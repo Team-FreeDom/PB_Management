@@ -1,0 +1,17 @@
+jQuery-video5.8                 播放器 			http://videojs.com/
+grantm-jquery-udraggable        自由布局 		http://grantm.github.io/jquery-udraggable/
+jQuery-typewriter               打字机 			http://www.jq22.com/jquery-info6035
+css3动画库                      html5动画 		http://daneden.github.io/animate.css/
+jQueryFeature                    			http://www.jq22.com/jquery-info6525
+echarts.min                	图插件                  	http://echarts.baidu.com/
+jquery.fullPage.min        	全屏滚动插件            	http://www.uedsc.com/fullpage-options.html
+kalendae			日期选择器
+wheelmenu			环绕菜单
+Feature				浏览器检测
+IsometricGrids			展示特效
+3d_shangpinzhanshi		3d图片展示
+
+
+http://www.jq22.com/yanshi5358
+http://www.jq22.com/jquery-info7677
+http://www.bejson.com/
