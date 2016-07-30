@@ -1,0 +1,99 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>jQuery商品添加到购物车飞入动画效果</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css">
+
+<!--主要样式-->
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+<!--[if IE]>
+	<script src="../public/html5shiv.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+
+<div class="wrapper">
+	<h1 class="title">手机商城</h1>
+	<span class="car"><i class="shopping-cart"></i></span>
+
+	<div class="clear"></div>
+	<!-- items -->
+	<div class="items">
+		<!-- single item -->
+		<div class="item">
+			<img src="img/droid-x.jpg" alt="item" />
+			 <h2>droid-x</h2>
+
+			<p>价格: <em>$255</em>
+			</p>
+			<button class="add-to-cart" type="button">添加到购物车</button>
+		</div>
+		<!--/ single item -->
+		<!-- single item -->
+		<div class="item">
+			<img src="img/htc-ozone.jpg" alt="item" />
+			 <h2>htc-ozone</h2>
+
+			<p>价格: <em>$368</em>
+			</p>
+			<button class="add-to-cart" type="button">添加到购物车</button>
+		</div>
+		<!--/ single item -->
+		<!-- single item -->
+		<div class="item">
+			<img src="img/motorola-backflip.jpg" alt="item" />
+			 <h2>motorola-backflip</h2>
+
+			<p>价格: <em>$226</em>
+			</p>
+			<button class="add-to-cart" type="button">添加到购物车</button>
+		</div>
+		<!--/ single item -->
+	</div>
+	<!--/ items -->
+</div>
+	
+<script src="../public/jquery.min.js"></script>
+<script type="text/javascript" src='../public/jquery-ui.min.js'></script>
+<script type="text/javascript">
+$('.add-to-cart').on('click', function () {
+	var cart = $('.shopping-cart');
+	var imgtodrag = $(this).parent('.item').find('img').eq(0);
+	if (imgtodrag) {
+		var imgclone = imgtodrag.clone().offset({
+			top: imgtodrag.offset().top,
+			left: imgtodrag.offset().left
+		}).css({
+			'opacity': '0.5',
+			'position': 'absolute',
+			'height': '150px',
+			'width': '150px',
+			'z-index': '100'
+		}).appendTo($('body')).animate({
+			'top': cart.offset().top + 10,
+			'left': cart.offset().left + 10,
+			'width': 75,
+			'height': 75
+		}, 1000, 'easeInOutExpo');
+		setTimeout(function () {
+			cart.effect('shake', { times: 2 }, 200);
+		}, 1500);
+		imgclone.animate({
+			'width': 0,
+			'height': 0
+		}, function () {
+			$(this).detach();
+		});
+	}
+});
+</script>
+
+
+</body>
+</html>
