@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery-1.10.2.min.js"></script>
+<script src="zoomFontSize.js"></script>
+<style>
+	body{	
+		font-size:26px;
+	}
+	.size52px{
+		font-size:200%;
+		}
+	.size26px{
+	font-size:100%;
+	}
+	ul li{
+	padding-bottom:40px;
+	}
+	.Explain{
+		margin-top:100px;
+		font-size:80%;
+		margin-bottom:200px;
+	}
+	.Explain ul li{
+	padding-bottom:2px;
+	}
+</style>
+</head>
+
+<body class="chang_fontSize">
+		<div class="Explain">
+			使用方法：body 的 class属性 添加 changbody_fontSize 而且整个页面的字体属性设为百分比（body除外） <br />
+			缺点：<ul>
+					<li>1.需要根据父类进行百分比 缩放</li>
+					<li>2.Chrome 字体缩放最小值为12px 就无法进行缩放</li>
+			     </ul>
+
+		</div>
+		<div class="size52px">
+				全局缩放：<br />
+			<ul>
+					<li style="font-size:100%;color:#c0f">
+						当前类为是父类的百分之100%（52px)-(body:26px; 父类body的200%[52px])
+					</li>
+					<li style="font-size:50%;color:#f00">
+						当前类为是父类的百分之50%（26px）-(body:26px; 父类body的200%[52px])
+					</li>
+					<li style="font-size:40%;color:#000">
+						当前类为是父类的百分之20%（20.8px）-(body:26px; 父类body的200%[52px])
+					</li>
+			</ul>
+		
+		</div>
+
+		<div style="font-size:26px;">
+				局部缩放：<br />	
+				<ul class="chang_fontSize">
+					<li style="font-size:100%;color:#c0f">
+					当前类为是父类的100%;(26px)-(父类为：26px)
+					</li>
+					<li style="font-size:80%;color:#f00">
+					当前类为是父类的80%;(20.8px)-(父类为：26px)
+					</li>
+					<li style="font-size:50%;color:#000">
+					当前类为是父类的50%;(20.8px)-(父类为：26px)
+					</li>
+				</ul>
+		</div>
+
+		
+</body>
+</html>

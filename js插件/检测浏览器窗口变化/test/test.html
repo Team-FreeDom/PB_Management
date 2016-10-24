@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Resize End Test</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="../src/jQuery.resizeEnd.js"></script>
+
+	<!-- For Demo Only -->
+	<link rel="stylesheet" href="style.css">
+	
+</head>
+<body>
+	
+	<div class="main-wrapper">
+		<h1 class="site-title">jQuery ResizeEnd Plugin</h1>
+		<h2>调整您的浏览器窗口的大小，<br>完成通知的下方会出现：</h2>
+		<div class="window"><h3>&nbsp;</h3></div>
+		<br clear="all">
+	
+	</div>
+
+<script>
+	;(function($) {
+		$(window).on('resize', function() {
+			$('.window h3').text('Resizing...');
+		});
+		$(window).resizeEnd({
+			delay : 500
+		}, function() {
+			$('.window h3').html('完成！');
+			/* Add callback function logic here */
+		});
+	})(jQuery);
+</script>
+</body>
+</html>
