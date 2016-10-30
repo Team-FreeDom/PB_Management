@@ -12,33 +12,31 @@
 </head>
 
 <body>
-<!--<div class="container">-->
-<center>
-<div class="main">
-    <div class="index_top">
-        <div id="webname">
+<div class="container-fluid">
+    <div class="index_top row">
+        <div class="col-md-6 col-xs-6" id="webname">
             <span>湖南农业大学</span>实习基地管理系统
         </div>
-        <div id="top_right"> 
-        	<div id="login">
+        <div class="col-md-6 col-xs-6"> 
+        	<div class="row" id="login">
             	<ul>
-                	<li>张三<span class="icon-sort-up"></span></li>
+                	<li><a href="#">退出</a></li>
                     <li style="border-right:solid 1px #FFFFFF; border-left:solid 2px #FFFFFF"><a href="#">更改密码</a></li>
-                    <li><a href="#">退出</a></li>
+                    <li>张三<span class="icon-sort-up"></span></li>
                 </ul>
             </div>
-            <div id="research">
+            <div class="row" id="research">
             	<ul>
-                	<li><a href="#">首页</a></li>
-                    <li><a href="#">土地租赁</a></li>
+                	<li><a href="#"><span class="glyphicon glyphicon-wrench"></span>报修申请</a></li>
                     <li><a href="#">实习申请</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-wrench">报修申请</span></a></li>
+                    <li><a href="#">土地租赁</a></li>
+                    <li><a href="#">首页</a></li>
                 </ul>
             </div>
         </div>
     </div>
     
-    <div class="index_center">
+    <div class="row">
         <div id="menue">
             <ul>
                 <li onClick="showsubmenu(this)"><a href="javascript:void(0)">我的工作<span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -57,7 +55,7 @@
                     </ul>
                 </li>
                 <li onClick="showsubmenu(this)"><a href="javascript:void(0)">数据维护<span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <ul class="index_hidden">
+                    <ul style="display:none;">
                         <li><a href="#">土地布局设置</a></li>
                         <li><a href="#">租赁记录维护</a></li>
                         <li><a href="#">实习基地维护</a></li>
@@ -100,55 +98,54 @@
                 <p>今日代办</p>
             </div>
             <div id="data">
-                <div class="display">
+                <div class="data_display">
                 	<table class="table">
                     	<tr>
-                        	<td>我的信息</td>
+                        	<td style="font-size:50%">我的信息</td>
                             <td rowspan="2"><span class="glyphicon glyphicon-user" style="background:#F63;"></span></td>
                         </tr>
                         <tr>
-                        	<td style="font-size:32px">1287</td>
+                        	<td style="font-size:120%">1287</td>
                         </tr>
                     </table>
                 </div>
-                <div class="display">
+                <div class="data_display">
                 	<table class="table">
                     	<tr>
-                        	<td>我的信息</td>
+                        	<td style="font-size:50%">我的信息</td>
                             <td rowspan="2" ><span class="glyphicon glyphicon-th-list" style="background:#0C6;"></span></td>
                         </tr>
                         <tr>
-                        	<td style="font-size:32px">1287</td>
+                        	<td style="font-size:120%">1287</td>
                         </tr>
                     </table>
                 </div>
-                <div class="display">
+                <div class="data_display">
                 	<table class="table">
                     	<tr>
-                        	<td>我的信息</td>
+                        	<td style="font-size:50%">我的信息</td>
                             <td rowspan="2"><span class="glyphicon glyphicon-list-alt" style="background:#36F;"></span></td>
                         </tr>
                         <tr>
-                        	<td style="font-size:32px">1287</td>
+                        	<td style="font-size:120%">1287</td>
                         </tr>
                     </table>
                 </div>
-                <div class="display">
+                <div class="data_display">
                 	<table class="table">
                     	<tr>
-                        	<td>我的信息</td>
+                        	<td style="font-size:50%">我的信息</td>
                             <td rowspan="2"><span class="glyphicon glyphicon-wrench" style="background:#F3C;"></span></td>
                         </tr>
                         <tr>
-                        	<td style="font-size:32px">1287</td>
+                        	<td style="font-size:120%">1287</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
-</center>
-<!--</div>-->
 </body>
 </html>
