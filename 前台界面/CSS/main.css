@@ -1,0 +1,167 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0px;
+	padding:0px;}
+ul{
+	list-style:none;
+	padding:0px;
+	margin:0px;}
+a{
+	text-decoration:none;
+	color:#FFF;}
+.main{
+	width:1024px;}
+.index_top{
+	background:#3B6290;
+	height:107px;
+	color:#FFF;
+	font-family:'微软雅黑';
+	}
+.index_center{
+	width:1054px;
+	margin-left:-15px;
+	}
+#webname {
+	font-size:20px;
+	margin-top:40px;
+	text-align:left	
+	}
+#webname span{
+	font-size:36px;
+	font-weight:bolder;
+	padding-right:10px;
+	}
+	
+#login{
+	margin-top:20px;
+	}
+
+#login ul li{
+	padding:0 30px;
+	font-size:14px;
+	float:left;
+	}
+#research{
+	clear:both;
+	padding-top:30px;
+	}
+
+#research li{
+	float:left;
+	padding:0 30px;}
+#menue{
+	height:500px;
+	float:left;
+	background:#3B6290;
+	font-size:14px;
+	font-family:'微软雅黑';
+	
+	}
+#menue ul li span{
+	text-indent:30px;}
+#menue a{
+	width:144px;
+	display:block;
+	height:40px;
+	line-height:40px;}
+#menue ul li ul{
+	background:#F7F6F6;
+	}
+.index_hidden{
+	display:none;
+	}
+#menue ul li ul a{
+	color:#000;}
+#content{
+	width:895px;
+	background:#F7F6F6;
+	height:500px;
+	float:left;
+	}
+#content-top{
+	width:895px;
+	height:215px;}
+#post1{
+	width:300px;
+	float:left;
+	height:177px;
+	font-size:14px;
+	margin-top:25px;
+	margin-left:20px;
+	text-align:left;
+	}
+.post{	
+	background:#EFF1F7;
+	font-size:13px;
+	height:147px;
+	border:#999 solid 1px;
+	line-height:30px;
+	text-indent:20px;}
+.post p{
+	padding:0 15px;}
+#information1{
+	width:249px;
+	height:177px;
+	float:left;
+	font-size:14px;
+	margin-top:25px;
+	margin-left:30px;
+	text-align:left;
+	
+	}
+.information{
+	border:#999 solid 1px;
+	background:#EFF1F7;
+	height:147px;
+	font-size:13px;
+	text-align:left;
+	}
+.information p{
+	margin:10px 15px;
+	border-bottom:dashed #CCCCCC 1px;}
+.calendar{
+	height:147px;
+	width:227px;
+	float:left;
+	background:#0FF;
+	margin-left:20px;
+	margin-top:55px;}
+#caption{
+	clear:both;
+	margin-top:30px;
+	width:841px;
+	height:54;
+	line-height:54px;
+	font-size:28px;
+	font-family:'微软雅黑';
+	background:#EFF1F7;
+	}
+#data{
+	margin-top:35px;
+	font-family:'微软雅黑';
+	width:895px;
+	}
+.display{
+	width:190px;
+	height:100px;
+	float:left;
+	background:#FFF;
+	margin-left:25px;}
+
+.display table tr td span{
+	font-size:36px;
+	color:#FFF;
+	text-align:center;
+	border-radius:5px;
+	display:block;
+	margin-top:12px;
+	padding:10px;}
+/*.display td{
+	width:60px;
+	height:30px;
+	line-height:30px;
+	text-align:center;}*/
+
+
+
