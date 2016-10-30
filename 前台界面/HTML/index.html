@@ -49,15 +49,15 @@
                         <li><a href="#">个人信息</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0)">事务审批<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">事务审批<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul style="display:none;">
                         <li><a href="#">租赁审批</a></li>
                         <li><a href="#">实习审批</a></li>
                         <li><a href="#">报修工单</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0)">数据维护<span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <ul class="index_hidden">
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">数据维护<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul style="display:none;"><!--罗老师，倘如在这里面引用这个样式class="index_hidden"，效果就显示不出来，这个样式在main.css里面，我先注释掉了-->
                         <li><a href="#">土地布局设置</a></li>
                         <li><a href="#">租赁记录维护</a></li>
                         <li><a href="#">实习基地维护</a></li>
@@ -65,7 +65,7 @@
                         <li><a href="#">权限   维护</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0)">统计分析<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">统计分析<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul style="display:none;">
                         <li><a href="#">租赁统计</a></li>
                         <li><a href="#">实习统计</a></li>
