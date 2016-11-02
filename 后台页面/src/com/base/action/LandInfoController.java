@@ -6,7 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 //土地布局模块的controller类
-public class LayoutController {
+public class LandInfoController {
 	
 	//土地布局提交
 	@RequestMapping("/submitLayout.do")

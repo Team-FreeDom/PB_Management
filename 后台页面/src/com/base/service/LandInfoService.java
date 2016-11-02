@@ -5,7 +5,7 @@ import java.util.List;
 import com.base.po.LandLayout;
 
 //土地布局管理表的业务逻辑层接口
-public interface LandLayoutService {
+public interface LandInfoService {
 
 	/*
 	   参数说明：list,LandLayout对象的集合，表示所有的土地布局对象
@@ -27,8 +27,6 @@ public interface LandLayoutService {
 	   函数功能：删除土地
 	 */
 	public void deleteLandLayout(int id);
-	
-	
 	
 	
 }

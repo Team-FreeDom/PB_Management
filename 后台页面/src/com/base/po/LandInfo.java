@@ -13,14 +13,21 @@ public class LandInfo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lid;
-	private String lname;
-	private String college;
+	private String lname;	
 	private String major_oriented;
 	private String plantingContent;
 	private int landArea;
 	private int afford;
 	private int buildingArea;
 	private int bid;
+	private int spareValue;
+	
+	public int getSpareValue() {
+		return spareValue;
+	}
+	public void setSpareValue(int spareValue) {
+		this.spareValue = spareValue;
+	}
 	public int getLid() {
 		return lid;
 	}
@@ -33,12 +40,7 @@ public class LandInfo {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getCollege() {
-		return college;
-	}
-	public void setCollege(String college) {
-		this.college = college;
-	}
+
 	public String getMajor_oriented() {
 		return major_oriented;
 	}
