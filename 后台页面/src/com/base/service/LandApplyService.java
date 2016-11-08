@@ -29,7 +29,7 @@ public interface LandApplyService {
 	   返回值：   LandInfo,为土地管理LandInfo对象
 	   函数功能：查询土地信息
 	 */
-	public LandInfo getLandInfo(int lid);
+	public List<LandInfo> getLandInfo(int lid);
 	
 	/*
 	   参数说明：la,为土地申请LandApply对象

@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>湖南农业大学土地管理系统</title>
+<link rel="stylesheet" type="text/css" href="../CSS/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="../CSS/main.css"/>
+<link rel="stylesheet" type="text/css" href="../CSS/font-awesome.min.css">
+<script type="text/javascript" src="../JS/jquery.min.js"></script>
+<script type="text/javascript" src="../JS/bootstrap.min.js"></script>
+<script type="text/javascript" src="../JS/main.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="index_top row">
+        <div class="col-md-6 col-xs-6" id="webname">
+            <span>湖南农业大学</span>实习基地管理系统
+        </div>
+        <div class="col-md-6 col-xs-6"> 
+        	<div class="row" id="login">
+            	<ul>
+                	<li><a href="#">退出</a></li>
+                    <li style="border-right:solid 1px #FFFFFF; border-left:solid 2px #FFFFFF"><a href="#">更改密码</a></li>
+                    <li>张三<span class="icon-sort-up"></span></li>
+                </ul>
+            </div>
+            <div class="row" id="research">
+            	<ul>
+                	<li><a href="#"><span class="glyphicon glyphicon-wrench"></span>报修申请</a></li>
+                    <li><a href="#">实习申请</a></li>
+                    <li><a href="#">土地租赁</a></li>
+                    <li><a href="#">首页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div id="menue" class="col-md-2 col-xs-2">
+            <ul>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">我的工作<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul style="display:none;">
+                        <li><a href="#">我的租赁</a></li>
+                        <li><a href="#">我的实习</a></li>
+                        <li><a href="#">我的报修</a></li>
+                        <li><a href="#">个人信息</a></li>
+                    </ul>
+                </li>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">事务审批<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul style="display:none;">
+                        <li><a href="#">租赁审批</a></li>
+                        <li><a href="#">实习审批</a></li>
+                        <li><a href="#">报修工单</a></li>
+                    </ul>
+                </li>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">数据维护<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul style="display:none;">
+                        <li><a href="#">土地布局设置</a></li>
+                        <li><a href="#">租赁记录维护</a></li>
+                        <li><a href="#">实习基地维护</a></li>
+                        <li><a href="#">个人信息维护</a></li>
+                        <li><a href="#">权限   维护</a></li>
+                    </ul>
+                </li>
+                <li onClick="showsubmenu(this)"><a href="javascript:void(0)">统计分析<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul style="display:none;">
+                        <li><a href="#">租赁统计</a></li>
+                        <li><a href="#">实习统计</a></li>
+                        <li><a href="#">维护统计</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="content" class="col-md-10 col-xs-10">
+            <div id="content-top" class="row">
+                <div id="post1" class="col-md-3 col-xs-3">
+                    <p>通知公告</p>
+                    <div class="post">
+                         <p>实习基地管理系统1.0版本正式上线，本系统的宗旨是携手学校基地科，为全体一线教师服务，主要体现在校内教学基地土地的租赁、校内外实习项目的开展和教学基地设备的及时维修。</p>
+                    </div>
+                </div>
+                <div id="information1" class="col-md-3 col-xs-3 col-md-offset-1 col-xs-offset-1">
+                    <p>个人消息提示</p>
+                    <div class="information">
+                        <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
+                        <p>租赁申请退回<span name="date"></span></p>
+                        <p>修理完成<span name="date"></span></p>
+                        <p>租赁成功，请缴费<span name="date"></span></p>
+                    </div>
+                    
+                </div>
+                <div id="calendar" class="col-md-3 col-xs-3 col-md-offset-1 col-xs-offset-1">
+                
+                </div>
+            </div>
+            <div id="caption" class="row">
+                <div class="col-md-12 col-xs-12"><p>今日代办</p></div>
+            </div>
+            <div id="data" class="row">
+                <div class="data_display col-md-2 col-xs-2" style="margin-left:2%">
+                	<table class="table">
+                    	<tr>
+                        	<td style="font-size:50%">我的信息</td>
+                            <td rowspan="2"><span class="glyphicon glyphicon-user" style="background:#F63;"></span></td>
+                        </tr>
+                        <tr>
+                        	<td style="font-size:120%">1287</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="data_display col-md-2 col-xs-2 col-md-offset-1 col-xs-offset-1">
+                	<table class="table">
+                    	<tr>
+                        	<td style="font-size:50%">我的信息</td>
+                            <td rowspan="2" ><span class="glyphicon glyphicon-th-list" style="background:#0C6;"></span></td>
+                        </tr>
+                        <tr>
+                        	<td style="font-size:120%">1287</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="data_display col-md-2 col-xs-2 col-md-offset-1 col-xs-offset-1">
+                	<table class="table">
+                    	<tr>
+                        	<td style="font-size:50%">我的信息</td>
+                            <td rowspan="2"><span class="glyphicon glyphicon-list-alt" style="background:#36F;"></span></td>
+                        </tr>
+                        <tr>
+                        	<td style="font-size:120%">1287</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="data_display col-md-2 col-xs-2 col-md-offset-1 col-xs-offset-1">
+                	<table class="table">
+                    	<tr>
+                        	<td style="font-size:50%">我的信息</td>
+                            <td rowspan="2"><span class="glyphicon glyphicon-wrench" style="background:#F3C;"></span></td>
+                        </tr>
+                        <tr>
+                        	<td style="font-size:120%">1287</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
