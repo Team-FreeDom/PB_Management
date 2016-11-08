@@ -2,11 +2,14 @@ package com.base.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.UserInfoDao;
+import com.base.po.LandLayout;
 import com.base.po.UserInfo;
 
 @Repository("userInfoDao")
@@ -19,6 +22,30 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	public void delUser(int id) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public boolean login(String id,String pwd)
+	{
+		Session session=sessionFactory.openSession();		
+		String hql="from UserInfo where id=? and password=?";
+		boolean flag=false;
+		
+	    try {
+	    	 Query query=session.createQuery(hql);
+	    	 query.setString(0, id);
+	    	 query.setString(1, pwd);
+	    	 UserInfo ui=(UserInfo) query.uniqueResult();
+	    	 if(ui!=null)
+	    	 {
+	    		 flag=true;
+	    	 }
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return flag;
 	}
 
 	@Override

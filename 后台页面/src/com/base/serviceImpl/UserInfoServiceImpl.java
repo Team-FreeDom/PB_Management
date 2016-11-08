@@ -21,6 +21,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	}
 
+	public boolean login(String id,String pwd)
+	{
+		return userInfoDaoImpl.login(id, pwd);
+	}
 	@Override
 	public void doUser(UserInfo ui) {
 		// TODO Auto-generated method stub

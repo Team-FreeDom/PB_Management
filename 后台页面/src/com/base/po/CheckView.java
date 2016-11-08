@@ -1,12 +1,14 @@
 package com.base.po;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="checkView")
-public class CheckView {
+public class CheckView implements Serializable{
 	
 	@Id
 	private int la_id;
