@@ -10,9 +10,9 @@ import javax.persistence.Table;
 @Table(name="userInfo")
 public class UserInfo {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@Id	
+	private String id;
+	private String password;
 	private String name;
 	private String sex;
 	private String birthdate;
@@ -29,11 +29,18 @@ public class UserInfo {
 	private String contactForm;
 	private String workingForm;
 	private String startContactTime;
-	private String endContactTime;
-	public int getId() {
+	private String endContactTime;	
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

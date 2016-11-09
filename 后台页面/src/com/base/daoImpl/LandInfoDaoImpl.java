@@ -1,5 +1,6 @@
 package com.base.daoImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.base.dao.LandInfoDao;
 import com.base.po.BaseInfo;
 import com.base.po.LandInfo;
+import com.base.po.Land_base;
 
 @Repository("landInfoDao")
 public class LandInfoDaoImpl implements LandInfoDao {
@@ -41,17 +43,55 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		}
 
 	}
-
-	@Override
-	public LandInfo getLandInfo(int lid) {
+	
+	public List<Land_base> getView(int lid)
+	{
 		Session session=sessionFactory.openSession();		
-		String hql="from LandInfo where lid=?";		
-		LandInfo li=null;
+		String hql="from Land_base where lid=?";		
+		List<Land_base> li=null;
 		
 		try {
 	    	 Query query=session.createQuery(hql);
 	    	 query.setInteger(0, lid);
-	    	 li=(LandInfo) query.uniqueResult();
+	    	 li=query.list();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return li;
+	}
+	
+	public List<Land_base> getlandbase(int bid)
+	{
+		Session session=sessionFactory.openSession();		
+		String hql="from Land_base where bid=?";		
+		List<Land_base> li=null;
+		
+		try {
+	    	 Query query=session.createQuery(hql);
+	    	 query.setInteger(0, bid);
+	    	 li=query.list();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return li;
+	}
+
+	@Override
+	public List<LandInfo> getLandInfo(int lid) {
+		Session session=sessionFactory.openSession();		
+		String hql="from LandInfo where lid=?";		
+		List<LandInfo> li=null;
+		
+		try {
+	    	 Query query=session.createQuery(hql);
+	    	 query.setInteger(0, lid);
+	    	 li=query.list();
 			
 		} catch (Exception e) {
 			System.out.println(e);
