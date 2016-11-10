@@ -1,3 +1,23 @@
 @charset "utf-8";
 /* CSS Document */
 
+.modal-body tr td input{	
+	width:140px;}
+.dropdown a{
+	display:block;
+	color:#000;}
+.dropdown a:hover,a:visited{
+	text-decoration:none;
+	cursor:pointer;}
+.dropdown div{
+	width:100%;}
+	
+#table1,#table2 span{
+	cursor:pointer;}
+.modal{
+	margin-top:5%;}
+.bottom{
+	margin-top:10px;
+	}
+.dataTables_length{
+	margin-left:5%;}

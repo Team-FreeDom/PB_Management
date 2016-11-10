@@ -14,6 +14,7 @@
     <!--datatable-->
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/myrent.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -191,7 +192,7 @@
 
 						<div class="col-lg-12">
 							<div class=" col-md-offset-1 col-md-10">
-                                <table id="table1" class="display" cellspacing="0" width="100%">
+                                <table id="table1" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#3B6290" style="color:#FFF">
                                             <th>开始日期</th>
@@ -209,7 +210,7 @@
                                             <td>长安基地</td>
                                             <td>#123</td>
                                             <td style="color:#FA8562">
-                                            <span class="icon-plus-sign-alt">添加</span>
+                                            <span class="icon-plus-sign-alt">提交</span>
                                             <span class="icon-pencil" data-toggle="modal" data-target="#myModal">编辑</span>
                                             <span class="icon-trash">删除</span>
                                             </td>
@@ -220,7 +221,7 @@
                                             <td>长安基地</td>
                                             <td>#124</td>
                                             <td>
-                                            <span class="icon-plus-sign-alt">添加</span>
+                                            <span class="icon-plus-sign-alt">提交</span>
                                             <span class="icon-pencil" data-toggle="modal" data-target="#myModal">编辑</span>
                                             <span class="icon-trash">删除</span>
                                             </td>
@@ -239,7 +240,7 @@
                                     <h4 class="modal-title text-center" id="myModalLabel">土地租赁详情及修改</h4>
                                   </div>
                                   <div class="modal-body table-responsive">
-                                    <table class="table" id="modal_table">
+                                    <table class="table">
                                         <tr>
                                             <td>基地名 ： </td>
                                             <td><input type="text" value="基地的名称"></td>
@@ -305,18 +306,18 @@
 
 						<div class="col-lg-12 form-group">
 							<div class=" col-md-offset-1 col-md-10">
-								<table id="table2" class="display" cellspacing="0" width="100%">
+								<table id="table2" class="cell-border" cellspacing="0" width="100%">
                                    <thead>
                                         <tr bgcolor="#ECF1F5">
                                             <td>租赁历史</td>
                                             <td colspan="6" ><!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
                                                 <div class="dropdown">
                                                   <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    筛选<span class="glyphicon glyphicon-sort-by-attributes"></span>
+                                                    筛选<span class="icon-filter"></span>
                                                   </a>
-                                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                  <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                                     ...
-                                                  </ul>
+                                                  </div>
                                                 </div>
                                           
                                         </tr>
@@ -389,7 +390,7 @@
                                     <h4 class="modal-title text-center" id="myModalLabel">土地租赁详情及修改</h4>
                                   </div>
                                   <div class="modal-body table-responsive">
-                                    <table class="table" id="modal_table2">
+                                    <table class="table">
                                         <tr>
                                             <td>基地名 ： </td>
                                             <td><input type="text" value="基地的名称"></td>
