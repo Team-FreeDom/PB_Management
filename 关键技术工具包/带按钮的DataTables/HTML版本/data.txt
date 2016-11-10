@@ -1,0 +1,19 @@
+{
+  "data":[
+    {
+      "username": "Tiger Nixon",
+      "id": "0"
+     
+    },
+    {
+      "username": "Michael Bruce",
+      "id": "1"
+      
+    },
+    {
+      "username": "Donna Snider",
+      "id": "2"
+     
+    }
+   ]
+}
