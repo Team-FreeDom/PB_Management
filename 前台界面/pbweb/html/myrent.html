@@ -173,8 +173,6 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a href="index.html">位置</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
-                                <li><a href="index.html">我的工作</a></li>
                                 <li><a href="index.html">我的租赁</a></li>
 							</ol>
 						</div>
@@ -199,20 +197,22 @@
                                             <th>租期</th>
                                             <th>基地名</th>
                                             <th>土地编号</th>
+                                            <th>状态</th>
                                             <th>操作</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="background:#feffd5">
+                                        <tr>
                                             <td>2016.10</td>
                                             <td>1年</td>
                                             <td>长安基地</td>
                                             <td>#123</td>
-                                            <td style="color:#FA8562">
-                                            <span class="icon-plus-sign-alt">提交</span>
-                                            <span class="icon-pencil" data-toggle="modal" data-target="#myModal">编辑</span>
-                                            <span class="icon-trash">删除</span>
+                                            <td>提交中</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal">编辑</button>
+                                            <button type="button" class="btn btn-success btn-xs">提交</button>
+                                            <button type="button" class="btn btn-danger btn-xs"><span>删除</span></button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -220,10 +220,10 @@
                                             <td>1年</td>
                                             <td>长安基地</td>
                                             <td>#124</td>
+                                            <td>审核中</td>
                                             <td>
-                                            <span class="icon-plus-sign-alt">提交</span>
-                                            <span class="icon-pencil" data-toggle="modal" data-target="#myModal">编辑</span>
-                                            <span class="icon-trash">删除</span>
+                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">查看 </button>
+                                            <button type="button" class="btn btn-info btn-xs">撤回</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -311,20 +311,72 @@
                                         <tr bgcolor="#ECF1F5">
                                             <td>租赁历史</td>
                                             <td colspan="6" ><!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
-                                                <div class="dropdown">
-                                                  <a id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    筛选<span class="icon-filter"></span>
-                                                  </a>
-                                                  <div class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                    ...
-                                                  </div>
-                                                </div>
-                                          
+                                                <ul id="dropdown_show">
+                                                	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
+                                                    	<ul id="hide_ul" style="display:none;">
+                                                        	<li>
+                                                            	<form>
+                                                            	<table class="table">
+                                                            	<tr>
+                                                                	<td>
+                                                                    基地名：
+                                                                    <select  name="" id="">
+                                                                      <option value="">显示全部</option>
+                                                                      <option value="">耘园科教综合基地</option>
+                                                                      <option value="">西南角农学基地</option>	
+                                                                    </select>  
+                                                                    </td>
+                                                                    <td>
+                                                                    起止年份：
+                                                                    <select  name="" id="">
+                                                                      <option value="">请选择</option>
+                                                                      <option value="">2015</option>
+                                                                      <option value="">2016</option>	
+                                                                    </select>年
+                                                                    -----
+                                                                     <select  name="" id="">
+                                                                      <option value="">请选择</option>
+                                                                      <option value="">2015</option>
+                                                                      <option value="">2016</option>	
+                                                                    </select>年
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                	<td>
+                                                                    	土地编号
+                                                                        <select  name="" id="">
+                                                                          <option value="">显示全部</option>
+                                                                          <option value="">#1</option>
+                                                                          <option value="">#2</option>	
+                                                                        </select>  
+                                                                    </td>
+                                                                    <td>
+                                                                    最终状态
+                                                                    <select  name="college" id="college" size="1">
+                                                                      <option value="">显示全部</option>
+                                                                      <option value="">申请成功</option>
+                                                                      <option value="">申请失败</option>	
+                                                                    </select>  
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                	<td colspan="2">
+                                                                    	<button type="reset" class="btn btn-primary" >重置</button>
+                                    									<button onClick="hidesubmenu()" type="button" class="btn btn-primary">完成</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        		</form>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                             </td>
                                         </tr>
                                         <tr style="background:#eeeff4">
                                             <th>序号</th>
                                             <th>开始日期</th>
-                                            <td>结束日期</td>
+                                            <th>结束日期</th>
                                             <th>基地名</th>
                                             <th>土地编号</th>
                                             <th>最终状态期</th>
@@ -445,7 +497,6 @@
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
     <!--datatable javascript-->
