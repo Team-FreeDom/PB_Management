@@ -452,16 +452,17 @@ a, a:link, a:visited, a:hover, a:active {
 	display: block;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children {
-	background: #191c21;
+	background: #f7f6f6;
 	box-shadow: 0px -3px 3px -3px rgba(0, 0, 0, 0.7) inset;
 	display: none;
 	padding: 10px 0;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children li a {
 	padding: 9px 15px 9px 70px;
+	color:#000;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children li a:hover, .sidebar ul.nav.nav-sidebar li .nav-children li a:focus {
-	background: #191c21;
+	background: #f7f6f6;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children li.active > a {
 	color: #435D78;
@@ -572,3 +573,17 @@ a, a:link, a:visited, a:hover, a:active {
 	overflow: visible !important;
 }
 }
+
+#modal_table tr,td{
+	border:none !important;}
+#modal_table tr td input{	
+	width:140px;}
+.dropdown a{
+	display:block;
+	color:#000;}
+.dropdown a:hover,a:visited{
+	text-decoration:none;
+	cursor:pointer;}
+.dropdown ul{
+	width:100%;}
+
