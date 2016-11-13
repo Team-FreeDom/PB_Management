@@ -66,8 +66,8 @@ textarea {
 	resize: none;
 }
 ul, ol {
-	margin-top: 0;
-	margin-bottom: 0;
+	margin: 0px 0px;
+	padding: 0px 0px;
 }
 a, a:link, a:visited, a:hover, a:active {
     text-decoration: none;
@@ -574,16 +574,21 @@ a, a:link, a:visited, a:hover, a:active {
 }
 }
 
-#modal_table tr,td{
-	border:none !important;}
-#modal_table tr td input{	
-	width:140px;}
-.dropdown a{
-	display:block;
-	color:#000;}
-.dropdown a:hover,a:visited{
-	text-decoration:none;
-	cursor:pointer;}
-.dropdown ul{
-	width:100%;}
+.breadcrumb{
+	padding:17px 0px !important;}
+.pull-right{
+	width:63%;}
+.pull-right ol li:before{
+	content:" ";
+}
+.pull-right ol li{
+	float:right;
+	padding-right:5%;}
+.pull-right li:last-child{
+	padding-left:0px;}
+.pull-left li:first-child{
+	padding-left:20px;}
+.pull-left li:nth-child(2):before{
+	content:":";}
+
 
