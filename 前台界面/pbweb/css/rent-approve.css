@@ -25,7 +25,12 @@ table thead tr th{
 	text-align:center;}
 table tbody tr td{
 	text-align:center;}
-	
+/*#rent-approve-table1_wrapper{
+	position:relative;}
+#rent-approve-table1_filter{
+	position:absolute;
+	top:10px;
+	right:3px;}*/
 tbody tr td span{
 	cursor:pointer;}
 .dropdown_show li{
@@ -64,7 +69,3 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
-/*#rent-approve-table1_info{
-	margin-left:15%;}*/
-#rent-approve-table2_info{
-	margin-left:15%;}

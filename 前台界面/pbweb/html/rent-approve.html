@@ -203,7 +203,14 @@
                                 <table id="rent-approve-table1" class="hover" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
-                                            <td colspan="2">排序<span class="glyphicon glyphicon-sort-by-attributes"></span></td>
+                                            <td colspan="2">
+                                            排序<span class="glyphicon glyphicon-sort-by-attributes"></span>
+                                            <select  name="" id="">
+                                            	<option value="">默认</option>
+                                                <option value="">租用次数降次</option>
+                                                <option value="">租用次数</option>	
+                                            </select> 
+                                            </td>
                                             <td colspan="8">
                                             	<ul class="dropdown_show">
                                                 	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
@@ -342,6 +349,18 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
                                         </tr>
                                     </tbody>
+                                    <thead>
+                                    	<tr>
+                                        	<td>
+                                            	<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
+                                            </td>
+                                            <td colspan="9">
+                                            	<button type="button" class="btn btn-primary">同意申请</button>
+                                                <button type="button" class="btn btn-danger">拒绝申请</button>
+                                            </td>
+                                        </tr>
+                                    </thead>
                                   </table>
                               </div>
                              
@@ -477,7 +496,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">1</td>
+                                            <td><label><input type="checkbox" name="2" class="ck"/></label>1</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -489,7 +508,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">2</td>
+                                            <td><label><input type="checkbox" name="2" class="ck"/></label>2</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -501,7 +520,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">3</td>
+                                            <td><label><input type="checkbox" name="3" class="ck"/></label>3</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -513,7 +532,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">4</td>
+                                            <td><label><input type="checkbox" name="4" class="ck"/></label>4</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -525,7 +544,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">5</td>
+                                            <td><label><input type="checkbox" name="5" class="ck"/></label>5</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -537,6 +556,18 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                     </tbody>
+                                    <thead>
+                                    	<tr>
+                                        	<td>
+                                            	<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
+                                            </td>
+                                            <td colspan="9">
+                                            	<button type="button" class="btn btn-primary">确认交费</button>
+                                                <button type="button" class="btn btn-danger">取消消费</button>
+                                            </td>
+                                        </tr>
+                                    </thead>
                                   </table>
                               </div>
                             </div>
@@ -561,5 +592,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/style.js"></script>
+    <script>
+		
+       </script>
   </body>
 </html>
