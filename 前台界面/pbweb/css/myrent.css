@@ -1,7 +1,11 @@
 @charset "utf-8";
 /* CSS Document */
-
-.modal-body tr td input{	
+.form-control{
+	width:350px !important;}
+#table1 tbody tr td button{
+	float:left;
+	margin-left:10px;}
+.modal-body>table tr td input{	
 	width:140px;}
 .modal-body>table tr td{
 	border:none !important;
@@ -35,7 +39,7 @@ table tbody tr td{
 	font-size:14px;
 	background:#d6dfe9;
 	border:none !important;}
-#table1,#table2 span{
+#table2 span{
 	cursor:pointer;}
 .modal{
 	margin-top:5%;}

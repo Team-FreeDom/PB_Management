@@ -17,6 +17,10 @@ table tbody tr td{
 	
 tbody tr td span{
 	cursor:pointer;}
+	
+.button_style{
+	width:45%;
+}
 .dropdown_show li{
 	position:relative;
 	list-style:none;

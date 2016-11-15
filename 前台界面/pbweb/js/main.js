@@ -1,7 +1,7 @@
 	$("li.menuItem.nav-parent").click(function(){
 	  $(this).toggleClass("opened nav-expanded");
 	})
-	
+								
 function showsubmenu(){
 	var submenu=document.getElementById("hide_ul");
 		if (submenu.style.display == 'none')
@@ -39,11 +39,9 @@ function showsubmenu2(){
 			  {
 				  "bSort": false,
 				  "bFilter": false,
-				  
-				  "scrollY": 78,
-				  "aLengthMenu":[2,4,5,8], //动态指定分页后每页显示的记录数。
+				  "aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 2,  //默认每页显示多少条记录
+					"iDisplayLength" : 5,  //默认每页显示多少条记录
 					"dom":'ftipr<"bottom"l>',
                     "language": {
                         "lengthMenu": "每页 _MENU_ 条记录",
@@ -64,9 +62,9 @@ function showsubmenu2(){
 			  
 			  $('#table2').DataTable(
 				{
-					"aLengthMenu":[5,10,15,20], //动态指定分页后每页显示的记录数。
+					"aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 5,  //默认每页显示多少条记录
+					"iDisplayLength" : 2,  //默认每页显示多少条记录
 				  "bSort": false,
 				  "dom":'ftipr<"bottom"l>',
 				  "language": {
@@ -85,14 +83,11 @@ function showsubmenu2(){
                     }
 					
 				});
-            } );
-			
-			
-$(document).ready(function() {
+          
              var table = $('#rent-approve-table1').dataTable(
 			  {
 				  "bSort": false,				  
-				  "dom":'ft<"#topPlugin">ipr<"bottom"l>',
+				  "dom": 'frti<"bottom"l>p<"clear">',
 				  
                     "language": {
                         "lengthMenu": "每页 _MENU_ 条记录",
@@ -108,9 +103,10 @@ $(document).ready(function() {
 						   "sLast": " 尾页 "
 					   }
                     },
-					initComplete:function(){
-					$("#topPlugin").append('<label><input type="checkbox">全选</label> <label><input type="checkbox">反选</label> <button type="button" class="btn btn-primary">同意申请</button> <button type="button" class="btn btn-danger">拒绝申请</button>')
-					}
+					/*initComplete:function(){
+					$("#xxxxxxxx").append(' ')
+					
+					}*/
 			  });
 			  
 			  
@@ -157,7 +153,7 @@ $(document).ready(function() {
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 5,  //默认每页显示多少条记录
 				  "bSort": false,
-				  "dom": '<"#all_select">lfrt<ip><"clear">',
+				  "dom":'ftipr<"bottom"l>',
 				  "language": {
                         "lengthMenu": "每页 _MENU_ 条记录",
                         "zeroRecords": "没有找到记录",
@@ -172,9 +168,9 @@ $(document).ready(function() {
 						   "sLast": " 尾页 "
 					   }
                     },
-					initComplete:function(){
+					/*initComplete:function(){
 					$("#all_select").append('<input type="checkbox">add')
-					}
+					}*/
 					
 				});
             } );
