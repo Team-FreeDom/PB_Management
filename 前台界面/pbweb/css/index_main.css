@@ -35,10 +35,10 @@
 .information p{
 	margin:10px 15px;
 	border-bottom:dashed #CCCCCC 1px;}
-#calendar{
-	height:177px;	
-	background:#0FF;
-	margin-top:55px;}
+/*#calendar{
+	
+	margin-left:60px;
+	margin-top:55px;}*/
 #caption{
 	clear:both;
 	margin-top:5%;
@@ -55,6 +55,10 @@
 	}
 .data_display{
 	font-size:2vw;}
+.data_display table tr td{
+	border:none;
+	text-align:center;
+	line-height:20px;}
 .data_display table tr td span{
 	color:#FFF;
 	text-align:center;
