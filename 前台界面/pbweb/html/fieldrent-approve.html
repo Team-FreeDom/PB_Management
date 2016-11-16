@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>租赁审批</title>
+    <title>土地租赁审批</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -203,7 +203,7 @@
                                 <table id="rent-approve-table1" class="hover" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
-                                            <td colspan="2">
+                                            <td colspan="3">
                                             排序<span class="glyphicon glyphicon-sort-by-attributes"></span>
                                             <select  name="" id="">
                                             	<option value="">默认</option>
@@ -211,7 +211,7 @@
                                                 <option value="">租用次数</option>	
                                             </select> 
                                             </td>
-                                            <td colspan="8">
+                                            <td colspan="7">
                                             	<ul class="dropdown_show">
                                                 	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
                                                     	<ul id="hide_ul" style="display:none;">
@@ -283,7 +283,7 @@
                                             <th>申请人</th>
                                             <th>所属学院</td>
                                             <th>已租用次数</td>
-                                            <th>种植内容</td>
+                                            <th>计划种植内容</td>
                                             <th>详情</th>
                                         </tr>
                                     </thead>
@@ -351,11 +351,11 @@
                                     </tbody>
                                     <thead>
                                     	<tr>
-                                        	<td>
+                                        	<td colspan="2">
                                             	<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
                                 				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
                                             </td>
-                                            <td colspan="9">
+                                            <td colspan="8">
                                             	<button type="button" class="btn btn-primary">同意申请</button>
                                                 <button type="button" class="btn btn-danger">拒绝申请</button>
                                             </td>
@@ -397,12 +397,23 @@
                                             <tr>
                                                 <td>计划种植内容 ： </td>
                                                 <td><input type="text" value="玉米"></td>
+                                                <td>已交经费 ： </td>
+                                                <td colspan="3"><input type="text" value=""></td>
+                                            </tr>
+                                            <tr>
+                                                <td>交费日期 ： </td>
+                                                <td colspan="3">
+                                                	<select name="year1"></select>
+                                                    <select name="month1"></select>
+                                                    <select name="day1"></select>
+	
+                                                </td>
                                             </tr>
                                         </table>
                                       </div>
                                       <div class="modal-footer table-responsive">
                                         <center>
-                                        <button type="button" class="btn btn-primary">同意申请</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">保存修改</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                         </center>
                                       </div>
@@ -410,15 +421,19 @@
                                   </div>
                                 </div>
                               
-                              
-                              
-                              
                               <div role="tabpanel" class="tab-pane col-md-12" id="profile">
-                              <table id="rent-approve-table2" class="display" cellspacing="0" width="100%">
+                              <table id="rent-approve-table2" class="hover" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
-                                            <td colspan="2">排序<span class="glyphicon glyphicon-sort-by-attributes"></span></td>
-                                            <td colspan="8" >
+                                            <td colspan="3">
+                                            排序<span class="glyphicon glyphicon-sort-by-attributes"></span>
+                                             <select  name="" id="">
+                                            	<option value="">默认</option>
+                                                <option value="">租用次数降次</option>
+                                                <option value="">租用次数</option>	
+                                            </select> 
+                                            </td>
+                                            <td colspan="7" >
                                                 <ul class="dropdown_show">
                                                 	<li><span class="icon-filter" onClick="showsubmenu2()">筛选</span>
                                                     	<ul id="hide_ul2" style="display:none;">
@@ -520,7 +535,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="3" class="ck"/></label>3</td>
+                                            <td><label><input type="checkbox" name="2" class="ck"/></label>3</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -532,7 +547,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="4" class="ck"/></label>4</td>
+                                            <td><label><input type="checkbox" name="2" class="ck"/></label>4</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -544,7 +559,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="5" class="ck"/></label>5</td>
+                                            <td><label><input type="checkbox" name="2" class="ck"/></label>5</td>
                                             <td>2016.10</td>
                                             <td>2016.10</td>
                                             <td>耘园科教综合基地</td>
@@ -558,11 +573,11 @@
                                     </tbody>
                                     <thead>
                                     	<tr>
-                                        	<td>
+                                        	<td colspan="2">
                                             	<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
                                 				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
                                             </td>
-                                            <td colspan="9">
+                                            <td colspan="8">
                                             	<button type="button" class="btn btn-primary">确认交费</button>
                                                 <button type="button" class="btn btn-danger">取消消费</button>
                                             </td>
@@ -591,10 +606,11 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/YMDClass.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/style.js"></script>
-    <script>
-		
-       </script>
+   <script>
+	new YMDselect('year1','month1','day1');
+	</script>
   </body>
 </html>

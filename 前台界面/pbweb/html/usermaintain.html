@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>人员信息维护</title>
+    <title>系统用户维护</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -197,7 +197,7 @@
                                             </td>
                                             <td colspan="7" >
                                                 <ul class="dropdown_show">
-                                                	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
+                                                	<li><span style="color:#24354a" class="icon-filter" onClick="showsubmenu()">筛选</span>
                                                     	<ul id="hide_ul" style="display:none;">
                                                         	<li>
                                                             	<form>
@@ -258,12 +258,33 @@
                                                 </ul>
                                              </td>
                                              <td colspan="2">
-                                             	<button type="button" class="btn btn-primary">全部导出</button>
+                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lead">导出</button>
                                              </td>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="lead" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content" style="border:#3071a9 8px solid">
+                                                      <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
+                                                      </div>
+                                                      <div class="modal-body" id="daochu" style="height:60px;">
+                                                        <select>
+                                                        	<option>全部</option>
+                                                            <option>教务处</option>
+                                                        </select>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                        <button type="button" class="btn btn-primary">确定</button>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
                                         </tr>
                                         <tr style="background:#eeeff4">
                                             <th>序号</th>
-                                            <th>工作编号</th>
+                                            <th>员工编号</th>
                                             <th>身份属性</th>
                                             <th>姓名</th>
                                             <th>性别</th>
@@ -277,7 +298,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">1</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">1</label></td>
                                             <td>100059</td>
                                             <td>管理员</td>
                                             <td>张三</td>
@@ -290,7 +311,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">2</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">2</label></td>
                                             <td>100059</td>
                                             <td>临时工</td>
                                             <td>张三</td>
@@ -303,7 +324,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal2"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">3</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">3</label></td>
                                             <td>100059</td>
                                             <td>教师</td>
                                             <td>张三</td>
@@ -316,7 +337,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">4</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">4</label></td>
                                             <td>100059</td>
                                             <td>基地管理员</td>
                                             <td>张三</td>
@@ -329,7 +350,7 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">5</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">5</label></td>
                                             <td>100059</td>
                                             <td>管理员</td>
                                             <td>张三</td>
@@ -342,6 +363,14 @@
                                             <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                     </tbody>
+                                    <thead>
+                                    	<tr>
+                                        	<td colspan="11">
+                                    			<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
+                                           </td>
+                                       </tr>
+                                  </thead>
                                   </table>
 							
 						</div>
@@ -351,8 +380,8 @@
                     
                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                   <div class="modal-dialog">
-                                    <div class="modal-content" style="border:#2D3F51 8px solid">
-                                      <div class="modal-header" style="background:#2D3F51; color:#FFF">
+                                    <div class="modal-content" style="border:#3071a9 8px solid">
+                                      <div class="modal-header" style="background:#3071a9; color:#FFF">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                         <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
                                       </div>
@@ -587,5 +616,31 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+    	allCkBox2(); 
+		function allCkBox2(id){
+        var tableBox = document.getElementById(id||"communication_table"),
+             ck = tableBox.getElementsByClassName("ck"),
+             ckAll = tableBox.getElementsByClassName("ck-all")[0],
+             ckRe = tableBox.getElementsByClassName("ck-re")[0];
+             ckAll.onchange = function(){
+                                    allCk(this.checked);
+                                };
+              ckRe.onchange = function(){
+                                    reCk();
+                                };
+        function allCk(bool){
+                            for(var i =0; i<ck.length;i++){
+                                   ck[i].checked = bool;
+                                    }
+                             }
+                        
+         function reCk(){
+                         for(var i =0; i<ck.length;i++){
+                                ck[i].checked ? ck[i].checked = false : ck[i].checked = true;
+                                    }
+                                }
+                            }		
+    </script>
   </body>
 </html>
