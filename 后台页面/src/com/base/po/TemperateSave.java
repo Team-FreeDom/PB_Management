@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="landApply")
-public class LandApply {
+@Table(name="temperatesave")
+public class TemperateSave {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -77,9 +77,10 @@ public class LandApply {
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	public LandApply() {
+	public TemperateSave() {
 		super();
 	}
+	
 	
 
 }
