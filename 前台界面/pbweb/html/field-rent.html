@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>湖南微课网-教师中心</title>
+    <title>土地租赁</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -10,6 +10,9 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,6 +21,13 @@
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    	.bottom{
+	margin-top:10px;
+	}
+		.dataTables_length{
+	margin-left:5%;}
+    </style>
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -170,7 +180,7 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a href="index.html">位置</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
+								<li><a href="index.html">土地租赁</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -210,26 +220,72 @@
 
 						<div class="col-lg-12 form-group">
 
-							<div class=" col-md-offset-2 col-md-2 ">
-								<a href="#">
-									<h2>均分三列 </h2>
-								</a>
-
-							</div>
-							
-							<div class=" col-md-offset-1 col-md-2 ">
-								<a href="#">
-									<h2>均分三列</h2>
-								</a>
-
-							</div>
-
-							<div class=" col-md-offset-1 col-md-2 ">
-								<!--<a href="message.html">-->
-								<a href="#">
-								<h2>均分三列 </h2>
-								</a>
-							</div>
+							<table id="field_rent" class="cell-border" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr bgcolor="#3B6290" style="color:#FFF">
+                                        	<th><label><input type="checkbox" name="0" class="ck-all"/></label></th>
+                                            <th>序号</th>
+                                            <th>开始日期</th>
+                                            <th>结束日期</th>
+                                            <th>基地名</th>
+                                            <th>土地编号</th>
+                                            <th>最终状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
+                                            <td>1</td>
+                                            <td>2014</td>
+                                            <td>2015</td>
+                                            <td>耕园科教综合基地</td>
+                                            <td>#21</td>
+                                            <td>张三</td>
+                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
+                                            <td>2</td>
+                                            <td>2013</td>
+                                            <td>2015</td>
+                                            <td>西南角农学基地</td>
+                                            <td>#22</td>
+                                            <td>李四</td>
+                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal2"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
+                                            <td>1</td>
+                                            <td>2014</td>
+                                            <td>2015</td>
+                                            <td>耕园科教综合基地</td>
+                                            <td>#21</td>
+                                            <td>张三</td>
+                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
+                                            <td>1</td>
+                                            <td>2014</td>
+                                            <td>2015</td>
+                                            <td>耕园科教综合基地</td>
+                                            <td>#21</td>
+                                            <td>张三</td>
+                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                        </tr>
+                                        <tr>
+                                           <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
+                                            <td>1</td>
+                                            <td>2014</td>
+                                            <td>2015</td>
+                                            <td>耕园科教综合基地</td>
+                                            <td>#21</td>
+                                            <td>张三</td>
+                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                        </tr>
+                                    </tbody>
+                                  </table>
 						</div>
 
 					</div>
@@ -243,6 +299,7 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
