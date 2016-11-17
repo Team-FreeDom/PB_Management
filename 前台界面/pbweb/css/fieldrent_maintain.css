@@ -2,6 +2,8 @@
 /* CSS Document */
 #daochu select{
 	width:100%;}
+.modal-body table tr td select{
+	width:100%;}
 table thead > tr> td{
 	
 	font-size:16px;
@@ -20,9 +22,7 @@ table tbody tr td{
 tbody tr td span{
 	cursor:pointer;}
 	
-.button_style{
-	width:45%;
-}
+
 .dropdown_show li{
 	position:relative;
 	list-style:none;
@@ -33,9 +33,9 @@ tbody tr td span{
 .dropdown_show ul li{
 	list-style:none;
 	position:absolute;
-	top:35px;
+	top:42px;
 	left:0px;
-	width:102%;
+	width:120%;
 	}	
 .dropdown_show ul li table tr td{
 	color:#000;
@@ -59,7 +59,3 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
-/*#rent-approve-table1_info{
-	margin-left:15%;}*/
-#rent-approve-table2_info{
-	margin-left:15%;}

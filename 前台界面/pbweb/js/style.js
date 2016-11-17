@@ -24,6 +24,7 @@ allCkBox();
                                     }
                                 }
                             }
+allCkBox2(); 
 function allCkBox2(id){
         var tableBox = document.getElementById(id||"rent-approve-table2"),
              ck = tableBox.getElementsByClassName("ck"),
