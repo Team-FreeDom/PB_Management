@@ -7,34 +7,32 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.base.dao.BaseInfoDao;
-import com.base.po.BaseInfo;
-import com.base.po.College;
+import com.base.po.Land_base;
+import com.base.po.Layout_InfoView;
 
-@Repository("baseInfoDao")
-public class BaseInfoDaoImpl implements BaseInfoDao {
-
+@Repository("landLayout_infoDao")
+public class LandLayout_infoDaoImpl {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Override
-	public List<BaseInfo> getBaseInfos() {
-		
+	public List<Layout_InfoView> getlayout_info()
+	{
 		Session session=sessionFactory.openSession();		
-		String hql="from BaseInfo";		
-		List<BaseInfo> list=null;
+		String hql="from Layout_InfoView";		
+		List<Layout_InfoView> li=null;
 		
-		 try {
+		try {
 	    	 Query query=session.createQuery(hql);	    	 
-	    	 list=query.list();
+	    	 li=query.list();
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally{
 			session.close();
 		}
-		return list;
+		return li;
 	}
+
 }

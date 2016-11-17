@@ -7,27 +7,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.base.dao.BaseInfoDao;
-import com.base.po.BaseInfo;
-import com.base.po.College;
+import com.base.po.ApplyDept;
+import com.base.po.LandRentInfo;
 
-@Repository("baseInfoDao")
-public class BaseInfoDaoImpl implements BaseInfoDao {
-
+@Repository("applyDeptDao")
+public class ApplyDeptDaoImpl {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Override
-	public List<BaseInfo> getBaseInfos() {
-		
+	public List<ApplyDept> getDepts()
+	{
 		Session session=sessionFactory.openSession();		
-		String hql="from BaseInfo";		
-		List<BaseInfo> list=null;
+		String hql="from ApplyDept";
+		List<ApplyDept> list=null;
 		
-		 try {
-	    	 Query query=session.createQuery(hql);	    	 
+	    try {
+	    	 Query query=session.createQuery(hql);	    	    	
 	    	 list=query.list();
 			
 		} catch (Exception e) {
@@ -37,4 +34,5 @@ public class BaseInfoDaoImpl implements BaseInfoDao {
 		}
 		return list;
 	}
+
 }

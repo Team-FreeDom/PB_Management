@@ -21,7 +21,15 @@ public class TemperateSave {
 	private int Status;
 	private String startPayTime;
 	private String resource;
+	private int applyDept;
 	
+	
+	public int getApplyDept() {
+		return applyDept;
+	}
+	public void setApplyDept(int applyDept) {
+		this.applyDept = applyDept;
+	}
 	public String getResource() {
 		return resource;
 	}
