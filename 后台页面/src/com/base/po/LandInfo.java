@@ -13,14 +13,35 @@ public class LandInfo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lid;
-	private String lname;
-	private String college;
-	private String major_oriented;
-	private String plantingContent;
+	private String lname;	
+	private String major_oriented;	
 	private int landArea;
 	private int afford;
+	private String aptPlanting;
 	private int buildingArea;
 	private int bid;
+	private int spareValue;
+	private String remark;
+	
+	
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getAptPlanting() {
+		return aptPlanting;
+	}
+	public void setAptPlanting(String aptPlanting) {
+		this.aptPlanting = aptPlanting;
+	}
+	public int getSpareValue() {
+		return spareValue;
+	}
+	public void setSpareValue(int spareValue) {
+		this.spareValue = spareValue;
+	}
 	public int getLid() {
 		return lid;
 	}
@@ -33,24 +54,14 @@ public class LandInfo {
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getCollege() {
-		return college;
-	}
-	public void setCollege(String college) {
-		this.college = college;
-	}
+
 	public String getMajor_oriented() {
 		return major_oriented;
 	}
 	public void setMajor_oriented(String major_oriented) {
 		this.major_oriented = major_oriented;
 	}
-	public String getPlantingContent() {
-		return plantingContent;
-	}
-	public void setPlantingContent(String plantingContent) {
-		this.plantingContent = plantingContent;
-	}
+
 	public int getLandArea() {
 		return landArea;
 	}

@@ -14,7 +14,9 @@ public class LandRentInfo {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lr_id;
 	private int lid;
-	private int rentTime;
+	private String startTime;
+	private String endTime;	
+	private String planting;	
 	private int userId;
 	private int rentMoney;
 	private String chargeDate;
@@ -30,11 +32,24 @@ public class LandRentInfo {
 	public void setLid(int lid) {
 		this.lid = lid;
 	}
-	public int getRentTime() {
-		return rentTime;
+
+	public String getStartTime() {
+		return startTime;
 	}
-	public void setRentTime(int rentTime) {
-		this.rentTime = rentTime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getPlanting() {
+		return planting;
+	}
+	public void setPlanting(String planting) {
+		this.planting = planting;
 	}
 	public int getUserId() {
 		return userId;
