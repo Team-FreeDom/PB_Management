@@ -19,7 +19,7 @@ public interface LandInfoDao {
 	   返回值：   List<LandInfo>,为土地管理LandInfo对象的集合
 	   函数功能：根据土地编号获取该土地布局管理信息
 	 */
-    public List<LandInfo> getLandInfo(int lid);
+    public List<LandInfo> getLandInfo(String lid);
     
     /*
 	   参数说明：bid,整型，表示基地编号

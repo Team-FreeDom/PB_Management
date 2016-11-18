@@ -865,10 +865,19 @@
 
 												"aoColumns" : [
 														{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
-															"mData" : "la_id",
+															"mData" : null,
+															"targets": 0,
 															"orderable" : true, // 禁用排序
 															"sDefaultContent" : "",
-															"sWidth" : "2%"
+															"sWidth" : "2%",
+															"fnDrawCallback": function(){
+																var api = this.api();
+																var startIndex= api.context[0]._iDisplayStart;//获取到本页开始的条数
+																
+																api.column(0).nodes().each(function(cell, i) {
+																cell.innerHTML = startIndex + i + 1;
+																}); 
+																}
 														},
 														{
 															"mData" : "startTime",
@@ -937,6 +946,9 @@
 												//meta包含请求行索引，列索引，tables各参数等信息
 
 												],
+												
+												
+												
 												"language" : {
 													"lengthMenu" : "每页 _MENU_ 条记录",
 													"zeroRecords" : "没有找到记录",
@@ -953,7 +965,15 @@
 												}
 
 											});
-						});
+							
+							
+							
+						}	
+							
+				);
+		
+		
+		
 
 		$(document).ready(
 
@@ -1036,8 +1056,7 @@
 			if (dept == "") {
 				alert("请选择申请部门！");
 				return false;
-			}
-       alert("hello");
+			}      
 			return true;
 
 		}
@@ -1230,7 +1249,7 @@
 		/*暂存中记录修改-----start*/
 		function editOne(obj) {
 			var la_id = obj.id;
-
+           
 			$.ajax({
 				type : 'POST',
 				data : {

@@ -86,7 +86,7 @@ a, a:link, a:visited, a:hover, a:active {
 	background:#496D99; !important;
 	position: fixed;
 	width: 100%;
-	z-index: 1102;
+	z-index: 10;
 	backface-visibility: hidden;
 	transform-style: preserve-3d;
 }

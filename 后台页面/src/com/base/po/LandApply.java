@@ -13,7 +13,7 @@ public class LandApply {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int la_id;
-	private int lid;
+	private String lid;
 	private String startTime;
 	private String endTime;	
 	private int applicantId;
@@ -42,13 +42,14 @@ public class LandApply {
 	public void setLa_id(int la_id) {
 		this.la_id = la_id;
 	}
-	public int getLid() {
+
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
-
 	public String getEndTime() {
 		return endTime;
 	}

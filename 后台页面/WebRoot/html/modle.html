@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
@@ -308,7 +308,11 @@
 	<!--row end-->
 	</div>
 	<div class="clearfix"></div>
-
+<script>
+$("li.menuItem.nav-parent").click(function(){
+	  $(this).toggleClass("opened nav-expanded");
+	})
+</script>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -323,7 +327,7 @@
 	<script src="../dist/gridstack.js"></script>
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../js/tu.js"></script>
-	<script src="../js/kg.js"></script>
+	
 	
 </body>
 </html>

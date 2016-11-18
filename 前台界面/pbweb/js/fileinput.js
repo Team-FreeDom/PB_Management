@@ -239,7 +239,7 @@
         tIcon = '<span class="glyphicon glyphicon-file kv-caption-icon"></span>',
         tCaption = '<div tabindex="-1" class="form-control file-caption {class}">\n' +
             '   <span class="file-caption-ellipsis">&hellip;</span>\n' +
-            '   <div class="file-caption-name"></div>\n' +
+            '   <div class="file-caption-name"><input id="fileResource" type="text" value="hello" style="border:none;" readonly></div>\n' +
             '</div>',
         tModal = '<div id="{id}" class="modal fade">\n' +
             '  <div class="modal-dialog modal-lg">\n' +
@@ -661,18 +661,7 @@
             }
             return false;
         },
-        noFilesError: function (params) {
-            var self = this, label = self.minFileCount > 1 ? self.filePlural : self.fileSingle,
-                msg = self.msgFilesTooLess.repl('{n}', self.minFileCount).repl('{files}', label),
-                $error = self.$errorContainer;
-            $error.html(msg);
-            self.isError = true;
-            self.updateFileDetails(0);
-            $error.fadeIn(800);
-            self.raise('fileerror', [params]);
-            self.clearFileInput();
-            addCss(self.$container, 'has-error');
-        },
+        
         setProgress: function (p) {
             var self = this, pct = Math.min(p, 100),
                 template = pct < 100 ? self.progressTemplate : self.progressCompleteTemplate;
@@ -2021,11 +2010,7 @@
             if (self.isDisabled) {
                 status = ' disabled ';
             }
-            if (!self.isUploadable || self.isDisabled) {
-                content = '<button type="submit" title="' + self.uploadTitle + '"class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</button>';
-            } else {
-                content = '<a href="' + self.uploadUrl + '" title="' + self.uploadTitle + '" class="' + css + '"' + status + '>' + self.uploadIcon + self.uploadLabel + '</a>';
-            }
+            
             return content;
         }
     };
@@ -2092,7 +2077,6 @@
         cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i> ',
         cancelClass: 'btn btn-default',
         uploadIcon: '<i class="glyphicon glyphicon-upload"></i> ',
-        uploadClass: 'btn btn-default',
         uploadUrl: null,
         uploadAsync: true,
         uploadExtraData: {},

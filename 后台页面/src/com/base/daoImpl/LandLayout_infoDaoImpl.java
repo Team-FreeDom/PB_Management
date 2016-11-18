@@ -34,5 +34,24 @@ public class LandLayout_infoDaoImpl {
 		}
 		return li;
 	}
+	
+	public List<Layout_InfoView> getlayout_info(int bid)
+	{
+		Session session=sessionFactory.openSession();		
+		String hql="from Layout_InfoView where bid=?";		
+		List<Layout_InfoView> li=null;
+		
+		try {
+	    	 Query query=session.createQuery(hql);	
+	    	 query.setInteger(0, bid);
+	    	 li=query.list();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return li;
+	}
 
 }

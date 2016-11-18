@@ -1,7 +1,10 @@
 package com.base.daoImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -134,13 +137,12 @@ public class LandApply_viewDaoImpl {
 	{
 		Session session=sessionFactory.openSession();
 		List<LandApply_view> list=null;
-		List<Object> paramList = new ArrayList<Object>();	
-		
+		List<Object> paramList = new ArrayList<Object>();			
 		
 		String bname = searchModel.getBname();
 		String startTime = searchModel.getStartTime();
 		String endTime=searchModel.getEndTime();
-		int lid=searchModel.getLid();
+		String lid=searchModel.getLid();
 		String desc=searchModel.getDescp();
 		StringBuilder hql = new StringBuilder("from LandApply_view where applicantId=? and status in(?,?,?)");
 		
@@ -167,9 +169,9 @@ public class LandApply_viewDaoImpl {
 			
 		}
 		
-		if (lid!=0) {
+		if (lid!=null&&!lid.equals("")) {
 			hql.append(" and lid=?");
-			paramList.add(String.valueOf(lid));
+			paramList.add(String.valueOf(lid)+"true");
 			
 		}
 		
@@ -192,10 +194,18 @@ public class LandApply_viewDaoImpl {
 			if (paramList != null && !paramList.isEmpty()) {
 				for (int i = 0; i < paramList.size(); i++) {	
 					System.out.println("start");
-					if(((String) paramList.get(i)).matches("[1-9]*")&&i!=0)
+					if(((String) paramList.get(i)).matches("[1-9]*(true)?")&&i!=0)
 					{
-						System.out.println("if");
+						if(((String) paramList.get(i)).matches("[1-9]*(true)"))
+						{
+							String str=(String) paramList.get(i);
+							str=str.substring(0, str.indexOf("true"));
+							System.out.println("我得到的lid是："+str);
+							query.setInteger(i, Integer.valueOf(str));
+							
+						}else{
 						query.setInteger(i, Integer.valueOf((String) paramList.get(i)));
+						}
 					}else{
 						System.out.println("else");
 						query.setString(i,(String) paramList.get(i));
@@ -215,5 +225,7 @@ public class LandApply_viewDaoImpl {
 		
 		return list;
 	}
+			
+	}
 
-}
+

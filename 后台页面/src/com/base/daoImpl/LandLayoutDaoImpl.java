@@ -65,13 +65,14 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	}
 
 	@Override
-	public void delLandLayout(int id) {
+	public void delLandLayout(String id) {
 		Session session=sessionFactory.openSession();		
 		Transaction tx=null;
 		
 		try {
 			 tx=session.beginTransaction();
-	    	 session.delete(id);
+			 LandLayout lla=(LandLayout) session.get(LandLayout.class, id);
+	    	 session.delete(lla);
 	    	 tx.commit();
 	    	
 		} catch (Exception e) {
@@ -101,6 +102,25 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 			session.close();
 		}
 		return list;
+	}
+	
+	public void delLandLayout(LandLayout ll) {
+		Session session=sessionFactory.openSession();		
+		Transaction tx=null;
+		
+		try {
+			 tx=session.beginTransaction();
+	    	 session.delete(ll);
+	    	 tx.commit();
+	    	
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();// 回滚事务，撤消查询语句
+			}
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
 	}
 
 }

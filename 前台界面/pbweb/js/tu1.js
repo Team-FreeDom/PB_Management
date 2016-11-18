@@ -5,6 +5,32 @@
 				float:true
             };
             $('.grid-stack').gridstack(options);
+            
+            /*获得基地------start*/
+            $.ajax({                //页面加载时自动执行
+				type : 'POST',
+				dataType : 'json',
+				url : 'baseInfo.do',
+				async : false,
+				cache : false,
+				error : function(request) {
+					alert("error");
+				},
+				success : function(data) {
+					var i = 0;
+					for ( var item in data) {
+
+						$("#load-gridh").after(
+								"<option value="+data[i].bid+">"
+										+ data[i].bname + "</option>");
+
+						i++;
+					}
+
+				}
+
+			});
+            /*获得基地------end*/
 
             var tudi=new function () {
 				this.isModify=false;
@@ -29,7 +55,11 @@
 				  if(!_.isEmpty(tudi.serializedData2))
 				  {	
 					if(t !=  tudi.serializedData2[0].bid){
-						 alert("操作失败");
+						
+						  bootbox.alert({
+							  message: "操作失败",
+							  size: 'small'
+						  });
 						 return false;
 					}
 				  }
@@ -43,7 +73,11 @@
 				  var n=_.findIndex(tudi.serializedData, 'id', $(el).attr('data-gs-id'));
 				   if(n==-1)
 				   {
-					   alert("无此节点，请联系管理员");
+					  
+					  bootbox.alert({
+						  message: "无此节点，操作失败",
+						  size: 'small'
+					  });
 					   return false;
 				   }
 				  if(!ishunluan()){
@@ -58,7 +92,7 @@
 				  tudi.grid.removeWidget(el);
 		  		  fuyuan();
 				  this.isModify=true;
-				  return false;					
+				  return true;					
 			  });
 			  
 			  ////////////////////单击结点选择事件/////////////////////////////
@@ -68,94 +102,96 @@
 				  }
 				  var id=$(this).attr('data-gs-id');
 				  var n=_.findIndex(tudi.serializedData2, 'id', id);
+				  if(n<0)
+				  return false;
 				  $('.grid-stack-item-content').removeClass("gay");
 				  $('.grid-stack-item-content').addClass("normal");
 				  $(this).children('div.grid-stack-item-content').removeClass('normal');
 				  $(this).children('div.grid-stack-item-content').addClass('gay');
-				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.																 				  serializedData2[n].buildingArea,tudi.serializedData2[n].Afford);
-			  }); ///单击结点事件
-
-              
-			  
-			  //////ajax加载数据loaddate/////////////////////////////
-			  this.loaddate = function () {
-				  //////////////////////////////此处添加ajax代码，读取数据
-				  data = [//在loadGrid中构成布局对象，关联土地编号id
-									  {x: 0, y: 0, width: 2, height: 1,id:'1',lname:'长安气象站',plantingContent:'气候观测',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 0, y: 1, width: 2, height: 1,id:'2',lname:'长安水稻实验田',plantingContent:'玉米 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 0, y: 2, width: 2, height: 1,id:'3',lname:'长安玉米试验田',plantingContent:'玉米 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 2, y: 3, width: 2, height: 1,id:'4',lname:'长安油菜实验田',plantingContent:'油菜 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 1, y: 4, width: 2, height: 1,id:'5',lname:'长安水生态区域',plantingContent:'农田鱼 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 1, y: 3, width: 2, height: 1,id:'6',lname:'长安林业观察站',plantingContent:'柏林 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 2, y: 4, width: 2, height: 1,id:'7',lname:'长安生物实验田',plantingContent:'微生物 水稻',landArea:86,buildingArea:100,Afford:123,bid:1},
-									  {x: 2, y: 5, width: 2, height: 1,id:'8',lname:'长安动科试验田',plantingContent:'龙虾 水产',landArea:86,buildingArea:100,Afford:123,bid:1}
-								  ];
-				  this.serializedData2 = _.map(data, function (el) {
-										  return {
-											  id: el.id,
-											  lname: el.lname,
-											  plantingContent: el.plantingContent,
-											  landArea: el.landArea,
-											  buildingArea:el.buildingArea,
-											  Afford:el.Afford,
-											  bid:el.bid
-										  };
-									  });
-				  this.serializedData = _.map(data, function (el) {
-										  return {
-											  x: el.x,
-											  y: el.y,
-											  width: el.width,
-											  height: el.height,
-											  id:el.id
-										  };
-									  });
-									  return true;
-			  }.bind(this)/////loaddate
-			  
-			  
+				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.serializedData2[n].buildingArea,tudi.serializedData2[n].Afford);
+				  return true;
+			  }); ///单击结点事件	  
 			  
               this.loadGrid = function () {
-					//alert($('#load-grid').children('option:selected').val());
+            	  var bid=$('#load-grid').children('option:selected').val();
+					var obj;
 					if(this.isModify)
 					{
-						if(confirm('您上次有修改痕迹，是否同步更新到服务器?'))
-						{
+						if(confirm('您上次的操作尚未保存，是否取消跳转?'))
+						{	
+							//this.savedata();
+							$('#load-grid').val(this.serializedData2[0].bid);
+							return false;
 							
-							if(!this.savedata())
-							{
-								$('#load-grid').val(this.serializedData2[0].bid);
-								return false;
-							}
 						}
 					}
 					fill('','','','','','');
 					this.grid.removeAll();
-					if(!this.loaddate())
-					{
-						alert('加载数据失败！任务中断');
-						return false;
-					}
-                    var items = GridStackUI.Utils.sort(this.serializedData);
-                    _.each(items, function (node) {
-						var name=_.result(_.find(this.serializedData2, function(chr) {
-						  return chr.id == node.id;
-						}), 'lname');////对象serializedData2查找关联的lname
-                        this.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),
-                            node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//插入节点
-							}, this);
-							return true;
+					obj=this;
+					
+					$.ajax({  type : 'POST',
+								dataType : 'json',
+								data:{"bid":bid},
+								url : 'getDifferLayout.do',
+								async : false,
+								cache : false,
+								error : function(request) {
+									
+									 bootbox.alert({
+										  message: "数据加载失败！",
+										  size: 'small'
+									  });
+								},
+								success : function(data) {
+									
+									obj.serializedData2 = _.map(data, function (el) {
+														  return {
+															  id: el.id,
+															  lname: el.lname,
+															  plantingContent: el.plantingContent,
+															  landArea: el.landArea,
+															  buildingArea:el.buildingArea,
+															  Afford:el.afford,
+															  bid:el.bid
+														  };
+													  });
+								  obj.serializedData = _.map(data, function (el) {
+														  return {
+															  x: el.x,
+															  y: el.y,
+															  width: el.width,
+															  height: el.height,
+															  id:el.id
+														  };
+													  });	
+								  var items = GridStackUI.Utils.sort(obj.serializedData);
+								  _.each(items, function (node) {
+									  var name=_.result(_.find(obj.serializedData2, function(chr) {
+										return chr.id == node.id;
+									  }), 'lname');////对象serializedData2查找关联的lname
+									  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//����ڵ�
+									}, obj);//end each	
+										
+							   }//end success
+					});	//end ajax				
+					
                 	}.bind(this);////loadgrid
 					
 			///////////////////savedate///////////////////////////////////
 				this.savedata = function(){
 					//////
+					var c="";
+					bid=$('#load-grid').children('option:selected').val();
+					var tag=1;
+					
+				
 					if(_.isEmpty(this.serializedData))
 					{
-						alert('空数据，直接发ajax清空命令')
-						////////补充删除命令///////
-						return true;
-					}
+						tag=0;//1.
+						
+						//return true;
+					}else
+						{
                     this.serializedData = _.map($('.grid-stack > .grid-stack-item:visible'), function (el) {
                         el = $(el);
                         var node = el.data('_gridstack_node');
@@ -168,10 +204,33 @@
                         };
                     }, this);
 					//var c=this.serializedData.concat(this.serializedData2);
-					var c=_.merge(this.serializedData, this.serializedData2);
-					//alert(JSON.stringify(c));
-                   // $('#saved-data').val(JSON.stringify(this.serializedData, null, '    '));
-				   ////////////////ajax上传////////////////////////////////////////////////
+					c=_.merge(this.serializedData, this.serializedData2);
+						}
+////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////				
+					$.ajax({  type : 'POST',
+								dataType : 'json',
+								data:{"layInfo":JSON.stringify(c),
+									   "bid":bid, 
+								       "tag":tag
+								      },
+								url : 'updateLayout_Info.do',
+								async : false,
+								cache : false,
+								error : function(request) {
+									bootbox.alert({
+										message: "加载失败!",
+										size: 'small'
+									});
+								},
+								success : function(data1) {
+									bootbox.alert({
+										message: "已同步至服务器，保存成功!",
+										size: 'small'
+									});
+							   }
+					});	
+					
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				   fuyuan();
 				   this.isModify=false;	
 				   return true;				
@@ -185,23 +244,33 @@
 				  }					
 				 this.savedata();
                    
-                };
-				////////////////////////////////清除结点函数..////////////////////////////////////////
+                }.bind(this);
+				////////////////////////////////清除结点函数////////////////////////////////////////
                 this.clearGrid = function () {
 				  if(!ishunluan()){
 					   return false;
 				  }
-					if(confirm('是否清空本地所有布局?'))
-					{
-					  this.grid.removeAll();
-					  this.serializedData.splice(0,this.serializedData.length);
-					  this.serializedData2.splice(0,this.serializedData2.length);
-					  fill('','','','','','');
-					  this.isModify=true;
-					  return false;					
+				  var obj=this;
+
+				 bootbox.confirm({ 
+					size: "small",
+					message: "确定清空本地节点吗?", 
+					callback: function(result){
+						if(result==true)
+						{
+							obj.grid.removeAll();
+							obj.serializedData.splice(0,obj.serializedData.length);
+							obj.serializedData2.splice(0,obj.serializedData2.length);
+							fill('','','','','','');
+							obj.isModify=true;
+						}
 					}
-                }.bind(this);		
-				//////////////////增加结点函数//////////////////////////////
+				  })
+                }.bind(this);	
+				
+				
+					
+          //////////////////增加结点函数//////////////////////////////
                 this.addGrid = function () {
 				  if(!ishunluan()){
 					   return false;
@@ -220,33 +289,37 @@
 					this.isModify=true;    
                     return false;
                 }.bind(this);
-				/////////////////////保存结点信息//////////////////////////////////////
+				
+        /////////////////////保存结点信息//////////////////////////////////////
 				this.savearray = function(){
 				  if(!ishunluan()){
 					   return false;
 				  }
 				   var id=$('#tudi_id').val();
 				 if(id==''){
-					   alert('请先选择左侧对象，操作失败！');
+					  bootbox.alert({
+						  message: "请先选择左侧节点",
+						  size: 'small'
+					  });
 					   return false;
 				  }
-				 /*var bid=_.result(_.find(this.serializedData2, function(chr) {
-						  return chr.id == id;
-						}), 'bid');
-				  if(parseInt($('#load-grid').children('option:selected').val()) !=  bid){
-					   alert('数据混乱，操作失败！请联系管理员');
-					   return false;
-				  }*/
+
 				  var n=_.findIndex(this.serializedData2, 'id', id);
 				  if(n<0)
 				  {
-					  alert('数据不存在，操作失败！请联系管理员');
+					  bootbox.alert({
+						  message: "无此节点，操作失败",
+						  size: 'small'
+					  });
 					  return false; 
 				  }
 				  if($('#tudi_name').val()=='')
 				  {
-					   alert('土地名称为必填，请补充！');
-					   $('#tudi_name')[0].focus();
+					  bootbox.alert({
+						  message: "土地名称为必填项， 请补充！",
+						  size: 'small'
+					  });					  
+					  $('#tudi_name')[0].focus();
 					  return false; 				  
 				  }
 				  this.serializedData2[n].lname=$('#tudi_name').val();
@@ -264,6 +337,6 @@
                 $('#clear-grid').click(this.clearGrid);
 				$('#add-grid').click(this.addGrid);
 				$('#save-array').click(this.savearray);
-                this.loadGrid();
+               // this.loadGrid();
             };
         });
