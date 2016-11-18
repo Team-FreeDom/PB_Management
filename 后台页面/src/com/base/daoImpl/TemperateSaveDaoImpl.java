@@ -62,6 +62,27 @@ public class TemperateSaveDaoImpl {
 			session.close();
 		}
 
+	}	
+
+	
+	public void updateTemperate(TemperateSave ts) {
+		Session session=sessionFactory.openSession();		
+		Transaction tx=null;
+		
+		try {
+			 tx=session.beginTransaction();
+	    	 session.update(ts);
+	    	 tx.commit();
+	    	
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();// 回滚事务，撤消查询语句
+			}
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+
 	}
 	
 	public void delTemperate(int la_id) {
@@ -124,5 +145,7 @@ public TemperateSave_View getTemperates(int la_id) {
 		
 		return tsv;
 	}
+
+
 
 }

@@ -14,7 +14,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/default.css">
-<link href="../css/fileinput.css" media="all" rel="stylesheet" type="text/css" />	
+<link href="../css/fileinput.css" media="all" rel="stylesheet"
+	type="text/css" />
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
@@ -25,8 +26,8 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
- <script src="../js/fileinput.js" type="text/javascript"></script>
-    <script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
+<script src="../js/fileinput.js" type="text/javascript"></script>
+<script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
 
 <script src="../js/bootstrap.min.js"></script>
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -293,119 +294,122 @@
 						</div>
 					</div>
 
-           <!--撤销确认对话框-->
-<div class="modal fade" id="cancelOneModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true" > <!-- data-backdrop="static" 禁止点击弹框后面内容 -->
-    <form class="form-horizontal" role="form">
-        <div class="modal-dialog modal-sm " > <!-- modal-sm 小的  modal-lg 大的 -->
-            <div class="modal-content" style="border:#4D719B 8px solid">
-                <div class="modal-header" style="background:#4D719B; color:#FFF">
-                    <button type="button" class="close"
-                            data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">                                
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <h5>您确定要撤销吗？</h5>
-                </div>
-                <div class="modal-footer">
-                <!-- 
+					<!--撤销确认对话框-->
+					<div class="modal fade" id="cancelOneModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<!-- data-backdrop="static" 禁止点击弹框后面内容 -->
+						<form class="form-horizontal" role="form">
+							<div class="modal-dialog modal-sm ">
+								<!-- modal-sm 小的  modal-lg 大的 -->
+								<div class="modal-content" style="border:#4D719B 8px solid">
+									<div class="modal-header"
+										style="background:#4D719B; color:#FFF">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel"></h4>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<h5>您确定要撤销吗？</h5>
+									</div>
+									<div class="modal-footer">
+										<!-- 
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
                      -->
-                    <button type="button" class="btn btn-primary" id="cancelSubmit">
-                        确认
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div>
-    </form>
-</div>
-          
-             <!--单个删除确认对话框-->
-<div class="modal fade" id="deleteOneModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true" > <!-- data-backdrop="static" 禁止点击弹框后面内容 -->
-    <form class="form-horizontal" role="form">
-        <div class="modal-dialog modal-sm " > <!-- modal-sm 小的  modal-lg 大的 -->
-            <div class="modal-content" style="border:#4D719B 8px solid">
-                <div class="modal-header" style="background:#4D719B; color:#FFF">
-                    <button type="button" class="close"
-                            data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">                                
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <h5>您确定要删除吗？</h5>
-                </div>
-                <div class="modal-footer">
-                <!-- 
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">取消
-                    </button>
-                     -->
-                    <button type="button" class="btn btn-primary" id="delSubmit">
-                        确认
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div>
-    </form>
-</div> 
+										<button type="button" class="btn btn-primary"
+											id="cancelSubmit">确认</button>
+									</div>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+						</form>
+					</div>
 
-<!--单个提交确认对话框-->
-<div class="modal fade" id="submitOneModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true" > <!-- data-backdrop="static" 禁止点击弹框后面内容 -->
-    <form class="form-horizontal" role="form">
-        <div class="modal-dialog modal-sm " > <!-- modal-sm 小的  modal-lg 大的 -->
-            <div class="modal-content" style="border:#4D719B 8px solid">
-                <div class="modal-header"  style="background:#4D719B; color:#FFF">
-                    <button type="button" class="close"
-                            data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">                                
-                    </h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <h5>您确定要提交吗？</h5>
-                </div>
-                <div class="modal-footer">
-                <!-- 
+					<!--单个删除确认对话框-->
+					<div class="modal fade" id="deleteOneModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<!-- data-backdrop="static" 禁止点击弹框后面内容 -->
+						<form class="form-horizontal" role="form">
+							<div class="modal-dialog modal-sm ">
+								<!-- modal-sm 小的  modal-lg 大的 -->
+								<div class="modal-content" style="border:#4D719B 8px solid">
+									<div class="modal-header"
+										style="background:#4D719B; color:#FFF">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel"></h4>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<h5>您确定要删除吗？</h5>
+									</div>
+									<div class="modal-footer">
+										<!-- 
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
                      -->
-                    <button type="button" class="btn btn-primary" id="SubmitTemperate">
-                        确认
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div>
-    </form>
-</div> 
+										<button type="button" class="btn btn-primary" id="delSubmit">
+											确认</button>
+									</div>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+						</form>
+					</div>
 
-   <!--交费详情模态框-->
-   <div class="modal fade" id="payFor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content" style="border:#4D719B 8px solid">
-                                  <div class="modal-header" style="background:#4D719B; color:#FFF">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title text-center" id="myModalLabel">缴费中详情</h4>
-                                  </div>
-                                  <div class="modal-body table-responsive">
-                                    <table class="table">
-                                       <tr>
+					<!--单个提交确认对话框-->
+					<div class="modal fade" id="submitOneModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<!-- data-backdrop="static" 禁止点击弹框后面内容 -->
+						<form class="form-horizontal" role="form">
+							<div class="modal-dialog modal-sm ">
+								<!-- modal-sm 小的  modal-lg 大的 -->
+								<div class="modal-content" style="border:#4D719B 8px solid">
+									<div class="modal-header"
+										style="background:#4D719B; color:#FFF">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel"></h4>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<h5>您确定要提交吗？</h5>
+									</div>
+									<div class="modal-footer">
+										<!-- 
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消
+                    </button>
+                     -->
+										<button type="button" class="btn btn-primary"
+											id="SubmitTemperate">确认</button>
+									</div>
+								</div>
+								<!-- /.modal-content -->
+							</div>
+						</form>
+					</div>
+
+					<!--交费详情模态框-->
+					<div class="modal fade" id="payFor" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="border:#4D719B 8px solid">
+								<div class="modal-header" style="background:#4D719B; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+									<h4 class="modal-title text-center" id="myModalLabel">缴费中详情</h4>
+								</div>
+								<div class="modal-body table-responsive">
+									<table class="table">
+										<tr>
 											<td>基地名 ：</td>
 											<td><input type="text" id="bnameP" readonly="readonly"></td>
 											<td>租赁人 ：</td>
-											<td><input type="text" id="nameP" ></td>
+											<td><input type="text" id="nameP"></td>
 										</tr>
-										<tr>											
+										<tr>
 											<td>土地名称 ：</td>
 											<td><input type="text" id="lnameP" readonly="readonly"></td>
 											<td>土地编号 ：</td>
@@ -415,9 +419,9 @@
 											<td>申报部门 ：</td>
 											<td><input type="text" id="mycollegeP" readonly></td>
 											<td>可承担人数 ：</td>
-											<td><input type="text" id="affordP" readonly></td>										
+											<td><input type="text" id="affordP" readonly></td>
 										</tr>
-										
+
 										<tr>
 											<td>土地面积 ：</td>
 											<td><input type="text" id="landAreaP" readonly></td>
@@ -428,119 +432,130 @@
 											<td>适宜种植内容 ：</td>
 											<td><input type="text" id="aptPlantingP" readonly></td>
 											<td>计划种植内容 ：</td>
-											<td><input type="text" id="plantingP" readonly></td>											
+											<td><input type="text" id="plantingP" readonly></td>
 										</tr>
 										<tr>
 											<td>起止年限 ：</td>
 											<td><input type="text" id="startTimeP" readonly></td>
 											<td>———————</td>
 											<td><input type="text" id="endTimeP" readonly></td>
-										</tr>	
-                                    </table>
-                                     <center>
-                                    <table class="table table-bordered" style="width:70%">
-                                    	<tr>
-                                            <td>序号</td>
-                                            <td>材料名称</td>
-                                            <td>操作</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td id="upload1">教学科研用地协议</td>
-                                            <td><a href="exportFile.do?fileName=teaching.pdf" style="color:#009">点击下载</a></td>
-                                        </tr>
-                                       <tr>
-                                            <td>2</td>
-                                            <td id="upload1">土地有偿使用协议</td>
-                                            <td><a  href="exportFile.do?fileName=landing.docx"  style="color:#009">点击下载</a></td>
-                                        </tr>
-                                     </table>
-                                                <span style="color:#F00">交费截止日期：</span><input type="text" id="closingdate">
-                                   </center>
+										</tr>
+									</table>
+									<center>
+										<table class="table table-bordered" style="width:70%">
+											<tr>
+												<td>序号</td>
+												<td>材料名称</td>
+												<td>操作</td>
+											</tr>
+											<tr>
+												<td>1</td>
+												<td id="upload1">教学科研用地协议</td>
+												<td><a href="exportFile.do?fileName=teaching.pdf"
+													style="color:#009">点击下载</a></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td id="upload1">土地有偿使用协议</td>
+												<td><a href="exportFile.do?fileName=landing.docx"
+													style="color:#009">点击下载</a></td>
+											</tr>
+										</table>
+										<span style="color:#F00">交费截止日期：</span><input type="text"
+											id="closingdate">
+									</center>
 
-                                  </div>
-                                  <div class="modal-footer table-responsive">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                             
-                            
-   <!--修改内容模态框-->
-    <div class="modal fade" id="rent_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content" style="border:#4D719B 8px solid">
-                                  <div class="modal-header" style="background:#4D719B; color:#FFF">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title text-center" id="myModalLabel">土地租赁修改</h4>
-                                  </div>
-                                  <div class="modal-body table-responsive">
-                                    <table class="table">
-                                       <tr>
-											<td>基地名 ：</td>
-											<td><input type="text" id="bnamer" ></td>
-											<td>租赁人 ：</td>
-											<td><input type="text" id="namer" ></td>
-										</tr>
-										<tr>											
-											<td>土地名称 ：</td>
-											<td><input type="text" id="lnamer"></td>
-											<td>土地编号 ：</td>
-											<td><input type="text" id="lidr" ></td>
-										</tr>
-										<tr>
-											<td>申报部门 ：</td>
-											<td><input type="text" id="mycolleger"></td>
-											<td>可承担人数 ：</td>
-											<td><input type="text" id="affordr"></td>										
-										</tr>
-										
-										<tr>
-											<td>土地面积 ：</td>
-											<td><input type="text" id="landArear"></td>
-											<td>建筑面积 ：</td>
-											<td><input type="text" id="buildingArear" ></td>
-										</tr>
-										<tr>
-											<td>适宜种植内容 ：</td>
-											<td><input type="text" id="aptPlantingr"></td>
-											<td>计划种植内容 ：</td>
-											<td><input type="text" id="plantingr"></td>											
-										</tr>
-										<tr>
-											<td>起止年限 ：</td>
-											<td><input type="text" id="startTimer"></td>
-											<td>———————</td>
-											<td><input type="text" id="endTimer"></td>
-										</tr>	
-                                    </table>
-                                  </div>
-                                  <div class="modal-footer table-responsive">
-                                    <table class="table">
-                                        <tr>
-                                        	
-                                            <td colspan="3">
-                                            <div style="float:right;">
-                                            
-                                                <form enctype="multipart/form-data">
-                                                    <input id="fileResource" class="file" type="file" multiple data-min-file-count="1">
-                                                </form>
-                                        	</div>
-            								</td>
-                                        </tr>
-                                    </table>
-                                    <center>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary">确定</button>
-                                    </center>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+								</div>
+								<div class="modal-footer table-responsive">
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-   
+					<!--修改内容模态框-->
+					<div class="modal fade" id="rent_edit" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="border:#4D719B 8px solid">
+								<div class="modal-header" style="background:#4D719B; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+									<h4 class="modal-title text-center" id="myModalLabel">土地租赁修改</h4>
+								</div>
+								<form action="updateContent.do" method="post"
+									enctype="multipart/form-data" onsubmit="return check()"
+									id="updateForm">
+									<div class="modal-body table-responsive">
+
+										<table class="table">
+											<tr>
+												<td><input type="text" id="hide" name="hide" hidden></td>
+											</tr>
+											<tr>
+												<td>基地名 ：</td>
+												<td><input type="text" id="bnamer" disabled></td>
+												<td>租赁人 ：</td>
+												<td><input type="text" id="namer" disabled></td>
+											</tr>
+											<tr>
+												<td>土地编号 ：</td>
+												<td><input type="text" id="lidr" name="lid"></td>
+												<td>申报部门 ：</td>
+												<td><select name="dept" id="deptme">
+														<option value="" width="10px" id="manydept">请选择</option>
+												</select></td>
+												<!-- <input type="text" id="mycolleger" name="dept"></td> -->
+											</tr>
+											<tr>
+												<td>适宜种植内容 ：</td>
+												<td><input type="text" id="aptPlantingr" disabled></td>
+												<td>计划种植内容 ：</td>
+												<td><input type="text" id="plantingr" name="planting"></td>
+
+											</tr>
+
+											<tr>
+												<td>起止年限 ：</td>
+												<td><input type="text" id="startTimer" disabled></td>
+												<td>———————</td>
+												<td><input type="text" id="endTimer" disabled></td>
+											</tr>
+										</table>
+									</div>
+									<div class="modal-footer table-responsive">
+										<table class="table">
+											<tr>
+
+												<td colspan="3">
+													<div style="float:right;">
+
+														<!--  <form enctype="multipart/form-data"> -->
+														<input  name="fileResource" class="file"
+															type="file" multiple data-min-file-count="1">
+														<!--  </form> -->
+													</div>
+												</td>
+											</tr>
+										</table>
+
+										<center>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+											<button type="button" class="btn btn-primary"
+												onclick="submitUpdate()">确定</button>
+										</center>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+
 
 
 					<div class="col-lg-12 form-group">
@@ -560,12 +575,12 @@
 																<table class="table">
 																	<tr>
 																		<td>基地名： <select name="bname" id="bnameUnion">
-																				<option value="">显示全部</option>
-																				<option value="耘园科教综合基地">耘园科教综合基地</option>
-																				<option value="西南角农学基地">西南角农学基地</option>
+																				<option value="" id="selectallbase">显示全部</option>
+
 																		</select>
 																		</td>
-																		<td>起止年份： <select name="startTime" id="startTimeUnion">
+																		<td>起止年份： <select name="startTime"
+																			id="startTimeUnion">
 																				<option value="">请选择</option>
 																				<option value="2015">2015</option>
 																				<option value="2016">2016</option>
@@ -626,7 +641,8 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal" onclick="closeScan2()">
+									<button type="button" class="close" data-dismiss="modal"
+										onclick="closeScan2()">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 									</button>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
@@ -637,9 +653,9 @@
 											<td>基地名 ：</td>
 											<td><input type="text" id="bname" readonly="readonly"></td>
 											<td>租赁人 ：</td>
-											<td><input type="text" id="name" ></td>
+											<td><input type="text" id="name"></td>
 										</tr>
-										<tr>											
+										<tr>
 											<td>土地名称 ：</td>
 											<td><input type="text" id="lname" readonly="readonly"></td>
 											<td>土地编号 ：</td>
@@ -649,9 +665,9 @@
 											<td>申报部门 ：</td>
 											<td><input type="text" id="mycollege" readonly></td>
 											<td>可承担人数 ：</td>
-											<td><input type="text" id="afford" readonly></td>										
+											<td><input type="text" id="afford" readonly></td>
 										</tr>
-										
+
 										<tr>
 											<td>土地面积 ：</td>
 											<td><input type="text" id="landArea" readonly></td>
@@ -662,21 +678,24 @@
 											<td>适宜种植内容 ：</td>
 											<td><input type="text" id="aptPlanting" readonly></td>
 											<td>计划种植内容 ：</td>
-											<td><input type="text" id="planting" readonly></td>											
+											<td><input type="text" id="planting" readonly></td>
 										</tr>
 										<tr>
 											<td>起止年限 ：</td>
 											<td><input type="text" id="startTime" readonly></td>
 											<td>———————</td>
 											<td><input type="text" id="endTime" readonly></td>
-										</tr>										
+										</tr>
 									</table>
 								</div>
-								<div class="modal-footer table-responsive" id="scanModal" style="display:none;">
-                                    <center>
-                                                              失败原因：<input type="text" id="reason2" readonly></center>
-                                  </div>
-								
+								<div class="modal-footer table-responsive"
+									>
+									<center  id="scanModal" style="display:none;">
+									<span>	失败原因：<input type="text" id="reason2" readonly></span>
+										
+									</center>申请材料：<a id="source" href="#">点击查看</a>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -712,7 +731,7 @@
 												},
 
 												"aoColumns" : [
-														
+
 														{
 															"mData" : "startTime",
 															"orderable" : true, // 禁用排序
@@ -743,40 +762,61 @@
 															"orderable" : false, // 禁用排序
 															"sDefaultContent" : "",
 															"sWidth" : "8%",
-															"render" : function(data, type,row) { 
-																var status=row.status;
-																if(status == 5|| status == 8||status==3)
-																	{
-																	  return data='<span>不通过</span>';
-																	}
-																else if(status == 6){																		
-																	  return data='<span>通过</span>';																														
-															         }else{
-															        	 return data='<span>'+data+'</span>'; 
-															         }
-														}
-															},
-														
+															"render" : function(
+																	data, type,
+																	row) {
+																var status = row.status;
+																if (status == 5
+																		|| status == 8
+																		|| status == 3) {
+																	return data = '<span>不通过</span>';
+																} else if (status == 6) {
+																	return data = '<span>通过</span>';
+																} else {
+																	return data = '<span>'
+																			+ data
+																			+ '</span>';
+																}
+															}
+														},
+
 														{
 															"mData" : "status",
 															"orderable" : false, // 禁用排序
 															"sDefaultContent" : '',
 															"sWidth" : "10%",
-															"render" : function(data, type,row) { //render改变该列样式,4个参数，其中参数数量是可变的。
+															"render" : function(
+																	data, type,
+																	row) { //render改变该列样式,4个参数，其中参数数量是可变的。
 																//alert(row.la_id);
-															   var la_id=row.la_id;
+																var la_id = row.la_id;
 																if (data == 9) {
-																	return data = '<button type="button"  id='+row.la_id+' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='+la_id+' id="frame1_edit">修改</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_delete">删除</button> <button type="button" class="btn btn-success btn-xs" data-id='+la_id+'  id="frame1_submit">提交</button>';
-																	
-																}else if (data == 2|| data == 4) {
-																	return data = '<button type="button" id='+row.la_id+' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='+la_id+' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_cancel" >撤回</button>';
-																}else if(data == 1){
-																	return data = '<button type="button"  id='+row.la_id+' onclick="payForOne(this)" class="btn btn-warning btn-xs" data-id='+la_id+' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_cancel" >撤回</button>';
-																}																
-																else{
-																	return data = '<button type="button" id='+row.la_id+' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='+la_id+' id="frame1_scan">查看</button>';
+																	return data = '<button type="button"  id='
+																			+ row.la_id
+																			+ ' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='
+																			+ la_id
+																			+ ' id="frame1_edit">修改</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_delete">删除</button> <button type="button" class="btn btn-success btn-xs" data-id='+la_id+'  id="frame1_submit">提交</button>';
+
+																} else if (data == 2
+																		|| data == 4) {
+																	return data = '<button type="button" id='
+																			+ row.la_id
+																			+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
+																			+ la_id
+																			+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_cancel" >撤回</button>';
+																} else if (data == 1) {
+																	return data = '<button type="button"  id='
+																			+ row.la_id
+																			+ ' onclick="payForOne(this)" class="btn btn-warning btn-xs" data-id='
+																			+ la_id
+																			+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='+la_id+' id="frame1_cancel" >撤回</button>';
+																} else {
+																	return data = '<button type="button" id='
+																			+ row.la_id
+																			+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
+																			+ la_id
+																			+ ' id="frame1_scan">查看</button>';
 																}
-																
 
 															}
 														}
@@ -785,8 +825,8 @@
 												//type调用数据类型，可用类型“filter”,"display","type","sort",具体用法还未研究
 												//meta包含请求行索引，列索引，tables各参数等信息
 
-												],												 
-												
+												],
+
 												"language" : {
 													"lengthMenu" : "每页 _MENU_ 条记录",
 													"zeroRecords" : "没有找到记录",
@@ -805,9 +845,10 @@
 											});
 						});
 
-		$(document).ready(
-						function() {						
-							
+		$(document)
+				.ready(
+						function() {
+
 							$('#table2')
 									.DataTable(
 											{
@@ -859,17 +900,19 @@
 															"orderable" : false, // 禁用排序
 															"sDefaultContent" : "",
 															"sWidth" : "8%",
-															"render" : function(data, type,row) { 
-																
-																var status=row.status;
-																if(status ==6)
-																	{
-																	  return data='<span>'+data+'</span>';
-																	}
-																else{																		
-																	  return data='<span>申请失败</span>';																														
-															         }
-														}
+															"render" : function(
+																	data, type,
+																	row) {
+
+																var status = row.status;
+																if (status == 6) {
+																	return data = '<span>'
+																			+ data
+																			+ '</span>';
+																} else {
+																	return data = '<span>申请失败</span>';
+																}
+															}
 														},
 														{
 															"mData" : "la_id",
@@ -880,7 +923,11 @@
 																	data, type,
 																	row) { //render改变该列样式,4个参数，其中参数数量是可变的。
 
-																return data = '<span data-id='+data+' id='+data+' onclick="scanOne(this)"  class=" glyphicon glyphicon-search"></span>';
+																return data = '<span data-id='
+																		+ data
+																		+ ' id='
+																		+ data
+																		+ ' onclick="scanOne(this)"  class=" glyphicon glyphicon-search"></span>';
 
 															}
 														}
@@ -907,191 +954,283 @@
 
 											});
 						});
-		
-		
-	
-				function unionSelect() {
-					
-					var bnameUnion=document.getElementById("bnameUnion").value;
-					var lidUnion=document.getElementById("lidUnion").value;
-					var startTimeUnion=document.getElementById("startTimeUnion").value;
-					var endTimeUnion=document.getElementById("endTimeUnion").value;
-					var descUnion=document.getElementById("descUnion").value;
-								
-					
-						$('#table2').DataTable(
-									{
-										"aLengthMenu" : [ 2, 4, 6, 8,
-												10 ], //动态指定分页后每页显示的记录数。
-										"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
-										"bSort" : false,
-										"iDisplayLength" : 4, //默认每页显示多少条记录
-										"bDestroy":true,
-										"dom" : 'ftipr<"bottom"l>',
-										
-										"ajax" : {	
-											    "data":{"bname":bnameUnion,
-											    "lid":lidUnion,
-											    "startTime":startTimeUnion,
-											    "endTime":endTimeUnion,
-											    "desc":descUnion
+
+		$(document).ready(
+
+				function() {
+
+					//alert("来啦！");
+
+					$.ajax({
+						type : 'POST',
+						dataType : 'json',
+						url : 'getDept.do',
+						async : false,
+						cache : false,
+						error : function(request) {
+							alert("error");
+						},
+						success : function(data) {
+							var i = 0;
+							for ( var item in data) {
+
+								$("#manydept").after(
+										"<option value="+data[i].aid+">"
+												+ data[i].dept + "</option>");
+
+								i++;
+							}
+
+						}
+
+					});
+				}
+
+		)
+
+		$(document).ready(
+
+				function() {
+
+					$.ajax({
+						type : 'POST',
+						dataType : 'json',
+						url : 'baseInfo.do',
+						async : false,
+						cache : false,
+						error : function(request) {
+							alert("error");
+						},
+						success : function(data) {
+							var i = 0;
+							for ( var item in data) {
+
+								$("#selectallbase").after(
+										"<option value="+data[i].bname+">"
+												+ data[i].bname + "</option>");
+
+								i++;
+							}
+
+						}
+
+					});
+				}
+
+		)
+
+		/*土地租赁内容修改------start*/
+		function submitUpdate() {
+			$('#updateForm').submit();
+		}
+
+		function check() {
+
+			var lid = document.getElementById("lidr").value;
+			var dept = document.getElementById("deptme").value;
+
+			if (lid == "") {
+				alert("请填写土地编号！");
+				return false;
+			}
+			if (dept == "") {
+				alert("请选择申请部门！");
+				return false;
+			}
+       alert("hello");
+			return true;
+
+		}
+
+		/*土地租赁内容修改-------end*/
+
+		function unionSelect() {
+
+			var bnameUnion = document.getElementById("bnameUnion").value;
+			var lidUnion = document.getElementById("lidUnion").value;
+			var startTimeUnion = document.getElementById("startTimeUnion").value;
+			var endTimeUnion = document.getElementById("endTimeUnion").value;
+			var descUnion = document.getElementById("descUnion").value;
+
+			$('#table2')
+					.DataTable(
+							{
+								"aLengthMenu" : [ 2, 4, 6, 8, 10 ], //动态指定分页后每页显示的记录数。
+								"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
+								"bSort" : false,
+								"iDisplayLength" : 4, //默认每页显示多少条记录
+								"bDestroy" : true,
+								"dom" : 'ftipr<"bottom"l>',
+
+								"ajax" : {
+									"data" : {
+										"bname" : bnameUnion,
+										"lid" : lidUnion,
+										"startTime" : startTimeUnion,
+										"endTime" : endTimeUnion,
+										"desc" : descUnion
+									},
+									"url" : "unionSelect.do",
+									"type" : "POST"
+								},
+
+								"aoColumns" : [
+										{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
+											"mData" : "la_id",
+											"orderable" : true, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "2%"
 										},
-											"url" : "unionSelect.do",
-											"type" : "POST"
+										{
+											"mData" : "startTime",
+											"orderable" : true, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "6%",
+
 										},
-
-										"aoColumns" : [
-												{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
-													"mData" : "la_id",
-													"orderable" : true, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "2%"
-												},
-												{
-													"mData" : "startTime",
-													"orderable" : true, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "6%",
-
-												},
-												{
-													"mData" : "endTime",
-													"orderable" : true, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "6%"
-												},
-												{
-													"mData" : "bname",
-													"orderable" : false, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "10%"
-												},
-												{
-													"mData" : "lid",
-													"orderable" : true, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "8%"
-												},
-												{
-													"mData" : "descp",
-													"orderable" : false, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "8%",
-													"render" : function(data, type,row) { 
-														var status=row.status;
-														if(status ==6)
-															{
-															  return data='<span>'+data+'</span>';
-															}
-														else{																		
-															  return data='<span>申请失败</span>';																														
-													         }
+										{
+											"mData" : "endTime",
+											"orderable" : true, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "6%"
+										},
+										{
+											"mData" : "bname",
+											"orderable" : false, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "10%"
+										},
+										{
+											"mData" : "lid",
+											"orderable" : true, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "8%"
+										},
+										{
+											"mData" : "descp",
+											"orderable" : false, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "8%",
+											"render" : function(data, type, row) {
+												var status = row.status;
+												if (status == 6) {
+													return data = '<span>'
+															+ data + '</span>';
+												} else {
+													return data = '<span>申请失败</span>';
 												}
-												},
-												{
-													"mData" : "la_id",
-													"orderable" : false, // 禁用排序
-													"sDefaultContent" : '',
-													"sWidth" : "5%",
-													"render" : function(
-															data, type,
-															row) { //render改变该列样式,4个参数，其中参数数量是可变的。
+											}
+										},
+										{
+											"mData" : "la_id",
+											"orderable" : false, // 禁用排序
+											"sDefaultContent" : '',
+											"sWidth" : "5%",
+											"render" : function(data, type, row) { //render改变该列样式,4个参数，其中参数数量是可变的。
 
-														return data = '<span data-id='+data+' id='+data+' onclick="scanOne(this)"  class=" glyphicon glyphicon-search"></span>';
+												return data = '<span data-id='
+														+ data
+														+ ' id='
+														+ data
+														+ ' onclick="scanOne(this)"  class=" glyphicon glyphicon-search"></span>';
 
-													}
-												}
-										//data指该行获取到的该列数据
-										//row指该行，可用row.name或row[2]获取第3列字段名为name的值
-										//type调用数据类型，可用类型“filter”,"display","type","sort",具体用法还未研究
-										//meta包含请求行索引，列索引，tables各参数等信息
-
-										],
-										"language" : {
-											"lengthMenu" : "每页 _MENU_ 条记录",
-											"zeroRecords" : "没有找到记录",
-											"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-											"infoEmpty" : "无记录",
-											"infoFiltered" : "(从 _MAX_ 条记录过滤)",
-											"sSearch" : "模糊查询：",
-											"oPaginate" : {
-												"sFirst" : "首页",
-												"sPrevious" : " 上一页 ",
-												"sNext" : " 下一页 ",
-												"sLast" : " 尾页 "
 											}
 										}
+								//data指该行获取到的该列数据
+								//row指该行，可用row.name或row[2]获取第3列字段名为name的值
+								//type调用数据类型，可用类型“filter”,"display","type","sort",具体用法还未研究
+								//meta包含请求行索引，列索引，tables各参数等信息
 
-									}); 
-						document.getElementById("hide_ul").style.display="none";
-				}
+								],
+								"language" : {
+									"lengthMenu" : "每页 _MENU_ 条记录",
+									"zeroRecords" : "没有找到记录",
+									"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+									"infoEmpty" : "无记录",
+									"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+									"sSearch" : "模糊查询：",
+									"oPaginate" : {
+										"sFirst" : "首页",
+										"sPrevious" : " 上一页 ",
+										"sNext" : " 下一页 ",
+										"sLast" : " 尾页 "
+									}
+								}
+
+							});
+			document.getElementById("hide_ul").style.display = "none";
+			recovery();
+		}
 
 		/**
 		 * 土地租赁详情查看
 		 */
-       function scanOne(obj)
-		{
-    	   var la_id = obj.id;
-    	  
-			$.ajax({
-				type : 'POST',
-				data : {
-					"la_id" : la_id
+		function scanOne(obj) {
+			var la_id = obj.id;
 
-				},
-				dataType : 'json',
-				url : 'myRentdetail.do',
-				async : false,
-				cache : false,
-				error : function(request) {
-					alert("error");
-				},
-				success : function(data) {
+			$
+					.ajax({
+						type : 'POST',
+						data : {
+							"la_id" : la_id
 
-					var i = 0;
-					for ( var item in data) {
-                       var reason;
-                      // alert(data[i].status);
-                       if(data[i].status==8)
-                       	{
-                       	reason="同类竞争";
-                       	}
-                       else{
-                       	reason=data[i].descp;
-                       }
-						$("#bname").val(data[i].bname);
-						$("#lname").val(data[i].lname);
-						$("#lid").val(data[i].lid);
-						$("#mycollege").val(data[i].college);						
-						$("#landArea").val(data[i].landArea);
-						$("#buildingArea").val(data[i].buildingArea);
-						$("#afford").val(data[i].afford);
-						$("#aptPlanting").val(data[i].aptPlanting);
-						$("#startTime").val(data[i].startTime);
-						$("#endTime").val(data[i].endTime);
-						$("#name").val(data[i].name);
-						$("#planting").val(data[i].planting);
-						$("#reason2").val(reason);
-						if(data[i].status!=6&&data[i].status!=2&&data[i].status!=4)
-							{
-							//alert(data[i].status);
-							document.getElementById("scanModal").style.display="block";
+						},
+						dataType : 'json',
+						url : 'myRentdetail.do',
+						async : false,
+						cache : false,
+						error : function(request) {
+							alert("error");
+						},
+						success : function(data) {
+
+							var i = 0;
+							for ( var item in data) {
+								var reason;
+								// alert(data[i].status);
+								if (data[i].status == 8) {
+									reason = "同类竞争";
+								} else {
+									reason = data[i].descp;
+								}
+								$("#bname").val(data[i].bname);
+								$("#lname").val(data[i].lname);
+								$("#lid").val(data[i].lid);
+								$("#mycollege").val(data[i].college);
+								$("#landArea").val(data[i].landArea);
+								$("#buildingArea").val(data[i].buildingArea);
+								$("#afford").val(data[i].afford);
+								$("#aptPlanting").val(data[i].aptPlanting);
+								$("#startTime").val(data[i].startTime);
+								$("#endTime").val(data[i].endTime);
+								$("#name").val(data[i].name);
+								$("#planting").val(data[i].planting);
+								$("#reason2").val(reason);
+								
+								if(data[i].resource!=null)
+									{
+									   $("#source").attr("href",data[i].resource);
+									}
+								
+								if (data[i].status != 6 && data[i].status != 2
+										&& data[i].status != 4) {
+
+									document.getElementById("scanModal").style.display = "block";
+								}
+								i++;
 							}
-						i++;
-					}
 
-				}
+						}
 
-			});
+					});
 
 			$("#scan").modal('show');
-		}	
-		
+		}
+
 		/*暂存中记录修改-----start*/
-		 function editOne(obj)
-		{
-    	   var la_id = obj.id;  
-    	  
+		function editOne(obj) {
+			var la_id = obj.id;
+
 			$.ajax({
 				type : 'POST',
 				data : {
@@ -1109,23 +1248,30 @@
 
 					var i = 0;
 					for ( var item in data) {
-                    
-                     
+
+						var filename = data[i].resource;
+						if (filename != null) {
+                              filename=filename.substring(filename.indexOf("$")+1);
+						}
+					//	alert(filename);
 						
-						/*  $("#bnamer").val(data[i].bname);						
-						$("#lnamer").val(data[i].lname);
+						document.getElementById("fileResource").value=filename;
+                    
+                        
+						$("#hide").val(data[i].la_id);
+						$("#bnamer").val(data[i].bname);
+
 						$("#lidr").val(data[i].lid);
-						$("#mycolleger").val(data[i].college);						
-						$("#landArear").val(data[i].landArea);
-						$("#buildingArear").val(data[i].buildingArea);
-						$("#affordr").val(data[i].afford);
+
+						$("#deptme option[value=" + data[i].applyDept + "]")
+								.attr("selected", true);
+
 						$("#aptPlantingr").val(data[i].aptPlanting);
 						$("#startTimer").val(data[i].startTime);
 						$("#endTimer").val(data[i].endTime);
 						$("#namer").val(data[i].name);
-						$("#plantingr").val(data[i].planting);						
-						alert(data[i].resource);  */
-					//$("#fileResource").val(data[i].resource);
+						$("#plantingr").val(data[i].planting);
+
 						i++;
 					}
 
@@ -1135,15 +1281,12 @@
 
 			$("#rent_edit").modal('show');
 		}
-		
+
 		/*暂存中记录修改-------end*/
-		
-		
-		
-       function payForOne(obj)
-		{
-   	   var la_id = obj.id;
-   	   //alert(la_id);
+
+		function payForOne(obj) {
+			var la_id = obj.id;
+
 			$.ajax({
 				type : 'POST',
 				data : {
@@ -1163,18 +1306,19 @@
 					var closingdate;
 					var date;
 					for ( var item in data) {
-                 
-						 closingdate=data[i].startPayTime.replace(/-/g,"/");
-						
-						 date=new Date(closingdate);
-						// alert(date.getDate());
-						date=date.getFullYear()+"-"+(date.getMonth()+1+1)+"-"+date.getDate();
-						
-						
+
+						closingdate = data[i].startPayTime.replace(/-/g, "/");
+
+						date = new Date(closingdate);
+
+						date = date.getFullYear() + "-"
+								+ (date.getMonth() + 1 + 1) + "-"
+								+ date.getDate();
+
 						$("#bnameP").val(data[i].bname);
 						$("#lnameP").val(data[i].lname);
 						$("#lidP").val(data[i].lid);
-						$("#mycollegeP").val(data[i].college);						
+						$("#mycollegeP").val(data[i].college);
 						$("#landAreaP").val(data[i].landArea);
 						$("#buildingAreaP").val(data[i].buildingArea);
 						$("#affordP").val(data[i].afford);
@@ -1182,10 +1326,10 @@
 						$("#startTimeP").val(data[i].startTime);
 						$("#endTimeP").val(data[i].endTime);
 						$("#nameP").val(data[i].name);
-						$("#plantingP").val(data[i].planting);	
-						
-						$("#closingdate").val(date);	
-						
+						$("#plantingP").val(data[i].planting);
+
+						$("#closingdate").val(date);
+
 						i++;
 					}
 
@@ -1195,200 +1339,130 @@
 
 			$("#payFor").modal('show');
 		}
+
 		
-		/* $(document).delegate('#scanOne', 'click', function() {
-			var la_id = $(this).data("id");
+
+		/*申请表中 状态为交费中和审核中的记录撤回----start*/
+		$(document).delegate('#frame1_cancel', 'click', function() {
+
+			var id = $(this).data("id");
+			$("#cancelSubmit").val(id);
+			$("#cancelOneModal").modal('show');
+
+		});
+
+		$(document).delegate('#cancelSubmit', 'click', function() {//点击确认撤销的按钮后执行
+			var id = $(this).val();
+			$('#cancelOneModal').modal('hide');
 			$.ajax({
-				type : 'POST',
 				data : {
-					"la_id" : la_id
+					"la_id" : id
 
 				},
-				dataType : 'json',
-				url : 'myRentdetail.do',
-				async : false,
-				cache : false,
-				error : function(request) {
-					alert("error");
-				},
+				url : 'myFameCancel1.do',
+				async : true,
+				type : "POST",
+				dataType : "json",
+				cache : false, //不允许缓存
 				success : function(data) {
 
-					var i = 0;
-					for ( var item in data) {
-                        var reason;
-                        if(data[i].status==8)
-                        	{
-                        	reason="同类竞争";
-                        	}
-                        else{
-                        	reason=data[i].desc;
-                        }
-						$("#bname").val(data[i].bname);
-						$("#lname").val(data[i].lname);
-						$("#lid").val(data[i].lid);
-						$("#mycollege").val(data[i].college);						
-						$("#landArea").val(data[i].landArea);
-						$("#buildingArea").val(data[i].buildingArea);
-						$("#afford").val(data[i].afford);
-						$("#aptPlanting").val(data[i].aptPlanting);
-						$("#startTime").val(data[i].startTime);
-						$("#endTime").val(data[i].endTime);
-						$("#name").val(data[i].name);
-						$("#planting").val(data[i].planting);
-						$("#reason2").val(reason);
-						if(data[i].status!=6)
-							{
-							//alert(data[i].status);
-							document.getElementById("scanModal").style.display="block";
-							}
-						i++;
+					if (data[0].flag) {
+						window.location.reload();
+					} else {
+						alert("撤销失败");
 					}
 
+				},
+				error : function(data) {
+					alert("请求异常");
 				}
-
 			});
+		});
 
-			$("#scan").modal('show');
-		}); */
-		
-		
-		/*申请表中 状态为交费中和审核中的记录撤回----start*/
-	 	$(document).delegate('#frame1_cancel', 'click', function() {
-	 		
-	 	    	var id=$(this).data("id");	 	    	
-	 	    	$("#cancelSubmit").val(id); 	    
-	 	    	$("#cancelOneModal").modal('show');	 	    	
-	 	 	   
-		});	
-		
-		
-	 	 $(document).delegate('#cancelSubmit','click',function(){//点击确认撤销的按钮后执行
-	         var id=$(this).val();
-	         $('#cancelOneModal').modal('hide');
-	         $.ajax({	
-	        	 data : {
-						"la_id" : id
-
-					},
-	         	url:'myFameCancel1.do',
-	             async:true,
-	             type:"POST",
-	             dataType:"json",
-	             cache:false,    //不允许缓存
-	             success: function(data){
-	            	
-	                 if(data[0].flag)
-	                 {	                	 
-	                     window.location.reload();
-	                 }
-	                 else
-	                 {
-	                     alert("撤销失败");
-	                 }
-
-	             },
-	             error:function(data){
-	                 alert("请求异常");
-	             }
-	         });
-	     });
-		
 		/*申请表中 状态为交费中和审核中的记录查看----end*/
-		
-		
-		
+
 		/*暂存表中 的记录删除----start*/
-		 
+
 		$(document).delegate('#frame1_delete', 'click', function() {
-	 		
-	 	    	var id=$(this).data("id");	 	    	
-	 	    	$("#delSubmit").val(id); 	    
-	 	    	$("#deleteOneModal").modal('show');	 	    	
-	 	 	   
-		});	
-		
-		
-	 	 $(document).delegate('#delSubmit','click',function(){//点击确认删除的按钮后执行
-	         var id=$(this).val();
-	         $('#deleteOneModal').modal('hide');
-	         $.ajax({	
-	        	 data : {
-						"la_id" : id
 
-					},
-	         	url:'myFrameDel1.do',
-	             async:true,
-	             type:"POST",
-	             dataType:"json",
-	             cache:false,    //不允许缓存
-	             success: function(data){
-	            	
-	                 if(data[0].flag)
-	                 {	                	 
-	                     window.location.reload();
-	                 }
-	                 else
-	                 {
-	                     alert("删除失败");
-	                 }
+			var id = $(this).data("id");
+			$("#delSubmit").val(id);
+			$("#deleteOneModal").modal('show');
 
-	             },
-	             error:function(data){
-	                 alert("请求异常");
-	             }
-	         });
-	     });
-		
+		});
+
+		$(document).delegate('#delSubmit', 'click', function() {//点击确认删除的按钮后执行
+			var id = $(this).val();
+			$('#deleteOneModal').modal('hide');
+			$.ajax({
+				data : {
+					"la_id" : id
+
+				},
+				url : 'myFrameDel1.do',
+				async : true,
+				type : "POST",
+				dataType : "json",
+				cache : false, //不允许缓存
+				success : function(data) {
+
+					if (data[0].flag) {
+						window.location.reload();
+					} else {
+						alert("删除失败");
+					}
+
+				},
+				error : function(data) {
+					alert("请求异常");
+				}
+			});
+		});
+
 		/*暂存表中 的记录删除----end*/
-		
-		
+
 		/*暂存表中 的记录提交----start*/
-		 
+
 		$(document).delegate('#frame1_submit', 'click', function() {
-	 		
-	 	    	var id=$(this).data("id");	 	    	
-	 	    	$("#SubmitTemperate").val(id); 	    
-	 	    	$("#submitOneModal").modal('show');	 	    	
-	 	 	   
-		});	
-		
-		
-	 	 $(document).delegate('#SubmitTemperate','click',function(){//点击确认删除的按钮后执行
-	         var id=$(this).val();
-	         $('#submitOneModal').modal('hide');
-	         $.ajax({	
-	        	 data : {
-						"la_id" : id
 
-					},
-	         	url:'myFrameSumbit.do',
-	             async:true,
-	             type:"POST",
-	             dataType:"json",
-	             cache:false,    //不允许缓存
-	             success: function(data){
-	            	
-	                 if(data[0].flag)
-	                 {	                	 
-	                     window.location.reload();
-	                 }
-	                 else
-	                 {
-	                     alert("提交失败");
-	                 }
+			var id = $(this).data("id");
+			$("#SubmitTemperate").val(id);
+			$("#submitOneModal").modal('show');
 
-	             },
-	             error:function(data){
-	                 alert("请求异常");
-	             }
-	         });
-	     });
-		
+		});
+
+		$(document).delegate('#SubmitTemperate', 'click', function() {//点击确认删除的按钮后执行
+			var id = $(this).val();
+			$('#submitOneModal').modal('hide');
+			$.ajax({
+				data : {
+					"la_id" : id
+
+				},
+				url : 'myFrameSumbit.do',
+				async : true,
+				type : "POST",
+				dataType : "json",
+				cache : false, //不允许缓存
+				success : function(data) {
+
+					if (data[0].flag) {
+						window.location.reload();
+					} else {
+						alert("提交失败");
+					}
+
+				},
+				error : function(data) {
+					alert("请求异常");
+				}
+			});
+		});
+
 		/*暂存表中 的记录提交----end*/
-		
-		function closeScan2()
-		{
-			document.getElementById("scanModal").style.display="none";
+
+		function closeScan2() {
+			document.getElementById("scanModal").style.display = "none";
 		}
 
 		function showsubmenu() {
@@ -1397,12 +1471,22 @@
 				submenu.style.display = 'block';
 			} else {
 				submenu.style.display = 'none';
+				recovery();
 			}
 
 		}
 		function hidesubmenu() {
 			var submenu = document.getElementById("hide_ul");
 			submenu.style.display = 'none';
+			recovery();
+		}
+
+		function recovery() {
+			document.getElementById("bnameUnion").value = "";
+			document.getElementById("lidUnion").value = "";
+			document.getElementById("startTimeUnion").value = "";
+			document.getElementById("endTimeUnion").value = "";
+			document.getElementById("descUnion").value = "";
 		}
 	</script>
 

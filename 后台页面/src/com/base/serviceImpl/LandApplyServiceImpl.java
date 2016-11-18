@@ -1,5 +1,6 @@
 package com.base.serviceImpl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,13 +9,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.daoImpl.ApplyDeptDaoImpl;
 import com.base.daoImpl.BaseInfoDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
 import com.base.daoImpl.LandApply_viewDaoImpl;
 import com.base.daoImpl.LandInfoDaoImpl;
 import com.base.daoImpl.LandLayoutDaoImpl;
+import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
 import com.base.daoImpl.TemperateSaveDaoImpl;
+import com.base.po.ApplyDept;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandApply_view;
@@ -22,6 +26,7 @@ import com.base.po.LandInfo;
 import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
+import com.base.po.Layout_InfoView;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
@@ -43,11 +48,15 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	private LandApply_viewDaoImpl landApply_viewDaoImpl;
 	@Autowired
 	private TemperateSaveDaoImpl temperateSaveDaoImpl;
+	@Autowired
+	private ApplyDeptDaoImpl applyDeptDaoImpl;
+	@Autowired
+	private LandLayout_infoDaoImpl landLayout_infoDaoImpl;
 
 	//1.代表土地  2.代表校内  3.代表校外    
 	@Override
-	public List<BaseInfo> getBaseInfos(int baseType) {
-		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos(baseType);
+	public List<BaseInfo> getBaseInfos() {
+		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos();
 		return list;
 	}
 	
@@ -178,6 +187,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     	ts.setPlanting(la.getPlanting());
     	ts.setStartTime(la.getStartTime());
     	ts.setStatus(9);
+    	ts.setResource(la.getResource());
+    	ts.setApplyDept(la.getApplyDept());
+    	
     	temperateSaveDaoImpl.doTemperate(ts);
     	
     	landApplyDaoImpl.delLandApply(la);   	
@@ -196,6 +208,8 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     	la.setPlanting(ts.getPlanting());
     	la.setStartTime(ts.getStartTime());
     	la.setStatus(2);
+    	la.setResource(ts.getResource());
+    	la.setApplyDept(ts.getApplyDept());
     	landApplyDaoImpl.doLandApply(la);
     	
     	temperateSaveDaoImpl.delTemperate(la_id);
@@ -227,4 +241,37 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
     
+   public List<ApplyDept> getDepts()
+   {
+	   List<ApplyDept> list=applyDeptDaoImpl.getDepts();
+	   return list;
+   }
+   
+   public void updateContent(int la_id,int lid,int dept,String planting,String filename,String path)
+   {
+	   TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
+	   ts.setLid(lid);
+	   ts.setPlanting(planting);
+	   ts.setApplyDept(dept);
+	   if(filename!=null)
+	   {
+		   String relativePath=ts.getResource();
+		   if(relativePath!=null)
+		   {		   
+		   relativePath=relativePath.substring(2);
+			File file=new File(path+relativePath);			
+			file.delete(); 
+		   }
+		   ts.setResource(filename);
+	   }
+	   temperateSaveDaoImpl.updateTemperate(ts);
+	   
+   }
+   
+   public List<Layout_InfoView>  getLayout()
+   {
+	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info();
+	   return list;
+   }
+   
 }

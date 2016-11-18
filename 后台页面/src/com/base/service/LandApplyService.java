@@ -15,7 +15,7 @@ public interface LandApplyService {
 	   返回值：   List<BaseInfo>,为基地信息BaseInfo对象的集合
 	   函数功能：查询六大基地的信息
 	 */
-	public List<BaseInfo> getBaseInfos(int baseType);
+	public List<BaseInfo> getBaseInfos();
 
 	/*
 	   参数说明：bid,整型，表示基地编号

@@ -59,9 +59,18 @@ public class TemperateSave_View implements Serializable{
 	@Column(name = "resource")
 	private String resource;
 	
-
+	@Column(name = "applyDept")
+	private int applyDept;
 	
 	
+	
+	
+	public int getApplyDept() {
+		return applyDept;
+	}
+	public void setApplyDept(int applyDept) {
+		this.applyDept = applyDept;
+	}
 	public String getDescp() {
 		return descp;
 	}

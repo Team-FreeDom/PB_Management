@@ -1,5 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
+#daochu select{
+	width:100%;}
 table thead > tr> td{
 	
 	font-size:16px;
