@@ -1,171 +1,638 @@
 package com.base.action;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.base.po.ApplyDept;
 import com.base.po.BaseInfo;
+import com.base.po.LandApply_view;
 import com.base.po.LandInfo;
 import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
+import com.base.po.Layout_InfoView;
+import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
 
 //申请模块的控制层
 @Controller("landApplyController")
-@RequestMapping("/jsp1")
+@RequestMapping("/jsp")
 public class LandApplyController {
-	
+
 	@Autowired
 	private LandApplyServiceImpl landApplyServiceImpl;
 
-	//基地查询
+	// 基地查询
 	@RequestMapping("/baseInfo.do")
-	public String selectBase(ModelMap map)
-	{
-		return null;		
+	public String selectBase(HttpServletRequest request, ModelMap map,
+			HttpServletResponse response) {
+		
+		List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
+		
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			JSONArray json = JSONArray.fromObject(list);
+			response.getWriter().print(json.toString());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
-	
-	//跳到具体租赁页面
+
+	// 跳到具体租赁页面
 	@RequestMapping("/mainRent.do")
-	public String mainRent(HttpServletRequest request,ModelMap map,HttpServletResponse response)
-	{			
-		boolean flag=CookieUtils.addCookie(request, response);
+	public String mainRent(HttpServletRequest request, ModelMap map,
+			HttpServletResponse response) {
+		boolean flag = CookieUtils.addCookie(request, response);
 		map.addAttribute("notimeout", flag);
-		if(!flag)
-		{
+		if (!flag) {
 			return "index";
 		}
-		List<BaseInfo> base=landApplyServiceImpl.getBaseInfos(1);
-		
+		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
+
 		map.addAttribute("base", base);
 		return "mainRent";
-		
+
 	}
-	
-	@RequestMapping("/getContent.do")	
-	public String getContent(HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException
-	{
-		boolean flag=CookieUtils.addCookie(request, response);
+
+	@RequestMapping("/getContent.do")
+	public String getContent(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		boolean flag = CookieUtils.addCookie(request, response);
 		int bid = Integer.valueOf(request.getParameter("base"));
-		String plant=request.getParameter("planting");	
+		String plant = request.getParameter("planting");
 		map.addAttribute("notimeout", flag);
-		if(!plant.equals("-1"))
-		{
+		if (!plant.equals("-1")) {
 			System.out.println(plant);
-			List<String> str=landApplyServiceImpl.getLandLayout(bid, plant);
+			List<String> str = landApplyServiceImpl.getLandLayout(bid, plant);
 			map.addAttribute("str", str);
 			map.addAttribute("flag2", plant);
-		}		
-		List<BaseInfo> base=landApplyServiceImpl.getBaseInfos(1);
-		List<Land_Planting> planting=landApplyServiceImpl.getPlanting(bid);
-		List<LandLayout> layout=landApplyServiceImpl.getLandLayout(bid);
-		List<Land_base>  landInfo=landApplyServiceImpl.getLand_base(bid);
+		}
+		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
+		List<Land_Planting> planting = landApplyServiceImpl.getPlanting(bid);
+		List<LandLayout> layout = landApplyServiceImpl.getLandLayout(bid);
+		List<Land_base> landInfo = landApplyServiceImpl.getLand_base(bid);
 		map.addAttribute("landInfo", landInfo);
 		map.addAttribute("base", base);
 		map.addAttribute("planting", planting);
-    	map.addAttribute("layout", layout);
-    	map.addAttribute("flag1", bid);
-    	return "mainRent";
+		map.addAttribute("layout", layout);
+		map.addAttribute("flag1", bid);
+		return "mainRent";
 	}
-	
-	
-	@RequestMapping("/getInfo.do")	
-	public String getInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException
-	{			
-		int lid = Integer.valueOf(request.getParameter("lid"));
-		List<Land_base> li=landApplyServiceImpl.getLand_baseView(lid);
+
+	@RequestMapping("/getInfo.do")
+	public String getInfo(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		String lid = request.getParameter("lid");
+		List<Land_base> li = landApplyServiceImpl.getLand_baseView(lid);
 		JSONArray json = JSONArray.fromObject(li);
 		response.setContentType("text/html;charset=UTF-8");
 		response.getWriter().print(json.toString());
 		return null;
-		
+
 	}
-	
-	@RequestMapping("/getPlanting.do")	
-	public String getPlanting(HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException
-	{		
+
+	@RequestMapping("/getPlanting.do")
+	public String getPlanting(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
 		return null;
 	}
-	
-	@RequestMapping("/getLayout.do")	
-	public String getLayout(HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException
-	{
-		int bid = Integer.valueOf(request.getParameter("bid"));		
-		List<LandLayout> layout=landApplyServiceImpl.getLandLayout(bid);			
+
+	@RequestMapping("/getLayout.do")
+	public String getLayout(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		int bid = Integer.valueOf(request.getParameter("bid"));
+		List<LandLayout> layout = landApplyServiceImpl.getLandLayout(bid);
 		JSONArray json = JSONArray.fromObject(layout);
 		response.setContentType("text/html;charset=UTF-8");
 		response.getWriter().print(json.toString());
 		return null;
 	}
-	
-	//土地布局查询
+
+	// 土地布局查询
 	@RequestMapping("/layout.do")
-	public String selectLandLayout(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String selectLandLayout(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	//土地信息查询
+
+	// 土地信息查询
 	@RequestMapping("/landInfo.do")
-	public String selectLandInfo(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String selectLandInfo(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	//月份空闲查询
+
+	// 月份空闲查询
 	@RequestMapping("/timeSpare.do")
-	public String timeSpare(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String timeSpare(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	
-	//获取申请信息(点击租赁按钮，获取教师+土地+个人信息)
+
+	// 获取申请信息(点击租赁按钮，获取教师+土地+个人信息)
 	@RequestMapping("/AllApplyInfo.do")
-	public String getAllApplyInfo(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String getAllApplyInfo(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	//提交申请
+
+	// 提交申请
 	@RequestMapping("/submitApply.do")
-	public String submitApply(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String submitApply(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	//修改申请
+
+	// 修改申请
 	@RequestMapping("/updateApply.do")
-	public String updateApply(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	public String updateApply(HttpServletRequest request, ModelMap map) {
+		return null;
 	}
-	
-	//查看申请
+
+	// 查看申请
 	@RequestMapping("/checkApply.do")
-	public String checkApply(ModelMap map)
-	{
-		return null;		
+	public String checkApply(ModelMap map) {
+		return null;
+	}
+
+	// 取消申请
+	@RequestMapping("/cancelApply.do")
+	public String cancelApply(HttpServletRequest request, ModelMap map) {
+		return null;
+	}
+
+	// 获取用户个人的申请记录
+	@RequestMapping("/selfApply.do")
+	public String selfApply(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		System.out.println("hello");
+		String applicantId = "201440509";
+		List<LandApply_view> list = landApplyServiceImpl
+				.getselfApply(applicantId);
+		/*
+		 * for(LandApply_view lv:list) { System.out.println(lv.getDescp()); }
+		 */
+		JSONObject getObj = new JSONObject();
+		getObj.put("data", list);
+
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@RequestMapping("/mySelfandStateApply1.do")
+	public String mySelfandStateApply1(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String applicantId = "201440509";
+		List<LandApply_view> list = null;
+		String str = request.getParameter("status");
+		int status;
+		if (str == null) {
+			status = 2;
+		} else {
+			status = Integer.valueOf(str);
+		}
+		list = landApplyServiceImpl.getselfApply(applicantId, status);
+
+		JSONObject getObj = new JSONObject();
+		getObj.put("data", list);
+
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	@RequestMapping("/mySelfandStateApply2.do")
+	public String mySelfandStateApply2(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String applicantId = "201440509";
+		List<LandApply_view> list = null;
+		int status = 1;
+
+		list = landApplyServiceImpl.getselfApply(applicantId, status);
+
+		JSONObject getObj = new JSONObject();
+		getObj.put("data", list);
+
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@RequestMapping("/myRentdetail.do")
+	public String myRentdetail(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		System.out.println(request.getParameter("来到myRentdetail.do"));
+		int la_id = Integer.valueOf(request.getParameter("la_id"));
+
+		List<LandApply_view> list = null;
+
+		list = landApplyServiceImpl.myRentdetail(la_id);
+
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(json.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@RequestMapping("/myRentEdit.do")
+	public String myRentEdit(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		int la_id = Integer.valueOf(request.getParameter("la_id"));
+
+		List<TemperateSave_View> list = new ArrayList<TemperateSave_View>();
+
+		list.add(landApplyServiceImpl.getTs(la_id));
+
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(json.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@RequestMapping("/myRentFont.do")
+	public String myRentFont(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+
+		String applicantId = "201440509";
+		List list = null;
+		list = landApplyServiceImpl.myRentFont1(applicantId);
+		// list=landApplyServiceImpl.myRentFont(applicantId);
+		JSONObject getObj = new JSONObject();
+		getObj.put("data", list);
+
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@RequestMapping("/myFameCancel1.do")
+	public String myFameCancel1(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		boolean flag = false;
+		try {
+
+			landApplyServiceImpl.myFameCancel1(la_id);
+			flag = true;
+			String str = "[{\"flag\":" + flag + "}]";
+			JSONArray json = JSONArray.fromObject(str);
+
+			response.getWriter().print(json.toString());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+
+	}
+
+	@RequestMapping("/myFrameDel1.do")
+	public String myFrameDel1(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		boolean flag = false;
+		try {
+
+			landApplyServiceImpl.myFrameDel1(la_id);
+			flag = true;
+			String str = "[{\"flag\":" + flag + "}]";
+			JSONArray json = JSONArray.fromObject(str);
+
+			response.getWriter().print(json.toString());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+
+	}
+
+	@RequestMapping("/myFrameSumbit.do")
+	public String myFrameSumbit(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		boolean flag = false;
+		try {
+
+			landApplyServiceImpl.myFrameSubmit(la_id);
+			flag = true;
+			String str = "[{\"flag\":" + flag + "}]";
+			JSONArray json = JSONArray.fromObject(str);
+
+			response.getWriter().print(json.toString());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
+
+	@RequestMapping("/exportFile")
+	public String exportFile(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		String fileName = request.getParameter("fileName");
+		String filename = fileName.substring(0, fileName.lastIndexOf('.'));
+		// String filetype=fileName.substring(fileName.lastIndexOf("."));
+		// System.out.println(filename);
+
+		// 文件下载
+		response.setContentType(request.getServletContext().getMimeType(
+				filename));
+
+		// 读取目标文件，通过response将目标文件写到客户端
+		// 获取目标文件的绝对路径
+		String fullFileName = request.getServletContext().getRealPath(
+				"file/" + fileName);
+
+		// 设置Content-Disposition
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ fileName);
+		// 读取文件
+		InputStream in = new FileInputStream(fullFileName);
+		OutputStream out = response.getOutputStream();
+
+		// 写文件
+		int b;
+		while ((b = in.read()) != -1) {
+			out.write(b);
+		}
+
+		in.close();
+		out.close();
+
+		return null;
+	}
+
+	@RequestMapping("/unionSelect.do")
+	public String unionSelect(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		System.out.println("调用了吗");
+		String applicantId = "201440509";
+
+		String bname = request.getParameter("bname");
+		String startTime = request.getParameter("startTime");
+		String endTime = request.getParameter("endTime");
+		String lid=request.getParameter("lid");
+		
+		System.out.println("我得到的lid是："+lid);
+		
+		String desc = request.getParameter("desc");
+
+		List<LandApply_view> list = landApplyServiceImpl.getUnionInfo(
+				applicantId, bname, startTime, endTime, lid, desc);
+
+		JSONObject getObj = new JSONObject();
+		getObj.put("data", list);
+		map.addAttribute("flag", 2);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@RequestMapping("/updateContent.do")
+	public String updateContent(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+
+		String lid =request.getParameter("lid");
+		int dept = Integer.valueOf(request.getParameter("dept"));
+		String planting = request.getParameter("planting");
+		int la_id=Integer.valueOf(request.getParameter("hide"));
+		String filename="";
+		
+		System.out.println(lid+"  "+dept+"  "+planting+"  "+la_id);		
+	
+		
+		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				// 得到上传的文件
+				MultipartFile mFile = multipartRequest.getFile("fileResource");
+				// 得到上传服务器的路径
+				String path = request.getSession().getServletContext()
+						.getRealPath("/infor/");
+				// 得到上传的文件的文件名
+				String fileName = mFile.getOriginalFilename();
+				System.out.println(fileName);
+				
+				
+				 if(!fileName.isEmpty())
+				  {
+				filename = new Date().getTime() +"$"+fileName;
+				InputStream inputStream = mFile.getInputStream();
+				byte[] b = new byte[1048576];
+				int length = inputStream.read(b);
+				path += "\\" + filename;
+				// 文件流写到服务器端
+				FileOutputStream outputStream = new FileOutputStream(path);
+				outputStream.write(b, 0, length);
+				inputStream.close();
+				outputStream.close();
+				filename = "../infor/" + filename;
+				  }
+				 String path1 = request.getSession().getServletContext().getRealPath("");
+				 landApplyServiceImpl.updateContent(la_id, lid, dept, planting, filename,path1);
+		return "redirect:myRent.jsp";
+
+	}
+
+	@RequestMapping("/getDept.do")
+	public String getDept(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+		
+		List<ApplyDept> list = landApplyServiceImpl.getDepts();
+		
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			JSONArray json = JSONArray.fromObject(list);
+			response.getWriter().print(json.toString());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 	
-	//取消申请
-	@RequestMapping("/cancelApply.do")
-	public String cancelApply(HttpServletRequest request,ModelMap map)
-	{
-		return null;		
+	@RequestMapping("/getLayout_Info.do")
+	public String getLayout_Info(HttpServletRequest request,HttpServletResponse response, ModelMap map){
+		
+		List<Layout_InfoView> list=landApplyServiceImpl.getLayout();
+		
+		
+	/*	JSONObject getObj = new JSONObject();
+		getObj.put("data", list);	*/	
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(json.toString());
+			//response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		
+		return null;
+
 	}
+	
+	@RequestMapping("/getDifferLayout.do")
+	public String getDifferLayout(HttpServletRequest request,HttpServletResponse response, ModelMap map){
+		
+		int bid=Integer.valueOf(request.getParameter("bid"));
+		List<Layout_InfoView> list=landApplyServiceImpl.getDifferLayout(bid);	
+	
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(json.toString());
+			//response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		
+		return null;
+
+	}
+	
+	@RequestMapping("/updateLayout_Info.do")
+	public String updateLayout_Info(HttpServletRequest request,HttpServletResponse response, ModelMap map) throws IOException{
+		
+		int bid=Integer.valueOf(request.getParameter("bid"));
+		int tag=Integer.valueOf(request.getParameter("tag"));
+		String str=request.getParameter("layInfo");
+		
+		List<Layout_InfoView> list=new ArrayList<Layout_InfoView>();
+		Layout_InfoView view=null;
+		
+		if(tag==0)
+		{
+			landApplyServiceImpl.delLayout_info(bid);
+		}else{
+			
+			JSONArray obj = JSONArray.fromObject(str);
+			for(int i=0;i<obj.size();i++)
+			{
+				
+				JSONObject temp=obj.getJSONObject(i);
+			
+				view=new Layout_InfoView();
+				view.setAfford(Integer.valueOf(temp.getString("Afford")));
+				view.setBid(temp.getInt("bid"));
+				view.setBuildingArea(temp.getInt("buildingArea"));
+				view.setHeight(temp.getInt("height"));
+				view.setWidth(temp.getInt("width"));
+				view.setId(temp.getString("id"));
+				view.setLandArea(temp.getInt("landArea"));
+				view.setLname(temp.getString("lname"));
+				view.setPlantingContent(temp.getString("plantingContent"));
+				view.setX(temp.getInt("x"));		
+				view.setY(temp.getInt("y"));
+				list.add(view);
+//				System.out.println(temp.get("id")+" "+temp.getInt("width")+temp.getInt("height"));
+			}
+			
+			
+			landApplyServiceImpl.delLayout_info(bid);
+			landApplyServiceImpl.updateLayInfo(bid, list);
+		}
+		
+		
+		String str1 = "[{\"flag\":" + true + "}]";
+		JSONArray json = JSONArray.fromObject(str1);
+
+		response.getWriter().print(json.toString());
+		
+		
+		
+		
+		
+		
+		return null;
+
+	}
+	
 }

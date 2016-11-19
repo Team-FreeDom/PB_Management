@@ -1,26 +1,38 @@
 package com.base.serviceImpl;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.daoImpl.ApplyDeptDaoImpl;
 import com.base.daoImpl.BaseInfoDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
+import com.base.daoImpl.LandApply_viewDaoImpl;
 import com.base.daoImpl.LandInfoDaoImpl;
 import com.base.daoImpl.LandLayoutDaoImpl;
+import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
+import com.base.daoImpl.TemperateSaveDaoImpl;
+import com.base.po.ApplyDept;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply;
+import com.base.po.LandApply_view;
 import com.base.po.LandInfo;
 import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
+import com.base.po.Layout_InfoView;
+import com.base.po.TemperateSave;
+import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
 
 @Service("landApplyService")
-public class LandApplyServiceImpl implements LandApplyService {
+public class LandApplyServiceImpl<E> implements LandApplyService {
 	
 	@Autowired
 	private LandApplyDaoImpl landApplyDaoImpl;
@@ -32,11 +44,19 @@ public class LandApplyServiceImpl implements LandApplyService {
 	private LandInfoDaoImpl landInfoDaoImpl;
 	@Autowired
 	private Land_PlantingDaoImpl land_PlantingDaoImpl;
+	@Autowired
+	private LandApply_viewDaoImpl landApply_viewDaoImpl;
+	@Autowired
+	private TemperateSaveDaoImpl temperateSaveDaoImpl;
+	@Autowired
+	private ApplyDeptDaoImpl applyDeptDaoImpl;
+	@Autowired
+	private LandLayout_infoDaoImpl landLayout_infoDaoImpl;
 
 	//1.代表土地  2.代表校内  3.代表校外    
 	@Override
-	public List<BaseInfo> getBaseInfos(int baseType) {
-		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos(baseType);
+	public List<BaseInfo> getBaseInfos() {
+		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos();
 		return list;
 	}
 	
@@ -62,8 +82,10 @@ public class LandApplyServiceImpl implements LandApplyService {
 		List<LandLayout> list=landLayoutDaoImpl.getLayout(bid);
 		return list;
 	}
+	
+	
 
-    public List<Land_base> getLand_baseView(int lid) {
+    public List<Land_base> getLand_baseView(String lid) {
 		
 		return landInfoDaoImpl.getView(lid);
 	}
@@ -74,7 +96,7 @@ public class LandApplyServiceImpl implements LandApplyService {
     }
 
 	@Override
-	public List<LandInfo> getLandInfo(int lid) {
+	public List<LandInfo> getLandInfo(String lid) {
 		
 		return landInfoDaoImpl.getLandInfo(lid);
 	}
@@ -99,7 +121,7 @@ public class LandApplyServiceImpl implements LandApplyService {
 	}
 
 	@Override
-	public int getSpareValue(int lid) {
+	public int getSpareValue(String lid) {
 		// 保留
 		return 0;
 	}
@@ -112,5 +134,201 @@ public class LandApplyServiceImpl implements LandApplyService {
 		landApplyDaoImpl.updateLandApply(la);
 
 	}
-
+	
+	//获得用户的申请历史
+	public List<LandApply_view> getselfApply(String applicantId)
+	{
+		return landApply_viewDaoImpl.getapplys(applicantId);
+	}
+	
+	//获取用户不同状态的申请记录
+	public List<LandApply_view> getselfApply(String applicantId,int status)
+	{
+		List<LandApply_view> list=landApply_viewDaoImpl.getapplys(applicantId, status);
+		return list;
+	}
+	
+	public List<LandApply_view> myRentdetail(int la_id)
+	{
+		List<LandApply_view> list=landApply_viewDaoImpl.getapplys(la_id);
+		return list;
+	}	
+  
+    
+    public List myRentFont1(String applicantId)
+    {
+    	List list=new ArrayList<E>();
+		
+    	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
+    	int year = c.get(Calendar.YEAR);     	
+    	String date=String.valueOf(year);
+    	
+    	List<LandApply_view> list1=landApply_viewDaoImpl.getapply(applicantId, date);
+    	List<TemperateSave_View> list2=temperateSaveDaoImpl.getTemperate(applicantId,date);
+    	for(LandApply_view lav:list1)
+    	{
+    		list.add(lav);
+    	}
+    	for(TemperateSave_View tsv:list2)
+    	{
+    		list.add(tsv);
+    	}
+    	
+    	return list;
+    }   
+  
+    
+    public void myFameCancel1(int la_id)
+    {
+    	LandApply la=landApplyDaoImpl.getapply(la_id);    	
+    	
+    	TemperateSave ts=new TemperateSave();
+    	ts.setApplicantId(la.getApplicantId());
+    	ts.setEndTime(la.getEndTime());
+    	ts.setLid(la.getLid());
+    	ts.setPlanting(la.getPlanting());
+    	ts.setStartTime(la.getStartTime());
+    	ts.setStatus(9);
+    	ts.setResource(la.getResource());
+    	ts.setApplyDept(la.getApplyDept());
+    	
+    	temperateSaveDaoImpl.doTemperate(ts);
+    	
+    	landApplyDaoImpl.delLandApply(la);   	
+    	
+    	
+    }
+    
+    public void myFrameSubmit(int la_id){
+    	
+    	TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
+    	
+    	LandApply la=new LandApply();
+    	la.setApplicantId(ts.getApplicantId());
+    	la.setEndTime(ts.getEndTime());
+    	la.setLid(ts.getLid());
+    	la.setPlanting(ts.getPlanting());
+    	la.setStartTime(ts.getStartTime());
+    	la.setStatus(2);
+    	la.setResource(ts.getResource());
+    	la.setApplyDept(ts.getApplyDept());
+    	landApplyDaoImpl.doLandApply(la);
+    	
+    	temperateSaveDaoImpl.delTemperate(la_id);
+    	
+    }
+    
+    public void myFrameDel1(int la_id)
+    {
+    	temperateSaveDaoImpl.delTemperate(la_id);
+    }
+    
+    public TemperateSave_View getTs(int la_id)
+    {
+    	TemperateSave_View tsv=temperateSaveDaoImpl.getTemperates(la_id);
+    	return tsv;
+    }
+    
+   public List<LandApply_view> getUnionInfo(String applicantId,String bname,String startTime,String endTime,String lid,String desc ){
+	   
+	   LandApply_view lav=new LandApply_view();
+	   lav.setApplicantId(applicantId);
+	   lav.setBname(bname);
+	   lav.setStartTime(startTime);
+	   lav.setEndTime(endTime);
+	   lav.setLid(lid);
+	   lav.setDescp(desc);
+	   
+	   List<LandApply_view> list=landApply_viewDaoImpl.getAllStudents(lav);
+	   return list;
+   }
+    
+   public List<ApplyDept> getDepts()
+   {
+	   List<ApplyDept> list=applyDeptDaoImpl.getDepts();
+	   return list;
+   }
+   
+   public void updateContent(int la_id,String lid,int dept,String planting,String filename,String path)
+   {
+	   TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
+	   ts.setLid(lid);
+	   ts.setPlanting(planting);
+	   ts.setApplyDept(dept);
+	   if(filename!=null)
+	   {
+		   String relativePath=ts.getResource();
+		   if(relativePath!=null)
+		   {		   
+		   relativePath=relativePath.substring(2);
+			File file=new File(path+relativePath);			
+			file.delete(); 
+		   }
+		   ts.setResource(filename);
+	   }
+	   temperateSaveDaoImpl.updateTemperate(ts);
+	   
+   }
+   
+   public List<Layout_InfoView>  getLayout()
+   {
+	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info();
+	   return list;
+   }
+   
+   public List<Layout_InfoView>  getDifferLayout(int bid)
+   {
+	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info(bid);
+	   return list;
+   }
+   
+   public void  delLayout_info(int bid)
+   {
+	   
+	   List<LandLayout> list1=landLayoutDaoImpl.getLayout(bid);
+	   List<LandInfo> list2=landInfoDaoImpl.getLandInfos(bid);
+	   System.out.println(list2);
+	   for(LandLayout ll:list1)
+	   {
+		   landLayoutDaoImpl.delLandLayout(ll);
+	   }
+	   for(LandInfo li:list2){
+		   
+		   landInfoDaoImpl.deleteInfo(li);
+	   }
+	   
+   }
+   
+   public void updateLayInfo(int bid,List<Layout_InfoView> list)
+   {
+	   LandLayout layout=null;
+	   LandInfo lifo=null;
+	   
+	   delLayout_info(bid); //第一步，删除土地布局表和土地信息表的记录
+	   
+	   for(Layout_InfoView liv:list)//第二步，向土地布局表和土地信息表中重新插入数据
+	   {
+		   lifo=new LandInfo();
+		   lifo.setAfford(liv.getAfford());
+		   lifo.setAptPlanting(liv.getPlantingContent());
+		   lifo.setBid(liv.getBid());
+		   lifo.setBuildingArea(liv.getBuildingArea());
+		   lifo.setLandArea(liv.getLandArea());
+		   lifo.setLid(liv.getId());
+		   lifo.setLname(liv.getLname());
+		   landInfoDaoImpl.doInfo(lifo);
+		   
+		   layout=new LandLayout();
+		   layout.setId(liv.getId());
+		   layout.setLid(liv.getId());
+		   layout.setBid(liv.getBid());
+		   layout.setHeight(liv.getHeight());
+		   layout.setWidth(liv.getWidth());
+		   layout.setX_axis(liv.getX());
+		   layout.setY_axis(liv.getY());
+		   landLayoutDaoImpl.doLandLayout(layout);
+		   
+	   }
+   }
+   
 }

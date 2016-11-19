@@ -11,7 +11,7 @@ public interface UserInfoService {
 	   返回值：  无返回值
 	   函数功能：删除一个或多个用户信息
 	 */
-     public void delUser(String[] id);
+     public void delUser(String[] delid);
   
      /*
 	   参数说明：ui,代表用户记录对象UserInfo

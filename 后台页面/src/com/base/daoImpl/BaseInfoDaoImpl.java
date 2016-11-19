@@ -20,15 +20,14 @@ public class BaseInfoDaoImpl implements BaseInfoDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<BaseInfo> getBaseInfos(int baseType) {
+	public List<BaseInfo> getBaseInfos() {
 		
 		Session session=sessionFactory.openSession();		
-		String hql="from BaseInfo where btype=?";		
+		String hql="from BaseInfo";		
 		List<BaseInfo> list=null;
 		
 		 try {
-	    	 Query query=session.createQuery(hql);
-	    	 query.setInteger(0, baseType);
+	    	 Query query=session.createQuery(hql);	    	 
 	    	 list=query.list();
 			
 		} catch (Exception e) {

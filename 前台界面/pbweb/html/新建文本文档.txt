@@ -1,0 +1,12 @@
+$.ajax({
+						type : 'POST',
+						dataType : 'json',
+						url : 'getLayout_Info.do',
+						async : false,
+						cache : false,
+						error : function(request) {
+							alert("error");
+						},
+						success : function(data1) {
+
+}£©£»

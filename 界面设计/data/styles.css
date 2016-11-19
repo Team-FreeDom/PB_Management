@@ -1,0 +1,321 @@
+﻿.ax_default {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  color:#333333;
+  text-align:center;
+  line-height:normal;
+}
+.h4 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:15px;
+  color:#FFFFFF;
+  text-align:left;
+  line-height:normal;
+}
+.link_8pt_text_inactive {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:11px;
+  color:#000099;
+  text-align:left;
+  line-height:normal;
+}
+.link_bold_inactive {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:12px;
+  color:#000099;
+  text-align:left;
+  line-height:normal;
+}
+._8pt_text {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:11px;
+  color:#333333;
+  text-align:left;
+  line-height:normal;
+}
+.error {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#FF0000;
+  text-align:center;
+  line-height:normal;
+}
+._形状 {
+}
+._图片 {
+  color:#000000;
+}
+.button {
+}
+.box_1 {
+}
+.box_3 {
+}
+.ellipse {
+}
+.primary_button {
+  color:#FFFFFF;
+}
+.link_button {
+  color:#169BD5;
+}
+._一级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  font-size:32px;
+  text-align:left;
+}
+._二级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  font-size:24px;
+  text-align:left;
+}
+._三级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  font-size:18px;
+  text-align:left;
+}
+._四级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  font-size:14px;
+  text-align:left;
+}
+._五级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  text-align:left;
+}
+._六级标题 {
+  font-family:'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight:700;
+  font-style:normal;
+  font-size:10px;
+  text-align:left;
+}
+._文本段落 {
+  text-align:left;
+}
+.line {
+}
+._文本框 {
+  color:#000000;
+  text-align:left;
+}
+.text_area {
+  color:#000000;
+  text-align:left;
+}
+._下拉列表框 {
+  color:#000000;
+  text-align:left;
+}
+.list_box {
+  color:#000000;
+  text-align:left;
+}
+._流程形状 {
+}
+._表格 {
+}
+._单元格 {
+}
+.menu_item {
+}
+.marker {
+  color:#FFFFFF;
+}
+._水平线 {
+}
+._垂直线 {
+}
+.checkbox {
+  text-align:left;
+}
+.radio_button {
+  text-align:left;
+}
+.html_button {
+  text-align:center;
+}
+.tree_node {
+  text-align:left;
+}
+.label {
+  font-size:14px;
+  text-align:left;
+}
+.error1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#FF0000;
+  text-align:center;
+}
+._文本段落1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  text-align:left;
+}
+._图片1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:13px;
+  color:#000000;
+}
+._文本段落2 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:13px;
+  color:#000000;
+  text-align:left;
+}
+.h5 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:13px;
+  color:#666666;
+  text-align:left;
+}
+.link_8pt_text_active {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:11px;
+  color:#0000FF;
+  text-align:left;
+}
+.link_8pt_text_inactive1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:11px;
+  color:#000099;
+  text-align:left;
+}
+.link_active {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#0000FF;
+  text-align:left;
+}
+.placeholder {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#333333;
+  text-align:center;
+}
+.link_bold_active {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:12px;
+  color:#0000FF;
+  text-align:left;
+}
+.link_bold_inactive1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:12px;
+  color:#000099;
+  text-align:left;
+}
+.link_inactive {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#000099;
+  text-align:left;
+}
+.tab-not_selected-active {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#0000FF;
+  text-align:center;
+}
+.tab-selected_inactive {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#000099;
+  text-align:center;
+}
+._垂直线1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:13px;
+  color:#000000;
+  text-align:left;
+}
+._形状1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:13px;
+  color:#000000;
+}
+.button_active {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#0000FF;
+  text-align:center;
+}
+.label1 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:bold;
+  font-style:normal;
+  font-size:12px;
+  color:#666666;
+  text-align:left;
+}
+._形状2 {
+  font-family:'Arial Normal', 'Arial';
+  font-weight:normal;
+  font-style:normal;
+  font-size:12px;
+  color:#666666;
+}
+.icon {
+}
+.new_style {
+  font-size:12px;
+  color:#FFFFFF;
+  text-align:center;
+}

@@ -41,6 +41,25 @@ public class LandApplyDaoImpl implements LandApplyDao {
 
 	}
 	
+	public void delLandApply(LandApply la) {
+		Session session=sessionFactory.openSession();		
+		Transaction tx=null;
+		
+		try {
+			 tx=session.beginTransaction();
+	    	 session.delete(la);
+	    	 tx.commit();
+	    	
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();// 回滚事务，撤消查询语句
+			}
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+
+	}
 	
 	public LandApply getapply(int la_id)
 	{
@@ -61,7 +80,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		return la;
 	}
 	
-	public List<LandApply> getUserApplys(int lid,int status)
+	public List<LandApply> getUserApplys(String lid,int status)
 	{
 		Session session=sessionFactory.openSession();		
 		String hql="from LandApply where lid=? and status=?";
@@ -69,7 +88,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	    try {
 	    	 Query query=session.createQuery(hql);
-	    	 query.setInteger(0, lid);
+	    	 query.setString(0, lid);
 	    	 query.setInteger(1, status);
 	    	 list=query.list();
 			
@@ -130,6 +149,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			session.close();
 		}
 		return list;
+		
 	}
 
 	@Override

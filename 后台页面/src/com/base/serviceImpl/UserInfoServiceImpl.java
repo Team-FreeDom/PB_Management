@@ -16,8 +16,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	private UserInfoDaoImpl userInfoDaoImpl;
 
 	@Override
-	public void delUser(String[] id) {
-		// TODO Auto-generated method stub
+	public void delUser(String[] delid) {
+		
+		for(String id:delid)
+		{
+			userInfoDaoImpl.delUser(Integer.valueOf(id));
+		}
 
 	}
 
@@ -25,28 +29,65 @@ public class UserInfoServiceImpl implements UserInfoService {
 	{
 		return userInfoDaoImpl.login(id, pwd);
 	}
+	
 	@Override
 	public void doUser(UserInfo ui) {
-		// TODO Auto-generated method stub
+		
+		userInfoDaoImpl.doUser(ui);
 
 	}
 
 	@Override
 	public void updateUser(UserInfo ui) {
-		// TODO Auto-generated method stub
+		
+		userInfoDaoImpl.updateUser(ui);
 
 	}
 
 	@Override
 	public List<UserInfo> getUserInfos() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<UserInfo> list=userInfoDaoImpl.getUserInfos();
+		return list;
+		
 	}
 
 	@Override
 	public List<UserInfo> getUserInfos(int userright, String sex, int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<UserInfo> list=null;
+		
+		if(userright!=0&&!sex.isEmpty()&&id!=0)
+		{
+			list=userInfoDaoImpl.getUserInfo(userright, sex, id);
+			
+		}else if(userright!=0&&!sex.isEmpty())
+		{
+			list=userInfoDaoImpl.getUserInfo(userright, sex);
+			
+			
+		}else if(!sex.isEmpty()&&id!=0)
+		{
+			list=userInfoDaoImpl.getUserInfos(sex, id);
+			
+		}else if(userright!=0&&id!=0)
+		{
+			list=userInfoDaoImpl.getUserInfo(userright, id);
+			
+		}else if(userright!=0)
+		{
+			list=userInfoDaoImpl.getUserInfos(userright);
+			
+		}else if(id!=0)
+		{
+			list=userInfoDaoImpl.getUserInfo(id);
+			
+		}else if(!sex.isEmpty())
+		{
+			list=userInfoDaoImpl.getUserInfos(sex);
+		}
+		
+		return list;
 	}
 
 }
