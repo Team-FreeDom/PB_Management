@@ -585,6 +585,17 @@ a, a:link, a:visited, a:hover, a:active {
 	background-color: #63addc;
 }
 
+.Havetorent  {
+	color: #fff;
+	text-align: center;
+	background-color: #2d3f51 ;
+}
+.Lineup{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+
 
 @media screen and (min-width:768px) {
 .container-fluid.content {
