@@ -1,29 +1,4 @@
-	$("li.menuItem.nav-parent").click(function(){
-	  $(this).toggleClass("opened nav-expanded");
-	})
-	
-function showsubmenu(){
-	var submenu=document.getElementById("hide_ul");
-		if (submenu.style.display == 'none')
-		{
-			submenu.style.display = 'block';
-		}
-		else
-		{
-			submenu.style.display = 'none';
-		}
-		
-	}
-	 function hidesubmenu(){
-		 var submenu=document.getElementById("hide_ul");
-		 submenu.style.display = 'none';
-		 }	
-		 
-
-			
-			
-			
-$(document).ready(function() {
+			$(document).ready(function() {
              var table = $('#rent-approve-table1').dataTable(
 			  {
 				  "bSort": false,				  
@@ -57,9 +32,7 @@ $(document).ready(function() {
 				$('#button').click( function () {
 					table.row('.selected').remove().draw( false );
 				} );	  
-            } );
-			
- $(document).ready(function(){
+            
 				$('#rent-approve-table2').DataTable(
 				{
 				  "bSort": false,
@@ -81,8 +54,7 @@ $(document).ready(function() {
 					
 				
 				});
-			});
- $(document).ready(function(){
+		
 				$('#rent-approve-table3').DataTable(
 				{
 				  "bSort": false,
@@ -104,8 +76,7 @@ $(document).ready(function() {
 					
 				
 				});
-			});			
- $(document).ready(function(){
+			
 				$('#rent-approve-table4').DataTable(
 				{
 				  "bSort": false,

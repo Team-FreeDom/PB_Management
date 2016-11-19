@@ -560,6 +560,30 @@ a, a:link, a:visited, a:hover, a:active {
 	font-size: 16px;
 }
 
+.lname {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-right: 15px;
+}
+
+.grid-stack {
+	background: #fff;
+}
+
+.gay {
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #2B83BD;
+}
+
+.normal {
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #63addc;
+}
 
 
 @media screen and (min-width:768px) {
