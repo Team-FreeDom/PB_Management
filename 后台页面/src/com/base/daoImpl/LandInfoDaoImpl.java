@@ -47,7 +47,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	public List<Land_base> getView(String lid)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from Land_base where lid=?";		
+		String hql="from land_base where lid=?";		
 		List<Land_base> li=null;
 		
 		try {
@@ -66,7 +66,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	public List<Land_base> getlandbase(int bid)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from Land_base where bid=?";		
+		String hql="from land_base where bid=?";		
 		List<Land_base> li=null;
 		
 		try {
@@ -85,7 +85,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	@Override
 	public List<LandInfo> getLandInfo(String lid) {
 		Session session=sessionFactory.openSession();		
-		String hql="from LandInfo where lid=?";		
+		String hql="from landinfo where lid=?";		
 		List<LandInfo> li=null;
 		
 		try {
@@ -106,7 +106,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	@Override
 	public List<LandInfo> getLandInfos(int bid) {
 		Session session=sessionFactory.openSession();		
-		String hql="from LandInfo where bid=?";		
+		String hql="from landinfo where bid=?";		
 		List<LandInfo> list=null;
 		
 		 try {

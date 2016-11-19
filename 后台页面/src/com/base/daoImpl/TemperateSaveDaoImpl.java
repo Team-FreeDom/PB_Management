@@ -23,7 +23,7 @@ public class TemperateSaveDaoImpl {
 	public List<TemperateSave_View> getTemperate(String applicantId,String date)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from TemperateSave_View where applicantId=? and (year(startTime)<=? and year(endTime)>=?)";		
+		String hql="from temperatesave_view where applicantId=? and (year(startTime)<=? and year(endTime)>=?)";		
 		List<TemperateSave_View> lp=null;
 		
 		try {
@@ -109,7 +109,7 @@ public class TemperateSaveDaoImpl {
 	public TemperateSave getTemperate(int la_id) {
 		
 		Session session=sessionFactory.openSession();		
-		String hql="from TemperateSave where la_id=?";		
+		String hql="from temperatesave where la_id=?";		
 		TemperateSave ts=null;
 		
 		try {
@@ -129,7 +129,7 @@ public class TemperateSaveDaoImpl {
 public TemperateSave_View getTemperates(int la_id) {
 		
 		Session session=sessionFactory.openSession();		
-		String hql="from TemperateSave_View where la_id=?";		
+		String hql="from temperatesave_view where la_id=?";		
 		TemperateSave_View tsv=null;
 		
 		try {

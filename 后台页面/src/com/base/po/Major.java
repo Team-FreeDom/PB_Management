@@ -6,8 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="major")
+@Entity(name="major")
 public class Major {
 
 	@Id

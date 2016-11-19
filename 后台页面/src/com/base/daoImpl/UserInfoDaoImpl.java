@@ -22,7 +22,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public void delUser(int id) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where id=?";
+		String hql="from userinfo where id=?";
 		Transaction tx=null;
 		
 		try {
@@ -44,7 +44,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	public boolean login(String id,String pwd)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where id=? and password=?";
+		String hql="from userinfo where id=? and password=?";
 		boolean flag=false;
 		
 	    try {
@@ -110,7 +110,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos() {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo";
+		String hql="from userinfo";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -128,7 +128,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos(int userright) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where userright=?";
+		String hql="from userinfo where userright=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -147,7 +147,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos(String sex) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where sex=?";
+		String hql="from userinfo where sex=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -166,7 +166,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int id) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where id=?";
+		String hql="from userinfo where id=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -185,7 +185,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, String sex) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where userright=? and sex=?";
+		String hql="from userinfo where userright=? and sex=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -205,7 +205,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, int id) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where userright=? and id=?";
+		String hql="from userinfo where userright=? and id=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -225,7 +225,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos(String sex, int id) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where sex=? and id=?";
+		String hql="from userinfo where sex=? and id=?";
 		List<UserInfo> list=null;
 		
 	    try {
@@ -245,7 +245,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, String sex, int id) {
 		Session session=sessionFactory.openSession();		
-		String hql="from UserInfo where userright=? and id=? and sex=?";
+		String hql="from userinfo where userright=? and id=? and sex=?";
 		List<UserInfo> list=null;
 		
 	    try {

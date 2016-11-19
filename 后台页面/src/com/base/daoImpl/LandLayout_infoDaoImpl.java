@@ -20,7 +20,7 @@ public class LandLayout_infoDaoImpl {
 	public List<Layout_InfoView> getlayout_info()
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from Layout_InfoView";		
+		String hql="from landlayout_infoview";		
 		List<Layout_InfoView> li=null;
 		
 		try {

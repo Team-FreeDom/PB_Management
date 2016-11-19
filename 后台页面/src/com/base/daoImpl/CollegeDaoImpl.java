@@ -19,7 +19,7 @@ public class CollegeDaoImpl {
 	public List<College> getColleges()
 	{		
 		Session session=sessionFactory.openSession();		
-		String hql="from College";
+		String hql="from college";
 		List<College> list=null;
 		
 	    try {

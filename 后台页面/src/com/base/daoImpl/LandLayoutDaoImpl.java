@@ -88,7 +88,7 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	public List<LandLayout> getLayout(int bid)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from LandLayout where bid=?";
+		String hql="from landlayout where bid=?";
 		List<LandLayout> list=null;
 		
 	    try {

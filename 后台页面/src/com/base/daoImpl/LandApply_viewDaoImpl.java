@@ -24,7 +24,7 @@ public class LandApply_viewDaoImpl {
 	public List<LandApply_view> getapplys(String applicantId)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where applicantId=? and status in(?,?,?,?)";		
+		String hql="from landapply_view where applicantId=? and status in(?,?,?,?)";		
 		List<LandApply_view> lp=null;
 		
 		try {
@@ -49,7 +49,7 @@ public class LandApply_viewDaoImpl {
 	{
 		
 		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where applicantId=? and status in(?,?)";		
+		String hql="from landapply_view where applicantId=? and status in(?,?)";		
 		List<LandApply_view> lp=null;
 		
 		try {
@@ -74,7 +74,7 @@ public class LandApply_viewDaoImpl {
 		
 		Session session=sessionFactory.openSession();	
 		System.out.println(date);
-		String hql="from LandApply_view where applicantId=? and (year(startTime)<=? and year(endTime)>=?) order by status";		
+		String hql="from landapply_view where applicantId=? and (year(startTime)<=? and year(endTime)>=?) order by status";		
 		List<LandApply_view> lp=null;
 		
 		try {
@@ -97,7 +97,7 @@ public class LandApply_viewDaoImpl {
 	public List<LandApply_view> getapplys(String applicantId,int status)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where applicantId=? and status=?";		
+		String hql="from landapply_view where applicantId=? and status=?";		
 		List<LandApply_view> lp=null;
 		
 		try {
@@ -117,7 +117,7 @@ public class LandApply_viewDaoImpl {
 	public List<LandApply_view> getapplys(int la_id)
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where la_id=?";		
+		String hql="from landapply_view where la_id=?";		
 		List<LandApply_view> lp=null;
 		
 		try {
@@ -144,7 +144,7 @@ public class LandApply_viewDaoImpl {
 		String endTime=searchModel.getEndTime();
 		String lid=searchModel.getLid();
 		String desc=searchModel.getDescp();
-		StringBuilder hql = new StringBuilder("from LandApply_view where applicantId=? and status in(?,?,?)");
+		StringBuilder hql = new StringBuilder("from landapply_view where applicantId=? and status in(?,?,?)");
 		
 		paramList.add(searchModel.getApplicantId());
 		paramList.add(String.valueOf(3));

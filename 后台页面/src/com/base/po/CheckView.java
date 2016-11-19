@@ -6,8 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="checkView")
+@Entity(name="checkview")
 public class CheckView implements Serializable{
 	
 	@Id

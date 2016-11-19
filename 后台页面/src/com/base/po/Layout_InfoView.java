@@ -8,8 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="landlayout_infoview")
+@Entity(name="landlayout_infoview")
 public class Layout_InfoView implements Serializable{	
 	
 	@Id	

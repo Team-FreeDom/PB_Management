@@ -19,7 +19,7 @@ public class Land_PlantingDaoImpl {
 	
 	public List<Land_Planting> getPlanting(int bid){
 		Session session=sessionFactory.openSession();		
-		String hql="from Land_Planting where bid=?";		
+		String hql="from land_planting where bid=?";		
 		List<Land_Planting> lp=null;
 		
 		try {

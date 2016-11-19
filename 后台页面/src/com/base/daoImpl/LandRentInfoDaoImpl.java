@@ -43,7 +43,7 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 	@Override
 	public List<LandRentInfo> getLandRentInfo(String userId) {
 		Session session=sessionFactory.openSession();		
-		String hql="from LandRentInfo where userId=?";
+		String hql="from landrentinfo where userId=?";
 		List<LandRentInfo> list=null;
 		
 	    try {
@@ -62,7 +62,7 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 	@Override
 	public List<LandRentInfo> getLandRentInfos() {
 		Session session=sessionFactory.openSession();		
-		String hql="from LandRentInfo";
+		String hql="from landrentinfo";
 		List<LandRentInfo> list=null;
 		
 	    try {
