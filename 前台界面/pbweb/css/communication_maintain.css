@@ -1,7 +1,5 @@
 @charset "utf-8";
 /* CSS Document */
-#daochu select{
-	width:100%;}
 table thead > tr> td{
 	
 	font-size:16px;
@@ -19,10 +17,6 @@ table tbody tr td{
 	
 tbody tr td span{
 	cursor:pointer;}
-	
-.button_style{
-	width:45%;
-}
 .dropdown_show li{
 	position:relative;
 	list-style:none;

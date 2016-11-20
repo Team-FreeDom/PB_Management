@@ -12,23 +12,23 @@ import javax.persistence.Table;
 @Table(name="landlayout_infoview")
 public class Layout_InfoView implements Serializable{	
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@Id	
+	private String id;
 	private int x;
 	private int y;
 	private int width;
 	private int height;
 	private String plantingContent;
 	private String lname;
-	private String landArea;
-	private String buildingArea;
+	private int landArea;
+	private int buildingArea;
 	private int bid;	
 	private int Afford;
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getX() {
@@ -67,17 +67,18 @@ public class Layout_InfoView implements Serializable{
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getLandArea() {
+
+
+	public int getLandArea() {
 		return landArea;
 	}
-	public void setLandArea(String landArea) {
+	public void setLandArea(int landArea) {
 		this.landArea = landArea;
 	}
-
-	public String getBuildingArea() {
+	public int getBuildingArea() {
 		return buildingArea;
 	}
-	public void setBuildingArea(String buildingArea) {
+	public void setBuildingArea(int buildingArea) {
 		this.buildingArea = buildingArea;
 	}
 	public int getBid() {

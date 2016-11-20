@@ -2,15 +2,11 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns="http://java.sun.com/xml/ns/javaee" 
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>BaseWeb</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login_soft.html</welcome-file>
+  
   </welcome-file-list>
   
   
@@ -51,4 +47,16 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>	
 	  
+	<filter>    
+         <filter-name>loginFilter</filter-name>    
+         <filter-class>com.base.filter.checkLoginFilter</filter-class>    
+    </filter>    
+    <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>/jsp/*</url-pattern>
+    </filter-mapping>  
+    <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>*.do</url-pattern>
+    </filter-mapping> 
 </web-app>

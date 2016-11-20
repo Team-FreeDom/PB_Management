@@ -18,7 +18,7 @@ public class LandApply_view implements Serializable{
 	@Id
 	private String endTime;
 	@Id
-	private int lid;
+	private String lid;
 	@Id
 	private String lname;
 	@Id
@@ -160,10 +160,11 @@ public class LandApply_view implements Serializable{
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public int getLid() {
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
 	public String getBname() {

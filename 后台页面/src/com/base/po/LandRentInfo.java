@@ -6,14 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="landRentInfo")
+@Entity(name="landrentinfo")
 public class LandRentInfo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lr_id;
-	private int lid;
+	private String lid;
 	private String startTime;
 	private String endTime;	
 	private String planting;	
@@ -26,13 +25,14 @@ public class LandRentInfo {
 	public void setLr_id(int lr_id) {
 		this.lr_id = lr_id;
 	}
-	public int getLid() {
+
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
-
 	public String getStartTime() {
 		return startTime;
 	}

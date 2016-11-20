@@ -82,8 +82,10 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		List<LandLayout> list=landLayoutDaoImpl.getLayout(bid);
 		return list;
 	}
+	
+	
 
-    public List<Land_base> getLand_baseView(int lid) {
+    public List<Land_base> getLand_baseView(String lid) {
 		
 		return landInfoDaoImpl.getView(lid);
 	}
@@ -94,7 +96,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }
 
 	@Override
-	public List<LandInfo> getLandInfo(int lid) {
+	public List<LandInfo> getLandInfo(String lid) {
 		
 		return landInfoDaoImpl.getLandInfo(lid);
 	}
@@ -119,7 +121,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}
 
 	@Override
-	public int getSpareValue(int lid) {
+	public int getSpareValue(String lid) {
 		// 保留
 		return 0;
 	}
@@ -227,7 +229,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     	return tsv;
     }
     
-   public List<LandApply_view> getUnionInfo(String applicantId,String bname,String startTime,String endTime,int lid,String desc ){
+   public List<LandApply_view> getUnionInfo(String applicantId,String bname,String startTime,String endTime,String lid,String desc ){
 	   
 	   LandApply_view lav=new LandApply_view();
 	   lav.setApplicantId(applicantId);
@@ -247,7 +249,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
    
-   public void updateContent(int la_id,int lid,int dept,String planting,String filename,String path)
+   public void updateContent(int la_id,String lid,int dept,String planting,String filename,String path)
    {
 	   TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
 	   ts.setLid(lid);
@@ -272,6 +274,61 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    {
 	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info();
 	   return list;
+   }
+   
+   public List<Layout_InfoView>  getDifferLayout(int bid)
+   {
+	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info(bid);
+	   return list;
+   }
+   
+   public void  delLayout_info(int bid)
+   {
+	   
+	   List<LandLayout> list1=landLayoutDaoImpl.getLayout(bid);
+	   List<LandInfo> list2=landInfoDaoImpl.getLandInfos(bid);
+	   System.out.println(list2);
+	   for(LandLayout ll:list1)
+	   {
+		   landLayoutDaoImpl.delLandLayout(ll);
+	   }
+	   for(LandInfo li:list2){
+		   
+		   landInfoDaoImpl.deleteInfo(li);
+	   }
+	   
+   }
+   
+   public void updateLayInfo(int bid,List<Layout_InfoView> list)
+   {
+	   LandLayout layout=null;
+	   LandInfo lifo=null;
+	   
+	   delLayout_info(bid); //第一步，删除土地布局表和土地信息表的记录
+	   
+	   for(Layout_InfoView liv:list)//第二步，向土地布局表和土地信息表中重新插入数据
+	   {
+		   lifo=new LandInfo();
+		   lifo.setAfford(liv.getAfford());
+		   lifo.setAptPlanting(liv.getPlantingContent());
+		   lifo.setBid(liv.getBid());
+		   lifo.setBuildingArea(liv.getBuildingArea());
+		   lifo.setLandArea(liv.getLandArea());
+		   lifo.setLid(liv.getId());
+		   lifo.setLname(liv.getLname());
+		   landInfoDaoImpl.doInfo(lifo);
+		   
+		   layout=new LandLayout();
+		   layout.setId(liv.getId());
+		   layout.setLid(liv.getId());
+		   layout.setBid(liv.getBid());
+		   layout.setHeight(liv.getHeight());
+		   layout.setWidth(liv.getWidth());
+		   layout.setX_axis(liv.getX());
+		   layout.setY_axis(liv.getY());
+		   landLayoutDaoImpl.doLandLayout(layout);
+		   
+	   }
    }
    
 }

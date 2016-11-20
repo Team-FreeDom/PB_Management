@@ -37,7 +37,7 @@ public class LandInfoServiceImpl implements LandInfoService {
 	}
 
 	@Override
-	public void deleteLandLayout(int id) {
+	public void deleteLandLayout(String id) {
 		landLayoutDaoImpl.delLandLayout(id);
 
 	}

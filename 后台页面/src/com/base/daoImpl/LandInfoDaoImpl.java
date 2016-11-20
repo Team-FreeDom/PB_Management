@@ -44,7 +44,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 
 	}
 	
-	public List<Land_base> getView(int lid)
+	public List<Land_base> getView(String lid)
 	{
 		Session session=sessionFactory.openSession();		
 		String hql="from Land_base where lid=?";		
@@ -52,7 +52,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		
 		try {
 	    	 Query query=session.createQuery(hql);
-	    	 query.setInteger(0, lid);
+	    	 query.setString(0, lid);
 	    	 li=query.list();
 			
 		} catch (Exception e) {
@@ -83,14 +83,14 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	}
 
 	@Override
-	public List<LandInfo> getLandInfo(int lid) {
+	public List<LandInfo> getLandInfo(String lid) {
 		Session session=sessionFactory.openSession();		
 		String hql="from LandInfo where lid=?";		
 		List<LandInfo> li=null;
 		
 		try {
 	    	 Query query=session.createQuery(hql);
-	    	 query.setInteger(0, lid);
+	    	 query.setString(0, lid);
 	    	 li=query.list();
 			
 		} catch (Exception e) {
@@ -119,7 +119,49 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		}finally{
 			session.close();
 		}
+		// System.out.println(bid+list.get(0).getAfford());
 		return list;
 	}
+	
+	public void deleteInfo(LandInfo li) {
+		Session session=sessionFactory.openSession();		
+		Transaction tx=null;
+		
+		try {
+			 tx=session.beginTransaction();	    	
+	    	 session.delete(li);
+	    	 tx.commit();
+	    	
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();// 回滚事务，撤消查询语句
+			}
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+
+	}
+	
+	public void doInfo(LandInfo li) {
+		Session session=sessionFactory.openSession();		
+		Transaction tx=null;
+		
+		try {
+			 tx=session.beginTransaction();	    	
+	    	 session.save(li);
+	    	 tx.commit();
+	    	
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();// 回滚事务，撤消查询语句
+			}
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+
+	}
+	
 
 }

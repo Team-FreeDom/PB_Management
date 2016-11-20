@@ -28,34 +28,34 @@ public class CheckServiceImpl implements checkService {
 	//交费是6，锁定是4，申请中是2，管理员拒绝为8
 	@Override
 	public void agreeApply(int la_id, int lid) {
-		LandApply la=landApplyDaoImpl.getapply(la_id);
+		/*LandApply la=landApplyDaoImpl.getapply(la_id);
 		la.setStatus(1);
 		landApplyDaoImpl.updateLandApply(la);//将唯一的申请记录状态变为交费中	
 		
-		/*缺少定时器，判定是否超过交费日期*/
+		缺少定时器，判定是否超过交费日期
 		
 		
-		/*获得特定土地状态为申请中的记录集合*/
-		List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
+		获得特定土地状态为申请中的记录集合
+		//List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
 		for(LandApply lay:list)
 		{
 			lay.setStatus(4);
 			landApplyDaoImpl.updateLandApply(lay);//将申请中状态的记录状态变为锁定
-		}
+		}*/
 
 	}
 
 	/*将状态为申请中的其他记录状态变为8*/
 	@Override
 	public void refuseOthers(int la_id, int lid) {
-		List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
+		/*List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
 		for(LandApply la:list)
 		{
 			if(la.getLa_id()!=la_id){
 				la.setStatus(8);
 				landApplyDaoImpl.updateLandApply(la);
 			}			
-		}
+		}*/
 	}
 
 	@Override

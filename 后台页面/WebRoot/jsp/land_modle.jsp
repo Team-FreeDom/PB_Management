@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -209,8 +209,10 @@
 								<label for="inputEmail3" class="col-sm-4 control-label">选择区域：</label>
 								<div class="col-sm-8">
 									<select id="load-grid" class="form-control">
-										<option value="1">长安基地</option>
-										<option value="2">耕耘基地</option>
+									  <option val="" id="load-gridh" >请选择</option>
+										<!-- <option value="1">长安基地</option>
+										<option value="2">耕耘基地</option> -->
+										
 									</select>
 								</div>
 							</div>
@@ -325,8 +327,10 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
 	<script src="../dist/gridstack.js"></script>
 	<script src="../dist/gridstack.jQueryUI.js"></script>
-	<script src="../js/tu.js"></script>
+	<script src="../dist/bootbox.min.js"></script>
+	<script src="../js/tu.js"></script>	
 	<script src="../js/kg.js"></script>
+	
 	
 </body>
 </html>

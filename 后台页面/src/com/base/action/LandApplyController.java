@@ -113,7 +113,7 @@ public class LandApplyController {
 	@RequestMapping("/getInfo.do")
 	public String getInfo(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		int lid = Integer.valueOf(request.getParameter("lid"));
+		String lid = request.getParameter("lid");
 		List<Land_base> li = landApplyServiceImpl.getLand_baseView(lid);
 		JSONArray json = JSONArray.fromObject(li);
 		response.setContentType("text/html;charset=UTF-8");
@@ -315,7 +315,7 @@ public class LandApplyController {
 	@RequestMapping("/myRentFont.do")
 	public String myRentFont(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-
+        System.out.println("myRentFont.do");
 		String applicantId = "201440509";
 		List list = null;
 		list = landApplyServiceImpl.myRentFont1(applicantId);
@@ -442,14 +442,10 @@ public class LandApplyController {
 		String bname = request.getParameter("bname");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
-		int lid;
-		if (request.getParameter("lid") == null
-				|| request.getParameter("lid").equals("")) {
-			lid = 0;
-		} else {
-			lid = Integer.valueOf(request.getParameter("lid"));
-		}
-
+		String lid=request.getParameter("lid");
+		
+		System.out.println("我得到的lid是："+lid);
+		
 		String desc = request.getParameter("desc");
 
 		List<LandApply_view> list = landApplyServiceImpl.getUnionInfo(
@@ -474,7 +470,7 @@ public class LandApplyController {
 	public String updateContent(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 
-		int lid = Integer.valueOf(request.getParameter("lid"));
+		String lid =request.getParameter("lid");
 		int dept = Integer.valueOf(request.getParameter("dept"));
 		String planting = request.getParameter("planting");
 		int la_id=Integer.valueOf(request.getParameter("hide"));
@@ -559,5 +555,84 @@ public class LandApplyController {
 		return null;
 
 	}
+	
+	@RequestMapping("/getDifferLayout.do")
+	public String getDifferLayout(HttpServletRequest request,HttpServletResponse response, ModelMap map){
+		
+		int bid=Integer.valueOf(request.getParameter("bid"));
+		List<Layout_InfoView> list=landApplyServiceImpl.getDifferLayout(bid);	
+	
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
 
+		try {
+			response.getWriter().print(json.toString());
+			//response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+		
+		return null;
+
+	}
+	
+	@RequestMapping("/updateLayout_Info.do")
+	public String updateLayout_Info(HttpServletRequest request,HttpServletResponse response, ModelMap map) throws IOException{
+		
+		int bid=Integer.valueOf(request.getParameter("bid"));
+		int tag=Integer.valueOf(request.getParameter("tag"));
+		String str=request.getParameter("layInfo");
+		
+		List<Layout_InfoView> list=new ArrayList<Layout_InfoView>();
+		Layout_InfoView view=null;
+		
+		if(tag==0)
+		{
+			landApplyServiceImpl.delLayout_info(bid);
+		}else{
+			
+			JSONArray obj = JSONArray.fromObject(str);
+			for(int i=0;i<obj.size();i++)
+			{
+				
+				JSONObject temp=obj.getJSONObject(i);
+			
+				view=new Layout_InfoView();
+				view.setAfford(Integer.valueOf(temp.getString("Afford")));
+				view.setBid(temp.getInt("bid"));
+				view.setBuildingArea(temp.getInt("buildingArea"));
+				view.setHeight(temp.getInt("height"));
+				view.setWidth(temp.getInt("width"));
+				view.setId(temp.getString("id"));
+				view.setLandArea(temp.getInt("landArea"));
+				view.setLname(temp.getString("lname"));
+				view.setPlantingContent(temp.getString("plantingContent"));
+				view.setX(temp.getInt("x"));		
+				view.setY(temp.getInt("y"));
+				list.add(view);
+//				System.out.println(temp.get("id")+" "+temp.getInt("width")+temp.getInt("height"));
+			}
+			
+			
+			landApplyServiceImpl.delLayout_info(bid);
+			landApplyServiceImpl.updateLayInfo(bid, list);
+		}
+		
+		
+		String str1 = "[{\"flag\":" + true + "}]";
+		JSONArray json = JSONArray.fromObject(str1);
+
+		response.getWriter().print(json.toString());
+		
+		
+		
+		
+		
+		
+		return null;
+
+	}
+	
 }

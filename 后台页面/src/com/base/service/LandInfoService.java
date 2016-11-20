@@ -26,7 +26,7 @@ public interface LandInfoService {
 	   返回值：   无返回值
 	   函数功能：删除土地
 	 */
-	public void deleteLandLayout(int id);
+	public void deleteLandLayout(String id);
 	
 	
 }

@@ -10,8 +10,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Repository;
 
-@Entity
-@Table(name="land_base")
+@Entity(name="land_base")
 public class Land_base implements Serializable{
 	
 	@Id	

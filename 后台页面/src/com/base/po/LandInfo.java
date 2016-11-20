@@ -10,9 +10,8 @@ import javax.persistence.Table;
 @Table(name="landInfo")
 public class LandInfo {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int lid;
+	@Id	
+	private String lid;
 	private String lname;	
 	private String major_oriented;	
 	private int landArea;
@@ -42,10 +41,11 @@ public class LandInfo {
 	public void setSpareValue(int spareValue) {
 		this.spareValue = spareValue;
 	}
-	public int getLid() {
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
 	public String getLname() {
