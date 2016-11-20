@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="../css/index_main.css">
     <link rel="stylesheet" href="../css/calendar.css" media="screen">
 
-	
+	<style>
+	.table{ background:#FFF;}
+	.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {border-top:0px solid #ddd;}
+    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -173,7 +176,7 @@
 					<div class="page-header row">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="index.html">位置</a></li>
+                            	<li><a href="#">位置  :</a></li>
 								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
 							</ol>
 						</div>
@@ -210,7 +213,7 @@
 							</div>
 
 							
-								<div id="calendar" class="col-md-4"></div>
+								<div id="calendar" class="col-md-4" style="background:none;"></div>
 
 							<script src="../js/calendar.jquery.min.js"></script>
                             <script src="../js/jquery-ui-datepicker.min.js"></script>
@@ -230,22 +233,21 @@
 						<div id="data" class="col-lg-12">
 
 							<div class="col-md-2 col-xs-2 data_display">
-								<table class="table">
+								<table class="table" id='tvb'>
                                     <tr>
-                                        <td style="font-size:50%">我的信息</td>
-                                        <td rowspan="2"><span class="glyphicon glyphicon-user" style="background:#FA8562;"></span></td>
+                                        <td style="font-size:50%">注册用户</td>
+                                        <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:120%">1287</td>
                                     </tr>
                                 </table>
-
 							</div>
 							
 							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
 								<table class="table">
                                     <tr>
-                                        <td style="font-size:50%">我的信息</td>
+                                        <td style="font-size:50%">租赁申请</td>
                                         <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
@@ -257,9 +259,9 @@
 
 							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
 								<!--<a href="message.html">-->
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">我的信息</td>
+								<table class="table" width="100%">
+                                    <tr style=" border-color:#FFF">
+                                        <td style="font-size:50%">实习申请</td>
                                         <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>
@@ -272,7 +274,7 @@
 								<!--<a href="message.html">-->
 								<table class="table">
                                     <tr>
-                                        <td style="font-size:50%">我的信息</td>
+                                        <td style="font-size:50%">维修申请</td>
                                         <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
                                     </tr>
                                     <tr>
@@ -297,6 +299,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     
-    <script src="../js/main.js"></script>
+    <script src="../js/kg.js"></script>
   </body>
 </html>
