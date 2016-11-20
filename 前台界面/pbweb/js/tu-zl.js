@@ -16,7 +16,7 @@
 				  bootbox.alert({
 					  message: "加载区域失败",
 					  size: 'small'
-				  });
+				  });	
 				},
 				success : function(data) {
 					var i = 0;
@@ -32,6 +32,7 @@
 		var tu_zl=new function () {
 		  this.choose_count=0;
 		  this.serializedData = [];//在loadGrid中构成布局对象，关联土地编号id
+		  this.dialog;
 		  this.grid = $('.grid-stack').data('gridstack');	
 		  function fill(id,name,plantingContent,landArea,buildingArea,tudi_Afford){
 			$('#tudi_id').val(id);
@@ -41,13 +42,22 @@
 			$('#tudi_buildingArea').val(buildingArea);
 			$('#tudi_Afford').val(tudi_Afford);					
 		  };		  
-		  
+		  function closeboxEX() {
+			$('#land_lease_table').html('');
+			tu_zl.loadGrid();	
+			tu_zl.dialog.modal('hide');		  
+			$('#landModal').modal('hide');
+		  }
+		  function closebox() {	
+			tu_zl.dialog.modal('hide');		  
+		  }			  
 		  this.loadGrid = function () {
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
 			  fill('','','','','','');
 			  this.grid.removeAll();
-			  /*$.ajax({  type : 'POST',
+			  var obj=this;
+			  $.ajax({  type : 'POST',
 						  dataType : 'json',
 						  data:{"bid":bid},
 						  url : 'getDifferLayout.do',////修改此处服务器文件即可
@@ -70,10 +80,10 @@
 							}, obj);//end each
 								  
 						 }//end success
-			  });	//end ajax*/	
+			  });	//end ajax	
 
 /////////////////////转换服务器代码时删除////////////-----------------------------////////////////////////////		
-				this.serializedData = [//测试数据，ajax数据格式
+				/*this.serializedData = [//测试数据，ajax数据格式
 									{x: 0, y: 0, width: 2, height: 1,id:'1',lname:'长安气象站',plantingContent:'气候观测',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'王献之',planting:'气候观测',Lineup:0,data:[{name:'王1',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2015'}]
 								    },
 									
@@ -105,20 +115,79 @@
 					obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
 					else
 					obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.Lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
-				  }, obj);//end each
-		  }.bind(this);////////////////////////----------------------------------/////////////////////////////////////////
+				  }, obj);//end each////////////////////////----------------------------------/////////////////////////////////////////*/
+		  }.bind(this);
 
 
-		  
+		  this.savedate = function () {
+			  if(this.choose_count<=0){
+				 bootbox.alert({
+					  message: "您没有选择土地",
+					  size: 'small'
+				  }); 
+				  return false;
+			  }
+			  var str=' ';
+			  var plan;
+			  var landid;
+			  var userid='180042';////////////根据登陆后获得userid,userid类型应该为varchar型
+			  var stime = $('#stime').val();
+			  var etime = $('#etime').val();
+			  for (var i=1;i<=this.choose_count;i++)
+			  {
+				 plan = $('#plan'+i).val();
+			  	if(plan=='')
+				{
+				 bootbox.alert({
+					  message: "从事工作为必填项目",
+					  size: 'small'
+				  });
+				  $('#plan'+i)[0].focus();
+				  return false;					
+				}
+				landid = $('#tuname'+i).attr('tid');
+				str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				if(i==this.choose_count)
+				str=str+",1)"
+				else
+				str=str+",1),"
+			  }//end for
+			 // alert(str);////INSERT INTO tab_comp VALUES(item1, price1, qty1),(item2, price2, qty2),(item3, price3, qty3);批量插入语句
+			  var obj=this;
+			  $.ajax({                //以文本方式提交申请
+				  type : 'POST',
+				  dataType : 'text',
+				  data: str,
+				  url : 'baseInfo.do',//修改
+				  async : false,
+				  cache : false,
+				  error : function(request) {
+					obj.dialog=bootbox.alert({
+						message: "网络故障，请稍后重试",
+						size: 'small'
+					});
+				  },///error
+				  success : function(data) {
+					  fill('','','','','','');
+					  $('#field_rent').empty();
+					  obj.dialog = bootbox.dialog({
+						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
+						  closeButton: false
+					  });
+					  window.setTimeout(closeboxEX, 1000);					  
+				  }//success
+			  });//ajax			  	  
+			  
+		  }.bind(this);
+
 		  $(document).on("click", ".grid-stack-item", function() {
 			  var id=$(this).attr('data-gs-id');
 			  var oBox= document.getElementById(id);
 			  oBox.click();
-		  });
+		  }).bind(this);;
 
 		  $(document).on("click", "#sum_app", function() {
 			  var i=1;
-			  var gonghao='180042';//////此处通过登陆获得账号id
 			  var str='';
 			  var id=-1;
 			  var n=-1;
@@ -150,9 +219,13 @@
 					i++;
 				  }//end if
 			  });//end each
+			  if(str==''){
+				  $('#sub_land_apply').attr('disabled',"true");
+				  return false;
+			  }
 			  $('#land_lease_table').html(str);
+			  $('#sub_land_apply').removeAttr("disabled");
 			  tu_zl.choose_count=i-1;
-			  alert(tu_zl.choose_count+'');
 		  });
 		  
 		   $(document).on("click", ".ck", function() {
@@ -188,7 +261,12 @@
 			  $('#field_rent').empty(); 
 			  }
 		   });//end click 
+		   
+		   
+		   
+		   
 		  $('#choose-grid').change(this.loadGrid);
+		  $('#sub_land_apply').click(this.savedate);
 		}//end tu_zl	
 			
 		});//end function

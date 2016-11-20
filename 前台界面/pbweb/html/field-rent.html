@@ -286,7 +286,7 @@
                                 </fieldset>
                                 <div class="form-group">
                                   <div class="col-sm-offset-3 col-sm-6">
-                                    <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#myModal">申 请 租 赁</a>
+                                    <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#landModal">申 请 租 赁</a>
                                   </div>
                                 </div>
                                     
@@ -329,7 +329,7 @@
         </div><!--row end-->
   
   
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id="landModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -337,70 +337,24 @@
         <h3 class="modal-title text-center" id="myModalLabel">土地租赁申请工单</h3>
       </div>
       <div class="modal-body"> 			
-          <form class="form-inline" role="form" id='land_lease_table'>
-       
-            <div class="form-group ">
-            <div class="input-group">
-              <label>土地租赁1：</label>
-              <input class="form-control" type="text" value='长安基地鱼类养殖场' id='tuname1' tid='' tname='' disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <label>推荐从事：</label>
-                <input class="form-control" type="text" value='鱼类、龙虾' id='tplan1' disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-              <label>申请从事：</label>
-              <input type="text" class="form-control" id="plan1" placeholder="必填从事项目">
-              </div>
-            </div>
- 			<p></p>
-
- 
-
-            <div class="form-group">
-            <div class="input-group">
-              <label>土地租赁2：</label>
-              <input class="form-control" type="text" value='长安基地鱼类养殖场' disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <label>推荐从事：</label>
-                <input class="form-control" type="text" value='鱼类、龙虾' disabled>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-              <label>申请从事：</label>
-              <input type="text" class="form-control" id="plan" placeholder="必填从事项目">
-              </div>
-            </div>                        
-                       
-          </form>
+          <form class="form-inline" role="form" id='land_lease_table'></form>
            
    		   <div class="text-center" style="margin-top:20px;">
            <form class="form-inline " role="form">
  			<div class="form-group">
                 <label>开始日期：</label>
-                <input class="form-control" type="datetime" value='2016-2-3' id="stime" disabled>
+                <input class="form-control" type="text" value='2016-2-3' id="stime" disabled>
             </div>
             <div class="form-group">
               <label>结束日期：</label>
-              <input type="datetime" class="form-control" id="etime" value='2017-2-3' disabled>
+              <input type="text" class="form-control" id="etime" value='2017-2-3' disabled>
             </div>
             </form>
-            </div>
-               
-   
-   
+            </div>    
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-primary" id='sub_land_apply'>提交</button>
       </div>
     </div>
   </div>
@@ -422,7 +376,6 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
  	<script src="../js/kg.js"></script>   
-    <script src="../js/main.js"></script>
     <script src="../js/tu-zl.js"></script>
   </body>
 </html>
