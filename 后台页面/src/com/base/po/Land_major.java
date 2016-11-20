@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity(name="land_major")
+@Entity
+@Table(name="land_major")
 public class Land_major {
 	
 	@Id

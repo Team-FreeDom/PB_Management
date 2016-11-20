@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="flag")
+@Entity
+@Table(name="flag")
 public class Flag {
 
 	@Id

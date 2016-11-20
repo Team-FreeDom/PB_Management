@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="landapply_view")
+@Entity
+@Table(name="landapply_view")
 public class LandApply_view implements Serializable{
 	
 	@Id

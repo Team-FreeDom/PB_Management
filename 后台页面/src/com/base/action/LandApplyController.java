@@ -315,7 +315,7 @@ public class LandApplyController {
 	@RequestMapping("/myRentFont.do")
 	public String myRentFont(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-
+        System.out.println("myRentFont.do");
 		String applicantId = "201440509";
 		List list = null;
 		list = landApplyServiceImpl.myRentFont1(applicantId);

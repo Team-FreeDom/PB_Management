@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="applydept")
+@Entity
+@Table(name="applydept")
 public class ApplyDept {
 	
 	@Id

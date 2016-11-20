@@ -20,7 +20,7 @@ public class ApplyDeptDaoImpl {
 	public List<ApplyDept> getDepts()
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from applydept";
+		String hql="from ApplyDept";
 		List<ApplyDept> list=null;
 		
 	    try {

@@ -6,7 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="baseinfo")
+@Entity
+@Table(name="baseInfo")
 public class BaseInfo {
 	
 	@Id

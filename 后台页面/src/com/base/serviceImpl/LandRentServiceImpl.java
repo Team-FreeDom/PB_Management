@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.daoImpl.LandRentInfoDaoImpl;
 import com.base.po.LandRentInfo;
+import com.base.po.RentMaintain;
 import com.base.service.LandRentService;
 
 @Service("landRentService")
@@ -27,9 +28,14 @@ public class LandRentServiceImpl implements LandRentService {
 	}
 
 	@Override
-	public List<LandRentInfo> getLandRentInfos() {
-		List<LandRentInfo> list=landRentInfoDaoImpl.getLandRentInfos();
+	public List<RentMaintain> getLandRentInfos(String bname,String deptName,String lid,String plantingContent) {
+		
+		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname, deptName, lid, plantingContent);
 		return list;
+		
 	}
+	
+	
+	
 
 }

@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="temperatesave_view")
+@Entity
+@Table(name="temperatesave_view")
 public class TemperateSave_View implements Serializable{
 	
 	@Id

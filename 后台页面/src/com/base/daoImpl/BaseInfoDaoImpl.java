@@ -23,7 +23,7 @@ public class BaseInfoDaoImpl implements BaseInfoDao {
 	public List<BaseInfo> getBaseInfos() {
 		
 		Session session=sessionFactory.openSession();		
-		String hql="from baseinfo";		
+		String hql="from BaseInfo";		
 		List<BaseInfo> list=null;
 		
 		 try {

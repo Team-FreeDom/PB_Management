@@ -1,5 +1,10 @@
 package com.base.daoImpl;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,11 +12,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandRentInfoDao;
 import com.base.po.LandApply;
 import com.base.po.LandRentInfo;
+import com.base.po.RentMaintain;
+
 
 @Repository("landRentInfoDao")
 public class LandRentInfoDaoImpl implements LandRentInfoDao {
@@ -43,7 +51,7 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 	@Override
 	public List<LandRentInfo> getLandRentInfo(String userId) {
 		Session session=sessionFactory.openSession();		
-		String hql="from landrentinfo where userId=?";
+		String hql="from LandRentInfo where userId=?";
 		List<LandRentInfo> list=null;
 		
 	    try {
@@ -60,21 +68,56 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 	}
 
 	@Override
-	public List<LandRentInfo> getLandRentInfos() {
-		Session session=sessionFactory.openSession();		
-		String hql="from landrentinfo";
-		List<LandRentInfo> list=null;
-		
-	    try {
-	    	 Query query=session.createQuery(hql);	    		    	
-	    	 list=query.list();
+	public List<LandRentInfo> getLandRentInfos()
+	{
+		return null;
+	}
+	
+	public List<RentMaintain> getRentMaintain(String bname,String deptName,String lid,String plantingContent) {	
+		List<RentMaintain> list=new ArrayList<RentMaintain>();
+		RentMaintain rm=null;
+		Connection conn;
+		try {
 			
-		} catch (Exception e) {
-			System.out.println(e);
-		}finally{
-			session.close();
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			CallableStatement sp;
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //发送存储过程
+			sp.setString(1,bname);
+			sp.setString(2,lid);
+			sp.setString(3, deptName);
+			sp.setString(4, plantingContent);
+			
+			sp.execute();   //执行存储过程
+
+			ResultSet rs=sp.getResultSet();  //获得结果集
+			int i=0;
+			while(rs.next())    //遍历结果集，赋值给list
+			{
+				rm=new RentMaintain();
+				rm.setLr_id(rs.getInt("lrid"));
+				rm.setStartTime(rs.getString("starttime"));
+				rm.setEndTime(rs.getString("endtime"));
+				rm.setPlanting(rs.getString("plant"));	
+				rm.setDeptName(rs.getString("dept"));
+				rm.setBname(rs.getString("basename"));
+				rm.setLid(rs.getString("lids"));
+				rm.setLandname(rs.getString("landname"));
+				rm.setAptplanting(rs.getString("aptplanting"));
+				rm.setName(rs.getString("username"));
+				rm.setRentMoney(rs.getInt("rentmoney"));
+				rm.setChargeDate(rs.getString("chargedate"));
+				rm.setTimes(rs.getInt("times"));		
+				
+				list.add(rm);    //加到list中
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return list;
+	
 	}
 
 }
