@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/index_main.css">
+    <link rel="stylesheet" href="../css/calendar.css" media="screen">
+
+	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -167,7 +170,7 @@
                 
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
-					<div class="page-header">
+					<div class="page-header row">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a href="index.html">位置</a></li>
@@ -206,11 +209,20 @@
                                 </div>
 							</div>
 
-							<div id="calendar" class=" col-md-offset-1 col-md-3 ">
-								<a href="#">
-								<h2>均分三列</h2>
-								</a>
-							</div>
+							
+								<div id="calendar" class="col-md-4"></div>
+
+							<script src="../js/calendar.jquery.min.js"></script>
+                            <script src="../js/jquery-ui-datepicker.min.js"></script>
+                            <script>
+                                $('#calendar').datepicker({
+                                    inline: true,
+                                    firstDay: 1,
+                                    showOtherMonths: true,
+                                    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                                });
+                            </script>
+							
 						</div>
 						<div id="caption" class="col-lg-12">
                         	<p>今日代办</p>
@@ -221,7 +233,7 @@
 								<table class="table">
                                     <tr>
                                         <td style="font-size:50%">我的信息</td>
-                                        <td rowspan="2"><span class="icon-user-md" style="background:#F63;"></span></td>
+                                        <td rowspan="2"><span class="glyphicon glyphicon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:120%">1287</td>
@@ -234,7 +246,7 @@
 								<table class="table">
                                     <tr>
                                         <td style="font-size:50%">我的信息</td>
-                                        <td rowspan="2" ><span class="icon-th-list" style="background:#0C6;"></span></td>
+                                        <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:120%">1287</td>
@@ -248,7 +260,7 @@
 								<table class="table">
                                     <tr>
                                         <td style="font-size:50%">我的信息</td>
-                                        <td rowspan="2"><span class="icon-list-alt" style="background:#36F;"></span></td>
+                                        <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:120%">1287</td>
@@ -261,7 +273,7 @@
 								<table class="table">
                                     <tr>
                                         <td style="font-size:50%">我的信息</td>
-                                        <td rowspan="2"><span class="icon-wrench" style="background:#F3C;"></span></td>
+                                        <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:120%">1287</td>

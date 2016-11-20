@@ -30,7 +30,7 @@
 				}
 
 			});
-           /*获得基地------end*/
+            /*获得基地------end*/
 
             var tudi=new function () {
 				this.isModify=false;
@@ -54,12 +54,14 @@
 				  var t=parseInt($('#load-grid').children('option:selected').val());
 				  if(!_.isEmpty(tudi.serializedData2))
 				  {	
-					 // alert(t+" "+tudi.serializedData2[1].bid);
-					/*if(t !=  tudi.serializedData2[0].bid){
-						 alert('操作失败！');
+					if(t !=  tudi.serializedData2[0].bid){
+						
+						  bootbox.alert({
+							  message: "操作失败",
+							  size: 'small'
+						  });
 						 return false;
-					}*/
-					  
+					}
 				  }
 				  return true;
 				};
@@ -71,7 +73,11 @@
 				  var n=_.findIndex(tudi.serializedData, 'id', $(el).attr('data-gs-id'));
 				   if(n==-1)
 				   {
-					   alert("无此节点，请联系管理员");
+					  
+					  bootbox.alert({
+						  message: "无此节点，操作失败",
+						  size: 'small'
+					  });
 					   return false;
 				   }
 				  if(!ishunluan()){
@@ -86,7 +92,7 @@
 				  tudi.grid.removeWidget(el);
 		  		  fuyuan();
 				  this.isModify=true;
-				  return false;					
+				  return true;					
 			  });
 			  
 			  ////////////////////单击结点选择事件/////////////////////////////
@@ -96,26 +102,27 @@
 				  }
 				  var id=$(this).attr('data-gs-id');
 				  var n=_.findIndex(tudi.serializedData2, 'id', id);
+				  if(n<0)
+				  return false;
 				  $('.grid-stack-item-content').removeClass("gay");
 				  $('.grid-stack-item-content').addClass("normal");
 				  $(this).children('div.grid-stack-item-content').removeClass('normal');
 				  $(this).children('div.grid-stack-item-content').addClass('gay');
 				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.serializedData2[n].buildingArea,tudi.serializedData2[n].Afford);
+				  return true;
 			  }); ///单击结点事件	  
 			  
               this.loadGrid = function () {
-					var bid=$('#load-grid').children('option:selected').val();
+            	  var bid=$('#load-grid').children('option:selected').val();
 					var obj;
 					if(this.isModify)
 					{
-						if(confirm('您上次有修改痕迹，是否同步更新到服务器?'))
-						{
+						if(confirm('您上次的操作尚未保存，是否取消跳转?'))
+						{	
+							//this.savedata();
+							$('#load-grid').val(this.serializedData2[0].bid);
+							return false;
 							
-							if(!this.savedata())
-							{
-								$('#load-grid').val(this.serializedData2[0].bid);
-								return false;
-							}
 						}
 					}
 					fill('','','','','','');
@@ -129,11 +136,15 @@
 								async : false,
 								cache : false,
 								error : function(request) {
-								alert("error");
+									
+									 bootbox.alert({
+										  message: "数据加载失败！",
+										  size: 'small'
+									  });
 								},
 								success : function(data) {
-								
-								  obj.serializedData2 = _.map(data, function (el) {
+									
+									obj.serializedData2 = _.map(data, function (el) {
 														  return {
 															  id: el.id,
 															  lname: el.lname,
@@ -158,27 +169,29 @@
 									  var name=_.result(_.find(obj.serializedData2, function(chr) {
 										return chr.id == node.id;
 									  }), 'lname');////对象serializedData2查找关联的lname
-									  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),
-										  node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//插入节点
-										  }, obj);							
-							   }
-					});					
+									  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//����ڵ�
+									}, obj);//end each	
+										
+							   }//end success
+					});	//end ajax				
 					
                 	}.bind(this);////loadgrid
 					
 			///////////////////savedate///////////////////////////////////
 				this.savedata = function(){
 					//////
+					var c="";
 					bid=$('#load-grid').children('option:selected').val();
 					var tag=1;
+					
+				
 					if(_.isEmpty(this.serializedData))
 					{
-						tag=0;					
-						///////////////////补充删除命令//////////////////////////////						
-						//alert('空数据，直接发ajax清空命令');							
-						////////补充删除命令///////
+						tag=0;//1.
+						
 						//return true;
-					}
+					}else
+						{
                     this.serializedData = _.map($('.grid-stack > .grid-stack-item:visible'), function (el) {
                         el = $(el);
                         var node = el.data('_gridstack_node');
@@ -191,9 +204,9 @@
                         };
                     }, this);
 					//var c=this.serializedData.concat(this.serializedData2);
-					var c=_.merge(this.serializedData, this.serializedData2);
-					
-	////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////				
+					c=_.merge(this.serializedData, this.serializedData2);
+						}
+////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////				
 					$.ajax({  type : 'POST',
 								dataType : 'json',
 								data:{"layInfo":JSON.stringify(c),
@@ -204,22 +217,20 @@
 								async : false,
 								cache : false,
 								error : function(request) {
-								alert("error");
+									bootbox.alert({
+										message: "加载失败!",
+										size: 'small'
+									});
 								},
-								success : function(data) {
-							
-									if(data[0].flag)
-										{
-										alert("已更新至服务器！");
-										window.location.reload();
-										}
+								success : function(data1) {
+									bootbox.alert({
+										message: "已同步至服务器，保存成功!",
+										size: 'small'
+									});
 							   }
-					});					
+					});	
+					
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-					//alert(JSON.stringify(c));
-                   // $('#saved-data').val(JSON.stringify(this.serializedData, null, '    '));
-				   ////////////////ajax上传////////////////////////////////////////////////
 				   fuyuan();
 				   this.isModify=false;	
 				   return true;				
@@ -234,22 +245,32 @@
 				 this.savedata();
                    
                 }.bind(this);
-				////////////////////////////////清除结点函数..////////////////////////////////////////
+				////////////////////////////////清除结点函数////////////////////////////////////////
                 this.clearGrid = function () {
 				  if(!ishunluan()){
 					   return false;
 				  }
-					if(confirm('是否清空本地所有布局?'))
-					{
-					  this.grid.removeAll();
-					  this.serializedData.splice(0,this.serializedData.length);
-					  this.serializedData2.splice(0,this.serializedData2.length);
-					  fill('','','','','','');
-					  this.isModify=true;
-					  return false;					
+				  var obj=this;
+
+				 bootbox.confirm({ 
+					size: "small",
+					message: "确定清空本地节点吗?", 
+					callback: function(result){
+						if(result==true)
+						{
+							obj.grid.removeAll();
+							obj.serializedData.splice(0,obj.serializedData.length);
+							obj.serializedData2.splice(0,obj.serializedData2.length);
+							fill('','','','','','');
+							obj.isModify=true;
+						}
 					}
-                }.bind(this);		
-				//////////////////增加结点函数//////////////////////////////
+				  })
+                }.bind(this);	
+				
+				
+					
+          //////////////////增加结点函数//////////////////////////////
                 this.addGrid = function () {
 				  if(!ishunluan()){
 					   return false;
@@ -268,27 +289,37 @@
 					this.isModify=true;    
                     return false;
                 }.bind(this);
-				/////////////////////保存结点信息//////////////////////////////////////
+				
+        /////////////////////保存结点信息//////////////////////////////////////
 				this.savearray = function(){
 				  if(!ishunluan()){
 					   return false;
 				  }
 				   var id=$('#tudi_id').val();
 				 if(id==''){
-					   alert('请先选择左侧对象，操作失败！');
+					  bootbox.alert({
+						  message: "请先选择左侧节点",
+						  size: 'small'
+					  });
 					   return false;
 				  }
 
 				  var n=_.findIndex(this.serializedData2, 'id', id);
 				  if(n<0)
 				  {
-					  alert('数据不存在，操作失败！请联系管理员');
+					  bootbox.alert({
+						  message: "无此节点，操作失败",
+						  size: 'small'
+					  });
 					  return false; 
 				  }
 				  if($('#tudi_name').val()=='')
 				  {
-					   alert('土地名称为必填，请补充！');
-					   $('#tudi_name')[0].focus();
+					  bootbox.alert({
+						  message: "土地名称为必填项， 请补充！",
+						  size: 'small'
+					  });					  
+					  $('#tudi_name')[0].focus();
 					  return false; 				  
 				  }
 				  this.serializedData2[n].lname=$('#tudi_name').val();

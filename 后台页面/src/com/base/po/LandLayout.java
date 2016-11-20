@@ -6,8 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="landLayout")
+@Entity(name="landlayout")
 public class LandLayout {
 	
 	@Id	

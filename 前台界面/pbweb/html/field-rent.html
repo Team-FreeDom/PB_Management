@@ -233,7 +233,7 @@
                       <div class="col-md-4">
 
                         <div class="tab-content">
-                          <div role="tabpanel" class="tab-pane active" id="tuzulin">
+                          <div role="tabpanel" class="tab-pane active" id="tuzulin" style="min-height:540px; background:#FFF">
                             <div style="background:#FFF; padding:20px">
                                <form class="form-horizontal" role="form">
                                   <fieldset disabled>
@@ -286,7 +286,7 @@
                                 </fieldset>
                                 <div class="form-group">
                                   <div class="col-sm-offset-3 col-sm-6">
-                                    <a class="btn btn-success"  style="padding-left:20px;"id="save-array" href="#">申 请 租 赁</a>
+                                    <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#landModal">申 请 租 赁</a>
                                   </div>
                                 </div>
                                     
@@ -294,7 +294,7 @@
                                 </div> 
                           
                           </div>
-                          <div role="tabpanel" class="tab-pane" id="lishi">
+                          <div role="tabpanel" class="tab-pane" id="lishi" style="min-height:540px; background:#FFF">
                          
 							<table id="field_rent" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
@@ -304,12 +304,7 @@
                                             <th>时间</th>
                                         </tr>
                                     </thead> 
-									<tbody>
-                                        <tr>
-                                            <td>农学院</td>
-                                            <td>棉花</td>
-                                            <td>2014</td>
-                                        </tr>                        
+									<tbody>                       
                           			</tbody>
                             </table>
                          
@@ -323,6 +318,7 @@
                     </div><!-- end row-->
 
 						<div class="col-lg-12 form-group">
+                        
 						</div>
 
 					</div>
@@ -331,6 +327,39 @@
                     
             
         </div><!--row end-->
+  
+  
+<div class="modal fade bs-example-modal-lg" id="landModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title text-center" id="myModalLabel">土地租赁申请工单</h3>
+      </div>
+      <div class="modal-body"> 			
+          <form class="form-inline" role="form" id='land_lease_table'></form>
+           
+   		   <div class="text-center" style="margin-top:20px;">
+           <form class="form-inline " role="form">
+ 			<div class="form-group">
+                <label>开始日期：</label>
+                <input class="form-control" type="text" value='2016-2-3' id="stime" disabled>
+            </div>
+            <div class="form-group">
+              <label>结束日期：</label>
+              <input type="text" class="form-control" id="etime" value='2017-2-3' disabled>
+            </div>
+            </form>
+            </div>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id='sub_land_apply'>提交</button>
+      </div>
+    </div>
+  </div>
+</div>  
+  
     </div>
 	<div class="clearfix"></div>
 
@@ -347,7 +376,6 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
  	<script src="../js/kg.js"></script>   
-    <script src="../js/main.js"></script>
     <script src="../js/tu-zl.js"></script>
   </body>
 </html>
