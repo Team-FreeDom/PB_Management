@@ -1,6 +1,10 @@
 package com.base.utils;
 
 import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -41,9 +45,9 @@ public class CookieUtils {
 	//情况一：未登录，返回登录界面
 	//情况二：登录成功，但未响应时间超过了10分钟，需要重新登录
 	//情况三：登录成功，响应时间也未超过了10分钟，则重新更新登录时间
-	public static boolean checkLogin(HttpServletRequest request,HttpServletResponse response)
+	public static boolean checkLogin(HttpServletRequest request,HttpServletResponse response,Cookie[] cookies)
 	{	
-			Cookie[] cookies=request.getCookies();		
+			//Cookie[] cookies=request.getCookies();		
 			boolean flag=false;
 			for(Cookie co:cookies)
 			{
@@ -65,13 +69,12 @@ public class CookieUtils {
 						BigInteger loginTime = new BigInteger(co.getValue()); 
 						long currentTime =  new Date().getTime();
 						long subTime = currentTime -loginTime.longValue() ;
-						System.out.println(loginTime);
-						System.out.println(currentTime);
-						System.out.println(subTime / (1000*60));
+						//System.out.println(loginTime);
+						//System.out.println(currentTime);
+						//System.out.println(subTime / (1000*60));
                         if( subTime / (1000*60) >= 10){
                         	flag = false;
-                        	System.out.print("超过时间");
-                        	
+                        	//System.out.print("超过时间");            	
                         }else{//未超过了10分钟,则更新时间
                         	co.setMaxAge(60*60*10);
                         	co.setPath("/BaseWeb/");
@@ -83,6 +86,31 @@ public class CookieUtils {
 			}
 			
 			return flag;
+	}
+	
+	
+    public static void free(Connection conn,Statement stmt,ResultSet rs){
+		
+		try{
+			if(rs!=null)
+				rs.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			try{
+				if(stmt!=null)
+					stmt.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{				
+				try{
+					if(conn!=null)
+						conn.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}	
+			}	
+		}	
 	}
 
 	

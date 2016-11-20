@@ -31,18 +31,18 @@ public class LoginController {
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
 		
-		boolean flag=userInfoServiceImpl.login(userid, pwd);
-		if(flag)
+		long adminValue=userInfoServiceImpl.login(userid, pwd);
+		if(adminValue!=-1)
 		{
 			//System.out.println("µÇÂ¼³É¹¦");
 			CookieUtils.addCookie("username", userid, response);
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
-			return "redirect:jsp/mainRent.jsp";
+			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
+			return "redirect:html/index.html";
 		}else{
 			//System.out.println("µÇÂ¼Ê§°Ü");
 			return "redirect:login_soft.html";
 		}
 	}
-
 }

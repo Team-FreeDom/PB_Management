@@ -90,10 +90,11 @@ public interface UserInfoDao {
        */
      public List<UserInfo> getUserInfo(int userright,String sex,int id);
       
-      
-
+ 
+     public boolean login1(String id,String pwd);
      
-
+     
+     public long login(String id,String pwd);
      
      
    
