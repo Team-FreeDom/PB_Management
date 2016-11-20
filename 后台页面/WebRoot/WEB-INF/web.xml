@@ -55,6 +55,10 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
          <filter-name>loginFilter</filter-name>    
          <url-pattern>/jsp/*</url-pattern>
     </filter-mapping>
+     <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>/html/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>    
          <filter-name>loginFilter</filter-name>    
          <url-pattern>*.do</url-pattern>

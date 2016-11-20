@@ -45,4 +45,13 @@ public class LoginController {
 			return "redirect:login_soft.html";
 		}
 	}
+	
+	
+	//用户单点登录控制
+	@RequestMapping("/loginout.do")
+	public String loginOut(HttpServletRequest request,HttpServletResponse response)
+	{
+		CookieUtils.loginout(request, response);
+		return "redirect:login_soft.html";
+	}
 }
