@@ -29,5 +29,5 @@ public interface LandRentService {
 	   返回值：   List<LandRentInfo>，为土地使用对象LandRentInfo的集合
 	   函数功能：查询所有土地使用情况
 	 */
-	public List<RentMaintain> getLandRentInfos(String bname,String deptName,String lid,String plantingContent);
+	public List<RentMaintain> getLandRentInfos(String bname,String deptName,String lid,String plantingContent,String lr_id);
 }

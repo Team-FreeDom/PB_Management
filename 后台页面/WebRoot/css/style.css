@@ -66,8 +66,8 @@ textarea {
 	resize: none;
 }
 ul, ol {
-	margin: 0px 0px;
-	padding: 0px 0px;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 a, a:link, a:visited, a:hover, a:active {
     text-decoration: none;
@@ -86,7 +86,7 @@ a, a:link, a:visited, a:hover, a:active {
 	background:#496D99; !important;
 	position: fixed;
 	width: 100%;
-	z-index: 1102;
+	z-index: 10;
 	backface-visibility: hidden;
 	transform-style: preserve-3d;
 }
@@ -560,7 +560,43 @@ a, a:link, a:visited, a:hover, a:active {
 	font-size: 16px;
 }
 
+.lname {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-right: 15px;
+}
 
+.grid-stack {
+	background: #fff;
+}
+
+.gay {
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #2B83BD;
+}
+
+.normal {
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #63addc;
+}
+
+.Havetorent  {
+	color: #fff;
+	text-align: center;
+	background-color: #2d3f51 ;
+}
+.Lineup{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+.wz > li + li::before{content:' '}
+.wz > li + li::before{ padding-right:20px;}
 
 @media screen and (min-width:768px) {
 .container-fluid.content {
@@ -573,22 +609,5 @@ a, a:link, a:visited, a:hover, a:active {
 	overflow: visible !important;
 }
 }
-
-.breadcrumb{
-	padding:17px 0px !important;}
-.pull-right{
-	width:63%;}
-.pull-right ol li:before{
-	content:" ";
-}
-.pull-right ol li{
-	float:right;
-	padding-right:5%;}
-.pull-right li:last-child{
-	padding-left:0px;}
-.pull-left li:first-child{
-	padding-left:20px;}
-.pull-left li:nth-child(2):before{
-	content:":";}
 
 

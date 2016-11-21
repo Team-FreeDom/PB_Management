@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -129,7 +129,7 @@
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">我的租赁</span></a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
 										<li><a href="#"><span class="text">我的报修</span></a></li>
 										<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -151,9 +151,9 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-										<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+										<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
 										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+										<li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
 										<li><a href="#"><span class="text"> 系统权限设置</span></a></li>
@@ -195,7 +195,7 @@
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
 							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
 							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
 						</ol>

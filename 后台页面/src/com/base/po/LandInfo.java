@@ -11,8 +11,7 @@ public class LandInfo {
 	
 	@Id	
 	private String lid;
-	private String lname;	
-	private String major_oriented;	
+	private String lname;
 	private int landArea;
 	private int afford;
 	private String aptPlanting;
@@ -52,13 +51,6 @@ public class LandInfo {
 	}
 	public void setLname(String lname) {
 		this.lname = lname;
-	}
-
-	public String getMajor_oriented() {
-		return major_oriented;
-	}
-	public void setMajor_oriented(String major_oriented) {
-		this.major_oriented = major_oriented;
 	}
 
 	public int getLandArea() {

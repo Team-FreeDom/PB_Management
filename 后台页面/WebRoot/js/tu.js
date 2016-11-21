@@ -14,7 +14,10 @@
 				async : false,
 				cache : false,
 				error : function(request) {
-					alert("error");
+				  bootbox.alert({
+					  message: "加载失败",
+					  size: 'small'
+				  });
 				},
 				success : function(data) {
 					var i = 0;
@@ -337,6 +340,6 @@
                 $('#clear-grid').click(this.clearGrid);
 				$('#add-grid').click(this.addGrid);
 				$('#save-array').click(this.savearray);
-               // this.loadGrid();
+               
             };
         });
