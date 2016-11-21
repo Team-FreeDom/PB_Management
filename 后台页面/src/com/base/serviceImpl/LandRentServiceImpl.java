@@ -1,5 +1,6 @@
 package com.base.serviceImpl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,53 @@ public class LandRentServiceImpl implements LandRentService {
 	}
 
 	@Override
-	public List<RentMaintain> getLandRentInfos(String bname,String deptName,String lid,String plantingContent) {
+	public List<RentMaintain> getLandRentInfos(String bname,String lid,String deptName ,String plantingContent,String lr_id) {
 		
-		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname, deptName, lid, plantingContent);
+		if(bname!=null&&bname.equals(""))
+		{
+			bname=null;
+		}
+		if(deptName!=null&&deptName.equals(""))
+		{
+			deptName=null;
+		}
+		if(lid!=null&&lid.equals("")){
+			lid=null;
+		}
+		if(plantingContent!=null&&plantingContent.equals("")){
+			plantingContent=null;
+		}
+		if(lr_id!=null&&lr_id.equals(""))
+		{
+			lr_id=null;
+		}
+		
+		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname,lid , deptName, plantingContent,lr_id);
 		return list;
 		
+	}
+	
+	public void deleteRentInfo(String[] check)
+	{
+		String str="";
+		int i=0;
+		for(String st:check)
+		{
+			if(i==check.length-1)
+			{
+			str+=st;
+			}else{
+				str+=st+",";
+			}
+			i++;
+		}
+		System.out.println(str);
+		try {
+			landRentInfoDaoImpl.deleteRentInfo(str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

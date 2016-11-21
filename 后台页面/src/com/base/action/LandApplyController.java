@@ -39,7 +39,7 @@ import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
-import com.base.utils.CookieUtils;
+
 
 //ÉêÇëÄ£¿éµÄ¿ØÖÆ²ã
 @Controller("landApplyController")
@@ -73,11 +73,8 @@ public class LandApplyController {
 	@RequestMapping("/mainRent.do")
 	public String mainRent(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
-		boolean flag = CookieUtils.addCookie(request, response);
-		map.addAttribute("notimeout", flag);
-		if (!flag) {
-			return "index";
-		}
+	
+	
 		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
 
 		map.addAttribute("base", base);
@@ -88,10 +85,10 @@ public class LandApplyController {
 	@RequestMapping("/getContent.do")
 	public String getContent(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		boolean flag = CookieUtils.addCookie(request, response);
+		
 		int bid = Integer.valueOf(request.getParameter("base"));
 		String plant = request.getParameter("planting");
-		map.addAttribute("notimeout", flag);
+	
 		if (!plant.equals("-1")) {
 			System.out.println(plant);
 			List<String> str = landApplyServiceImpl.getLandLayout(bid, plant);
@@ -397,7 +394,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	@RequestMapping("/exportFile")
+	@RequestMapping("/exportFile.do")
 	public String exportFile(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 		String fileName = request.getParameter("fileName");

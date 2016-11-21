@@ -12,9 +12,9 @@ public final class Admin {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int adminid;
-	private String adminType;
-	private int adminValue;
+	private int adminid;//权限表id
+	private String adminType;//用户类型说明
+	private int adminValue; //用户权限值
 	public int getAdminid() {
 		return adminid;
 	}

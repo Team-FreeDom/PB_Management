@@ -23,22 +23,7 @@
 <link rel="stylesheet" href="../css/myrent.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../js/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/fileinput.js" type="text/javascript"></script>
-<script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
 
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/myNeed/myRent.js"></script>
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<!--datatable javascript-->
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/kg.js"></script>
 
 
 </head>
@@ -121,7 +106,7 @@
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">我的租赁</span></a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
 										<li><a href="#"><span class="text">我的报修</span></a></li>
 										<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -143,9 +128,9 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-										<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+										<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
 										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+										<li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
 										<li><a href="#"><span class="text"> 系统权限设置</span></a></li>
@@ -189,7 +174,7 @@
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
 							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
 							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
@@ -711,9 +696,24 @@
 		<!--row end-->
 	</div>
 	<div class="clearfix"></div>
-	<script>
 	
-	</script>
 
 </body>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../js/fileinput.js" type="text/javascript"></script>
+<script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/myNeed/myRent.js"></script>
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!--datatable javascript-->
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/kg.js"></script>
 </html>
