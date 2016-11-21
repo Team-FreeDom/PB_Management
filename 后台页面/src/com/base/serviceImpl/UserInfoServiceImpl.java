@@ -22,10 +22,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 		{
 			userInfoDaoImpl.delUser(Integer.valueOf(id));
 		}
-
 	}
 
-	public boolean login(String id,String pwd)
+	public long login(String id,String pwd)
 	{
 		return userInfoDaoImpl.login(id, pwd);
 	}
