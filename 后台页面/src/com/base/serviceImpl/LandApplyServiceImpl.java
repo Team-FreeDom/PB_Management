@@ -292,10 +292,14 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   {
 		   landLayoutDaoImpl.delLandLayout(ll);
 	   }
-	   for(LandInfo li:list2){
+	   if(list2!=null){
 		   
-		   landInfoDaoImpl.deleteInfo(li);
+		   for(LandInfo li:list2){
+			   
+			   landInfoDaoImpl.deleteInfo(li);
+		   }
 	   }
+	   
 	   
    }
    

@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="landapply_view")
 public class LandApply_view implements Serializable{
 	
 	@Id
@@ -20,9 +19,7 @@ public class LandApply_view implements Serializable{
 	@Id
 	private String lid;
 	@Id
-	private String lname;
-	@Id
-	private String major_oriented;
+	private String lname;	
 	
 	@Column(name = "landArea")
 	private int landArea;
@@ -82,12 +79,7 @@ public class LandApply_view implements Serializable{
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getMajor_oriented() {
-		return major_oriented;
-	}
-	public void setMajor_oriented(String major_oriented) {
-		this.major_oriented = major_oriented;
-	}
+
 	public int getLandArea() {
 		return landArea;
 	}

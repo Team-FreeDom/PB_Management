@@ -595,7 +595,8 @@ a, a:link, a:visited, a:hover, a:active {
 	right:0;
 	bottom:0;
 }
-
+.wz > li + li::before{content:' '}
+.wz > li + li::before{ padding-right:20px;}
 
 @media screen and (min-width:768px) {
 .container-fluid.content {

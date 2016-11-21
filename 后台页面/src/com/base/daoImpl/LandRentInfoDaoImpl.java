@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,11 +20,16 @@ import com.base.dao.LandRentInfoDao;
 import com.base.po.LandApply;
 import com.base.po.LandRentInfo;
 import com.base.po.RentMaintain;
+import com.base.utils.SqlConnectionUtils;
 
 
 @Repository("landRentInfoDao")
 public class LandRentInfoDaoImpl implements LandRentInfoDao {
 
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -73,23 +79,23 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 		return null;
 	}
 	
-	public List<RentMaintain> getRentMaintain(String bname,String deptName,String lid,String plantingContent) {	
+	public List<RentMaintain> getRentMaintain(String bname,String lid,String deptName,String plantingContent,String lr_id) {	
 		List<RentMaintain> list=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;
-		Connection conn;
+		
 		try {
 			
-			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-			CallableStatement sp;
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //发送存储过程
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?,?)}");  //发送存储过程
 			sp.setString(1,bname);
-			sp.setString(2,lid);
-			sp.setString(3, deptName);
+			sp.setString(2,lid);			
+			sp.setString(3,deptName);
 			sp.setString(4, plantingContent);
+			sp.setString(5, lr_id);
 			
 			sp.execute();   //执行存储过程
 
-			ResultSet rs=sp.getResultSet();  //获得结果集
+			rs=sp.getResultSet();  //获得结果集
 			int i=0;
 			while(rs.next())    //遍历结果集，赋值给list
 			{
@@ -106,7 +112,8 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 				rm.setName(rs.getString("username"));
 				rm.setRentMoney(rs.getInt("rentmoney"));
 				rm.setChargeDate(rs.getString("chargedate"));
-				rm.setTimes(rs.getInt("times"));		
+				rm.setTimes(rs.getInt("times"));
+				rm.setApplydept(rs.getInt("deptid"));
 				
 				list.add(rm);    //加到list中
 			}
@@ -114,10 +121,26 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{			
+			
+			SqlConnectionUtils.free(conn, sp, rs);
+			
 		}
 		
 		return list;
 	
+	}
+	
+	
+	public void deleteRentInfo(String str) throws SQLException
+	{
+		Session session=sessionFactory.openSession();
+		//hibernate调用存储过程(无返回参数)
+		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`delete_landrentinfo`(?)}");
+		sqlQuery.setString(0, str);		
+		sqlQuery.executeUpdate();
+		session.close();			
+		 
 	}
 
 }

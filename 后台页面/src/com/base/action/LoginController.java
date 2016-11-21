@@ -31,18 +31,27 @@ public class LoginController {
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
 		
-		boolean flag=userInfoServiceImpl.login(userid, pwd);
-		if(flag)
+		long adminValue=userInfoServiceImpl.login(userid, pwd);
+		if(adminValue!=-1)
 		{
 			//System.out.println("登录成功");
 			CookieUtils.addCookie("username", userid, response);
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
-			return "redirect:jsp/mainRent.jsp";
+			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
+			return "redirect:jsp/index.jsp";
 		}else{
 			//System.out.println("登录失败");
 			return "redirect:login_soft.html";
 		}
 	}
-
+	
+	
+	//用户单点登录控制
+	@RequestMapping("/loginout.do")
+	public String loginOut(HttpServletRequest request,HttpServletResponse response)
+	{
+		CookieUtils.loginout(request, response);
+		return "redirect:login_soft.html";
+	}
 }

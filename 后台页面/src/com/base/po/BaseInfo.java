@@ -7,14 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="baseInfo")
 public class BaseInfo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int bid;
-	private String bname;
-	private int btype;
+	private int bid;//基地编号
+	private String bname;//基地名称
+	private int btype;//基地类型，默认为1，代表为旗下为土地
 	public int getBid() {
 		return bid;
 	}
