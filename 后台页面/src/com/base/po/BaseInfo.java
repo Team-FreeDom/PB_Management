@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="baseInfo")
 public class BaseInfo {
 	
 	@Id
@@ -33,7 +32,7 @@ public class BaseInfo {
 	public void setBtype(int btype) {
 		this.btype = btype;
 	}
-	public BaseInfo(int bid, String bname, int btype) {
+	/*public BaseInfo(int bid, String bname, int btype) {
 		super();
 		this.bid = bid;
 		this.bname = bname;
@@ -43,7 +42,7 @@ public class BaseInfo {
 		super();
 		this.bname = bname;
 		this.btype = btype;
-	}
+	}*/
 	public BaseInfo() {
 		super();
 	}

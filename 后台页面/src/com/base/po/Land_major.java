@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="land_major")
 public class Land_major {
 	
 	@Id

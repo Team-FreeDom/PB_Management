@@ -177,7 +177,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos(String sex) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where sex=?";
+		String hql = "from UserInfo where sex=?";
 		List<UserInfo> list = null;
 
 		try {
@@ -196,7 +196,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int id) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where id=?";
+		String hql = "from UserInfo where id=?";
 		List<UserInfo> list = null;
 
 		try {
@@ -215,7 +215,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, String sex) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where userright=? and sex=?";
+		String hql = "from UserInfo where userright=? and sex=?";
 		List<UserInfo> list = null;
 
 		try {
@@ -235,7 +235,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, int id) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where userright=? and id=?";
+		String hql = "from UserInfo where userright=? and id=?";
 		List<UserInfo> list = null;
 
 		try {
@@ -255,7 +255,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfos(String sex, int id) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where sex=? and id=?";
+		String hql = "from UserInfo where sex=? and id=?";
 		List<UserInfo> list = null;
 
 		try {
@@ -275,7 +275,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfo> getUserInfo(int userright, String sex, int id) {
 		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where userright=? and id=? and sex=?";
+		String hql = "from UserInfo where userright=? and id=? and sex=?";
 		List<UserInfo> list = null;
 
 		try {
