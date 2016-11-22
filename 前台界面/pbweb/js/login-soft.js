@@ -82,9 +82,9 @@ var Login = function () {
             handleLogin();
 			handleUniform();
 	       	$.backstretch([
-				"../image/bg/1.jpg",
-				"../image/bg/2.jpg",
-				"../image/bg/3.jpg"
+				"image/bg/1.jpg",
+				"image/bg/2.jpg",
+				"image/bg/3.jpg"
 		        ], {
 		          fade: 1000,
 		          duration: 4000
