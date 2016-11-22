@@ -10,7 +10,7 @@ var Login = function () {
             test.each(function () {
                 if ($(this).parents(".checker").size() == 0) {
                     $(this).show();
-                    $(this).uniform();////插件运用方法
+                    $(this).uniform();////鎻掍欢杩愮敤鏂规硶
                 }
             });
         }
@@ -35,10 +35,10 @@ var Login = function () {
 
 	            messages: {
 	                username: {
-	                    required: "用户名必填"
+	                    required: "鐢ㄦ埛鍚嶅繀濉�
 	                },
 	                password: {
-	                    required: "密码必填"
+	                    required: "瀵嗙爜蹇呭～"
 	                }
 	            },
 
