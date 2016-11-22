@@ -29,7 +29,7 @@ public class LandRentServiceImpl implements LandRentService {
 	}
 
 	@Override
-	public List<RentMaintain> getLandRentInfos(String bname,String lid,String deptName ,String plantingContent,String lr_id) {
+	public List<RentMaintain> getLandRentInfos(String bname,String deptName ,String plantingContent,String lr_id) {
 		
 		if(bname!=null&&bname.equals(""))
 		{
@@ -39,9 +39,7 @@ public class LandRentServiceImpl implements LandRentService {
 		{
 			deptName=null;
 		}
-		if(lid!=null&&lid.equals("")){
-			lid=null;
-		}
+		
 		if(plantingContent!=null&&plantingContent.equals("")){
 			plantingContent=null;
 		}
@@ -50,7 +48,7 @@ public class LandRentServiceImpl implements LandRentService {
 			lr_id=null;
 		}
 		
-		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname,lid , deptName, plantingContent,lr_id);
+		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname,deptName, plantingContent,lr_id);
 		return list;
 		
 	}

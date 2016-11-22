@@ -136,53 +136,17 @@ public class LandApplyController {
 		return null;
 	}
 
-	// 土地布局查询
-	@RequestMapping("/layout.do")
-	public String selectLandLayout(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 土地信息查询
-	@RequestMapping("/landInfo.do")
-	public String selectLandInfo(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 月份空闲查询
-	@RequestMapping("/timeSpare.do")
-	public String timeSpare(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 获取申请信息(点击租赁按钮，获取教师+土地+个人信息)
-	@RequestMapping("/AllApplyInfo.do")
-	public String getAllApplyInfo(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 提交申请
-	@RequestMapping("/submitApply.do")
-	public String submitApply(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 修改申请
-	@RequestMapping("/updateApply.do")
-	public String updateApply(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 查看申请
-	@RequestMapping("/checkApply.do")
-	public String checkApply(ModelMap map) {
-		return null;
-	}
-
-	// 取消申请
-	@RequestMapping("/cancelApply.do")
-	public String cancelApply(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
+	// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
+		@RequestMapping("/getRentCollection.do")
+		public String getRentCollection(HttpServletRequest request,
+				HttpServletResponse response, ModelMap map) {
+			int bid=Integer.valueOf(request.getParameter("bid"));
+			
+			
+			return null;		
+		}
+	
+	
 
 	// 获取用户个人的申请记录
 	@RequestMapping("/selfApply.do")

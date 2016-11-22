@@ -104,7 +104,7 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.html"> <i
+								<li class="menuItem"><a href="index.jsp"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -129,7 +129,7 @@
 
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
@@ -171,8 +171,8 @@
 				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html">位置</a></li>
-							<li><a href="index.html">土地租赁维护</a></li>
+							<li><a>位置</a></li>
+							<li><a href="fieldRent_maintain.jsp">土地租赁维护</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
@@ -199,7 +199,7 @@
 											<span class="glyphicon glyphicon-plus"></span>
 										</button>
 									</td>
-									<td colspan="3">排序<span
+									<td colspan="2">排序<span
 										class="glyphicon glyphicon-sort-by-attributes"></span> <select
 										name="" id="">
 											<option value="">默认</option>
@@ -207,7 +207,7 @@
 											<option value="">租用次数</option>
 									</select> 
 									</td>
-									<td colspan="4">
+									<td colspan="5">
 										<ul class="dropdown_show">
 											<li><span style="color:#24354a" class="icon-filter"
 												onClick="showsubmenu()">筛选</span>
@@ -226,19 +226,14 @@
 																	</select>
 																	</td>
 																</tr>
-																<tr>
-																	<td>土地编号 <select name="lidS" id="lidSh">
-																			<option value="" >显示全部</option>
-																			<option value="1">#1</option>
-																			<option value="2">#2</option>
-																	</select>  
-																	</td>
+																<tr>																	
 																	<td>种植内容 <select name="contentS" id="contentSh" size="">
 																			<option value="" >显示全部</option>
 																			<option value="玉米">玉米</option>
 																			<option value="棉花">棉花</option>
 																	</select>  
 																	</td>
+																	<td>&nbsp;</td>
 																</tr>
 																<tr>
 																	<td colspan="2">

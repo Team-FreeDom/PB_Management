@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.html">
+										<a href="index.jsp">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -190,8 +190,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="index.html">位置</a></li>
-								<li><a href="index.html">土地租赁</a></li>
+                            	<li><a>位置</a></li>
+								<li><a href="field-rent.jsp">土地租赁</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -211,8 +211,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                               <label for="inputEmail3" class="col-sm-4 control-label">选择区域：</label>
                               <div class="col-sm-8">
-                                <select  class="form-control">
-                                  <option value="" id ="choose-grid">请选择</option>
+                                <select id ="choose-grid" class="form-control">
+                                  <option value="" id="choose-gridh">请选择</option>
                                  
                                 </select>
                               </div>

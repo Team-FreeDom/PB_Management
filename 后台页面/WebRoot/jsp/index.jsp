@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.html">
+										<a href="index.jsp">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -182,8 +182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="page-header row">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="#">位置  :</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
+                            	<li><a>位置  :</a></li>
+								<li><a href="index.jsp"><i class=" icon-home"></i>首页</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -245,7 +245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%">1287</td>
+                                        <td style="font-size:120%" id="userCount"></td>
                                     </tr>
                                 </table>
 							</div>
@@ -257,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%">1287</td>
+                                        <td style="font-size:120%" id="applyCount"></td>
                                     </tr>
                                 </table>
 
@@ -271,7 +271,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%">1287</td>
+                                        <td style="font-size:120%" id="practiceCount"></td>
                                     </tr>
                                 </table>
 							</div>
@@ -284,7 +284,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%">1287</td>
+                                        <td style="font-size:120%" id="maintainCount"></td>
                                     </tr>
                                 </table>
 							</div>
@@ -304,7 +304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    
+    <script src="../js/myNeed/index.js"></script>
     <script src="../js/kg.js"></script>
   </body>
 </html>

@@ -21,7 +21,7 @@
 				success : function(data) {
 					var i = 0;
 					for ( var item in data) {
-						$("#choose-grid").after(
+						$("#choose-gridh").after(
 								"<option value="+data[i].bid+">"
 										+ data[i].bname + "</option>");
 						i++;

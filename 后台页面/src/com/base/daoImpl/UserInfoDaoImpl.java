@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -24,6 +25,10 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("userInfoDao")
 public class UserInfoDaoImpl implements UserInfoDao {
 
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -291,6 +296,24 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			session.close();
 		}
 		return list;
+	}
+	
+	public Long getUserCount() {
+		
+		Session session = sessionFactory.openSession();		
+		Long userCount=(long) 0;
+        String hql="select count(*) from UserInfo";
+		try {			
+			Query query=session.createQuery(hql);
+			userCount=(Long) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		System.out.println(userCount);
+		return userCount;
 	}
 
 }

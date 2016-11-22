@@ -227,8 +227,7 @@ $(document).delegate('#submitS', 'click', function() {
 
 	
 	var baseSh = document.getElementById("baseSh").value;
-	var deptSh = document.getElementById("deptSh").value;
-	var lidSh = document.getElementById("lidSh").value;
+	var deptSh = document.getElementById("deptSh").value;	
 	var contentSh = document.getElementById("contentSh").value;
 	
 	$('#fieldrent_maintain')
@@ -243,8 +242,7 @@ $(document).delegate('#submitS', 'click', function() {
 				"ajax" : {
 					"data" : {
 						"baseSh" : baseSh,
-						"deptSh" : deptSh,
-						"lidSh" : lidSh,
+						"deptSh" : deptSh,						
 						"contentSh" : contentSh
 						},
 					"url" : "submitChoose.do",

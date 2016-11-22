@@ -79,19 +79,18 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 		return null;
 	}
 	
-	public List<RentMaintain> getRentMaintain(String bname,String lid,String deptName,String plantingContent,String lr_id) {	
+	public List<RentMaintain> getRentMaintain(String bname,String deptName,String plantingContent,String lr_id) {	
 		List<RentMaintain> list=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;
 		
 		try {
 			
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?,?)}");  //发送存储过程
-			sp.setString(1,bname);
-			sp.setString(2,lid);			
-			sp.setString(3,deptName);
-			sp.setString(4, plantingContent);
-			sp.setString(5, lr_id);
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //发送存储过程
+			sp.setString(1,bname);					
+			sp.setString(2,deptName);
+			sp.setString(3, plantingContent);
+			sp.setString(4, lr_id);
 			
 			sp.execute();   //执行存储过程
 
@@ -142,5 +141,7 @@ public class LandRentInfoDaoImpl implements LandRentInfoDao {
 		session.close();			
 		 
 	}
+	
+	
 
 }

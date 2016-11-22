@@ -27,6 +27,7 @@ import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
+import com.base.po.RentCollection;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
@@ -333,6 +334,12 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		   landLayoutDaoImpl.doLandLayout(layout);
 		   
 	   }
+   }
+  
+// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
+   public List<RentCollection> getRentCollection(int bid)
+   {
+	   return null;
    }
    
 }

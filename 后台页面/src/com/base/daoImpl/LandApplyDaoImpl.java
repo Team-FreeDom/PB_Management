@@ -1,5 +1,10 @@
 package com.base.daoImpl;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,15 +12,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandApplyDao;
 import com.base.po.College;
 import com.base.po.LandApply;
+import com.base.po.RentAdd;
+import com.base.po.RentCollection;
+import com.base.po.RentMaintain;
+import com.base.utils.SqlConnectionUtils;
 
 @Repository("landApplyDao")
 public class LandApplyDaoImpl implements LandApplyDao {
 
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
 	
 	@Autowired
 	private SessionFactory sessionFactory;	
@@ -174,6 +187,121 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	public void updateOthers(int la_id, int lid) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public List<RentCollection> getRentCollection(int bid)
+	{			
+		List<RentCollection> list=new ArrayList<RentCollection>();
+		RentCollection rc=null;		
+		List<RentAdd> lra=getRentAdd(bid);
+		
+	   try {
+		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+		sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?)}");
+		sp.setInt(1,bid);		
+		sp.execute();   //执行存储过程
+		rs=sp.getResultSet();  //获得结果集
+			
+		while(rs.next())    //遍历结果集，赋值给list
+		{
+			rc=new RentCollection();
+			
+			rc.setId(rs.getString("id"));
+			rc.setX(rs.getInt("x"));
+			rc.setY(rs.getInt("y"));
+			rc.setWidth(rs.getInt("width"));
+			rc.setHeight(rs.getInt("height"));
+			rc.setBid(rs.getInt("bid"));
+			rc.setLname(rs.getString("lname"));
+			rc.setPlantingContent(rs.getString("aptPlanting"));
+			rc.setLandArea(rs.getInt("landArea"));
+			rc.setBuildingArea(rs.getInt("buildingArea"));			
+			rc.setAfford(rs.getInt("afford"));		
+			rc.setCollage(rs.getString("collage"));
+			rc.setName(rs.getString("name"));
+			rc.setPlanting(rs.getString("planting"));
+			rc.setLineup(rs.getInt("lineup"));
+			List<RentAdd> lis=new ArrayList<RentAdd>();
+			for(RentAdd ra:lra)
+			{
+				if(rs.getString("lid").equals(ra.getLid())){				
+				lis.add(ra);
+				}
+			}
+			rc.setData(lra);
+			list.add(rc);
+			
+		}		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		SqlConnectionUtils.free(conn, sp, rs);
+		
+	}
+		
+		return list;
+	}
+	
+	
+	
+	public List<RentAdd> getRentAdd(int bid)
+	{
+		RentAdd ra=null;
+		List<RentAdd> lra=new ArrayList<RentAdd>();
+		
+		try {
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?)}");
+			sp.setInt(1,bid);		
+			sp.execute();   //执行存储过程
+			rs=sp.getResultSet();  //获得结果集
+			
+			while(rs.next())
+			{
+				ra=new RentAdd();
+				ra.setLid(rs.getString("lid"));
+				ra.setName(rs.getString("name"));
+				ra.setPlanting(rs.getString("planting"));
+				ra.setPtime(rs.getString("ptime"));
+				lra.add(ra);
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}			
+			return lra;		
+	}
+	
+	public Long getApplyCount(String date)
+	{
+		System.out.println(date);	
+		Long applyCount=(long) 0;		
+		
+		Session session = sessionFactory.openSession();			
+        String hql="select count(*) from LandApply where year(startTime)<=? and year(endTime)>=? and status in(?,?,?)";
+		try {			
+			Query query=session.createQuery(hql);
+			query.setString(0, date);
+	    	query.setString(1, date);
+	    	query.setInteger(2, 1);
+	    	query.setInteger(3, 2);
+	    	query.setInteger(4, 3);
+			applyCount=(Long) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		System.out.println(applyCount);
+		
+		return applyCount;
 	}
 
 }

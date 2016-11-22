@@ -121,7 +121,7 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.html"> <i
+								<li class="menuItem"><a href="index.jsp"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -146,7 +146,7 @@
 
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
@@ -188,8 +188,8 @@
 				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html">位置</a></li>
-							<li><a href="index.html"><i class=" icon-home"></i>土地布置</a></li>
+							<li><a>位置</a></li>
+							<li><a href="land_modle.jsp"><i class=" icon-home"></i>土地布局设置</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
