@@ -52,15 +52,19 @@
 			tu_zl.dialog.modal('hide');		  
 		  }			  
 		  this.loadGrid = function () {
+			  
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
-			  fill('','','','','','');
+			  fill('','','','','','');			  
 			  this.grid.removeAll();
 			  var obj=this;
+			  if(bid==""){
+					return;
+				}
 			  $.ajax({  type : 'POST',
 						  dataType : 'json',
 						  data:{"bid":bid},
-						  url : 'getDifferLayout.do',////修改此处服务器文件即可
+						  url : 'getRentCollection.do',////修改此处服务器文件即可
 						  async : false,
 						  cache : false,
 						  error : function(request) {
@@ -70,14 +74,18 @@
 								});
 						  },
 						  success : function(data) {
-						  obj.serializedData=data
+						
+						 
+						  obj.serializedData=data;
 						  var items = GridStackUI.Utils.sort(obj.serializedData);
 						  _.each(items, function (node) {
 							  if(node.name!='')
 							  obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
 							  else
-							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.Lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
+							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
 							}, obj);//end each
+						  
+						
 								  
 						 }//end success
 			  });	//end ajax	
@@ -130,7 +138,7 @@
 			  var str=' ';
 			  var plan;
 			  var landid;
-			  var userid='180042';////////////根据登陆后获得userid,userid类型应该为varchar型
+			  var userid='201440509';////////////根据登陆后获得userid,userid类型应该为varchar型
 			  var stime = $('#stime').val();
 			  var etime = $('#etime').val();
 			  for (var i=1;i<=this.choose_count;i++)
@@ -146,19 +154,23 @@
 				  return false;					
 				}
 				landid = $('#tuname'+i).attr('tid');
-				str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				if(i==1){
+				str=str+"'"+userid+"'('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				}else{
+					str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				}
 				if(i==this.choose_count)
-				str=str+",1)"
+				str=str+",2)"
 				else
-				str=str+",1),"
+				str=str+",2),"
 			  }//end for
 			 // alert(str);////INSERT INTO tab_comp VALUES(item1, price1, qty1),(item2, price2, qty2),(item3, price3, qty3);批量插入语句
 			  var obj=this;
 			  $.ajax({                //以文本方式提交申请
 				  type : 'POST',
 				  dataType : 'text',
-				  data: str,
-				  url : 'baseInfo.do',//修改
+				  data: {"str":str},
+				  url : 'submitLandApply.do',//修改
 				  async : false,
 				  cache : false,
 				  error : function(request) {
@@ -235,7 +247,7 @@
 			  if( $(this).is(':checked'))
 			  {
 				fill(id,tu_zl.serializedData[n].lname,tu_zl.serializedData[n].plantingContent,tu_zl.serializedData[n].landArea,tu_zl.serializedData[n].buildingArea,
-				tu_zl.serializedData[n].Afford);
+				tu_zl.serializedData[n].afford);
 				 var testArray=tu_zl.serializedData[n].data;
 				 var data=new Array();
 				 i=0;

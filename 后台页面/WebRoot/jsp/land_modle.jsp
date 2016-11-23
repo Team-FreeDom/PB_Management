@@ -209,7 +209,7 @@
 								<label for="inputEmail3" class="col-sm-4 control-label">选择区域：</label>
 								<div class="col-sm-8">
 									<select id="load-grid" class="form-control">
-									  <option val="" id="load-gridh" >请选择</option>
+									  <option value="" id="load-gridh" >请选择</option>
 										<!-- <option value="1">长安基地</option>
 										<option value="2">耕耘基地</option> -->
 										

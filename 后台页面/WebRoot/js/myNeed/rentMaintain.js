@@ -8,7 +8,8 @@ $(document)
 										"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 8, // 默认每页显示多少条记录
+										"iDisplayLength" : 4, // 默认每页显示多少条记录
+										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
 											"url" : "landRentInfo.do",

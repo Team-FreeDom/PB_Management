@@ -12,13 +12,13 @@ public class LandApply_view implements Serializable{
 	
 	@Id
 	private int la_id;
-	@Id
+	
 	private String startTime;
-	@Id
+	
 	private String endTime;
 	@Id
 	private String lid;
-	@Id
+	
 	private String lname;	
 	
 	@Column(name = "landArea")
@@ -27,13 +27,13 @@ public class LandApply_view implements Serializable{
 	@Column(name = "afford")
 	private int afford;
 	
-	@Id
+	
 	private String aptPlanting;
 	
 	@Column(name = "buildingArea")
 	private int buildingArea;
 	
-	@Id
+	
 	private String bname;
 	@Column(name = "descp")
 	private String descp;
@@ -41,15 +41,15 @@ public class LandApply_view implements Serializable{
 	@Column(name = "applicantId")
 	private String applicantId;
 	
-	@Id
+	
 	private int tenancy;
 	@Id
 	private int status;
-	@Id
+	
 	private String planting;
-	@Id
+	
 	private String name;
-	@Id
+	
 	private String college;
 	
 	@Column(name = "startPayTime")

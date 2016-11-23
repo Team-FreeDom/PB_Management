@@ -30,6 +30,7 @@ public class LoginController {
 	
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
+		System.out.println(userid+"  "+pwd);
 		
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
 		if(adminValue!=-1)

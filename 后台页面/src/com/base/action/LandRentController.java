@@ -37,6 +37,11 @@ public class LandRentController {
 			HttpServletResponse response, ModelMap map) {
 		System.out.println("展示土地租赁信息");
 
+		
+		String length=request.getParameter("length");
+		String start=request.getParameter("start");
+		System.out.println(length+"   "+start);
+		
 		List<RentMaintain> list = landRentServiceImpl.getLandRentInfos(null,
 				null, null, null);
 
