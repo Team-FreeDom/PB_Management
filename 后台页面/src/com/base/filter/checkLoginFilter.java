@@ -28,24 +28,29 @@ public class checkLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 			FilterChain arg2) throws IOException, ServletException {
+		
 		// TODO Auto-generated method stub
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String url = request.getServletPath();
 		// 设置不需要过滤的页面
 		if (url.endsWith("login.do")) {
+			
 			arg2.doFilter(arg0, arg1);
 			return;
 		}
 
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {
+			
 			response.sendRedirect("/BaseWeb/login_soft.html");
 			return;
 		}
-
+      
 		boolean flag = CookieUtils.checkLogin(request, response,cookies);
+		
 		if (!flag) { // 如果没有登录或者登录后超过失效时间都跳转到登录页面
+			
 			response.sendRedirect("/BaseWeb/login_soft.html");
 			return;
 		}

@@ -8,10 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-public class Layout_InfoView implements Serializable{	
+
+public class Layout_InfoView{	
 	
-	@Id	
+	
 	private String id;
 	private int x;
 	private int y;

@@ -27,6 +27,7 @@ import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
+import com.base.po.RentCollection;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
@@ -284,55 +285,34 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    
    public void  delLayout_info(int bid)
    {
-	   
-	   List<LandLayout> list1=landLayoutDaoImpl.getLayout(bid);
-	   List<LandInfo> list2=landInfoDaoImpl.getLandInfos(bid);
-	   System.out.println(list2);
-	   for(LandLayout ll:list1)
-	   {
-		   landLayoutDaoImpl.delLandLayout(ll);
-	   }
-	   if(list2!=null){
-		   
-		   for(LandInfo li:list2){
-			   
-			   landInfoDaoImpl.deleteInfo(li);
-		   }
-	   }
-	   
-	   
+	   landInfoDaoImpl.delLayout_info(bid);
+	 
    }
    
-   public void updateLayInfo(int bid,List<Layout_InfoView> list)
+   public void updateLayInfo(String landinfoStr,String layoutStr)
    {
-	   LandLayout layout=null;
-	   LandInfo lifo=null;
+	   landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr);
+   }
+   
+  
+// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
+   public List<RentCollection> getRentCollection(int bid)
+   {
+	   List<RentCollection> list=landApplyDaoImpl.getRentCollection(bid);
 	   
-	   delLayout_info(bid); //第一步，删除土地布局表和土地信息表的记录
+	   return list;
+   }
+   
+   public void submitLandApply(String str)
+   {
+	   String userid=str.substring(0,str.indexOf('('));
+	   String apply=str.substring(str.indexOf('('));
+	  /* System.out.println(userid);
+	   System.out.println(apply);*/
 	   
-	   for(Layout_InfoView liv:list)//第二步，向土地布局表和土地信息表中重新插入数据
-	   {
-		   lifo=new LandInfo();
-		   lifo.setAfford(liv.getAfford());
-		   lifo.setAptPlanting(liv.getPlantingContent());
-		   lifo.setBid(liv.getBid());
-		   lifo.setBuildingArea(liv.getBuildingArea());
-		   lifo.setLandArea(liv.getLandArea());
-		   lifo.setLid(liv.getId());
-		   lifo.setLname(liv.getLname());
-		   landInfoDaoImpl.doInfo(lifo);
-		   
-		   layout=new LandLayout();
-		   layout.setId(liv.getId());
-		   layout.setLid(liv.getId());
-		   layout.setBid(liv.getBid());
-		   layout.setHeight(liv.getHeight());
-		   layout.setWidth(liv.getWidth());
-		   layout.setX_axis(liv.getX());
-		   layout.setY_axis(liv.getY());
-		   landLayoutDaoImpl.doLandLayout(layout);
-		   
-	   }
+	   landApplyDaoImpl.submitApply(userid,apply);
+	   
+	   
    }
    
 }

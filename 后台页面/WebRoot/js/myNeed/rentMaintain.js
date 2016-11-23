@@ -8,7 +8,8 @@ $(document)
 										"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 8, // 默认每页显示多少条记录
+										"iDisplayLength" : 4, // 默认每页显示多少条记录
+										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
 											"url" : "landRentInfo.do",
@@ -227,8 +228,7 @@ $(document).delegate('#submitS', 'click', function() {
 
 	
 	var baseSh = document.getElementById("baseSh").value;
-	var deptSh = document.getElementById("deptSh").value;
-	var lidSh = document.getElementById("lidSh").value;
+	var deptSh = document.getElementById("deptSh").value;	
 	var contentSh = document.getElementById("contentSh").value;
 	
 	$('#fieldrent_maintain')
@@ -243,8 +243,7 @@ $(document).delegate('#submitS', 'click', function() {
 				"ajax" : {
 					"data" : {
 						"baseSh" : baseSh,
-						"deptSh" : deptSh,
-						"lidSh" : lidSh,
+						"deptSh" : deptSh,						
 						"contentSh" : contentSh
 						},
 					"url" : "submitChoose.do",

@@ -130,8 +130,10 @@
 					}
 					fill('','','','','','');
 					this.grid.removeAll();
-					obj=this;
-					
+					obj=this;	
+					if(bid==""){
+						return;
+					}
 					$.ajax({  type : 'POST',
 								dataType : 'json',
 								data:{"bid":bid},

@@ -37,8 +37,13 @@ public class LandRentController {
 			HttpServletResponse response, ModelMap map) {
 		System.out.println("展示土地租赁信息");
 
+		
+		String length=request.getParameter("length");
+		String start=request.getParameter("start");
+		System.out.println(length+"   "+start);
+		
 		List<RentMaintain> list = landRentServiceImpl.getLandRentInfos(null,
-				null, null, null, null);
+				null, null, null);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("data", list);
@@ -61,7 +66,7 @@ public class LandRentController {
 			HttpServletResponse response, ModelMap map) {
 		String lr_id = request.getParameter("lr_id");
 		List<RentMaintain> list = landRentServiceImpl.getLandRentInfos(null,
-				null, null, null, lr_id);
+				null, null, lr_id);
 
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
@@ -84,13 +89,13 @@ public class LandRentController {
 		
 		String bname = request.getParameter("baseSh");
 		String dept = request.getParameter("deptSh");
-		String lid = request.getParameter("lidSh");
+		//String lid = request.getParameter("lidSh");
 		String planting = request.getParameter("contentSh");
 
-		System.out.println("基地名称是："+bname + " 部门是： " + dept + "  土地编号是：" + lid + " " + "种植内容是："+planting);
+		//System.out.println("基地名称是："+bname + " 部门是： " + dept + "  土地编号是：" + lid + " " + "种植内容是："+planting);
 
 		List<RentMaintain> list = landRentServiceImpl.getLandRentInfos(bname,
-				lid, dept, planting, null);
+				dept, planting, null);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("data", list);
@@ -126,7 +131,7 @@ public class LandRentController {
 		String dept=request.getParameter("dept");	
 		System.out.println(dept);
 		List<RentMaintain> list = landRentServiceImpl.getLandRentInfos(null,
-				null, dept, null, null);		
+				dept, null, null);		
 	
 		
 		ExcelReport er=new ExcelReport();
