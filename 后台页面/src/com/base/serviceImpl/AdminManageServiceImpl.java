@@ -35,4 +35,12 @@ public class AdminManageServiceImpl implements AdminManageService {
 		return list;
 	}
 
+
+	@Override
+	public void setAdminFunction(String insertSql) {
+		// TODO Auto-generated method stub
+		adminManageDaoImpl.setAdminFunction(insertSql);
+		return;
+	}
+
 }

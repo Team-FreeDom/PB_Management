@@ -50,5 +50,18 @@ public class AdminController {
 			
 			return null;		
 		}	
+		
+		//获取指定人的权限功能值
+		@RequestMapping("jsp/setAdminFunction.do")
+		public String setAdminFunction(HttpServletRequest request, ModelMap map,
+						HttpServletResponse response)
+		{
+			String values = request.getParameter("data");		
+			String insertSql = "insert into Admin(id,upow,name) values"+values.trim()+" on duplicate key update upow=values(upow),name=values(name)";
+			System.out.println(insertSql);
+			adminManageServiceImpl.setAdminFunction(insertSql);
+					
+			return null;
+		}
 	
 }

@@ -3,8 +3,11 @@ package com.base.daoImpl;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.ScrollMode;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +21,7 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public List<AdminFunction> getAdminFunctionInfos() {
 		// TODO Auto-generated method stub
@@ -57,4 +60,40 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 		return list;
 	}
 
+	@Override
+	public void setAdminFunction(String insertSql) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+
+		int i = 0;
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			Query q = session.createSQLQuery(insertSql);
+			q.executeUpdate();
+			t.commit();
+		} catch (Exception ex) {
+			if (t != null) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+
+		// 以下为批量插入
+		/*
+		 * if (adminList != null && adminList.size() > 0) { Transaction t =
+		 * null; try {
+		 * 
+		 * t = session.beginTransaction(); Admin admin = null; // 创建药品对象 //
+		 * 循环获取药品对象 for (int i = 0; i < adminList.size(); i++) { admin = (Admin)
+		 * adminList.get(i); // 获取药品 session.save(admin); // 保存药品对象 //
+		 * 批插入的对象立即写入数据库并释放内存 if (i % 100 == 0) { session.flush();
+		 * session.clear(); } }
+		 * 
+		 * t.commit(); } catch (Exception ex) { if (t != null) { t.rollback(); }
+		 * } finally { session.close(); } }
+		 */
+
+	}
 }

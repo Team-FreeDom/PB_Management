@@ -34,7 +34,7 @@ $(function () {
 			$.ajax({                
 				type : 'POST',
 				dataType : 'json',
-				url : 'baseInfo.do',//后台修改
+				url : 'getAdminFunction.do',//后台修改
 				async : false,
 				cache : false,
 				error : function(request) {
@@ -44,8 +44,8 @@ $(function () {
 				  });
 				},
 				success : function(em) {
-					obj.sfData=em[0].sf;
-					obj.powlist=em[0].qxm;
+					obj.sfData=em.sf;
+					obj.powlist=em.qxm;
 				}
 			});
 			
@@ -116,7 +116,10 @@ $(function () {
 			$.ajax({                
 				type : 'POST',
 				dataType : 'text',
-				url : 'baseInfo.do',//后台修改
+				data:{
+					data:str
+				},
+				url : 'setAdminFunction.do',//后台修改
 				async : false,
 				cache : false,
 				error : function(request) {
