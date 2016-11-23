@@ -201,8 +201,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                   <input type="text" class="form-control input-sm" id="role_text" placeholder="权限角色">
                                 </div>
-                                <button  class="btn btn-default" id='role_add'>增加</button>
-                                <button  class="btn btn-default" id='role_del'>删除</button>
+                                <button  class="btn btn-default" id='role_add' style="display:none;">增加</button>
+                                <button  class="btn btn-default" id='role_del' style="display:none;">删除</button>
+                                <button  class="btn btn-default" id='role_name' >修改角色名</button>
                                 <button  class="btn btn-success" id='pow_update'>更新到服务器</button>
                               </form>  
                               </div>   
