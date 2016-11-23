@@ -307,9 +307,9 @@
                                         </tr>
                                         <tr>
                                             <td>起止年限 ： </td>
-                                            <td><input type="text" value="2013-08-01"></td>
+                                            <td><select name="year1" id="year1"></select></td>
                                             <td>———————</td>
-                                            <td><input type="text" value="2017-08-01"></td>
+                                            <td><select name="month1"></select></td>
                                         </tr>
                                         <tr>
                                             <td>计划种植内容 ： </td>
@@ -434,7 +434,7 @@
                                     <table class="table">
                                         <tr>
                                             <td>基地名 ： </td>
-                                            <td><input type="text" value="基地的名称"></td>
+                                            <td><input type="text" value="基地的名称" ></td>
                                             <td>租赁人 ： </td>
                                             <td><input type="text" value="租赁人的名称"></td>
                                         </tr>
@@ -480,21 +480,7 @@
                               </div>
                             </div>
 							
-                            
-<!--                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-    </div>
-  </div>
-</div>
--->
+                          
 
 							<div class="modal fade" id="failapplication" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
@@ -706,7 +692,7 @@
     <script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/SyearE.js"></script>
     <script>
 	    $("#file-0").fileinput({
 	        'allowedFileExtensions' : ['jpg', 'png','gif'],
@@ -719,6 +705,8 @@
 	        });
 	        
 	    });
+		
+		new YMDselect('year1','month1');
 		</script>
   </body>
 </html>
