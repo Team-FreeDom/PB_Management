@@ -188,7 +188,7 @@
 					<!-- 主面板内容 -->
 					<div class="row form">
 						<div class="col-lg-12">
-							<table id="communication_table" class="cell-border" cellspacing="0" width="100%">
+							<table id="usermaintable" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
                                             <td colspan="2">
@@ -615,32 +615,7 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script>
-    	allCkBox2(); 
-		function allCkBox2(id){
-        var tableBox = document.getElementById(id||"communication_table"),
-             ck = tableBox.getElementsByClassName("ck"),
-             ckAll = tableBox.getElementsByClassName("ck-all")[0],
-             ckRe = tableBox.getElementsByClassName("ck-re")[0];
-             ckAll.onchange = function(){
-                                    allCk(this.checked);
-                                };
-              ckRe.onchange = function(){
-                                    reCk();
-                                };
-        function allCk(bool){
-                            for(var i =0; i<ck.length;i++){
-                                   ck[i].checked = bool;
-                                    }
-                             }
-                        
-         function reCk(){
-                         for(var i =0; i<ck.length;i++){
-                                ck[i].checked ? ck[i].checked = false : ck[i].checked = true;
-                                    }
-                                }
-                            }		
-    </script>
+    <script src="../js/usermaintain.js"></script>
+    <script src="../js/kg.js"></script>
   </body>
 </html>
