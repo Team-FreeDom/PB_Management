@@ -23,11 +23,7 @@
     <![endif]-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/myNeed/rentMaintain.js"></script>
-<script src="../js/kg.js"></script>
+
 
 
 </head>
@@ -51,7 +47,7 @@
 				<ul class="notifications" avalonctrl="subNotificationsController">
 					<li class="hidden-sm hidden-xs"><a href="#"
 						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"></i> <!--ms-if-->
+							<i class="icon-envelope"><span class="badge dw-position">4</span></i> <!--ms-if-->
 					</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
@@ -90,7 +86,7 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="#"><img class="img-circle bk-img-60" alt=""
+										<a href="user.html"><img class="img-circle bk-img-60" alt=""
 											src="../image/psu.jpg"></a>
 										<!--ms-if-->
 									</div>
@@ -192,7 +188,7 @@
 								<tr bgcolor="#ECF1F5">
 									<td>
 										<button type="button" class="btn btn-info button_style"
-											data-toggle="modal" data-target="#myModal">
+											data-toggle="modal" data-target="#myModaladd">
 											<span class="glyphicon glyphicon-plus"></span>
 										</button>
 									</td>
@@ -364,6 +360,81 @@
 			</div>
 			<!-- End Sidebar-->
 
+
+
+
+
+			      <div class="modal fade" id="myModaladd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="border:#3071a9 8px solid">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+									<h4 class="modal-title text-center" id="myModalLabel">租赁记录增加</h4>
+								</div>
+								<div class="modal-body table-responsive">
+									<table class="table">
+										<tr>
+											<td>基地名 ：</td>
+											<td>
+                                            	<select>
+                                                	<option>请选择</option>
+                                                </select>
+                                            </td>
+
+											<td>土地编号 ：</td>
+											<td><input type="text" name="username"></td>
+
+										</tr>
+										<tr>
+											<td>租赁人 ：</td>
+											<td><input type="text" name="username"></td>
+
+											<td>土地名称 ：</td>
+											<td><input type="text" name="lid" id="lid"></td>
+
+										</tr>
+
+
+										<tr>
+
+											<td>租赁人<br>
+												所属学院 ：</td>
+											<td><input type="text" name="lname" id="lname"></td>
+											<td>计划<br>
+												从事内容 ：</td>
+											<td><input type="text" name="landArea" id="landArea"></td>
+
+										</tr>
+										<tr>
+											<td>使用年限 :</td>
+											<td><select name="year1" id="year1"></select></td>
+											<td>--------</td>
+											<td><select name="month1"></select></td>
+										</tr>
+                                        <tr>
+                                        	<td>申请结果</td>
+                                        	<td>
+                                            	<select>
+                                                	<option>申请成功</option>
+                                                    <option>申请失败</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+									</table>
+								</div>
+								<div class="modal-footer table-responsive">
+									<center>
+										<button type="button" class="btn btn-primary">确定修改</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">取消</button>
+									</center>
+								</div>
+							</div>
+						</div>
+					</div>
+
 			<!-- Modal -->
 			<div class="modal fade" id="lead" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -399,4 +470,13 @@
 
 
 </body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/myNeed/rentMaintain.js"></script>
+<script src="../js/SyearE.js"></script>
+<script src="../js/kg.js"></script>
+<script> 
+new YMDselect('year1','month1');
+</script>
 </html>

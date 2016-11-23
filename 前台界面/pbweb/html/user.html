@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>湖南农业大学土地管理系统</title>
+    <title>个人中心</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -12,19 +12,18 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/index_main.css">
-    <link rel="stylesheet" href="../css/calendar.css" media="screen">
-
-	<style>
-	.table{ background:#FFF;}
-	.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {border-top:0px solid #ddd;}
-    </style>
+    <link rel="stylesheet" href="../css/user.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+		#preview{width:120px;height:120px;border:1px solid #000;border-radius:60px;overflow:hidden;}
+		#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+</style>
+
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -88,7 +87,7 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="user.html"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -104,6 +103,7 @@
 										<a href="index.html">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
+										
 									</li>
 									
 									 <li class="menuItem nav-parent">
@@ -111,7 +111,7 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="myrent.html"><span class="text">我的租赁</span></a></li>
+											<li><a href="#"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -125,7 +125,7 @@
 										<ul class="nav nav-children">
                                             <li><a href="#"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
-                                            <li><a href="#"><span class="text">维修审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
 
 										</ul>
@@ -173,11 +173,11 @@
                 
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
-					<div class="page-header row">
+					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="#">位置  :</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
+                            	<li><a>位置</a></li>
+								<li><a href="index.html"><i class=" icon-home"></i>个人中心</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -191,103 +191,65 @@
 					</div>
 					<!-- 主面板内容 -->
 					<div class="row form">
-
-						<div class="col-lg-12">
-
-							<div id="post1" class="col-md-3 ">
-								<p>通知公告</p>
-                                <div class="post">
-                                     <p>实习基地管理系统1.0版本正式上线，本系统的宗旨是携手学校基地科，为全体一线教师服务，主要体现在校内教学基地土地的租赁、校内外实习项目的开展和教学基地设备的及时维修。</p>
+                    	<form role="form" id="userform">
+							<div class="col-md-6  col-md-offset-2 form-group xgarea form-horizontal">
+                              <div class="form-group jianju text-left">
+                                <label for="inputEmail3" class="col-sm-2 control-label">姓  名</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control">
                                 </div>
-
-							</div>
-
-							<div id="information1" class=" col-md-offset-1 col-md-3 ">
-								<p>个人消息提示</p>
-                                <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
-                                    <p>租赁申请退回<span name="date"></span></p>
-                                    <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
+                              </div>
+                              
+                              <div class="form-group jianju">
+                                <label for="inputEmail3" class="col-sm-2 control-label">联系电话</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control">
                                 </div>
-							</div>
-
-							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
-
-							<script src="../js/calendar.jquery.min.js"></script>
-                            <script src="../js/jquery-ui-datepicker.min.js"></script>
-                            <script>
-                                $('#calendar').datepicker({
-                                    inline: true,
-                                    firstDay: 1,
-                                    showOtherMonths: true,
-                                    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-                                });
-                            </script>
-							
-						</div>
-						<div id="caption" class="col-lg-12">
-                        	<p>今日代办</p>
-						</div>
-						<div id="data" class="col-lg-12">
-
-							<div class="col-md-2 col-xs-2 data_display">
-								<table class="table" id='tvb'>
-                                    <tr>
-                                        <td style="font-size:50%">注册用户</td>
-                                        <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
-							
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">租赁申请</td>
-                                        <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-
-							</div>
-
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table" width="100%">
-                                    <tr style=" border-color:#FFF">
-                                        <td style="font-size:50%">实习申请</td>
-                                        <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
+                              </div>
+                              
+                              <div class="form-group jianju">
+                                <label for="inputEmail3" class="col-sm-2 control-label">密码修改</label>
+                                <div class="col-sm-8">
+                                  <input type="password" class="form-control" id="possword">
+                                </div>
+                              </div>
+                              
+                              <div class="form-group jianju">
+                                <label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
+                                <div class="col-sm-8">
+                                  <input type="password" class="form-control" id="repossword" onBlur="password()">
+                                </div>
+                              </div>
+                              
+                              
+                              
+                              <div class="form-group jianju" >
+                                <div class="col-sm-offset-5 col-sm-5" id="lastxg">
+                                   <button type="submit" class="btn btn-success" id="submit">确认修改</button>
+                                  <button type="reset" class="btn btn-danger">重置</button>
+                                </div>
+                              </div>
                             
-                            <div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">维修申请</td>
-                                        <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
 						</div>
-
+                        
+                        <div class="col-md-3">
+                        	<div class="form-group">
+                                <div class="col-sm-10">
+                                  <div id="preview">
+    								<img id="imghead" class="img-circle bk-img-60" width=100% height=auto border=0 src="../image/big.jpg">
+								  </div>
+                                  <div style="margin:20px 18px;">
+                                  <label class="btn btn-primary" for="file" >浏览头像</label>
+								  <form><input type="file" onchange="previewImage(this)" id="file" style="position:absolute;clip:rect(0 0 0 0);"></form>                           
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        </form>
 					</div>
 				</div><!-- End Sidebar-->                 
                 
-                    
+                 
             
         </div><!--row end-->
     </div>
@@ -295,10 +257,11 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-	
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    
+    <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>
+    <script src="../js/user.js"></script>
   </body>
 </html>

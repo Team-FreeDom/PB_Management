@@ -1,8 +1,14 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>湖南农业大学土地管理系统</title>
+    <title>基地管理系统-权限管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -12,13 +18,6 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/index_main.css">
-    <link rel="stylesheet" href="../css/calendar.css" media="screen">
-
-	<style>
-	.table{ background:#FFF;}
-	.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {border-top:0px solid #ddd;}
-    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -88,7 +87,7 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="user.html"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -101,9 +100,9 @@
 									
 									
 									<li class="menuItem">
-										<a href="index.html">
+										
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										</a>
+										
 									</li>
 									
 									 <li class="menuItem nav-parent">
@@ -111,7 +110,7 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="myrent.html"><span class="text">我的租赁</span></a></li>
+											<li><a href="#"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -125,7 +124,7 @@
 										<ul class="nav nav-children">
                                             <li><a href="#"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
-                                            <li><a href="#"><span class="text">维修审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
 
 										</ul>
@@ -173,11 +172,11 @@
                 
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
-					<div class="page-header row">
+					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="#">位置  :</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
+                            	<li><a>位置</a></li>
+								<li><a href="system_power.html"><i class=" icon-home"></i>系统权限设置</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -191,97 +190,64 @@
 					</div>
 					<!-- 主面板内容 -->
 					<div class="row form">
-
-						<div class="col-lg-12">
-
-							<div id="post1" class="col-md-3 ">
-								<p>通知公告</p>
-                                <div class="post">
-                                     <p>实习基地管理系统1.0版本正式上线，本系统的宗旨是携手学校基地科，为全体一线教师服务，主要体现在校内教学基地土地的租赁、校内外实习项目的开展和教学基地设备的及时维修。</p>
+                    <div class="col-md-12" style="background:#FFF">
+                    		<div style="margin:20px 0; padding:20px 0;">
+                              <form class="form-inline" role="form">
+                                <div class="form-group">
+                                  <label>身份：</label>
                                 </div>
-
-							</div>
-
-							<div id="information1" class=" col-md-offset-1 col-md-3 ">
-								<p>个人消息提示</p>
-                                <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
-                                    <p>租赁申请退回<span name="date"></span></p>
-                                    <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
+                                <div class="form-group">
+                                  <input type="text" class="form-control input-sm" id="role_text" placeholder="权限角色">
                                 </div>
+                                <button  class="btn btn-default" id='role_add'>增加</button>
+                                <button  class="btn btn-default" id='role_del'>删除</button>
+                                <button  class="btn btn-success" id='pow_update'>更新到服务器</button>
+                              </form>  
+                              </div>   
+                    </div>
+
+						<div class="col-md-12" style="background:#FFF">
+							<div class="col-md-4" >   
+                              <div class="list-group" id="sflist">
+                                <a href="#" class="list-group-item active">
+                                  身份列表
+                                </a>
+                              </div>           
 							</div>
-
-							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
-
-							<script src="../js/calendar.jquery.min.js"></script>
-                            <script src="../js/jquery-ui-datepicker.min.js"></script>
-                            <script>
-                                $('#calendar').datepicker({
-                                    inline: true,
-                                    firstDay: 1,
-                                    showOtherMonths: true,
-                                    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-                                });
-                            </script>
-							
+                            <div class="col-md-8">
+                              <ul class="list-group" id='pow_list'>
+                                <li class="list-group-item list-group-item-info"><div class="text-center">权限设置</div></li>
+                                <li class="list-group-item"><span style="float:left; margin-right:20px;">业务审批权限：</span>
+                                  <ul class="list-inline" id="powlist1">
+                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
+                                    <li><label><input type="checkbox"> 实习申请</label></li>
+                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
+                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
+                                  </ul>                                
+                                </li>
+                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据维护权限：</span>
+                                  <ul class="list-inline" id="powlist2">
+                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
+                                    <li><label><input type="checkbox"> 实习申请</label></li>
+                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
+                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
+                                  </ul>                                    
+                                </li>
+                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据分析权限：</span>
+                                  <ul class="list-inline" id="powlist3">
+                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
+                                    <li><label><input type="checkbox"> 实习申请</label></li>
+                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
+                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
+                                  </ul> 
+                                </li>
+     
+                              </ul>                            
+                            </div>
 						</div>
-						<div id="caption" class="col-lg-12">
-                        	<p>今日代办</p>
-						</div>
-						<div id="data" class="col-lg-12">
 
-							<div class="col-md-2 col-xs-2 data_display">
-								<table class="table" id='tvb'>
-                                    <tr>
-                                        <td style="font-size:50%">注册用户</td>
-                                        <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
-							
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">租赁申请</td>
-                                        <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
+						<div class="col-lg-12 form-group">
 
-							</div>
-
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table" width="100%">
-                                    <tr style=" border-color:#FFF">
-                                        <td style="font-size:50%">实习申请</td>
-                                        <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
-                            
-                            <div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">维修申请</td>
-                                        <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%">1287</td>
-                                    </tr>
-                                </table>
-							</div>
 						</div>
 
 					</div>
@@ -295,10 +261,12 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-	
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    
+     <script src="../js/bootbox.min.js"></script>
+     <script src="../js/lodash.min.js"></script>
     <script src="../js/kg.js"></script>
+    <script src="../js/set_power.js"></script>
   </body>
 </html>
