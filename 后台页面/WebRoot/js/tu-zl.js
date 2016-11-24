@@ -51,11 +51,11 @@
 		  function closebox() {	
 			tu_zl.dialog.modal('hide');		  
 		  }			  
-		  this.loadGrid = function () {
-			  
+		  this.loadGrid = function () {			  
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
-			  fill('','','','','','');			  
+			  fill('','','','','','');	
+			  $('#field_rent').empty();		  
 			  this.grid.removeAll();
 			  var obj=this;
 			  if(bid==""){
@@ -73,9 +73,7 @@
 									size: 'small'
 								});
 						  },
-						  success : function(data) {
-						
-						 
+						  success : function(data) {						 
 						  obj.serializedData=data;
 						  var items = GridStackUI.Utils.sort(obj.serializedData);
 						  _.each(items, function (node) {
@@ -83,47 +81,9 @@
 							  obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
 							  else
 							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
-							}, obj);//end each
-						  
-						
-								  
+							}, obj);//end each  
 						 }//end success
 			  });	//end ajax	
-
-/////////////////////转换服务器代码时删除////////////-----------------------------////////////////////////////		
-				/*this.serializedData = [//测试数据，ajax数据格式
-									{x: 0, y: 0, width: 2, height: 1,id:'1',lname:'长安气象站',plantingContent:'气候观测',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'王献之',planting:'气候观测',Lineup:0,data:[{name:'王1',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2015'}]
-								    },
-									
-									{x: 0, y: 1, width: 2, height: 1,id:'2',lname:'长安水稻实验田',plantingContent:'玉米 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'',planting:'玉米',Lineup:0,data:[{name:'王2',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2015'}]   
-									},
-									
-									{x: 0, y: 2, width: 2, height: 1,id:'3',lname:'长安玉米试验田',plantingContent:'玉米 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'汪仲贤',planting:'油菜',Lineup:0,data:[{name:'王3',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									},
-									
-									{x: 2, y: 3, width: 2, height: 1,id:'4',lname:'长安油菜实验田',plantingContent:'油菜 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'',planting:'水稻',Lineup:3,data:[{name:'王4',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									},
-									
-									{x: 1, y: 4, width: 2, height: 1,id:'5',lname:'长安水生态区域',plantingContent:'农田鱼 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'',planting:'农田鱼',Lineup:2,data:[{name:'王5',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									},
-									
-									{x: 1, y: 3, width: 2, height: 1,id:'6',lname:'长安林业观察站',plantingContent:'柏林 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'',planting:'柏林',Lineup:1,data:[{name:'王6',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									},
-									
-									{x: 2, y: 4, width: 2, height: 1,id:'7',lname:'长安生物实验田',plantingContent:'微生物 水稻',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'',planting:'微生物',Lineup:5,data:[{name:'王7',planting:'西瓜',ptime:'2013'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									},
-									
-									{x: 2, y: 5, width: 2, height: 1,id:'8',lname:'长安动科试验田',plantingContent:'龙虾 水产',landArea:86,buildingArea:100,Afford:123,bid:1,collage:'农学院',name:'吴雪松',planting:'龙虾',Lineup:0,data:[{name:'王8',planting:'西瓜',ptime:'2016'},{name:'王双',planting:'西瓜',ptime:'2014'},{name:'王双',planting:'西瓜',ptime:'2014'}]   
-									}
-								];
-							
-			   var items = GridStackUI.Utils.sort(this.serializedData);
-				_.each(items, function (node) {
-					if(node.name!='')
-					obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
-					else
-					obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.Lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
-				  }, obj);//end each////////////////////////----------------------------------/////////////////////////////////////////*/
 		  }.bind(this);
 
 
@@ -138,7 +98,16 @@
 			  var str=' ';
 			  var plan;
 			  var landid;
-			  var userid='201440509';////////////根据登陆后获得userid,userid类型应该为varchar型
+			  var userid=$.cookie('filepath');////////////此处需要修改
+			  if(userid=='' || userid=='undefined')
+			  {
+				  bootbox.alert({
+					  message: "登录失效，请正返回首页",
+					  size: 'small'
+				  }); 
+				  window.location.href="../login_soft.html"; 
+			  }
+			  
 			  var stime = $('#stime').val();
 			  var etime = $('#etime').val();
 			  for (var i=1;i<=this.choose_count;i++)
@@ -196,7 +165,7 @@
 			  var id=$(this).attr('data-gs-id');
 			  var oBox= document.getElementById(id);
 			  oBox.click();
-		  }).bind(this);;
+		  }).bind(this);
 
 		  $(document).on("click", "#sum_app", function() {
 			  var i=1;
@@ -273,9 +242,6 @@
 			  $('#field_rent').empty(); 
 			  }
 		   });//end click 
-		   
-		   
-		   
 		   
 		  $('#choose-grid').change(this.loadGrid);
 		  $('#sub_land_apply').click(this.savedate);
