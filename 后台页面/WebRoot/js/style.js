@@ -2,7 +2,7 @@
 /*全选反选函数*/	
 allCkBox(); 
     	function allCkBox(id){
-        var tableBox = document.getElementById(id||"rent-approve-table1"),
+        var tableBox = document.getElementById(id||"tableCheck"),
              ck = tableBox.getElementsByClassName("ck"),
              ckAll = tableBox.getElementsByClassName("ck-all")[0],
              ckRe = tableBox.getElementsByClassName("ck-re")[0];
@@ -26,7 +26,7 @@ allCkBox();
                             }
 allCkBox2(); 
 function allCkBox2(id){
-        var tableBox = document.getElementById(id||"rent-approve-table2"),
+        var tableBox = document.getElementById(id||"tablePay"),
              ck = tableBox.getElementsByClassName("ck"),
              ckAll = tableBox.getElementsByClassName("ck-all")[0],
              ckRe = tableBox.getElementsByClassName("ck-re")[0];
