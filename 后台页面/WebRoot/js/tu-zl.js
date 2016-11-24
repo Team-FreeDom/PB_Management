@@ -98,7 +98,7 @@
 			  var str=' ';
 			  var plan;
 			  var landid;
-			  var userid=$.cookie('filepath');////////////此处需要修改
+			  var userid=$.cookie('BaseWeb');////////////此处需要修改
 			  if(userid=='' || userid=='undefined')
 			  {
 				  bootbox.alert({
