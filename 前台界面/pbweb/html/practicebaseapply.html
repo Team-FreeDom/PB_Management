@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>基地管理系统-权限管理</title>
+    <title>湖南微课网-教师中心</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -104,10 +104,10 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="#"><span class="text">我的租赁</span></a></li>
-											<li><a href="#"><span class="text">我的实习</span></a></li>
+											<li><a href="myrent.html"><span class="text">我的租赁</span></a></li>
+											<li><a href="mypractice.html"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
-											<li><a href="#"><span class="text">我的基地</span></a></li>
+											<li><a href="mybase.html"><span class="text">我的基地</span></a></li>
 										</ul>
 									</li>
 
@@ -116,9 +116,9 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
-                                            <li><a href="#"><span class="text">实习审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="fieldrent-approve.html"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="practice-approve"><span class="text">实习审批</span></a></li>
+                                            <li><a href="base-approve"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
 
 										</ul>
@@ -131,11 +131,11 @@
 										<ul class="nav nav-children">
                                         	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
-                                        	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                        	<li><a href="base_maintain.html"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="fieldrent_maintain.html"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="practicemaintain.html"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="usermaintain.html"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.html"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -170,7 +170,7 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="system_power.html"><i class=" icon-home"></i>系统权限设置</a></li>
+								<li><a href="index.html"><i class=" icon-home"></i>实习基地申请</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -184,65 +184,18 @@
 					</div>
 					<!-- 主面板内容 -->
 					<div class="row form">
-                    <div class="col-md-12" style="background:#FFF">
-                    		<div style="margin:20px 0; padding:20px 0;">
-                              <form class="form-inline" role="form">
-                                <div class="form-group">
-                                  <label>身份：</label>
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control input-sm" id="role_text" placeholder="权限角色">
-                                </div>
-                                <button  class="btn btn-default" id='role_add'>增加</button>
-                                <button  class="btn btn-default" id='role_del'>删除</button>
-                                <button  class="btn btn-success" id='pow_update'>更新到服务器</button>
-                              </form>  
-                              </div>   
-                    </div>
 
-						<div class="col-md-12" style="background:#FFF">
-							<div class="col-md-4" >   
-                              <div class="list-group" id="sflist">
-                                <a href="#" class="list-group-item active">
-                                  身份列表
-                                </a>
-                              </div>           
+						<div class="col-lg-12">
+
+							<div class=" col-md-offset-2 col-md-8 ">
+								<div></div>
+                                <div></div>
+
 							</div>
-                            <div class="col-md-8">
-                              <ul class="list-group" id='pow_list'>
-                                <li class="list-group-item list-group-item-info"><div class="text-center">权限设置</div></li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">业务审批权限：</span>
-                                  <ul class="list-inline" id="powlist1">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul>                                
-                                </li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据维护权限：</span>
-                                  <ul class="list-inline" id="powlist2">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul>                                    
-                                </li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据分析权限：</span>
-                                  <ul class="list-inline" id="powlist3">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul> 
-                                </li>
-     
-                              </ul>                            
-                            </div>
+							
 						</div>
 
-						<div class="col-lg-12 form-group">
-
-						</div>
+						
 
 					</div>
 				</div><!-- End Sidebar-->                 
@@ -258,9 +211,7 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-     <script src="../js/bootbox.min.js"></script>
-     <script src="../js/lodash.min.js"></script>
+    <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>
-    <script src="../js/set_power.js"></script>
   </body>
 </html>

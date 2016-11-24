@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>基地管理系统-权限管理</title>
+    <title>用户管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -11,7 +11,10 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
+    <!--datatable-->
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/communication_maintain.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -169,12 +172,12 @@
 					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a>位置</a></li>
-								<li><a href="system_power.html"><i class=" icon-home"></i>系统权限设置</a></li>
+                            	<li><a href="index.html">位置</a></li>
+                                <li><a href="index.html">用户管理</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">
 								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
@@ -184,67 +187,104 @@
 					</div>
 					<!-- 主面板内容 -->
 					<div class="row form">
-                    <div class="col-md-12" style="background:#FFF">
-                    		<div style="margin:20px 0; padding:20px 0;">
-                              <form class="form-inline" role="form">
-                                <div class="form-group">
-                                  <label>身份：</label>
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control input-sm" id="role_text" placeholder="权限角色">
-                                </div>
-                                <button  class="btn btn-default" id='role_add'>增加</button>
-                                <button  class="btn btn-default" id='role_del'>删除</button>
-                                <button  class="btn btn-success" id='pow_update'>更新到服务器</button>
-                              </form>  
-                              </div>   
-                    </div>
-
-						<div class="col-md-12" style="background:#FFF">
-							<div class="col-md-4" >   
-                              <div class="list-group" id="sflist">
-                                <a href="#" class="list-group-item active">
-                                  身份列表
-                                </a>
-                              </div>           
-							</div>
-                            <div class="col-md-8">
-                              <ul class="list-group" id='pow_list'>
-                                <li class="list-group-item list-group-item-info"><div class="text-center">权限设置</div></li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">业务审批权限：</span>
-                                  <ul class="list-inline" id="powlist1">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul>                                
-                                </li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据维护权限：</span>
-                                  <ul class="list-inline" id="powlist2">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul>                                    
-                                </li>
-                                <li class="list-group-item"><span style="float:left; margin-right:20px;">数据分析权限：</span>
-                                  <ul class="list-inline" id="powlist3">
-                                    <li><label><input type="checkbox"> 土地租赁申请</label></li>
-                                    <li><label><input type="checkbox"> 实习申请</label></li>
-                                    <li><label><input type="checkbox"> 实习基地申请</label></li>
-                                    <li><label><input type="checkbox"> 基地维修申请</label></li>
-                                  </ul> 
-                                </li>
-     
-                              </ul>                            
-                            </div>
+						<div class="col-lg-12">
+							<table id="manageusertable" class="cell-border" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr style="background:#eeeff4">
+                                            <th>序号</th>
+                                            <th>员工编号</th>
+                                            <th>身份属性</th>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>员工类别</th>
+                                            <th>出生日期</th>
+                                            <th>身份证号</th>
+                                            <th>联系电话</th>
+                                            <th>部门</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">1</label></td>
+                                            <td>100059</td>
+                                            <td>管理员</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>在职人员</td>
+                                            <td>1975-10-20</td>
+                                            <td>43011119751020043X</td>
+                                            <td>18219723489</td>
+                                            <td>教务处</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">2</label></td>
+                                            <td>100059</td>
+                                            <td>临时工</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>在职人员</td>
+                                            <td>1975-10-20</td>
+                                            <td>43011119751020043X</td>
+                                            <td>18219723489</td>
+                                            <td>教务处</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">3</label></td>
+                                            <td>100059</td>
+                                            <td>教师</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>在职人员</td>
+                                            <td>1975-10-20</td>
+                                            <td>43011119751020043X</td>
+                                            <td>18219723489</td>
+                                            <td>教务处</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">4</label></td>
+                                            <td>100059</td>
+                                            <td>基地管理员</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>在职人员</td>
+                                            <td>1975-10-20</td>
+                                            <td>43011119751020043X</td>
+                                            <td>18219723489</td>
+                                            <td>教务处</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">5</label></td>
+                                            <td>100059</td>
+                                            <td>管理员</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>在职人员</td>
+                                            <td>1975-10-20</td>
+                                            <td>43011119751020043X</td>
+                                            <td>18219723489</td>
+                                            <td>教务处</td>
+                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
+                                        </tr>
+                                    </tbody>
+                                    <thead>
+                                    	<tr>
+                                        	<td colspan="11">
+                                    			<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
+                                           </td>
+                                       </tr>
+                                  </thead>
+                                  </table>
+							
 						</div>
-
-						<div class="col-lg-12 form-group">
-
-						</div>
-
 					</div>
+                    
+                    
 				</div><!-- End Sidebar-->                 
                 
                     
@@ -255,12 +295,11 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-
+    <!--datatable javascript-->
+	<script src="../js/jquery.dataTables.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-     <script src="../js/bootbox.min.js"></script>
-     <script src="../js/lodash.min.js"></script>
+    <script src="../js/manageuser.js"></script>
     <script src="../js/kg.js"></script>
-    <script src="../js/set_power.js"></script>
   </body>
 </html>
