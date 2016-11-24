@@ -10,16 +10,15 @@ import javax.persistence.Id;
 public final class Admin {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;//权限表id
+	private long id;//权限表id
 	private String name;//用户类型说明
 	private int upow; //用户权限值
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -15,4 +15,6 @@ public interface AdminManageService {
 	   函数功能：获取Admin表中的所有信息
 	 */
      public List<Admin> getAdminInfos();
+     
+     public void setAdminFunction(String insertSql);
 }

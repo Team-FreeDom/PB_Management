@@ -3,7 +3,7 @@
 //权限字段为long，对应权限种类63种
 //权限名对应值    
 /*json 客户端收数据格式
-			   [sf:[{id:1,name:'系统管理员',upow:3},{id:2,name:'普通教师',upow:7}], id代表身份的唯一性，pow是身份的权限值
+			   [sf:[{id:1,name:'系统管理员',upow:3},{id:2,name:'普通教师',upow:7}], id代表角色的唯一性，pow是角色的权限值
                 qxm:[{qid:11,value:1,pname:'土地租赁审批'},{qid:12,value:2,pname:'实习审批'}],  qid是权限名的id 12值中的1代表它属于第一类（类别的意思）。value是权限授权码
 			   ]
 			   
@@ -34,7 +34,7 @@ $(function () {
 			$.ajax({                
 				type : 'POST',
 				dataType : 'json',
-				url : 'baseInfo.do',//后台修改
+				url : 'getAdminFunction.do',//后台修改
 				async : false,
 				cache : false,
 				error : function(request) {
@@ -44,12 +44,12 @@ $(function () {
 				  });
 				},
 				success : function(em) {
-					obj.sfData=em[0].sf;
-					obj.powlist=em[0].qxm;
+					obj.sfData=em.sf;
+					obj.powlist=em.qxm;
 				}
 			});
 			
-			str='<a href="#" class="list-group-item active">管理身份列表</a>';
+			str='<a href="#" class="list-group-item active">管理角色列表</a>';
 			 _.map(this.sfData,function(em){			
 				 str=str+'<a href="#" class="list-group-item people" upow='+em.upow+' id='+em.id+'>'+em.name+'</a>';
 			});
@@ -79,14 +79,14 @@ $(function () {
 			if(typeof(a) == "undefined")
 			{
 				 bootbox.alert({
-					  message: "请选择下方'身份列表'中的任一项",
+					  message: "请选择下方'角色列表'中的任一项",
 					  size: 'small'
 				  });
 				  return false;
 			}
 			 bootbox.confirm({ 
 					size: "small",
-					message: "确定删除该身份吗?", 
+					message: "确定删除该角色吗?", 
 					callback: function(result){
 						if(result==true)
 						{
@@ -100,6 +100,22 @@ $(function () {
 			
 			return false;
 		};
+		
+		this.modify = function(){
+			var uname= $('#role_text').val();
+			if(uname=='')return false;
+			var a=$('#sflist .list-group-item-info').attr('upow')
+			if(typeof(a) == "undefined")
+			{
+				 bootbox.alert({
+					  message: "请选择下方'角色列表'中的任一项",
+					  size: 'small'
+				  });
+				  return false;
+			}
+			$('#sflist .list-group-item-info').html(uname);
+			return false;
+		}
 		
 		this.powsave = function(){
 			var str='';
@@ -116,7 +132,10 @@ $(function () {
 			$.ajax({                
 				type : 'POST',
 				dataType : 'text',
-				url : 'baseInfo.do',//后台修改
+				data:{
+					data:str
+				},
+				url : 'setAdminFunction.do',//后台修改
 				async : false,
 				cache : false,
 				error : function(request) {
@@ -139,7 +158,7 @@ $(function () {
 		$(document).on("click", "#sflist .people", function() {
 			$('.people').removeClass('list-group-item-info');
 			$(this).addClass('list-group-item-info');
-			
+			$('#role_text').val($(this).html());
 			var upow=parseInt($(this).attr('upow'));
 			var checklist=$('#pow_list input[type="checkbox"]');
 			$(checklist).prop('checked',false);
@@ -158,7 +177,7 @@ $(function () {
 			{
 				$(this).prop('checked',!is);
 				 bootbox.alert({
-					  message: "请选择左侧'身份列表'中的任一项",
+					  message: "请选择左侧'角色列表'中的任一项",
 					  size: 'small'
 				  });
 				  return false;
@@ -171,8 +190,9 @@ $(function () {
 				a=a&(~b);
 			$('#sflist .list-group-item-info').attr('upow',a);
 		});
-		$('#role_add').click(this.addrole);
-		$('#role_del').click(this.delrole);
+		$('#role_name').click(this.modify);
+		//$('#role_add').click(this.addrole);
+		//$('#role_del').click(this.delrole);
 		$('#pow_update').click(this.powsave);
 		this.loaddata();
 	};
