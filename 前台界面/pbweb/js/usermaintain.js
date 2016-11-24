@@ -62,7 +62,7 @@ $(document).ready(function() {
 			
 allCkBox2(); 
 		function allCkBox2(id){
-        var tableBox = document.getElementById(id||"#usermaintable"),
+        var tableBox = document.getElementById(id||"usermaintable"),
              ck = tableBox.getElementsByClassName("ck"),
              ckAll = tableBox.getElementsByClassName("ck-all")[0],
              ckRe = tableBox.getElementsByClassName("ck-re")[0];
