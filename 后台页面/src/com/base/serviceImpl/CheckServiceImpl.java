@@ -1,5 +1,7 @@
 package com.base.serviceImpl;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,67 +9,75 @@ import org.springframework.stereotype.Service;
 
 import com.base.daoImpl.CheckViewDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
+import com.base.po.BaseInfo;
+import com.base.po.CheckList;
 import com.base.po.CheckView;
 import com.base.po.LandApply;
+import com.base.po.UserInfo;
 import com.base.service.checkService;
 
 @Service("checkService")
 public class CheckServiceImpl implements checkService {
-	
+
 	@Autowired
 	private LandApplyDaoImpl landApplyDaoImpl;
 	@Autowired
 	private CheckViewDaoImpl checkViewDaoImpl;
 
+	//æŸ¥è¯¢statusä¸­è®°å½•ä¸ºå®¡æ ¸çš„å‡½æ•°ï¼ˆstatus=2ï¼‰
 	@Override
-	public List<CheckView> getLandApplys() {
-		
-		return null;
+	public CheckList getLandApply(int id,int pageindex,int size) throws SQLException  {
+		CheckList list=checkViewDaoImpl.getLandApply(id,pageindex,size,null,null,null);
+		return list;
 	}
-
-	//½»·ÑÊÇ6£¬Ëø¶¨ÊÇ4£¬ÉêÇëÖĞÊÇ2£¬¹ÜÀíÔ±¾Ü¾øÎª8
+    //æ‹’ç»ç”³è¯·ã€åŒæ„ç”³è¯·
 	@Override
-	public void agreeApply(int la_id, int lid) {
-		/*LandApply la=landApplyDaoImpl.getapply(la_id);
-		la.setStatus(1);
-		landApplyDaoImpl.updateLandApply(la);//½«Î¨Ò»µÄÉêÇë¼ÇÂ¼×´Ì¬±äÎª½»·ÑÖĞ	
-		
-		È±ÉÙ¶¨Ê±Æ÷£¬ÅĞ¶¨ÊÇ·ñ³¬¹ı½»·ÑÈÕÆÚ
-		
-		
-		»ñµÃÌØ¶¨ÍÁµØ×´Ì¬ÎªÉêÇëÖĞµÄ¼ÇÂ¼¼¯ºÏ
-		//List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
-		for(LandApply lay:list)
+	public void refuseapply(int flag,String la_id) throws SQLException
+	{
+		 checkViewDaoImpl.getLandApplys(flag,la_id);
+	}
+	//å–æ¶ˆäº¤è´¹ã€åŒæ„äº¤è´¹
+		@Override
+		public void getApplys(int flag,String la_id) throws SQLException
 		{
-			lay.setStatus(4);
-			landApplyDaoImpl.updateLandApply(lay);//½«ÉêÇëÖĞ×´Ì¬µÄ¼ÇÂ¼×´Ì¬±äÎªËø¶¨
-		}*/
-
-	}
-
-	/*½«×´Ì¬ÎªÉêÇëÖĞµÄÆäËû¼ÇÂ¼×´Ì¬±äÎª8*/
+			 checkViewDaoImpl.getApplys(flag,la_id);
+		}
+	//è¯¦æƒ…æŸ¥çœ‹
 	@Override
-	public void refuseOthers(int la_id, int lid) {
-		/*List<LandApply> list=landApplyDaoImpl.getUserApplys(lid, 2);
-		for(LandApply la:list)
-		{
-			if(la.getLa_id()!=la_id){
-				la.setStatus(8);
-				landApplyDaoImpl.updateLandApply(la);
-			}			
-		}*/
-	}
-
+	public List<CheckView> Rentdetail(int la_id) throws SQLException
+	{
+		List<CheckView> list=checkViewDaoImpl.detail(la_id);
+		return list;
+	}	
+	//è¯¦æƒ…æŸ¥çœ‹2
 	@Override
-	public List<CheckView> getLandApplys(int status) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public List<CheckView> Rentdetail2(int la_id) throws SQLException
+	{
+		List<CheckView> list=checkViewDaoImpl.detail(la_id);
+		return list;
+	}	
+	//åˆ·é€‰
+	public CheckList getInfo(int flag,int startIndex,int pageindex,String basename,String username,String usercollage) throws SQLException{	   
+		   CheckList list=checkViewDaoImpl.getLandApply(flag,startIndex,pageindex,basename,username,usercollage);
+		   return list;
+	   }
+	//åŸºåœ°æŸ¥è¯¢
 	@Override
-	public List<CheckView> getLandApplys(String bname,int lid,String college,int userCount,String planting,int status) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BaseInfo> getBaseInfos() {
+		List<BaseInfo> list=checkViewDaoImpl.getBaseInfos();
+		return list;
 	}
+	//ç”³è¯·äººæŸ¥è¯¢
+	@Override
+	public List<UserInfo> getappliInfos() throws SQLException {
+		List<UserInfo> list=checkViewDaoImpl.getappliInfos();
+		return list;
+	}
+	//ç”³è¯·éƒ¨é—¨æŸ¥è¯¢
+		@Override
+		public List<UserInfo> getDept() throws SQLException {
+			List<UserInfo> list=checkViewDaoImpl.getDept();
+			return list;
+		}
 
 }
