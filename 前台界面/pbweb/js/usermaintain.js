@@ -36,6 +36,7 @@ function showsubmenu2(){
 $(document).ready(function() {
               $('#usermaintable').dataTable(
 			  {
+				  
 				  "bSort": false,
 				  "bFilter": false,
 				  "aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。

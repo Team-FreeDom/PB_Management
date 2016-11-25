@@ -2,14 +2,14 @@
 
 						
 $(document).ready(function() {
-              $('#manageusertable').dataTable(
+              var table =$('#manageusertable').dataTable(
 			  {
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
 				  "aLengthMenu":[5,10,20,30], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 10,  //默认每页显示多少条记录
+					"iDisplayLength" : 5,  //默认每页显示多少条记录
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
 							"url" : "landRentInfo.do",
@@ -75,11 +75,11 @@ $(document).ready(function() {
 								for ( var item in data) {
 				
 									$("#EworkerclassId").after(
-											"<option value="+data[i].name+">"
-													+ data[i].name + "</option>");
+											"<option value="+data[i].classname+">"
+													+ data[i].classname + "</option>");
 									$("#AworkerclassId").after(
-											"<option value="+data[i].name+">"
-													+ data[i].name + "</option>");
+											"<option value="+data[i].classID+">"
+													+ data[i].classname + "</option>");
 				
 									i++;
 								}
@@ -102,10 +102,10 @@ $(document).ready(function() {
 									var i = 0;
 									for ( var item in data) {
 										$("#EstatueID").after(
-												"<option value="+data[i].bname+">"
+												"<option value="+data[i].statuename+">"
 														+ data[i].bname + "</option>");
 										$("#AstatueID").after(
-												"<option value="+data[i].bname+">"
+												"<option value="+data[i].statuename+">"
 														+ data[i].bname + "</option>");
 										i++;
 									}
@@ -128,10 +128,10 @@ $(document).ready(function() {
 									for ( var item in data) {
 										$("#EdivisionID").after(
 												"<option value="+data[i].dept+">"
-														+ data[i].dept + "</option>");
+														+ data[i].divisionname + "</option>");
 										$("#AdivisionID").after(
 												"<option value="+data[i].dept+">"
-														+ data[i].dept + "</option>");
+														+ data[i].divisionname + "</option>");
 										i++;
 									}
 					
@@ -146,45 +146,138 @@ $(document).ready(function() {
 				 /*添加数据函数*/
 					function add() {
 						/*alert("get into the function");*/
+						var status=document.getElementById("Astatus").value;
+						var workerclass=document.getElementById("Aworkerclass").value;
+						var division=document.getElementById("Adivision").value;
 									var addJson = {
-										"number": $("#name").val(),
-										"workerId": $("#workerId").val(),
-										"status": $("#status").val(),
-										"name": $("#sex").val(),
-										"sex": $("#workerclass").val(),
-										"borndate": $("#borndate").val(),
-										"IDnumber": $("#IDnumber").val(),
-										"phone": $("#phone").val(),
-										"division": $("#division").val(),
-										"password": $("#possword").val(),
+										"number": $("#Anumber").val(),
+										"workerId": $("#AworkerId").val(),
+										"status": status,
+										"sex": $("#sex").val(),
+										"workerclass": workerclass,
+										"borndate": $("#Aborndate").val(),
+										"IDnumber": $("#AIDnumber").val(),
+										"phone": $("#Aphone").val(),
+										"division": division,
+										"password": $("#Apossword").val(),
 									};
 									ajax(addJson);
 								}
 								
-					/*详情and修改*/				
 					function ajax(obj) {
 								var url ="/add.jsp" ;
-								if(editFlag){
+								/*if(editFlag){
 									url = "/edit.jsp";
-								}
+								}*/
 								$.ajax({
 									url:url ,
 									data: {
 										"name": obj.name,
-										"workerId": obj.position,
-										"status": obj.salary,
-										"start_date": obj.start_date,
-										"office": obj.office,
-										"extn": obj.extn
+										"workerId": obj.workId,
+										"status": obj.status,
+										"sex": obj.sex,
+										"workerclass": obj.workerclass,
+										"borndate": obj.borndate,
+										"IDnumber": obj.IDnumber,
+										"phone": obj.phone,
+										"division": obj.phone,
+										"password": obj.phone,
 									}, success: function (data) {
 										table.ajax.reload();
-										$("#myModal").modal("hide");
-										$("#myModalLabel").text("新增");
+										$("#add").modal("hide");
 										clear();
-										console.log("结果" + data);
 									}
 								});
 							}
+								
+					/*详情and修改*/
+					
+					function theEdit(obj) {
+									var lr_id = obj.id;
+									$.ajax({
+										type : 'POST',
+										data : {
+											"run" : run
+										},
+										dataType : 'json',
+										url : 'getSingleRentInfo.do',
+										async : false,
+										cache : false,
+										error : function(request) {
+											alert("error");
+										},
+										success : function(data) {
+								
+											var i = 0;
+											for ( var item in data) {
+								
+												$("#Ename").val(data[i].name);
+												$("#Esex").val(data[i].sex);
+												$("#EworkerId").val(data[i].workerId);
+												$("#Eworkerclass option[value=" + data[i].wkclass + "]").attr(
+														"selected", true);
+								
+												$("#Estatus option[value=" + data[i].sta + "]").attr(
+														"selected", true);
+												$("#Edivision option[value=" + data[i].divi + "]").attr(
+														"selected", true);
+												$("#Eborndate").val(data[i].borndate);
+												$("#EIDnumber").val(data[i].IDnumber);
+												$("#Ephone").val(data[i].phone);
+												$("#Epassword").val(data[i].password);
+												i++;
+											}
+								
+										}
+								
+									});
+								}
+						function getvalue() {
+						/*alert("get into the function");*/
+						var status=document.getElementById("Estatus").value;
+						var workerclass=document.getElementById("Eworkerclass").value;
+						var division=document.getElementById("Edivision").value;
+									var editJson = {
+										"number": $("#Enumber").val(),
+										"workerId": $("#EworkerId").val(),
+										"status": status,
+										"sex": $("#sex").val(),
+										"workerclass": workerclass,
+										"borndate": $("#Eborndate").val(),
+										"IDnumber": $("#EIDnumber").val(),
+										"phone": $("#Ephone").val(),
+										"division": division,
+										"password": $("#Epossword").val(),
+									};
+									ajaxedit(editJson);
+								}
+								
+					function ajaxedit(obj) {
+								var url = "/edit.jsp";
+								$.ajax({
+									url:url ,
+									data: {
+										"name": obj.name,
+										"workerId": obj.workId,
+										"status": obj.status,
+										"sex": obj.sex,
+										"workerclass": obj.workerclass,
+										"borndate": obj.borndate,
+										"IDnumber": obj.IDnumber,
+										"phone": obj.phone,
+										"division": obj.phone,
+										"password": obj.phone,
+									}, success: function (data) {
+										table.ajax.reload();
+										$("#edit").modal("hide");
+										clear();
+									}
+								});
+							}
+
+	
+				
+					
 								
 								
 								
