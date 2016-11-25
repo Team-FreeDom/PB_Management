@@ -1,14 +1,10 @@
-<%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+﻿<%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>湖南农业大学土地管理系统</title>
+    <title>湖南农业大学基地管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -18,13 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/index_main.css">
-    <link rel="stylesheet" href="../css/calendar.css" media="screen">
-
-	<style>
-	.table{ background:#FFF;}
-	.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {border-top:0px solid #ddd;}
-    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,22 +38,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                      <a href="msgUI.jsp" class="notification-icon" >
+                          <i class="icon-envelope"><span class="badge msg">4</span></i><!-- 添加no_display类，即可关闭消息条数提示-->
                               <!--ms-if-->
                       </a>
-                      <ul class="dropdown-menu">
+                      <!--<ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <strong>未读消息列表</strong>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="getMessage.do">更多消息</a>
+                              <a href="msgUI.jsp">更多消息</a>
                           </li>
-                      </ul>
+                      </ul>-->
     
                   </li>
                   <li>
-                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -107,9 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.jsp">
+										
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										</a>
+										
 									</li>
 									
 									 <li class="menuItem nav-parent">
@@ -117,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
+											<li><a href="#"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -142,13 +131,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="notification.jsp"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -179,17 +168,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
-					<div class="page-header row">
+					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a>位置  :</a></li>
-								<li><a href="index.jsp"><i class=" icon-home"></i>首页</a></li>
+                            	<li><a>位置</a></li>
+								<li><a href="msgUI.jsp">系统消息</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
@@ -199,114 +188,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row form">
 
 						<div class="col-lg-12">
-
-							<div id="post1" class="col-md-3 ">
-								<p>通知公告</p>
-                                <div class="post">
-                                    <!-- <div id="notification"></div> -->
-                                <p id="notification"> </p>
-                                </div>
-
-							</div>
-
-							<div id="information1" class=" col-md-offset-1 col-md-3 ">
-								<p>个人消息提示</p>
-                                <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
-                                    <p>租赁申请退回<span name="date"></span></p>
-                                    <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
-                                </div>
-							</div>
-
-							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
-
-							<script src="../js/calendar.jquery.min.js"></script>
-                            <script src="../js/jquery-ui-datepicker.min.js"></script>
-                            <script>
-                                $('#calendar').datepicker({
-                                    inline: true,
-                                    firstDay: 1,
-                                    showOtherMonths: true,
-                                    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-                                });
-                            </script>
-							
-						</div>
-						<div id="caption" class="col-lg-12">
-                        	<p>今日代办</p>
-						</div>
-						<div id="data" class="col-lg-12">
-
-							<div class="col-md-2 col-xs-2 data_display">
-								<table class="table" id='tvb'>
-                                    <tr>
-                                        <td style="font-size:50%">注册用户</td>
-                                        <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%" id="userCount"></td>
-                                    </tr>
-                                </table>
-							</div>
-							
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">租赁申请</td>
-                                        <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%" id="applyCount"></td>
-                                    </tr>
-                                </table>
-
-							</div>
-
-							<div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table" width="100%">
-                                    <tr style=" border-color:#FFF">
-                                        <td style="font-size:50%">实习申请</td>
-                                        <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%" id="practiceCount"></td>
-                                    </tr>
-                                </table>
-							</div>
-                            
-                            <div class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
-								<!--<a href="message.html">-->
-								<table class="table">
-                                    <tr>
-                                        <td style="font-size:50%">维修申请</td>
-                                        <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:120%" id="maintainCount"></td>
-                                    </tr>
-                                </table>
-							</div>
+                            <div class="panel panel-primary">
+                            	<div class="panel-heading">系统消息</div>
+                                    <div class="panel-body">
+                                    <table class="table table-hover table-responsive" id='msgtable'>
+                                     <thead>
+                                            <tr>
+                                              <th><span class="glyphicon glyphicon-envelope" style="font-size:1.5em"></span></th>
+                                              <th>标题</th>
+                                              <th>内容</th>
+                                              <th>时间</th>
+                                            </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                    <c:forEach items='${messageList}' var='message'>
+                                            <tr class="read">
+                                              <td>${message.id}</td>
+                                              <td>${message.title}</td>
+                                              <td>${message.content}</td>
+                                              <td>${message.time}</td>
+                                            </tr>
+                                    </c:forEach>
+                                           <!--  <tr>
+                                              <td>2</td>
+                                              <td>土地租赁审核结果</td>
+                                              <td>长安基地#3321234土地租赁审核通过，请于2016-07-20号前缴费</td>
+                                              <td>2016-07-10</td>
+                                            </tr>
+                                            <tr>
+                                              <td>3</td>
+                                              <td>土地租赁结果</td>
+                                              <td>退回</td>
+                                              <td>2016-07-20</td>
+                                            </tr>
+                                            <tr>
+                                              <td>4</td>
+                                              <td>系统通知</td>
+                                              <td>土地租赁业务即将开始，请于2012-7-30号前登录</td>
+                                              <td>2016-07-20</td>
+                                            </tr> -->
+                                    </tbody>
+                                    </table>
+                                    </div>
+                            </div>
 						</div>
 
 					</div>
 				</div><!-- End Sidebar-->                 
-                
-                    
-            
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-	
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/myNeed/index.js"></script>
+	<script src="../js/bootbox.min.js"></script>
     <script src="../js/kg.js"></script>
-   
+    
   </body>
 </html>
