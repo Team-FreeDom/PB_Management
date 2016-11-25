@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -203,7 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3 ">
 								<p>通知公告</p>
                                 <div class="post">
-                                     <p>实习基地管理系统1.0版本正式上线，本系统的宗旨是携手学校基地科，为全体一线教师服务，主要体现在校内教学基地土地的租赁、校内外实习项目的开展和教学基地设备的及时维修。</p>
+                                    <script id="editor" type="text/plain" ></script>
                                 </div>
 
 							</div>
@@ -306,5 +306,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/myNeed/index.js"></script>
     <script src="../js/kg.js"></script>
+    
+    <!-- UEditor -->
+    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
+    <script src="../js/myNeed/ueditor.js"></script>
   </body>
 </html>
