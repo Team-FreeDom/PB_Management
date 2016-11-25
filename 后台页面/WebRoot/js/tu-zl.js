@@ -98,8 +98,8 @@
 			  var str=' ';
 			  var plan;
 			  var landid;
-			  var userid=$.cookie('BaseWeb');////////////此处需要修改
-			  if(userid=='' || userid=='undefined')
+			  var userid=$.cookie("username");////////////此处需要修改
+			  if(userid=='' || userid==undefined)
 			  {
 				  bootbox.alert({
 					  message: "登录失效，请正返回首页",

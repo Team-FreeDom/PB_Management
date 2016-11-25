@@ -602,7 +602,13 @@ a, a:link, a:visited, a:hover, a:active {
 	position:absolute;
 	top:-3px;
 	background-color:#F00;}
-
+.msg{top:0px;right:-10px; position:absolute; background:#A20000;}
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+#msgtable tr{ cursor:pointer;}
+#msgtable .read{ color:#CCC;}
+.no_display{ display:none}
 @media screen and (min-width:768px) {
 .container-fluid.content {
 	overflow: hidden;
