@@ -315,5 +315,44 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		System.out.println(userCount);
 		return userCount;
 	}
+//修改个人信息
+		public void updateuser(String id,String name,String telephone,String password,String img) throws SQLException
+		{
+			conn=(Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp=(CallableStatement) conn.prepareCall("{call baseweb.update_userinfo(?,?,?,?,?)}");
+			sp.setString(1,id);
+			sp.setString(2,name);
+			sp.setString(3,telephone);
+			sp.setString(4,password);
+			sp.setString(5,img);
+			sp.execute();
+			
+		}
+	//获取个人 信息
+		public List<UserInfo> getInfoPerson(String id){
+			List<UserInfo> list=new ArrayList<UserInfo>();
+			try{
+			    conn=(Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+				sp=(CallableStatement) conn.prepareCall("{call baseweb.userdetail(?)}");
+				sp.setString(1, id);
+				sp.execute();		
+				ResultSet rs=sp.getResultSet();
+				while(rs.next())
+				{		
+					UserInfo ch=new UserInfo();
+					ch.setName(rs.getString("name"));
+					ch.setTelephone(rs.getString("telephone"));
+					ch.setImg(rs.getString("img"));
+					list.add(ch);
+				}
+				}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally{			
+					SqlConnectionUtils.free(conn, sp, rs);
+				}
+				
+				return list;
+		}
 
 }

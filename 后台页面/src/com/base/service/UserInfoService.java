@@ -44,5 +44,16 @@ public interface UserInfoService {
 	                     在此规定，从上层传来的userright和id值若为0，则代表此两参数无值
     */
     public List<UserInfo> getUserInfos(int userright,String sex,int id);
+/**
+     * 修改个人信息
+     * @param userinfo
+     */
+    public void update(String id,String name,String telephone,String password,String img)throws SQLException;
+    /**
+     * 获取个人信息
+     * @param id 用户id
+     * @return 用户信息
+     */
+    public List<UserInfo> getInfoPerson(String id);
 
 }
