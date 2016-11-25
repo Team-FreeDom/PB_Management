@@ -60,7 +60,85 @@ $(document).ready(function() {
                     }
 					  });
 					  
-
+					  //获取员工类别
+						 $.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : 'workerclassInfoR.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								alert("error");
+							},
+							success : function(data) {
+								var i = 0;
+								for ( var item in data) {
+				
+									$("#EworkerclassId").after(
+											"<option value="+data[i].name+">"
+													+ data[i].name + "</option>");
+									$("#AworkerclassId").after(
+											"<option value="+data[i].name+">"
+													+ data[i].name + "</option>");
+				
+									i++;
+								}
+				
+							}
+				
+						}); 
+						
+						//获取身份属性
+							$.ajax({
+								type : 'POST',
+								dataType : 'json',
+								url : 'EstatueIDInfoR.do',
+								async : false,
+								cache : false,
+								error : function(request) {
+									alert("error");
+								},
+								success : function(data) {
+									var i = 0;
+									for ( var item in data) {
+										$("#EstatueID").after(
+												"<option value="+data[i].bname+">"
+														+ data[i].bname + "</option>");
+										$("#AstatueID").after(
+												"<option value="+data[i].bname+">"
+														+ data[i].bname + "</option>");
+										i++;
+									}
+					
+								}
+					
+							});
+							//获取部门信息
+							$.ajax({
+								type : 'POST',
+								dataType : 'json',
+								url : 'selectCo.do',
+								async : false,
+								cache : false,
+								error : function(request) {
+									alert("error");
+								},
+								success : function(data) {
+									var i = 0;
+									for ( var item in data) {
+										$("#EdivisionID").after(
+												"<option value="+data[i].dept+">"
+														+ data[i].dept + "</option>");
+										$("#AdivisionID").after(
+												"<option value="+data[i].dept+">"
+														+ data[i].dept + "</option>");
+										i++;
+									}
+					
+								}
+					
+							});
+							
 					   $("#save").click(add);
             } );
 			
@@ -83,7 +161,7 @@ $(document).ready(function() {
 									ajax(addJson);
 								}
 								
-									
+					/*详情and修改*/				
 					function ajax(obj) {
 								var url ="/add.jsp" ;
 								if(editFlag){
