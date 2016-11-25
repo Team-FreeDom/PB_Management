@@ -379,7 +379,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="../js/gridstack.min.js"></script>
 	<script src="../js/gridstack.jQueryUI.min.js"></script>
     <script src="../js/bootbox.min.js"></script>
-
+	<script src="../dist/jquery.cokie.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
  	<script src="../js/kg.js"></script>   
     <script src="../js/tu-zl.js"></script>
