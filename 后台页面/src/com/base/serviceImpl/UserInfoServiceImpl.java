@@ -14,6 +14,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Autowired
 	private UserInfoDaoImpl userInfoDaoImpl;
+        @Autowired
+	private UserInfoDao userInfodao;
 
 	@Override
 	public void delUser(String[] delid) {
@@ -88,23 +90,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		
 		return list;
 	}
-   /**
-    * 修改个人信息
-    */
-	@Override
-	public void update(String id,String name,String telephone,String password,String img)throws SQLException
-	{
-		userInfodao.updateuser(id, name, telephone, password, img);
-		
-	}
-	/**
-     * 获取个人信息
-     * @param id 用户id
-     * @return 用户信息
-     */
-	 public List<UserInfo> getInfoPerson(String id){
-		 List<UserInfo> list=userInfodao.getInfoPerson(id);
-		return list;
-	 }
+	
+	 public String getImage(String userId)
+		{
+		 List<UserInfo> list=userInfodao.getInfoPerson(userId);
+		//  UserInfo ui=userInfoDaoImpl.getUserInfo(userId);
+			String image=list.get(0).getImg();
+			
+			return image;
+			
+		}
 
 }

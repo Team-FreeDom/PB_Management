@@ -19,6 +19,14 @@ public class LandRentInfo {
 	private String userId;
 	private int rentMoney;
 	private String chargeDate;
+	private int applyDept;
+	
+	public int getApplyDept() {
+		return applyDept;
+	}
+	public void setApplyDept(int applyDept) {
+		this.applyDept = applyDept;
+	}
 	public int getLr_id() {
 		return lr_id;
 	}
@@ -73,5 +81,31 @@ public class LandRentInfo {
 	public LandRentInfo() {
 		super();
 	}
+	public LandRentInfo(String lid, String startTime,
+			String endTime, String planting, String userId, int rentMoney,
+			String chargeDate, int applyDept) {
+		super();		
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.rentMoney = rentMoney;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	public LandRentInfo(String lid, String startTime, String endTime,
+			String planting, String userId, String chargeDate, int applyDept) {
+		super();
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	
+	
 	
 }

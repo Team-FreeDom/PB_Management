@@ -355,4 +355,24 @@ public class UserInfoDaoImpl implements UserInfoDao {
 				return list;
 		}
 
+public UserInfo getUserInfo(String userid)
+	{
+		Session session = sessionFactory.openSession();
+		String hql = "from UserInfo where id=?";
+		UserInfo ui = null;
+
+		try {
+			Query query = session.createQuery(hql);			
+			query.setString(0, userid);
+			
+			ui = (UserInfo) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return ui;
+	}
+
 }

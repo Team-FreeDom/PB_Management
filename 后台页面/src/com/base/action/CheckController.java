@@ -2,6 +2,7 @@ package com.base.action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,12 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.base.po.ApplyDept;
 import com.base.po.BaseInfo;
 import com.base.po.CheckList;
 import com.base.po.CheckView;
 import com.base.po.LandApply;
 import com.base.po.UserInfo;
 import com.base.service.checkService;
+import com.base.serviceImpl.LandApplyServiceImpl;
 
 //审核模块的controller类
 @Controller("CheckController")
@@ -30,6 +33,31 @@ import com.base.service.checkService;
 public class CheckController {
 	@Autowired
 	private checkService checkservice;
+	@Autowired
+	private LandApplyServiceImpl landApplyServiceImpl;
+	
+	@RequestMapping("/getAllInfos.do")
+	public String getAllInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map)
+	{
+		List<BaseInfo> list = checkservice.getBaseInfos();//基地
+		List<ApplyDept> la= landApplyServiceImpl.getDepts();//部门
+		try {
+			List<UserInfo> ui= checkservice.getappliInfos();
+			List list1=new ArrayList();
+			list1.add(list);
+			list1.add(la);
+			list1.add(ui);
+			JSONArray json = JSONArray.fromObject(list1);
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().print(json.toString());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//申请人
+		
+		return null;
+	}
 
 	//查询所有未审核申请记录
 	@RequestMapping("/checkApplyRecord.do")
@@ -130,8 +158,12 @@ public class CheckController {
 		}
 			try
 			{
-				checkservice.refuseapply(flag,str);
-			} catch (SQLException e)
+				checkservice.agreeApply(str);
+				
+				
+				
+				
+			} catch (Exception e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();

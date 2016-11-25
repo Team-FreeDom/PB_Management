@@ -7,43 +7,43 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+
 public class LandApply_view implements Serializable{
 	
-	@Id
+	
 	private int la_id;
 	
 	private String startTime;
 	
 	private String endTime;
-	@Id
+	
 	private String lid;
 	
 	private String lname;	
 	
-	@Column(name = "landArea")
+	
 	private int landArea;
 	
-	@Column(name = "afford")
+	
 	private int afford;
 	
 	
 	private String aptPlanting;
 	
-	@Column(name = "buildingArea")
+	
 	private int buildingArea;
 	
 	
 	private String bname;
-	@Column(name = "descp")
+	
 	private String descp;
 	
-	@Column(name = "applicantId")
+	
 	private String applicantId;
 	
 	
 	private int tenancy;
-	@Id
+	
 	private int status;
 	
 	private String planting;
@@ -52,10 +52,10 @@ public class LandApply_view implements Serializable{
 	
 	private String college;
 	
-	@Column(name = "startPayTime")
+	
 	private String startPayTime;
 	
-	@Column(name = "resource")
+	
 	private String resource;
 	
 	

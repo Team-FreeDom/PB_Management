@@ -22,6 +22,21 @@ public class CookieUtils {
 		response.addCookie(cookie);
 	}
 
+      public static String getUserid(HttpServletRequest request)
+	{
+		Cookie[] cookies = request.getCookies();//获得所有cookie对象		
+		String userid=null;
+		for (Cookie co : cookies) {   //遍历cookie数组
+			if (co.getName().equals("username")) {  //判断此cookie的key值是否是username
+				
+				userid=co.getValue();
+			}
+		}
+		return userid;
+	
+		}
+
+
 	public static boolean addCookie(HttpServletRequest request,
 			HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();

@@ -8,6 +8,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +31,10 @@ public class LoginController {
 	
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
-		System.out.println(userid+"  "+pwd);
-		
+		System.out.println(userid+"  "+pwd);	
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
+		String src=userInfoServiceImpl.getImage(userid);
+		System.out.println(src);
 		if(adminValue!=-1)
 		{
 			//System.out.println("µÇÂ¼³É¹¦");
@@ -40,11 +42,14 @@ public class LoginController {
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
+			CookieUtils.addCookie("image", src,response);
 			return "redirect:jsp/index.jsp";
 		}else{
 			//System.out.println("µÇÂ¼Ê§°Ü");
 			return "redirect:login_soft.html";
 		}
+		
+	
 	}
 	
 	
