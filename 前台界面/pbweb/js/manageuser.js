@@ -22,7 +22,16 @@ $(document).ready(function() {
 						 
                 	}); 
 					$("#ck1").prop("checked", false); 
-           		 });  
+           		 }); 
+				 
+				 $("#add").click(function () {
+					 $("#workerId").val("");
+			        $("#sex").val("");
+			        $("#IDnumber").val("");
+			        $("#password").val("");
+					
+					$("#Adivision option:first").attr("selected",true);
+           		 }); 
 				 
               var table =$('#manageusertable').dataTable(
 			  {
