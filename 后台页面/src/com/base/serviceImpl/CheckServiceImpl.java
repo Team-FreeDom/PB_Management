@@ -79,5 +79,26 @@ public class CheckServiceImpl implements checkService {
 			List<UserInfo> list=checkViewDaoImpl.getDept();
 			return list;
 		}
+		
+		
+		@Override
+		public void agreeApply(String str) {
+			
+			//把审核中的改为待缴费
+			/*
+			 * 
+			 * landApplyDaoImpl.updateStatus(str,1)
+			 * 
+			 * 
+			 * */
+			
+			/*把相同土地的其他申请置为锁定
+			 * 
+			 * str,int1,int2
+			 * */
+			/*
+			 * userid ,bname+bid,
+			 * */
+		}
 
 }

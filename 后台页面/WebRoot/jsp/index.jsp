@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -55,16 +56,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       </a>
                       <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
+                              <a href="getMessage.do">更多消息</a>
                           </li>
                       </ul>
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -107,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.jsp">
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -142,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="notification.jsp"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
@@ -203,23 +204,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3 ">
 								<p>通知公告</p>
                                 <div class="post">
-                                    <script id="editor" type="text/plain" ></script>
+                                     <div>${notification } </div>
+                                     <div ><a class="pull-right" href="#">更多</a></div>
                                 </div>
-
+                                
 							</div>
 
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">
 								<p>个人消息提示</p>
                                 <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
+                                    <c:forEach items='${messageList}' var='message'>
+                                            <p>${message.title}<span name="date" style="text-align:right;"></span></p>
+                                    </c:forEach>
+                                   <!--  <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
                                     <p>租赁申请退回<span name="date"></span></p>
                                     <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
+                                    <p>租赁成功，请缴费<span name="date"></span></p> -->
                                 </div>
 							</div>
 
 							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
+							<div id="calendar" class="col-md-4" style="background:none; width:100%"></div>
 
 							<script src="../js/calendar.jquery.min.js"></script>
                             <script src="../js/jquery-ui-datepicker.min.js"></script>
@@ -245,7 +250,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="userCount"></td>
+                                        <td style="font-size:120%" id="userCount">${userCount }</td>
                                     </tr>
                                 </table>
 							</div>
@@ -257,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="applyCount"></td>
+                                        <td style="font-size:120%" id="applyCount">${applyCount }</td>
                                     </tr>
                                 </table>
 
@@ -306,10 +311,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/myNeed/index.js"></script>
     <script src="../js/kg.js"></script>
-    
-    <!-- UEditor -->
-    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
-    <script src="../js/myNeed/ueditor.js"></script>
+   
   </body>
 </html>

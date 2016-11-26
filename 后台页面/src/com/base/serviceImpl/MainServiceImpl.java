@@ -17,17 +17,21 @@ public class MainServiceImpl {
 	private LandApplyDaoImpl landApplyDaoImpl;
 	
 	
-	public String getCount()
+	public long getUserCount()
+	{
+        long userCount=userInfoDaoImpl.getUserCount();
+		return userCount;
+	}
+	
+	
+	public long getApplyCount()
 	{
 		Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
     	int year = c.get(Calendar.YEAR);     	
     	String date=String.valueOf(year);
     	
-		Long userCount=userInfoDaoImpl.getUserCount();
-		Long applyCount=landApplyDaoImpl.getApplyCount(date);
-		
-		String str= "[{\"userCount\":" + userCount + ",\"applyCount\":"+applyCount+"}]";
-		return str;
+		long applyCount=landApplyDaoImpl.getApplyCount(date);
+		return applyCount;
 	}
 
 }

@@ -21,25 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/rent-approve.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../js/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="../js/YMDClass.js"></script>
-   
-  <!-- <script src="../js/style.js"></script> -->
-
-<script src="../js/bootstrap.min.js"></script>
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<!--datatable javascript-->
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/myNeed/rent-approve.js"></script>
- 
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -63,17 +44,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
-                          <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                         <li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
+                              <a href="getMessage.do">更多消息</a>
                           </li>
                       </ul>
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -116,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.html">
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -234,8 +215,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </td>
                                             <td colspan="6">
                                             	<ul class="dropdown_show">
-                                                	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
-                                                    	<ul id="hide_ul" style="display:none;">
+                                                	<li><span class="icon-filter">筛选</span>
+                                                    	<ul class="hide_ul" style="display:none">
                                                         	<li>
                                                             	<form>
                                                             	<table class="table">
@@ -293,7 +274,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th>所属学院</td>
                                             <th>已租用次数</td>
                                             <th>种植内容</td>
-                                            <th>详情</th>
+                                            
                                         </tr>
                                     </thead>
                                     
@@ -304,12 +285,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
                                     	<tr>
                                         	<td colspan="2">
-                                            	<label><input type="checkbox" name="0" class="ck-all" />全选</label>
-						                     	<label><input type="checkbox" name="0" class="ck-re" />反选</label>
+                                            	<label><input type="checkbox" name="0" id="ck1" />全选</label>
                                             </td>
                                             <td colspan="8">
-                                            	<button type="button" class="btn btn-primary" id="agreeOne" name="agreeOne" onclick="agree()">同意申请</button>
-                                                <button type="button" class="btn btn-danger" id="deleteOne" name="deleteOne" onclick="refuse()">拒绝申请</button>
+                                            	<button type="button" class="btn btn-primary" id="agreeOne" name="agreeOne">同意申请</button>
+                                                <button type="button" class="btn btn-danger" id="deleteOne" name="deleteOne">拒绝申请</button>
                                             </td>
                                         </tr>
                                     </thead>
@@ -328,13 +308,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <table class="table">
                                             <tr>
                                                 <td>基地名 ： </td>
-                                                <td><input type="text" id="basename" readonly="readonly"></td>
+                                                <td><input type="text" id="basename" readonly></td>
                                                 <td>租赁人 ： </td>
                                                 <td><input type="text" id="username"></td>
                                             </tr>
                                             <tr>
                                                 <td>申请学院 ： </td>
-                                                <td><input type="text" id="usercollage" readonly="readonly"></td>
+                                                <td><input type="text" id="usercollage" readonly></td>
                                                 <td>面向专业 ： </td>
                                                 <td><input type="text" id="landoriented"></td>
                                             </tr>
@@ -342,14 +322,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             
                                             <tr>
                                                 <td>土地名称 ： </td>
-                                                <td><input type="text" id="landname" readonly="readonly"></td>
+                                                <td><input type="text" id="landname" readonly></td>
                                                 <td>土地编号 ： </td>
                                                 <td><input type="text" id="li"></td>
                                             </tr>
                                             
                                             <tr>
                                                 <td>计划种植内容 ： </td>
-                                                <td><input type="text" id="plant" readonly="readonly"></td>
+                                                <td><input type="text" id="plant" readonly></td>
                                             </tr>
                                         </table>
                                       </div>
@@ -379,8 +359,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </td>
                                             <td colspan="6" >
                                                 <ul class="dropdown_show">
-                                                	<li><span class="icon-filter" onClick="showsubmenu2()">筛选</span>
-                                                    	<ul id="hide_ul2" style="display:none;">
+                                                	<li><span class="icon-filter">筛选</span>
+                                                    	<ul class="hide_ul" style="display:none;">
                                                         	<li>
                                                             	<form>
                                                             	<table class="table">
@@ -437,7 +417,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th>所属学院</td>
                                             <th>已租用次数</td>
                                             <th>种植内容</td>
-                                            <th>详情</th>
+                                            
                                         </tr>
                                     </thead>
                                    
@@ -447,12 +427,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
                                     	<tr>
                                         	<td colspan="2">
-                                            	<label><input type="checkbox" name="0" class="ck-all" />全选</label>
-						                     	<label><input type="checkbox" name="0" class="ck-re" />反选</label>
+                                            	<label><input type="checkbox" name="0" id="ck2" />全选</label>
                                             </td>
                                             <td colspan="8">
-                                            	<button type="button" class="btn btn-primary" onclick="confirm()" id="confim" >确认交费</button>
-                                                <button type="button" class="btn btn-danger" onclick="cancel()" id="cancel" >取消交费</button>
+                                            	<button type="button" class="btn btn-primary" id="confim" >确认交费</button>
+                                                <button type="button" class="btn btn-danger" id="cancel" >取消交费</button>
                                             </td>
                                         </tr>
                                     </thead>
@@ -471,13 +450,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                          <table class="table">
                                             <tr>
                                                 <td>基地名 ： </td>
-                                                <td><input type="text" id="basename1" readonly="readonly"></td>
+                                                <td><input type="text" id="basename1" readonly></td>
                                                 <td>租赁人 ： </td>
                                                 <td><input type="text" id="username1"></td>
                                             </tr>
                                             <tr>
                                                 <td>申请学院 ： </td>
-                                                <td><input type="text" id="usercollage1" readonly="readonly"></td>
+                                                <td><input type="text" id="usercollage1" readonly></td>
                                                 <td>面向专业 ： </td>
                                                 <td><input type="text" id="landoriented1"></td>
                                             </tr>
@@ -485,14 +464,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             
                                             <tr>
                                                 <td>土地名称 ： </td>
-                                                <td><input type="text" id="landname1" readonly="readonly"></td>
+                                                <td><input type="text" id="landname1" readonly></td>
                                                 <td>土地编号 ： </td>
                                                 <td><input type="text" id="li"></td>
                                             </tr>
                                             
                                             <tr>
                                                 <td>计划种植内容 ： </td>
-                                                <td><input type="text" id="plant1" readonly="readonly"></td>
+                                                <td><input type="text" id="plant1" readonly></td>
                                             </tr>
                                         </table>
                                       </div>
@@ -514,13 +493,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
-
-    
-    
-<script src="../js/style.js"></script>
-
-   <script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!--<script src="../js/YMDClass.js"></script>-->
    
+  <!-- <script src="../js/style.js"></script> -->
+
+<script src="../js/bootstrap.min.js"></script>
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!--datatable javascript-->
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
+<script src="../js/myNeed/rent-approve.js"></script>
+   <script>
 	/* new YMDselect('year1','month1','day1');
 	new YMDselect('year2','month2','day2'); */
 	</script>

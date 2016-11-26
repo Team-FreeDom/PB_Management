@@ -73,12 +73,14 @@
 							<i class="icon-envelope"></i> <!--ms-if-->
 					</a>
 						<ul class="dropdown-menu">
-							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
-							</li>
-							<li class="dropdown-menu-footer text-center"><a
-								href="../teach/notifications.html">更多消息</a></li>
+							<li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                          </li>    
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="getMessage.do">更多消息</a>
+                          </li>
 						</ul></li>
-					<li><a href="#outModal"
+					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
 					</a></li>
@@ -110,7 +112,7 @@
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
 										<a href="#"><img class="img-circle bk-img-60" alt=""
-											src="../image/psu.jpg"></a>
+											src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -121,7 +123,7 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.jsp"> <i
+								<li class="menuItem"><a href="index.do"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -130,17 +132,17 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
-										<li><a href="#"><span class="text">我的基地</span></a></li>
+										<li><a><span class="text">我的实习</span></a></li>
+										<li><a><span class="text">我的报修</span></a></li>
+										<li><a><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁审批</span></a></li>
-										<li><a href="#"><span class="text">实习审批</span></a></li>
+										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+										<li><a><span class="text">实习审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
 
@@ -194,10 +196,10 @@
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+							<li><a><i class=" icon-building"></i>基地申报</a></li>
 							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+							<li><a><i class="icon-user"></i>实习申请</a></li>
+							<li><a><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -329,6 +331,7 @@
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../dist/bootbox.min.js"></script>
 	<script src="../js/tu.js"></script>	
+	<script src="../dist/jquery.cokie.min.js"></script>    
 	<script src="../js/kg.js"></script>
 	
 	

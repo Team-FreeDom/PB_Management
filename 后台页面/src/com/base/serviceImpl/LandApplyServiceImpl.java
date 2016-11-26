@@ -19,6 +19,7 @@ import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
 import com.base.daoImpl.TemperateSaveDaoImpl;
 import com.base.po.ApplyDept;
+import com.base.po.ApplyList;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandApply_view;
@@ -137,10 +138,39 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}
 	
 	//获得用户的申请历史
-	public List<LandApply_view> getselfApply(String applicantId)
+	/*
+	 * bname,startTime,endTime,status为筛选条件，规定传入存储过程的整型参数，若没有，则传-1
+	 * */
+	public ApplyList getselfApply(String applicantId,String bname,String startTime,String endTime,String status,int page,int length)
 	{
-		return landApply_viewDaoImpl.getapplys(applicantId);
+		int start=0;
+		int end=0;
+		int statusZ=0;
+		
+		if(bname!=null&&bname.equals("")){
+			bname=null;			
+		}
+		if(startTime!=null&&startTime.equals(""))
+		{
+			startTime=null;
+		}
+		if(endTime!=null&&endTime.equals(""))
+		{
+			endTime=null;
+		}
+		System.out.println(status);
+		if(status==null){
+			statusZ=-1;
+		}else{
+			statusZ=Integer.valueOf(status);
+		}
+		
+		
+		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname, startTime, endTime, statusZ, page, length);
+		
+		return al;
 	}
+	
 	
 	//获取用户不同状态的申请记录
 	public List<LandApply_view> getselfApply(String applicantId,int status)
@@ -156,26 +186,12 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}	
   
     
-    public List myRentFont1(String applicantId)
-    {
-    	List list=new ArrayList<E>();
-		
-    	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
-    	int year = c.get(Calendar.YEAR);     	
-    	String date=String.valueOf(year);
+    public ApplyList myRentFont1(String applicantId,int page,int length)
+    {   	
     	
-    	List<LandApply_view> list1=landApply_viewDaoImpl.getapply(applicantId, date);
-    	List<TemperateSave_View> list2=temperateSaveDaoImpl.getTemperate(applicantId,date);
-    	for(LandApply_view lav:list1)
-    	{
-    		list.add(lav);
-    	}
-    	for(TemperateSave_View tsv:list2)
-    	{
-    		list.add(tsv);
-    	}
+    	ApplyList al=landApply_viewDaoImpl.getapply(applicantId, page, length);    	
     	
-    	return list;
+    	return al;
     }   
   
     
@@ -224,9 +240,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     	temperateSaveDaoImpl.delTemperate(la_id);
     }
     
-    public TemperateSave_View getTs(int la_id)
+    public List<TemperateSave_View> getTs(int la_id)
     {
-    	TemperateSave_View tsv=temperateSaveDaoImpl.getTemperates(la_id);
+    	List<TemperateSave_View> tsv=temperateSaveDaoImpl.getTemperates(la_id);
     	return tsv;
     }
     

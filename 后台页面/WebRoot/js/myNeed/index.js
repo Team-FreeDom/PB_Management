@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	
 	$.ajax({
 		type : 'POST',
@@ -22,4 +22,4 @@ $(document).ready(function() {
 	
 	
 	
-});
+});*/

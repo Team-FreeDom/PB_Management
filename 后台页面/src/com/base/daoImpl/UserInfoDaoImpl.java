@@ -25,9 +25,7 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("userInfoDao")
 public class UserInfoDaoImpl implements UserInfoDao {
 
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -316,27 +314,42 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		return userCount;
 	}
 //修改个人信息
-		public void updateuser(String id,String name,String telephone,String password,String img) throws SQLException
+		public void updateuser(String id,String name,String telephone,String password,String img)
 		{
-			conn=(Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-			sp=(CallableStatement) conn.prepareCall("{call baseweb.update_userinfo(?,?,?,?,?)}");
-			sp.setString(1,id);
-			sp.setString(2,name);
-			sp.setString(3,telephone);
-			sp.setString(4,password);
-			sp.setString(5,img);
-			sp.execute();
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
+			try {
+				conn=(Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+				sp=(CallableStatement) conn.prepareCall("{call baseweb.update_userinfo(?,?,?,?,?)}");
+				sp.setString(1,id);
+				sp.setString(2,name);
+				sp.setString(3,telephone);
+				sp.setString(4,password);
+				sp.setString(5,img);
+				sp.execute();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{			
+				SqlConnectionUtils.free(conn, sp, rs);
+			}
+			
 			
 		}
 	//获取个人 信息
 		public List<UserInfo> getInfoPerson(String id){
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
 			List<UserInfo> list=new ArrayList<UserInfo>();
 			try{
 			    conn=(Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 				sp=(CallableStatement) conn.prepareCall("{call baseweb.userdetail(?)}");
 				sp.setString(1, id);
 				sp.execute();		
-				ResultSet rs=sp.getResultSet();
+				rs=sp.getResultSet();
 				while(rs.next())
 				{		
 					UserInfo ch=new UserInfo();
@@ -354,5 +367,25 @@ public class UserInfoDaoImpl implements UserInfoDao {
 				
 				return list;
 		}
+
+public UserInfo getUserInfo(String userid)
+	{
+		Session session = sessionFactory.openSession();
+		String hql = "from UserInfo where id=?";
+		UserInfo ui = null;
+
+		try {
+			Query query = session.createQuery(hql);			
+			query.setString(0, userid);
+			
+			ui = (UserInfo) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return ui;
+	}
 
 }

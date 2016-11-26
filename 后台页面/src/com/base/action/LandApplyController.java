@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.base.po.ApplyDept;
+import com.base.po.ApplyList;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply_view;
 import com.base.po.LandInfo;
@@ -40,6 +41,7 @@ import com.base.po.Layout_InfoView;
 import com.base.po.RentCollection;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
+import com.base.utils.CookieUtils;
 
 //申请模块的控制层
 @Controller("landApplyController")
@@ -185,16 +187,30 @@ public class LandApplyController {
 	@RequestMapping("/selfApply.do")
 	public String selfApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("hello");
-		String applicantId = "201440509";
-		List<LandApply_view> list = landApplyServiceImpl
-				.getselfApply(applicantId);
-		/*
-		 * for(LandApply_view lv:list) { System.out.println(lv.getDescp()); }
-		 */
+		
+		String bname = request.getParameter("bname");
+		String startTime = request.getParameter("startTime");
+		String endTime = request.getParameter("endTime");
+		String desc = request.getParameter("desc");
+		
+		int length=Integer.valueOf(request.getParameter("length"));
+		int start=Integer.valueOf(request.getParameter("start"));
+		int draw=Integer.valueOf(request.getParameter("draw"));  //从客户端获得length(每页3长度)，start()起始页数，draw计数器
+		
+		
+		int page=start/length+1; //当前页数
+		
+	    String applicantId = CookieUtils.getUserid(request);	
+		
+		
+		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname, startTime, endTime, desc, page, length);
+		
 		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
-
+		getObj.put("draw",draw);
+		getObj.put("recordsFiltered",al.getRecordsTotal());		
+		getObj.put("recordsTotal",al.getRecordsTotal());
+		getObj.put("data",al.getData());	
+		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
@@ -287,11 +303,10 @@ public class LandApplyController {
 	@RequestMapping("/myRentEdit.do")
 	public String myRentEdit(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		int la_id=21;
+		//int la_id = Integer.valueOf(request.getParameter("la_id"));
 
-		List<TemperateSave_View> list = new ArrayList<TemperateSave_View>();
-
-		list.add(landApplyServiceImpl.getTs(la_id));
+		List<TemperateSave_View> list = landApplyServiceImpl.getTs(la_id);		
 
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
@@ -309,13 +324,21 @@ public class LandApplyController {
 	@RequestMapping("/myRentFont.do")
 	public String myRentFont(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("myRentFont.do");
-		String applicantId = "201440509";
-		List list = null;
-		list = landApplyServiceImpl.myRentFont1(applicantId);
-		// list=landApplyServiceImpl.myRentFont(applicantId);
+		
+		int length=Integer.valueOf(request.getParameter("length"));
+		int start=Integer.valueOf(request.getParameter("start"));
+		int draw=Integer.valueOf(request.getParameter("draw"));  //从客户端获得length(每页3长度)，start()起始页数，draw计数器
+			
+		int page=start/length+1; //当前页数		
+		String applicantId = CookieUtils.getUserid(request);
+		
+		ApplyList al = landApplyServiceImpl.myRentFont1(applicantId,page,length);		
+		
 		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
+		getObj.put("draw",draw);
+		getObj.put("recordsFiltered",al.getRecordsTotal());		
+		getObj.put("recordsTotal",al.getRecordsTotal());
+		getObj.put("data",al.getData());	
 
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -394,9 +417,17 @@ public class LandApplyController {
 	@RequestMapping("/exportFile.do")
 	public String exportFile(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		String fileName = request.getParameter("fileName");
+		
+		String fileName = null;
+		int flag=Integer.valueOf(request.getParameter("flag"));
+		if(flag==1){
+			fileName="教学科研用地协议.pdf";
+		}else if(flag==2){
+			fileName="土地有偿使用协议.docx";
+		}	
+		
 		String filename = fileName.substring(0, fileName.lastIndexOf('.'));
-		// String filetype=fileName.substring(fileName.lastIndexOf("."));
+		String filetype=fileName.substring(fileName.lastIndexOf("."));
 		// System.out.println(filename);
 
 		// 文件下载
@@ -409,8 +440,11 @@ public class LandApplyController {
 				"file/" + fileName);
 
 		// 设置Content-Disposition
+		/*response.setHeader("Content-Disposition", "attachment;filename="
+				+ fileName);*/
+		
 		response.setHeader("Content-Disposition", "attachment;filename="
-				+ fileName);
+				+ new String(filename.getBytes(), "iso-8859-1") + filetype);
 		// 读取文件
 		InputStream in = new FileInputStream(fullFileName);
 		OutputStream out = response.getOutputStream();

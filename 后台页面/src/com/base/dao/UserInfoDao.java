@@ -100,7 +100,7 @@ public interface UserInfoDao {
       * 修改个人信息
       * @param userinfo
       */
-     public void updateuser(String id,String name,String telephone,String password,String img)throws SQLException;
+     public void updateuser(String id,String name,String telephone,String password,String img);
      /**
       * 获取个人信息
       * @param id 用户id

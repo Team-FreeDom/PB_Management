@@ -1,5 +1,6 @@
 package com.base.po;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,8 @@ public class UserInfo {
 	private String id;
 	private String password;
 	private String name;
-	private String sex;
+	private String sex;	
+	private String img;	
 	private String birthdate;
 	private String ID_number;
 	private String telephone;
@@ -30,6 +32,13 @@ public class UserInfo {
 	private String startContactTime;
 	private String endContactTime;	
 	
+
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getPassword() {
 		return password;
 	}
