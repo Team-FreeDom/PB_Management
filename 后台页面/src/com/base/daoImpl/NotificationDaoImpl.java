@@ -143,11 +143,11 @@ public class NotificationDaoImpl implements NotificationDao {
 				Message message = new Message();
 				message.setId(rs.getInt("id"));
 				message.setTitle(rs.getString("title"));
-				message.setUserid(rs.getInt("userid"));
+				message.setUserid(rs.getString("userid"));
 				message.setTime(rs.getString("time"));
 				message.setContent(rs.getString("content"));
 			    message.setIsRead(rs.getInt("isRead"));
-			    System.out.println(message.getContent());
+			    //System.out.println(message.getContent());
 			    
 				list.add(message);
 			}
@@ -160,5 +160,26 @@ public class NotificationDaoImpl implements NotificationDao {
 		}			
 		
 		return list;
+	}
+
+	@Override
+	public int getNoreadMessageCount(String userid) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		String hql = "from Message where userid='"+userid+"' and isRead=0";
+		List<Message> list = null;
+        int number =0;
+		try {
+			Query query = session.createQuery(hql);
+			list = query.list();
+			if(list!=null)
+				number=list.size();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return number;
 	}
 }

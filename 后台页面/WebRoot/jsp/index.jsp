@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
@@ -308,8 +308,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/jquery.min.js"></script>
 	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/myNeed/index.js"></script>
+     <script src="../js/bootstrap.min.js"></script>
+     <script src="../dist/jquery.cokie.min.js"></script>  
+      <script src="../js/myNeed/index.js"></script>
     <script src="../js/kg.js"></script>
    
   </body>

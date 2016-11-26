@@ -69,8 +69,13 @@ public class MainController {
 		List<Message> messageList = notificationServiceImpl.getMessageTop5Infos(userid);
 		if (messageList != null){
 			map.addAttribute("messageList", messageList);
-			System.out.println("messageList不为空");
+			//System.out.println("messageList不为空");
 		}
+		
+		//获取未读消息数，并写入到cookies中
+		int number = notificationServiceImpl.getNoreadMessageCount(userid);
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		System.out.println("未读消息数："+number);
 		
 		return "index";
 	}
