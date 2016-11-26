@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -107,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.jsp">
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -203,24 +204,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3 ">
 								<p>通知公告</p>
                                 <div class="post">
-                                    <!-- <div id="notification"></div> -->
-                                <p id="notification"> </p>
+                                     <p>${notification } </p>
                                 </div>
-
 							</div>
 
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">
 								<p>个人消息提示</p>
                                 <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
+                                    <c:forEach items='${messageList}' var='message'>
+                                            <p>${message.title}<span name="date" style="text-align:right;"></span></p>
+                                    </c:forEach>
+                                   <!--  <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
                                     <p>租赁申请退回<span name="date"></span></p>
                                     <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
+                                    <p>租赁成功，请缴费<span name="date"></span></p> -->
                                 </div>
 							</div>
 
 							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
+							<div id="calendar" class="col-md-4" style="background:none;"></div>
 
 							<script src="../js/calendar.jquery.min.js"></script>
                             <script src="../js/jquery-ui-datepicker.min.js"></script>
@@ -246,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="userCount"></td>
+                                        <td style="font-size:120%" id="userCount">${userCount }</td>
                                     </tr>
                                 </table>
 							</div>
@@ -258,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="applyCount"></td>
+                                        <td style="font-size:120%" id="applyCount">${applyCount }</td>
                                     </tr>
                                 </table>
 

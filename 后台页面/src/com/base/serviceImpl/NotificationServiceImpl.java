@@ -48,6 +48,13 @@ public class NotificationServiceImpl implements NotificationService {
 		return notificationDaoImpl.getMessageInfos(userid);
 	}
 
+
+	@Override
+	public List<Message> getMessageTop5Infos(String userid) {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getMessageTop5Infos(userid);
+	}
+
 	
 
 }

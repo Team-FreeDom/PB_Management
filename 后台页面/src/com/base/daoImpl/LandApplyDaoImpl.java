@@ -302,7 +302,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		} finally {
 			session.close();
 		}
-		System.out.println(applyCount);
+		//System.out.println(applyCount);
 		
 		return applyCount;
 	}

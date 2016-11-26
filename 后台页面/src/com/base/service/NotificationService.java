@@ -16,4 +16,6 @@ public interface NotificationService {
 	 public Notification getNotificationInfo(); 
 	 
 	 public List<Message> getMessageInfos(String userid);
+	 
+	 public List<Message> getMessageTop5Infos(String userid);
 }

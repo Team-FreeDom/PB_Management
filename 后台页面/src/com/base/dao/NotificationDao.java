@@ -14,4 +14,6 @@ public interface NotificationDao {
 	 public void addMessage(String insertSql);
 	 
 	 public List<Message> getMessageInfos(String userid);
+	 
+	 public List<Message> getMessageTop5Infos(String userid);
 }

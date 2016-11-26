@@ -76,14 +76,7 @@ public class UserController{
 				if(possword.equals("")){
 					possword=null;
 				}
-				try
-				{
-					userInfoservice.update(id,name,telephone,possword,filename);
-				} catch (SQLException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				userInfoservice.update(id,name,telephone,possword,filename);
 				}
 		}			
 	        return "user";

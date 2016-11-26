@@ -60,4 +60,6 @@ public interface checkService {
      * @throws SQLException
      */
 	public void getApplys(int flag,String la_id) throws SQLException;
+	
+	public void agreeApply(String str);
 }
