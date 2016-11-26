@@ -53,7 +53,7 @@ $(document).ready(function() {
 															type, row) {
 														var status = row.status;
 														if (status == 5
-																|| status == 8
+																|| status == 10
 																|| status == 3) {
 															return data = '<span>不通过</span>';
 														} else if (status == 6) {

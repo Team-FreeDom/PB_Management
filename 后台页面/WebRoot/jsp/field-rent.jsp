@@ -58,21 +58,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
+                          <i class="icon-envelope"></i>
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
-                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                          <strong>未读消息列表</strong>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="getMessage.do">更多消息</a>
+                              <a href="../teach/notifications.html">更多消息</a>
                           </li>
                       </ul>
     
                   </li>
                   <li>
-                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.do">
+										<a href="index.jsp">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -381,8 +381,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootbox.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-     <script src="../dist/jquery.cokie.min.js"></script>   
-      <script src="../dist/jquery.cokie.min.js"></script>  
+     <script src="../dist/jquery.cokie.min.js"></script>    
  	<script src="../js/kg.js"></script>   
     <script src="../js/tu-zl.js"></script>
   </body>

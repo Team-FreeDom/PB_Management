@@ -55,7 +55,7 @@
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
 			  fill('','','','','','');	
-			  $('#field_rent tbody').html();		  
+			  $('#field_rent tbody').html('');		  
 			  this.grid.removeAll();
 			  var obj=this;
 			  if(bid==""){
@@ -150,7 +150,7 @@
 				  },///error
 				  success : function(data) {
 					  fill('','','','','','');
-					  $('#field_rent tbody').html();
+					  $('#field_rent tbody').html('');
 					  obj.dialog = bootbox.dialog({
 						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
 						  closeButton: false
@@ -239,7 +239,7 @@
 			  }
 			  else{
 			  fill('','','','','','');
-			  $('#field_rent tbody').html(); 
+			  $('#field_rent tbody').html(''); 
 			  }
 		   });//end click 
 		   
