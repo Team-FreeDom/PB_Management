@@ -24,14 +24,19 @@ $(document).ready(function() {
 					$("#ck1").prop("checked", false); 
            		 }); 
 				 
-				 $("#add").click(function () {
+				/* $("#add").click(function () {
+					 
+           		 }); */
+				 $("#save").click(function(){
+					 $("#add").modal("hide");
 					 $("#workerId").val("");
 			        $("#sex").val("");
 			        $("#IDnumber").val("");
 			        $("#password").val("");
 					
-					$("#Adivision option:first").attr("selected",true);
-           		 }); 
+					$("#Adivision").val("1");
+					 
+					 })
 				 
               var table =$('#manageusertable').dataTable(
 			  {
