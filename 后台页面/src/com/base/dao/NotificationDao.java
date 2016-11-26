@@ -16,4 +16,6 @@ public interface NotificationDao {
 	 public List<Message> getMessageInfos(String userid);
 	 
 	 public List<Message> getMessageTop5Infos(String userid);
+	 
+	 public int getNoreadMessageCount(String userid);
 }

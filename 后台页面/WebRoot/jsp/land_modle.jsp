@@ -70,7 +70,7 @@
 				<ul class="notifications" avalonctrl="subNotificationsController">
 					<li class="hidden-sm hidden-xs"><a href="#"
 						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"></i> <!--ms-if-->
+							<i class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
 					</a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">

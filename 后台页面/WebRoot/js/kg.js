@@ -11,5 +11,9 @@ $("li.menuItem.nav-parent").click(function(){
 			$(this).removeClass('read');
 			$(this).addClass('read');
 		})
+ 
+     var temp = $.cookie("noReadNumber");
+     $('.msg').html($.cookie("noReadNumber"));
  });
 
+ 
