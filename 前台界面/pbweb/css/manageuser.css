@@ -13,6 +13,8 @@ table thead > tr> td{
     background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
     background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
 	}
+table thead > tr> th{
+	text-align:center;}
 #button-right button{
 	float:right;
 	margin-left:5px;}
