@@ -19,6 +19,7 @@ import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
 import com.base.daoImpl.TemperateSaveDaoImpl;
 import com.base.po.ApplyDept;
+import com.base.po.ApplyList;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandApply_view;
@@ -137,10 +138,39 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}
 	
 	//获得用户的申请历史
-	public List<LandApply_view> getselfApply(String applicantId)
+	/*
+	 * bname,startTime,endTime,status为筛选条件，规定传入存储过程的整型参数，若没有，则传-1
+	 * */
+	public ApplyList getselfApply(String applicantId,String bname,String startTime,String endTime,String status,int page,int length)
 	{
-		return landApply_viewDaoImpl.getapplys(applicantId);
+		int start=0;
+		int end=0;
+		int statusZ=0;
+		
+		if(bname!=null&&bname.equals("")){
+			bname=null;			
+		}
+		if(startTime!=null&&startTime.equals(""))
+		{
+			startTime=null;
+		}
+		if(endTime!=null&&endTime.equals(""))
+		{
+			endTime=null;
+		}
+		System.out.println(status);
+		if(status==null){
+			statusZ=-1;
+		}else{
+			statusZ=Integer.valueOf(status);
+		}
+		
+		
+		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname, startTime, endTime, statusZ, page, length);
+		
+		return al;
 	}
+	
 	
 	//获取用户不同状态的申请记录
 	public List<LandApply_view> getselfApply(String applicantId,int status)
@@ -156,26 +186,12 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}	
   
     
-    public List myRentFont1(String applicantId)
-    {
-    	List list=new ArrayList<E>();
-		
-    	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
-    	int year = c.get(Calendar.YEAR);     	
-    	String date=String.valueOf(year);
+    public ApplyList myRentFont1(String applicantId,int page,int length)
+    {   	
     	
-    	List<LandApply_view> list1=landApply_viewDaoImpl.getapply(applicantId, date);
-    	List<TemperateSave_View> list2=temperateSaveDaoImpl.getTemperate(applicantId,date);
-    	for(LandApply_view lav:list1)
-    	{
-    		list.add(lav);
-    	}
-    	for(TemperateSave_View tsv:list2)
-    	{
-    		list.add(tsv);
-    	}
+    	ApplyList al=landApply_viewDaoImpl.getapply(applicantId, page, length);    	
     	
-    	return list;
+    	return al;
     }   
   
     
@@ -224,9 +240,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     	temperateSaveDaoImpl.delTemperate(la_id);
     }
     
-    public TemperateSave_View getTs(int la_id)
+    public List<TemperateSave_View> getTs(int la_id)
     {
-    	TemperateSave_View tsv=temperateSaveDaoImpl.getTemperates(la_id);
+    	List<TemperateSave_View> tsv=temperateSaveDaoImpl.getTemperates(la_id);
     	return tsv;
     }
     
@@ -285,61 +301,34 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    
    public void  delLayout_info(int bid)
    {
-	   
-	   List<LandLayout> list1=landLayoutDaoImpl.getLayout(bid);
-	   List<LandInfo> list2=landInfoDaoImpl.getLandInfos(bid);
-	   System.out.println(list2);
-	   for(LandLayout ll:list1)
-	   {
-		   landLayoutDaoImpl.delLandLayout(ll);
-	   }
-	   if(list2!=null){
-		   
-		   for(LandInfo li:list2){
-			   
-			   landInfoDaoImpl.deleteInfo(li);
-		   }
-	   }
-	   
-	   
+	   landInfoDaoImpl.delLayout_info(bid);
+	 
    }
    
-   public void updateLayInfo(int bid,List<Layout_InfoView> list)
+   public void updateLayInfo(String landinfoStr,String layoutStr)
    {
-	   LandLayout layout=null;
-	   LandInfo lifo=null;
-	   
-	   delLayout_info(bid); //第一步，删除土地布局表和土地信息表的记录
-	   
-	   for(Layout_InfoView liv:list)//第二步，向土地布局表和土地信息表中重新插入数据
-	   {
-		   lifo=new LandInfo();
-		   lifo.setAfford(liv.getAfford());
-		   lifo.setAptPlanting(liv.getPlantingContent());
-		   lifo.setBid(liv.getBid());
-		   lifo.setBuildingArea(liv.getBuildingArea());
-		   lifo.setLandArea(liv.getLandArea());
-		   lifo.setLid(liv.getId());
-		   lifo.setLname(liv.getLname());
-		   landInfoDaoImpl.doInfo(lifo);
-		   
-		   layout=new LandLayout();
-		   layout.setId(liv.getId());
-		   layout.setLid(liv.getId());
-		   layout.setBid(liv.getBid());
-		   layout.setHeight(liv.getHeight());
-		   layout.setWidth(liv.getWidth());
-		   layout.setX_axis(liv.getX());
-		   layout.setY_axis(liv.getY());
-		   landLayoutDaoImpl.doLandLayout(layout);
-		   
-	   }
+	   landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr);
    }
+   
   
 // 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
    public List<RentCollection> getRentCollection(int bid)
    {
-	   return null;
+	   List<RentCollection> list=landApplyDaoImpl.getRentCollection(bid);
+	   
+	   return list;
+   }
+   
+   public void submitLandApply(String str)
+   {
+	   String userid=str.substring(0,str.indexOf('('));
+	   String apply=str.substring(str.indexOf('('));
+	  /* System.out.println(userid);
+	   System.out.println(apply);*/
+	   
+	   landApplyDaoImpl.submitApply(userid,apply);
+	   
+	   
    }
    
 }

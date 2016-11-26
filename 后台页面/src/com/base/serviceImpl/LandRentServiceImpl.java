@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.daoImpl.LandRentInfoDaoImpl;
 import com.base.po.LandRentInfo;
+import com.base.po.RentList;
 import com.base.po.RentMaintain;
 import com.base.service.LandRentService;
 
@@ -29,8 +30,9 @@ public class LandRentServiceImpl implements LandRentService {
 	}
 
 	@Override
-	public List<RentMaintain> getLandRentInfos(String bname,String deptName ,String plantingContent,String lr_id) {
+	public RentList getLandRentInfos(String bname,String deptName ,String plantingContent,int page,int length) {
 		
+		System.out.println("service层");
 		if(bname!=null&&bname.equals(""))
 		{
 			bname=null;
@@ -42,13 +44,16 @@ public class LandRentServiceImpl implements LandRentService {
 		
 		if(plantingContent!=null&&plantingContent.equals("")){
 			plantingContent=null;
-		}
-		if(lr_id!=null&&lr_id.equals(""))
-		{
-			lr_id=null;
-		}
+		}		
 		
-		List<RentMaintain> list=landRentInfoDaoImpl.getRentMaintain(bname,deptName, plantingContent,lr_id);
+		RentList rl=landRentInfoDaoImpl.getRentMaintain(bname,deptName, plantingContent,page,length);			
+		return rl;
+	}
+	
+	public List<RentMaintain> getSingleRentInfo(String lr_id,String dept)
+	{
+		System.out.println("哈哈。我来到service层了");
+		List<RentMaintain> list=landRentInfoDaoImpl.getSingleRentInfo(lr_id,dept);
 		return list;
 		
 	}
@@ -76,7 +81,23 @@ public class LandRentServiceImpl implements LandRentService {
 		}
 	}
 	
+	//土地租赁记录修改更新
+	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
+	{
+		LandRentInfo lr=landRentInfoDaoImpl.getOne(lr_id);
+		lr.setEndTime(endTime);
+		lr.setPlanting(planCareer);
+		lr.setRentMoney(expense);
+		lr.setStartTime(startTime);
+		lr.setApplyDept(dept);
+		
+		landRentInfoDaoImpl.updateOne(lr);
+		
+	}
 	
-	
-
+ public void landManageAdd(LandRentInfo lr)
+ {
+	 landRentInfoDaoImpl.doLandRentInfo(lr);
+ }
+ 
 }

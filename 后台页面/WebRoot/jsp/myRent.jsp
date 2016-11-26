@@ -14,8 +14,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/default.css">
-<link href="../css/fileinput.css" media="all" rel="stylesheet"
-	type="text/css" />
+
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
@@ -87,7 +86,7 @@
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
 										<a href="#"><img class="img-circle bk-img-60" alt=""
-											src="../image/psu.jpg"></a>
+											id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -116,7 +115,7 @@
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁审批</span></a></li>
+										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="#"><span class="text">实习审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
@@ -171,10 +170,10 @@
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+							<li><a><i class=" icon-building"></i>基地申报</a></li>
 							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+							<li><a><i class="icon-user"></i>实习申请</a></li>
+							<li><a><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -435,13 +434,13 @@
 											<tr>
 												<td>1</td>
 												<td id="upload1">教学科研用地协议</td>
-												<td><a href="exportFile.do?fileName=teaching.pdf"
+												<td><a href="exportFile.do?flag=1"
 													style="color:#009">点击下载</a></td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td id="upload1">土地有偿使用协议</td>
-												<td><a href="exportFile.do?fileName=landing.docx"
+												<td><a href="exportFile.do?flag=2"
 													style="color:#009">点击下载</a></td>
 											</tr>
 										</table>
@@ -515,13 +514,25 @@
 											<tr>
 
 												<td colspan="3">
-													<div style="float:right;">
+												
+												
+											<center>
+                                            <div class="form-group" style="position:relative">
+                                                <input type="file"  style=" position:absolute; left:25%" name="fileResource">
+                                                <label for="exampleInputFile" class="btn btn-primary" style=" position:absolute; top:-10px;left:23.5%">上传文件</label>
+                                            </div>
+                                            </center>
 
-														<!--  <form enctype="multipart/form-data"> -->
-														<input  name="fileResource" class="file"
+												
+												
+													<!-- <div style="float:right;">
+
+														 <form enctype="multipart/form-data">
+														<input   class="file" name="fileResource"
 															type="file" multiple data-min-file-count="1">
-														<!--  </form> -->
-													</div>
+														 </form>
+													</div> -->
+													
 												</td>
 											</tr>
 										</table>
@@ -548,8 +559,8 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td colspan="2">租赁历史</td>
-										<td colspan="5">
+										<td colspan="1">租赁历史</td>
+										<td colspan="6">
 											<!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
 											<ul id="dropdown_show">
 												<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
@@ -576,17 +587,12 @@
 																		</td>
 																	</tr>
 																	<tr>
-																		<td>土地编号 <select name="lid" id="lidUnion">
-																				<option value="">显示全部</option>
-																				<option value="1">#1</option>
-																				<option value="2">#2</option>
-																		</select>
-																		</td>
-																		<td>最终状态 <select name="desc" id="descUnion"
+																		
+																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
 																			size="1">
-																				<option value="">显示全部</option>
-																				<option value="申请成功">申请成功</option>
-																				<option value="申请失败">申请失败</option>
+																				<option value="-1">显示全部</option>
+																				<option value="0">申请成功</option>
+																				<option value="1">申请失败</option>
 																		</select>
 																		</td>
 																	</tr>
@@ -701,11 +707,10 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/fileinput.js" type="text/javascript"></script>
-<script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
 
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/myNeed/myRent.js"></script>
+<script src="../js/SyearE.js"></script>
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -713,5 +718,6 @@
     <![endif]-->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
+ <script src="../dist/jquery.cokie.min.js"></script>    
 <script src="../js/kg.js"></script>
 </html>

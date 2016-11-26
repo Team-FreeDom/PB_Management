@@ -8,7 +8,10 @@ $(document)
 										"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 8, // 默认每页显示多少条记录
+										"iDisplayLength" : 4, // 默认每页显示多少条记录
+										"bPaginate": true, //翻页功能
+										
+										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
 											"url" : "landRentInfo.do",
@@ -142,6 +145,9 @@ $(document)
 								$("#deptE").after(
 										"<option value=" + data[i].dept + ">"
 												+ data[i].dept + "</option>");
+								$("#addDepth").after(
+										"<option value=" + data[i].aid + ">"
+												+ data[i].dept + "</option>");
 								i++;
 							}
 
@@ -201,6 +207,7 @@ function theEdit(obj) {
 						"selected", true);
 
 				$("#lid").val(data[i].lid);
+				$("#lr_id").val(data[i].lr_id);
 				// $("#lname").val(data[i].landname);
 				$("#landArea").val(data[i].landArea);
 				$("#aptCareer").val(data[i].aptplanting);
@@ -217,7 +224,7 @@ function theEdit(obj) {
 
 	});
 
-	$("#rent_edit").modal('show');
+	//$("#rent_edit").modal('show');
 }
 
 /* 土地租赁记录修改-------end */
@@ -237,7 +244,10 @@ $(document).delegate('#submitS', 'click', function() {
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
 				"iDisplayLength" : 8, // 默认每页显示多少条记录
+				"bPaginate": true, //翻页功能
 				"bDestroy":true,
+				"processing": true,
+				"bServerSide" : true,
 				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
 					"data" : {
@@ -367,17 +377,103 @@ $(document).delegate('#certainExport', 'click', function() {
 	$("#landRentForm").submit();
 	
 });
-
-
 /*提交导出学院----end */
+
+
+/*土地租赁记录修改---start*/
+$(document).delegate('#definite', 'click', function() {
+		
+	$("#landManageUpdate").submit();
+	
+});
+/*土地租赁记录修改---end*/
+
+
+/*土地租赁记录增加---start*/
+$(document).delegate('#add', 'click', function() {
+	
+	
+	$("#landManageAdd").submit();
+	
+});
+/*土地租赁记录增加---end*/
 
 
 function deleteInfo()
 {
-	document.getElementById("lead").style.display = 'none';
-	$("#deleteInfo").submit();	
+	var chk_value =[];
+	$('input[name="idname"]:checked').each(function(){
+	chk_value.push($(this).val());
+	});	
+	
+	 if(chk_value.length==0)
+	 {
+		  alert("您还没有选择任何内容！");
+	  }else{
+		  
+		  document.getElementById("lead").style.display = 'none';
+		  $("#deleteInfo").submit();
+	  }	
 	
 
+}
+
+function check()
+{
+	var chk_value =[];
+	$('input[name="idname"]:checked').each(function(){
+	chk_value.push($(this).val());
+	});
+	alert("提交后检测");
+	alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);  
+
+}
+
+function checkA()
+{
+	
+	var lid=$("#addLid").val();
+	var userid=$("#addUserid").val();
+	var dept=$("#addDept").val();
+	var planting=$("#addPlanting").val();
+	var startTime=$("#addStartTime").val();
+	var endTime=$("#addEndTime").val();
+	
+	
+	if(lid=="")
+	{
+		alert("请填写土地编号！");
+		return false;
+	}
+	if(userid=="")
+		{
+		alert("请填写租赁人编号！");
+		return false;
+		}
+	if(dept=="")
+		{
+		alert("请选择申报部门！");
+		return false;
+		}
+	if(planting=="")
+		{
+		alert("请填写从事内容！");
+		return false;
+		}
+	if(startTime=="")
+	{
+	alert("请填写起始日期！");
+	return false;
+	}
+	if(endTime=="")
+	{
+	alert("请填写结束日期！");
+	return false;
+	}
+	
+	return true;
+	
+	
 }
 
 function showsubmenu() {

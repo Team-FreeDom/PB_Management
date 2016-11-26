@@ -14,6 +14,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Autowired
 	private UserInfoDaoImpl userInfoDaoImpl;
+        @Autowired
+	private UserInfoDao userInfodao;
 
 	@Override
 	public void delUser(String[] delid) {
@@ -88,5 +90,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		
 		return list;
 	}
+	
+	 public String getImage(String userId)
+		{
+		 List<UserInfo> list=userInfodao.getInfoPerson(userId);
+		//  UserInfo ui=userInfoDaoImpl.getUserInfo(userId);
+			String image=list.get(0).getImg();
+			
+			return image;
+			
+		}
 
 }

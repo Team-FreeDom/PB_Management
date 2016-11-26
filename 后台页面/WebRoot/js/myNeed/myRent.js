@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	/*myRent.jspҳ��js----start*/
+	
 					$('#table1').dataTable({
 										"bSort" : false,
 										"bFilter" : false,
@@ -8,6 +8,8 @@ $(document).ready(function() {
 										"lengthChange" : true, //是否启用改变每页显示多少条数据的控件										
 										"iDisplayLength" : 8,  //默认每页显示多少条记录
 										"bDestroy":true,
+										"bPaginate": true, //翻页功能									
+										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 
 										"ajax" : {
@@ -140,6 +142,8 @@ $(document).ready(function() {
 									"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 									"bSort" : false,									
 									"iDisplayLength" : 4, //默认每页显示多少条记录
+									"bPaginate": true, //翻页功能									
+									"bServerSide" : true,
 									"dom" : 'ftipr<"bottom"l>',
 									"ajax" : {
 										"url" : "selfApply.do",
@@ -234,55 +238,38 @@ $(document).ready(function() {
 								}
 
 							});
-			
+					
 					$.ajax({
 						type : 'POST',
 						dataType : 'json',
-						url : 'getDept.do',
+						url : 'getAllInfos.do',
 						async : false,
 						cache : false,
 						error : function(request) {
 							alert("error");
 						},
 						success : function(data) {
-							var i = 0;
-							for ( var item in data) {
+							
+							for ( var i=0;i<data[1].length;i++) {
 
 								$("#manydept").after(
-										"<option value="+data[i].aid+">"
-												+ data[i].dept + "</option>");
-
-								i++;
+										"<option value="+data[1][i].aid+">"
+												+ data[1][i].dept + "</option>");
+								
 							}
-
+							for ( var i=0;i<data[0].length;i++) {
+							$("#selectallbase").after(
+									"<option value="+data[0][i].bname+">"
+											+ data[0][i].bname + "</option>");
+							
+							}
+							
 						}
 
 					});
 					
-					$.ajax({
-						type : 'POST',
-						dataType : 'json',
-						url : 'baseInfo.do',
-						async : false,
-						cache : false,
-						error : function(request) {
-							alert("error");
-						},
-						success : function(data) {
-							var i = 0;
-							for ( var item in data) {
-
-								$("#selectallbase").after(
-										"<option value="+data[i].bname+">"
-												+ data[i].bname + "</option>");
-
-								i++;
-							}
-
-						}
-
-					});
-					
+			
+										
 });
 			
 					/*土地租赁内容修改------start*/
@@ -311,8 +298,7 @@ $(document).ready(function() {
 
 					function unionSelect() {
 
-						var bnameUnion = document.getElementById("bnameUnion").value;
-						var lidUnion = document.getElementById("lidUnion").value;
+						var bnameUnion = document.getElementById("bnameUnion").value;						
 						var startTimeUnion = document.getElementById("startTimeUnion").value;
 						var endTimeUnion = document.getElementById("endTimeUnion").value;
 						var descUnion = document.getElementById("descUnion").value;
@@ -324,18 +310,19 @@ $(document).ready(function() {
 											"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 											"bSort" : false,
 											"iDisplayLength" : 4, //默认每页显示多少条记录
+											"bPaginate": true, //翻页功能									
+											"bServerSide" : true,
 											"bDestroy" : true,
 											"dom" : 'ftipr<"bottom"l>',
 
 											"ajax" : {
 												"data" : {
-													"bname" : bnameUnion,
-													"lid" : lidUnion,
+													"bname" : bnameUnion,													
 													"startTime" : startTimeUnion,
 													"endTime" : endTimeUnion,
 													"desc" : descUnion
 												},
-												"url" : "unionSelect.do",
+												"url" : "selfApply.do",
 												"type" : "POST"
 											},
 
@@ -343,7 +330,7 @@ $(document).ready(function() {
 													
 													{
 														"mData" : "startTime",
-														"orderable" : true, // ��������
+														"orderable" : true,
 														"sDefaultContent" : "",
 														"sWidth" : "6%",
 
@@ -488,6 +475,7 @@ $(document).ready(function() {
 
 					/*暂存中记录修改-----start*/
 					function editOne(obj) {
+						
 						var la_id = obj.id;
 			           
 						$.ajax({
@@ -501,30 +489,29 @@ $(document).ready(function() {
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								
 							},
 							success : function(data) {
-
+								
 								var i = 0;
 								for ( var item in data) {
 
 									var filename = data[i].resource;
-									if (filename != null) {
+										if (filename != null) {
 			                              filename=filename.substring(filename.indexOf("$")+1);
-									}
-								//	alert(filename);
+									}								
 									
-									document.getElementById("fileResource").value=filename;
+											//	document.getElementById("fileResource").value=filename;
 			                    
-			                        
-									$("#hide").val(data[i].la_id);
-									$("#bnamer").val(data[i].bname);
+										 
+										 $("#hide").val(data[i].la_id);
+										  $("#bnamer").val(data[i].bname);
 
 									$("#lidr").val(data[i].lid);
 
 									$("#deptme option[value=" + data[i].applyDept + "]")
 											.attr("selected", true);
-
+                                                                  
 									$("#aptPlantingr").val(data[i].aptPlanting);
 									$("#startTimer").val(data[i].startTime);
 									$("#endTimer").val(data[i].endTime);
@@ -741,11 +728,10 @@ $(document).ready(function() {
 					}
 
 					function recovery() {
-						document.getElementById("bnameUnion").value = "";
-						document.getElementById("lidUnion").value = "";
+						document.getElementById("bnameUnion").value = "";						
 						document.getElementById("startTimeUnion").value = "";
 						document.getElementById("endTimeUnion").value = "";
-						document.getElementById("descUnion").value = "";
+						document.getElementById("descUnion").value = "-1";
 					}
 					
 					

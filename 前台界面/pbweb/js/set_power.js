@@ -101,6 +101,21 @@ $(function () {
 			return false;
 		};
 		
+		this.modify = function(){
+			var uname= $('#role_text').val();
+			if(uname=='')return false;
+			var a=$('#sflist .list-group-item-info').attr('upow')
+			if(typeof(a) == "undefined")
+			{
+				 bootbox.alert({
+					  message: "请选择下方'身份列表'中的任一项",
+					  size: 'small'
+				  });
+				  return false;
+			}
+			$('#sflist .list-group-item-info').html(uname);
+		}
+		
 		this.powsave = function(){
 			var str='';
 			var i=0;
@@ -139,7 +154,7 @@ $(function () {
 		$(document).on("click", "#sflist .people", function() {
 			$('.people').removeClass('list-group-item-info');
 			$(this).addClass('list-group-item-info');
-			
+			$('#role_text').val($(this).html());
 			var upow=parseInt($(this).attr('upow'));
 			var checklist=$('#pow_list input[type="checkbox"]');
 			$(checklist).prop('checked',false);
@@ -171,8 +186,9 @@ $(function () {
 				a=a&(~b);
 			$('#sflist .list-group-item-info').attr('upow',a);
 		});
-		$('#role_add').click(this.addrole);
-		$('#role_del').click(this.delrole);
+		//$('#role_add').click(this.addrole);
+		//$('#role_del').click(this.delrole);
+		$('#role_name').click(this.modify);
 		$('#pow_update').click(this.powsave);
 		this.loaddata();
 	};

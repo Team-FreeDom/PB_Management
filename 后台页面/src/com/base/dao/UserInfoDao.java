@@ -96,7 +96,17 @@ public interface UserInfoDao {
      
      public long login(String id,String pwd);
      
-     
+     /**
+      * 修改个人信息
+      * @param userinfo
+      */
+     public void updateuser(String id,String name,String telephone,String password,String img)throws SQLException;
+     /**
+      * 获取个人信息
+      * @param id 用户id
+      * @return 用户信息
+      */
+     public List<UserInfo> getInfoPerson(String id);
    
      
 

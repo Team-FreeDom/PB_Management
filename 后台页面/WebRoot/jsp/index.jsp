@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -58,13 +58,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <strong>未读消息列表</strong>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
+                              <a href="getMessage.do">更多消息</a>
                           </li>
                       </ul>
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -142,13 +142,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="notification.jsp"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -203,7 +203,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3 ">
 								<p>通知公告</p>
                                 <div class="post">
-                                     <p>实习基地管理系统1.0版本正式上线，本系统的宗旨是携手学校基地科，为全体一线教师服务，主要体现在校内教学基地土地的租赁、校内外实习项目的开展和教学基地设备的及时维修。</p>
+                                    <!-- <div id="notification"></div> -->
+                                <p id="notification"> </p>
                                 </div>
 
 							</div>
@@ -306,5 +307,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/myNeed/index.js"></script>
     <script src="../js/kg.js"></script>
+   
   </body>
 </html>

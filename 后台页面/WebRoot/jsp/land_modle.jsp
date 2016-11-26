@@ -110,7 +110,7 @@
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
 										<a href="#"><img class="img-circle bk-img-60" alt=""
-											src="../image/psu.jpg"></a>
+											src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -130,17 +130,17 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
-										<li><a href="#"><span class="text">我的基地</span></a></li>
+										<li><a><span class="text">我的实习</span></a></li>
+										<li><a><span class="text">我的报修</span></a></li>
+										<li><a><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁审批</span></a></li>
-										<li><a href="#"><span class="text">实习审批</span></a></li>
+										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+										<li><a><span class="text">实习审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
 
@@ -194,10 +194,10 @@
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+							<li><a><i class=" icon-building"></i>基地申报</a></li>
 							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+							<li><a><i class="icon-user"></i>实习申请</a></li>
+							<li><a><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -209,7 +209,7 @@
 								<label for="inputEmail3" class="col-sm-4 control-label">选择区域：</label>
 								<div class="col-sm-8">
 									<select id="load-grid" class="form-control">
-									  <option val="" id="load-gridh" >请选择</option>
+									  <option value="" id="load-gridh" >请选择</option>
 										<!-- <option value="1">长安基地</option>
 										<option value="2">耕耘基地</option> -->
 										
@@ -329,6 +329,7 @@
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../dist/bootbox.min.js"></script>
 	<script src="../js/tu.js"></script>	
+	<script src="../dist/jquery.cokie.min.js"></script>    
 	<script src="../js/kg.js"></script>
 	
 	

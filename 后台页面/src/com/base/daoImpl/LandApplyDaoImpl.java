@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -197,7 +198,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	   try {
 		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-		sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?)}");
+		sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landinfos(?)}");
 		sp.setInt(1,bid);		
 		sp.execute();   //执行存储过程
 		rs=sp.getResultSet();  //获得结果集
@@ -206,25 +207,25 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		{
 			rc=new RentCollection();
 			
-			rc.setId(rs.getString("id"));
-			rc.setX(rs.getInt("x"));
-			rc.setY(rs.getInt("y"));
-			rc.setWidth(rs.getInt("width"));
-			rc.setHeight(rs.getInt("height"));
-			rc.setBid(rs.getInt("bid"));
-			rc.setLname(rs.getString("lname"));
-			rc.setPlantingContent(rs.getString("aptPlanting"));
-			rc.setLandArea(rs.getInt("landArea"));
-			rc.setBuildingArea(rs.getInt("buildingArea"));			
-			rc.setAfford(rs.getInt("afford"));		
-			rc.setCollage(rs.getString("collage"));
-			rc.setName(rs.getString("name"));
-			rc.setPlanting(rs.getString("planting"));
+			rc.setId(rs.getString("lids"));
+			rc.setX(rs.getInt("xs"));
+			rc.setY(rs.getInt("ys"));
+			rc.setWidth(rs.getInt("widths"));
+			rc.setHeight(rs.getInt("heights"));
+			rc.setBid(rs.getInt("bids"));
+			rc.setLname(rs.getString("landname"));
+			rc.setPlantingContent(rs.getString("aptplant"));
+			rc.setLandArea(rs.getInt("landareas"));
+			rc.setBuildingArea(rs.getInt("buildarea"));			
+			rc.setAfford(rs.getInt("affords"));		
+			rc.setCollage(rs.getString("depts"));
+			rc.setName(rs.getString("username"));
+			rc.setPlanting(rs.getString("plants"));
 			rc.setLineup(rs.getInt("lineup"));
 			List<RentAdd> lis=new ArrayList<RentAdd>();
 			for(RentAdd ra:lra)
 			{
-				if(rs.getString("lid").equals(ra.getLid())){				
+				if(rs.getString("lids").equals(ra.getLid())){				
 				lis.add(ra);
 				}
 			}
@@ -253,7 +254,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?)}");
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landrentinfos(?)}");
 			sp.setInt(1,bid);		
 			sp.execute();   //执行存储过程
 			rs=sp.getResultSet();  //获得结果集
@@ -261,9 +262,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			while(rs.next())
 			{
 				ra=new RentAdd();
-				ra.setLid(rs.getString("lid"));
-				ra.setName(rs.getString("name"));
-				ra.setPlanting(rs.getString("planting"));
+				ra.setLid(rs.getString("lids"));
+				ra.setName(rs.getString("username"));
+				ra.setPlanting(rs.getString("plants"));
 				ra.setPtime(rs.getString("ptime"));
 				lra.add(ra);
 			
@@ -277,6 +278,8 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		}			
 			return lra;		
 	}
+	
+	
 	
 	public Long getApplyCount(String date)
 	{
@@ -303,5 +306,16 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 		return applyCount;
 	}
-
+	
+	public void submitApply(String userid,String str)
+	{
+				
+		Session session=sessionFactory.openSession();		
+		//hibernate调用存储过程(无返回参数)
+		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_landapply(?,?)}");
+		sqlQuery.setString(0, userid);	
+		sqlQuery.setString(1, str);	
+		sqlQuery.executeUpdate();
+		session.close();		
+	}
 }
