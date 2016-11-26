@@ -49,17 +49,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
-                          <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                         <li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
+                              <a href="getMessage.do">更多消息</a>
                           </li>
                       </ul>
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -102,9 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										
+										</a>
 									</li>
 									
 									 <li class="menuItem nav-parent">

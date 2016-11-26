@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       </a>
                       <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
                               <a href="getMessage.do">更多消息</a>

@@ -38,7 +38,7 @@
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="msgUI.jsp" class="notification-icon" >
+                      <a href="getMessage.do" class="notification-icon" >
                           <i class="icon-envelope"><span class="badge msg">4</span></i><!-- 添加no_display类，即可关闭消息条数提示-->
                               <!--ms-if-->
                       </a>
@@ -53,7 +53,7 @@
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -94,11 +94,11 @@
 									</div>
 									<div class="divider2"></div>
 									
-									
+																		
 									<li class="menuItem">
-										
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										
+										</a>
 									</li>
 									
 									 <li class="menuItem nav-parent">
