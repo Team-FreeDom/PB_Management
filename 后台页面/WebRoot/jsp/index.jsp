@@ -204,8 +204,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3 ">
 								<p>通知公告</p>
                                 <div class="post">
-                                     <p>${notification } </p>
+                                     <div>${notification } </div>
+                                     <div ><a class="pull-right" href="#">更多</a></div>
                                 </div>
+                                
 							</div>
 
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">
@@ -222,7 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 
 							
-							<div id="calendar" class="col-md-4" style="background:none;"></div>
+							<div id="calendar" class="col-md-4" style="background:none; width:100%"></div>
 
 							<script src="../js/calendar.jquery.min.js"></script>
                             <script src="../js/jquery-ui-datepicker.min.js"></script>
