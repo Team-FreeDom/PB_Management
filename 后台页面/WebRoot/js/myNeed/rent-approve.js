@@ -15,6 +15,9 @@
 			$("#tablePay input[name='idname']").prop("checked", false);
 		}
      });
+	 
+	 
+	 
 	$(".icon-filter").on("click", function () {
 		$('.hide_ul').toggle(500);
 	});

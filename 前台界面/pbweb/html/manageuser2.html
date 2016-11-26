@@ -190,6 +190,19 @@
 						<div class="col-lg-12">
 							<table id="manageusertable" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
+                                    	<tr bgcolor="#ECF1F5">
+                                            <td colspan="3" id="button-left">
+                                            <button type="button" class="btn btn-danger">删除</button>
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add">增加</button>
+                                            </td>
+                                            <td colspan="5" >
+                                            </td>
+                                             <td colspan="3" id="button-right">
+                                             	<button type="button" class="btn btn-primary">导入</button>
+                                             	<button type="button" class="btn btn-primary">导出</button>
+                                             </td>
+                                               
+                                        </tr>
                                         <tr>
                                             <th>序号</th>
                                             <th>员工编号</th>
@@ -283,13 +296,12 @@
                                     </tbody>
                                     <thead>
                                     	<tr>
-                                        	<td><button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#add">增加</button></td>
-                                            <td><button type="button" class="btn btn-danger btn-xs">删除</button></td>
-                                        	<td colspan="10">
-                                    			<label><input type="checkbox" name="0" class="ck-all"/>全选</label>
-                                				<label><input type="checkbox" name="0" class="ck-re"/>反选</label>
+                                        	<td colspan="11">
+                                    			<label><input type="checkbox" name="0" class="ck-all" id="ck1"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re" id="ck2"/>反选</label>
                                            </td>
                                        </tr>
+                                       
                                   </thead>
                                   </table>
 							
@@ -310,7 +322,7 @@
                                         <table class="table">
                                             <tr>
                                                 <td>员工编号 ： </td>
-                                                <td><input type="text" value="100059" class="form-control"  placeholder="Disabled input here..." disabled id="EworkerId"></td>
+                                                <td><input type="text" value="100059" class="form-control" onFocus="this.blur()" onClick="a()" id="EworkerId"></td>
                                                 <td>姓名 ： </td>
                                                 <td><input type="text" value="张三" class="form-control" id="Ename"></td>
                                             </tr>
@@ -318,7 +330,7 @@
                                                 <td>性别 ： </td>
                                                 <td><input type="text" value="男" class="form-control" id="Esex"></td>
                                                 <td>出生年月 ： </td>
-                                                <td><input class="laydate-icon" id="demo" value="2016-11-24更新" id="Eborndate"></td>
+                                                <td class="input-style"><input class="laydate-icon" id="demo" value="2016-11-24更新"></td>
                                             </tr>
                                             
                                             
@@ -377,7 +389,7 @@
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
+                                        <h4 class="modal-title text-center" id="myModalLabel">曾加人员信息</h4>
                                       </div>
                                       <div class="modal-body table-responsive">
                                         <table class="table">
@@ -391,7 +403,7 @@
                                                 <td>性别 ： </td>
                                                 <td><input type="text" value="" id="sex" class="form-control"></td>
                                                 <td>出生年月 ： </td>
-                                                <td><input class="laydate-icon" id="demo2" value="2016-11-24更新"></td>
+                                                <td  class="input-style"><input class="laydate-icon" id="demo2" value="2016-11-24更新"></td>
                                             </tr>
                                             
                                             

@@ -1,7 +1,29 @@
 // JavaScript Document
-
-						
+function a(){
+	alert("on")
+	}						
 $(document).ready(function() {
+	
+			////全选反选
+				$("#ck1").on("click", function () {
+					if ($(this).prop("checked") === true) {
+						$("#manageusertable input[name='allcheckbox']").prop("checked", true);
+						
+					} else {
+						$("#manageusertable input[name='allcheckbox']").prop("checked", false);
+						
+					}
+					$("#ck2").prop("checked", false);
+				 });
+				 
+				  $("#ck2").click(function () {//反选  
+                		$("#manageusertable input[name='allcheckbox']").each(function () {  
+                    	$(this).prop("checked", !$(this).prop("checked"));
+						 
+                	}); 
+					$("#ck1").prop("checked", false); 
+           		 });  
+				 
               var table =$('#manageusertable').dataTable(
 			  {
 				  "processing": true,
@@ -289,7 +311,7 @@ $(document).ready(function() {
 								
 								
 									
-allCkBox2(); 
+/*allCkBox2(); 
 		function allCkBox2(id){
         var tableBox = document.getElementById(id||"manageusertable"),
              ck = tableBox.getElementsByClassName("ck"),
@@ -312,4 +334,4 @@ allCkBox2();
                                 ck[i].checked ? ck[i].checked = false : ck[i].checked = true;
                                     }
                                 }
-                            }
+                            }*/

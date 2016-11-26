@@ -2,6 +2,7 @@
 /* CSS Document */
 @charset "utf-8";
 /* CSS Document */
+
 table thead > tr> td{
 	
 	font-size:16px;
@@ -12,7 +13,14 @@ table thead > tr> td{
     background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
     background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
 	}
+#button-right button{
+	float:right;
+	margin-left:5px;}
+#button-left button{
+	margin-right:5px;}
 
+.input-style input{
+	cursor:pointer;}
 
 .bottom{
 	margin-top:10px;

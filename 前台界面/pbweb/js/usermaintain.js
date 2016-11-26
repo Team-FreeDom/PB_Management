@@ -1,4 +1,5 @@
 // JavaScript Document
+
 $(document).ready(function() {
 	  $('#usermaintable').dataTable(
 	  {
