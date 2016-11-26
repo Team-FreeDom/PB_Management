@@ -110,4 +110,18 @@ public class NotificationController {
 		
 		return "msgUI";
 	}
+	
+	@RequestMapping("jsp/setReadMessage.do")
+	public String setReadMessage(ModelMap map, HttpServletRequest request,
+			HttpServletResponse response) {
+		String id = request.getParameter("id");
+		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
+		
+		//对cookies值进行修改
+		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+		int number = Integer.valueOf(noReadNumber)-1;
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
+		return null;
+	}
 }

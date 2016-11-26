@@ -182,4 +182,24 @@ public class NotificationDaoImpl implements NotificationDao {
 		}
 		return number;
 	}
+
+	@Override
+	public void setReadMessage(int id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+        String hql = "update Message set isRead='1' where id="+id;
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			Query q = session.createSQLQuery(hql);
+			q.executeUpdate();
+			t.commit();
+		} catch (Exception ex) {
+			if (t != null) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+	}
 }

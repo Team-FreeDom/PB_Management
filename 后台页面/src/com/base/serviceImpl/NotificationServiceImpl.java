@@ -55,6 +55,22 @@ public class NotificationServiceImpl implements NotificationService {
 		return notificationDaoImpl.getMessageTop5Infos(userid);
 	}
 
+
+	@Override
+	public int getNoreadMessageCount(String userid) {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNoreadMessageCount(userid);
+	}
+
+
+	@Override
+	public void setReadMessage(int id) {
+		// TODO Auto-generated method stub
+		notificationDaoImpl.setReadMessage(id);
+		return;
+	}
+
+	
 	
 
 }

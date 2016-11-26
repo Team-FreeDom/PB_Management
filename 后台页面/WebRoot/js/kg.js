@@ -10,6 +10,23 @@ $("li.menuItem.nav-parent").click(function(){
 			});
 			$(this).removeClass('read');
 			$(this).addClass('read');
+			
+			
+			$.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url : 'setReadMessage.do',
+				data:{
+					id:$(this).find('td').eq(0).text(),
+				},
+				async : false,
+				cache : false,
+				error : function(request) {		
+				},
+				success : function(data) {		
+				}
+			});
+			
 		})
  
      var temp = $.cookie("noReadNumber");
