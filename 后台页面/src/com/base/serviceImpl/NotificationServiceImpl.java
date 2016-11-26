@@ -35,9 +35,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 
 	@Override
-	public void addMessage(String insertSql) {
+	public void addMessage(String title,String content,String department) {
 		// TODO Auto-generated method stub
-		notificationDaoImpl.setNotification(insertSql);
+		notificationDaoImpl.addMessage(title,content,department);
 		return;
 	}
 

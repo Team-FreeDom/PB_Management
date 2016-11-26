@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -45,7 +46,7 @@
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
@@ -218,8 +219,10 @@
                                   <div class="input-group">
                                     <label class="col-sm-2 control-label">部门</label>
                                       <select class="form-control" id="collage_list">
-                                      <option value ="1">全部</option>
-                                      <option value ="2">信息学院</option>
+                                        <option value ="0">全部</option>
+                                        <c:forEach items='${applyDeptList}' var='applyDept'>
+                                          <option value =" ${applyDept.aid }">${applyDept.dept }</option>
+                                        </c:forEach>
                                       </select>
                                   </div>
                                 </div>
@@ -235,7 +238,7 @@
                         <div class="col-md-4" id="btns">
                           <button onclick="saveNotifitation()">发布通知</button>
                           <button onclick="setContent()">清空内容</button>
-                          <button onclick="addMessage()">发布消息</button>
+                          <button onclick="saveMessage()">发布消息</button>
                         </div>
                         </div>
 

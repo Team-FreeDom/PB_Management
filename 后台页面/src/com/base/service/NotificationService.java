@@ -11,7 +11,7 @@ public interface NotificationService {
 	
 	 public void setNotification(String insertSql);
 	 
-	 public void addMessage(String insertSql);
+	 public void addMessage(String title,String content,String department);
 	
 	 public Notification getNotificationInfo(); 
 	 
