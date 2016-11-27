@@ -328,8 +328,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <form class="form-inline " role="form">
            <div class="form-group">
                 <label>申报学院：</label>
-                <select class="form-control input-sm" id="scollage">
-                <option></option>
+                <select class="form-control input-sm" id="scollage" name="scollage">
+                <option value="" id="scollageh">请选择</option>
                 </select>
             </div>
  			<div class="form-group">

@@ -30,7 +30,7 @@
 					}
 					i=0;
 					for ( var item in array2) {
-						$("#scollage").after(
+						$("#scollageh").after(
 								"<option value="+array2[i].aid+">"
 										+ array2[i].dept + "</option>");
 							i++;
@@ -122,7 +122,8 @@
 			  
 			  var bname=$('#choose-grid').children('option:selected').html();//选中的基地编号
 			  var info_str='['; 
-			  
+			 
+			 
 			  for (var i=1;i<=this.choose_count;i++)
 			  {
 				 plan = $('#plan'+i).val();

@@ -97,7 +97,7 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.jsp"> <i
+								<li class="menuItem"><a href="index.do"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -131,8 +131,8 @@
 										<li><a href="fieldRent_maintain.jsp"><span
 												class="text"> 土地租赁维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-										<li><a href="system_power"><span class="text">
+										<li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li><a href="system_power.jsp"><span class="text">
 													系统权限设置</span></a></li>
 									</ul></li>
 								<li class="menuItem nav-parent"><a> <i
