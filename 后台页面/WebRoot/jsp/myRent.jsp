@@ -686,7 +686,7 @@
 									<center  id="scanModal" style="display:none;">
 									<span>	失败原因：<input type="text" id="reason2" readonly></span>
 										
-									</center>申请材料：<a id="source" href="#">点击查看</a>
+									<%-- </center>申请材料：<a id="source" href="#">点击查看</a> --%>
 								</div>
 
 							</div>
