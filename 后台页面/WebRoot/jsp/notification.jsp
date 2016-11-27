@@ -209,7 +209,7 @@
                                   <label for="#msglx_list" class="col-sm-3 control-label">消息类型</label>
                                   <div class="col-sm-6">
                                     <select class="form-control" id="msglx_list">
-                                    <option value ="1">通知公告</option>
+                                    <option value ="1" selected="selected">通知公告</option>
                                     <option value ="2">系统消息</option>
                                     </select>
                                   </div>
@@ -217,7 +217,7 @@
                                 </fieldset> 
                               	<fieldset>
                                 <div class="form-group" id='part' style="display:none;">
-                                    <label for="#collage_list">部门</label>
+                                    <label for="#collage_list" class="col-sm-3 control-label">部门</label>
                                     <div class="col-sm-6">
                                       <select class="form-control" id="collage_list">
                                         <option value ="0">全部</option>

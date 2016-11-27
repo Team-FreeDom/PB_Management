@@ -246,7 +246,7 @@
 																		<tr>
 																			<td colspan="3">
 																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button onClick="Select()" type="button"
+																				<button id="finish" type="button"
 																					class="btn btn-primary">完成</button>
 																			</td>
 
@@ -396,7 +396,7 @@
 																		<tr>
 																			<td colspan="3">
 																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button onClick="Select2()" type="button"
+																				<button id="finishPay" type="button"
 																					class="btn btn-primary">完成</button>
 																			</td>
 
