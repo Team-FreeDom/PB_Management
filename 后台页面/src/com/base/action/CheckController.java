@@ -168,6 +168,7 @@ public class CheckController {
 		String recordstr = request.getParameter("recordstr");
 		String infostr = request.getParameter("infostr");
 
+		
 		checkservice.refuseapply(recordstr, infostr);
 
 		JSONObject getObj = new JSONObject();

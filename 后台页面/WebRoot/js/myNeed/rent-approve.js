@@ -231,7 +231,7 @@ $(document)
 											success : function(msg) {
 												// ////////将所有的alert替换成以下/////////////////////////////////////////////////////////////////////////////////////统一风格/////////////////////////////
 												bootbox.alert({
-													message : msg,
+													message : msg.str,
 													size : 'small'
 												});
 												Spage.draw(false);
@@ -462,7 +462,7 @@ $(document)
 											},
 											success : function(msg) {
 												bootbox.alert({
-													message : msg,
+													message :  msg.str,
 													size : 'small'
 												});
 												repage.draw(false);
@@ -573,7 +573,7 @@ $(document)
 											},
 											success : function(msg) {
 												bootbox.alert({
-													message : msg,
+													message :  msg.str,
 													size : 'small'
 												});
 												repage.draw(false);
