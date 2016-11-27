@@ -92,13 +92,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return list;
 	}
 	
-	 public String getImage(String userId)
+	 public UserInfo getImage(String userId)
 		{
-		 List<UserInfo> list=userInfodao.getInfoPerson(userId);
-		//  UserInfo ui=userInfoDaoImpl.getUserInfo(userId);
-			String image=list.get(0).getImg();
-			
-			return image;
+		 
+		  UserInfo ui=userInfoDaoImpl.getUserInfo(userId);
+		 
+			return ui;
 			
 		}
 

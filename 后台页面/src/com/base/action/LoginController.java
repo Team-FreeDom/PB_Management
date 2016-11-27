@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.base.po.UserInfo;
 import com.base.serviceImpl.UserInfoServiceImpl;
 import com.base.utils.CookieUtils;
 
@@ -33,16 +34,24 @@ public class LoginController {
 		String pwd=request.getParameter("pwd");
 		System.out.println(userid+"  "+pwd);	
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
-		String src=userInfoServiceImpl.getImage(userid);
-		System.out.println(src);
+		UserInfo ui=userInfoServiceImpl.getImage(userid);
+		String src="";
+		String name="";
+		if(ui!=null)
+		{
+		  src=ui.getImg();
+		  name=ui.getName();
+		}
+		
 		if(adminValue!=-1)
 		{
 			//System.out.println("µÇÂ¼³É¹¦");
 			CookieUtils.addCookie("username", userid, response);
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
-			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
+			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);			
 			CookieUtils.addCookie("image", src,response);
+			CookieUtils.addCookie("name", name,response);
 			return "redirect:jsp/index.do";
 		}else{
 			//System.out.println("µÇÂ¼Ê§°Ü");
