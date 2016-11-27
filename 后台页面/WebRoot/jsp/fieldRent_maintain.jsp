@@ -51,18 +51,19 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs"><a href="#"
-						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"><span class="badge msg"></span></i><!--ms-if-->
-					</a>
-						<ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs">
+					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
+                              <!--ms-if-->
+                      </a> 
+						<!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                                 <a href="getMessage.do"><strong>未读消息列表</strong></a>
                             </li>    
                             <li class="dropdown-menu-footer text-center">
                                  <a href="getMessage.do">更多消息</a>
                             </li>
-						</ul></li>
+						</ul> --></li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>

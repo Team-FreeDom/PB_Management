@@ -45,18 +45,18 @@
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
+                       <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>
-                      <ul class="dropdown-menu">
+                      </a> 
+                      <!-- <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <strong>未读消息列表</strong>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
                               <a href="../teach/notifications.html">更多消息</a>
                           </li>
-                      </ul>
+                      </ul> -->
     
                   </li>
                   <li>
@@ -236,9 +236,9 @@
                         </div>
                         <div class="col-lg-12 form-group">
                         <div class="col-md-4" id="btns">
-                          <button onclick="saveNotifitation()">发布通知</button>
+                          <button id="sendNotifitation" onclick="saveNotifitation()">发布通知</button>
                           <button onclick="setContent()">清空内容</button>
-                          <button onclick="saveMessage()">发布消息</button>
+                          <button id="sendMessage" onclick="saveMessage()">发布消息</button>
                         </div>
                         </div>
 
