@@ -111,7 +111,7 @@
 										<li><a href="#"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">

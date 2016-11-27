@@ -133,7 +133,7 @@
 										</ul>
 									</li>
 
-										<li class="menuItem nav-parent">
+										<li class="menuItem nav-parent opened nav-expanded">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
