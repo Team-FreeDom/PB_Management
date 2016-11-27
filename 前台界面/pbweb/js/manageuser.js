@@ -5,6 +5,7 @@ function a(){
 $(document).ready(function() {
 	
 			////全选反选
+			var flag=0;
 				$("#ck1").on("click", function () {
 					if ($(this).prop("checked") === true) {
 						$("#manageusertable input[name='allcheckbox']").prop("checked", true);
@@ -27,15 +28,63 @@ $(document).ready(function() {
 				/* $("#add").click(function () {
 					 
            		 }); */
-				 $("#save").click(function(){
-					 $("#add").modal("hide");
+				 
+				 $("#ZJ").click(function(){
+					 
 					 $("#workerId").val("");
 			        $("#sex").val("");
 			        $("#IDnumber").val("");
 			        $("#password").val("");
-					
 					$("#Adivision").val("1");
+					$("#Awkclass").val("1");
+					$("#Astatus").val("1");
+					 })
 					 
+					 
+				
+					 
+				 $("#delete").click(function () {  
+                		$("#manageusertable input[name='allcheckbox']").each(function () {
+							if($(this).prop("checked")==true){
+								flag=1;
+								}
+                	}); 
+					
+					if(flag==0){
+								alert("请先选择");
+								} 
+           		 });
+				 
+				 $("#save").click(function(){
+					 
+					if($("#workerId").val()==""){
+						alert("请填写员工编号");
+						}
+					else if($("#name").val()==""){
+						alert("请填写姓名");
+						}
+					else if($("#sex").val()==""){
+						alert("请填写性别");
+						}
+			       
+					else if($("#Awkclass").val()=="1"){
+						alert("请选择员工类别");
+						}
+					else if($("#Astatus").val()=="1"){
+						alert("请选择身份属性");
+						}
+					else if($("#Adivision").val()=="1"){
+						alert("请选择部门");
+						}
+					else if($("phone").val()==""){
+						alert("请填写电话号码");
+						}
+					else if($("#IDnumber").val()==""){
+						alert("你填写身份证");
+						}
+					else if($("#password").val()==""){
+						alert("你填写密码！！！");
+						}
 					 })
 				 
               var table =$('#manageusertable').dataTable(

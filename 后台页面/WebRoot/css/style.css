@@ -559,7 +559,6 @@ a, a:link, a:visited, a:hover, a:active {
 	margin-right: 8px;
 	font-size: 16px;
 }
-
 .lname {
 	position: absolute;
 	left: 0;
@@ -598,6 +597,7 @@ a, a:link, a:visited, a:hover, a:active {
 .wz > li + li::before{content:' '}
 .wz > li + li::before{ padding-right:20px;}
 .invisible{ display:none;}
+.msg{ right: -10px; top:0px; position:absolute; background:#C00}
 
 @media screen and (min-width:768px) {
 .container-fluid.content {

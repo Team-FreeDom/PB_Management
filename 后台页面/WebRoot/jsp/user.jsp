@@ -49,22 +49,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                      <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>
-                      <ul class="dropdown-menu">
+                      </a> 
+                     <!--  <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
+                              <a href="getMessage.do">更多消息</a>
                           </li>
-                      </ul>
+                      </ul> -->
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.html">
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 										
@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="#"><span class="text">我的租赁</span></a></li>
+											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -130,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
@@ -144,12 +144,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a>
 										<ul class="nav nav-children">
                                         	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -184,15 +184,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>个人中心</a></li>
+								<li><a href="user.jdp"><i class=" icon-home"></i>个人中心</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
@@ -270,6 +270,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
+     <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>
     <script src="../js/user.js"></script>

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,10 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -49,22 +47,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                      <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>
-                      <ul class="dropdown-menu">
-                          <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
+                      </a>   
+                     <!--  <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
                               <a href="getMessage.do">更多消息</a>
                           </li>
-                      </ul>
-    
+						</ul>  -->
                   </li>
                   <li>
-                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -89,12 +86,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						
 						<!-- Sidebar Menu-->
-						<div class="sidebar-menu" style="height: 384px;">
+						<div class="sidebar-menu">
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -104,10 +101,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 									</div>
 									<div class="divider2"></div>
-									
-									
 									<li class="menuItem">
-										<a href="index.jsp">
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -129,11 +124,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
+                                            <li><a href="#"><span class="text">维修审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
-
 										</ul>
 									</li>
 
@@ -142,12 +136,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="notification.jsp"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                        	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
                                             <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
@@ -183,47 +177,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置  :</a></li>
-								<li><a href="index.jsp"><i class=" icon-home"></i>首页</a></li>
+								<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
 					<!-- 主面板内容 -->
 					<div class="row form">
-
 						<div class="col-lg-12">
-
-							<div id="post1" class="col-md-3 ">
+							<div id="post1" class="col-md-3">
 								<p>通知公告</p>
                                 <div class="post">
-                                    <!-- <div id="notification"></div> -->
-                                <p id="notification"> </p>
-                                </div>
-
+                                     <div>${notification } </div>
+                                </div>                                
 							</div>
-
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">
 								<p>个人消息提示</p>
                                 <div class="information">
-                                    <p>实习申请通过 <span name="date" style="text-align:right;"></span></p>
-                                    <p>租赁申请退回<span name="date"></span></p>
-                                    <p>修理完成<span name="date"></span></p>
-                                    <p>租赁成功，请缴费<span name="date"></span></p>
+                                    <c:forEach items='${messageList}' var='message'>
+                                            <p>${message.title}<span name="date" style="text-align:right;"></span></p>
+                                    </c:forEach>
                                 </div>
 							</div>
 
 							
-								<div id="calendar" class="col-md-4" style="background:none;"></div>
-
-							<script src="../js/calendar.jquery.min.js"></script>
-                            <script src="../js/jquery-ui-datepicker.min.js"></script>
+							<div id="calendar" class="col-md-4" style="background:none;"></div>
+                            <script src="../js/calendar.jquery.min.js"></script>
+    						<script src="../js/jquery-ui-datepicker.min.js"></script>
                             <script>
                                 $('#calendar').datepicker({
                                     inline: true,
@@ -231,14 +218,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     showOtherMonths: true,
                                     dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
                                 });
-                            </script>
-							
+                            </script>					
 						</div>
 						<div id="caption" class="col-lg-12">
                         	<p>今日代办</p>
 						</div>
 						<div id="data" class="col-lg-12">
-
 							<div class="col-md-2 col-xs-2 data_display">
 								<table class="table" id='tvb'>
                                     <tr>
@@ -246,7 +231,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-user" style="background:#FA8562;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="userCount"></td>
+                                        <td style="font-size:120%" id="userCount">${userCount }</td>
                                     </tr>
                                 </table>
 							</div>
@@ -258,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2" ><span class="icon-th-list" style="background:#ADC885;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="applyCount"></td>
+                                        <td style="font-size:120%" id="applyCount">${applyCount }</td>
                                     </tr>
                                 </table>
 
@@ -272,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="practiceCount"></td>
+                                        <td style="font-size:120%" id="practiceCount">0</td>
                                     </tr>
                                 </table>
 							</div>
@@ -285,7 +270,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="maintainCount"></td>
+                                        <td style="font-size:120%" id="maintainCount">0</td>
                                     </tr>
                                 </table>
 							</div>
@@ -299,13 +284,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-	
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/myNeed/index.js"></script>
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="../dist/jquery.cokie.min.js"></script>  
     <script src="../js/kg.js"></script>
    
   </body>

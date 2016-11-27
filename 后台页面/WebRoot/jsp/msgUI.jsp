@@ -38,8 +38,8 @@
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="msgUI.jsp" class="notification-icon" >
-                          <i class="icon-envelope"><span class="badge msg">4</span></i><!-- 添加no_display类，即可关闭消息条数提示-->
+                      <a href="getMessage.do" class="notification-icon" >
+                          <i class="icon-envelope"><span class="badge msg"></span></i><!-- 添加no_display类，即可关闭消息条数提示-->
                               <!--ms-if-->
                       </a>
                       <!--<ul class="dropdown-menu">
@@ -53,7 +53,7 @@
     
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -83,7 +83,7 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -94,11 +94,11 @@
 									</div>
 									<div class="divider2"></div>
 									
-									
+																		
 									<li class="menuItem">
-										
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										
+										</a>
 									</li>
 									
 									 <li class="menuItem nav-parent">
@@ -106,7 +106,7 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="#"><span class="text">我的租赁</span></a></li>
+											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -118,10 +118,10 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">维修审批</span></a></li>
 
 										</ul>
 									</li>
@@ -132,12 +132,12 @@
 										</a>
 										<ul class="nav nav-children">
                                         	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -172,15 +172,15 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="msgUI.jsp">系统消息</a></li>
+								<li><a href="getMessage.do">系统消息</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
@@ -203,12 +203,27 @@
                                     <tbody>
                                     
                                     <c:forEach items='${messageList}' var='message'>
-                                            <tr class="read">
+                                    <c:choose>
+                                           <c:when test="${message.isRead==0}">
+                                           <tr>
                                               <td>${message.id}</td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>
                                             </tr>
+                                           </c:when >
+                                           <c:when test="${message.isRead!=0}">
+                                              <tr class="read">
+                                              <td>${message.id}</td>
+                                              <td>${message.title}</td>
+                                              <td>${message.content}</td>
+                                              <td>${message.time}</td>
+                                            </tr>
+                                            </c:when>
+                                     </c:choose>
+                                    
+                                    
+                                      
                                     </c:forEach>
                                            <!--  <tr>
                                               <td>2</td>
@@ -246,6 +261,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	 <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/kg.js"></script>
     
   </body>

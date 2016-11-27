@@ -1,39 +1,14 @@
 // JavaScript Document
-function showsubmenu(){
-	var submenu=document.getElementById("hide_ul");
-		if (submenu.style.display == 'none')
-		{
-			submenu.style.display = 'block';
-		}
-		else
-		{
-			submenu.style.display = 'none';
-		}
-		
-	}
-	 function hidesubmenu(){
-		 var submenu=document.getElementById("hide_ul");
-		 submenu.style.display = 'none';
-		 }	
-function showsubmenu2(){
-	var submenu=document.getElementById("hide_ul2");
-		if (submenu.style.display == 'none')
-		{
-			submenu.style.display = 'block';
-		}
-		else
-		{
-			submenu.style.display = 'none';
-		}
-		
-	}
-	 function hidesubmenu2(){
-		 var submenu=document.getElementById("hide_ul2");
-		 submenu.style.display = 'none';
-		 }
+
 
 
 $(document).ready(function() {
+	
+				$(".icon-filter").on("click", function () {
+					$('#hide_ul').toggle(500);
+				});
+	
+	
               $('#mybasetable').dataTable(
 			  {
 				  "bSort": false,
