@@ -43,7 +43,7 @@ public class LoginController {
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
 			CookieUtils.addCookie("image", src,response);
-			return "redirect:jsp/index.jsp";
+			return "redirect:jsp/index.do";
 		}else{
 			//System.out.println("µÇÂ¼Ê§°Ü");
 			return "redirect:login_soft.html";

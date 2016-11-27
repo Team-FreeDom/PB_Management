@@ -48,12 +48,14 @@ public interface UserInfoService {
      * 修改个人信息
      * @param userinfo
      */
-    public void update(String id,String name,String telephone,String password,String img)throws SQLException;
+    public void update(String id,String name,String telephone,String password,String img);
     /**
      * 获取个人信息
      * @param id 用户id
      * @return 用户信息
      */
     public List<UserInfo> getInfoPerson(String id);
+    
+ 
 
 }

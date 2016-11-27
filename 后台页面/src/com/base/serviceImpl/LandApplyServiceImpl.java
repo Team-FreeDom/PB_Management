@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.daoImpl.ApplyDeptDaoImpl;
 import com.base.daoImpl.BaseInfoDaoImpl;
+import com.base.daoImpl.CheckViewDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
 import com.base.daoImpl.LandApply_viewDaoImpl;
 import com.base.daoImpl.LandInfoDaoImpl;
@@ -32,6 +33,7 @@ import com.base.po.RentCollection;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
+import com.base.utils.MessageUtils;
 
 @Service("landApplyService")
 public class LandApplyServiceImpl<E> implements LandApplyService {
@@ -54,7 +56,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	private ApplyDeptDaoImpl applyDeptDaoImpl;
 	@Autowired
 	private LandLayout_infoDaoImpl landLayout_infoDaoImpl;
-
+    @Autowired
+    private CheckViewDaoImpl checkViewDaoImpl;
+	
 	//1.代表土地  2.代表校内  3.代表校外    
 	@Override
 	public List<BaseInfo> getBaseInfos() {
@@ -195,25 +199,20 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }   
   
     
-    public void myFameCancel1(int la_id)
+    public void myFameCancel1(int la_id,String info_str)
     {
-    	LandApply la=landApplyDaoImpl.getapply(la_id);    	
-    	
-    	TemperateSave ts=new TemperateSave();
-    	ts.setApplicantId(la.getApplicantId());
-    	ts.setEndTime(la.getEndTime());
-    	ts.setLid(la.getLid());
-    	ts.setPlanting(la.getPlanting());
-    	ts.setStartTime(la.getStartTime());
-    	ts.setStatus(9);
-    	ts.setResource(la.getResource());
-    	ts.setApplyDept(la.getApplyDept());
-    	
-    	temperateSaveDaoImpl.doTemperate(ts);
-    	
-    	landApplyDaoImpl.delLandApply(la);   	
-    	
-    	
+    	 //获得插入的消息语句
+  	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
+  	  
+    	LandApply la=landApplyDaoImpl.getapply(la_id);   	
+    	//将此记录的状态改为失效11
+        la.setStatus(11);        
+        //更新此记录
+        landApplyDaoImpl.updateLandApply(la);
+        
+        //向消息表中插入数据
+        checkViewDaoImpl.insertMessage(insertStr);
+        
     }
     
     public void myFrameSubmit(int la_id){
@@ -318,15 +317,21 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   
 	   return list;
    }
-   
-   public void submitLandApply(String str)
+  
+   //提交租赁申请
+   public void submitLandApply(String str,String info_str)
    {
 	   String userid=str.substring(0,str.indexOf('('));
 	   String apply=str.substring(str.indexOf('('));
-	  /* System.out.println(userid);
-	   System.out.println(apply);*/
 	   
+	 //获得插入的消息语句
+	  String insertStr=MessageUtils.getInsertStr(info_str,1);	
+	 		
+	  //提交申请 
 	   landApplyDaoImpl.submitApply(userid,apply);
+	   
+	 //向消息表中插入信息 
+		checkViewDaoImpl.insertMessage(insertStr);
 	   
 	   
    }

@@ -66,6 +66,18 @@ public class CookieUtils {
 		return "";
 	}
 	
+	public static String getCookieNoReadNumber(HttpServletRequest request,
+			HttpServletResponse response) {
+		Cookie[] cookies = request.getCookies();
+		for (Cookie co : cookies) {
+			if (co.getName().equals("noReadNumber")) {
+				return co.getValue();
+			}
+		}
+
+		return "";
+	}
+	
 	// 判断用户是否登录
 	// 情况一：未登录，返回登录界面
 	// 情况二：登录成功，但未响应时间超过了10分钟，需要重新登录

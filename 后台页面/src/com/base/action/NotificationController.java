@@ -1,6 +1,8 @@
 package com.base.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.base.po.Admin;
 import com.base.po.AdminFunction;
+import com.base.po.ApplyDept;
 import com.base.po.Message;
 import com.base.po.Notification;
+import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.serviceImpl.NotificationServiceImpl;
 import com.base.utils.CookieUtils;
 
@@ -29,7 +33,23 @@ public class NotificationController {
 
 	@Autowired
 	private NotificationServiceImpl notificationServiceImpl;
+	
+	@Autowired
+	private LandApplyServiceImpl landApplyServiceImpl;
 
+	// 保存通知信息到数据库
+	@RequestMapping("jsp/notification.do")
+	public String notification(HttpServletRequest request, ModelMap map,
+				HttpServletResponse response) {
+
+			//获取所有的部门
+		    List<ApplyDept> applyDeptList = landApplyServiceImpl.getDepts();
+		    map.addAttribute("applyDeptList", applyDeptList);
+		    
+			return "notification";
+	}
+	
+	
 	// 保存通知信息到数据库
 	@RequestMapping("jsp/saveNotification.do")
 	public String saveNotification(HttpServletRequest request, ModelMap map,
@@ -69,24 +89,13 @@ public class NotificationController {
 	public String saveMessage(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
-		String title = request.getParameter("title");
+		response.setContentType("text/html;charset=UTF-8");		
 		String content = request.getParameter("content");
-		String time = (new SimpleDateFormat("yyyy-mm-dd")).format(Calendar
-				.getInstance().getTime());
-		String userid = request.getParameter("userid");
+		String depatment = request.getParameter("depatment");
 		int isRead = 0;
-
-		// System.out.println("values:"+values);
-		String insertSql = "insert into Message(title,content,time,userid,isRead) values(\""
-				+ title.trim()
-				+ "\","
-				+ "\""
-				+ content.trim()
-				+ "\","
-				+ "\""
-				+ time.trim() + "\"," + "\"" + userid.trim() + "\"," + "0) ";
-		System.out.println(insertSql);
-		notificationServiceImpl.addMessage(insertSql);
+        
+		
+		notificationServiceImpl.addMessage("系统通知",content,depatment.trim() );
 
 		return null;
 	}
@@ -109,5 +118,19 @@ public class NotificationController {
 
 		
 		return "msgUI";
+	}
+	
+	@RequestMapping("jsp/setReadMessage.do")
+	public String setReadMessage(ModelMap map, HttpServletRequest request,
+			HttpServletResponse response) {
+		String id = request.getParameter("id");
+		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
+		
+		//对cookies值进行修改
+		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+		int number = Integer.valueOf(noReadNumber)-1;
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
+		return null;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.dao.UserInfoDao;
 import com.base.daoImpl.UserInfoDaoImpl;
 import com.base.po.UserInfo;
 import com.base.service.UserInfoService;
@@ -14,7 +15,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	@Autowired
 	private UserInfoDaoImpl userInfoDaoImpl;
-        @Autowired
+    @Autowired
 	private UserInfoDao userInfodao;
 
 	@Override
@@ -100,5 +101,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 			return image;
 			
 		}
+
+	@Override
+	public void update(String id, String name, String telephone,
+			String password, String img) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<UserInfo> getInfoPerson(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
