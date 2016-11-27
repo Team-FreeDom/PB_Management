@@ -12,7 +12,7 @@ public class Message {
 	private String content;
 	private String time;
 	private int isRead; //是否已经阅读消息，0为未阅读，1为已经阅读
-	private int userid;
+	private String userid;
 	public int getId() {
 		return id;
 	}
@@ -43,14 +43,11 @@ public class Message {
 	public void setIsRead(int isRead) {
 		this.isRead = isRead;
 	}
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	
-	
-	
 	
 }

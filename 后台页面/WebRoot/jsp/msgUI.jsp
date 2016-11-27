@@ -39,7 +39,7 @@
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="getMessage.do" class="notification-icon" >
-                          <i class="icon-envelope"><span class="badge msg">4</span></i><!-- 添加no_display类，即可关闭消息条数提示-->
+                          <i class="icon-envelope"><span class="badge msg"></span></i><!-- 添加no_display类，即可关闭消息条数提示-->
                               <!--ms-if-->
                       </a>
                       <!--<ul class="dropdown-menu">
@@ -203,12 +203,27 @@
                                     <tbody>
                                     
                                     <c:forEach items='${messageList}' var='message'>
-                                            <tr class="read">
+                                    <c:choose>
+                                           <c:when test="${message.isRead==0}">
+                                           <tr>
                                               <td>${message.id}</td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>
                                             </tr>
+                                           </c:when >
+                                           <c:when test="${message.isRead!=0}">
+                                              <tr class="read">
+                                              <td>${message.id}</td>
+                                              <td>${message.title}</td>
+                                              <td>${message.content}</td>
+                                              <td>${message.time}</td>
+                                            </tr>
+                                            </c:when>
+                                     </c:choose>
+                                    
+                                    
+                                      
                                     </c:forEach>
                                            <!--  <tr>
                                               <td>2</td>
@@ -246,6 +261,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	 <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/kg.js"></script>
     
   </body>

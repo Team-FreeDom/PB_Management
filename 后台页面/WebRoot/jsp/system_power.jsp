@@ -268,6 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
      <script src="../js/bootbox.min.js"></script>
+      <script src="../dist/jquery.cokie.min.js"></script> 
      <script src="../js/lodash.min.js"></script>
     <script src="../js/kg.js"></script>
     <script src="../js/set_power.js"></script>

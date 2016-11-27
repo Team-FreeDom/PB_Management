@@ -11,9 +11,13 @@ public interface NotificationDao {
 		
 	public Notification getNotificationInfo();
 	
-	 public void addMessage(String insertSql);
+	public void addMessage(String title,String content,String department);
 	 
 	 public List<Message> getMessageInfos(String userid);
 	 
 	 public List<Message> getMessageTop5Infos(String userid);
+	 
+	 public int getNoreadMessageCount(String userid);
+	 
+	 public void setReadMessage(int id);
 }

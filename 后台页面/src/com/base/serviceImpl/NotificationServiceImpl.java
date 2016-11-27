@@ -35,9 +35,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 
 	@Override
-	public void addMessage(String insertSql) {
+	public void addMessage(String title,String content,String department) {
 		// TODO Auto-generated method stub
-		notificationDaoImpl.setNotification(insertSql);
+		notificationDaoImpl.addMessage(title,content,department);
 		return;
 	}
 
@@ -55,6 +55,22 @@ public class NotificationServiceImpl implements NotificationService {
 		return notificationDaoImpl.getMessageTop5Infos(userid);
 	}
 
+
+	@Override
+	public int getNoreadMessageCount(String userid) {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNoreadMessageCount(userid);
+	}
+
+
+	@Override
+	public void setReadMessage(int id) {
+		// TODO Auto-generated method stub
+		notificationDaoImpl.setReadMessage(id);
+		return;
+	}
+
+	
 	
 
 }

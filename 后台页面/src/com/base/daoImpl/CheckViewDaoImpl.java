@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class CheckViewDaoImpl {
 		return list;
 	}
       //查询部门
-        @SuppressWarnings("unchecked")
+       /* @SuppressWarnings("unchecked")
 		public List<UserInfo> getDept() throws SQLException {
     		List<UserInfo> list=new ArrayList();
     		try{
@@ -92,7 +93,7 @@ public class CheckViewDaoImpl {
     			
     		}
 		return list;
-	}
+	}*/
     //数据库分页
 	public CheckList getLandApply(int id,int pageindex,int size,String basename,String username,String usercollage ) throws SQLException
 	{
@@ -188,6 +189,8 @@ public class CheckViewDaoImpl {
 		sp.setString(2,la_id);
 		sp.execute();
 	}
+	
+	
 	//同意和取消交费
 	public void getApplys(int flag,String la_id) throws SQLException
 	{
@@ -200,5 +203,51 @@ public class CheckViewDaoImpl {
 	}
 	
 	
-
+	//更改状态(参数1：拒绝的申请记录id;参数2：发送消息)
+	public void updateStatus(String recordStr,int status){
+				
+			System.out.println("更改");	
+			System.out.println(recordStr+"   "+status);
+			Session session=sessionFactory.openSession();		
+			//hibernate调用存储过程(无返回参数)
+			SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`state_trans`(?,?)}");
+			sqlQuery.setString(0, recordStr);
+			sqlQuery.setInteger(1, status);
+			sqlQuery.executeUpdate();
+			session.close();		
+		System.out.println("更改完毕");
+		
+	}
+	
+	
+	public void insertMessage(String sql){
+       System.out.println("insert---start");
+       
+		Session session=sessionFactory.openSession();
+		SQLQuery sqlQuery =session.createSQLQuery(sql);
+		//hibernate调用存储过程(无返回参数)    
+		sqlQuery.executeUpdate();
+		session.close();	
+		
+		 System.out.println("insert---end");
+	
+}
+	
+	//将土地状态为2的改为1，status1为转变后，status2为转变前
+	public void changeSolid(String landstr,int status1,int status2){
+		
+		
+		System.out.println("改变啦");	
+		System.out.println(landstr);
+		Session session=sessionFactory.openSession();			
+		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`update_applystate`(?,?,?)}");
+		sqlQuery.setString(0,landstr);
+		sqlQuery.setInteger(1, status1);
+		sqlQuery.setInteger(2, status2);
+		sqlQuery.executeUpdate();
+		session.close();
+		System.out.println("改变完成");	
+	
+}
+	
 }

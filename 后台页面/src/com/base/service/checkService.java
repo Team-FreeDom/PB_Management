@@ -23,7 +23,7 @@ public interface checkService {
 	 * @param la_id
 	 * @throws SQLException
 	 */
-	public void refuseapply(int flag,String la_id) throws SQLException;
+	public void refuseapply(String recordStr,String infoStr);
 
     /*
      * 详情查看table1(tableCheck)
@@ -61,5 +61,10 @@ public interface checkService {
      */
 	public void getApplys(int flag,String la_id) throws SQLException;
 	
-	public void agreeApply(String str);
+	
+	public void agreeApply(String landstr,String recordstr,String infostr);
+	
+	public void cancelPayFor(String landstr, String recordstr, String infostr);
+	
+	public void confirmPayFor(String landstr, String recordstr, String infostr);
 }
