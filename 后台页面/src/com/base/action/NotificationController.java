@@ -123,6 +123,7 @@ public class NotificationController {
 	@RequestMapping("jsp/setReadMessage.do")
 	public String setReadMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");	
 		String id = request.getParameter("id");
 		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
 		
@@ -130,6 +131,12 @@ public class NotificationController {
 		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
 		int number = Integer.valueOf(noReadNumber)-1;
 		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		try {
+			response.getWriter().print(number);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return null;
 	}

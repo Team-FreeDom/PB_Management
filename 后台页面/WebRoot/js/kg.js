@@ -22,10 +22,10 @@ $("li.menuItem.nav-parent").click(function(){
 				cache : false,
 				error : function(request) {		
 				},
-				success : function(data) {		
+				success : function(data) {	
+					$(".msg").html(data);
 				}
-			});
-			
+			});	
 		})
  
      var temp = $.cookie("noReadNumber");
