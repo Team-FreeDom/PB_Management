@@ -326,6 +326,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
    		   <div class="text-center" style="margin-top:20px;">
            <form class="form-inline " role="form">
+           <div class="form-group">
+                <label>申报学院：</label>
+                <select class="form-control input-sm" id="scollage">
+                <option></option>
+                </select>
+            </div>
  			<div class="form-group">
                 <label>开始日期：</label>
                 <input class="form-control" type="text" value='2016-2-3' id="stime" disabled>
