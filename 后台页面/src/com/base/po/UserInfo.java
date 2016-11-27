@@ -20,7 +20,6 @@ public class UserInfo {
 	private String ID_number;
 	private String telephone;
 	private String userType;
-	private String dept;
 	private String college;
 	private int userRight;
 	private String formerUnit;
@@ -86,12 +85,6 @@ public class UserInfo {
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
-	}
-	public String getDept() {
-		return dept;
-	}
-	public void setDept(String dept) {
-		this.dept = dept;
 	}
 	public String getCollege() {
 		return college;
