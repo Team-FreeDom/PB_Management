@@ -148,6 +148,20 @@ $(document)
 					$('#deleteOne')
 							.click(
 									function() {
+										
+										var chk_value =[];
+										$('input[name="idname"]:checked').each(function(){
+										chk_value.push($(this).val());
+										});	
+										
+										 if(chk_value.length==0)
+										 {
+											 bootbox.alert({
+													message : "请至少选择一项",
+													size : 'small'
+												});
+										  }
+										
 										var record_str = '(';// //申请记录id格(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var jsonback = '';/*
@@ -245,6 +259,20 @@ $(document)
 					$('#agreeOne')
 							.click(
 									function() {
+										
+										var chk_value =[];
+										$('input[name="idname"]:checked').each(function(){
+										chk_value.push($(this).val());
+										});	
+										
+										 if(chk_value.length==0)
+										 {
+											 bootbox.alert({
+													message : "请至少选择一项",
+													size : 'small'
+												});
+										  }
+										 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
@@ -363,6 +391,19 @@ $(document)
 					$('#cancel')
 							.click(
 									function() {
+										
+										var chk_value =[];
+										$('input[name="idname"]:checked').each(function(){
+										chk_value.push($(this).val());
+										});	
+										
+										 if(chk_value.length==0)
+										 {
+											 bootbox.alert({
+													message : "请至少选择一项",
+													size : 'small'
+												});
+										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
@@ -474,6 +515,19 @@ $(document)
 					$('#confim')
 							.click(
 									function() {
+										
+										var chk_value =[];
+										$('input[name="idname"]:checked').each(function(){
+										chk_value.push($(this).val());
+										});	
+										
+										 if(chk_value.length==0)
+										 {
+											 bootbox.alert({
+													message : "请至少选择一项",
+													size : 'small'
+												});
+										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)

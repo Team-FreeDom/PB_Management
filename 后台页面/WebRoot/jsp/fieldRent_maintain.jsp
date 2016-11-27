@@ -483,6 +483,7 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
 <script src="../js/myNeed/rentMaintain.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>    
 <script src="../js/kg.js"></script>

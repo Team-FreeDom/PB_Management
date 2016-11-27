@@ -374,6 +374,7 @@ $(document).delegate('#submitS', 'click', function() {
 /*提交导出学院----start */
 $(document).delegate('#certainExport', 'click', function() {
 	
+	$("#lead").modal('hide');
 	$("#landRentForm").submit();
 	
 });
@@ -408,7 +409,10 @@ function deleteInfo()
 	
 	 if(chk_value.length==0)
 	 {
-		  alert("您还没有选择任何内容！");
+		 bootbox.alert({
+				message : "请至少选择一项",
+				size : 'small'
+			});
 	  }else{
 		  
 		  document.getElementById("lead").style.display = 'none';
