@@ -94,7 +94,6 @@ public class NotificationController {
 		String depatment = request.getParameter("depatment");
 		int isRead = 0;
         
-		
 		notificationServiceImpl.addMessage("系统通知",content,depatment.trim() );
 
 		return null;
@@ -107,16 +106,15 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");
 		String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = null;
-		System.out.println(userid);
+		//System.out.println(userid);
 		if (userid != "")
 			messageList = notificationServiceImpl.getMessageInfos(userid);
 
 		if (messageList != null){
 			map.addAttribute("messageList", messageList);
-			System.out.println("messageList不为空");
+			//System.out.println("messageList不为空");
 		}
 
-		
 		return "msgUI";
 	}
 	

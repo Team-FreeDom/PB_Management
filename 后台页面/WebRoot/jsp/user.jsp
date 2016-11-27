@@ -143,10 +143,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                        	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
                                             <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="user.jdp"><i class=" icon-home"></i>个人中心</a></li>
+								<li><a href="user.jsp"><i class=" icon-home"></i>个人中心</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">

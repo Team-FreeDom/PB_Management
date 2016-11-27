@@ -599,6 +599,8 @@ a, a:link, a:visited, a:hover, a:active {
 .invisible{ display:none;}
 .msg{ right: -10px; top:0px; position:absolute; background:#C00}
 .read{ color:#ccc;}
+#msgtable tr{ cursor:pointer;}
+
 
 @media screen and (min-width:768px) {
 .container-fluid.content {

@@ -103,9 +103,9 @@
 									
 									
 									<li class="menuItem">
-										
+										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-										
+										</a>
 									</li>
 									
 									 <li class="menuItem nav-parent">
@@ -179,15 +179,15 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="notification.jsp"><i class=" icon-home"></i>发布通知公告</a></li>
+								<li><a href="notification.do"><i class=" icon-home"></i>发布通知公告</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
