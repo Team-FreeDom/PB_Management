@@ -115,11 +115,12 @@
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										<li><a href="#"><span class="text">实习审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
-									</ul></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="#"><span class="text">实习审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
 
+										</ul>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
