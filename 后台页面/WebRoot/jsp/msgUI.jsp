@@ -172,7 +172,7 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="msgUI.jsp">系统消息</a></li>
+								<li><a href="getMessage.do">系统消息</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
