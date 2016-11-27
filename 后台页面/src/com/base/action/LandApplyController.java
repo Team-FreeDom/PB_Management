@@ -52,17 +52,22 @@ public class LandApplyController {
 	private LandApplyServiceImpl landApplyServiceImpl;
 
 	// »ùµØ²éÑ¯
-	@RequestMapping("/baseInfo.do")
+	@RequestMapping("/getBase_deptInfo.do")
 	public String selectBase(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
-		List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
-
+		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
+		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
+		
+		JSONObject getObj = new JSONObject();
+		getObj.put("base",list1);
+		getObj.put("xy",list2);
+		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
-			JSONArray json = JSONArray.fromObject(list);
-			response.getWriter().print(json.toString());
+			
+			response.getWriter().print(getObj.toString());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -9,7 +9,7 @@
             $.ajax({                //页面加载时自动执行
 				type : 'POST',
 				dataType : 'json',
-				url : 'baseInfo.do',
+				url : 'getBase_deptInfo.do',
 				async : false,
 				cache : false,
 				error : function(request) {
