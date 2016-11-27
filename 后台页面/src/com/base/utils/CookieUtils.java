@@ -66,6 +66,20 @@ public class CookieUtils {
 		return "";
 	}
 	
+
+	
+	public static String getCookieImage(HttpServletRequest request,
+			HttpServletResponse response) {
+		Cookie[] cookies = request.getCookies();
+		for (Cookie co : cookies) {
+			if (co.getName().equals("image")) {
+				return co.getValue();
+			}
+		}
+
+		return "";
+	}
+	
 	public static String getCookieNoReadNumber(HttpServletRequest request,
 			HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();

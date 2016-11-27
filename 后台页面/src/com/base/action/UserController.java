@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.base.po.UserInfo;
 import com.base.service.UserInfoService;
+import com.base.utils.CookieUtils;
 
 @Controller("UserController")
 @RequestMapping("/jsp")
@@ -78,7 +79,12 @@ public class UserController{
 				}
 				userInfoservice.update(id,name,telephone,possword,filename);
 				}
-		}			
+		}	
+			
+		String image= CookieUtils.getCookieImage(request, response);
+		
+		CookieUtils.addCookie("image", image, response);
+		
 	        return "user";
 	        }
 	//获取个人信息
