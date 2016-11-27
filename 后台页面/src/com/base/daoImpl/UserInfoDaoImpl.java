@@ -368,7 +368,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 				return list;
 		}
 
-public UserInfo getUserInfo(String userid)
+                public UserInfo getUserInfo(String userid)
 	{
 		Session session = sessionFactory.openSession();
 		String hql = "from UserInfo where id=?";
@@ -387,5 +387,339 @@ public UserInfo getUserInfo(String userid)
 		}
 		return ui;
 	}
+        /**
+	 * 用户管理(分页)
+	 * 
+	 * @param pageindex
+	 *            当前页数
+	 * @param size
+	 *            当前显示几条记录
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public MangerList manger(int pageindex, int size,String searchValue)
+	{
+		MangerList ck = new MangerList();
+		List<Manger> list = new ArrayList<Manger>();
+		int recordsTotal = 0;
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.finduserinfo(?,?,?,?)}");
+			sp.setInt(1, pageindex);
+			sp.setInt(2, size);
+			sp.registerOutParameter(3, java.sql.Types.INTEGER);
+			sp.setString(4,searchValue);
+			sp.execute();
+			recordsTotal = sp.getInt(3);
+			ResultSet rs = sp.getResultSet();
+			while (rs.next())
+			{
+				Manger ch = new Manger();
+				ch.setId(rs.getString("userid"));
+				ch.setUsername(rs.getString("username"));
+				ch.setSex(rs.getString("sex"));
+				ch.setCategory(rs.getString("category"));
+				ch.setAttritube(rs.getString("attr"));
+				ch.setBirth(rs.getString("birth"));
+				ch.setIdcard(rs.getString("idcard"));
+				ch.setTelephone(rs.getString("tel"));
+				ch.setDept(rs.getString("college"));
+				list.add(ch);
+			}
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		ck.setRecordsTotal(recordsTotal);
+		ck.setData(list);
+		return ck;
+	}
+
+	/**
+	 * 
+	 * @param id
+	 *            用户id
+	 * @return 用户基本信息
+	 * @throws SQLException
+	 */
+	@Override
+	public List<Manger> Mangerdetail(String id)
+	{
+
+		List<Manger> list = new ArrayList<Manger>();
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.user_message(?)}");
+			sp.setString(1, id);
+			sp.execute();
+			ResultSet rs = sp.getResultSet();
+			while (rs.next())
+			{
+				Manger ch = new Manger();
+				ch.setId(rs.getString("uid"));
+				ch.setUsername(rs.getString("username"));
+				ch.setSex(rs.getString("sex"));
+				ch.setBirth(rs.getString("birth"));
+				ch.setCategory(rs.getString("usertype"));
+				ch.setDept(rs.getString("college"));
+				ch.setTelephone(rs.getString("tel"));
+				ch.setIdcard(rs.getString("idnumber"));
+				ch.setPassword(rs.getString("pwd"));
+				ch.setAttritube(rs.getString("rights"));
+				list.add(ch);
+			}
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}
+
+	/**
+	 * 删除人员基本信息
+	 * 
+	 * @param str
+	 *            为人员id的字符串
+	 * @throws SQLException
+	 */
+	@Override
+	public void deleteInfo(String str)
+	{
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.delete_user(?)}");
+			sp.setString(1, str);
+			sp.execute();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+
+	}
+
+	/**
+	 * 修改用户信息
+	 * 
+	 * @param id
+	 * @param name
+	 * @param sex
+	 * @param birthdate
+	 * @param category
+	 * @param attritube
+	 * @param telephone
+	 * @param idcard
+	 * @param password
+	 * @throws SQLException
+	 */
+	@Override
+	public void upInfo(String id, String name, String sex, String birthdate,
+			String category, String attritube, String dept, String telephone,
+			String idcard, String password)
+
+	{
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.update_userinfos(?,?,?,?,?,?,?,?,?,?)}");
+			sp.setString(1, id);
+			sp.setString(2, name);
+			sp.setString(3, sex);
+			sp.setString(4, birthdate);
+			sp.setString(5, category);
+			sp.setString(6, attritube);
+			// System.out.println(attritube);
+			sp.setString(7, dept);
+			// System.out.println(dept);
+			sp.setString(8, telephone);
+			sp.setString(9, idcard);
+			sp.setString(10, password);
+			sp.execute();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+
+	}
+
+	/**
+	 * 部门集合
+	 * 
+	 * @return
+	 */
+	@Override
+	public List<ApplyDept> getDepts()
+	{
+		Session session = sessionFactory.openSession();
+		String hql = "from ApplyDept";
+		List<ApplyDept> list = null;
+		try
+		{
+			Query query = session.createQuery(hql);
+			list = query.list();
+
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		} finally
+		{
+			session.close();
+		}
+		return list;
+	}
+
+	/**
+	 * Admin中人员属性集合
+	 * 
+	 * @return
+	 */
+	@Override
+	public List<Admin> getAttritube()
+	{
+		Session session = sessionFactory.openSession();
+		String hql = "from Admin";
+		List<Admin> list = null;
+		try
+		{
+			Query query = session.createQuery(hql);
+			list = query.list();
+
+		} catch (Exception e)
+		{
+			System.out.println(e);
+		} finally
+		{
+			session.close();
+		}
+		return list;
+	}
+
+	/**
+	 * 增加用户
+	 * 
+	 * @param id
+	 * @param name
+	 * @param sex
+	 * @param birthdate
+	 * @param category
+	 * @param attritube
+	 * @param dept
+	 * @param telephone
+	 * @param idcard
+	 * @param password
+	 */
+
+	@Override
+	public int addInfo(String id, String name, String sex, String birthdate,
+			String category, String attritube, String dept, String telephone,
+			String idcard, String password)
+	{
+		int flag = 0;
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{CALL baseweb.add_user(?,?,?,?,?,?,?,?,?,?,?)}");
+			sp.setString(1, id);
+			sp.setString(2, name);
+			sp.setString(3, sex);
+			sp.setString(4, birthdate);
+			sp.setString(5, category);
+			sp.setString(6, attritube);
+			sp.setString(7, dept);
+			sp.setString(8, telephone);
+			sp.setString(9, idcard);
+			sp.setString(10, password);
+			/*
+			 * System.out.println(id+"1"); System.out.println(name+"2");
+			 * System.out.println(sex+"3"); System.out.println(birthdate+"4");
+			 * System.out.println(category+"5");
+			 * System.out.println(attritube+"6"); System.out.println(dept+"7");
+			 * System.out.println(telephone+"8");
+			 * System.out.println(idcard+"9");
+			 * System.out.println(password+"10");
+			 */
+			sp.registerOutParameter(11, java.sql.Types.INTEGER);
+			sp.execute();
+			flag = sp.getInt(11);
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
+	}
+	/**
+     * 导出人员信息
+     * @return
+     */
+	@Override
+	public List<Manger> exportPersonInfo(String dept)
+	{
+		List<Manger> list = new ArrayList<Manger>();
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn.prepareCall("{call baseweb.export(?)}");
+			sp.setString(1, dept);
+			sp.execute();
+			ResultSet rs = sp.getResultSet();
+			while (rs.next())
+			{
+				Manger ch = new Manger();
+				ch.setId(rs.getString("userid"));
+				ch.setUsername(rs.getString("username"));
+				ch.setSex(rs.getString("sex"));
+				ch.setCategory(rs.getString("category"));
+				ch.setBirth(rs.getString("birth"));
+				ch.setIdcard(rs.getString("idcard"));
+				ch.setTelephone(rs.getString("tel"));
+				ch.setDept(rs.getString("college"));	
+				ch.setAttritube(rs.getString("attr"));
+				list.add(ch);
+			}
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}
+
 
 }
