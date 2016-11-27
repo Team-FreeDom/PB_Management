@@ -376,7 +376,9 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-
+                                              
+												$(".msg").html(msg.messageCount);
+												
 												bootbox.alert({
 													message : msg.str,
 													size : 'small'
@@ -502,6 +504,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
+												$(".msg").html(msg.messageCount);
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'
@@ -626,6 +629,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
+												$(".msg").html(msg.messageCount);
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'

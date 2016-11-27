@@ -196,12 +196,18 @@ public class LandApplyController {
        
         
 		int flag=landApplyServiceImpl.submitLandApply(userid,lidList,str,info_str);
+		
+		//将消息值更改
+		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+		int number = Integer.valueOf(noReadNumber)+1;
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 		response.setContentType("text/html;charset=UTF-8");
 
-		String str1 = "[{\"flag\":" +flag + "}]";
-		JSONArray json = JSONArray.fromObject(str1);
+		String str1 =""+flag+'$'+number ;
+		
 		try {
-			response.getWriter().print(json.toString());
+			response.getWriter().print(str1);
 			// response.getWriter().print(getObj.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -393,8 +399,13 @@ public class LandApplyController {
 
 			landApplyServiceImpl.myFameCancel1(la_id,info_str);
 			
+			//将消息值更改
+			String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+			int number = Integer.valueOf(noReadNumber)+1;
+			CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+			
 			flag = true;
-			String str = "[{\"flag\":" + flag + "}]";
+			String str = "[{\"flag\":" + flag +",\"number\":" +number+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());

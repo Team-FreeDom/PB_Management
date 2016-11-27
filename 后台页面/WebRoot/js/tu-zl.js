@@ -181,7 +181,12 @@
 					});
 				  },///error
 				  success : function(data) {
-					  if(data[0].flag!=1){
+					  var position=data.indexOf('$');
+					var messageCount=data.substring(position+1);
+					var flag=data.substring(0,position);
+                  
+                    				 
+					  if(flag!=1){
 						  
 						  bootbox.alert({
 							  message: "请先撤回相同的土地申请",
@@ -189,6 +194,8 @@
 						  }); 
 						  
 					  }else{
+						  
+					  $(".msg").html(messageCount);
 					  fill('','','','','','');
 					  $('#field_rent tbody').html('');
 					  obj.dialog = bootbox.dialog({
