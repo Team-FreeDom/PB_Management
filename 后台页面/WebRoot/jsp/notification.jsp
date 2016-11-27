@@ -236,9 +236,9 @@
                         </div>
                         <div class="col-lg-12 form-group">
                         <div class="col-md-4" id="btns">
-                          <button id="sendNotifitation" onclick="saveNotifitation()">发布通知</button>
-                          <button id="setContent" onclick="setContent()">清空内容</button>
-                          <button id="sendMessage" onclick="saveMessage()">发布消息</button>
+                          <button id="sendNotifitation" class="btn btn-default">发布通知</button>
+                          <button id="sendMessage" class="btn btn-default" style="display:none";>发布消息</button>
+                          <button id="setContent" class="btn btn-default">清空内容</button>
                         </div>
                         </div>
 
@@ -259,6 +259,7 @@
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/kg.js"></script>
     <script type="text/javascript" src="../js/ueditor/myeditor.js"></script>
   </body>

@@ -1,13 +1,16 @@
 $(document).ready(function() {
 
 	$("#msglx_list").change(function() {
-		if ($(this).val() == '1'){
+		/*if ($(this).val() == '1'){
 			$("#part").hidden();
 			$("#sendMessage").hidden();
 		}else{
 			$("#part").show();		
 			$("#sendMessage").show();
-		}
+		}*/
+		$("#part").toggle(100);
+		$("#sendMessage").toggle(100);
+		
 	});
 
 	
