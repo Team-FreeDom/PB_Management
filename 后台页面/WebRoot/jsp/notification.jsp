@@ -237,7 +237,7 @@
                         <div class="col-lg-12 form-group">
                         <div class="col-md-4" id="btns">
                           <button id="sendNotifitation" onclick="saveNotifitation()">发布通知</button>
-                          <button onclick="setContent()">清空内容</button>
+                          <button id="setContent" onclick="setContent()">清空内容</button>
                           <button id="sendMessage" onclick="saveMessage()">发布消息</button>
                         </div>
                         </div>

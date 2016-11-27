@@ -521,7 +521,9 @@
 	<!--datatable javascript-->
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	<script src="../dist/jquery.cokie.min.js"></script>  
 	<script src="../js/myNeed/rent-approve.js"></script>
+    <script src="../js/kg.js"></script>
 	<script>
 		/* new YMDselect('year1','month1','day1');
 		new YMDselect('year2','month2','day2'); */
