@@ -10,7 +10,7 @@ $(document)
 										"bSort" : false,
 										"iDisplayLength" : 4, // 默认每页显示多少条记录
 										"bPaginate": true, //翻页功能
-										
+										"searching":false,//禁用搜索
 										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
@@ -247,6 +247,7 @@ $(document).delegate('#submitS', 'click', function() {
 				"bPaginate": true, //翻页功能
 				"bDestroy":true,
 				"processing": true,
+				"searching":false,//禁用搜索
 				"bServerSide" : true,
 				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
@@ -379,6 +380,7 @@ $(document).delegate('#certainExport', 'click', function() {
 	
 });
 /*提交导出学院----end */
+
 
 
 /*土地租赁记录修改---start*/

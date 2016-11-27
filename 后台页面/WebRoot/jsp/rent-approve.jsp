@@ -204,13 +204,13 @@
 									width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3">排序<span
+											<td colspan="3"><!-- 排序<span
 												class="glyphicon glyphicon-sort-by-attributes"></span> <select
 												name="" id="">
 													<option value="">默认</option>
 													<option value="">租用次数降次</option>
 													<option value="">租用次数</option>
-											</select> 
+											</select>  -->
 											</td>
 											<td colspan="5">
 												<ul class="dropdown_show">
@@ -257,7 +257,7 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><button type="button" class="btn btn-primary">导出</button></td>
+											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 
@@ -356,13 +356,13 @@
 								<table id="tablePay" class="hover" cellspacing="0" width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3">排序<span
+											<td colspan="3"><!-- 排序<span
 												class="glyphicon glyphicon-sort-by-attributes"></span> <select
 												name="" id="">
 													<option value="">默认</option>
 													<option value="">租用次数降次</option>
 													<option value="">租用次数</option>
-											</select> 
+											</select>  -->
 											</td>
 											<td colspan="5">
 												<ul class="dropdown_show">
@@ -407,7 +407,7 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><button type="button" class="btn btn-primary">导出</button></td>
+											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 											<th>序号</th>

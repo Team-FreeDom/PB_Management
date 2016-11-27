@@ -52,8 +52,28 @@ public class LandApplyController {
 	private LandApplyServiceImpl landApplyServiceImpl;
 
 	// 基地查询
+		@RequestMapping("/baseInfo.do")
+		public String selectBase(HttpServletRequest request, ModelMap map,
+				HttpServletResponse response) {
+
+			List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
+
+			response.setContentType("text/html;charset=UTF-8");
+
+			try {
+				JSONArray json = JSONArray.fromObject(list);
+				response.getWriter().print(json.toString());
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	
+	// 基地+部门查询
 	@RequestMapping("/getBase_deptInfo.do")
-	public String selectBase(HttpServletRequest request, ModelMap map,
+	public String selectBase_deptInfo(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
 		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
@@ -171,11 +191,14 @@ public class LandApplyController {
 
 		String str = request.getParameter("str");
         String info_str=request.getParameter("info_str");
-		
-		landApplyServiceImpl.submitLandApply(str,info_str);
+        String lidList=request.getParameter("lidList");
+		String userid=request.getParameter("userid");       
+       
+        
+		int flag=landApplyServiceImpl.submitLandApply(userid,lidList,str,info_str);
 		response.setContentType("text/html;charset=UTF-8");
 
-		String str1 = "[{\"flag\":" + true + "}]";
+		String str1 = "[{\"flag\":" +flag + "}]";
 		JSONArray json = JSONArray.fromObject(str1);
 		try {
 			response.getWriter().print(json.toString());

@@ -198,20 +198,20 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td>
+										<td colspan="2">
 											<button type="button" class="btn btn-info button_style"
 												data-toggle="modal" data-target="#myModalAdd">
 												<span class="glyphicon glyphicon-plus"></span>
 											</button>
 										</td>
-										<td colspan="2">排序<span
+										<!-- <td colspan="2">排序<span
 											class="glyphicon glyphicon-sort-by-attributes"></span> <select
-											name="" id="">
+											name="orderCount" id="orderCount" onchange="changeOrder()">
 												<option value="">默认</option>
-												<option value="">租用次数降次</option>
-												<option value="">租用次数</option>
+												<option value="1">租用次数降次</option>
+												<option value="2">租用次数</option>
 										</select> 
-										</td>
+										</td> -->
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
@@ -255,7 +255,7 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="2">
+										<td colspan="3">
 											<button type="button" class="btn btn-danger"
 												onClick="deleteInfo()">删除</button>
 											<button type="button" class="btn btn-primary"
