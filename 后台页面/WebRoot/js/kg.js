@@ -28,8 +28,10 @@ $("li.menuItem.nav-parent").click(function(){
 			});	
 		})
  
-     var temp = $.cookie("noReadNumber");
+    // var temp = $.cookie("noReadNumber");
      $('.msg').html($.cookie("noReadNumber"));
+     
+     $('.text-success').html($.cookie('name'));
  });
 
  

@@ -1,6 +1,7 @@
 package com.base.action;
 
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,7 +43,7 @@ public class LoginController {
 		  src=ui.getImg();
 		  name=ui.getName();
 		}
-		
+		//System.out.println(name);
 		if(adminValue!=-1)
 		{
 			//System.out.println("µÇÂ¼³É¹¦");
@@ -51,7 +52,12 @@ public class LoginController {
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);			
 			CookieUtils.addCookie("image", src,response);
-			CookieUtils.addCookie("name", name,response);
+			try {
+				CookieUtils.addCookie("name",java.net.URLEncoder.encode(name,"utf-8") ,response);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return "redirect:jsp/index.do";
 		}else{
 			//System.out.println("µÇÂ¼Ê§°Ü");

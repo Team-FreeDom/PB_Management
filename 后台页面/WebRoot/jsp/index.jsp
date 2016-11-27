@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 										<div class="bk-padding-top-10">
 											<i class="icon-circle text-success"></i> 
-											<small>罗旭</small>
+											<small></small>
 											<!--ms-if-->
 										</div>
 									</div>
