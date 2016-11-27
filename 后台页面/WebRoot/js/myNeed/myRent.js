@@ -95,7 +95,7 @@ $(document).ready(function() {
 																	+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ la_id
+																	+ row.la_id+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
 																	+ ' id="frame1_cancel" >撤回</button>';
 														} else if (data == 1) {
 															return data = '<button type="button"  id='
@@ -103,7 +103,7 @@ $(document).ready(function() {
 																	+ ' onclick="payForOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ la_id
+																	+ row.la_id+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
 																	+ ' id="frame1_cancel" >撤回</button>';
 														} else {
 															return data = '<button type="button" id='
@@ -143,6 +143,7 @@ $(document).ready(function() {
 						"aLengthMenu" : [ 2, 4, 6, 8,
 											10 ], //动态指定分页后每页显示的记录数。
 									"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
+									"searching":false,//禁用搜索
 									"bSort" : false,									
 									"iDisplayLength" : 4, //默认每页显示多少条记录
 									"bPaginate": true, //翻页功能									
@@ -311,6 +312,7 @@ $(document).ready(function() {
 										{
 											"aLengthMenu" : [ 2, 4, 6, 8, 10 ], //动态指定分页后每页显示的记录数。
 											"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
+											"searching":false,//禁用搜索
 											"bSort" : false,
 											"iDisplayLength" : 4, //默认每页显示多少条记录
 											"bPaginate": true, //翻页功能									
@@ -601,20 +603,27 @@ $(document).ready(function() {
 					});
 
 					$(document).delegate('#cancelSubmit', 'click', function() {//���ȷ�ϳ���İ�ť��ִ��
-						var id = $(this).val();
+						var str = $(this).val();
+						
+						var position=str.indexOf('$');
+						
+						var la_id=str.substring(0,position);
+						var info_str=str.substring(position+1);
+					   
 						$('#cancelOneModal').modal('hide');
+						 alert(la_id);
 						$.ajax({
 							data : {
-								"la_id" : id
-
+								"la_id" : la_id,
+                                "info_str":info_str
 							},
 							url : 'myFameCancel1.do',
 							async : true,
 							type : "POST",
 							dataType : "json",
-							cache : false, //�����?��
+							cache : false,
 							success : function(data) {
-
+                               alert("成功")
 								if (data[0].flag) {
 									window.location.reload();
 								} else {

@@ -355,11 +355,16 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
+		System.out.println("cancel1");
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		String info_str=request.getParameter("info_str");
+		System.out.println(info_str);
+		
 		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id);
+			landApplyServiceImpl.myFameCancel1(la_id,info_str);
+			
 			flag = true;
 			String str = "[{\"flag\":" + flag + "}]";
 			JSONArray json = JSONArray.fromObject(str);

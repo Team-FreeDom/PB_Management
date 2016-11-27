@@ -199,25 +199,20 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }   
   
     
-    public void myFameCancel1(int la_id)
+    public void myFameCancel1(int la_id,String info_str)
     {
-    	LandApply la=landApplyDaoImpl.getapply(la_id);    	
-    	
-    	TemperateSave ts=new TemperateSave();
-    	ts.setApplicantId(la.getApplicantId());
-    	ts.setEndTime(la.getEndTime());
-    	ts.setLid(la.getLid());
-    	ts.setPlanting(la.getPlanting());
-    	ts.setStartTime(la.getStartTime());
-    	ts.setStatus(9);
-    	ts.setResource(la.getResource());
-    	ts.setApplyDept(la.getApplyDept());
-    	
-    	temperateSaveDaoImpl.doTemperate(ts);
-    	
-    	landApplyDaoImpl.delLandApply(la);   	
-    	
-    	
+    	 //获得插入的消息语句
+  	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
+  	  
+    	LandApply la=landApplyDaoImpl.getapply(la_id);   	
+    	//将此记录的状态改为失效11
+        la.setStatus(11);        
+        //更新此记录
+        landApplyDaoImpl.updateLandApply(la);
+        
+        //向消息表中插入数据
+        checkViewDaoImpl.insertMessage(insertStr);
+        
     }
     
     public void myFrameSubmit(int la_id){
