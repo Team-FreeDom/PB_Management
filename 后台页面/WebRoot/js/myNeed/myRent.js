@@ -58,7 +58,10 @@ $(document).ready(function() {
 															return data = '<span>不通过</span>';
 														} else if (status == 6) {
 															return data = '<span>ͨ通过</span>';
-														} else {
+														}else if(status==4){
+															return data="<span>待审核</span>"
+														}													
+														else {
 															return data = '<span>'
 																	+ data
 																	+ '</span>';

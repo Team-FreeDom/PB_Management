@@ -165,9 +165,9 @@ public class LandApplyController {
 			HttpServletResponse response, ModelMap map) {
 
 		String str = request.getParameter("str");
-
-		System.out.println(str);
-		landApplyServiceImpl.submitLandApply(str);
+        String info_str=request.getParameter("info_str");
+		
+		landApplyServiceImpl.submitLandApply(str,info_str);
 		response.setContentType("text/html;charset=UTF-8");
 
 		String str1 = "[{\"flag\":" + true + "}]";

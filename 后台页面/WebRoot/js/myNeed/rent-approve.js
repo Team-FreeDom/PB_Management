@@ -157,12 +157,12 @@
 			if(i!=0)					
 			{
 				record_str = record_str+','+$(this).val();
-				info_str=info_str+',{userid:"'+userid+'",msg:"'+$(this).closest('tr').find('td:eq(3)').text()+'#'+$(this).closest('tr').find('td:eq(4)').text()+'"}'
+				info_str=info_str+',{userid:"'+userid+'",msg:"'+$(this).closest('tr').find('td:eq(3)').text()+'#'+$(this).closest('tr').find('td:eq(4)').text()+'"}';
 			}
 			else
 			{
 				record_str = record_str+$(this).val();
-				info_str=info_str+'{userid:"'+userid+'",msg:"'+$(this).closest('tr').find('td:eq(3)').text()+'#'+$(this).closest('tr').find('td:eq(4)').text()+'"}'
+				info_str=info_str+'{userid:"'+userid+'",msg:"'+$(this).closest('tr').find('td:eq(3)').text()+'#'+$(this).closest('tr').find('td:eq(4)').text()+'"}';
 			}
 			i++;
 		});
