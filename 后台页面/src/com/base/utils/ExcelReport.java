@@ -24,24 +24,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.base.po.LandApply_view;
+import com.base.po.Manger;
 import com.base.po.RentMaintain;
+import com.base.po.UserInfo;
 
 
 public class ExcelReport{
 
 	/*
-	 * Ò»:ÍÁµØ×âÁŞÎ¬»¤µÄExcelÎÄ¼şµ¼³ö (non-Javadoc)
+	 * ä¸€:åœŸåœ°ç§Ÿèµç»´æŠ¤çš„Excelæ–‡ä»¶å¯¼å‡º (non-Javadoc)
 	 * 
 	 * @see com.base.service.ExcelReportService#landRentPreserveReport()
 	 */	
-	public void landRentPreserveReport(List<RentMaintain> list) { // ÁĞÍ·ĞÅÏ¢
-		String[] col_title = { "ĞòºÅ", "¿ªÊ¼ÈÕÆÚ", "½áÊøÈÕÆÚ", "»ùµØÃû", "ÍÁµØ±àºÅ", "×âÁŞÈË",
-				"Éê±¨²¿ÃÅ", "ÒÑ×âÓÃ´ÎÊı", "ÍÁµØÃû³Æ", "ÍÁµØÃæ»ı", "ÊÊÒË´ÓÊÂÄÚÈİ", "¼Æ»®´ÓÊÂÄÚÈİ",
-				"×âÁŞ·ÑÓÃ", "½»·ÑÈÕÆÚ" };// 15¸öÁĞÍ·
+	public void landRentPreserveReport(List<RentMaintain> list) { // åˆ—å¤´ä¿¡æ¯
+		String[] col_title = { "åºå·", "å¼€å§‹æ—¥æœŸ", "ç»“æŸæ—¥æœŸ", "åŸºåœ°å", "åœŸåœ°ç¼–å·", "ç§Ÿèµäºº",
+				"ç”³æŠ¥éƒ¨é—¨", "å·²ç§Ÿç”¨æ¬¡æ•°", "åœŸåœ°åç§°", "åœŸåœ°é¢ç§¯", "é€‚å®œä»äº‹å†…å®¹", "è®¡åˆ’ä»äº‹å†…å®¹",
+				"ç§Ÿèµè´¹ç”¨", "äº¤è´¹æ—¥æœŸ" };// 15ä¸ªåˆ—å¤´
 		@SuppressWarnings("resource")
-		XSSFWorkbook workbook = new XSSFWorkbook();// ´´½¨Ò»¸öExcelÎÄµµ¶ÔÏó
-		Sheet sheet = workbook.createSheet();// ÔÚÉÏÃæµÄÎÄµµÖĞ´´½¨Excel±íµ¥
-		// ÉèÖÃÁĞµÄ¿í¶È
+		XSSFWorkbook workbook = new XSSFWorkbook();// åˆ›å»ºä¸€ä¸ªExcelæ–‡æ¡£å¯¹è±¡
+		Sheet sheet = workbook.createSheet();// åœ¨ä¸Šé¢çš„æ–‡æ¡£ä¸­åˆ›å»ºExcelè¡¨å•
+		// è®¾ç½®åˆ—çš„å®½åº¦
 		sheet.setColumnWidth(0, 1300);
 		sheet.setColumnWidth(1, 3000);
 		sheet.setColumnWidth(2, 3000);
@@ -60,158 +62,158 @@ public class ExcelReport{
 		sheet.setColumnWidth(15, 2000);
 
 		/*
-		 * ÉèÖÃÑùÊ½
+		 * è®¾ç½®æ ·å¼
 		 */
-		// 1¡¢ÉèÖÃ×ÖÌå// ÉèÖÃ±êÌâ×ÖÌå
+		// 1ã€è®¾ç½®å­—ä½“// è®¾ç½®æ ‡é¢˜å­—ä½“
 		Font font_title = workbook.createFont();
-		font_title.setFontName("ËÎÌå");
-		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font_title.setFontHeightInPoints((short) 18);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÁĞÍ·×ÖÌå
+		font_title.setFontName("å®‹ä½“");
+		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font_title.setFontHeightInPoints((short) 18);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®åˆ—å¤´å­—ä½“
 		Font font1 = workbook.createFont();
-		font1.setFontName("ËÎÌå");
-		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font1.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÕıÎÄ×ÖÌå1
+		font1.setFontName("å®‹ä½“");
+		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font1.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®æ­£æ–‡å­—ä½“1
 		Font font2 = workbook.createFont();
-		font2.setFontName("ËÎÌå");
-		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font2.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// 2¡¢ÉèÖÃÑùÊ½
-		// ÉèÖÃ±êÌâÑùÊ½
+		font2.setFontName("å®‹ä½“");
+		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// è®¾ç½®å­—ä½“ç²—ç»†
+		font2.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// 2ã€è®¾ç½®æ ·å¼
+		// è®¾ç½®æ ‡é¢˜æ ·å¼
 		XSSFCellStyle cs_title = workbook.createCellStyle();
-		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs_title.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs_title.setWrapText(true);// ÉèÖÃÊ¹µÃµ¥Ôª¸ñµÄÎÄ×Ö°´ÕÕµ¥Ôª¸ñµÄÁĞ¿íÀ´×Ô¶¯£¡»»ĞĞ£¡ÏÔÊ¾
+		cs_title.setWrapText(true);// è®¾ç½®ä½¿å¾—å•å…ƒæ ¼çš„æ–‡å­—æŒ‰ç…§å•å…ƒæ ¼çš„åˆ—å®½æ¥è‡ªåŠ¨ï¼æ¢è¡Œï¼æ˜¾ç¤º
 		cs_title.setFont(font_title);
-		// ÉèÖÃÁĞÍ·ÑùÊ½
+		// è®¾ç½®åˆ—å¤´æ ·å¼
 		XSSFCellStyle cs1 = workbook.createCellStyle();
-		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs1.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs1.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs1.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs1.setFont(font1);
-		// ÉèÖÃÕıÎÄ¾ÓÖĞÑùÊ½
+		// è®¾ç½®æ­£æ–‡å±…ä¸­æ ·å¼
 		XSSFCellStyle cs2 = workbook.createCellStyle();
-		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs2.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs2.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs2.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs2.setFont(font2);
-		// ºÏ²¢ÁĞ £¨µÚÒ»ĞĞ£¬×îºóÒ»ĞĞ£¬µÚÒ»ÁĞ£¬×îºóÒ»ÁĞ£©
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 14));// ºÏ²¢ÁĞ-±êÌâ
+		// åˆå¹¶åˆ— ï¼ˆç¬¬ä¸€è¡Œï¼Œæœ€åä¸€è¡Œï¼Œç¬¬ä¸€åˆ—ï¼Œæœ€åä¸€åˆ—ï¼‰
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 14));// åˆå¹¶åˆ—-æ ‡é¢˜
 
 		/*
-		 * ²åÈëÊı¾İ²Ù×÷
+		 * æ’å…¥æ•°æ®æ“ä½œ
 		 */
-		// µÚÒ»ÅÅ±íÃû
+		// ç¬¬ä¸€æ’è¡¨å
 		Row row1 = sheet.createRow(0);
-		row1.setHeight((short) 1000);// ÉèÖÃĞĞµÄ¸ß¶È
+		row1.setHeight((short) 1000);// è®¾ç½®è¡Œçš„é«˜åº¦
 		Cell cell_title = row1.createCell(0);
 		cell_title.setAsActiveCell();
-		cell_title.setCellValue("ºşÄÏÅ©Òµ´óÑ§ÍÁµØ×âÁŞĞÅÏ¢±í");
+		cell_title.setCellValue("æ¹–å—å†œä¸šå¤§å­¦åœŸåœ°ç§Ÿèµä¿¡æ¯è¡¨");
 		cell_title.setCellStyle(cs_title);
-		// µÚ¶şÅÅÌîÏàÓ¦ÁĞÍ·Ãû
+		// ç¬¬äºŒæ’å¡«ç›¸åº”åˆ—å¤´å
 		Row row2 = sheet.createRow(1);
 		for (int i = 0; i < col_title.length; i++) {
 			Cell cell_line = row2.createCell(i);
 			cell_line.setCellValue(col_title[i]);
 			cell_line.setCellStyle(cs1);
 		}
-		// ÈıÅÅÖ®ºó
+		// ä¸‰æ’ä¹‹å
 		/*
-		 * !!!!!!Àî²Ê×¢ÒâÕâÀïÊÇĞèÒªÍÁµØ×âÁŞµÄÊı¾İlistµÄÀàÃûºÍ·½·¨Ãû£¬È»ºóºóÃæ»¹ÓĞÃ¿ÌõÊı¾İÖĞ»ñÈ¡µ¥¸öÊıÖµµÄ·½·¨!!!!!!!!!!!!!!!!
+		 * !!!!!!æå½©æ³¨æ„è¿™é‡Œæ˜¯éœ€è¦åœŸåœ°ç§Ÿèµçš„æ•°æ®listçš„ç±»åå’Œæ–¹æ³•åï¼Œç„¶ååé¢è¿˜æœ‰æ¯æ¡æ•°æ®ä¸­è·å–å•ä¸ªæ•°å€¼çš„æ–¹æ³•!!!!!!!!!!!!!!!!
 		 * !!!!!!
 		 */
-		// ÓÃ»§ID£¬ÒÔºóÒª´ÓºóÌ¨»ñÈ¡µÄ£¡£¡£¡£¡
+		// ç”¨æˆ·IDï¼Œä»¥åè¦ä»åå°è·å–çš„ï¼ï¼ï¼ï¼
 
 		/*
-		 * ±éÀúlistÖĞÈ¡µÃµÄÊı¾İ
+		 * éå†listä¸­å–å¾—çš„æ•°æ®
 		 */
 		for (int i = 0; i < list.size(); i++) {
-			RentMaintain line_data = list.get(i);// È¡µÃlist¼¯ºÏÖĞÒ»ÌõÊı¾İ
-			int line = i + 2;// ¶àÉÙĞĞ
-			Row row_line = sheet.createRow(line);// ´´½¨µÚlineĞĞ
-			// µÚÒ»ÁĞĞòºÅ ×Ô¶¯Ôö¼Ó1
+			RentMaintain line_data = list.get(i);// å–å¾—listé›†åˆä¸­ä¸€æ¡æ•°æ®
+			int line = i + 2;// å¤šå°‘è¡Œ
+			Row row_line = sheet.createRow(line);// åˆ›å»ºç¬¬lineè¡Œ
+			// ç¬¬ä¸€åˆ—åºå· è‡ªåŠ¨å¢åŠ 1
 			Cell cell0 = row_line.createCell(0);
 			cell0.setCellValue(i + 1);
 			cell0.setCellStyle(cs2);
-			// µÚ¶şÁĞ¿ªÊ¼ÈÕÆÚ
+			// ç¬¬äºŒåˆ—å¼€å§‹æ—¥æœŸ
 			Cell cell1 = row_line.createCell(1);
-			// !!!!!!!!!!ÏÂÃæÕâĞĞ´úÂëµÄline_data.getStartTime()·½·¨»ñÈ¡µÄÖµÊÇÒª¶ÔÓ¦ÉÏÃæ±í¸ñË³ĞòµÄ¹şÀî²Ê£¬
-			// !!!!!!!!!!!È»ºóºóÃæÃ¿ÁĞ¶¼ÊÇÍ¬´Ë¸ü¸Ä!!!!!!!!!!!!!!!
+			// !!!!!!!!!!ä¸‹é¢è¿™è¡Œä»£ç çš„line_data.getStartTime()æ–¹æ³•è·å–çš„å€¼æ˜¯è¦å¯¹åº”ä¸Šé¢è¡¨æ ¼é¡ºåºçš„å“ˆæå½©ï¼Œ
+			// !!!!!!!!!!!ç„¶ååé¢æ¯åˆ—éƒ½æ˜¯åŒæ­¤æ›´æ”¹!!!!!!!!!!!!!!!
 			cell1.setCellValue(line_data.getStartTime());
 			cell1.setCellStyle(cs2);
-			// µÚÈıÁĞ½áÊøÈÕÆÚ
+			// ç¬¬ä¸‰åˆ—ç»“æŸæ—¥æœŸ
 			Cell cell2 = row_line.createCell(2);
 			cell2.setCellValue(line_data.getEndTime());
 			cell2.setCellStyle(cs2);
-			// µÚËÄÁĞ»ùµØÃû
+			// ç¬¬å››åˆ—åŸºåœ°å
 			Cell cell3 = row_line.createCell(3);
 			cell3.setCellValue(line_data.getBname());
 			cell3.setCellStyle(cs2);
-			// µÚÎåÁĞÍÁµØ±àºÅ
+			// ç¬¬äº”åˆ—åœŸåœ°ç¼–å·
 			Cell cell4 = row_line.createCell(4);
 			cell4.setCellValue(line_data.getLid());
 			cell4.setCellStyle(cs2);
-			// µÚÁùÁĞ×âÁŞÈË
+			// ç¬¬å…­åˆ—ç§Ÿèµäºº
 			Cell cell5 = row_line.createCell(5);
 			cell5.setCellValue(line_data.getName());
 			cell5.setCellStyle(cs2);
-			// µÚÆßÁĞÉê±¨²¿ÃÅ
+			// ç¬¬ä¸ƒåˆ—ç”³æŠ¥éƒ¨é—¨
 			Cell cell6 = row_line.createCell(6);
 			cell6.setCellValue(line_data.getDeptName());
 			cell6.setCellStyle(cs2);
-			// µÚ°ËÁĞÒÑ×âÓÃ´ÎÊı
+			// ç¬¬å…«åˆ—å·²ç§Ÿç”¨æ¬¡æ•°
 			Cell cell7 = row_line.createCell(7);
 			cell7.setCellValue(line_data.getTimes());
 			cell7.setCellStyle(cs2);
 			
-			/*// µÚ¾ÅÁĞÖÖÖ²ÄÚÈİ
+			/*// ç¬¬ä¹åˆ—ç§æ¤å†…å®¹
 			Cell cell8 = row_line.createCell(8);
 			cell8.setCellValue(line_data.getPlanting());
 			cell8.setCellStyle(cs2);*/
 			
-			// µÚÊ®ÁĞÍÁµØÃû³Æ
+			// ç¬¬ååˆ—åœŸåœ°åç§°
 			Cell cell9 = row_line.createCell(9);
 			cell9.setCellValue(line_data.getLandname());
 			cell9.setCellStyle(cs2);
-			// µÚÊ®Ò»ÁĞÍÁµØÃæ»ı
+			// ç¬¬åä¸€åˆ—åœŸåœ°é¢ç§¯
 			Cell cell10 = row_line.createCell(10);
 			cell10.setCellValue(line_data.getLandArea());
 			cell10.setCellStyle(cs2);
-			// µÚÊ®¶şÁĞÊÊÒË´ÓÊÂÄÚÈİ
+			// ç¬¬åäºŒåˆ—é€‚å®œä»äº‹å†…å®¹
 			Cell cell11 = row_line.createCell(11);
 			cell11.setCellValue(line_data.getAptplanting());
 			cell11.setCellStyle(cs2);
-			// µÚÊ®ÈıÁĞ¼Æ»®´ÓÊÂÄÚÈİ
+			// ç¬¬åä¸‰åˆ—è®¡åˆ’ä»äº‹å†…å®¹
 			Cell cell12 = row_line.createCell(12);
 			cell12.setCellValue(line_data.getPlanting());
 			cell12.setCellStyle(cs2);
-			// µÚÊ®ËÄÁĞ×âÁŞ·ÑÓÃ
+			// ç¬¬åå››åˆ—ç§Ÿèµè´¹ç”¨
 			Cell cell13 = row_line.createCell(13);
 			cell13.setCellValue(line_data.getRentMoney());
 			cell13.setCellStyle(cs2);
-			// µÚÊ®ÎåÁĞ½»·ÑÈÕÆÚ
+			// ç¬¬åäº”åˆ—äº¤è´¹æ—¥æœŸ
 			Cell cell14 = row_line.createCell(14);
 			cell14.setCellValue(line_data.getChargeDate());
 			cell14.setCellStyle(cs2);
 		}
-		// ½¨Á¢ExcelÎÄ¼ş
-		// !!!!!!!!!Àî²Ê°¡~~ÏÂÃæµÄÂ·¾¶ÊÇ½«Éú³ÉµÄÎÄ¼ş·Åµ½·şÎñÆ÷µÄÂ·¾¶!!!!!!!!!!!!!!!!!!!
+		// å»ºç«‹Excelæ–‡ä»¶
+		// !!!!!!!!!æå½©å•Š~~ä¸‹é¢çš„è·¯å¾„æ˜¯å°†ç”Ÿæˆçš„æ–‡ä»¶æ”¾åˆ°æœåŠ¡å™¨çš„è·¯å¾„!!!!!!!!!!!!!!!!!!!
 		File file = new File("E://landRentPreserveReport.xlsx");
 		try {
 			file.createNewFile();
@@ -225,19 +227,19 @@ public class ExcelReport{
 	}
 
 	/*
-	 * ¶ş:ÊµÏ°»ùµØÎ¬»¤µÄExcelÎÄ¼şµ¼³ö (non-Javadoc)
+	 * äºŒ:å®ä¹ åŸºåœ°ç»´æŠ¤çš„Excelæ–‡ä»¶å¯¼å‡º (non-Javadoc)
 	 * 
 	 * @see com.base.service.ExcelReportService#workLandPreserveReport()
 	 */
 	/*@Override
 	public void workLandPreserveReport() {
-		// ÁĞÍ·ĞÅÏ¢£¡£¡£¡£¡Àî²ÊÕâÊÇÎÒ°´ĞÄÓêµÄÉè¼ÆÅªµÄ£¬Èç¹ûÄãÒª¸ÄÊ²Ã´¾Í¸Ä£¡£¡£¡£¡£¡£¡£¡
-		String[] col_title = { "ĞòºÅ", "»ùµØÃû³Æ", "»ùµØÀàĞÍ", "Éê±¨²¿ÃÅ", "Ò»´ÎĞÔ¿É³Ğµ£ÊµÏ°Ñ§ÉúÈËÊı",
-				"ÍÁµØÃæ»ı/Ä¶", "½¨ÖşÃæ»ı/Æ½·½Ã×", "ÉêÇë½á¹û" };// 8¸öÁĞÍ·
+		// åˆ—å¤´ä¿¡æ¯ï¼ï¼ï¼ï¼æå½©è¿™æ˜¯æˆ‘æŒ‰å¿ƒé›¨çš„è®¾è®¡å¼„çš„ï¼Œå¦‚æœä½ è¦æ”¹ä»€ä¹ˆå°±æ”¹ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+		String[] col_title = { "åºå·", "åŸºåœ°åç§°", "åŸºåœ°ç±»å‹", "ç”³æŠ¥éƒ¨é—¨", "ä¸€æ¬¡æ€§å¯æ‰¿æ‹…å®ä¹ å­¦ç”Ÿäººæ•°",
+				"åœŸåœ°é¢ç§¯/äº©", "å»ºç­‘é¢ç§¯/å¹³æ–¹ç±³", "ç”³è¯·ç»“æœ" };// 8ä¸ªåˆ—å¤´
 		@SuppressWarnings("resource")
-		XSSFWorkbook workbook = new XSSFWorkbook();// ´´½¨Ò»¸öExcelÎÄµµ¶ÔÏó
-		Sheet sheet = workbook.createSheet();// ÔÚÉÏÃæµÄÎÄµµÖĞ´´½¨Excel±íµ¥
-		// ÉèÖÃÁĞµÄ¿í¶È
+		XSSFWorkbook workbook = new XSSFWorkbook();// åˆ›å»ºä¸€ä¸ªExcelæ–‡æ¡£å¯¹è±¡
+		Sheet sheet = workbook.createSheet();// åœ¨ä¸Šé¢çš„æ–‡æ¡£ä¸­åˆ›å»ºExcelè¡¨å•
+		// è®¾ç½®åˆ—çš„å®½åº¦
 		sheet.setColumnWidth(0, 1000);
 		sheet.setColumnWidth(1, 3500);
 		sheet.setColumnWidth(2, 3000);
@@ -247,133 +249,133 @@ public class ExcelReport{
 		sheet.setColumnWidth(6, 4500);
 		sheet.setColumnWidth(7, 3000);
 		
-		 * ÉèÖÃÑùÊ½
+		 * è®¾ç½®æ ·å¼
 		 
-		// 1¡¢ÉèÖÃ×ÖÌå// ÉèÖÃ±êÌâ×ÖÌå
+		// 1ã€è®¾ç½®å­—ä½“// è®¾ç½®æ ‡é¢˜å­—ä½“
 		Font font_title = workbook.createFont();
-		font_title.setFontName("ËÎÌå");
-		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font_title.setFontHeightInPoints((short) 18);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÁĞÍ·×ÖÌå
+		font_title.setFontName("å®‹ä½“");
+		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font_title.setFontHeightInPoints((short) 18);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®åˆ—å¤´å­—ä½“
 		Font font1 = workbook.createFont();
-		font1.setFontName("ËÎÌå");
-		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font1.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÕıÎÄ×ÖÌå1
+		font1.setFontName("å®‹ä½“");
+		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font1.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®æ­£æ–‡å­—ä½“1
 		Font font2 = workbook.createFont();
-		font2.setFontName("ËÎÌå");
-		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font2.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// 2¡¢ÉèÖÃÑùÊ½
-		// ÉèÖÃ±êÌâÑùÊ½
+		font2.setFontName("å®‹ä½“");
+		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// è®¾ç½®å­—ä½“ç²—ç»†
+		font2.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// 2ã€è®¾ç½®æ ·å¼
+		// è®¾ç½®æ ‡é¢˜æ ·å¼
 		XSSFCellStyle cs_title = workbook.createCellStyle();
-		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs_title.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs_title.setWrapText(true);// ÉèÖÃÊ¹µÃµ¥Ôª¸ñµÄÎÄ×Ö°´ÕÕµ¥Ôª¸ñµÄÁĞ¿íÀ´×Ô¶¯£¡»»ĞĞ£¡ÏÔÊ¾
+		cs_title.setWrapText(true);// è®¾ç½®ä½¿å¾—å•å…ƒæ ¼çš„æ–‡å­—æŒ‰ç…§å•å…ƒæ ¼çš„åˆ—å®½æ¥è‡ªåŠ¨ï¼æ¢è¡Œï¼æ˜¾ç¤º
 		cs_title.setFont(font_title);
-		// ÉèÖÃÁĞÍ·ÑùÊ½
+		// è®¾ç½®åˆ—å¤´æ ·å¼
 		XSSFCellStyle cs1 = workbook.createCellStyle();
-		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs1.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs1.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs1.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs1.setFont(font1);
-		// ÉèÖÃÕıÎÄ¾ÓÖĞÑùÊ½
+		// è®¾ç½®æ­£æ–‡å±…ä¸­æ ·å¼
 		XSSFCellStyle cs2 = workbook.createCellStyle();
-		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs2.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs2.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs2.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs2.setFont(font2);
-		// ºÏ²¢ÁĞ £¨µÚÒ»ĞĞ£¬×îºóÒ»ĞĞ£¬µÚÒ»ÁĞ£¬×îºóÒ»ÁĞ£©
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 7));// ºÏ²¢ÁĞ-±êÌâ
+		// åˆå¹¶åˆ— ï¼ˆç¬¬ä¸€è¡Œï¼Œæœ€åä¸€è¡Œï¼Œç¬¬ä¸€åˆ—ï¼Œæœ€åä¸€åˆ—ï¼‰
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 7));// åˆå¹¶åˆ—-æ ‡é¢˜
 		
-		 * ²åÈëÊı¾İ²Ù×÷
+		 * æ’å…¥æ•°æ®æ“ä½œ
 		 
-		// ±íÃû£¨µÚÒ»ÅÅÕ¼ÈıĞĞ£©
+		// è¡¨åï¼ˆç¬¬ä¸€æ’å ä¸‰è¡Œï¼‰
 		Row row1 = sheet.createRow(0);
 		row1.setHeight((short) 1000);
 		Cell cell_title = row1.createCell(0);
 		cell_title.setAsActiveCell();
-		cell_title.setCellValue("ºşÄÏÅ©Òµ´óÑ§ÊµÏ°»ùµØĞÅÏ¢±í");
+		cell_title.setCellValue("æ¹–å—å†œä¸šå¤§å­¦å®ä¹ åŸºåœ°ä¿¡æ¯è¡¨");
 		cell_title.setCellStyle(cs_title);
-		// µÚ¶şÅÅÌîÏàÓ¦ÁĞÍ·Ãû
+		// ç¬¬äºŒæ’å¡«ç›¸åº”åˆ—å¤´å
 		Row row2 = sheet.createRow(1);
 		for (int i = 0; i < col_title.length; i++) {
 			Cell cell_line = row2.createCell(i);
 			cell_line.setCellValue(col_title[i]);
 			cell_line.setCellStyle(cs1);
 		}
-		// ÈıÅÅÖ®ºó
+		// ä¸‰æ’ä¹‹å
 		
-		 * !!!!!!Àî²Ê×¢ÒâÕâÀïÊÇĞèÒªÍÁµØ×âÁŞµÄÊı¾İlistµÄÀàÃûºÍ·½·¨Ãû£¬È»ºóºóÃæ»¹ÓĞÃ¿ÌõÊı¾İÖĞ»ñÈ¡µ¥¸öÊıÖµµÄ·½·¨!!!!!!!!!!!!!!!!
+		 * !!!!!!æå½©æ³¨æ„è¿™é‡Œæ˜¯éœ€è¦åœŸåœ°ç§Ÿèµçš„æ•°æ®listçš„ç±»åå’Œæ–¹æ³•åï¼Œç„¶ååé¢è¿˜æœ‰æ¯æ¡æ•°æ®ä¸­è·å–å•ä¸ªæ•°å€¼çš„æ–¹æ³•!!!!!!!!!!!!!!!!
 		 * !!!!!!
 		 
-		// ÓÃ»§ID£¬ÒÔºóÒª´ÓºóÌ¨»ñÈ¡µÄ£¡£¡£¡£¡
+		// ç”¨æˆ·IDï¼Œä»¥åè¦ä»åå°è·å–çš„ï¼ï¼ï¼ï¼
 		@SuppressWarnings("rawtypes")
 		String applicantId = "201440509";
 		@SuppressWarnings("unchecked")
 		List<LandApply_view> list = landApplyServiceImpl
 				.getselfApply(applicantId);
 		
-		 * ±éÀúlistÖĞÈ¡µÃµÄÊı¾İ
+		 * éå†listä¸­å–å¾—çš„æ•°æ®
 		 
 		for (int i = 0; i < list.size(); i++) {
-			LandApply_view line_data = list.get(i);// È¡µÃlist¼¯ºÏÖĞÒ»ÌõÊı¾İ
-			int line = i + 2;// ¶àÉÙĞĞ
-			Row row_line = sheet.createRow(line);// ´´½¨µÚlineĞĞ
-			// µÚÒ»ÁĞĞòºÅ×Ô¶¯Ôö¼Ó1
+			LandApply_view line_data = list.get(i);// å–å¾—listé›†åˆä¸­ä¸€æ¡æ•°æ®
+			int line = i + 2;// å¤šå°‘è¡Œ
+			Row row_line = sheet.createRow(line);// åˆ›å»ºç¬¬lineè¡Œ
+			// ç¬¬ä¸€åˆ—åºå·è‡ªåŠ¨å¢åŠ 1
 			Cell cell0 = row_line.createCell(0);
 			cell0.setCellValue(i + 1);
 			cell0.setCellStyle(cs2);
-			// String[] col_title = { "ĞòºÅ","»ùµØÃû³Æ","»ùµØÀàĞÍ","Éê±¨²¿ÃÅ","Ò»´ÎĞÔ¿É³Ğµ£ÊµÏ°Ñ§ÉúÈËÊı",
-			// "ÍÁµØÃæ»ı/Ä¶","½¨ÖşÃæ»ı/Æ½·½Ã×","ÉêÇë½á¹û"};// 8¸öÁĞÍ·
-			// µÚ¶şÁĞ»ùµØÃû³Æ
+			// String[] col_title = { "åºå·","åŸºåœ°åç§°","åŸºåœ°ç±»å‹","ç”³æŠ¥éƒ¨é—¨","ä¸€æ¬¡æ€§å¯æ‰¿æ‹…å®ä¹ å­¦ç”Ÿäººæ•°",
+			// "åœŸåœ°é¢ç§¯/äº©","å»ºç­‘é¢ç§¯/å¹³æ–¹ç±³","ç”³è¯·ç»“æœ"};// 8ä¸ªåˆ—å¤´
+			// ç¬¬äºŒåˆ—åŸºåœ°åç§°
 			Cell cell1 = row_line.createCell(1);
-			// !!!!!!!!!!ÏÂÃæÕâĞĞ´úÂëµÄline_data.getStartTime()·½·¨»ñÈ¡µÄÖµÊÇÒª¶ÔÓ¦ÉÏÃæ±í¸ñË³ĞòµÄ¹şÀî²Ê£¬
-			// !!!!!!!!!!!È»ºóºóÃæÃ¿ÁĞ¶¼ÊÇÍ¬´Ë¸ü¸Ä!!!!!!!!!!!!!!!
+			// !!!!!!!!!!ä¸‹é¢è¿™è¡Œä»£ç çš„line_data.getStartTime()æ–¹æ³•è·å–çš„å€¼æ˜¯è¦å¯¹åº”ä¸Šé¢è¡¨æ ¼é¡ºåºçš„å“ˆæå½©ï¼Œ
+			// !!!!!!!!!!!ç„¶ååé¢æ¯åˆ—éƒ½æ˜¯åŒæ­¤æ›´æ”¹!!!!!!!!!!!!!!!
 			cell1.setCellValue(line_data.getStartTime());
 			cell1.setCellStyle(cs2);
-			// µÚÈıÁĞ»ùµØÀàĞÍ
+			// ç¬¬ä¸‰åˆ—åŸºåœ°ç±»å‹
 			Cell cell2 = row_line.createCell(2);
 			cell2.setCellValue(line_data.getEndTime());
 			cell2.setCellStyle(cs2);
-			// µÚËÄÁĞÉê±¨²¿ÃÅ
+			// ç¬¬å››åˆ—ç”³æŠ¥éƒ¨é—¨
 			Cell cell3 = row_line.createCell(3);
 			cell3.setCellValue(line_data.getBname());
 			cell3.setCellStyle(cs2);
-			// µÚÎåÁĞÒ»´ÎĞÔ¿É³Ğµ£ÊµÏ°Ñ§ÉúÈËÊı
+			// ç¬¬äº”åˆ—ä¸€æ¬¡æ€§å¯æ‰¿æ‹…å®ä¹ å­¦ç”Ÿäººæ•°
 			Cell cell4 = row_line.createCell(4);
 			cell4.setCellValue(line_data.getLid());
 			cell4.setCellStyle(cs2);
-			// µÚÁùÁĞÍÁµØÃæ»ı/Ä¶
+			// ç¬¬å…­åˆ—åœŸåœ°é¢ç§¯/äº©
 			Cell cell5 = row_line.createCell(5);
 			cell5.setCellValue(line_data.getName());
 			cell5.setCellStyle(cs2);
-			// µÚÆßÁĞ½¨ÖşÃæ»ı/Æ½·½Ã×
+			// ç¬¬ä¸ƒåˆ—å»ºç­‘é¢ç§¯/å¹³æ–¹ç±³
 			Cell cell6 = row_line.createCell(6);
 			cell6.setCellValue(line_data.getCollege());
 			cell6.setCellStyle(cs2);
-			// µÚ°ËÁĞÉêÇë½á¹û
+			// ç¬¬å…«åˆ—ç”³è¯·ç»“æœ
 			Cell cell7 = row_line.createCell(7);
 			cell7.setCellValue(line_data.getMajor_oriented());
 			cell7.setCellStyle(cs2);
 		}
-		// ½¨Á¢ExcelÎÄ¼ş
-		// !!!!!!!!!Àî²Ê°¡~~ÏÂÃæµÄÂ·¾¶ÊÇ½«Éú³ÉµÄÎÄ¼ş·Åµ½·şÎñÆ÷µÄÂ·¾¶!!!!!!!!!!!!!!!!!!!
+		// å»ºç«‹Excelæ–‡ä»¶
+		// !!!!!!!!!æå½©å•Š~~ä¸‹é¢çš„è·¯å¾„æ˜¯å°†ç”Ÿæˆçš„æ–‡ä»¶æ”¾åˆ°æœåŠ¡å™¨çš„è·¯å¾„!!!!!!!!!!!!!!!!!!!
 		File file = new File("E://workLandPreserveReport.xlsx");
 		try {
 			file.createNewFile();
@@ -387,21 +389,21 @@ public class ExcelReport{
 	}
 
 	
-	 * Èı:ÊµÏ°¼Æ»®Î¬»¤µÄExcelÎÄ¼şµ¼³ö (non-Javadoc)
+	 * ä¸‰:å®ä¹ è®¡åˆ’ç»´æŠ¤çš„Excelæ–‡ä»¶å¯¼å‡º (non-Javadoc)
 	 * 
 	 * @see com.base.service.ExcelReportService#workPlanPreserveReport()
 	 
 	@Override
-	public void workPlanPreserveReport() {// ÁĞÍ·ĞÅÏ¢
-		String[] col_title = { "ĞòºÅ", "ÊµÏ°»ùµØ", "ÁªÏµµç»°", "ÊµÏ°¿ªÊ¼Ê±¼ä", "ÊµÏ°½áÊøÊ±¼ä",
-				"ÊµÏ°ÀàĞÍ", "ÊµÏ°Ñ§Ôº", "ÊµÏ°µØµã", "ÊµÏ°Ö¸µ¼ÀÏÊ¦", "ÊµÏ°ÏîÄ¿Ãû³Æ", "Äê¼¶×¨Òµ°à¼¶", "ÊµÏ°ÈËÊı",
-				"ÊµÏ°ÄÚÈİÕªÒª¼°½ø³Ì°²ÅÅ" };
-		// 13¸ö
-		// 14¸öÁĞÍ·
+	public void workPlanPreserveReport() {// åˆ—å¤´ä¿¡æ¯
+		String[] col_title = { "åºå·", "å®ä¹ åŸºåœ°", "è”ç³»ç”µè¯", "å®ä¹ å¼€å§‹æ—¶é—´", "å®ä¹ ç»“æŸæ—¶é—´",
+				"å®ä¹ ç±»å‹", "å®ä¹ å­¦é™¢", "å®ä¹ åœ°ç‚¹", "å®ä¹ æŒ‡å¯¼è€å¸ˆ", "å®ä¹ é¡¹ç›®åç§°", "å¹´çº§ä¸“ä¸šç­çº§", "å®ä¹ äººæ•°",
+				"å®ä¹ å†…å®¹æ‘˜è¦åŠè¿›ç¨‹å®‰æ’" };
+		// 13ä¸ª
+		// 14ä¸ªåˆ—å¤´
 		@SuppressWarnings("resource")
-		XSSFWorkbook workbook = new XSSFWorkbook();// ´´½¨Ò»¸öExcelÎÄµµ¶ÔÏó
-		Sheet sheet = workbook.createSheet();// ÔÚÉÏÃæµÄÎÄµµÖĞ´´½¨Excel±íµ¥
-		// ÉèÖÃÁĞµÄ¿í¶È
+		XSSFWorkbook workbook = new XSSFWorkbook();// åˆ›å»ºä¸€ä¸ªExcelæ–‡æ¡£å¯¹è±¡
+		Sheet sheet = workbook.createSheet();// åœ¨ä¸Šé¢çš„æ–‡æ¡£ä¸­åˆ›å»ºExcelè¡¨å•
+		// è®¾ç½®åˆ—çš„å®½åº¦
 		sheet.setColumnWidth(0, 1500);
 		sheet.setColumnWidth(1, 4500);
 		sheet.setColumnWidth(2, 4000);
@@ -416,155 +418,155 @@ public class ExcelReport{
 		sheet.setColumnWidth(11, 2500);
 		sheet.setColumnWidth(12, 7000);
 		
-		 * ÉèÖÃÑùÊ½
+		 * è®¾ç½®æ ·å¼
 		 
-		// 1¡¢ÉèÖÃ×ÖÌå// ÉèÖÃ±êÌâ×ÖÌå
+		// 1ã€è®¾ç½®å­—ä½“// è®¾ç½®æ ‡é¢˜å­—ä½“
 		Font font_title = workbook.createFont();
-		font_title.setFontName("ËÎÌå");
-		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font_title.setFontHeightInPoints((short) 18);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÁĞÍ·×ÖÌå
+		font_title.setFontName("å®‹ä½“");
+		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font_title.setFontHeightInPoints((short) 18);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®åˆ—å¤´å­—ä½“
 		Font font1 = workbook.createFont();
-		font1.setFontName("ËÎÌå");
-		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font1.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÕıÎÄ×ÖÌå1
+		font1.setFontName("å®‹ä½“");
+		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font1.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®æ­£æ–‡å­—ä½“1
 		Font font2 = workbook.createFont();
-		font2.setFontName("ËÎÌå");
-		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font2.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// 2¡¢ÉèÖÃÑùÊ½
-		// ÉèÖÃ±êÌâÑùÊ½
+		font2.setFontName("å®‹ä½“");
+		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// è®¾ç½®å­—ä½“ç²—ç»†
+		font2.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// 2ã€è®¾ç½®æ ·å¼
+		// è®¾ç½®æ ‡é¢˜æ ·å¼
 		XSSFCellStyle cs_title = workbook.createCellStyle();
-		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs_title.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs_title.setWrapText(true);// ÉèÖÃÊ¹µÃµ¥Ôª¸ñµÄÎÄ×Ö°´ÕÕµ¥Ôª¸ñµÄÁĞ¿íÀ´×Ô¶¯£¡»»ĞĞ£¡ÏÔÊ¾
+		cs_title.setWrapText(true);// è®¾ç½®ä½¿å¾—å•å…ƒæ ¼çš„æ–‡å­—æŒ‰ç…§å•å…ƒæ ¼çš„åˆ—å®½æ¥è‡ªåŠ¨ï¼æ¢è¡Œï¼æ˜¾ç¤º
 		cs_title.setFont(font_title);
-		// ÉèÖÃÁĞÍ·ÑùÊ½
+		// è®¾ç½®åˆ—å¤´æ ·å¼
 		XSSFCellStyle cs1 = workbook.createCellStyle();
-		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs1.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs1.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs1.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs1.setFont(font1);
-		// ÉèÖÃÕıÎÄ¾ÓÖĞÑùÊ½
+		// è®¾ç½®æ­£æ–‡å±…ä¸­æ ·å¼
 		XSSFCellStyle cs2 = workbook.createCellStyle();
-		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs2.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs2.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs2.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs2.setFont(font2);
-		// ºÏ²¢ÁĞ £¨µÚÒ»ĞĞ£¬×îºóÒ»ĞĞ£¬µÚÒ»ÁĞ£¬×îºóÒ»ÁĞ£©
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 12));// ºÏ²¢ÁĞ-±êÌâ
+		// åˆå¹¶åˆ— ï¼ˆç¬¬ä¸€è¡Œï¼Œæœ€åä¸€è¡Œï¼Œç¬¬ä¸€åˆ—ï¼Œæœ€åä¸€åˆ—ï¼‰
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 12));// åˆå¹¶åˆ—-æ ‡é¢˜
 		
-		 * ²åÈëÊı¾İ²Ù×÷
+		 * æ’å…¥æ•°æ®æ“ä½œ
 		 
-		// ±íÃû£¨µÚÒ»ÅÅÕ¼ÈıĞĞ£©
+		// è¡¨åï¼ˆç¬¬ä¸€æ’å ä¸‰è¡Œï¼‰
 		Row row1 = sheet.createRow(0);
 		row1.setHeight((short) 1000);
 		Cell cell_title = row1.createCell(0);
 		cell_title.setAsActiveCell();
-		cell_title.setCellValue("ºşÄÏÅ©Òµ´óÑ§ÊµÏ°¼Æ»®ĞÅÏ¢±í");
+		cell_title.setCellValue("æ¹–å—å†œä¸šå¤§å­¦å®ä¹ è®¡åˆ’ä¿¡æ¯è¡¨");
 		cell_title.setCellStyle(cs_title);
-		// µÚ¶şÅÅÌîÏàÓ¦ÁĞÍ·Ãû
+		// ç¬¬äºŒæ’å¡«ç›¸åº”åˆ—å¤´å
 		Row row2 = sheet.createRow(1);
 		for (int i = 0; i < col_title.length; i++) {
 			Cell cell_line = row2.createCell(i);
 			cell_line.setCellValue(col_title[i]);
 			cell_line.setCellStyle(cs1);
 		}
-		// ÈıÅÅÖ®ºó
+		// ä¸‰æ’ä¹‹å
 		
-		 * !!!!!!Àî²Ê×¢ÒâÕâÀïÊÇĞèÒªÍÁµØ×âÁŞµÄÊı¾İlistµÄÀàÃûºÍ·½·¨Ãû£¬È»ºóºóÃæ»¹ÓĞÃ¿ÌõÊı¾İÖĞ»ñÈ¡µ¥¸öÊıÖµµÄ·½·¨!!!!!!!!!!!!!!!!
+		 * !!!!!!æå½©æ³¨æ„è¿™é‡Œæ˜¯éœ€è¦åœŸåœ°ç§Ÿèµçš„æ•°æ®listçš„ç±»åå’Œæ–¹æ³•åï¼Œç„¶ååé¢è¿˜æœ‰æ¯æ¡æ•°æ®ä¸­è·å–å•ä¸ªæ•°å€¼çš„æ–¹æ³•!!!!!!!!!!!!!!!!
 		 * !!!!!!
 		 
-		// ÓÃ»§ID£¬ÒÔºóÒª´ÓºóÌ¨»ñÈ¡µÄ£¡£¡£¡£¡
+		// ç”¨æˆ·IDï¼Œä»¥åè¦ä»åå°è·å–çš„ï¼ï¼ï¼ï¼
 		@SuppressWarnings("rawtypes")
 		String applicantId = "201440509";
 		@SuppressWarnings("unchecked")
 		List<LandApply_view> list = landApplyServiceImpl
 				.getselfApply(applicantId);
 		
-		 * ±éÀúlistÖĞÈ¡µÃµÄÊı¾İ
+		 * éå†listä¸­å–å¾—çš„æ•°æ®
 		 
 		for (int i = 0; i < list.size(); i++) {
-			LandApply_view line_data = list.get(i);// È¡µÃlist¼¯ºÏÖĞÒ»ÌõÊı¾İ
-			int line = i + 2;// ¶àÉÙĞĞ
-			Row row_line = sheet.createRow(line);// ´´½¨µÚlineĞĞ
-			// µÚÒ»ÁĞĞòºÅ×Ô¶¯Ôö¼Ó1
+			LandApply_view line_data = list.get(i);// å–å¾—listé›†åˆä¸­ä¸€æ¡æ•°æ®
+			int line = i + 2;// å¤šå°‘è¡Œ
+			Row row_line = sheet.createRow(line);// åˆ›å»ºç¬¬lineè¡Œ
+			// ç¬¬ä¸€åˆ—åºå·è‡ªåŠ¨å¢åŠ 1
 			Cell cell0 = row_line.createCell(0);
 			cell0.setCellValue(i + 1);
 			cell0.setCellStyle(cs2);
-			// String[] col_title = { "ĞòºÅ", "ÊµÏ°»ùµØ", "ÁªÏµµç»°", "ÊµÏ°¿ªÊ¼Ê±¼ä", "ÊµÏ°½áÊøÊ±¼ä",
-			// "ÊµÏ°ÀàĞÍ", "ÊµÏ°Ñ§Ôº", "ÊµÏ°µØµã", "ÊµÏ°Ö¸µ¼ÀÏÊ¦", "ÊµÏ°ÏîÄ¿Ãû³Æ",
-			// "Äê¼¶×¨Òµ°à¼¶", "ÊµÏ°ÈËÊı","ÊµÏ°ÄÚÈİÕªÒª¼°½ø³Ì°²ÅÅ" };
-			// // 13¸öÁĞÍ·
-			// µÚ¶şÁĞÊµÏ°»ùµØ
+			// String[] col_title = { "åºå·", "å®ä¹ åŸºåœ°", "è”ç³»ç”µè¯", "å®ä¹ å¼€å§‹æ—¶é—´", "å®ä¹ ç»“æŸæ—¶é—´",
+			// "å®ä¹ ç±»å‹", "å®ä¹ å­¦é™¢", "å®ä¹ åœ°ç‚¹", "å®ä¹ æŒ‡å¯¼è€å¸ˆ", "å®ä¹ é¡¹ç›®åç§°",
+			// "å¹´çº§ä¸“ä¸šç­çº§", "å®ä¹ äººæ•°","å®ä¹ å†…å®¹æ‘˜è¦åŠè¿›ç¨‹å®‰æ’" };
+			// // 13ä¸ªåˆ—å¤´
+			// ç¬¬äºŒåˆ—å®ä¹ åŸºåœ°
 			Cell cell1 = row_line.createCell(1);
-			// !!!!!!!!!!ÏÂÃæÕâĞĞ´úÂëµÄline_data.getStartTime()·½·¨»ñÈ¡µÄÖµÊÇÒª¶ÔÓ¦ÉÏÃæ±í¸ñË³ĞòµÄ¹şÀî²Ê£¬
-			// !!!!!!!!!!!È»ºóºóÃæÃ¿ÁĞ¶¼ÊÇÍ¬´Ë¸ü¸Ä!!!!!!!!!!!!!!!
+			// !!!!!!!!!!ä¸‹é¢è¿™è¡Œä»£ç çš„line_data.getStartTime()æ–¹æ³•è·å–çš„å€¼æ˜¯è¦å¯¹åº”ä¸Šé¢è¡¨æ ¼é¡ºåºçš„å“ˆæå½©ï¼Œ
+			// !!!!!!!!!!!ç„¶ååé¢æ¯åˆ—éƒ½æ˜¯åŒæ­¤æ›´æ”¹!!!!!!!!!!!!!!!
 			cell1.setCellValue(line_data.getStartTime());
 			cell1.setCellStyle(cs2);
-			// µÚÈıÁĞÁªÏµµç»°
+			// ç¬¬ä¸‰åˆ—è”ç³»ç”µè¯
 			Cell cell2 = row_line.createCell(2);
 			cell2.setCellValue(line_data.getEndTime());
 			cell2.setCellStyle(cs2);
-			// µÚËÄÊµÏ°¿ªÊ¼Ê±¼ä
+			// ç¬¬å››å®ä¹ å¼€å§‹æ—¶é—´
 			Cell cell3 = row_line.createCell(3);
 			cell3.setCellValue(line_data.getBname());
 			cell3.setCellStyle(cs2);
-			// µÚÎåÁĞÊµÏ°½áÊøÊ±¼ä
+			// ç¬¬äº”åˆ—å®ä¹ ç»“æŸæ—¶é—´
 			Cell cell4 = row_line.createCell(4);
 			cell4.setCellValue(line_data.getLid());
 			cell4.setCellStyle(cs2);
-			// µÚÁùÁĞÊµÏ°ÀàĞÍ
+			// ç¬¬å…­åˆ—å®ä¹ ç±»å‹
 			Cell cell5 = row_line.createCell(5);
 			cell5.setCellValue(line_data.getName());
 			cell5.setCellStyle(cs2);
-			// µÚÆßÁĞÊµÏ°Ñ§Ôº
+			// ç¬¬ä¸ƒåˆ—å®ä¹ å­¦é™¢
 			Cell cell6 = row_line.createCell(6);
 			cell6.setCellValue(line_data.getCollege());
 			cell6.setCellStyle(cs2);
-			// µÚ°ËÁĞÊµÏ°µØµã
+			// ç¬¬å…«åˆ—å®ä¹ åœ°ç‚¹
 			Cell cell7 = row_line.createCell(7);
 			cell7.setCellValue(line_data.getMajor_oriented());
 			cell7.setCellStyle(cs2);
-			// µÚ¾ÅÁĞÊµÏ°Ö¸µ¼ÀÏÊ¦
+			// ç¬¬ä¹åˆ—å®ä¹ æŒ‡å¯¼è€å¸ˆ
 			Cell cell8 = row_line.createCell(8);
 			cell8.setCellValue(line_data.getBuildingArea());
 			cell8.setCellStyle(cs2);
-			// µÚÊ®ÁĞÊµÏ°ÏîÄ¿Ãû³Æ
+			// ç¬¬ååˆ—å®ä¹ é¡¹ç›®åç§°
 			Cell cell9 = row_line.createCell(9);
 			cell9.setCellValue(line_data.getLandArea());
 			cell9.setCellStyle(cs2);
-			// µÚÊ®Ò»ÁĞÄê¼¶×¨Òµ°à¼¶
+			// ç¬¬åä¸€åˆ—å¹´çº§ä¸“ä¸šç­çº§
 			Cell cell10 = row_line.createCell(10);
 			cell10.setCellValue(line_data.getAptPlanting());
 			cell10.setCellStyle(cs2);
-			// µÚÊ®¶şÁĞÊµÏ°ÈËÊı
+			// ç¬¬åäºŒåˆ—å®ä¹ äººæ•°
 			Cell cell11 = row_line.createCell(11);
 			cell11.setCellValue(line_data.getAfford());
 			cell11.setCellStyle(cs2);
-			// µÚÊ®ÈıÁĞÊµÏ°ÄÚÈİÕªÒª¼°½ø³Ì°²ÅÅ
+			// ç¬¬åä¸‰åˆ—å®ä¹ å†…å®¹æ‘˜è¦åŠè¿›ç¨‹å®‰æ’
 			Cell cell12 = row_line.createCell(12);
 			cell12.setCellValue(line_data.getTenancy());
 			cell12.setCellStyle(cs2);
 		}
-		// ½¨Á¢ExcelÎÄ¼ş
-		// !!!!!!!!!Àî²Ê°¡~~ÏÂÃæµÄÂ·¾¶ÊÇ½«Éú³ÉµÄÎÄ¼ş·Åµ½·şÎñÆ÷µÄÂ·¾¶!!!!!!!!!!!!!!!!!!!
+		// å»ºç«‹Excelæ–‡ä»¶
+		// !!!!!!!!!æå½©å•Š~~ä¸‹é¢çš„è·¯å¾„æ˜¯å°†ç”Ÿæˆçš„æ–‡ä»¶æ”¾åˆ°æœåŠ¡å™¨çš„è·¯å¾„!!!!!!!!!!!!!!!!!!!
 		File file = new File("E://workPlanPreserveReport.xlsx");
 		try {
 			file.createNewFile();
@@ -576,22 +578,23 @@ public class ExcelReport{
 		}
 
 	}
-
-	
-	 * ËÄ:ÏµÍ³ÓÃ»§Î¬»¤µÄExcelÎÄ¼şµ¼³ö (non-Javadoc)
+*/
+	/*
+	 * å››:ç³»ç»Ÿç”¨æˆ·ç»´æŠ¤çš„Excelæ–‡ä»¶å¯¼å‡º (non-Javadoc)
 	 * 
 	 * @see com.base.service.ExcelReportService#systemUsersPreserveReport()
-	 
-	@Override
-	public void systemUsersPreserveReport() {
-		// ÁĞÍ·ĞÅÏ¢
-		String[] col_title = { "ĞòºÅ", "Ô±¹¤±àºÅ", "Éí·İÊôĞÔ", "ĞÕÃû", "ĞÔ±ğ", "Ô±¹¤ÀàĞÍ",
-				"³öÉúÈÕÆÚ", "Éí·İÖ¤ºÅÂë", "ÁªÏµµç»°", "²¿ÃÅ", "Ô­¹¤×÷µ¥Î»", "À´Ğ£¹¤×÷Ê±¼ä", "²Î¼Ó¹¤×÷Ê±¼ä",
-				"ÓÃ¹¤ĞÎÊ½", "»§¿ÚĞÔÖÊ", "ÃÜÂë" };// 16
+	 */
+	public void exportPersonInfo(List<Manger> list) {
+		// åˆ—å¤´ä¿¡æ¯
+		/*"åºå·", "å‘˜å·¥ç¼–å·", "èº«ä»½å±æ€§", "å§“å", "æ€§åˆ«", "å‘˜å·¥ç±»å‹",
+		"å‡ºç”Ÿæ—¥æœŸ", "èº«ä»½è¯å·ç ", "è”ç³»ç”µè¯", "éƒ¨é—¨", "åŸå·¥ä½œå•ä½", "æ¥æ ¡å·¥ä½œæ—¶é—´", "å‚åŠ å·¥ä½œæ—¶é—´",
+		"ç”¨å·¥å½¢å¼", "æˆ·å£æ€§è´¨", "å¯†ç " */
+          String[] col_title = { "åºå·", "å‘˜å·¥ç¼–å·", "èº«ä»½å±æ€§", "å§“å", "æ€§åˆ«", "å‘˜å·¥ç±»å‹",
+				"å‡ºç”Ÿæ—¥æœŸ", "èº«ä»½è¯å·ç ", "è”ç³»ç”µè¯", "éƒ¨é—¨"};// 16
 		@SuppressWarnings("resource")
-		XSSFWorkbook workbook = new XSSFWorkbook();// ´´½¨Ò»¸öExcelÎÄµµ¶ÔÏó
-		Sheet sheet = workbook.createSheet();// ÔÚÉÏÃæµÄÎÄµµÖĞ´´½¨Excel±íµ¥
-		// ÉèÖÃÁĞµÄ¿í¶È
+		XSSFWorkbook workbook = new XSSFWorkbook();// åˆ›å»ºä¸€ä¸ªExcelæ–‡æ¡£å¯¹è±¡
+		Sheet sheet = workbook.createSheet();// åœ¨ä¸Šé¢çš„æ–‡æ¡£ä¸­åˆ›å»ºExcelè¡¨å•
+		// è®¾ç½®åˆ—çš„å®½åº¦
 		sheet.setColumnWidth(0, 1500);
 		sheet.setColumnWidth(1, 2500);
 		sheet.setColumnWidth(2, 3000);
@@ -602,174 +605,162 @@ public class ExcelReport{
 		sheet.setColumnWidth(7, 5500);
 		sheet.setColumnWidth(8, 4000);
 		sheet.setColumnWidth(9, 4000);
-		sheet.setColumnWidth(10, 4500);
-		sheet.setColumnWidth(11, 3000);
-		sheet.setColumnWidth(12, 3000);
-		sheet.setColumnWidth(13, 3000);
-		sheet.setColumnWidth(14, 3000);
-		sheet.setColumnWidth(15, 3000);
 		
-		 * ÉèÖÃÑùÊ½
+		// * è®¾ç½®æ ·å¼
 		 
-		// 1¡¢ÉèÖÃ×ÖÌå// ÉèÖÃ±êÌâ×ÖÌå
+		// 1ã€è®¾ç½®å­—ä½“// è®¾ç½®æ ‡é¢˜å­—ä½“
 		Font font_title = workbook.createFont();
-		font_title.setFontName("ËÎÌå");
-		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font_title.setFontHeightInPoints((short) 18);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÁĞÍ·×ÖÌå
+		font_title.setFontName("å®‹ä½“");
+		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font_title.setFontHeightInPoints((short) 18);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®åˆ—å¤´å­—ä½“
 		Font font1 = workbook.createFont();
-		font1.setFontName("ËÎÌå");
-		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font1.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// ÉèÖÃÕıÎÄ×ÖÌå1
+		font1.setFontName("å®‹ä½“");
+		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// è®¾ç½®å­—ä½“ç²—ç»†
+		font1.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// è®¾ç½®æ­£æ–‡å­—ä½“1
 		Font font2 = workbook.createFont();
-		font2.setFontName("ËÎÌå");
-		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// ÉèÖÃ×ÖÌå´ÖÏ¸
-		font2.setFontHeightInPoints((short) 11);// ÉèÖÃ×ÖÌå´óĞ¡
-		// 2¡¢ÉèÖÃÑùÊ½
-		// ÉèÖÃ±êÌâÑùÊ½
+		font2.setFontName("å®‹ä½“");
+		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// è®¾ç½®å­—ä½“ç²—ç»†
+		font2.setFontHeightInPoints((short) 11);// è®¾ç½®å­—ä½“å¤§å°
+		// 2ã€è®¾ç½®æ ·å¼
+		// è®¾ç½®æ ‡é¢˜æ ·å¼
 		XSSFCellStyle cs_title = workbook.createCellStyle();
-		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs_title.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs_title.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs_title.setWrapText(true);// ÉèÖÃÊ¹µÃµ¥Ôª¸ñµÄÎÄ×Ö°´ÕÕµ¥Ôª¸ñµÄÁĞ¿íÀ´×Ô¶¯£¡»»ĞĞ£¡ÏÔÊ¾
+		cs_title.setWrapText(true);// è®¾ç½®ä½¿å¾—å•å…ƒæ ¼çš„æ–‡å­—æŒ‰ç…§å•å…ƒæ ¼çš„åˆ—å®½æ¥è‡ªåŠ¨ï¼æ¢è¡Œï¼æ˜¾ç¤º
 		cs_title.setFont(font_title);
-		// ÉèÖÃÁĞÍ·ÑùÊ½
+		// è®¾ç½®åˆ—å¤´æ ·å¼
 		XSSFCellStyle cs1 = workbook.createCellStyle();
-		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs1.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs1.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs1.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs1.setFont(font1);
-		// ÉèÖÃÕıÎÄ¾ÓÖĞÑùÊ½
+		// è®¾ç½®æ­£æ–‡å±…ä¸­æ ·å¼
 		XSSFCellStyle cs2 = workbook.createCellStyle();
-		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// ÉèÖÃ×ÖÌåË®Æ½¾ÓÖĞ
-		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// ÉèÖÃ×ÖÌå´¹Ö±¾ÓÖĞ
-		// ÒÀ´ÎÉèÖÃµ×¡¢×ó¡¢ÓÒ¡¢ÉÏ±ß¿ò
+		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// è®¾ç½®å­—ä½“æ°´å¹³å±…ä¸­
+		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// è®¾ç½®å­—ä½“å‚ç›´å±…ä¸­
+		// ä¾æ¬¡è®¾ç½®åº•ã€å·¦ã€å³ã€ä¸Šè¾¹æ¡†
 		cs2.setBorderBottom(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderLeft(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderRight(XSSFCellStyle.BORDER_THIN);
 		cs2.setBorderTop(XSSFCellStyle.BORDER_THIN);
-		cs2.setWrapText(true);// ÉèÖÃ¿í¶È×ÔÊÊÓ¦
+		cs2.setWrapText(true);// è®¾ç½®å®½åº¦è‡ªé€‚åº”
 		cs2.setFont(font2);
-		// ºÏ²¢ÁĞ £¨µÚÒ»ĞĞ£¬×îºóÒ»ĞĞ£¬µÚÒ»ÁĞ£¬×îºóÒ»ÁĞ£©
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));// ºÏ²¢ÁĞ-±êÌâ
+		// åˆå¹¶åˆ— ï¼ˆç¬¬ä¸€è¡Œï¼Œæœ€åä¸€è¡Œï¼Œç¬¬ä¸€åˆ—ï¼Œæœ€åä¸€åˆ—ï¼‰
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));// åˆå¹¶åˆ—-æ ‡é¢˜
 		
-		 * ²åÈëÊı¾İ²Ù×÷
+		// * æ’å…¥æ•°æ®æ“ä½œ
 		 
-		// ±íÃû£¨µÚÒ»ÅÅÕ¼ÈıĞĞ£©
+		// è¡¨åï¼ˆç¬¬ä¸€æ’å ä¸‰è¡Œï¼‰
 		Row row1 = sheet.createRow(0);
 		row1.setHeight((short) 1000);
 		Cell cell_title = row1.createCell(0);
 		cell_title.setAsActiveCell();
-		cell_title.setCellValue("ºşÄÏÅ©Òµ´óÑ§ÏµÍ³ÓÃ»§ĞÅÏ¢±í");
+		cell_title.setCellValue("æ¹–å—å†œä¸šå¤§å­¦ç³»ç»Ÿç”¨æˆ·ä¿¡æ¯è¡¨");
 		cell_title.setCellStyle(cs_title);
-		// µÚ¶şÅÅÌîÏàÓ¦ÁĞÍ·Ãû
+		// ç¬¬äºŒæ’å¡«ç›¸åº”åˆ—å¤´å
 		Row row2 = sheet.createRow(1);
 		for (int i = 0; i < col_title.length; i++) {
 			Cell cell_line = row2.createCell(i);
 			cell_line.setCellValue(col_title[i]);
 			cell_line.setCellStyle(cs1);
 		}
-		// ÈıÅÅÖ®ºó
+		/*// ä¸‰æ’ä¹‹å
 		
-		 * !!!!!!Àî²Ê×¢ÒâÕâÀïÊÇĞèÒªÍÁµØ×âÁŞµÄÊı¾İlistµÄÀàÃûºÍ·½·¨Ãû£¬È»ºóºóÃæ»¹ÓĞÃ¿ÌõÊı¾İÖĞ»ñÈ¡µ¥¸öÊıÖµµÄ·½·¨!!!!!!!!!!!!!!!!
+		 * !!!!!!æå½©æ³¨æ„è¿™é‡Œæ˜¯éœ€è¦åœŸåœ°ç§Ÿèµçš„æ•°æ®listçš„ç±»åå’Œæ–¹æ³•åï¼Œç„¶ååé¢è¿˜æœ‰æ¯æ¡æ•°æ®ä¸­è·å–å•ä¸ªæ•°å€¼çš„æ–¹æ³•!!!!!!!!!!!!!!!!
 		 * !!!!!!
 		 
-		// ÓÃ»§ID£¬ÒÔºóÒª´ÓºóÌ¨»ñÈ¡µÄ£¡£¡£¡£¡
-		@SuppressWarnings("rawtypes")
-		String applicantId = "201440509";
-		@SuppressWarnings("unchecked")
-		List<LandApply_view> list = landApplyServiceImpl
-				.getselfApply(applicantId);
-		
-		 * ±éÀúlistÖĞÈ¡µÃµÄÊı¾İ
+		// ç”¨æˆ·IDï¼Œä»¥åè¦ä»åå°è·å–çš„ï¼ï¼ï¼ï¼*/		
+		 //* éå†listä¸­å–å¾—çš„æ•°æ®
 		 
 		for (int i = 0; i < list.size(); i++) {
-			LandApply_view line_data = list.get(i);// È¡µÃlist¼¯ºÏÖĞÒ»ÌõÊı¾İ
-			int line = i + 2;// ¶àÉÙĞĞ
-			Row row_line = sheet.createRow(line);// ´´½¨µÚlineĞĞ
-			// µÚÒ»ÁĞĞòºÅ×Ô¶¯Ôö¼Ó1
+			Manger line_data = list.get(i);// å–å¾—listé›†åˆä¸­ä¸€æ¡æ•°æ®
+			int line = i + 2;// å¤šå°‘è¡Œ
+			Row row_line = sheet.createRow(line);// åˆ›å»ºç¬¬lineè¡Œ
+			// ç¬¬ä¸€åˆ—åºå·è‡ªåŠ¨å¢åŠ 1
 			Cell cell0 = row_line.createCell(0);
 			cell0.setCellValue(i + 1);
 			cell0.setCellStyle(cs2);
-			// String[] col_title = { "ĞòºÅ","Ô±¹¤±àºÅ","Éí·İÊôĞÔ","ĞÕÃû","ĞÔ±ğ","Ô±¹¤ÀàĞÍ",
-			// "³öÉúÈÕÆÚ","Éí·İÖ¤ºÅÂë","ÁªÏµµç»°","²¿ÃÅ","Ô­¹¤×÷µ¥Î»",
-			// "À´Ğ£¹¤×÷Ê±¼ä","²Î¼Ó¹¤×÷Ê±¼ä","ÓÃ¹¤ĞÎÊ½","»§¿ÚĞÔÖÊ","ÃÜÂë"};//16
-			// µÚ¶şÁĞÔ±¹¤±àºÅ
+			// String[] col_title = { "åºå·","å‘˜å·¥ç¼–å·","èº«ä»½å±æ€§","å§“å","æ€§åˆ«","å‘˜å·¥ç±»å‹",
+			// "å‡ºç”Ÿæ—¥æœŸ","èº«ä»½è¯å·ç ","è”ç³»ç”µè¯","éƒ¨é—¨","åŸå·¥ä½œå•ä½",
+			// "æ¥æ ¡å·¥ä½œæ—¶é—´","å‚åŠ å·¥ä½œæ—¶é—´","ç”¨å·¥å½¢å¼","æˆ·å£æ€§è´¨","å¯†ç "};//16
+			// ç¬¬äºŒåˆ—å‘˜å·¥ç¼–å·
 			Cell cell1 = row_line.createCell(1);
-			// !!!!!!!!!!ÏÂÃæÕâĞĞ´úÂëµÄline_data.getStartTime()·½·¨»ñÈ¡µÄÖµÊÇÒª¶ÔÓ¦ÉÏÃæ±í¸ñË³ĞòµÄ¹şÀî²Ê£¬
-			// !!!!!!!!!!!È»ºóºóÃæÃ¿ÁĞ¶¼ÊÇÍ¬´Ë¸ü¸Ä!!!!!!!!!!!!!!!
-			cell1.setCellValue(line_data.getStartTime());
+			// !!!!!!!!!!ä¸‹é¢è¿™è¡Œä»£ç çš„line_data.getStartTime()æ–¹æ³•è·å–çš„å€¼æ˜¯è¦å¯¹åº”ä¸Šé¢è¡¨æ ¼é¡ºåºçš„å“ˆæå½©ï¼Œ
+			// !!!!!!!!!!!ç„¶ååé¢æ¯åˆ—éƒ½æ˜¯åŒæ­¤æ›´æ”¹!!!!!!!!!!!!!!!
+			cell1.setCellValue(line_data.getId());
 			cell1.setCellStyle(cs2);
-			// µÚÈıÁĞÉí·İÊôĞÔ
+			// ç¬¬ä¸‰åˆ—èº«ä»½å±æ€§
 			Cell cell2 = row_line.createCell(2);
-			cell2.setCellValue(line_data.getEndTime());
+			cell2.setCellValue(line_data.getAttritube());
 			cell2.setCellStyle(cs2);
-			// µÚËÄÁĞĞÕÃû
+			// ç¬¬å››åˆ—å§“å
 			Cell cell3 = row_line.createCell(3);
-			cell3.setCellValue(line_data.getBname());
+			cell3.setCellValue(line_data.getUsername());
 			cell3.setCellStyle(cs2);
-			// µÚÎåÁĞĞÔ±ğ
+			// ç¬¬äº”åˆ—æ€§åˆ«
 			Cell cell4 = row_line.createCell(4);
-			cell4.setCellValue(line_data.getLid());
+			cell4.setCellValue(line_data.getSex());
 			cell4.setCellStyle(cs2);
-			// µÚÁùÁĞÔ±¹¤ÀàĞÍ
+			// ç¬¬å…­åˆ—å‘˜å·¥ç±»å‹
 			Cell cell5 = row_line.createCell(5);
-			cell5.setCellValue(line_data.getName());
+			cell5.setCellValue(line_data.getCategory());
 			cell5.setCellStyle(cs2);
-			// µÚÆßÁĞ³öÉúÈÕÆÚ
+			// ç¬¬ä¸ƒåˆ—å‡ºç”Ÿæ—¥æœŸ
 			Cell cell6 = row_line.createCell(6);
-			cell6.setCellValue(line_data.getCollege());
+			cell6.setCellValue(line_data.getBirth());
 			cell6.setCellStyle(cs2);
-			// µÚ°ËÁĞÉí·İÖ¤ºÅÂë
+			// ç¬¬å…«åˆ—èº«ä»½è¯å·ç 
 			Cell cell7 = row_line.createCell(7);
-			cell7.setCellValue(line_data.getMajor_oriented());
+			cell7.setCellValue(line_data.getIdcard());
 			cell7.setCellStyle(cs2);
-			// µÚ¾ÅÁĞÁªÏµµç»°
+			// ç¬¬ä¹åˆ—è”ç³»ç”µè¯
 			Cell cell8 = row_line.createCell(8);
-			cell8.setCellValue(line_data.getBuildingArea());
+			cell8.setCellValue(line_data.getTelephone());
 			cell8.setCellStyle(cs2);
-			// µÚÊ®ÁĞ²¿ÃÅ
+			// ç¬¬ååˆ—éƒ¨é—¨
 			Cell cell9 = row_line.createCell(9);
-			cell9.setCellValue(line_data.getLandArea());
+			cell9.setCellValue(line_data.getDept());
 			cell9.setCellStyle(cs2);
-			// µÚÊ®Ò»ÁĞÔ­¹¤×÷µ¥Î»
+			/*// ç¬¬åä¸€åˆ—åŸå·¥ä½œå•ä½
 			Cell cell10 = row_line.createCell(10);
 			cell10.setCellValue(line_data.getAptPlanting());
 			cell10.setCellStyle(cs2);
-			// µÚÊ®¶şÁĞÀ´Ğ£¹¤×÷Ê±¼ä
+			// ç¬¬åäºŒåˆ—æ¥æ ¡å·¥ä½œæ—¶é—´
 			Cell cell11 = row_line.createCell(11);
 			cell11.setCellValue(line_data.getAfford());
 			cell11.setCellStyle(cs2);
-			// µÚÊ®ÈıÁĞ²Î¼Ó¹¤×÷Ê±¼ä
+			// ç¬¬åä¸‰åˆ—å‚åŠ å·¥ä½œæ—¶é—´
 			Cell cell12 = row_line.createCell(12);
 			cell12.setCellValue(line_data.getDescp());
 			cell12.setCellStyle(cs2);
-			// µÚÊ®ËÄÁĞÓÃ¹¤ĞÎÊ½
+			// ç¬¬åå››åˆ—ç”¨å·¥å½¢å¼
 			Cell cell13 = row_line.createCell(13);
 			cell13.setCellValue(line_data.getTenancy());
 			cell13.setCellStyle(cs2);
-			// µÚÊ®ÎåÁĞ»§¿ÚĞÔÖÊ
+			// ç¬¬åäº”åˆ—æˆ·å£æ€§è´¨
 			Cell cell14 = row_line.createCell(14);
 			cell14.setCellValue(line_data.getPlanting());
 			cell14.setCellStyle(cs2);
-			// µÚÊ®ÁùÁĞÃÜÂë
+			// ç¬¬åå…­åˆ—å¯†ç 
 			Cell cell15 = row_line.createCell(15);
 			cell15.setCellValue(line_data.getPlanting());
-			cell15.setCellStyle(cs2);
+			cell15.setCellStyle(cs2);*/
 		}
-		// ½¨Á¢ExcelÎÄ¼ş
-		// !!!!!!!!!Àî²Ê°¡~~ÏÂÃæµÄÂ·¾¶ÊÇ½«Éú³ÉµÄÎÄ¼ş·Åµ½·şÎñÆ÷µÄÂ·¾¶!!!!!!!!!!!!!!!!!!!
-		File file = new File("E://systemUsersPreserveReport.xlsx");
+		// å»ºç«‹Excelæ–‡ä»¶
+		// !!!!!!!!!æå½©å•Š~~ä¸‹é¢çš„è·¯å¾„æ˜¯å°†ç”Ÿæˆçš„æ–‡ä»¶æ”¾åˆ°æœåŠ¡å™¨çš„è·¯å¾„!!!!!!!!!!!!!!!!!!!
+		File file = new File("E://PersonInfo.xlsx");
 		try {
 			file.createNewFile();
 			FileOutputStream stream = FileUtils.openOutputStream(file);
@@ -779,6 +770,6 @@ public class ExcelReport{
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 
 }
