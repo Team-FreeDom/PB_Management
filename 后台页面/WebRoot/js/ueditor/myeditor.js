@@ -10,6 +10,7 @@ $(document).ready(function() {
 		}*/
 		$("#part").toggle(100);
 		$("#sendMessage").toggle(100);
+		$('#sendNotifitation').toggle(100);
 		
 	});
 

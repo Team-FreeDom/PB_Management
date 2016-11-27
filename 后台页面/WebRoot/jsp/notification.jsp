@@ -203,34 +203,36 @@
 						<div class="col-lg-12 form-group">
 
 							<div class=" col-md-4">
-                              <form class="form-inline" role="form">
+                              <form class="form-horizontal" role="form">
+                              	<fieldset>
                                 <div class="form-group">
-                                  <label>消息类型</label>
-                                  <select class="form-control" id="msglx_list">
-                                  <option value ="1">通知公告</option>
-                                  <option value ="2">系统消息</option>
-                                  </select>
+                                  <label for="#msglx_list" class="col-sm-3 control-label">消息类型</label>
+                                  <div class="col-sm-6">
+                                    <select class="form-control" id="msglx_list">
+                                    <option value ="1">通知公告</option>
+                                    <option value ="2">系统消息</option>
+                                    </select>
+                                  </div>
                                 </div>
-                                </form>
-                                </div>
-                                <div class=" col-md-4">
-                                <form class="form-horizontal" role="form">
+                                </fieldset> 
+                              	<fieldset>
                                 <div class="form-group" id='part' style="display:none;">
-                                  <div class="input-group">
-                                    <label class="col-sm-2 control-label">部门</label>
+                                    <label for="#collage_list">部门</label>
+                                    <div class="col-sm-6">
                                       <select class="form-control" id="collage_list">
                                         <option value ="0">全部</option>
                                         <c:forEach items='${applyDeptList}' var='applyDept'>
                                           <option value =" ${applyDept.aid }">${applyDept.dept }</option>
                                         </c:forEach>
                                       </select>
-                                  </div>
-                                </div>
+                                     </div>
+                                	</div>
+                                 </fieldset>
                               </form>
                               </div> 
 
 							</div>
-						</div>
+						
                         <div class="col-lg-12 form-group">
                         	<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
                         </div>
