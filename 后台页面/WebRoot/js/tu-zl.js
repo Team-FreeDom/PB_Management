@@ -9,7 +9,7 @@
             $.ajax({                //页面加载时自动执行
 				type : 'POST',
 				dataType : 'json',
-				url : 'baseInfo.do',
+				url : 'getBase_deptInfo.do',
 				async : false,
 				cache : false,
 				error : function(request) {
@@ -20,11 +20,20 @@
 				},
 				success : function(data) {
 					var i = 0;
-					for ( var item in data) {
+					var array1=data.base;
+					var array2=data.xy;				
+					for ( var item in array1) {
 						$("#choose-gridh").after(
-								"<option value="+data[i].bid+">"
-										+ data[i].bname + "</option>");
-						i++;
+								"<option value="+array1[i].bid+">"
+										+ array1[i].bname + "</option>");
+							i++;
+					}
+					i=0;
+					for ( var item in array2) {
+						$("#scollageh").after(
+								"<option value="+array2[i].aid+">"
+										+ array2[i].dept + "</option>");
+							i++;
 					}
 				}
 			});			
@@ -110,13 +119,19 @@
 			  
 			  var stime = $('#stime').val();
 			  var etime = $('#etime').val();
+			  
+			  var bname=$('#choose-grid').children('option:selected').html();//选中的基地编号
+			  var info_str='['; 
+			 
+			 
 			  for (var i=1;i<=this.choose_count;i++)
 			  {
 				 plan = $('#plan'+i).val();
-			  	if(plan=='')
+				 xy=$('#scollage').val();
+			  	if(plan=='' || xy =='')
 				{
 				 bootbox.alert({
-					  message: "从事工作为必填项目",
+					  message: "从事工作和申报学院为必填项目",
 					  size: 'small'
 				  });
 				  $('#plan'+i)[0].focus();
@@ -124,21 +139,30 @@
 				}
 				landid = $('#tuname'+i).attr('tid');
 				if(i==1){
-				str=str+"'"+userid+"'('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				str=str+"'"+userid+"'('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;
+				 info_str=info_str+'{userid:"'+userid+'",msg:"'+bname+'#'+landid+'"}';
 				}else{
-					str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				  str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;				 
+				  info_str=info_str+',{userid:"'+userid+'",msg:"'+bname+'#'+landid+'"}';
 				}
+								
+				
 				if(i==this.choose_count)
 				str=str+",2)"
 				else
 				str=str+",2),"
-			  }//end for
+			  }
+			  info_str=info_str+']';
+			 
+			  //end for
 			 // alert(str);////INSERT INTO tab_comp VALUES(item1, price1, qty1),(item2, price2, qty2),(item3, price3, qty3);批量插入语句
 			  var obj=this;
 			  $.ajax({                //以文本方式提交申请
 				  type : 'POST',
 				  dataType : 'text',
-				  data: {"str":str},
+				  data: {"str":str,
+					     "info_str":info_str
+				  },
 				  url : 'submitLandApply.do',//修改
 				  async : false,
 				  cache : false,

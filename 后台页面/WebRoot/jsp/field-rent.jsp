@@ -47,10 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="notification.jsp" class="dropdown-toggle notification-icon">
+                       <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>
+                      </a> 
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon">
@@ -326,6 +326,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
    		   <div class="text-center" style="margin-top:20px;">
            <form class="form-inline " role="form">
+           <div class="form-group">
+                <label>申报学院：</label>
+                <select class="form-control input-sm" id="scollage" name="scollage">
+                <option value="" id="scollageh">请选择</option>
+                </select>
+            </div>
  			<div class="form-group">
                 <label>开始日期：</label>
                 <input class="form-control" type="text" value='2016-2-3' id="stime" disabled>

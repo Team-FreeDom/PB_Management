@@ -52,17 +52,22 @@ public class LandApplyController {
 	private LandApplyServiceImpl landApplyServiceImpl;
 
 	// »ùµØ²éÑ¯
-	@RequestMapping("/baseInfo.do")
+	@RequestMapping("/getBase_deptInfo.do")
 	public String selectBase(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
-		List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
-
+		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
+		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
+		
+		JSONObject getObj = new JSONObject();
+		getObj.put("base",list1);
+		getObj.put("xy",list2);
+		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
-			JSONArray json = JSONArray.fromObject(list);
-			response.getWriter().print(json.toString());
+			
+			response.getWriter().print(getObj.toString());
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -165,9 +170,9 @@ public class LandApplyController {
 			HttpServletResponse response, ModelMap map) {
 
 		String str = request.getParameter("str");
-
-		System.out.println(str);
-		landApplyServiceImpl.submitLandApply(str);
+        String info_str=request.getParameter("info_str");
+		
+		landApplyServiceImpl.submitLandApply(str,info_str);
 		response.setContentType("text/html;charset=UTF-8");
 
 		String str1 = "[{\"flag\":" + true + "}]";
@@ -355,11 +360,16 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
+		System.out.println("cancel1");
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		String info_str=request.getParameter("info_str");
+		System.out.println(info_str);
+		
 		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id);
+			landApplyServiceImpl.myFameCancel1(la_id,info_str);
+			
 			flag = true;
 			String str = "[{\"flag\":" + flag + "}]";
 			JSONArray json = JSONArray.fromObject(str);

@@ -47,10 +47,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="notification.jsp" class="dropdown-toggle notification-icon">
+                      <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>    
+                      </a>   
+                     <!--  <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                          </li>    
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="getMessage.do">更多消息</a>
+                          </li>
+						</ul>  -->
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon">
@@ -83,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -116,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="myRent.jsp"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">维修审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
@@ -128,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="notification.jsp"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
@@ -169,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置  :</a></li>
-								<li><a href="index.jsp"><i class=" icon-home"></i>首页</a></li>
+								<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">

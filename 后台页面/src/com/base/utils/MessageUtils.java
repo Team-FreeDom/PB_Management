@@ -34,7 +34,9 @@ public class MessageUtils {
 			
 			str="缴费成功";
 			
-		}		
+		}else if(i==7){  //用户自己撤回
+			str="申请撤回";
+		}	
 		
 		return str;
 	}
@@ -68,7 +70,9 @@ public class MessageUtils {
 			
 			content=bname+"土地租赁成功";
 			
-		}	
+		}else if(i==7){
+			content=bname+"土地租赁申请已撤回";
+			}	
          
          return content;
       }

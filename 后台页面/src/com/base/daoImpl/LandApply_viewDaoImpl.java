@@ -27,9 +27,9 @@ import com.base.utils.SqlConnectionUtils;
 public class LandApply_viewDaoImpl {
 	
 
-	Connection conn = null;
+	/*Connection conn = null;
 	CallableStatement sp = null;
-	ResultSet rs = null;
+	ResultSet rs = null;*/
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -40,6 +40,9 @@ public class LandApply_viewDaoImpl {
 	 * */
 	public ApplyList getapplys(String applicantId,String bname,String startTime,String endTime,int status,int page,int length)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		System.out.println(applicantId+"  "+bname+"  "+startTime+"   "+endTime+"  "+status);
 		ApplyList al=new ApplyList();
 		LandApply_view lv=null;
@@ -124,6 +127,9 @@ public class LandApply_viewDaoImpl {
 	
 	public ApplyList getapply(String applicantId,int page,int length)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		
 		ApplyList al=new ApplyList();
 		LandApply_view lv=null;
@@ -203,7 +209,9 @@ public class LandApply_viewDaoImpl {
 		Session session=sessionFactory.openSession();
 			
 		List<LandApply_view> lav=new ArrayList<LandApply_view>();
-		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		LandApply_view lv=null;
 		try
 		{

@@ -43,16 +43,17 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs"><a href="#"
-						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"></i> <!--ms-if-->
-					</a>
-						<ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs">
+					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
+                              <!--ms-if-->
+                      </a> 
+						<!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
 							</li>
 							<li class="dropdown-menu-footer text-center"><a
 								href="../teach/notifications.html">更多消息</a></li>
-						</ul></li>
+						</ul> --></li>
 					<li><a href="#outModal"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
@@ -96,7 +97,7 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.jsp"> <i
+								<li class="menuItem"><a href="index.do"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -130,8 +131,8 @@
 										<li><a href="fieldRent_maintain.jsp"><span
 												class="text"> 土地租赁维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-										<li><a href="system_power"><span class="text">
+										<li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li><a href="system_power.jsp"><span class="text">
 													系统权限设置</span></a></li>
 									</ul></li>
 								<li class="menuItem nav-parent"><a> <i
@@ -245,7 +246,7 @@
 																		<tr>
 																			<td colspan="3">
 																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button onClick="Select()" type="button"
+																				<button id="finish" type="button"
 																					class="btn btn-primary">完成</button>
 																			</td>
 
@@ -395,7 +396,7 @@
 																		<tr>
 																			<td colspan="3">
 																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button onClick="Select2()" type="button"
+																				<button id="finishPay" type="button"
 																					class="btn btn-primary">完成</button>
 																			</td>
 
@@ -520,7 +521,9 @@
 	<!--datatable javascript-->
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	<script src="../dist/jquery.cokie.min.js"></script>  
 	<script src="../js/myNeed/rent-approve.js"></script>
+    <script src="../js/kg.js"></script>
 	<script>
 		/* new YMDselect('year1','month1','day1');
 		new YMDselect('year2','month2','day2'); */

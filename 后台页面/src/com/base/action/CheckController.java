@@ -168,6 +168,7 @@ public class CheckController {
 		String recordstr = request.getParameter("recordstr");
 		String infostr = request.getParameter("infostr");
 
+		
 		checkservice.refuseapply(recordstr, infostr);
 
 		JSONObject getObj = new JSONObject();
@@ -291,6 +292,8 @@ public class CheckController {
 		Integer size = Integer.parseInt(request.getParameter("length"));
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
+		//System.out.println(startIndex);
+		//System.out.println(size);
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
 		Integer draw = Integer.parseInt(request.getParameter("draw"));

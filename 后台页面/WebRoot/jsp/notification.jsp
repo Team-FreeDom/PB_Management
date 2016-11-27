@@ -45,18 +45,18 @@
               <!-- Notifications -->
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
-                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
+                       <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg">0</span></i>
                               <!--ms-if-->
-                      </a>
-                      <ul class="dropdown-menu">
+                      </a> 
+                      <!-- <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <strong>未读消息列表</strong>
                           </li>    
                           <li class="dropdown-menu-footer text-center">
                               <a href="../teach/notifications.html">更多消息</a>
                           </li>
-                      </ul>
+                      </ul> -->
     
                   </li>
                   <li>
@@ -90,7 +90,7 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
@@ -113,7 +113,7 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="#"><span class="text">我的租赁</span></a></li>
+											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 											<li><a href="#"><span class="text">我的实习</span></a></li>
 											<li><a href="#"><span class="text">我的报修</span></a></li>
 											<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -125,7 +125,7 @@
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
@@ -139,12 +139,12 @@
 										</a>
 										<ul class="nav nav-children">
                                         	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                         	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -184,10 +184,10 @@
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+								<li><a href="#l"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
@@ -203,42 +203,44 @@
 						<div class="col-lg-12 form-group">
 
 							<div class=" col-md-4">
-                              <form class="form-inline" role="form">
+                              <form class="form-horizontal" role="form">
+                              	<fieldset>
                                 <div class="form-group">
-                                  <label>消息类型</label>
-                                  <select class="form-control" id="msglx_list">
-                                  <option value ="1">通知公告</option>
-                                  <option value ="2">系统消息</option>
-                                  </select>
+                                  <label for="#msglx_list" class="col-sm-3 control-label">消息类型</label>
+                                  <div class="col-sm-6">
+                                    <select class="form-control" id="msglx_list">
+                                    <option value ="1" selected="selected">通知公告</option>
+                                    <option value ="2">系统消息</option>
+                                    </select>
+                                  </div>
                                 </div>
-                                </form>
-                                </div>
-                                <div class=" col-md-4">
-                                <form class="form-horizontal" role="form">
+                                </fieldset> 
+                              	<fieldset>
                                 <div class="form-group" id='part' style="display:none;">
-                                  <div class="input-group">
-                                    <label class="col-sm-2 control-label">部门</label>
+                                    <label for="#collage_list" class="col-sm-3 control-label">部门</label>
+                                    <div class="col-sm-6">
                                       <select class="form-control" id="collage_list">
                                         <option value ="0">全部</option>
                                         <c:forEach items='${applyDeptList}' var='applyDept'>
                                           <option value =" ${applyDept.aid }">${applyDept.dept }</option>
                                         </c:forEach>
                                       </select>
-                                  </div>
-                                </div>
+                                     </div>
+                                	</div>
+                                 </fieldset>
                               </form>
                               </div> 
 
 							</div>
-						</div>
+						
                         <div class="col-lg-12 form-group">
                         	<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
                         </div>
                         <div class="col-lg-12 form-group">
                         <div class="col-md-4" id="btns">
-                          <button onclick="saveNotifitation()">发布通知</button>
-                          <button onclick="setContent()">清空内容</button>
-                          <button onclick="saveMessage()">发布消息</button>
+                          <button id="sendNotifitation" class="btn btn-default">发布通知</button>
+                          <button id="sendMessage" class="btn btn-default" style="display:none";>发布消息</button>
+                          <button id="setContent" class="btn btn-default">清空内容</button>
                         </div>
                         </div>
 
@@ -259,6 +261,7 @@
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/kg.js"></script>
     <script type="text/javascript" src="../js/ueditor/myeditor.js"></script>
   </body>
