@@ -94,7 +94,6 @@ public class NotificationController {
 		String depatment = request.getParameter("depatment");
 		int isRead = 0;
         
-		
 		notificationServiceImpl.addMessage("系统通知",content,depatment.trim() );
 
 		return null;
@@ -107,22 +106,22 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");
 		String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = null;
-		System.out.println(userid);
+		//System.out.println(userid);
 		if (userid != "")
 			messageList = notificationServiceImpl.getMessageInfos(userid);
 
 		if (messageList != null){
 			map.addAttribute("messageList", messageList);
-			System.out.println("messageList不为空");
+			//System.out.println("messageList不为空");
 		}
 
-		
 		return "msgUI";
 	}
 	
 	@RequestMapping("jsp/setReadMessage.do")
 	public String setReadMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");	
 		String id = request.getParameter("id");
 		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
 		
@@ -130,6 +129,12 @@ public class NotificationController {
 		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
 		int number = Integer.valueOf(noReadNumber)-1;
 		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		try {
+			response.getWriter().print(number);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return null;
 	}

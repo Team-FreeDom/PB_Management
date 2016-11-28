@@ -307,15 +307,27 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		return applyCount;
 	}
 	
-	public void submitApply(String userid,String str)
+	public int submitApply(String userid,String lidList,String str)
 	{
-				
-		Session session=sessionFactory.openSession();		
-		//hibernate调用存储过程(无返回参数)
-		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_landapply(?,?)}");
-		sqlQuery.setString(0, userid);	
-		sqlQuery.setString(1, str);	
-		sqlQuery.executeUpdate();
-		session.close();		
+		int flag=0;
+		try {
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.insert_landapply(?,?,?,?)}");
+			sp.setString(1,userid);		
+			sp.setString(2,lidList);
+			sp.setString(3, str);
+			sp.registerOutParameter(4,java.sql.Types.INTEGER);
+			sp.execute();   //执行存储过程
+			flag=sp.getInt(4);
+			rs=sp.getResultSet();  //获得结果集
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}			
+	    
+		return flag;
 	}
 }

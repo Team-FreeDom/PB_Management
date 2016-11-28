@@ -26,6 +26,7 @@ import com.base.po.LandApply;
 import com.base.po.UserInfo;
 import com.base.service.checkService;
 import com.base.serviceImpl.LandApplyServiceImpl;
+import com.base.utils.CookieUtils;
 
 //审核模块的controller类
 @Controller("CheckController")
@@ -147,10 +148,17 @@ public class CheckController {
 		String landstr = request.getParameter("landstr");
 
 		checkservice.agreeApply(landstr, recordstr, infostr);
+        
+		//将消息值更改
+		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+		int number = Integer.valueOf(noReadNumber)+1;
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
 
+		
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-
+		getObj.put("messageCount", number);
+		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -170,9 +178,16 @@ public class CheckController {
 
 		
 		checkservice.refuseapply(recordstr, infostr);
+		
+		//将消息值更改
+				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+				int number = Integer.valueOf(noReadNumber)+1;
+				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
+		getObj.put("messageCount", number);
+		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -193,9 +208,16 @@ public class CheckController {
 		String landstr = request.getParameter("landstr");
 
 		checkservice.confirmPayFor(landstr, recordstr, infostr);
+		
+		//将消息值更改
+				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+				int number = Integer.valueOf(noReadNumber)+1;
+				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
+		getObj.put("messageCount", number);
+		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -216,9 +238,16 @@ public class CheckController {
 		String landstr = request.getParameter("landstr");
 
 		checkservice.cancelPayFor(landstr, recordstr, infostr);
+		
+		//将消息值更改
+				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+				int number = Integer.valueOf(noReadNumber)+1;
+				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
+		getObj.put("messageCount", number);
+		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());

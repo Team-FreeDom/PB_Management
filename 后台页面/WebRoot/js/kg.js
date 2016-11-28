@@ -22,14 +22,16 @@ $("li.menuItem.nav-parent").click(function(){
 				cache : false,
 				error : function(request) {		
 				},
-				success : function(data) {		
+				success : function(data) {	
+					$(".msg").html(data);
 				}
-			});
-			
+			});	
 		})
  
-     var temp = $.cookie("noReadNumber");
+    // var temp = $.cookie("noReadNumber");
      $('.msg').html($.cookie("noReadNumber"));
+     
+     $('.text-success').html($.cookie('name'));
  });
 
  

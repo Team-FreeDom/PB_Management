@@ -52,8 +52,28 @@ public class LandApplyController {
 	private LandApplyServiceImpl landApplyServiceImpl;
 
 	// 基地查询
+		@RequestMapping("/baseInfo.do")
+		public String selectBase(HttpServletRequest request, ModelMap map,
+				HttpServletResponse response) {
+
+			List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
+
+			response.setContentType("text/html;charset=UTF-8");
+
+			try {
+				JSONArray json = JSONArray.fromObject(list);
+				response.getWriter().print(json.toString());
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	
+	// 基地+部门查询
 	@RequestMapping("/getBase_deptInfo.do")
-	public String selectBase(HttpServletRequest request, ModelMap map,
+	public String selectBase_deptInfo(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
 		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
@@ -171,14 +191,23 @@ public class LandApplyController {
 
 		String str = request.getParameter("str");
         String info_str=request.getParameter("info_str");
+        String lidList=request.getParameter("lidList");
+		String userid=request.getParameter("userid");       
+       
+        
+		int flag=landApplyServiceImpl.submitLandApply(userid,lidList,str,info_str);
 		
-		landApplyServiceImpl.submitLandApply(str,info_str);
+		//将消息值更改
+		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+		int number = Integer.valueOf(noReadNumber)+1;
+		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 		response.setContentType("text/html;charset=UTF-8");
 
-		String str1 = "[{\"flag\":" + true + "}]";
-		JSONArray json = JSONArray.fromObject(str1);
+		String str1 =""+flag+'$'+number ;
+		
 		try {
-			response.getWriter().print(json.toString());
+			response.getWriter().print(str1);
 			// response.getWriter().print(getObj.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -370,8 +399,13 @@ public class LandApplyController {
 
 			landApplyServiceImpl.myFameCancel1(la_id,info_str);
 			
+			//将消息值更改
+			String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
+			int number = Integer.valueOf(noReadNumber)+1;
+			CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+			
 			flag = true;
-			String str = "[{\"flag\":" + flag + "}]";
+			String str = "[{\"flag\":" + flag +",\"number\":" +number+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());

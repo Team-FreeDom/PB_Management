@@ -2,7 +2,11 @@ package com.base.dao;
 
 import java.util.List;
 
+import com.base.po.Admin;
+import com.base.po.ApplyDept;
 import com.base.po.BaseInfo;
+import com.base.po.Manger;
+import com.base.po.MangerList;
 import com.base.po.UserInfo;
 
 
@@ -108,6 +112,79 @@ public interface UserInfoDao {
       */
      public List<UserInfo> getInfoPerson(String id);
    
+     
+    
+     /**
+	     * 用户管理
+	     * @param pageindex 当前页数
+	     * @param size      当前显示几条记录
+	     * @return
+	     * @throws SQLException
+	     */
+  public MangerList manger(int pageindex, int size,String searchValue);
+  /**
+   * 
+   * @param id 用户id
+   * @return 用户基本信息
+   * @throws SQLException
+   */
+  public List<Manger> Mangerdetail(String id) ;
+  /**
+   * 删除人员基本信息
+   * @param str 为人员id的字符串
+   * @throws SQLException
+   */
+  public void deleteInfo(String str) ;
+  /**
+   * 修改用户信息
+   * @param id
+   * @param name
+   * @param sex
+   * @param birthdate
+   * @param category
+   * @param attritube
+   * @param telephone
+   * @param idcard
+   * @param password
+  * @return 
+   * @throws SQLException
+   */
+  public void upInfo(String id, String name, String sex, String birthdate,
+			String category, String attritube,String dept, String telephone, String idcard,
+			String password);
+  /**
+	   * 部门集合
+	   * @return
+	  */
+  public List<ApplyDept> getDepts();
+  /**
+	     * Admin中人员属性集合
+	     * @return
+	     */
+  public List<Admin> getAttritube();
+  /**
+   * 增加人员
+   * @param id
+   * @param name
+   * @param sex
+   * @param birthdate
+   * @param category
+   * @param attritube
+   * @param dept
+   * @param telephone
+   * @param idcard
+   * @param password
+   */
+  public int addInfo(String id, String name, String sex,
+				String birthdate, String category, String attritube,
+				String dept, String telephone, String idcard, String password);
+   /**
+    * 导出人员信息
+    * @param dept
+    * @return
+    */
+    public List<Manger> exportPersonInfo(String dept);
+
      
 
 }

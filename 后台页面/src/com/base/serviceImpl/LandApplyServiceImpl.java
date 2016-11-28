@@ -319,20 +319,19 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    }
   
    //提交租赁申请
-   public void submitLandApply(String str,String info_str)
+   public int submitLandApply(String userid,String lidList,String str,String info_str)
    {
-	   String userid=str.substring(0,str.indexOf('('));
-	   String apply=str.substring(str.indexOf('('));
-	   
+	  
 	 //获得插入的消息语句
 	  String insertStr=MessageUtils.getInsertStr(info_str,1);	
 	 		
 	  //提交申请 
-	   landApplyDaoImpl.submitApply(userid,apply);
+	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
 	   
 	 //向消息表中插入信息 
 		checkViewDaoImpl.insertMessage(insertStr);
 	   
+		return flag;
 	   
    }
    

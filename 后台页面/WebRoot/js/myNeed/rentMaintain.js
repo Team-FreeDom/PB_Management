@@ -10,7 +10,7 @@ $(document)
 										"bSort" : false,
 										"iDisplayLength" : 4, // 默认每页显示多少条记录
 										"bPaginate": true, //翻页功能
-										
+										"searching":false,//禁用搜索
 										"bServerSide" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
@@ -247,6 +247,7 @@ $(document).delegate('#submitS', 'click', function() {
 				"bPaginate": true, //翻页功能
 				"bDestroy":true,
 				"processing": true,
+				"searching":false,//禁用搜索
 				"bServerSide" : true,
 				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
@@ -374,10 +375,12 @@ $(document).delegate('#submitS', 'click', function() {
 /*提交导出学院----start */
 $(document).delegate('#certainExport', 'click', function() {
 	
+	$("#lead").modal('hide');
 	$("#landRentForm").submit();
 	
 });
 /*提交导出学院----end */
+
 
 
 /*土地租赁记录修改---start*/
@@ -408,7 +411,10 @@ function deleteInfo()
 	
 	 if(chk_value.length==0)
 	 {
-		  alert("您还没有选择任何内容！");
+		 bootbox.alert({
+				message : "请至少选择一项",
+				size : 'small'
+			});
 	  }else{
 		  
 		  document.getElementById("lead").style.display = 'none';

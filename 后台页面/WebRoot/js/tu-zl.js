@@ -119,7 +119,7 @@
 			  
 			  var stime = $('#stime').val();
 			  var etime = $('#etime').val();
-			  
+			  var lidList='(';
 			  var bname=$('#choose-grid').children('option:selected').html();//选中的基地编号
 			  var info_str='['; 
 			 
@@ -138,8 +138,9 @@
 				  return false;					
 				}
 				landid = $('#tuname'+i).attr('tid');
-				if(i==1){
-				str=str+"'"+userid+"'('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;
+				lidList=lidList+"'"+landid+"'";
+				if(i==1){				 
+				 str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;
 				 info_str=info_str+'{userid:"'+userid+'",msg:"'+bname+'#'+landid+'"}';
 				}else{
 				  str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;				 
@@ -148,12 +149,17 @@
 								
 				
 				if(i==this.choose_count)
-				str=str+",2)"
-				else
-				str=str+",2),"
+					{
+				str=str+",2)";
+				lidList=lidList+")";
+					}
+				else{
+				str=str+",2),";
+				lidList=lidList+",";
+				}
 			  }
 			  info_str=info_str+']';
-			 
+			  userid="'"+userid+"'";
 			  //end for
 			 // alert(str);////INSERT INTO tab_comp VALUES(item1, price1, qty1),(item2, price2, qty2),(item3, price3, qty3);批量插入语句
 			  var obj=this;
@@ -161,7 +167,9 @@
 				  type : 'POST',
 				  dataType : 'text',
 				  data: {"str":str,
-					     "info_str":info_str
+					     "info_str":info_str,
+					     "lidList":lidList,
+					     "userid":userid
 				  },
 				  url : 'submitLandApply.do',//修改
 				  async : false,
@@ -173,13 +181,29 @@
 					});
 				  },///error
 				  success : function(data) {
+					  var position=data.indexOf('$');
+					var messageCount=data.substring(position+1);
+					var flag=data.substring(0,position);
+                  
+                    				 
+					  if(flag!=1){
+						  
+						  bootbox.alert({
+							  message: "请先撤回相同的土地申请",
+							  size: 'small'
+						  }); 
+						  
+					  }else{
+						  
+					  $(".msg").html(messageCount);
 					  fill('','','','','','');
 					  $('#field_rent tbody').html('');
 					  obj.dialog = bootbox.dialog({
 						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
 						  closeButton: false
 					  });
-					  window.setTimeout(closeboxEX, 1000);					  
+					  window.setTimeout(closeboxEX, 1000);	
+					  }
 				  }//success
 			  });//ajax			  	  
 			  

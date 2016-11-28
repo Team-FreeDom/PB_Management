@@ -100,15 +100,16 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small>罗旭</small>
+										<i class="icon-circle text-success"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.do"> <i
-										class="icon-home" aria-hidden="true"></i><span>主界面</span>
+								<li class="menuItem">
+								<a href="index.do"> 
+								<i	class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -136,16 +137,14 @@
 										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a><span class="text"> 发布通知公告</span></a></li>
-										<li><a href="land_modle.jsp"><span class="text">
-													土地布局设置</span></a></li>
-										<li><a><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="fieldRent_maintain.jsp"><span
-												class="text"> 土地租赁维护</span></a></li>
-										<li><a><span class="text"> 实习计划维护</span></a></li>
-										<li><a href="user.jsp"><span class="text"> 系统用户维护</span></a></li>
-										<li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-									</ul></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
@@ -181,13 +180,13 @@
 						</ol>
 					</div>
 					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a><i class="icon-user"></i>实习申请</a></li>
-							<li><a><i class="icon-home"></i>报修申请</a></li>
-						</ol>
-					</div>
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
+							</ol>
+						</div>
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
@@ -198,20 +197,20 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td>
+										<td colspan="2">
 											<button type="button" class="btn btn-info button_style"
 												data-toggle="modal" data-target="#myModalAdd">
 												<span class="glyphicon glyphicon-plus"></span>
 											</button>
 										</td>
-										<td colspan="2">排序<span
+										<!-- <td colspan="2">排序<span
 											class="glyphicon glyphicon-sort-by-attributes"></span> <select
-											name="" id="">
+											name="orderCount" id="orderCount" onchange="changeOrder()">
 												<option value="">默认</option>
-												<option value="">租用次数降次</option>
-												<option value="">租用次数</option>
+												<option value="1">租用次数降次</option>
+												<option value="2">租用次数</option>
 										</select> 
-										</td>
+										</td> -->
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
@@ -255,7 +254,7 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="2">
+										<td colspan="3">
 											<button type="button" class="btn btn-danger"
 												onClick="deleteInfo()">删除</button>
 											<button type="button" class="btn btn-primary"
@@ -483,6 +482,7 @@
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
 <script src="../js/myNeed/rentMaintain.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>    
 <script src="../js/kg.js"></script>

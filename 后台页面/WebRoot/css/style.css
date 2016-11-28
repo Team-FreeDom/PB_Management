@@ -598,6 +598,17 @@ a, a:link, a:visited, a:hover, a:active {
 .wz > li + li::before{ padding-right:20px;}
 .invisible{ display:none;}
 .msg{ right: -10px; top:0px; position:absolute; background:#C00}
+.read{ color:#ccc;}
+#msgtable tr{ cursor:pointer;}
+#post1{
+min-height: 200px;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+  word-wrap: break-word;
+  word-break: break-all;
+ }
+
 
 @media screen and (min-width:768px) {
 .container-fluid.content {

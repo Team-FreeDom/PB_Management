@@ -611,7 +611,7 @@ $(document).ready(function() {
 						var info_str=str.substring(position+1);
 					   
 						$('#cancelOneModal').modal('hide');
-						 alert(la_id);
+						
 						$.ajax({
 							data : {
 								"la_id" : la_id,
@@ -623,7 +623,8 @@ $(document).ready(function() {
 							dataType : "json",
 							cache : false,
 							success : function(data) {
-                               alert("成功")
+								
+								$(".msg").html(data[0].number);
 								if (data[0].flag) {
 									window.location.reload();
 								} else {
