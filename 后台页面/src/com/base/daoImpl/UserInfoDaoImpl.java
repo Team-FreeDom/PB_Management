@@ -739,5 +739,36 @@ public List<Manger> exportPersonInfo(String dept)
 	}
 	return list;
 }
+    /**
+     * 筛选userInfo中的部门
+     * @return
+     */
+	@Override
+    public List<UserInfo> userdept(){
+		List<UserInfo> list = new ArrayList<UserInfo>();
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.user_dept()}");
+			sp.execute();
+			ResultSet rs = sp.getResultSet();
+			while (rs.next())
+			{
+				UserInfo ch = new UserInfo();
+				ch.setCollege(rs.getString("college"));
+				list.add(ch);
+			}
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}
 
 }

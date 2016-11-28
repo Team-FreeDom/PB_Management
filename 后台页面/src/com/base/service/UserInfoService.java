@@ -124,7 +124,11 @@ public interface UserInfoService {
       * @return
       */
      public List<Manger> exportPersonInfo(String dept);
-    
+     /**
+      * 筛选userInfo中的部门
+      * @return
+      */
+     public List<UserInfo> userdept();
  
 
 }

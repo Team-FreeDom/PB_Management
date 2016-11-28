@@ -2,13 +2,40 @@
 $("#certainExport").click(function(){
         	 $("#lead").modal("hide");
         	 
-         })
+         })         
+        //导出功能刷选部门  
+        	 $.ajax({
+        	type : 'POST',
+ 			dataType : 'json',
+ 			url : 'Checkdept.do',
+ 			async : false,
+ 			cache : false,
+ 			error : function(request) {
+ 				bootbox.alert({
+         			  message: "error",
+         			  size: 'small'
+         		  });	
+ 			},
+ 			success : function(data) {	
+ 				for (var i=0;i<data.length;i++){
+ 					$("#EdeptID").after(
+ 							"<option value="+data[i].college+">"
+ 									+data[i].college+"</option>");
+ 				} 				
+ 			}
+        });	
+//每次点击导出清空select
+$("#exportid").click(function(){
+	$("#dept").val("1");
+	
+})   
 //增加模态框每次点击赋空值
 $("#addOne").click(function(){	 
 			$("#workerId").val("");
 			$("#name").val("");
 			$("#demo2").val("");
-			$("#sex").val("");
+			$("#sex1").prop("checked",false);
+			$("#sex2").prop("checked",false);
 			$("#IDnumber").val("");
 			$("#password").val("");
 			$("#Adivision").val("1");
@@ -188,13 +215,14 @@ $("#addOne").click(function(){
  					$("#AdivisionID").after(
  							"<option value="+data[1][i].dept+">"
  									+data[1][i].dept+"</option>");
- 					$("#EdeptID").after(
- 							"<option value="+data[1][i].dept+">"
- 									+data[1][i].dept+"</option>");
  				}		
  			}
  		});     
-
+         
+ 				
+ 			       	
+        	
+       
       //删除人员基本信息
       var flag=0;
         $('#deleteOne').click(function() {
@@ -258,7 +286,7 @@ $("#addOne").click(function(){
 						  size: 'small'
 					  });	
 					}
-				else if($("#sex").val()==""){					
+				else if($("#sex1").prop("checked") === false && $("#sex2").prop("checked") === false){					
 					bootbox.alert({
 						  message: "请填写性别",
 						  size: 'small'
@@ -282,13 +310,13 @@ $("#addOne").click(function(){
 						  size: 'small'
 					  });
 					}
-				else if($("phone").val()==""){				
+				else if($("#phone").val()==""){				
 					bootbox.alert({
 						  message: "请填写电话号码",
 						  size: 'small'
 					  });
 					}
-				else if($("#IDnumber").val()==""){					
+				else if($("#IDnumber1").val()==""){					
 					bootbox.alert({
 						  message: "请填写身份证号码",
 						  size: 'small'

@@ -1,4 +1,4 @@
-package com.base.serviceImpl;
+﻿package com.base.serviceImpl;
 
 import java.util.List;
 
@@ -235,5 +235,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 		List<Manger> list = userInfodao.exportPersonInfo(dept);
 		return list;
 	}
+                   /**
+		      * 筛选userInfo中的部门
+		      * @return
+		      */
+			@Override
+		     public List<UserInfo> userdept(){
+				List<UserInfo> list=userInfodao.userdept();
+				return list;
+			}
+ 
 
 }
