@@ -106,10 +106,6 @@ public class PersonalManageController {
 		public String deleteInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map)
 		{
 			String check[] = request.getParameterValues("idname");
-			for (String string : check)
-			{
-				System.out.println(string);
-			}
 			String str = "";
 			int i=0;
 			if (check!= null)
@@ -192,9 +188,8 @@ public class PersonalManageController {
 			String name=request.getParameter("name");//获取人员名字
 			if(name.equals("")){
 				name=null;
-			}
-			//System.out.println(name);
-			String sex=request.getParameter("sex");//性别
+			}		
+			String sex=request.getParameter("inlineRadioOptions");//性别
 			if(sex.equals("")){
 				sex=null;
 			}
@@ -270,7 +265,7 @@ public class PersonalManageController {
 		}
 		//导出功能
 		@RequestMapping("/exportPersonInfo.do")
-		public String exportPersonInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map){
+		public String exportPersonInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map){		
 			String dept=request.getParameter("dept");
 			if(dept.equals("全部")){
 				dept=null;
@@ -278,29 +273,30 @@ public class PersonalManageController {
 			List<Manger> list = userinfoservice.exportPersonInfo(dept);
 			ExcelReport export=new ExcelReport();
 			export.exportPersonInfo(list);
-			
 			String filename = "湖南农业大学人员信息表";
 			
 			String fullFileName = "E://PersonInfo.xlsx";
 			// 显示中文文件名
-			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setContentType("application/octet-stream;charset=UTF-8");
 			try {
+
 				response.setHeader("Content-Disposition", "attachment;filename="
 						+ new String(filename.getBytes(), "iso-8859-1") + ".xlsx");
+				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 			// 读取文件
 			InputStream in =null;
-			try
-			{
-				in = new FileInputStream(fullFileName);
-			} catch (FileNotFoundException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try
+				{
+					in = new FileInputStream(fullFileName);
+				} catch (FileNotFoundException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			OutputStream out =null;
 			try
 			{
@@ -310,7 +306,7 @@ public class PersonalManageController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// 写文件
+			// 写文件	
 			int b;
 			try
 			{
@@ -337,10 +333,10 @@ public class PersonalManageController {
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		
+			}	
 		
 		   return null;
-		}
+}
 		//导入功能
 		@RequestMapping("/inputExcel.do")
 		public String inputExcel(HttpServletRequest request,HttpServletResponse response,ModelMap map) throws IOException{
@@ -398,7 +394,24 @@ public class PersonalManageController {
 				}
 				}		
 		}
-			return null;
+			return "mangeruser";
 	}
+		//筛选userInfo中的部门
+		@RequestMapping("/Checkdept.do")
+		public String Checkdept(HttpServletRequest request,HttpServletResponse response,ModelMap map){
+			List<UserInfo> list=userinfoservice.userdept();
+			JSONArray json = JSONArray.fromObject(list);
+			response.setContentType("text/html;charset=UTF-8");
+			try
+			{
+				response.getWriter().print(json.toString());
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+
+		}
 
 }

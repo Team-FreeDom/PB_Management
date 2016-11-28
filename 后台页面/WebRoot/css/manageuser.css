@@ -3,6 +3,10 @@
 @charset "utf-8";
 /* CSS Document */
 
+
+#sex-style input{
+	width:20px;}
+
 table thead > tr> td{
 	
 	font-size:16px;

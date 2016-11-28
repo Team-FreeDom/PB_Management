@@ -91,12 +91,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
 											<i class="icon-circle text-success"></i> 
-											<small></small>
+											<small>罗旭</small>
 											<!--ms-if-->
 										</div>
 									</div>
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									
 									
 									<li class="menuItem">
-										<a href="index.do">
+										<a href="index.html">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
@@ -114,11 +114,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a><span class="text">我的实习</span></a></li>
-										<li><a><span class="text">我的报修</span></a></li>
-										<li><a><span class="text">我的基地</span></a></li>
-									</ul>
+											<li><a href="#"><span class="text">我的租赁</span></a></li>
+											<li><a href="#"><span class="text">我的实习</span></a></li>
+											<li><a href="#"><span class="text">我的报修</span></a></li>
+											<li><a href="#"><span class="text">我的基地</span></a></li>
+										</ul>
 									</li>
 
 									<li class="menuItem nav-parent">
@@ -126,12 +126,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										<li><a><span class="text">实习审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="#"><span class="text">实习审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
 
-									</ul>
+										</ul>
 									</li>
 
 										<li class="menuItem nav-parent">
@@ -139,13 +139,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -180,13 +180,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a href="index.html">位置</a></li>
-                                <li><a href="#">用户管理</a></li>
+                                <li><a href="index.html">用户管理</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">
 								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
 							</ol>
@@ -201,15 +201,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
                                     <thead >
                                     <tr bgcolor="#ECF1F5">
-                                            <td colspan="2" id="button-left">
+                                            <td colspan="3" id="button-left">
                                             <button type="button" class="btn btn-danger" id="deleteOne">删除<tton>
                                             <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add" id="addOne" onclick="clear()">增加<tton>
                                             </td>
-                                            <td colspan="6" >
+                                            <td colspan="5" >
                                             </td>
-                                             <td colspan="3" id="button-right">                                          		                                        
-                                             	<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#daoru">导入<tton>
-                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lead">导出<tton>
+                                             <td colspan="3" id="button-right">  
+                                             <a href="../templet/PersonInfotemplet.zip"  class="btn btn-primary">点击下载导入模板</a>                                                                                    		                                        
+                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导入<tton>
+                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lead" id="exportid">导出<tton>
                                           </td>                                              
                                         </tr>
                                     
@@ -244,13 +245,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
                     
-                    <form action="inputExcel.do" method="post"
-		enctype="multipart/form-data" id="inputForm">
-		<center>
-			<input type="file" name="fileResource" /> </br></br>
-			<input type="submit" value="上传">
-        </center>
-	</form>
+                   
+
 				</div><!-- End Sidebar-->
                 			<!-- 弹出框-->                 
                 			<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
@@ -331,23 +327,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   </div>
                                 </div>
                                 <!-- Modal 导入-->
-										<div class="modal fade" id="daoru" tabindex="-1" role="dialog"
+                                	<div class="modal fade" id="import" tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-sm">
 											<form action="inputExcel.do" method="post"
-														id="landRentForm" enctype="multipart/form-data">
+														id="daoruform" enctype="multipart/form-data">
 												<div class="modal-content" style="border:#3071a9 8px solid">
 													<div class="modal-header" style="background:#3071a9; color:#FFF">
 														<button type="button" class="close" data-dismiss="modal">
 															<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 														</button>
-														<h4 class="modal-title" id="myModalLabel">请选择导入的文件</h4>
-													</div>																											
-														<input type="file" name="fileResource" /> </br></br>
-														<input type="submit" value="上传">     												
+														<h4 class="modal-title" id="myModalLabel">请选择要导入的文件</h4>
+													</div>
+													
+														<center>
+														<div class="modal-body" id="exportxsl" style="height:60px;">
+															<input type="file" id="exampleInputFile" name="fileResource">
+														</div>
+														</center>													
 													<div class="modal-footer">
 													<center>														
-														<button type="submit" class="btn btn-primary" id="certainExport">确定</button>
+														<button type="submit" class="btn btn-primary" id="certainimport">确定</button>
 														<button type="button" class="btn btn-default"
 															data-dismiss="modal" >取消</button>
 														</center>
@@ -356,12 +356,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</form>
 											</div>
 										</div>
-										<!-- Modal -->
+										
+
+
+										<!-- Modal 导入-->
 										<div class="modal fade" id="lead" tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-sm">
 											<form action="exportPersonInfo.do" method="post"
-														id="landRentForm" enctype="multipart/form-data">
+														id="daochuform" enctype="multipart/form-data">
 												<div class="modal-content" style="border:#3071a9 8px solid">
 													<div class="modal-header" style="background:#3071a9; color:#FFF">
 														<button type="button" class="close" data-dismiss="modal">
@@ -373,7 +376,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														<center>
 														<div class="modal-body" id="exportxsl" style="height:60px;">
 															<select name="dept" id="dept">
-																<option  id="EdeptID">全部</option>							
+																<option  id="EdeptID" value="1">全部</option>							
 															</select>
 														</div>
 														</center>													
@@ -407,7 +410,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </tr>
                                             <tr>
                                                 <td>性别 ： </td>
-                                                <td><input type="text"  id="sex" name="sex" class="form-control"></td>
+                                                <td id="sex-style">
+                                                  	<label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex1" value="男">男                                                   </label>
+                                                    <label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex2" value="女">女                                                   </label>
+                                                </td>
+
                                                 <td>出生年月 ： </td>
                                                 <td class="input-style"
                                                 ><input class="laydate-icon" id="demo2" name="demo2" ></td>
