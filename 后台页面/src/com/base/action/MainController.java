@@ -73,9 +73,9 @@ public class MainController {
 		}
 		
 		//获取未读消息数，并写入到cookies中
-		int number = notificationServiceImpl.getNoreadMessageCount(userid);
+		/*int number = notificationServiceImpl.getNoreadMessageCount(userid);
 		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
-		System.out.println("未读消息数："+number);
+		System.out.println("未读消息数："+number);*/
 		
 		return "index";
 	}

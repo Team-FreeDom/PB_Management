@@ -118,6 +118,23 @@ public class NotificationController {
 		return "msgUI";
 	}
 	
+	@RequestMapping("jsp/getNoReadMessageCount.do")
+	public String getNoReadMessageCount(ModelMap map, HttpServletRequest request,
+			HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");	
+		String userid = CookieUtils.getCookieUsername(request, response);
+		int number = notificationServiceImpl.getNoreadMessageCount(userid);
+		System.out.println("未读消息数为："+number);
+		try {
+			response.getWriter().print(number);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	@RequestMapping("jsp/setReadMessage.do")
 	public String setReadMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -125,10 +142,10 @@ public class NotificationController {
 		String id = request.getParameter("id");
 		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
 		
-		//对cookies值进行修改
-		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-		int number = Integer.valueOf(noReadNumber)-1;
-		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		//读取未读消息数，更新消息界面
+		String userid = CookieUtils.getCookieUsername(request, response);
+		int number = notificationServiceImpl.getNoreadMessageCount(userid);
+		//System.out.println("未读消息数为："+number);
 		try {
 			response.getWriter().print(number);
 		} catch (IOException e) {

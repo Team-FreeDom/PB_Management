@@ -26,12 +26,23 @@ $("li.menuItem.nav-parent").click(function(){
 					$(".msg").html(data);
 				}
 			});	
-		})
+		});
  
-    // var temp = $.cookie("noReadNumber");
-     $('.msg').html($.cookie("noReadNumber"));
+       $.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url : 'getNoReadMessageCount.do',
+				async : false,
+				cache : false,
+				error : function(request) {		
+				},
+				success : function(data) {	
+					$('.msg').html(data);
+				}
+			});	
      
-     $('.text-success').html($.cookie('name'));
+     
+       $('.text-success').html($.cookie('name'));
  });
 
  
