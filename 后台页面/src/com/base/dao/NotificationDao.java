@@ -9,11 +9,11 @@ public interface NotificationDao {
 
 	public void setNotification(String insertSql);
 		
-	public Notification getNotificationInfo();
+	public List getNotificationInfo(String currentPage,String itemsPerPage);
 	
 	public void addMessage(String title,String content,String department);
 	 
-	 public List<Message> getMessageInfos(String userid);
+	 public List getMessageInfos(String userid,String currentPage,String itemsPerPage);
 	 
 	 public List<Message> getMessageTop5Infos(String userid);
 	 

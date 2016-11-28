@@ -48,13 +48,13 @@ public class MainController {
 	public String index(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		// 获得通知公告
+		// 获得通知公告标题列表
 		response.setContentType("text/html;charset=UTF-8");
-		Notification notification = notificationServiceImpl
+		/*Notification notification = notificationServiceImpl
 				.getNotificationInfo();
 
 		if (notification != null)
-			map.addAttribute("notification", notification.getMessage());
+			map.addAttribute("notification", notification.getMessage());*/
 
 		//获取注册用户
 		long userCount =  mainServiceImpl.getUserCount();
@@ -65,12 +65,12 @@ public class MainController {
 		map.addAttribute("applyCount", applyCount);
 		
 		//获取时间排序前5条
-		String userid = CookieUtils.getCookieUsername(request, response);
+		/*String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = notificationServiceImpl.getMessageTop5Infos(userid);
 		if (messageList != null){
 			map.addAttribute("messageList", messageList);
 			//System.out.println("messageList不为空");
-		}
+		}*/
 		
 		//获取未读消息数，并写入到cookies中
 		/*int number = notificationServiceImpl.getNoreadMessageCount(userid);

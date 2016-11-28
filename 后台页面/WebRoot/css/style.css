@@ -583,11 +583,7 @@ a, a:link, a:visited, a:hover, a:active {
 	text-align: center;
 	background-color: #63addc;
 }
-.lockdiv{
-  color: #fff;
-	text-align: center;
-	background-color: #862f2f ;
-}
+
 .Havetorent  {
 	color: #fff;
 	text-align: center;
@@ -625,3 +621,9 @@ white-space:nowrap;
 	overflow: visible !important;
 }
 }
+
+
+#jumpTo{
+width:40px;
+}
+

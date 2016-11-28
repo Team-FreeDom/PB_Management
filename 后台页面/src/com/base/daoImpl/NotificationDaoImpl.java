@@ -50,22 +50,59 @@ public class NotificationDaoImpl implements NotificationDao {
 	}
 
 	@Override
-	public Notification getNotificationInfo() {
+	public List getNotificationInfo(String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
+		/*Session session = sessionFactory.openSession();
 		String hql = "from Notification";
 		List<Notification> notificationList = null;
-		Notification notification = null;
 		try {
 			Query query = session.createQuery(hql);
 			notificationList = query.list();
-			notification = notificationList.get(0);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			session.close();
+		}*/
+		
+		Connection conn=null;
+		CallableStatement sp=null; 
+		ResultSet rs=null;
+		List list = new ArrayList();
+		List<Notification> listNews = new ArrayList<Notification>();
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			
+			sp = conn.prepareCall("{call baseweb.find_notification(?,?,?)}");  //调用存储过程
+			sp.setInt(1, Integer.valueOf(currentPage));
+			sp.setInt(2, Integer.valueOf(itemsPerPage));
+			sp.registerOutParameter(3,java.sql.Types.INTEGER);
+			sp.execute(); // 执行存储过程 
+			int maxItems=sp.getInt(3);//接收输出参数
+			//接收结果集
+			rs=sp.getResultSet();   //获得结果集
+			
+			while(rs.next())
+			{
+				Notification notification=new Notification();
+				notification.setId(rs.getInt("id"));
+				notification.setMessage(rs.getString("message"));
+				notification.setTitle(rs.getString("title"));
+				listNews.add(notification);
+			}
+			
+			list.add(listNews);
+			list.add(maxItems);
+			
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
 		}
-		return notification;
+		return list;
 
 	}
 
@@ -102,10 +139,10 @@ public class NotificationDaoImpl implements NotificationDao {
 	}
 
 	@Override
-	public List<Message> getMessageInfos(String userid) {
+	public List getMessageInfos(String userid,String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
-		Session session = sessionFactory.openSession();
-		String hql = "from Message where userid='" + userid + "'";
+		/*Session session = sessionFactory.openSession();
+		String hql = "from Message where userid='" + userid + "' order by time desc limit "+currentPage+","+Integer.valueOf(currentPage)+10;
 		List<Message> list = null;
 
 		try {
@@ -116,7 +153,52 @@ public class NotificationDaoImpl implements NotificationDao {
 			System.out.println(e);
 		} finally {
 			session.close();
-		}
+		}*/
+		
+		//转入JDBC模式
+				Connection conn=null;
+				CallableStatement sp=null; 
+				ResultSet rs=null;
+				List list = new ArrayList();
+				try
+				{
+					conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+					
+					sp = conn.prepareCall("{call baseweb.find_message(?,?,?,?)}");  //调用存储过程
+					sp.setString(1, userid);
+					sp.setInt(2, Integer.valueOf(currentPage));
+					sp.setInt(3, Integer.valueOf(itemsPerPage));
+					sp.registerOutParameter(4,java.sql.Types.INTEGER);
+					sp.execute(); // 执行存储过程 
+					int maxItems=sp.getInt(4);//接收输出参数
+					//接收结果集
+					rs=sp.getResultSet();   //获得结果集
+					List<Message> messagelist=new ArrayList<Message>();//定义一个相应类型的list集合去接受
+					while(rs.next())
+					{
+						Message me=new Message();
+						me.setId(rs.getInt("id"));
+						me.setContent(rs.getString("content"));
+						me.setIsRead(rs.getInt("isRead"));
+						me.setTime(rs.getString("time"));
+						me.setTitle(rs.getString("title"));
+						me.setUserid(rs.getString("userid"));
+						messagelist.add(me);
+					}
+					
+					list.add(messagelist);
+					list.add(maxItems);
+					
+					
+				} catch (SQLException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					SqlConnectionUtils.free(conn, sp, rs);
+				}
+		
+		
 		return list;
 	}
 
