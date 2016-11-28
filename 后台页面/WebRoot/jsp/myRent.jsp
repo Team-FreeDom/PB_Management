@@ -88,7 +88,7 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="#"><img class="img-circle bk-img-60" alt=""
+										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
 											id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>

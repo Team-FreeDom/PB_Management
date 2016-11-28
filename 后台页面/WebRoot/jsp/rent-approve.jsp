@@ -54,7 +54,7 @@
 							<li class="dropdown-menu-footer text-center"><a
 								href="../teach/notifications.html">更多消息</a></li>
 						</ul> --></li>
-					<li><a href="#outModal"
+					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
 					</a></li>
@@ -85,12 +85,12 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="#"><img class="img-circle bk-img-60" alt=""
+										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
 											src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small>罗旭</small>
+										<i class="icon-circle text-success"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>

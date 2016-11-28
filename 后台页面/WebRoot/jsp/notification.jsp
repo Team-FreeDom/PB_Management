@@ -90,7 +90,7 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
