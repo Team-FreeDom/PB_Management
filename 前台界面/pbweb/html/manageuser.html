@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>人员信息维护</title>
+    <title>用户管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -14,7 +14,7 @@
     <!--datatable-->
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/communication_maintain.css">
+    <link rel="stylesheet" href="../css/manageuser.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                          <i class="icon-envelope"><span class="badge dw-position">4</span></i>
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
@@ -172,8 +172,8 @@
 					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a>位置</a></li>
-                                <li><a href="index.html">人员信息维护</a></li>
+                            	<li><a href="index.html">位置</a></li>
+                                <li><a href="index.html">用户管理</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -188,82 +188,24 @@
 					<!-- 主面板内容 -->
 					<div class="row form">
 						<div class="col-lg-12">
-							<table id="communication_table" class="display" cellspacing="0" width="100%">
+							<table id="manageusertable" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr bgcolor="#ECF1F5">
-                                            <td colspan="3">
-                                            <button type="button" class="btn btn-danger">删除</button>
-                                            <button type="button" class="btn btn-info" style="margin-left:20px;">增加</button>
+                                    	<tr bgcolor="#ECF1F5">
+                                            <td colspan="3" id="button-left">
+                                            <button type="button" class="btn btn-danger" id="delete">删除</button>
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add" id="ZJ">增加</button>
                                             </td>
-                                            <td colspan="6" >
-                                                <ul class="dropdown_show">
-                                                	<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
-                                                    	<ul id="hide_ul" style="display:none;">
-                                                        	<li>
-                                                            	<form>
-                                                            	<table class="table">
-                                                            	<tr>
-                                                                	<td>
-                                                                    基地名：
-                                                                    <select  name="" id="">
-                                                                      <option value="">显示全部</option>
-                                                                      <option value="">耘园科教综合基地</option>
-                                                                      <option value="">西南角农学基地</option>	
-                                                                    </select>  
-                                                                    </td>
-                                                                    <td>
-                                                                    起止年份：
-                                                                    <select  name="" id="">
-                                                                      <option value="">请选择</option>
-                                                                      <option value="">2015</option>
-                                                                      <option value="">2016</option>	
-                                                                    </select>年
-                                                                    -----
-                                                                     <select  name="" id="">
-                                                                      <option value="">请选择</option>
-                                                                      <option value="">2015</option>
-                                                                      <option value="">2016</option>	
-                                                                    </select>年
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                	<td>
-                                                                    	土地编号
-                                                                        <select  name="" id="">
-                                                                          <option value="">显示全部</option>
-                                                                          <option value="">#1</option>
-                                                                          <option value="">#2</option>	
-                                                                        </select>  
-                                                                    </td>
-                                                                    <td>
-                                                                    最终状态
-                                                                    <select  name="college" id="college" size="1">
-                                                                      <option value="">显示全部</option>
-                                                                      <option value="">申请成功</option>
-                                                                      <option value="">申请失败</option>	
-                                                                    </select>  
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                	<td colspan="2">
-                                                                    	<button type="reset" class="btn btn-primary" >重置</button>
-                                    									<button onClick="hidesubmenu()" type="button" class="btn btn-primary">完成</button>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        		</form>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                            <td colspan="5" >
+                                            </td>
+                                             <td colspan="3" id="button-right">
+                                             	<button type="button" class="btn btn-primary">导入</button>
+                                             	<button type="button" class="btn btn-primary">导出</button>
                                              </td>
-                                             <td colspan="2">
-                                             	<button type="button" class="btn btn-primary">全部导出</button>
-                                             </td>
+                                               
                                         </tr>
-                                        <tr style="background:#eeeff4">
+                                        <tr>
                                             <th>序号</th>
-                                            <th>工作编号</th>
+                                            <th>员工编号</th>
                                             <th>身份属性</th>
                                             <th>姓名</th>
                                             <th>性别</th>
@@ -272,12 +214,12 @@
                                             <th>身份证号</th>
                                             <th>联系电话</th>
                                             <th>部门</th>
-                                            <th>详情</th>
+                                            <th>操作</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="text-center">
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">1</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">1</label></td>
                                             <td>100059</td>
                                             <td>管理员</td>
                                             <td>张三</td>
@@ -286,50 +228,58 @@
                                             <td>1975-10-20</td>
                                             <td>43011119751020043X</td>
                                             <td>18219723489</td>
-                                            <td>教务出</td>
-                                            <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
+                                            <td>教务处</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit">修改</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">2</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">2</label></td>
                                             <td>100059</td>
-                                            <td>管理员</td>
+                                            <td>临时工</td>
                                             <td>张三</td>
                                             <td>男</td>
                                             <td>在职人员</td>
                                             <td>1975-10-20</td>
                                             <td>43011119751020043X</td>
                                             <td>18219723489</td>
-                                            <td>教务出</td>
-                                            <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
+                                            <td>教务处</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs">修改</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">3</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">3</label></td>
                                             <td>100059</td>
-                                            <td>管理员</td>
+                                            <td>教师</td>
                                             <td>张三</td>
                                             <td>男</td>
                                             <td>在职人员</td>
                                             <td>1975-10-20</td>
                                             <td>43011119751020043X</td>
                                             <td>18219723489</td>
-                                            <td>教务出</td>
-                                            <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
+                                            <td>教务处</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs">修改</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">4</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">4</label></td>
                                             <td>100059</td>
-                                            <td>管理员</td>
+                                            <td>基地管理员</td>
                                             <td>张三</td>
                                             <td>男</td>
                                             <td>在职人员</td>
                                             <td>1975-10-20</td>
                                             <td>43011119751020043X</td>
                                             <td>18219723489</td>
-                                            <td>教务出</td>
-                                            <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
+                                            <td>教务处</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs">修改</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="allcheckbox">5</td>
+                                            <td><label><input type="checkbox" name="allcheckbox" class="ck">5</label></td>
                                             <td>100059</td>
                                             <td>管理员</td>
                                             <td>张三</td>
@@ -338,21 +288,33 @@
                                             <td>1975-10-20</td>
                                             <td>43011119751020043X</td>
                                             <td>18219723489</td>
-                                            <td>教务出</td>
-                                            <td><span class="glyphicon glyphicon-search" data-toggle="modal" data-target="#myModal"></span></td>
+                                            <td>教务处</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs">修改</button>
+                                            </td>
                                         </tr>
                                     </tbody>
+                                    <thead>
+                                    	<tr>
+                                        	<td colspan="11">
+                                    			<label><input type="checkbox" name="0" class="ck-all" id="ck1"/>全选</label>
+                                				<label><input type="checkbox" name="0" class="ck-re" id="ck2"/>反选</label>
+                                           </td>
+                                       </tr>
+                                       
+                                  </thead>
                                   </table>
 							
 						</div>
 					</div>
                     
                     
-                    
-                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				</div><!-- End Sidebar-->
+                			<!-- 弹出框-->                 
+                			<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
                                   <div class="modal-dialog">
-                                    <div class="modal-content" style="border:#2D3F51 8px solid">
-                                      <div class="modal-header" style="background:#2D3F51; color:#FFF">
+                                    <div class="modal-content" style="border:#3071a9 8px solid">
+                                      <div class="modal-header" style="background:#3071a9; color:#FFF">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                         <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
                                       </div>
@@ -360,75 +322,141 @@
                                         <table class="table">
                                             <tr>
                                                 <td>员工编号 ： </td>
-                                                <td><input type="text" value="基地的名称"></td>
+                                                <td><input type="text" value="100059" class="form-control" onFocus="this.blur()" onClick="a()" id="EworkerId"></td>
                                                 <td>姓名 ： </td>
-                                                <td><input type="text" value="租赁人的名称"></td>
+                                                <td><input type="text" value="张三" class="form-control" id="Ename"></td>
                                             </tr>
                                             <tr>
                                                 <td>性别 ： </td>
-                                                <td><input type="text" value="农学院"></td>
+                                                <td><input type="text" value="男" class="form-control" id="Esex"></td>
                                                 <td>出生年月 ： </td>
-                                                <td><input type="text" value="茶学"></td>
+                                                <td class="input-style"><input class="laydate-icon" id="demo" value="2016-11-24更新"></td>
                                             </tr>
                                             
                                             
                                             <tr>
-                                                <td>人员类比 ： </td>
-                                                <td><input type="text" value="景园气象站"></td>
-                                                <td>部门 ： </td>
-                                                <td><input type="text" value="#001"></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>身份证号 ： </td>
-                                                <td><input type="text" value="景园气象站"></td>
-                                                <td>联系电话 ： </td>
-                                                <td><input type="text" value="#001"></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>原工作单位 ： </td>
-                                                <td><input type="text" value="景园气象站"></td>
-                                                <td>来校工作时间 ： </td>
-                                                <td><input type="text" value="#001"></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>参加工作时间 ： </td>
-                                                <td><input type="text" value="景园气象站"></td>
-                                                <td>用工形式 ： </td>
-                                                <td><input type="text" value="#001"></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>户口性质 ： </td>
-                                                <td><input type="text" value="景园气象站"></td>
+                                                <td>员工类别 ： </td>
+                                                <td>
+                                                	<select class="form-control" name="Eworkerclass" id="Eworkerclass">
+                                                      <option id="EworkerclassId">请选择</option>
+                                                    </select>
+                                                </td>
                                                 <td>身份属性 ： </td>
-                                                <td><input type="text" value="#001"></td>
+                                                <td>
+                                                	<select class="form-control" name="Estatus" id="Estatus">
+                                                      <option id="EstatusID">请选择</option>
+                                                    </select>
+                                                </td>
                                             </tr>
                                             
                                             <tr>
-                                                <td>计划种植内容 ： </td>
-                                                <td><input type="text" value="玉米"></td>
+                                                <td>部门 ： </td>
+                                                <td>
+                                                	<select class="form-control" name="Edivision" id="Edivision">
+                                                      <option id="EdivisionID">请选择</option>
+                                                    </select>
+                                                </td>
+                                                <td>联系电话 ： </td>
+                                                <td><input type="text" value="18219723489" class="form-control" id="Ephone"></td>
                                             </tr>
+                                            
+                                            <tr>
+                                            	<td>身份证号 ： </td>
+                                                <td colspan="3"><input style="width:100%;" type="text" value="43011119751020043X" class="form-control" id="IDnumber"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                            	<td>密码修改 ： </td>
+                                                <td colspan="3"><input style="width:100%;" type="text" value="12345" class="form-control" id="Epassword"></td>
+                                            </tr>
+                                            
+                                           
                                         </table>
                                       </div>
                                       <div class="modal-footer table-responsive">
                                         <center>
-                                        <button type="button" class="btn btn-primary">保存</button>
+                                        <button type="button" class="btn btn-primary" id="saverun">保存</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                         </center>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                    
-                    
-                    
-                    
-                    
-				</div><!-- End Sidebar-->                 
-                
+                                
+                                
+                                <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content" style="border:#3071a9 8px solid">
+                                      <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title text-center" id="myModalLabel">曾加人员信息</h4>
+                                      </div>
+                                      <div class="modal-body table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <td>员工编号 ： </td>
+                                                <td><input type="text" value="" id="workerId" class="form-control"></td>
+                                                <td>姓名 ： </td>
+                                                <td><input type="text" value="" id="name" class="form-control"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>性别 ： </td>
+                                                <td><input type="text" value="" id="sex" class="form-control"></td>
+                                                <td>出生年月 ： </td>
+                                                <td  class="input-style"><input class="laydate-icon" id="demo2" value=""></td>
+                                            </tr>
+                                            
+                                            
+                                            <tr>
+                                                <td>员工类别 ： </td>
+                                                <td>
+                                                	<select class="form-control" name="Awkclass" id="Awkclass">
+                                                      <option id="AworkerclassId" value="1">请选择</option>
+                                                    </select>
+                                                </td>
+                                                <td>身份属性 ： </td>
+                                                <td>
+                                                	<select class="form-control" name="Astatus" id="Astatus">
+                                                      <option id="AstatusId" value="1">请选择</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>部门 ： </td>
+                                                <td>
+                                                	<select class="form-control" name="Adivision" id="Adivision">
+                                                      <option id="AdivisionID" value="1">请选择</option>
+                                                      <option>1</option>
+                                                      <option>1</option>
+                                                    </select>
+                                                </td>
+                                                <td>联系电话 ： </td>
+                                                <td><input type="text" value="" id="phone" class="form-control"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                            	<td>身份证号 ： </td>
+                                                <td colspan="3"><input style="width:100%;" type="text" value="" id="IDnumber" class="form-control"></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                            	<td>密码修改 ： </td>
+                                                <td colspan="3"><input style="width:100%;" type="text" value="" id="password" class="form-control"></td>
+                                            </tr>
+                                            
+                                           
+                                        </table>
+                                      </div>
+                                      <div class="modal-footer table-responsive">
+                                        <center>
+                                        <button type="button" class="btn btn-primary" id="save">保存</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        </center>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                     
             
         </div><!--row end-->
@@ -441,6 +469,17 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/laydate.js"></script>
+    <script src="../js/manageuser.js"></script>
+    <script src="../js/kg.js"></script>
+    <script>
+    	!function(){
+			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库
+			laydate({elem: '#demo'});//绑定元素
+			laydate({elem: '#demo2'});
+         }();
+		 
+    </script>
+    
   </body>
 </html>

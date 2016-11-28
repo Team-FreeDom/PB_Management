@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8">
+    <title>实习计划审批</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/default.css">
+
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+    <!--datatable-->
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/practice-plan-approve.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar" role="navigation">
+      <div class="container-fluid container-nav">
+          <!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
+          <ul class="nav navbar-nav navbar-actions navbar-left">
+              <li class="visible-md visible-lg"><a href="index.html#"><i class="icon-th-large"></i></a></li>
+              <li class="visible-xs visible-sm"><a href="index.html#"><i class="icon-align-justify"></i></a></li>
+          </ul>
+      
+          <span class="teachCenterTitle">基地管理系统</span>
+          <!-- Navbar Left -->
+    
+          <!-- Navbar Right -->
+          <div class="navbar-right">
+              <!-- Notifications -->
+              <ul class="notifications" avalonctrl="subNotificationsController">
+                  <li class="hidden-sm hidden-xs">
+                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+                          <i class="icon-envelope"><span class="badge dw-position">4</span></i>
+                              <!--ms-if-->
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-header" style="text-align: center;">
+                          <strong>未读消息列表</strong>
+                          </li>    
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="../teach/notifications.html">更多消息</a>
+                          </li>
+                      </ul>
+    
+                  </li>
+                  <li>
+                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                          <i class="icon-remove"></i>
+                      </a>
+                  </li>
+              </ul>
+    
+              <!-- End Notifications -->
+          </div>
+          <!-- End Navbar Right -->
+      </div>
+    </div>
+
+
+
+	<div class="container-fluid content">
+    	<div class="row">
+        	
+        	<div class="sidebar">
+					<div class="sidebar-collapse">
+						<!-- Sidebar Header Logo-->
+						<div class="sidebar-header ">
+							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
+						</div>
+						
+						<!-- Sidebar Menu-->
+						<div class="sidebar-menu" style="height: 384px;">
+							<nav id="menu" class="nav-main" role="navigation">
+								<ul class="nav nav-sidebar">
+									<div class="panel-body text-center">
+										<div class="bk-avatar">
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<!--ms-if-->
+										</div>
+										<div class="bk-padding-top-10">
+											<i class="icon-circle text-success"></i> 
+											<small>罗旭</small>
+											<!--ms-if-->
+										</div>
+									</div>
+									<div class="divider2"></div>
+									
+									
+									<li class="menuItem">
+										<a href="index.html">
+											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
+										</a>
+									</li>
+									
+									 <li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+										</a>
+										<ul class="nav nav-children">
+											<li><a href="#"><span class="text">我的租赁</span></a></li>
+											<li><a href="#"><span class="text">我的实习</span></a></li>
+											<li><a href="#"><span class="text">我的报修</span></a></li>
+											<li><a href="#"><span class="text">我的基地</span></a></li>
+										</ul>
+									</li>
+
+									<li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+										</a>
+										<ul class="nav nav-children">
+                                            <li><a href="#"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="#"><span class="text">实习审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+
+										</ul>
+									</li>
+
+										<li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+										</a>
+										<ul class="nav nav-children">
+                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 系统权限设置</span></a></li> 
+										</ul>
+									</li>
+									 <li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
+										</a>
+										<ul class="nav nav-children">
+											<li><a href="#"><span class="text">租赁统计</span></a></li>
+											<li><a href="#"><span class="text">实习分析</span></a></li>
+											<li><a href="#"><span class="text">实习基地统计</span></a></li>
+										</ul>
+									</li>									
+									
+								</ul>
+							</nav>
+						</div>
+						<!-- End Sidebar Menu-->
+					</div>
+					<!-- Sidebar Footer-->
+					<div class="sidebar-footer">
+						<div class="copyright text-center">
+							<div>湖南农业大学版权所有 </div>
+						</div>
+					</div>
+					<!-- End Sidebar Footer-->
+				</div>   <!-- End Sidebar--> 
+		        
+                
+			<div class="main " style="min-height: 584px;">
+					<!-- 当前地址导航 -->
+					<div class="page-header">
+						<div class="pull-left">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">
+                            	<li><a href="index.html">位置</a></li>
+                                <li><a href="index.html">我的实习</a></li>
+							</ol>
+						</div>
+						<div class="pull-right">
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+							</ol>
+						</div>
+					</div>
+					<!-- 主面板内容 -->
+					<div class="row form">
+
+						<div class="col-lg-12">
+                                <table id="practice-plan-approve" class="cell-border" cellspacing="0" width="100%">
+                                    <thead>
+                                    	<tr bgcolor="#ECF1F5">
+                                            <td colspan="3">
+                                            	<form class="form-inline" role="form">
+                                                  <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputPassword2" placeholder="输入搜索内容">
+                                                  </div>
+                                                  <button type="submit" class="btn btn-primary">搜索</button>
+                                                </form>
+                                            </td>
+                                            <td colspan="7" >
+                                                <ul id="dropdown_show">
+                                                	<li><span class="icon-filter">筛选</span>
+                                                    	<ul id="hide_ul" style="display:none;">
+                                                        	<li style="background:#D6DFE9; padding-top:15px;">
+                                                            	<center>
+                                                            	<form class="form-inline" role="form">
+                                                                
+                                                                  <div class="form-group">
+                                                                    <label>基地类型 : </label>
+                                                                    <select class="form-control" name="" id="">
+                                                                      <option value="">显示全部</option>
+                                                                      <option value="">耘园科教综合基地</option>
+                                                                      <option value="">西南角农学基地</option>	
+                                                                    </select>  
+                                                                  </div>
+                                                                  
+                                                                  <div class="form-group">
+                                                                    <label>申报学院 : </label>
+                                                                    <select class="form-control" name="" id="">
+                                                                          <option value="">显示全部</option>
+                                                                          <option value="">#1</option>
+                                                                          <option value="">#2</option>	
+                                                                        </select>
+                                                                  </div><br>
+
+                                                                  <div class="form-group">
+                                                                    <label>开始时间 : </label>
+                                                                    <select class="form-control" name="" id="">
+                                                                          <option value="">显示全部</option>
+                                                                          <option value="">#1</option>
+                                                                          <option value="">#2</option>	
+                                                                        </select>
+                                                                  </div>
+                                                                  
+                                                                  <div class="form-group">
+                                                                    <label>结束时间 : </label>
+                                                                    <select class="form-control" name="" id="">
+                                                                          <option value="">显示全部</option>
+                                                                          <option value="">#1</option>
+                                                                          <option value="">#2</option>	
+                                                                        </select>
+                                                                  </div>
+                                                                  <br><br>
+
+                                                                  <button type="reset" class="btn btn-primary" >重置</button>
+                                    							  <button type="button" class="btn btn-primary" id="finished">完成</button>
+                                                                </form> 
+                                                               </center>                                                       	
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                             </td>
+                                             <td>
+                                             	<button type="reset" class="btn btn-primary" >导出</button>
+                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>实习基地</th>
+                                            <th>联系电话</th>
+                                            <th>开始日期</th>
+                                            <th>结束日期</th>
+                                            <th>实习类型</th>
+                                            <th>学院</th>
+                                            <th>年级专业班级</th>
+                                            <th>实习地点</th>
+                                            <th>指导老师</th>
+                                            <th>详情内容及进程</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>耘园气象站</td>
+                                            <td>15337904657</td>
+                                            <td>2015.1</td>
+                                            <td>2016.1</td>
+                                            <td>教学实习</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>14级计算机一班</td>
+                                            <td>气象站</td>
+                                            <td>张三、李四</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#check-detail">查看详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>耘园生科实习基地</td>
+                                            <td>15337904657</td>
+                                            <td>2015.1</td>
+                                            <td>2016.1</td>
+                                            <td>教学实习</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>14级计算机一班</td>
+                                            <td>气象站</td>
+                                            <td>张三、李四</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#check-detail">查看详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>耘园生科实习基地</td>
+                                            <td>15337904657</td>
+                                            <td>2015.1</td>
+                                            <td>2016.1</td>
+                                            <td>教学实习</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>14级计算机一班</td>
+                                            <td>气象站</td>
+                                            <td>张三、李四</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#check-detail">查看详情</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>耘园生科实习基地</td>
+                                            <td>15337904657</td>
+                                            <td>2015.1</td>
+                                            <td>2016.1</td>
+                                            <td>教学实习</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>14级计算机一班</td>
+                                            <td>气象站</td>
+                                            <td>张三、李四</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#check-detail">查看详情</button>
+                                            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>耘园生科实习基地</td>
+                                            <td>15337904657</td>
+                                            <td>2015.1</td>
+                                            <td>2016.1</td>
+                                            <td>教学实习</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>14级计算机一班</td>
+                                            <td>气象站</td>
+                                            <td>张三、李四</td>
+                                            <td>
+                                            <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#check-detail">查看详情</button>
+                                            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                  </table>
+						</div>
+                        
+                        <!--弹出框-->
+                        <div class="modal fade" id="check-detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content" style="border:#3071a9 8px solid">
+                                  <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title text-center" id="myModalLabel">实习申请详情及修改</h4>
+                                  </div>
+                                  
+                                  <div class="modal-body table-responsive">
+                                  	<form class="form-horizontal" role="form">
+                                        
+                                          <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-2 control-label">实习类型:</label>
+                                            <div class="col-sm-10">
+                                              <input type="email" class="form-control" id="Etype">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">实习学院</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Ecollege">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">实习时间</label>
+                                            <div class="col-sm-5">
+                                              <input class="form-control laydate-icon" id="demo" value="">
+                                            </div>
+                                            <div class="col-sm-5">
+                                              <input class="form-control laydate-icon" id="demo2" value=""> 
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">项目名称</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Eitemname">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">年级专业班级</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Eclass">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">实习人数</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Epoeple">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">指导老师</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Eteacher">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">实习地点</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Eplace">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">联系电话</label>
+                                            <div class="col-sm-10">
+                                              <input type="password" class="form-control" id="Ephone">
+                                            </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-2 control-label">实习内容摘要及进程安排:</label>
+                                            <div class="col-sm-10">
+                                              <textarea class="form-control" rows="3" id="Econtent"></textarea>
+                                            </div>
+                                          </div>
+                                          
+                                          
+                                        </form>
+                                  	
+                                  </div>
+                                  
+                                  <div class="modal-footer table-responsive">
+                                    <center>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        <button type="button" class="btn btn-primary">确定</button>
+                                    </center>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+					</div>
+				</div><!-- End Sidebar-->                 
+                
+
+                   
+            
+        </div><!--row end-->
+    </div>
+	<div class="clearfix"></div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery.min.js"></script>
+    <!--datatable javascript-->
+	<script src="../js/jquery.dataTables.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="../js/laydate.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/kg.js"></script>
+    <script src="../js/practice-plan-approve.js"></script>
+    <script>
+		!function(){
+	laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库
+	laydate({elem: '#demo'});//绑定元素
+	laydate({elem: '#demo2'});
+         }();
+		 
+		</script>
+  </body>
+</html>
