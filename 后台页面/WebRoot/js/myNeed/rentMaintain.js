@@ -126,28 +126,41 @@ $(document)
 					$.ajax({ // 获得申报部门
 						type : 'POST',
 						dataType : 'json',
-						url : 'getDept.do',
+						url : 'getExistRentInfo.do',
 						async : false,
 						cache : false,
 						error : function(request) {
 							alert("error");
 						},
 						success : function(data) {
-							var i = 0;
-							for ( var item in data) {
+							
+							
+							var i = 0;							
+							for ( var item in data[0]) {
+								
+								//所有的部门
+								$("#deptD").after(
+										"<option value=" + data[0][i].aid + ">"
+												+ data[0][i].dept + "</option>");
+								
+								/*$("#addDepth").after(
+										"<option value=" + data[i].aid + ">"
+												+ data[i].dept + "</option>");*/
+								i++;
+							}
+							
+							//租赁历史表中存在的部门
+							i=0;
+							for ( var item in data[1]) {
 
 								$("#deptS").after(
-										"<option value=" + data[i].dept + ">"
-												+ data[i].dept + "</option>");
-								$("#deptD").after(
-										"<option value=" + data[i].aid + ">"
-												+ data[i].dept + "</option>");
+										"<option value=" + data[1][i].dept + ">"
+												+ data[1][i].dept + "</option>");
+								
 								$("#deptE").after(
-										"<option value=" + data[i].dept + ">"
-												+ data[i].dept + "</option>");
-								$("#addDepth").after(
-										"<option value=" + data[i].aid + ">"
-												+ data[i].dept + "</option>");
+										"<option value=" + data[1][i].dept + ">"
+												+ data[1][i].dept + "</option>");
+								
 								i++;
 							}
 

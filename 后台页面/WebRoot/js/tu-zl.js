@@ -22,6 +22,18 @@
 					var i = 0;
 					var array1=data.base;
 					var array2=data.xy;
+          var stime=data.stime;
+          var etime=data.etime;
+          if(stime=='' || etime=='')
+          {
+            bootbox.alert({
+             message: "土地租赁尚未开放，请等候通知",
+             size: 'small'
+            });
+            return false;
+          }
+          $('#stime').val(stime);
+          $('#etime').val(etime);
 					for ( var item in array1) {
 						$("#choose-gridh").after(
 								"<option value="+array1[i].bid+">"

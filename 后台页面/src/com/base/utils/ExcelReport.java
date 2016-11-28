@@ -188,29 +188,29 @@ public class ExcelReport{
 			cell8.setCellStyle(cs2);*/
 			
 			// 第十列土地名称
-			Cell cell9 = row_line.createCell(9);
-			cell9.setCellValue(line_data.getLandname());
-			cell9.setCellStyle(cs2);
+			Cell cell8 = row_line.createCell(8);
+			cell8.setCellValue(line_data.getLandname());
+			cell8.setCellStyle(cs2);
 			// 第十一列土地面积
-			Cell cell10 = row_line.createCell(10);
-			cell10.setCellValue(line_data.getLandArea());
-			cell10.setCellStyle(cs2);
+			Cell cell9 = row_line.createCell(9);
+			cell9.setCellValue(line_data.getLandArea());
+			cell9.setCellStyle(cs2);
 			// 第十二列适宜从事内容
-			Cell cell11 = row_line.createCell(11);
-			cell11.setCellValue(line_data.getAptplanting());
-			cell11.setCellStyle(cs2);
+			Cell cell10 = row_line.createCell(10);
+			cell10.setCellValue(line_data.getAptplanting());
+			cell10.setCellStyle(cs2);
 			// 第十三列计划从事内容
-			Cell cell12 = row_line.createCell(12);
-			cell12.setCellValue(line_data.getPlanting());
-			cell12.setCellStyle(cs2);
+			Cell cell11 = row_line.createCell(11);
+			cell11.setCellValue(line_data.getPlanting());
+			cell11.setCellStyle(cs2);
 			// 第十四列租赁费用
-			Cell cell13 = row_line.createCell(13);
-			cell13.setCellValue(line_data.getRentMoney());
-			cell13.setCellStyle(cs2);
+			Cell cell12 = row_line.createCell(12);
+			cell12.setCellValue(line_data.getRentMoney());
+			cell12.setCellStyle(cs2);
 			// 第十五列交费日期
-			Cell cell14 = row_line.createCell(14);
-			cell14.setCellValue(line_data.getChargeDate());
-			cell14.setCellStyle(cs2);
+			Cell cell13 = row_line.createCell(13);
+			cell13.setCellValue(line_data.getChargeDate());
+			cell13.setCellStyle(cs2);
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!

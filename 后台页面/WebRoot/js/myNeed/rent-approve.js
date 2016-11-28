@@ -160,6 +160,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 										
 										var record_str = '(';// //申请记录id格(1,2,3,4,5)
@@ -271,6 +272,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 										 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
@@ -395,7 +397,7 @@ $(document)
 									function() {
 										
 										var chk_value =[];
-										$('input[name="idname"]:checked').each(function(){
+										$('input[name="iname"]:checked').each(function(){
 										chk_value.push($(this).val());
 										});	
 										
@@ -405,6 +407,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
@@ -520,7 +523,7 @@ $(document)
 									function() {
 										
 										var chk_value =[];
-										$('input[name="idname"]:checked').each(function(){
+										$('input[name="iname"]:checked').each(function(){
 										chk_value.push($(this).val());
 										});	
 										
@@ -530,6 +533,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")

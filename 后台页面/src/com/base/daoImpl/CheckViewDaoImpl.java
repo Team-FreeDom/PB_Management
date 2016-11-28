@@ -300,5 +300,24 @@ public class CheckViewDaoImpl {
 		System.out.println("改变完成");
 
 	}
+	
+	
+	//确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
+	public void payForSuccess(String recordStr, int status) {
+		
+		Session session = sessionFactory.openSession();
+		try {
+			// hibernate调用存储过程(无返回参数)
+			SQLQuery sqlQuery = session.createSQLQuery("{call baseweb.state_success(?,?)}");
+			sqlQuery.setString(0, recordStr);
+			sqlQuery.setInteger(1, status);
+			sqlQuery.executeUpdate();
+		} finally {
+			session.close();
+		}
+
+		System.out.println("更改完毕");
+
+	}
 
 }

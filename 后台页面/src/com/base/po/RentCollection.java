@@ -19,8 +19,16 @@ public class RentCollection {
 	private String name;
 	private String planting;
 	private int Lineup;
+	private int tag;
 	private List<RentAdd> data;
 	
+		
+	public int getTag() {
+		return tag;
+	}
+	public void setTag(int tag) {
+		this.tag = tag;
+	}
 	public List<RentAdd> getData() {
 		return data;
 	}
