@@ -16,12 +16,12 @@
 				  bootbox.alert({
 					  message: "加载区域失败",
 					  size: 'small'
-				  });	
+				  });
 				},
 				success : function(data) {
 					var i = 0;
 					var array1=data.base;
-					var array2=data.xy;				
+					var array2=data.xy;
 					for ( var item in array1) {
 						$("#choose-gridh").after(
 								"<option value="+array1[i].bid+">"
@@ -36,35 +36,35 @@
 							i++;
 					}
 				}
-			});			
+			});
 
 		var tu_zl=new function () {
 		  this.choose_count=0;
 		  this.serializedData = [];//在loadGrid中构成布局对象，关联土地编号id
 		  this.dialog;
-		  this.grid = $('.grid-stack').data('gridstack');	
+		  this.grid = $('.grid-stack').data('gridstack');
 		  function fill(id,name,plantingContent,landArea,buildingArea,tudi_Afford){
 			$('#tudi_id').val(id);
 			$('#tudi_name').val(name);
 			$('#tudi_plantingContent').val(plantingContent);
 			$('#tudi_landArea').val(landArea);
 			$('#tudi_buildingArea').val(buildingArea);
-			$('#tudi_Afford').val(tudi_Afford);					
-		  };		  
+			$('#tudi_Afford').val(tudi_Afford);
+		  };
 		  function closeboxEX() {
 			$('#land_lease_table').html('');
-			tu_zl.loadGrid();	
-			tu_zl.dialog.modal('hide');		  
+			tu_zl.loadGrid();
+			tu_zl.dialog.modal('hide');
 			$('#landModal').modal('hide');
 		  }
-		  function closebox() {	
-			tu_zl.dialog.modal('hide');		  
-		  }			  
-		  this.loadGrid = function () {			  
+		  function closebox() {
+			tu_zl.dialog.modal('hide');
+		  }
+		  this.loadGrid = function () {
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
-			  fill('','','','','','');	
-			  $('#field_rent tbody').html('');		  
+			  fill('','','','','','');
+			  $('#field_rent tbody').html('');
 			  this.grid.removeAll();
 			  var obj=this;
 			  if(bid==""){
@@ -82,17 +82,21 @@
 									size: 'small'
 								});
 						  },
-						  success : function(data) {						 
+						  success : function(data) {
 						  obj.serializedData=data;
 						  var items = GridStackUI.Utils.sort(obj.serializedData);
 						  _.each(items, function (node) {
 							  if(node.name!='')
 							  obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
+                else if(node.tag==1 && node.name=='')
+                {
+                  obj.grid.addWidget($('<div><div class="grid-stack-item-content lockdiv"><span class="lname">锁定：等候缴费</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
+                }
 							  else
-							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);													
-							}, obj);//end each  
+							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
+							}, obj);//end each
 						 }//end success
-			  });	//end ajax	
+			  });	//end ajax
 		  }.bind(this);
 
 
@@ -101,7 +105,7 @@
 				 bootbox.alert({
 					  message: "您没有选择土地",
 					  size: 'small'
-				  }); 
+				  });
 				  return false;
 			  }
 			  var str=' ';
@@ -113,41 +117,41 @@
 				  bootbox.alert({
 					  message: "登录失效，请正返回首页",
 					  size: 'small'
-				  }); 
-				  window.location.href="../login_soft.html"; 
+				  });
+				  window.location.href="../login_soft.html";
 			  }
-			  
+
 			  var stime = $('#stime').val();
 			  var etime = $('#etime').val();
 			  var lidList='(';
 			  var bname=$('#choose-grid').children('option:selected').html();//选中的基地编号
-			  var info_str='['; 
-			 
-			 
+			  var info_str='[';
+
+
 			  for (var i=1;i<=this.choose_count;i++)
 			  {
 				 plan = $('#plan'+i).val();
 				 xy=$('#scollage').val();
 			  	if(plan=='' || xy =='')
-				{			  		
-				 bootbox.alert({					  
+				{
+				 bootbox.alert({
 					  message: "从事工作和申报学院为必填项目",
-					  size: 'small'					  
+					  size: 'small'
 				  });
 				  $('#plan'+i)[0].focus();
-				  return false;					
+				  return false;
 				}
 				landid = $('#tuname'+i).attr('tid');
 				lidList=lidList+"'"+landid+"'";
-				if(i==1){				 
+				if(i==1){
 				 str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;
 				 info_str=info_str+'{userid:"'+userid+'",msg:"'+bname+'#'+landid+'"}';
 				}else{
-				  str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;				 
+				  str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"',"+xy;
 				  info_str=info_str+',{userid:"'+userid+'",msg:"'+bname+'#'+landid+'"}';
 				}
-								
-				
+
+
 				if(i==this.choose_count)
 					{
 				str=str+",2)";
@@ -184,18 +188,18 @@
 					  var position=data.indexOf('$');
 					var messageCount=data.substring(position+1);
 					var flag=data.substring(0,position);
-                  
-                    				 
+
+
 					  if(flag!=1){
-						  
+
 						  bootbox.alert({
 							  message: "请先撤回相同的土地申请",
 							  size: 'small',
 							  title: "申请失败",
-						  }); 
-						  
+						  });
+
 					  }else{
-						  
+
 					  $(".msg").html(messageCount);
 					  fill('','','','','','');
 					  $('#field_rent tbody').html('');
@@ -203,11 +207,11 @@
 						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
 						  closeButton: false
 					  });
-					  window.setTimeout(closeboxEX, 1000);	
+					  window.setTimeout(closeboxEX, 1000);
 					  }
 				  }//success
-			  });//ajax			  	  
-			  
+			  });//ajax
+
 		  }.bind(this);
 
 		  $(document).on("click", ".grid-stack-item", function() {
@@ -221,6 +225,7 @@
 			  var str='';
 			  var id=-1;
 			  var n=-1;
+        $('#scollage').val("");
 			  $.each($('.ck'), function(){
 				  if($(this).is(':checked'))
 				  {
@@ -245,7 +250,7 @@
 					  </div>\
 					</div>\
 					<p></p> '
-					
+
 					i++;
 				  }//end if
 			  });//end each
@@ -257,7 +262,7 @@
 			  $('#sub_land_apply').removeAttr("disabled");
 			  tu_zl.choose_count=i-1;
 		  });
-		  
+
 		   $(document).on("click", ".ck", function() {
 			  var id=$(this).attr('id');
 			  var n=_.findIndex(tu_zl.serializedData, 'id', id);
@@ -275,7 +280,7 @@
 					 data[i][1]=el.planting;
 					 data[i][2]=el.ptime;
 					 i++;
-				 }); 
+				 });
 				 $('#field_rent').dataTable( {
 					"destroy": true,
 						"data": data,
@@ -284,16 +289,16 @@
 						"ordering": false,
 						"info":     false,
 						"order": [[ 2, "asc" ]]
-				 });			  
+				 });
 			  }
 			  else{
 			  fill('','','','','','');
-			  $('#field_rent tbody').html(''); 
+			  $('#field_rent tbody').html('');
 			  }
-		   });//end click 
-		   
+		   });//end click
+
 		  $('#choose-grid').change(this.loadGrid);
 		  $('#sub_land_apply').click(this.savedate);
-		}//end tu_zl	
-			
+		}//end tu_zl
+
 		});//end function
