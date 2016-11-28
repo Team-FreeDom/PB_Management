@@ -321,15 +321,18 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    //提交租赁申请
    public int submitLandApply(String userid,String lidList,String str,String info_str)
    {
-	  
-	 //获得插入的消息语句
-	  String insertStr=MessageUtils.getInsertStr(info_str,1);	
-	 		
+	  	 		
 	  //提交申请 
 	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
 	   
+	   if(flag==1){
+		   
+	   //获得插入的消息语句
+		  String insertStr=MessageUtils.getInsertStr(info_str,1);	
+		  
 	 //向消息表中插入信息 
-		checkViewDaoImpl.insertMessage(insertStr);
+		  checkViewDaoImpl.insertMessage(insertStr);
+	   }
 	   
 		return flag;
 	   

@@ -129,10 +129,10 @@
 				 plan = $('#plan'+i).val();
 				 xy=$('#scollage').val();
 			  	if(plan=='' || xy =='')
-				{
-				 bootbox.alert({
+				{			  		
+				 bootbox.alert({					  
 					  message: "从事工作和申报学院为必填项目",
-					  size: 'small'
+					  size: 'small'					  
 				  });
 				  $('#plan'+i)[0].focus();
 				  return false;					
@@ -190,7 +190,8 @@
 						  
 						  bootbox.alert({
 							  message: "请先撤回相同的土地申请",
-							  size: 'small'
+							  size: 'small',
+							  title: "申请失败",
 						  }); 
 						  
 					  }else{
