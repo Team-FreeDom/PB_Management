@@ -356,17 +356,17 @@
 										style="background:#4D719B; color:#FFF">
 										<button type="button" class="close" data-dismiss="modal"
 											aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel"></h4>
+										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
 										<h5>您确定要提交吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!-- 
+										
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                     -->
+                    
 										<button type="button" class="btn btn-primary"
 											id="SubmitTemperate">确认</button>
 									</div>

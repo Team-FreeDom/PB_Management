@@ -95,8 +95,8 @@ public class CheckServiceImpl implements checkService {
 			//获得插入的消息语句
 			String insertStr=MessageUtils.getInsertStr(infostr,6);	
 			
-			//把特定记录的状态改为申请成功
-			checkViewDaoImpl.updateStatus(recordstr, 6);
+			//把特定记录的状态改为申请成功，并将记录插入土地租赁历史表中
+			checkViewDaoImpl.payForSuccess(recordstr, 6);
 			
 			//把相同土地的状态为锁定的土地状态变为未交费
 			checkViewDaoImpl.changeSolid(landstr, 5, 4);

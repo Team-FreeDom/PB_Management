@@ -17,6 +17,7 @@ import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandRentInfoDao;
+import com.base.po.ApplyDept;
 import com.base.po.LandApply;
 import com.base.po.LandRentInfo;
 import com.base.po.RentList;
@@ -292,6 +293,37 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		}
 	}
 	
-	
+	public List<ApplyDept> getExistDept(){
+		
+		List<ApplyDept> list=new ArrayList<ApplyDept>();
+		ApplyDept dept=null;
+		
+		 try{
+				
+				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
+				sp = conn.prepareCall("{call baseweb.`rent_dept`()}");				
+				sp.execute();   //执行存储过程			
+				
+				rs=sp.getResultSet(); 
+				if(rs!=null){
+				while(rs.next())    //遍历结果集，赋值给list
+				{
+					dept=new ApplyDept();
+					dept.setAid(rs.getInt("aid"));
+					dept.setDept(rs.getString("dept"));
+					list.add(dept);    //加到list中
+				}
+				}
+				
+	             }catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			e.printStackTrace();
+	     		}finally{			
+	     			
+	     			SqlConnectionUtils.free(conn, sp, rs);
+	     			
+	     		} 
+		 return list;
+	}
 
 }
