@@ -198,7 +198,8 @@
                                             <td colspan="5" >
                                             </td>
                                              <td colspan="3" id="button-right">
-                                             	<button type="button" class="btn btn-primary">导入</button>
+                                             	<a href="../image/bg/Thumbs.db"  class="btn btn-primary">点击下载模板</a>
+                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导入</button>
                                              	<button type="button" class="btn btn-primary">导出</button>
                                              </td>
                                                
@@ -401,7 +402,12 @@
                                             </tr>
                                             <tr>
                                                 <td>性别 ： </td>
-                                                <td><input type="text" value="" id="sex" class="form-control"></td>
+                                                <td id="sex-style">
+                                                  	<label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex1" value="option1">男                                                    </label>
+                                                    <label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex2" value="option2">女                                                    </label>
+                                                </td>
                                                 <td>出生年月 ： </td>
                                                 <td  class="input-style"><input class="laydate-icon" id="demo2" value=""></td>
                                             </tr>
@@ -456,6 +462,38 @@
                                       </div>
                                     </div>
                                   </div>
+                                </div>
+                                
+                                
+                                <div class="modal fade" id="import" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content" style="border:#3071a9 8px solid">
+                                            <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
+                                            </div>
+                                            <div class="modal-body" id="daochu" style="height:120px;">
+                                            <center>
+                                            	<form role="form">
+                                                  
+                                                  <div class="form-group">
+                                                    <input type="file" id="exampleInputFile">
+                                                  </div>
+                                                </form>
+                                            </center>
+                                            </div>
+                                            <div class="modal-footer">
+                                            	<center>
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">取消</button>
+                                                    <button type="button" class="btn btn-primary">确定</button>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                     
             

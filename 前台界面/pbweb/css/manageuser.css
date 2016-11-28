@@ -20,7 +20,8 @@ table thead > tr> th{
 	margin-left:5px;}
 #button-left button{
 	margin-right:5px;}
-
+#sex-style input{
+	width:20px;}
 .input-style input{
 	cursor:pointer;}
 

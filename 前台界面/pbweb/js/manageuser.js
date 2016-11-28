@@ -32,7 +32,8 @@ $(document).ready(function() {
 				 $("#ZJ").click(function(){
 					 
 					 $("#workerId").val("");
-			        $("#sex").val("");
+			        $("#sex1").prop("checked",false);
+					$("#sex2").prop("checked",false);
 			        $("#IDnumber").val("");
 			        $("#password").val("");
 					$("#Adivision").val("1");
@@ -63,7 +64,7 @@ $(document).ready(function() {
 					else if($("#name").val()==""){
 						alert("请填写姓名");
 						}
-					else if($("#sex").val()==""){
+					else if($("#sex1").prop("checked") === false && $("#sex2").prop("checked") === false){
 						alert("请填写性别");
 						}
 			       
