@@ -124,9 +124,12 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");	
 		String userid = CookieUtils.getCookieUsername(request, response);
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		System.out.println("未读消息数为："+number);
+		//System.out.println("未读消息数为："+number);
 		try {
-			response.getWriter().print(number);
+			if(number==0)
+				response.getWriter().print("");
+			else
+				response.getWriter().print(number);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +150,10 @@ public class NotificationController {
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
 		//System.out.println("未读消息数为："+number);
 		try {
-			response.getWriter().print(number);
+			if(number==0)
+				response.getWriter().print("");
+			else
+				response.getWriter().print(number);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

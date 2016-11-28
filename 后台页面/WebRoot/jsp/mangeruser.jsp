@@ -180,11 +180,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a href="index.html">位置</a></li>
-                                <li><a href="mangeruser.jsp">用户管理</a></li>
+                                <li><a href="#">用户管理</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>

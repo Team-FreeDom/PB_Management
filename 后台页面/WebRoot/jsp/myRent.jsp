@@ -46,7 +46,7 @@
 				<ul class="notifications" avalonctrl="subNotificationsController">
 					<li class="hidden-sm hidden-xs">
 					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg">0</span></i>
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a> 
 						<!-- <ul class="dropdown-menu">
@@ -168,11 +168,11 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置</a></li>							
-							<li><a href="myRent.jsp">我的租赁</a></li>
+							<li><a href="#">我的租赁</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg">
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 							<li><a><i class=" icon-building"></i>基地申报</a></li>
 							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
 							<li><a><i class="icon-user"></i>实习申请</a></li>

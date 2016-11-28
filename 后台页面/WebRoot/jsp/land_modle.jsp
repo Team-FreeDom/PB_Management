@@ -70,7 +70,7 @@
 				<ul class="notifications" avalonctrl="subNotificationsController">
 					<li class="hidden-sm hidden-xs">
 					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg">0</span></i>
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a> 
 						<!-- <ul class="dropdown-menu">
