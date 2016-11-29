@@ -583,7 +583,11 @@ a, a:link, a:visited, a:hover, a:active {
 	text-align: center;
 	background-color: #63addc;
 }
-
+.lockdiv  {
+	color: #fff;
+	text-align: center;
+	background-color: rgb(128, 40, 51) ;
+}
 .Havetorent  {
 	color: #fff;
 	text-align: center;
