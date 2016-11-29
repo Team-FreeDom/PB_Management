@@ -1,19 +1,6 @@
 // JavaScript Document
 $(document).ready(function() {
     ////数据格式{planstime:"2016-12-1",planetime:"2016-12-30",rentstime:"2016-12-30",rentetime:"2017-12-30"}//////////
-    laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
-    laydate({
-        elem: '#demo'
-    }); //绑定元素
-    laydate({
-        elem: '#demo2'
-    });
-    laydate({
-        elem: '#demo3'
-    });
-    laydate({
-        elem: '#demo4'
-    });
     $.ajax({ //页面加载时自动执行
         type: 'POST',
         dataType: 'json',

@@ -4,27 +4,28 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
             <!DOCTYPE html>
             <html lang="zh-cn">
 
             <head>
                 <meta charset="UTF-8">
-                <title>湖南农业大学基地管理系统</title>
+                <title>湖南农业大学土地管理系统</title>
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
                 <meta http-equiv="X-UA-Compatible" content="IE=9">
                 <meta name="renderer" content="webkit">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
                 <!-- Bootstrap -->
                 <link rel="stylesheet" href="../css/bootstrap.min.css">
                 <link rel="stylesheet" href="../css/font-awesome.min.css">
                 <link rel="stylesheet" href="../css/style.css">
+                <link rel="stylesheet" href="../css/index_main.css">
                 <link rel="stylesheet" href="../css/calendar.css" media="screen">
+
                 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
                 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-                <!--[if lt IE 9]>
-                  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-                  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-                <![endif]-->
+
             </head>
 
             <body>
@@ -48,6 +49,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <i class="icon-envelope"><span class="badge msg"></span></i>
                                         <!--ms-if-->
                                     </a>
+                                    <!--  <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                          </li>
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="getMessage.do">更多消息</a>
+                          </li>
+						</ul>  -->
                                 </li>
                                 <li>
                                     <a href="../loginout.do" class="dropdown-toggle notification-icon">
@@ -67,203 +76,221 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="container-fluid content">
                     <div class="row">
 
-
-                        <div class="sideebar">
-              					<div class="sidebar-collapse">
-              						<!-- Sidebar Header Logo-->
-              						<div class="sidebar-header ">
-              							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
-              						</div>
-
-              						<!-- Sidebar Menu-->
-              						<div class="sidebar-menu">
-              							<nav id="menu" class="nav-main" role="navigation">
-              								<ul class="nav nav-sidebar">
-              									<div class="panel-body text-center">
-              										<div class="bk-avatar">
-              											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
-              											<!--ms-if-->
-              										</div>
-              										<div class="bk-padding-top-10">
-              											<i class="icon-circle text-success"></i>
-              											<small></small>
-              											<!--ms-if-->
-              										</div>
-              									</div>
-              									<div class="divider2"></div>
-              									<li class="menuItem">
-              										<a href="index.do">
-              											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
-              										</a>
-              									</li>
-
-              									 <li class="menuItem nav-parent">
-              										<a>
-              											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
-              										</a>
-              										<ul class="nav nav-children">
-              											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-              											<li><a href="#"><span class="text">我的实习</span></a></li>
-              											<li><a href="#"><span class="text">我的报修</span></a></li>
-              											<li><a href="#"><span class="text">我的基地</span></a></li>
-              										</ul>
-              									</li>
-
-              									<li class="menuItem nav-parent">
-              										<a>
-              											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
-              										</a>
-              										<ul class="nav nav-children">
-                                                          <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                                          <li><a href="#"><span class="text">实习审批</span></a></li>
-                                                          <li><a href="#"><span class="text">维修审批</span></a></li>
-                                                          <li><a href="#"><span class="text">基地审批</span></a></li>
-              										</ul>
-              									</li>
-
-              										<li class="menuItem nav-parent opened nav-expanded">
-              										<a>
-              											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
-              										</a>
-              										<ul class="nav nav-children">
-                                                      	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                                      	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                                          <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                                          <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                                          <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                                          <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                                          <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-              										</ul>
-              									</li>
-              									 <li class="menuItem nav-parent">
-              										<a>
-              											<i class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
-              										</a>
-              										<ul class="nav nav-children">
-              											<li><a href="#"><span class="text">租赁统计</span></a></li>
-              											<li><a href="#"><span class="text">实习分析</span></a></li>
-              											<li><a href="#"><span class="text">实习基地统计</span></a></li>
-              										</ul>
-              									</li>
-
-              								</ul>
-              							</nav>
-              						</div>
-              						<!-- End Sidebar Menu-->
-              					</div>
-              					<!-- Sidebar Footer-->
-              					<div class="sidebar-footer">
-              						<div class="copyright text-center">
-              							<div>湖南农业大学版权所有 </div>
-              						</div>
-              					</div>
-              					<!-- End Sidebar Footer-->
-              				</div>   <!-- End Sidebar-->
-
-
-                            <div class="main " style="min-height: 584px;">
-                                <!-- 当前地址导航 -->
-                                <div class="page-header">
-                                    <div class="pull-left">
-                                        <ol class="breadcrumb visible-sm visible-md visible-lg">
-                                            <li><a>位置</a></li>
-                                            <li><a href="index.html"><i class=" icon-home"></i>项目启动</a></li>
-                                        </ol>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ol class="breadcrumb visible-sm visible-md visible-lg wz">
-                                            <li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                            <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-                                            <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                            <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
-                                        </ol>
-                                    </div>
+                        <div class="sidebar">
+                            <div class="sidebar-collapse">
+                                <!-- Sidebar Header Logo-->
+                                <div class="sidebar-header ">
+                                    <a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
                                 </div>
-                                <!-- 主面板内容 -->
-                                <div class="row form">
 
-                                    <div class="col-lg-12">
-
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">土地租赁</div>
-                                            <div class="panel-body text-center" id="start">
-                                                <button type="button" class="btn btn-danger btn-lg" id="start-btn"><span class="icon-play-circle">启动</span></button>
+                                <!-- Sidebar Menu-->
+                                <div class="sidebar-menu">
+                                    <nav id="menu" class="nav-main" role="navigation">
+                                        <ul class="nav nav-sidebar">
+                                            <div class="panel-body text-center">
+                                                <div class="bk-avatar">
+                                                    <a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
+                                                    <!--ms-if-->
+                                                </div>
+                                                <div class="bk-padding-top-10">
+                                                    <i class="icon-circle text-success"></i>
+                                                    <small></small>
+                                                    <!--ms-if-->
+                                                </div>
                                             </div>
-                                            <div class="panel-body" id="set" style="display:none">
-                                                <center>
-                                                    <div>
-                                                        <h2>申报设置</h2></div>
-                                                    <div>
-                                                        <form method="post" class="form-horizontal" role="form" id="submit">
+                                            <div class="divider2"></div>
+                                            <li class="menuItem">
+                                                <a href="index.do">
+                                                    <i class="icon-home" aria-hidden="true"></i><span>主界面</span>
+                                                </a>
+                                            </li>
 
-                                                            <div class="form-group form-group-lg">
-                                                                <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">申报开始时间</label>
-                                                                <div class="col-sm-3">
-                                                                    <input class="form-control laydate-icon" id="demo" value="">
-                                                                </div>
-                                                                <label for="inputPassword" class="col-sm-2 control-label">申报结束时间</label>
-                                                                <div class="col-sm-3">
-                                                                    <input class="form-control laydate-icon" id="demo2" value="">
-                                                                </div>
-                                                            </div>
+                                            <li class="menuItem nav-parent">
+                                                <a>
+                                                    <i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+                                                </a>
+                                                <ul class="nav nav-children">
+                                                    <li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
+                                                    <li><a href="#"><span class="text">我的实习</span></a></li>
+                                                    <li><a href="#"><span class="text">我的报修</span></a></li>
+                                                    <li><a href="#"><span class="text">我的基地</span></a></li>
+                                                </ul>
+                                            </li>
 
-                                                            <div class="form-group form-group-lg">
-                                                                <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">租赁开始时间</label>
-                                                                <div class="col-sm-3">
-                                                                    <input class="form-control laydate-icon" id="demo3" value="">
-                                                                </div>
-                                                                <label for="inputPassword" class="col-sm-2 control-label">租赁结束时间</label>
-                                                                <div class="col-sm-3">
-                                                                    <input class="form-control laydate-icon" id="demo4" value="">
-                                                                </div>
-                                                            </div>
+                                            <li class="menuItem nav-parent">
+                                                <a>
+                                                    <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+                                                </a>
+                                                <ul class="nav nav-children">
+                                                    <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+                                                    <li><a href="#"><span class="text">实习审批</span></a></li>
+                                                    <li><a href="#"><span class="text">维修审批</span></a></li>
+                                                    <li><a href="#"><span class="text">基地审批</span></a></li>
+                                                </ul>
+                                            </li>
 
-                                                            <div class="form-group form-group-lg">
-                                                                <button type="button" class="btn btn-primary" id="save">保存</button>
-                                                                <button type="button" class="btn btn-danger" id="end-btn">结束</button>
-                                                            </div>
+                                            <li class="menuItem nav-parent opened nav-expanded">
+                                                <a>
+                                                    <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+                                                </a>
+                                                <ul class="nav nav-children">
+                                                    <li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                                    <li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                                    <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                                    <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                                    <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                                    <li><a href="#"><span class="text"> 工作计划制定</span></a></li>
+                                                    <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                                    <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menuItem nav-parent">
+                                                <a>
+                                                    <i class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
+                                                </a>
+                                                <ul class="nav nav-children">
+                                                    <li><a href="#"><span class="text">租赁统计</span></a></li>
+                                                    <li><a href="#"><span class="text">实习分析</span></a></li>
+                                                    <li><a href="#"><span class="text">实习基地统计</span></a></li>
+                                                </ul>
+                                            </li>
 
-                                                        </form>
-                                                    </div>
-                                                    <div></div>
-                                                </center>
-                                            </div>
-                                        </div>
-
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title">实习计划</h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                Panel content
-                                            </div>
-                                        </div>
-
-
-
-
-                                    </div>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- End Sidebar Menu-->
+                            </div>
+                            <!-- Sidebar Footer-->
+                            <div class="sidebar-footer">
+                                <div class="copyright text-center">
+                                    <div>湖南农业大学版权所有 </div>
                                 </div>
                             </div>
-                            <!-- End Sidebar-->
-
-
-
+                            <!-- End Sidebar Footer-->
                         </div>
-                        <!--row end-->
+                        <!-- End Sidebar-->
+
+
+                        <div class="main " style="min-height: 584px;">
+                            <!-- 当前地址导航 -->
+                            <div class="page-header row">
+                                <div class="pull-left">
+                                    <ol class="breadcrumb visible-sm visible-md visible-lg">
+                                        <li><a>位置  :</a></li>
+                                        <li><a href="start.do"><i class=" icon-home"></i>工作计划制定</a></li>
+                                    </ol>
+                                </div>
+                                <div class="pull-right">
+                                    <ol class="breadcrumb visible-sm visible-md visible-lg wz">
+                                        <li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                        <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                        <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                        <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <!-- 主面板内容 -->
+                            <div class="row form">
+
+                                <div class="col-lg-12">
+
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">土地租赁</div>
+                                        <div class="panel-body text-center" id="start">
+                                            <button type="button" class="btn btn-danger btn-lg" id="start-btn"><span class="icon-play-circle">启动</span></button>
+                                        </div>
+                                        <div class="panel-body" id="set" style="display:none">
+                                            <center>
+                                                <div>
+                                                    <h2>申报设置</h2></div>
+                                                <div>
+                                                    <form method="post" class="form-horizontal" role="form" id="submit">
+
+                                                        <div class="form-group form-group-lg">
+                                                            <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">申报开始时间</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control laydate-icon" id="demo" value="">
+                                                            </div>
+                                                            <label for="inputPassword" class="col-sm-2 control-label">申报结束时间</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control laydate-icon" id="demo2" value="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group form-group-lg">
+                                                            <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">租赁开始时间</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control laydate-icon" id="demo3" value="">
+                                                            </div>
+                                                            <label for="inputPassword" class="col-sm-2 control-label">租赁结束时间</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control laydate-icon" id="demo4" value="">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group form-group-lg">
+                                                            <button type="button" class="btn btn-primary" id="save">保存</button>
+                                                            <button type="button" class="btn btn-danger" id="end-btn">结束</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div></div>
+                                            </center>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">实习计划</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            Panel content
+                                        </div>
+                                    </div>
+
+
+
+
+                                
+                        </div>
                     </div>
-                    <div class="clearfix"></div>
+                    <!-- End Sidebar-->
 
-                    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-                    <script src="../js/jquery.min.js"></script>
 
-                    <!-- Include all compiled plugins (below), or include individual files as needed -->
-                    <script src="../js/bootstrap.min.js"></script>
-                    <script src="../js/bootbox.min.js"></script>
-                    <script type="text/javascript" src="../js/laydate.js"></script>
-                    <script src="../dist/jquery.cokie.min.js"></script>
-                    <script src="../js/kg.js"></script>
-                    <script src="../js/start.js"></script>
+                </div>
+
+                <!--row end-->
+                </div>
+                <div class="clearfix"></div>
+                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                <script src="../js/jquery.min.js"></script>
+                <script src="../js/bootstrap.min.js"></script>
+                <script src="../js/bootbox.min.js"></script>
+                <script type="text/javascript" src="../js/laydate.js"></script>
+                <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+                <script src="../dist/jquery.cokie.min.js"></script>
+                <script src="../js/kg.js"></script>
+                <script src="../js/start.js"></script>
+                <script>
+                laydate.skin('yahui'); //切换皮肤，请查看skins下面皮肤库
+                laydate({
+                   elem: '#demo'
+                })
+                laydate({
+                    elem: '#demo2'
+                });
+                laydate({
+                    elem: '#demo3'
+                });
+                laydate({
+                    elem: '#demo4'
+                });
+                </script>
+
             </body>
 
             </html>
