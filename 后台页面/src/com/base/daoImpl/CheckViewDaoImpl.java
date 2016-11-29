@@ -262,6 +262,22 @@ public class CheckViewDaoImpl {
 		System.out.println("更改完毕");
 
 	}
+	
+	public void updateStatusP(String recordStr, int status) {
+		
+		Session session = sessionFactory.openSession();
+		try {
+			// hibernate调用存储过程(无返回参数)
+			SQLQuery sqlQuery = session
+					.createSQLQuery("{CALL baseweb.state_pay(?,?)}");
+			sqlQuery.setString(0, recordStr);
+			sqlQuery.setInteger(1, status);
+			sqlQuery.executeUpdate();
+		} finally {
+			session.close();
+		}
+
+	}
 
 	public void insertMessage(String sql) {
 		System.out.println("insert---start");

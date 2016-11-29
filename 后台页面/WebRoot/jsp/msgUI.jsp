@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
+﻿<%@page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -26,8 +26,8 @@
       <div class="container-fluid container-nav">
           <!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
           <ul class="nav navbar-nav navbar-actions navbar-left">
-              <li class="visible-md visible-lg"><a href="index.html#"><i class="icon-th-large"></i></a></li>
-              <li class="visible-xs visible-sm"><a href="index.html#"><i class="icon-align-justify"></i></a></li>
+              <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
+              <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
       
           <span class="teachCenterTitle">基地管理系统</span>
@@ -136,6 +136,7 @@
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
                                             <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
 										</ul>
@@ -243,8 +244,69 @@
                                               <td>土地租赁业务即将开始，请于2012-7-30号前登录</td>
                                               <td>2016-07-20</td>
                                             </tr> -->
+                                            
                                     </tbody>
                                     </table>
+ <nav>
+  <ul class="pagination">                    
+              <!-- 上一页 按钮 -->
+
+<c:choose>
+<c:when test="${page != 1}">
+<li><a href="getMessage.do?page=${page-1}">上一页</a></li>
+</c:when>
+<c:otherwise>
+<li><a href="getMessage.do?page=${page}">上一页</a></li>
+</c:otherwise>
+</c:choose>
+
+<!-- 页数列表 -->
+<c:forEach items="${pageList}" var="item">
+<c:choose>
+<c:when test="${item == page}">
+<li><a href="getMessage.do?page=${item}" class="currentPage">${item}</a></li>
+</c:when>
+<c:otherwise>
+<li><a href="getMessage.do?page=${item}">${item}</a></li>
+</c:otherwise>
+</c:choose>
+</c:forEach>
+
+<!-- 下一页 按钮 -->
+<c:choose>
+<c:when test="${page != totalPages}">
+<li><a href="getMessage.do?page=${page+1}">下一页</a></li>
+</c:when>
+<c:otherwise>
+<li><a href="getMessage.do?page=${page}">下一页</a></li>
+</c:otherwise>
+</c:choose>
+
+<!-- 直接跳转 -->
+<li><a>共${totalPages}页 -向<input type="text" id="jumpTo" />页 <input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
+ 
+
+</ul>
+
+                    
+</nav>                                  
+                                    
+                                    
+                                    
+                                    
+                                    
+<!--   <nav>
+  <ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+  </ul>
+</nav> -->
+                                    
                                     </div>
                             </div>
 						</div>
@@ -264,5 +326,18 @@
 	 <script src="../dist/jquery.cokie.min.js"></script> 
     <script src="../js/kg.js"></script>
     
+    <script>
+    
+    function jumpTo(maxPage){
+    var page = $("#jumpTo").val();
+    if(page > maxPage || page < 1){
+        bootbox.dialog({
+    		message: "对不起，无法到达该页",
+			});
+    }else{
+        $('body').load('getMessage.do?page=' + page);
+    };
+    };
+    </script> 
   </body>
 </html>

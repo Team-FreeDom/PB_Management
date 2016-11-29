@@ -30,6 +30,7 @@ import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
 import com.base.po.RentCollection;
+import com.base.po.Startplan;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
@@ -337,5 +338,32 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		return flag;
 	   
    }
+
+@Override
+public void updateLandApplyDate(Startplan sp) {
+	// TODO Auto-generated method stub
+	landApplyDaoImpl.updateLandApplyDate(sp);
+	return;
+}
+
+@Override
+public List<Startplan> getLandApplyDate() {
+	// TODO Auto-generated method stub
+	return landApplyDaoImpl.getLandApplyDate();
+}
+
+@Override
+public Startplan getStartPlan(String id){
+	
+	Startplan sp=landApplyDaoImpl.getStartPlan(id);
+	
+	return sp;
+}
+
+public void endStartPlan(){
+	
+	landApplyDaoImpl.endAllRent();	
+	
+}
    
 }

@@ -6,6 +6,8 @@ import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandInfo;
 import com.base.po.LandLayout;
+import com.base.po.Startplan;
+
 
 //土地申请表的业务逻辑层接口
 public interface LandApplyService {
@@ -73,6 +75,12 @@ public interface LandApplyService {
 	   函数功能：取消申请
 	 */
 	public void cancelApply(int la_id);
+	
+	public void updateLandApplyDate(Startplan sp);
+	
+	public List<Startplan> getLandApplyDate();
+	
+	public Startplan getStartPlan(String id);
 
 }
  

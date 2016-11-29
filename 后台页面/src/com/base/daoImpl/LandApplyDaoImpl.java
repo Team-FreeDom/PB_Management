@@ -17,11 +17,13 @@ import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandApplyDao;
+import com.base.po.Admin;
 import com.base.po.College;
 import com.base.po.LandApply;
 import com.base.po.RentAdd;
 import com.base.po.RentCollection;
 import com.base.po.RentMaintain;
+import com.base.po.Startplan;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("landApplyDao")
@@ -331,4 +333,83 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    
 		return flag;
 	}
+
+	@Override
+	public void updateLandApplyDate(Startplan sp) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+	
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			session.saveOrUpdate(sp);
+			t.commit();
+		} catch (Exception ex) {
+			if (t != null) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public List<Startplan> getLandApplyDate() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		List<Startplan> list = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			list = query.list();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return list;
+		
+	}
+	
+	public Startplan getStartPlan(String id) {
+		
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		Startplan sp = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			sp = (Startplan) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return sp;
+		
+	}
+	
+	public void endAllRent(){
+		
+			try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.clear_data()}");
+			
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+		
+	}
+
 }

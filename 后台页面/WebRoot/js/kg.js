@@ -42,7 +42,10 @@ $("li.menuItem.nav-parent").click(function(){
 			});	
      
      
-       $('.text-success').html($.cookie('name'));
+       $('.text-success').html($.cookie('name'));      
+       $('#imageMain').attr("src",$.cookie('image'));
+      
+       
  });
 
  

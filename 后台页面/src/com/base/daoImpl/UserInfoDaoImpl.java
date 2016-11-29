@@ -745,6 +745,9 @@ public List<Manger> exportPersonInfo(String dept)
      */
 	@Override
     public List<UserInfo> userdept(){
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		List<UserInfo> list = new ArrayList<UserInfo>();
 		try
 		{
@@ -753,7 +756,7 @@ public List<Manger> exportPersonInfo(String dept)
 			sp = (CallableStatement) conn
 					.prepareCall("{call baseweb.user_dept()}");
 			sp.execute();
-			ResultSet rs = sp.getResultSet();
+			rs = sp.getResultSet();
 			while (rs.next())
 			{
 				UserInfo ch = new UserInfo();

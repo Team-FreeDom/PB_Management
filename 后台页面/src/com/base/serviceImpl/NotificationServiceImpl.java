@@ -27,10 +27,10 @@ public class NotificationServiceImpl implements NotificationService {
 
 
 	@Override
-	public Notification getNotificationInfo() {
+	public List getNotificationInfo(String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
 		
-		return notificationDaoImpl.getNotificationInfo();
+		return notificationDaoImpl.getNotificationInfo(currentPage,itemsPerPage);
 	}
 
 
@@ -43,9 +43,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 
 	@Override
-	public List<Message> getMessageInfos(String userid) {
+	public List getMessageInfos(String userid,String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
-		return notificationDaoImpl.getMessageInfos(userid);
+		return notificationDaoImpl.getMessageInfos(userid,currentPage,itemsPerPage);
 	}
 
 
@@ -68,6 +68,20 @@ public class NotificationServiceImpl implements NotificationService {
 		// TODO Auto-generated method stub
 		notificationDaoImpl.setReadMessage(id);
 		return;
+	}
+
+
+	@Override
+	public Notification getNotification(String id) {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNotification(id);
+	}
+
+
+	@Override
+	public List<Notification> getNotificationTop5Infos() {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNotificationTop5Infos();
 	}
 
 	

@@ -583,10 +583,10 @@ a, a:link, a:visited, a:hover, a:active {
 	text-align: center;
 	background-color: #63addc;
 }
-.lockdiv{
-  color: #fff;
+.lockdiv  {
+	color: #fff;
 	text-align: center;
-	background-color: #862f2f ;
+	background-color: rgb(128, 40, 51) ;
 }
 .Havetorent  {
 	color: #fff;
@@ -604,14 +604,6 @@ a, a:link, a:visited, a:hover, a:active {
 .msg{ right: -10px; top:0px; position:absolute; background:#C00}
 .read{ color:#ccc;}
 #msgtable tr{ cursor:pointer;}
-#post1{
-min-height: 200px;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-  word-wrap: break-word;
-  word-break: break-all;
- }
 
 
 @media screen and (min-width:768px) {
@@ -624,4 +616,9 @@ white-space:nowrap;
 	padding-bottom: 0;
 	overflow: visible !important;
 }
+}
+
+
+#jumpTo{
+width:40px;
 }

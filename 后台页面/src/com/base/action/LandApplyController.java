@@ -39,6 +39,7 @@ import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
 import com.base.po.RentCollection;
+import com.base.po.Startplan;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
@@ -78,10 +79,20 @@ public class LandApplyController {
 
 		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
 		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
+		Startplan sp=landApplyServiceImpl.getStartPlan("zl");
+		String rents="";
+		String rente="";
 		
+		if(sp!=null){
+		rents= sp.getRent_start();
+		rente=sp.getRent_end();
+				
+		}
 		JSONObject getObj = new JSONObject();
 		getObj.put("base",list1);
 		getObj.put("xy",list2);
+		getObj.put("stime",rents);
+		getObj.put("etime",rente);
 		
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -709,4 +720,80 @@ public class LandApplyController {
 
 	}
 
+	//修改或更新租赁开始时间
+	@RequestMapping("/updateLandApplyDate.do")
+	public String updateLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String planstime = request.getParameter("planstime");
+		String planetime = request.getParameter("planetime");
+		
+		String rentstime = request.getParameter("rentstime");
+		String rentetime = request.getParameter("rentetime");
+		
+				
+		Startplan sp =new Startplan("zl","土地租赁",planstime,planetime,rentstime,rentetime);		
+		landApplyServiceImpl.updateLandApplyDate(sp);
+		
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//获取租赁开始时间
+	@RequestMapping("/getLandApplyDate.do")
+	public String getLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String plans="";
+		String plane="";
+		String rents="";
+		String rente="";
+		Startplan sp = landApplyServiceImpl.getStartPlan("zl");
+		
+		if(sp!=null){
+		plans=sp.getApply_start();
+		plane=sp.getApply_end();
+		rents=sp.getRent_start();
+		rente=sp.getRent_end();
+		}
+		JSONObject getObj = new JSONObject();
+		getObj.put("planstime",plans);
+		getObj.put("planetime",plane);
+		getObj.put("rentstime",rents);
+		getObj.put("rentetime",rente);
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping("/endLandApply.do")
+	public String endLandApply(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		
+		landApplyServiceImpl.endStartPlan();
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
