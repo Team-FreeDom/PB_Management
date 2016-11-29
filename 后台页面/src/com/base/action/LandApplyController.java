@@ -80,12 +80,19 @@ public class LandApplyController {
 		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
 		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
 		Startplan sp=landApplyServiceImpl.getStartPlan("zl");
+		String rents="";
+		String rente="";
 		
+		if(sp!=null){
+		rents= sp.getRent_start();
+		rente=sp.getRent_end();
+				
+		}
 		JSONObject getObj = new JSONObject();
 		getObj.put("base",list1);
 		getObj.put("xy",list2);
-		getObj.put("stime", sp.getRent_start());
-		getObj.put("etime",sp.getRent_end());
+		getObj.put("stime",rents);
+		getObj.put("etime",rente);
 		
 		response.setContentType("text/html;charset=UTF-8");
 

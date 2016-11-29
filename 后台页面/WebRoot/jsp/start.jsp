@@ -33,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="container-fluid container-nav">
                         <!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
                         <ul class="nav navbar-nav navbar-actions navbar-left">
-                            <li class="visible-md visible-lg"><a href="index.html#"><i class="icon-th-large"></i></a></li>
-                            <li class="visible-xs visible-sm"><a href="index.html#"><i class="icon-align-justify"></i></a></li>
+                            <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
+                            <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
                         </ul>
 
                         <span class="teachCenterTitle">基地管理系统</span>
@@ -139,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                                     <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
                                                     <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                                    <li><a href="#"><span class="text"> 工作计划制定</span></a></li>
+                                                    <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                                     <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
                                                     <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
                                                 </ul>
@@ -177,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="pull-left">
                                     <ol class="breadcrumb visible-sm visible-md visible-lg">
                                         <li><a>位置  :</a></li>
-                                        <li><a href="start.do"><i class=" icon-home"></i>工作计划制定</a></li>
+                                        <li><a href="start.jsp"><i class=" icon-home"></i>工作计划制定</a></li>
                                     </ol>
                                 </div>
                                 <div class="pull-right">
@@ -276,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <script src="../js/kg.js"></script>
                 <script src="../js/start.js"></script>
                 <script>
-                laydate.skin('yahui'); //切换皮肤，请查看skins下面皮肤库
+                laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
                 laydate({
                    elem: '#demo'
                 })

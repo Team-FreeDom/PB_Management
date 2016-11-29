@@ -41,10 +41,10 @@
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
 			<ul class="nav navbar-nav navbar-actions navbar-left">
-				<li class="visible-md visible-lg"><a href="index.html#"> <i
+				<li class="visible-md visible-lg"><a> <i
 						class="icon-th-large"></i>
 				</a></li>
-				<li class="visible-xs visible-sm"><a href="index.html#"> <i
+				<li class="visible-xs visible-sm"><a> <i
 						class="icon-align-justify"></i>
 				</a></li>
 			</ul>
@@ -156,6 +156,7 @@
 										</a></li>
 										<li><a href="#"> <span class="text"> 实习计划维护</span>
 										</a></li>
+										 <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
 										<li><a href="mangeruser.jsp"> <span class="text">
 													系统用户维护</span>
 										</a></li>
