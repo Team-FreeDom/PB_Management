@@ -195,7 +195,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="post1" class="col-md-3">
 								<p>通知公告</p>
                                 <div class="post">
-                                     <div>${notification } </div>
+                                <c:forEach items='${notificationList}' var='notification'>
+           
+                                     <ul>
+                                     <li>
+                                            <a href="newdetail.do?id=${notification.id }"	class="list-group-item">${notification.title }</a>
+                                     </li>
+                                     </ul>
+                                      </c:forEach>
+                                     <a href="newlist.do">更多</a>
                                 </div>                                
 							</div>
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">

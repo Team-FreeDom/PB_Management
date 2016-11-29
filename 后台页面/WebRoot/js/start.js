@@ -22,7 +22,7 @@ $(document).ready(function() {
         cache: false,
         error: function(request) {
             bootbox.alert({
-                message: "加载区域失败",
+                message: "加载数据失败",
                 size: 'small'
             });
             return false;
@@ -41,8 +41,8 @@ $(document).ready(function() {
                 $("#set").show();
                 $('#demo').val(planstime);
                 $('#demo2').val(planetime);
-                $('#demo').val(rentstime);
-                $('#demo2').val(rentetime);
+                $('#demo3').val(rentstime);
+                $('#demo4').val(rentetime);
             }
 
         }
@@ -51,8 +51,8 @@ $(document).ready(function() {
     $("#start-btn").click(function() {
         $('#demo').val('');
         $('#demo2').val('');
-        $('#demo').val('');
-        $('#demo2').val('');
+        $('#demo3').val('');
+        $('#demo4').val('');
         $("#start").hide();
         $("#set").show();
     });

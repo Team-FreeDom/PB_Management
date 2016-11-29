@@ -228,6 +228,9 @@
                                      </div>
                                 	</div>
                                  </fieldset>
+                                 <fieldset>
+                                                                                                                通知标题：<input type="text"  id="title"></input>
+                                 </fieldset>
                               </form>
                               </div> 
 
@@ -241,6 +244,8 @@
                           <button id="sendNotifitation" class="btn btn-default">发布通知</button>
                           <button id="sendMessage" class="btn btn-default" style="display:none";>发布消息</button>
                           <button id="setContent" class="btn btn-default">清空内容</button>
+                         
+                        
                         </div>
                         </div>
 

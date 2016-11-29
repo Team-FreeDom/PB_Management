@@ -335,8 +335,8 @@
 			});
     }else{
         $('body').load('getMessage.do?page=' + page);
-    }
-    }
+    };
+    };
     </script> 
   </body>
 </html>

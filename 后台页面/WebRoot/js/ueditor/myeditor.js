@@ -29,6 +29,8 @@ $(document).ready(function() {
 		//alert("1234566");
 		var message = '';
 		message = UE.getEditor('editor').getContent();
+		var title = '';
+		title =  $("#title").val();
 		// alert(message);
 
 		$.ajax({
@@ -36,7 +38,8 @@ $(document).ready(function() {
 			dataType : 'text',
 			url : 'saveNotification.do',// ºóÌ¨ÐÞ¸Ä
 			data : {
-				data : message
+				data : message,
+				title:"ceshi"
 			},
 			async : false,
 			cache : false,

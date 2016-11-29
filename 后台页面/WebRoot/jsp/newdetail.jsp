@@ -285,7 +285,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                     <a>位置 :</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="newdetail.do">
+                                                                                    <a href="#">
                                                                                         <i class=" icon-home"></i>新闻详情</a>
                                                                                 </li>
                                                                             </ol>
@@ -314,10 +314,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                     <!-- 主面板内容 -->
                                                                     <div class="row form">
                                                                         <div class="col-lg-12">
-                                                                            <h2 class="text-center">新闻标题</h2>
+                                                                            <h2 class="text-center">${notification.title }</h2>
                                                                         </div>
                                                                         <div class="col-lg-12" id="newdetail">
                                                                           <!-- 在此插入新闻详情。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
+                                                                             ${notification.message }
                                                                         </div>
 
                                                                     </div>

@@ -229,7 +229,7 @@
 								<a class="list-group-item active"> 公告列表 </a> 
 								 <c:forEach items='${notifications}' var='notification'>
                                    
-                                       <a href="#"	class="list-group-item">${notification.title }</a>
+                                       <a href="newdetail.do?id=${notification.id }"	class="list-group-item">${notification.title }</a>
 						
                                  </c:forEach>
 						
@@ -271,10 +271,10 @@
 
 								<c:choose>
 									<c:when test="${page != 1}">
-										<li><a href="getNotification.do?page=${page-1}">上一页</a></li>
+										<li><a href="newlist.do?page=${page-1}">上一页</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="getNotification.do?page=${page}">上一页</a></li>
+										<li><a href="newlist.do?page=${page}">上一页</a></li>
 									</c:otherwise>
 								</c:choose>
 
@@ -282,11 +282,11 @@
 								<c:forEach items="${pageList}" var="item">
 									<c:choose>
 										<c:when test="${item == page}">
-											<li><a href="getNotification.do?page=${item}"
+											<li><a href="newlist.do?page=${item}"
 												class="currentPage">${item}</a></li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="getNotification.do?page=${item}">${item}</a></li>
+											<li><a href="newlist.do?page=${item}">${item}</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -294,10 +294,10 @@
 								<!-- 下一页 按钮 -->
 								<c:choose>
 									<c:when test="${page != totalPages}">
-										<li><a href="getNotification.do?page=${page+1}">下一页</a></li>
+										<li><a href="newlist.do?page=${page+1}">下一页</a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="getNotification.do?page=${page}">下一页</a></li>
+										<li><a href="newlist.do?page=${page}">下一页</a></li>
 									</c:otherwise>
 								</c:choose>
 
@@ -332,13 +332,11 @@
     function jumpTo(maxPage){
     var page = $("#jumpTo").val();
     if(page > maxPage || page < 1){
-        bootbox.dialog({
-    		message: "对不起，无法到达该页",
-			});
+        bootbox.dialog({message: "对不起，无法到达该页",});
     }else{
-        $('body').load('getNotification.do?page=' + page);
-    };
-    };
+        $('body').load('newlist.do?page=' + page);
+    }
+    }
     </script> 
 </body>
 </html>

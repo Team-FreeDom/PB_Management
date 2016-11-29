@@ -50,6 +50,11 @@ public class MainController {
 
 		// 获得通知公告标题列表
 		response.setContentType("text/html;charset=UTF-8");
+		List<Notification> notificationList = notificationServiceImpl.getNotificationTop5Infos();
+		if (notificationList != null){
+			map.addAttribute("notificationList", notificationList);
+			//System.out.println("messageList不为空");
+		}
 		/*Notification notification = notificationServiceImpl
 				.getNotificationInfo();
 
@@ -65,12 +70,12 @@ public class MainController {
 		map.addAttribute("applyCount", applyCount);
 		
 		//获取时间排序前5条
-		/*String userid = CookieUtils.getCookieUsername(request, response);
+		String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = notificationServiceImpl.getMessageTop5Infos(userid);
 		if (messageList != null){
 			map.addAttribute("messageList", messageList);
 			//System.out.println("messageList不为空");
-		}*/
+		}
 		
 		//获取未读消息数，并写入到cookies中
 		/*int number = notificationServiceImpl.getNoreadMessageCount(userid);

@@ -39,7 +39,7 @@ public class NotificationController {
 	@Autowired
 	private LandApplyServiceImpl landApplyServiceImpl;
 
-	// 保存通知信息到数据库
+	// 通知发布页面
 	@RequestMapping("jsp/notification.do")
 	public String notification(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -51,24 +51,26 @@ public class NotificationController {
 		return "notification";
 	}
 
-	// 保存通知信息到数据库
+	// 发布通知
 	@RequestMapping("jsp/saveNotification.do")
 	public String saveNotification(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
-		String values = request.getParameter("data");
+		String message = request.getParameter("data");
+		String title = request.getParameter("title");
 		// System.out.println("values:"+values);
-		String insertSql = "insert into Notification(id,message) values(1,\""
-				+ values.trim()
-				+ "\") on duplicate key update message=values(message)";
-		// System.out.println(insertSql);
+		String insertSql = "insert into Notification(title,message) values" +
+				"(\'"+ title.trim()+ "\'," +
+				"\'"+ message.trim()+ "\')";
+	    System.out.println(insertSql);
 		notificationServiceImpl.setNotification(insertSql);
 
 		return null;
 	}
 
-	@RequestMapping("jsp/getNotification.do")
-	public String getNotification(ModelMap map, HttpServletResponse response,HttpServletRequest request) {
+	//获取通知详情
+	@RequestMapping("jsp/newlist.do")
+	public String newlist(ModelMap map, HttpServletResponse response,HttpServletRequest request) {
 
 		response.setContentType("text/html;charset=UTF-8");
 		// 获取当前是第几页
@@ -106,7 +108,7 @@ public class NotificationController {
 		return "newlist";
 	}
 
-	// 保存通知信息到数据库
+	//消息发布
 	@RequestMapping("jsp/saveMessage.do")
 	public String saveMessage(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -116,11 +118,12 @@ public class NotificationController {
 		String depatment = request.getParameter("depatment");
 		int isRead = 0;
 
-		notificationServiceImpl.addMessage("系统通知", content, depatment.trim());
+		notificationServiceImpl.addMessage("系统消息", content, depatment.trim());
 
 		return null;
 	}
 
+	//获取消息列表详情
 	@RequestMapping("jsp/getMessage.do")
 	public String getMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -166,6 +169,7 @@ public class NotificationController {
 		return "msgUI";
 	}
 
+	//获取未读消息数
 	@RequestMapping("jsp/getNoReadMessageCount.do")
 	public String getNoReadMessageCount(ModelMap map,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -186,6 +190,7 @@ public class NotificationController {
 		return null;
 	}
 
+	//设置消息为“已读”状态，返回“未读消息数”
 	@RequestMapping("jsp/setReadMessage.do")
 	public String setReadMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -209,4 +214,23 @@ public class NotificationController {
 
 		return null;
 	}
+	
+	//通知详情页面
+	@RequestMapping("jsp/newdetail.do")
+	public String newdetail(ModelMap map, HttpServletRequest request,
+			HttpServletResponse response) {
+				
+		response.setContentType("text/html;charset=UTF-8");
+		// 获取要读取的通知详情id
+		String id = request.getParameter("id");
+		Notification notification =null;
+		if (id != null)
+			notification = notificationServiceImpl.getNotification(id);
+		
+		map.addAttribute("notification", notification);
+		return "newdetail";
+		
+	}
+	
+		
 }

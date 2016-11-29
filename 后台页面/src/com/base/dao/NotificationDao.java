@@ -17,7 +17,12 @@ public interface NotificationDao {
 	 
 	 public List<Message> getMessageTop5Infos(String userid);
 	 
+	 public List<Notification> getNotificationTop5Infos();
+	 
 	 public int getNoreadMessageCount(String userid);
 	 
 	 public void setReadMessage(int id);
+	 
+	 public Notification getNotification(String id);
 }
+

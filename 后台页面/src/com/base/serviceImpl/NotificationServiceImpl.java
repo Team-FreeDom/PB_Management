@@ -70,6 +70,20 @@ public class NotificationServiceImpl implements NotificationService {
 		return;
 	}
 
+
+	@Override
+	public Notification getNotification(String id) {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNotification(id);
+	}
+
+
+	@Override
+	public List<Notification> getNotificationTop5Infos() {
+		// TODO Auto-generated method stub
+		return notificationDaoImpl.getNotificationTop5Infos();
+	}
+
 	
 	
 

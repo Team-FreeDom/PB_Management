@@ -223,7 +223,7 @@ public class NotificationDaoImpl implements NotificationDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.find_message(?)}"); // 发送存储过程
+					.prepareCall("{CALL baseweb.top_message(?)}"); // 发送存储过程
 			sp.setString(1, userid);
 			sp.execute(); // 执行存储过程
 
@@ -293,5 +293,61 @@ public class NotificationDaoImpl implements NotificationDao {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public Notification getNotification(String id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		String hql = "from Notification where id=" + id + "";
+		List<Notification> list=null;
+		try {
+			Query query = session.createQuery(hql);
+			list =  query.list();
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return list.get(0);
+	}
+
+	@Override
+	public List<Notification> getNotificationTop5Infos() {
+		// TODO Auto-generated method stub
+		
+		CallableStatement sp = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		List<Notification> list = new ArrayList<Notification>();
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{CALL baseweb.top_notification()}"); // 发送存储过程
+			
+			sp.execute(); // 执行存储过程
+
+			rs = sp.getResultSet(); // 获得结果集
+			int i = 0;
+
+			while (rs.next()) // 遍历结果集，赋值给list
+			{
+				Notification notification = new Notification();
+				notification.setId(rs.getInt("id"));
+				notification.setTitle(rs.getString("title"));
+				notification.setMessage(rs.getString("message"));
+				
+				list.add(notification);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+
+		return list;
 	}
 }
