@@ -3,6 +3,7 @@ package com.base.dao;
 import java.util.List;
 
 import com.base.po.LandApply;
+import com.base.po.Startplan;
 
 //土地申请表的数据库连接层接口
 public interface LandApplyDao {
@@ -49,5 +50,14 @@ public interface LandApplyDao {
 	 函数功能： 将申请土地编号为lid但不为此la_id的记录拒绝(即申请失败)
 	  */
 	public void updateOthers(int la_id,int lid);
+	
+	
+	
+	public void updateLandApplyDate(Startplan sp);
+	
+	
+	public List<Startplan> getLandApplyDate();
+	
+	public Startplan getStartPlan(String id);
 
 }

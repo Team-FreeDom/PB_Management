@@ -146,11 +146,11 @@
 				  return false;					
 				}
 				landid = $('#tuname'+i).attr('tid');
-				str=str+"('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
+				str=str+"'"+userid+"'('"+landid+"','"+stime+"','"+etime+"','"+plan+"','"+userid+"'";
 				if(i==this.choose_count)
-				str=str+",1)"
+				str=str+",2)";
 				else
-				str=str+",1),"
+				str=str+",2),";
 			  }//end for
 			 // alert(str);////INSERT INTO tab_comp VALUES(item1, price1, qty1),(item2, price2, qty2),(item3, price3, qty3);批量插入语句
 			  var obj=this;

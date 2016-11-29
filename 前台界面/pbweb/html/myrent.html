@@ -11,7 +11,6 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/default.css">
-    <link href="../css/fileinput.css" media="all" rel="stylesheet" type="text/css" />	
 
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
     <!--datatable-->
@@ -307,9 +306,9 @@
                                         </tr>
                                         <tr>
                                             <td>起止年限 ： </td>
-                                            <td><input type="text" value="2013-08-01"></td>
+                                            <td><select name="year1" id="year1"></select></td>
                                             <td>———————</td>
-                                            <td><input type="text" value="2017-08-01"></td>
+                                            <td><select name="month1"></select></td>
                                         </tr>
                                         <tr>
                                             <td>计划种植内容 ： </td>
@@ -320,14 +319,13 @@
                                   <div class="modal-footer table-responsive">
                                     <table class="table">
                                         <tr>
-                                        	
                                             <td colspan="3">
-                                            <div style="float:right;">
-                                            
-                                                <form enctype="multipart/form-data">
-                                                    <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
-                                                </form>
-                                        	</div>
+                                            <center>
+                                            <div class="form-group" style="position:relative">
+                                                <input type="file" id="exampleInputFile" style=" position:absolute; left:25%">
+                                                <label for="exampleInputFile" class="btn btn-primary" style=" position:absolute; top:-10px;left:23.5%">上传文件</label>
+                                            </div>
+                                            </center>
             								</td>
                                         </tr>
                                     </table>
@@ -434,7 +432,7 @@
                                     <table class="table">
                                         <tr>
                                             <td>基地名 ： </td>
-                                            <td><input type="text" value="基地的名称"></td>
+                                            <td><input type="text" value="基地的名称" ></td>
                                             <td>租赁人 ： </td>
                                             <td><input type="text" value="租赁人的名称"></td>
                                         </tr>
@@ -480,21 +478,7 @@
                               </div>
                             </div>
 							
-                            
-<!--                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-    </div>
-  </div>
-</div>
--->
+                          
 
 							<div class="modal fade" id="failapplication" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
@@ -702,23 +686,11 @@
     <!--datatable javascript-->
 	<script src="../js/jquery.dataTables.min.js"></script>
     <!--updatefile-->
-    <script src="../js/fileinput.js" type="text/javascript"></script>
-    <script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script>
-	    $("#file-0").fileinput({
-	        'allowedFileExtensions' : ['jpg', 'png','gif'],
-	    });
-		 $(document).ready(function() {
-	        $("#test-upload").fileinput({
-	            'showPreview' : false,
-	            'allowedFileExtensions' : ['jpg', 'png','gif'],
-	            'elErrorContainer': '#errorBlock'
-	        });
-	        
-	    });
-		</script>
+    <script src="../js/myrent.js"></script>
+    <script src="../js/SyearE.js"></script>
+    <script src="../js/kg.js"></script>
+    
   </body>
 </html>

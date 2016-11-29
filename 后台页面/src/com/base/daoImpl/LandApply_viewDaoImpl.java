@@ -1,5 +1,9 @@
 package com.base.daoImpl;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,39 +14,91 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
+import com.base.po.ApplyList;
 import com.base.po.LandApply_view;
 import com.base.po.Land_Planting;
+import com.base.po.RentAdd;
+import com.base.utils.SqlConnectionUtils;
 
 @Repository("landapply_viewDao")
 public class LandApply_viewDaoImpl {
 	
+
+	/*Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;*/
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public List<LandApply_view> getapplys(String applicantId)
+	
+	/*
+	 * 可以通过七个参数查询用户租赁历史 
+	 * */
+	public ApplyList getapplys(String applicantId,String bname,String startTime,String endTime,int status,int page,int length)
 	{
-		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where applicantId=? and status in(?,?,?,?)";		
-		List<LandApply_view> lp=null;
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		System.out.println(applicantId+"  "+bname+"  "+startTime+"   "+endTime+"  "+status);
+		ApplyList al=new ApplyList();
+		LandApply_view lv=null;
+		List<LandApply_view> list=new ArrayList<LandApply_view>();
 		
 		try {
-	    	 Query query=session.createQuery(hql);
-	    	 query.setString(0, applicantId);
-	    	 query.setInteger(1, 3);
-	    	 query.setInteger(2, 5);
-	    	 query.setInteger(3, 6);
-	    	 query.setInteger(4, 8);
-	    	 lp=query.list();
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.landapplys(?,?,?,?,?,?,?,?)}");
+			sp.setString(1,applicantId);
+			sp.setString(2, bname);
+			sp.setString(3, startTime);
+			sp.setString(4,endTime);
+			sp.setInt(5, status);
+			sp.setInt(6, page);
+			sp.setInt(7,length);
+			sp.registerOutParameter(8,java.sql.Types.INTEGER);
 			
-		} catch (Exception e) {
-			System.out.println(e);
+			sp.execute();   //执行存储过程
+			rs=sp.getResultSet();  //获得结果集
+			al.setRecordsTotal(sp.getInt(8));
+			
+			while(rs.next())
+			{
+				lv=new LandApply_view();
+				lv.setAfford(rs.getInt("afford"));
+				lv.setApplicantId(rs.getString("applicantId"));
+				lv.setAptPlanting(rs.getString("aptPlanting"));
+				lv.setBname(rs.getString("bname"));
+				lv.setBuildingArea(rs.getInt("buildingArea"));
+				lv.setCollege(rs.getString("college"));
+				lv.setDescp(rs.getString("descp"));
+				lv.setEndTime(rs.getString("endTime"));
+				lv.setLa_id(rs.getInt("la_id"));
+				lv.setLandArea(rs.getInt("landArea"));
+				lv.setLid(rs.getString("lid"));
+				lv.setLname(rs.getString("lname"));
+				lv.setName(rs.getString("name"));
+				lv.setPlanting(rs.getString("planting"));
+				lv.setResource(rs.getString("resource"));
+				lv.setStartPayTime(rs.getString("startPayTime"));
+				lv.setStartTime(rs.getString("startTime"));
+				lv.setStatus(rs.getInt("status"));
+				lv.setTenancy(rs.getInt("tenancy"));
+				
+				list.add(lv);
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
-			session.close();
+			SqlConnectionUtils.free(conn, sp, rs);			
 		}		
-		
-		return lp;
+		al.setData(list);
+		return al;
 	}
 	
 	public List<LandApply_view> getapply(String applicantId,int i)
@@ -69,28 +125,62 @@ public class LandApply_viewDaoImpl {
 	
 	}
 	
-	public List<LandApply_view> getapply(String applicantId,String date)
+	public ApplyList getapply(String applicantId,int page,int length)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		
-		Session session=sessionFactory.openSession();	
-		System.out.println(date);
-		String hql="from LandApply_view where applicantId=? and (year(startTime)<=? and year(endTime)>=?) order by status";		
-		List<LandApply_view> lp=null;
+		ApplyList al=new ApplyList();
+		LandApply_view lv=null;
+		List<LandApply_view> list=new ArrayList<LandApply_view>();
 		
 		try {
-	    	 Query query=session.createQuery(hql);
-	    	 query.setString(0, applicantId);
-	    	 query.setString(1, date);
-	    	 query.setString(2, date);	    	 
-	    	 lp=query.list();
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL tem_applyinfo(?,?,?,?)}");
+			sp.setString(1,applicantId);			
+			sp.setInt(2, page);
+			sp.setInt(3,length);
+			sp.registerOutParameter(4,java.sql.Types.INTEGER);
 			
-		} catch (Exception e) {
-			System.out.println(e);
+			sp.execute();   //执行存储过程
+			rs=sp.getResultSet();  //获得结果集
+			al.setRecordsTotal(sp.getInt(4));
+			
+			while(rs.next())
+			{
+				lv=new LandApply_view();
+				lv.setAfford(rs.getInt("afford"));
+				lv.setApplicantId(rs.getString("applicantId"));
+				lv.setAptPlanting(rs.getString("aptPlanting"));
+				lv.setBname(rs.getString("bname"));
+				lv.setBuildingArea(rs.getInt("buildingArea"));
+				lv.setCollege(rs.getString("college"));
+				lv.setDescp(rs.getString("descp"));
+				lv.setEndTime(rs.getString("endTime"));
+				lv.setLa_id(rs.getInt("la_id"));
+				lv.setLandArea(rs.getInt("landArea"));
+				lv.setLid(rs.getString("lid"));
+				lv.setLname(rs.getString("lname"));
+				lv.setName(rs.getString("name"));
+				lv.setPlanting(rs.getString("planting"));
+				lv.setResource(rs.getString("resource"));
+				lv.setStartPayTime(rs.getString("startPayTime"));
+				lv.setStartTime(rs.getString("startTime"));
+				lv.setStatus(rs.getInt("status"));
+				lv.setTenancy(rs.getInt("tenancy"));
+				
+				list.add(lv);
+			
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
-			session.close();
+			SqlConnectionUtils.free(conn, sp, rs);			
 		}		
-		
-		return lp;
+		al.setData(list);
+		return al;
 	
 	}
 	
@@ -116,21 +206,56 @@ public class LandApply_viewDaoImpl {
 	
 	public List<LandApply_view> getapplys(int la_id)
 	{
-		Session session=sessionFactory.openSession();		
-		String hql="from LandApply_view where la_id=?";		
-		List<LandApply_view> lp=null;
-		
-		try {
-	    	 Query query=session.createQuery(hql);	    	 
-	    	 query.setInteger(0, la_id);
-	    	 lp=query.list();
+		Session session=sessionFactory.openSession();
 			
-		} catch (Exception e) {
-			System.out.println(e);
+		List<LandApply_view> lav=new ArrayList<LandApply_view>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		LandApply_view lv=null;
+		try
+		{
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landapply_detail(?)}");
+			sp.setInt(1, la_id);
+			sp.execute();   //执行存储过程
+			rs=sp.getResultSet();  //获得结果集			
+			
+			while(rs.next())
+			{
+				lv=new LandApply_view();
+				lv.setAfford(rs.getInt("afford"));
+				lv.setApplicantId(rs.getString("applicantId"));
+				lv.setAptPlanting(rs.getString("aptPlanting"));
+				lv.setBname(rs.getString("bname"));
+				lv.setBuildingArea(rs.getInt("buildingArea"));
+				lv.setCollege(rs.getString("college"));
+				lv.setDescp(rs.getString("descp"));
+				lv.setEndTime(rs.getString("endTime"));
+				lv.setLa_id(rs.getInt("la_id"));
+				lv.setLandArea(rs.getInt("landArea"));
+				lv.setLid(rs.getString("lid"));
+				lv.setLname(rs.getString("lname"));
+				lv.setName(rs.getString("name"));
+				lv.setPlanting(rs.getString("planting"));
+				lv.setResource(rs.getString("resource"));
+				lv.setStartPayTime(rs.getString("startPayTime"));
+				lv.setStartTime(rs.getString("startTime"));
+				lv.setStatus(rs.getInt("status"));
+				lv.setTenancy(rs.getInt("tenancy"));
+				
+				lav.add(lv);
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
-			session.close();
-		}
-		return lp;
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}		
+		
+		return lav;
 	}
 	
 	public List<LandApply_view> getAllStudents(LandApply_view searchModel)

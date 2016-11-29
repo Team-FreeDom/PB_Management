@@ -14,8 +14,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/default.css">
-<link href="../css/fileinput.css" media="all" rel="stylesheet"
-	type="text/css" />
+
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
@@ -23,22 +22,7 @@
 <link rel="stylesheet" href="../css/myrent.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../js/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../js/fileinput.js" type="text/javascript"></script>
-<script src="../js/fileinput_locale_zh.js" type="text/javascript"></script>
 
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/myNeed/myRent.js"></script>
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<!--datatable javascript-->
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/kg.js"></script>
 
 
 </head>
@@ -47,9 +31,9 @@
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
 			<ul class="nav navbar-nav navbar-actions navbar-left">
-				<li class="visible-md visible-lg"><a href="index.html#"><i
+				<li class="visible-md visible-lg"><a><i
 						class="icon-th-large"></i></a></li>
-				<li class="visible-xs visible-sm"><a href="index.html#"><i
+				<li class="visible-xs visible-sm"><a><i
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
@@ -60,17 +44,20 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs"><a href="#"
-						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"></i> <!--ms-if-->
-					</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
-							</li>
-							<li class="dropdown-menu-footer text-center"><a
-								href="../teach/notifications.html">更多消息</a></li>
-						</ul></li>
-					<li><a href="#outModal"
+					<li class="hidden-sm hidden-xs">
+					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
+                              <!--ms-if-->
+                      </a> 
+						<!-- <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;">
+                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                          </li>    
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="getMessage.do">更多消息</a>
+                          </li>
+						</ul> --></li>
+					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
 					</a></li>
@@ -101,27 +88,27 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="#"><img class="img-circle bk-img-60" alt=""
-											src="../image/psu.jpg"></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
+											id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small>罗旭</small>
+										<i class="icon-circle text-success"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.html"> <i
+								<li class="menuItem"><a href="index.do"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">我的租赁</span></a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
 										<li><a href="#"><span class="text">我的报修</span></a></li>
 										<li><a href="#"><span class="text">我的基地</span></a></li>
@@ -131,10 +118,10 @@
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁审批</span></a></li>
+										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="#"><span class="text">实习审批</span></a></li>
 										<li><a href="#"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
+										<li><a href="#"><span class="text">维修审批</span></a></li>
 
 									</ul></li>
 
@@ -142,14 +129,15 @@
 										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-										<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
-										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
-										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统权限设置</span></a></li>
-									</ul></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
+                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
@@ -180,18 +168,16 @@
 				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html">位置</a></li>
-							<li><a href="index.html"><i class=" icon-home"></i>首页</a></li>
-							<li><a href="index.html">我的工作</a></li>
-							<li><a href="index.html">我的租赁</a></li>
+							<li><a>位置</a></li>							
+							<li><a href="myRent.jsp">我的租赁</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a><i class=" icon-building"></i>基地申报</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a><i class="icon-user"></i>实习申请</a></li>
+							<li><a><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -371,17 +357,17 @@
 										style="background:#4D719B; color:#FFF">
 										<button type="button" class="close" data-dismiss="modal"
 											aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel"></h4>
+										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
 										<h5>您确定要提交吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!-- 
+										
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                     -->
+                    
 										<button type="button" class="btn btn-primary"
 											id="SubmitTemperate">确认</button>
 									</div>
@@ -452,13 +438,13 @@
 											<tr>
 												<td>1</td>
 												<td id="upload1">教学科研用地协议</td>
-												<td><a href="exportFile.do?fileName=teaching.pdf"
+												<td><a href="exportFile.do?flag=1"
 													style="color:#009">点击下载</a></td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td id="upload1">土地有偿使用协议</td>
-												<td><a href="exportFile.do?fileName=landing.docx"
+												<td><a href="exportFile.do?flag=2"
 													style="color:#009">点击下载</a></td>
 											</tr>
 										</table>
@@ -532,13 +518,25 @@
 											<tr>
 
 												<td colspan="3">
-													<div style="float:right;">
+												
+												
+											<center>
+                                            <div class="form-group" style="position:relative">
+                                                <input type="file"  style=" position:absolute; left:25%" name="fileResource">
+                                                <label for="exampleInputFile" class="btn btn-primary" style=" position:absolute; top:-10px;left:23.5%">上传文件</label>
+                                            </div>
+                                            </center>
 
-														<!--  <form enctype="multipart/form-data"> -->
-														<input  name="fileResource" class="file"
+												
+												
+													<!-- <div style="float:right;">
+
+														 <form enctype="multipart/form-data">
+														<input   class="file" name="fileResource"
 															type="file" multiple data-min-file-count="1">
-														<!--  </form> -->
-													</div>
+														 </form>
+													</div> -->
+													
 												</td>
 											</tr>
 										</table>
@@ -565,8 +563,8 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td colspan="2">租赁历史</td>
-										<td colspan="5">
+										<td colspan="1">租赁历史</td>
+										<td colspan="6">
 											<!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
 											<ul id="dropdown_show">
 												<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
@@ -593,17 +591,12 @@
 																		</td>
 																	</tr>
 																	<tr>
-																		<td>土地编号 <select name="lid" id="lidUnion">
-																				<option value="">显示全部</option>
-																				<option value="1">#1</option>
-																				<option value="2">#2</option>
-																		</select>
-																		</td>
-																		<td>最终状态 <select name="desc" id="descUnion"
+																		
+																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
 																			size="1">
-																				<option value="">显示全部</option>
-																				<option value="申请成功">申请成功</option>
-																				<option value="申请失败">申请失败</option>
+																				<option value="-1">显示全部</option>
+																				<option value="0">申请成功</option>
+																				<option value="1">申请失败</option>
 																		</select>
 																		</td>
 																	</tr>
@@ -694,7 +687,7 @@
 									<center  id="scanModal" style="display:none;">
 									<span>	失败原因：<input type="text" id="reason2" readonly></span>
 										
-									</center>申请材料：<a id="source" href="#">点击查看</a>
+									<%-- </center>申请材料：<a id="source" href="#">点击查看</a> --%>
 								</div>
 
 							</div>
@@ -711,9 +704,24 @@
 		<!--row end-->
 	</div>
 	<div class="clearfix"></div>
-	<script>
 	
-	</script>
 
 </body>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/myNeed/myRent.js"></script>
+<script src="../js/SyearE.js"></script>
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!--datatable javascript-->
+<script src="../js/jquery.dataTables.min.js"></script>
+ <script src="../dist/jquery.cokie.min.js"></script>    
+<script src="../js/kg.js"></script>
 </html>

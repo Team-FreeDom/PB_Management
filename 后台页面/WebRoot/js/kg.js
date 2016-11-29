@@ -1,36 +1,51 @@
 $("li.menuItem.nav-parent").click(function(){
 	  $(this).toggleClass("opened nav-expanded");
 	});
+ $(function () {
+	 	$(document).on("click", "#msgtable tr", function() {
+			bootbox.dialog({
+    		title: $(this).find('td').eq(1).html(),
+    		message: $(this).find('td').eq(2).html()
+			});
+			$(this).removeClass('read');
+			$(this).addClass('read');
+			
+			
+			$.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url : 'setReadMessage.do',
+				data:{
+					id:$(this).find('td').eq(0).text(),
+				},
+				async : false,
+				cache : false,
+				error : function(request) {		
+				},
+				success : function(data) {	
+					$(".msg").html(data);
+				}
+			});	
+		});
+ 
+       $.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url : 'getNoReadMessageCount.do',
+				async : false,
+				cache : false,
+				error : function(request) {		
+				},
+				success : function(data) {	
+					$('.msg').html(data);
+				}
+			});	
+     
+     
+       $('.text-success').html($.cookie('name'));      
+       $('#imageMain').attr("src",$.cookie('image'));
+      
+       
+ });
 
-function showsubmenu(){
-	var submenu=document.getElementById("hide_ul");
-		if (submenu.style.display == 'none')
-		{
-			submenu.style.display = 'block';
-		}
-		else
-		{
-			submenu.style.display = 'none';
-		}
-		
-	}
-	 function hidesubmenu(){
-		 var submenu=document.getElementById("hide_ul");
-		 submenu.style.display = 'none';
-		 }	
-function showsubmenu2(){
-	var submenu=document.getElementById("hide_ul2");
-		if (submenu.style.display == 'none')
-		{
-			submenu.style.display = 'block';
-		}
-		else
-		{
-			submenu.style.display = 'none';
-		}
-		
-	}
-	 function hidesubmenu2(){
-		 var submenu=document.getElementById("hide_ul2");
-		 submenu.style.display = 'none';
-		 }
+ 

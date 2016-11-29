@@ -1,57 +1,70 @@
 package com.base.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import com.base.po.BaseInfo;
+import com.base.po.CheckList;
 import com.base.po.CheckView;
 import com.base.po.LandApply;
+import com.base.po.UserInfo;
 
-//ÉóºËÄ£¿éÒµÎñÂß¼­²ã½Ó¿Ú
+//å®¡æ ¸æ¨¡å—ä¸šåŠ¡é€»è¾‘å±‚æ¥å£
 public interface checkService {
-	
 	/*
-	   ²ÎÊıËµÃ÷£ºstatus,ÕûĞÍ£¬ÎªÉêÇë¼ÇÂ¼µÄ×´Ì¬Öµ
-	   ·µ»ØÖµ£º   List<CheckView>,ÎªÍÁµØÉêÇëÊÓÍ¼CheckView¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º²éÑ¯ËùÓĞÍÁµØÉêÇëÊÓÍ¼¼ÇÂ¼(»ñµÃµÄ¼ÇÂ¼°´ÉêÇëÊ±¼ä£¬Ä¬ÈÏÎªµ¹Ğò)
+	   å‚æ•°è¯´æ˜ï¼šæ— å‚
+	   è¿”å›å€¼ï¼š   List<CheckView>,ä¸ºåœŸåœ°ç”³è¯·è§†å›¾CheckViewå¯¹è±¡çš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæŸ¥è¯¢æ‰€æœ‰åœŸåœ°ç”³è¯·è®°å½•(è·å¾—çš„è®°å½•æŒ‰ç”³è¯·æ—¶é—´ï¼Œé»˜è®¤ä¸ºå€’åº)
 	 */
-	public List<CheckView> getLandApplys(int status);
-	
-
-	/*
-	   ²ÎÊıËµÃ÷£ºÎŞ²Î
-	   ·µ»ØÖµ£º   List<CheckView>,ÎªÍÁµØÉêÇëÊÓÍ¼CheckView¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º²éÑ¯ËùÓĞÍÁµØÉêÇë¼ÇÂ¼(»ñµÃµÄ¼ÇÂ¼°´ÉêÇëÊ±¼ä£¬Ä¬ÈÏÎªµ¹Ğò)
+	public CheckList getLandApply(int id,int pageindex,int size) throws SQLException  ;
+	/**
+	 * 
+	 * @param flag 0ä¸ºæ‹’ç»ï¼Œ1ä¸ºåŒæ„
+	 * @param la_id
+	 * @throws SQLException
 	 */
-	public List<CheckView> getLandApplys();
-	
+	public void refuseapply(String recordStr,String infoStr);
+
+    /*
+     * è¯¦æƒ…æŸ¥çœ‹table1(tableCheck)
+     */
+	public List<CheckView> Rentdetail(int la_id) throws SQLException;
 	/*
-	  ²ÎÊıËµÃ÷£ºla_id,ÕûĞÍ£¬ÎªÉêÇë¼ÇÂ¼±àºÅ£»lid,ÕûĞÍ£¬ÎªÍÁµØ±àºÅ	          
-	 ·µ»ØÖµ£º    ÎŞ·µ»ØÖµ
-	 º¯Êı¹¦ÄÜ£º Í¬ÒâÉêÇë(½«ÉêÇë¼ÇÂ¼±àºÅÎªla_idµÄ¼ÇÂ¼×´Ì¬±äÎª"½»·ÑÖĞ"¼´1£¬Í¬Ê±½«ÍÁµØ±àºÅ
-	                     ÎªlidÇÒ×´Ì¬ÎªÉêÇëÖĞµÄ¼ÇÂ¼×´Ì¬±äÎª"Ëø¶¨"¼´4)
-	          µ±×´Ì¬ÉèÎª½»·ÑÖĞ£¬Æô¶¯Êı¾İ¿â¶¨Ê±Æ÷£¬¼ì²âÊÇ·ñ³¬¹ı¹Ì¶¨ÆÚÏŞ£¬³¬¹ıÆÚÏŞ£¬Ôò½«la_id¼ÇÂ¼ÉèÎªÎ´½»·Ñ
-	  */
-	public void agreeApply(int la_id,int lid);
-	
-	/*
-	  ²ÎÊıËµÃ÷£ºla_id,ÕûĞÍ£¬ÎªÉêÇë¼ÇÂ¼±àºÅ£»lid,ÕûĞÍ£¬ÎªÍÁµØ±àºÅ	          
-	 ·µ»ØÖµ£º    ÎŞ·µ»ØÖµ
-	 º¯Êı¹¦ÄÜ£º ¾Ü¾øËûÈË(½«ÍÁµØ±àºÅÎªlid(³ıÁËla_idµÄÕâÌõ¼ÇÂ¼)µÄ¼ÇÂ¼×´Ì¬ÎªÉêÇëÖĞ¼´2µÄ±äÎª"¹ÜÀíÔ±¾Ü¾ø"¼´8)
-	  */
-	public void refuseOthers(int la_id,int lid);	
-	
-	/*
-	   ²ÎÊıËµÃ÷£ºbname,×Ö·û´®ĞÍ£¬Îª»ùµØÃû³Æ
-	           lid,ÕûĞÍ£¬ÎªÍÁµØ±àºÅ
-	           college£¬×Ö·û´®ĞÍ£¬ÎªÑ§ÔºÃû³Æ
-	           userCount,ÕûĞÍ£¬Îª×âÁŞ¸öÊı
-	   ·µ»ØÖµ£º  List<CheckView>,ÎªÍÁµØÉêÇëÊÓÍ¼CheckView¶ÔÏóµÄ¼¯ºÏ 
-	   º¯Êı¹¦ÄÜ£º¸ù¾İÌõ¼ş²éÑ¯»ñÈ¡ÍÁµØÉêÇëÊÓÍ¼ĞÅÏ¢
-	   ×¢£º           6¸ö²ÎÊıÊÇÁªºÏ²éÑ¯£¬µ«Ç°Îå¸ö²ÎÊıÒ²¿ÉÄÜ´æÔÚÃ»ÓĞÖµµÄÇé¿ö
-	                     Òò´ËÔÚ´ËĞèÒª½øĞĞÅĞ¶Ï²ÎÊıÊÇ·ñÓĞÖµ£¬¸ù¾İ½á¹ûµ÷ÓÃdao²ãµÄ·½·¨
-	                     ÔÚ´Ë¹æ¶¨£¬´ÓÉÏ²ã´«À´µÄlidºÍusercountÖµÈôÎª0£¬Ôò´ú±í´ËÁ½²ÎÊıÎŞÖµ
+	 * è¯¦æƒ…æŸ¥çœ‹table2(tablePay)
 	 */
-	public List<CheckView> getLandApplys(String bname,int lid,String college,int userCount,String planting,int status);
+	public List<CheckView> Rentdetail2(int la_id) throws SQLException;
+	/*
+	 * ç­›é€‰
+	 */
+	public CheckList getInfo(int flag,int pageindex,int size,String basename,String username,String usercollage) throws SQLException;
+	/*
+	 * åŸºåœ° æŸ¥è¯¢
+	 */
+	public List<BaseInfo> getBaseInfos();
+	/*
+	 * ç”³è¯·äººæŸ¥è¯¢
+	 */
+	public List<UserInfo> getappliInfos() throws SQLException;
+
+    /**
+     * æŸ¥çœ‹éƒ¨é—¨
+     * @return
+     * @throws SQLException
+     */
+	public List<UserInfo> getDept() throws SQLException;
+
+    /**
+     * äº¤è´¹
+     * @param flag  çŠ¶æ€å€¼1ä¸ºå–æ¶ˆ0ä¸ºç¡®è®¤
+     * @param la_id idå·
+     * @throws SQLException
+     */
+	public void getApplys(int flag,String la_id) throws SQLException;
 	
-
-
+	
+	public void agreeApply(String landstr,String recordstr,String infostr);
+	
+	public void cancelPayFor(String landstr, String recordstr, String infostr);
+	
+	public void confirmPayFor(String landstr, String recordstr, String infostr);
 }

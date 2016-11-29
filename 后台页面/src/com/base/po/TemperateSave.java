@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="temperatesave")
 public class TemperateSave {
 	
 	@Id
@@ -16,7 +15,7 @@ public class TemperateSave {
 	private String lid;
 	private String startTime;
 	private String endTime;	
-	private int applicantId;
+	private String applicantId;
 	private String planting;
 	private int Status;
 	private String startPayTime;
@@ -68,10 +67,11 @@ public class TemperateSave {
 	public void setStartPayTime(String startPayTime) {
 		this.startPayTime = startPayTime;
 	}
-	public int getApplicantId() {
+
+	public String getApplicantId() {
 		return applicantId;
 	}
-	public void setApplicantId(int applicantId) {
+	public void setApplicantId(String applicantId) {
 		this.applicantId = applicantId;
 	}
 	public int getStatus() {

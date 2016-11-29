@@ -1,5 +1,6 @@
 package com.base.po;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,19 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="userInfo")
 public class UserInfo {
 	
 	@Id	
 	private String id;
 	private String password;
 	private String name;
-	private String sex;
+	private String sex;	
+	private String img;	
 	private String birthdate;
 	private String ID_number;
 	private String telephone;
 	private String userType;
-	private String dept;
 	private String college;
 	private int userRight;
 	private String formerUnit;
@@ -30,7 +30,67 @@ public class UserInfo {
 	private String workingForm;
 	private String startContactTime;
 	private String endContactTime;	
-	
+	public UserInfo(String id,String name, String telephone , String password,String img )
+	{
+		super();
+		this.id=id;
+		this.password = password;
+		this.name = name;
+		this.telephone = telephone;
+		this.img=img;
+	}
+
+	public UserInfo(String id, String password, String name, String sex,
+			String birthdate, String iD_number, String telephone,
+			String userType, String college, int userRight)
+	{
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.sex = sex;
+		this.birthdate = birthdate;
+		ID_number = iD_number;
+		this.telephone = telephone;
+		this.userType = userType;
+		this.college = college;
+		this.userRight = userRight;
+	}
+
+	public UserInfo(String id, String password, String name, String sex,
+			String birthdate, String iD_number, String telephone,
+			String userType,  String college, int userRight,
+			String formerUnit, String hukou, String arriveTime,
+			String workTime, String contactForm, String workingForm,
+			String startContactTime, String endContactTime, String img)
+	{
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.sex = sex;
+		this.birthdate = birthdate;
+		ID_number = iD_number;
+		this.telephone = telephone;
+		this.userType = userType;
+		this.college = college;
+		this.userRight = userRight;
+		this.formerUnit = formerUnit;
+		this.hukou = hukou;
+		this.arriveTime = arriveTime;
+		this.workTime = workTime;
+		this.contactForm = contactForm;
+		this.workingForm = workingForm;
+		this.startContactTime = startContactTime;
+		this.endContactTime = endContactTime;
+		this.img = img;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -79,12 +139,8 @@ public class UserInfo {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	public String getDept() {
-		return dept;
-	}
-	public void setDept(String dept) {
-		this.dept = dept;
-	}
+	
+	
 	public String getCollege() {
 		return college;
 	}

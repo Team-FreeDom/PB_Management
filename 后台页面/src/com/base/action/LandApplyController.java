@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.base.po.ApplyDept;
+import com.base.po.ApplyList;
 import com.base.po.BaseInfo;
 import com.base.po.LandApply_view;
 import com.base.po.LandInfo;
@@ -37,6 +38,8 @@ import com.base.po.LandLayout;
 import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
+import com.base.po.RentCollection;
+import com.base.po.Startplan;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
@@ -50,18 +53,53 @@ public class LandApplyController {
 	private LandApplyServiceImpl landApplyServiceImpl;
 
 	// 基地查询
-	@RequestMapping("/baseInfo.do")
-	public String selectBase(HttpServletRequest request, ModelMap map,
+		@RequestMapping("/baseInfo.do")
+		public String selectBase(HttpServletRequest request, ModelMap map,
+				HttpServletResponse response) {
+
+			List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
+
+			response.setContentType("text/html;charset=UTF-8");
+
+			try {
+				JSONArray json = JSONArray.fromObject(list);
+				response.getWriter().print(json.toString());
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	
+	// 基地+部门查询
+	@RequestMapping("/getBase_deptInfo.do")
+	public String selectBase_deptInfo(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
+
+		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
+		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
+		Startplan sp=landApplyServiceImpl.getStartPlan("zl");
+		String rents="";
+		String rente="";
 		
-		List<BaseInfo> list = landApplyServiceImpl.getBaseInfos();
+		if(sp!=null){
+		rents= sp.getRent_start();
+		rente=sp.getRent_end();
+				
+		}
+		JSONObject getObj = new JSONObject();
+		getObj.put("base",list1);
+		getObj.put("xy",list2);
+		getObj.put("stime",rents);
+		getObj.put("etime",rente);
 		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
-			JSONArray json = JSONArray.fromObject(list);
-			response.getWriter().print(json.toString());
 			
+			response.getWriter().print(getObj.toString());
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,11 +111,7 @@ public class LandApplyController {
 	@RequestMapping("/mainRent.do")
 	public String mainRent(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
-		boolean flag = CookieUtils.addCookie(request, response);
-		map.addAttribute("notimeout", flag);
-		if (!flag) {
-			return "index";
-		}
+
 		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
 
 		map.addAttribute("base", base);
@@ -88,10 +122,10 @@ public class LandApplyController {
 	@RequestMapping("/getContent.do")
 	public String getContent(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		boolean flag = CookieUtils.addCookie(request, response);
+
 		int bid = Integer.valueOf(request.getParameter("base"));
 		String plant = request.getParameter("planting");
-		map.addAttribute("notimeout", flag);
+
 		if (!plant.equals("-1")) {
 			System.out.println(plant);
 			List<String> str = landApplyServiceImpl.getLandLayout(bid, plant);
@@ -139,51 +173,55 @@ public class LandApplyController {
 		return null;
 	}
 
-	// 土地布局查询
-	@RequestMapping("/layout.do")
-	public String selectLandLayout(HttpServletRequest request, ModelMap map) {
+	// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
+	@RequestMapping("/getRentCollection.do")
+	public String getRentCollection(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+
+		int bid = Integer.valueOf(request.getParameter("bid"));
+		List<RentCollection> list = landApplyServiceImpl.getRentCollection(bid);
+
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(json.toString());
+			// response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
-	// 土地信息查询
-	@RequestMapping("/landInfo.do")
-	public String selectLandInfo(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
+	// 租赁申请时，提交租赁申请
+	@RequestMapping("/submitLandApply.do")
+	public String submitLandApply(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
 
-	// 月份空闲查询
-	@RequestMapping("/timeSpare.do")
-	public String timeSpare(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
+		String str = request.getParameter("str");
+        String info_str=request.getParameter("info_str");
+        String lidList=request.getParameter("lidList");
+		String userid=request.getParameter("userid");       
+       
+        
+		int flag=landApplyServiceImpl.submitLandApply(userid,lidList,str,info_str);
+		
+		
+		
+		response.setContentType("text/html;charset=UTF-8");
 
-	// 获取申请信息(点击租赁按钮，获取教师+土地+个人信息)
-	@RequestMapping("/AllApplyInfo.do")
-	public String getAllApplyInfo(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
+		String str1 =""+flag+'$'+"" ;
+		
+		try {
+			response.getWriter().print(str1);
+			// response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	// 提交申请
-	@RequestMapping("/submitApply.do")
-	public String submitApply(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 修改申请
-	@RequestMapping("/updateApply.do")
-	public String updateApply(HttpServletRequest request, ModelMap map) {
-		return null;
-	}
-
-	// 查看申请
-	@RequestMapping("/checkApply.do")
-	public String checkApply(ModelMap map) {
-		return null;
-	}
-
-	// 取消申请
-	@RequestMapping("/cancelApply.do")
-	public String cancelApply(HttpServletRequest request, ModelMap map) {
 		return null;
 	}
 
@@ -191,16 +229,30 @@ public class LandApplyController {
 	@RequestMapping("/selfApply.do")
 	public String selfApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("hello");
-		String applicantId = "201440509";
-		List<LandApply_view> list = landApplyServiceImpl
-				.getselfApply(applicantId);
-		/*
-		 * for(LandApply_view lv:list) { System.out.println(lv.getDescp()); }
-		 */
+		
+		String bname = request.getParameter("bname");
+		String startTime = request.getParameter("startTime");
+		String endTime = request.getParameter("endTime");
+		String desc = request.getParameter("desc");
+		
+		int length=Integer.valueOf(request.getParameter("length"));
+		int start=Integer.valueOf(request.getParameter("start"));
+		int draw=Integer.valueOf(request.getParameter("draw"));  //从客户端获得length(每页3长度)，start()起始页数，draw计数器
+		
+		
+		int page=start/length+1; //当前页数
+		
+	    String applicantId = CookieUtils.getUserid(request);	
+		
+		
+		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname, startTime, endTime, desc, page, length);
+		
 		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
-
+		getObj.put("draw",draw);
+		getObj.put("recordsFiltered",al.getRecordsTotal());		
+		getObj.put("recordsTotal",al.getRecordsTotal());
+		getObj.put("data",al.getData());	
+		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
@@ -293,11 +345,10 @@ public class LandApplyController {
 	@RequestMapping("/myRentEdit.do")
 	public String myRentEdit(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		int la_id=21;
+		//int la_id = Integer.valueOf(request.getParameter("la_id"));
 
-		List<TemperateSave_View> list = new ArrayList<TemperateSave_View>();
-
-		list.add(landApplyServiceImpl.getTs(la_id));
+		List<TemperateSave_View> list = landApplyServiceImpl.getTs(la_id);		
 
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
@@ -315,13 +366,21 @@ public class LandApplyController {
 	@RequestMapping("/myRentFont.do")
 	public String myRentFont(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-        System.out.println("myRentFont.do");
-		String applicantId = "201440509";
-		List list = null;
-		list = landApplyServiceImpl.myRentFont1(applicantId);
-		// list=landApplyServiceImpl.myRentFont(applicantId);
+		
+		int length=Integer.valueOf(request.getParameter("length"));
+		int start=Integer.valueOf(request.getParameter("start"));
+		int draw=Integer.valueOf(request.getParameter("draw"));  //从客户端获得length(每页3长度)，start()起始页数，draw计数器
+			
+		int page=start/length+1; //当前页数		
+		String applicantId = CookieUtils.getUserid(request);
+		
+		ApplyList al = landApplyServiceImpl.myRentFont1(applicantId,page,length);		
+		
 		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
+		getObj.put("draw",draw);
+		getObj.put("recordsFiltered",al.getRecordsTotal());		
+		getObj.put("recordsTotal",al.getRecordsTotal());
+		getObj.put("data",al.getData());	
 
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -338,13 +397,20 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
+		System.out.println("cancel1");
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
+		String info_str=request.getParameter("info_str");
+		System.out.println(info_str);
+		
 		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id);
+			landApplyServiceImpl.myFameCancel1(la_id,info_str);
+			
+			
+			
 			flag = true;
-			String str = "[{\"flag\":" + flag + "}]";
+			String str = "[{\"flag\":" + flag +",\"number\":" +""+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());
@@ -397,12 +463,20 @@ public class LandApplyController {
 		return null;
 	}
 
-	@RequestMapping("/exportFile")
+	@RequestMapping("/exportFile.do")
 	public String exportFile(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		String fileName = request.getParameter("fileName");
+		
+		String fileName = null;
+		int flag=Integer.valueOf(request.getParameter("flag"));
+		if(flag==1){
+			fileName="教学科研用地协议.pdf";
+		}else if(flag==2){
+			fileName="土地有偿使用协议.docx";
+		}	
+		
 		String filename = fileName.substring(0, fileName.lastIndexOf('.'));
-		// String filetype=fileName.substring(fileName.lastIndexOf("."));
+		String filetype=fileName.substring(fileName.lastIndexOf("."));
 		// System.out.println(filename);
 
 		// 文件下载
@@ -415,8 +489,11 @@ public class LandApplyController {
 				"file/" + fileName);
 
 		// 设置Content-Disposition
+		/*response.setHeader("Content-Disposition", "attachment;filename="
+				+ fileName);*/
+		
 		response.setHeader("Content-Disposition", "attachment;filename="
-				+ fileName);
+				+ new String(filename.getBytes(), "iso-8859-1") + filetype);
 		// 读取文件
 		InputStream in = new FileInputStream(fullFileName);
 		OutputStream out = response.getOutputStream();
@@ -442,10 +519,10 @@ public class LandApplyController {
 		String bname = request.getParameter("bname");
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
-		String lid=request.getParameter("lid");
-		
-		System.out.println("我得到的lid是："+lid);
-		
+		String lid = request.getParameter("lid");
+
+		System.out.println("我得到的lid是：" + lid);
+
 		String desc = request.getParameter("desc");
 
 		List<LandApply_view> list = landApplyServiceImpl.getUnionInfo(
@@ -470,44 +547,42 @@ public class LandApplyController {
 	public String updateContent(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 
-		String lid =request.getParameter("lid");
+		String lid = request.getParameter("lid");
 		int dept = Integer.valueOf(request.getParameter("dept"));
 		String planting = request.getParameter("planting");
-		int la_id=Integer.valueOf(request.getParameter("hide"));
-		String filename="";
-		
-		System.out.println(lid+"  "+dept+"  "+planting+"  "+la_id);		
-	
-		
+		int la_id = Integer.valueOf(request.getParameter("hide"));
+		String filename = "";
+
+		System.out.println(lid + "  " + dept + "  " + planting + "  " + la_id);
+
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 
-				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-				// 得到上传的文件
-				MultipartFile mFile = multipartRequest.getFile("fileResource");
-				// 得到上传服务器的路径
-				String path = request.getSession().getServletContext()
-						.getRealPath("/infor/");
-				// 得到上传的文件的文件名
-				String fileName = mFile.getOriginalFilename();
-				System.out.println(fileName);
-				
-				
-				 if(!fileName.isEmpty())
-				  {
-				filename = new Date().getTime() +"$"+fileName;
-				InputStream inputStream = mFile.getInputStream();
-				byte[] b = new byte[1048576];
-				int length = inputStream.read(b);
-				path += "\\" + filename;
-				// 文件流写到服务器端
-				FileOutputStream outputStream = new FileOutputStream(path);
-				outputStream.write(b, 0, length);
-				inputStream.close();
-				outputStream.close();
-				filename = "../infor/" + filename;
-				  }
-				 String path1 = request.getSession().getServletContext().getRealPath("");
-				 landApplyServiceImpl.updateContent(la_id, lid, dept, planting, filename,path1);
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		// 得到上传的文件
+		MultipartFile mFile = multipartRequest.getFile("fileResource");
+		// 得到上传服务器的路径
+		String path = request.getSession().getServletContext()
+				.getRealPath("/infor/");
+		// 得到上传的文件的文件名
+		String fileName = mFile.getOriginalFilename();
+		System.out.println(fileName);
+
+		if (!fileName.isEmpty()) {
+			filename = new Date().getTime() + "$" + fileName;
+			InputStream inputStream = mFile.getInputStream();
+			byte[] b = new byte[1048576];
+			int length = inputStream.read(b);
+			path += "\\" + filename;
+			// 文件流写到服务器端
+			FileOutputStream outputStream = new FileOutputStream(path);
+			outputStream.write(b, 0, length);
+			inputStream.close();
+			outputStream.close();
+			filename = "../infor/" + filename;
+		}
+		String path1 = request.getSession().getServletContext().getRealPath("");
+		landApplyServiceImpl.updateContent(la_id, lid, dept, planting,
+				filename, path1);
 		return "redirect:myRent.jsp";
 
 	}
@@ -515,15 +590,15 @@ public class LandApplyController {
 	@RequestMapping("/getDept.do")
 	public String getDept(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		
+
 		List<ApplyDept> list = landApplyServiceImpl.getDepts();
-		
+
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
 			JSONArray json = JSONArray.fromObject(list);
 			response.getWriter().print(json.toString());
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -531,108 +606,188 @@ public class LandApplyController {
 		return null;
 
 	}
-	
+
 	@RequestMapping("/getLayout_Info.do")
-	public String getLayout_Info(HttpServletRequest request,HttpServletResponse response, ModelMap map){
-		
-		List<Layout_InfoView> list=landApplyServiceImpl.getLayout();
-		
-		
-	/*	JSONObject getObj = new JSONObject();
-		getObj.put("data", list);	*/	
+	public String getLayout_Info(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+
+		List<Layout_InfoView> list = landApplyServiceImpl.getLayout();
+
+		/*
+		 * JSONObject getObj = new JSONObject(); getObj.put("data", list);
+		 */
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
 			response.getWriter().print(json.toString());
-			//response.getWriter().print(getObj.toString());
+			// response.getWriter().print(getObj.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
-		
+		}
+
 		return null;
 
 	}
-	
+
 	@RequestMapping("/getDifferLayout.do")
-	public String getDifferLayout(HttpServletRequest request,HttpServletResponse response, ModelMap map){
-		
-		int bid=Integer.valueOf(request.getParameter("bid"));
-		List<Layout_InfoView> list=landApplyServiceImpl.getDifferLayout(bid);	
-	
+	public String getDifferLayout(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+
+		int bid = Integer.valueOf(request.getParameter("bid"));
+		System.out.println(bid);
+		List<Layout_InfoView> list = landApplyServiceImpl.getDifferLayout(bid);
+
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
 			response.getWriter().print(json.toString());
-			//response.getWriter().print(getObj.toString());
+			// response.getWriter().print(getObj.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
-		
+		}
+
 		return null;
 
 	}
-	
+
 	@RequestMapping("/updateLayout_Info.do")
-	public String updateLayout_Info(HttpServletRequest request,HttpServletResponse response, ModelMap map) throws IOException{
-		
-		int bid=Integer.valueOf(request.getParameter("bid"));
-		int tag=Integer.valueOf(request.getParameter("tag"));
-		String str=request.getParameter("layInfo");
-		
-		List<Layout_InfoView> list=new ArrayList<Layout_InfoView>();
-		Layout_InfoView view=null;
-		
-		if(tag==0)
-		{
+	public String updateLayout_Info(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) throws IOException {
+
+		int bid = Integer.valueOf(request.getParameter("bid"));
+		int tag = Integer.valueOf(request.getParameter("tag"));
+		String str = request.getParameter("layInfo");
+
+		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
+		Layout_InfoView view = null;
+		String layoutStr = "";
+		String landinfoStr = "";
+        System.out.println("tag:"+tag);
+		if (tag == 0) {
+			System.out.println("清空");
 			landApplyServiceImpl.delLayout_info(bid);
-		}else{
-			
+		} else {
+			System.out.println("更新：controller层");
 			JSONArray obj = JSONArray.fromObject(str);
-			for(int i=0;i<obj.size();i++)
-			{
+			for (int i = 0; i < obj.size(); i++) {
+
+				JSONObject temp = obj.getJSONObject(i);
+
+				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
+						+ temp.getInt("bid") + ","
+						+ Integer.valueOf(temp.getString("Afford")) + ","
+						+ temp.getInt("buildingArea") + ","
+						+ temp.getInt("landArea") + ",'"
+						+ temp.getString("lname") + "','"
+						+ temp.getString("plantingContent") + "'";
+
+				layoutStr += "(" + temp.getInt("bid") + ","    //拼装土地布局信息
+						+ temp.getInt("height") + "," + temp.getInt("width")
+						+ "," + temp.getInt("x") + "," + temp.getInt("y")
+						+ ",'" + temp.getString("id") + "'";
 				
-				JSONObject temp=obj.getJSONObject(i);
-			
-				view=new Layout_InfoView();
-				view.setAfford(Integer.valueOf(temp.getString("Afford")));
-				view.setBid(temp.getInt("bid"));
-				view.setBuildingArea(temp.getInt("buildingArea"));
-				view.setHeight(temp.getInt("height"));
-				view.setWidth(temp.getInt("width"));
-				view.setId(temp.getString("id"));
-				view.setLandArea(temp.getInt("landArea"));
-				view.setLname(temp.getString("lname"));
-				view.setPlantingContent(temp.getString("plantingContent"));
-				view.setX(temp.getInt("x"));		
-				view.setY(temp.getInt("y"));
-				list.add(view);
-//				System.out.println(temp.get("id")+" "+temp.getInt("width")+temp.getInt("height"));
+				if(i==obj.size()-1)
+				{
+					landinfoStr+=")";
+					layoutStr+=")";
+				}else{
+					landinfoStr+="),";
+					layoutStr+="),";
+				}			
+
 			}
 			
-			
 			landApplyServiceImpl.delLayout_info(bid);
-			landApplyServiceImpl.updateLayInfo(bid, list);
+			landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr);
 		}
-		
-		
+
 		String str1 = "[{\"flag\":" + true + "}]";
 		JSONArray json = JSONArray.fromObject(str1);
 
 		response.getWriter().print(json.toString());
-		
-		
-		
-		
-		
-		
+
 		return null;
 
 	}
+
+	//修改或更新租赁开始时间
+	@RequestMapping("/updateLandApplyDate.do")
+	public String updateLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String planstime = request.getParameter("planstime");
+		String planetime = request.getParameter("planetime");
+		
+		String rentstime = request.getParameter("rentstime");
+		String rentetime = request.getParameter("rentetime");
+		
+				
+		Startplan sp =new Startplan("zl","土地租赁",planstime,planetime,rentstime,rentetime);		
+		landApplyServiceImpl.updateLandApplyDate(sp);
+		
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+	
+	//获取租赁开始时间
+	@RequestMapping("/getLandApplyDate.do")
+	public String getLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String plans="";
+		String plane="";
+		String rents="";
+		String rente="";
+		Startplan sp = landApplyServiceImpl.getStartPlan("zl");
+		
+		if(sp!=null){
+		plans=sp.getApply_start();
+		plane=sp.getApply_end();
+		rents=sp.getRent_start();
+		rente=sp.getRent_end();
+		}
+		JSONObject getObj = new JSONObject();
+		getObj.put("planstime",plans);
+		getObj.put("planetime",plane);
+		getObj.put("rentstime",rents);
+		getObj.put("rentetime",rente);
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping("/endLandApply.do")
+	public String endLandApply(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		
+		landApplyServiceImpl.endStartPlan();
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

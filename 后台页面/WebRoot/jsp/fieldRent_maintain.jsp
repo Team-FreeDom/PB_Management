@@ -31,12 +31,6 @@
     <![endif]-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/jquery.dataTables.min.js"></script>
-<script src="../js/myNeed/rentMaintain.js"></script>
-<script src="../js/kg.js"></script>
-
 
 </head>
 <body>
@@ -44,9 +38,9 @@
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
 			<ul class="nav navbar-nav navbar-actions navbar-left">
-				<li class="visible-md visible-lg"><a href="index.html#"><i
+				<li class="visible-md visible-lg"><a><i
 						class="icon-th-large"></i></a></li>
-				<li class="visible-xs visible-sm"><a href="index.html#"><i
+				<li class="visible-xs visible-sm"><a><i
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
@@ -57,17 +51,20 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs"><a href="#"
-						class="dropdown-toggle notification-icon" data-toggle="dropdown">
-							<i class="icon-envelope"></i> <!--ms-if-->
-					</a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
-							</li>
-							<li class="dropdown-menu-footer text-center"><a
-								href="../teach/notifications.html">更多消息</a></li>
-						</ul></li>
-					<li><a href="#outModal"
+					<li class="hidden-sm hidden-xs">
+					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
+                          <i class="icon-envelope"><span class="badge msg"></span></i>
+                              <!--ms-if-->
+                      </a> 
+						<!-- <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;">
+                                <a href="getMessage.do"><strong>未读消息列表</strong></a>
+                            </li>    
+                            <li class="dropdown-menu-footer text-center">
+                                 <a href="getMessage.do">更多消息</a>
+                            </li>
+						</ul> --></li>
+					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
 					</a></li>
@@ -98,62 +95,64 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="#"><img class="img-circle bk-img-60" alt=""
-											src="../image/psu.jpg"></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
+											src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small>罗旭</small>
+										<i class="icon-circle text-success"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
 								<div class="divider2"></div>
 
 
-								<li class="menuItem"><a href="index.html"> <i
-										class="icon-home" aria-hidden="true"></i><span>主界面</span>
+								<li class="menuItem">
+								<a href="index.do"> 
+								<i	class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">我的租赁</span></a></li>
-										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
-										<li><a href="#"><span class="text">我的基地</span></a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
+										<li><a><span class="text">我的实习</span></a></li>
+										<li><a><span class="text">我的报修</span></a></li>
+										<li><a><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁审批</span></a></li>
-										<li><a href="#"><span class="text">实习审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
+										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+										<li><a><span class="text">实习审批</span></a></li>
+										<li><a><span class="text">基地审批</span></a></li>
+										<li><a><span class="text">维修审批</span></a></li>
 
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
-										<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
-										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="#"><span class="text"> 土地租赁维护</span></a></li>
-										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统用户维护</span></a></li>
-										<li><a href="#"><span class="text"> 系统权限设置</span></a></li>
-									</ul></li>
+                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
+                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li><a href="#"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
+										<li><a><span class="text">租赁统计</span></a></li>
+										<li><a><span class="text">实习分析</span></a></li>
+										<li><a><span class="text">实习基地统计</span></a></li>
 									</ul></li>
 
 							</ul>
@@ -177,197 +176,261 @@
 				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html">位置</a></li>
-							<li><a href="index.html">土地租赁维护</a></li>
+							<li><a>位置</a></li>
+							<li><a href="fieldRent_maintain.jsp">土地租赁维护</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
-						</ol>
-					</div>
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
+							</ol>
+						</div>
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
 
 					<div class="col-lg-12">
-						<table id="fieldrent_maintain" class="cell-border" cellspacing="0"
-							width="100%">
-							<thead>
-								<tr bgcolor="#ECF1F5">
-									<td>
-										<button type="button" class="btn btn-info button_style"
-											data-toggle="modal" data-target="#myModal">
-											<span class="glyphicon glyphicon-plus"></span>
-										</button>
-									</td>
-									<td colspan="3">排序<span
-										class="glyphicon glyphicon-sort-by-attributes"></span> <select
-										name="" id="">
-											<option value="">默认</option>
-											<option value="">租用次数降次</option>
-											<option value="">租用次数</option>
-									</select> 
-									</td>
-									<td colspan="4">
-										<ul class="dropdown_show">
-											<li><span style="color:#24354a" class="icon-filter"
-												onClick="showsubmenu()">筛选</span>
-												<ul id="hide_ul" style="display:none;">
-													<li>
-														<form>
-															<table class="table">
-																<tr>
-																	<td>基地名： <select name="" id="">
-																			<option value="">显示全部</option>
-																			<option value="">耘园科教综合基地</option>
-																			<option value="">西南角农学基地</option>
-																	</select>  
-																	</td>
-																	<td>申请人所属学院： <select name="" id="">
-																			<option value="">请选择</option>
-																			<option value="">信息科学技术学院</option>
-																			<option value="">资源环境保护学院</option>
-																	</select>
-																	</td>
-																</tr>
-																<tr>
-																	<td>土地编号 <select name="" id="">
-																			<option value="">显示全部</option>
-																			<option value="">#1</option>
-																			<option value="">#2</option>
-																	</select>  
-																	</td>
-																	<td>计划种植内容 <select name="" id="" size="">
-																			<option value="">显示全部</option>
-																			<option value="">玉米</option>
-																			<option value="">棉花</option>
-																	</select>  
-																	</td>
-																</tr>
-																<tr>
-																	<td colspan="2">
-																		<button type="reset" class="btn btn-primary">重置</button>
-																		<button onClick="hidesubmenu()" type="button"
-																			class="btn btn-primary">完成</button>
-																	</td>
-																</tr>
-															</table>
-														</form>
-													</li>
-												</ul></li>
-										</ul>
-									</td>
-									<td colspan="2">
-										<button type="button" class="btn btn-danger">删除</button>
-										<button type="button" class="btn btn-primary"
-											data-toggle="modal" data-target="#lead">导出</button>
-									</td>
+						<form action="deleteLandRentInfo.do" method="post" id="deleteInfo">
+							<table id="fieldrent_maintain" class="cell-border"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr bgcolor="#ECF1F5">
+																			
+										<td colspan="5">
+											<ul class="dropdown_show">
+												<li><span style="color:#24354a" class="icon-filter"
+													onClick="showsubmenu()">筛选</span>
+													<ul id="hide_ul" style="display:none;">
+														<li>
+															<form action="submitChoose.do" method="post"
+																id="submitChoose">
+																<table class="table">
+																	<tr>
+																		<td>基地名： <select name="baseS" id="baseSh">
+																				<option value="" id="baseS">显示全部</option>
+																		</select>  
+																		</td>
+																		<td>申报部门： <select name="deptS" id="deptSh">
+																				<option value="" id="deptS">请选择</option>
 
-								</tr>
-								<tr style="background:#eeeff4" width="100%">
-                                    <th></th>  
-									<th>开始日期</th>
-									<th>结束日期</th>
-									<th>基地名</th>
-									<th>土地编号</th>
-									<th>申请人</th>
-									<th>申请部门</th>
-									<th>已租用次数</th>
-									<th>种植内容</th>
-									<th>修改</th>
-								</tr>
-							</thead>
-							<tbody>
+																		</select>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>种植内容 <select name="contentS" id="contentSh"
+																			size="">
+																				<option value="">显示全部</option>
+																				<option value="玉米">玉米</option>
+																				<option value="棉花">棉花</option>
+																		</select>  
+																		</td>
+																		<td>&nbsp;</td>
+																	</tr>
+																	<tr>
+																		<td colspan="2">
+																			<button type="reset" class="btn btn-primary">重置</button>
+																			<button onClick="hidesubmenu()" type="button"
+																				id="submitS" class="btn btn-primary">完成</button>
+																		</td>
+																	</tr>
+																</table>
+															</form>
+														</li>
+													</ul></li>
+											</ul>
+										</td>
+										<td colspan="3">
+											<!-- <button type="button" class="btn btn-info button_style"
+												data-toggle="modal" data-target="#myModalAdd">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button> -->
+										</td>	
+										<td colspan="2">
+											<button type="button" class="btn btn-danger"
+												onClick="deleteInfo()">删除</button>
+											<button type="button" class="btn btn-primary"
+												data-toggle="modal" data-target="#lead">导出</button>
+										</td>
 
-							</tbody>
-						</table>
+									</tr>
+									<tr style="background:#eeeff4" width="100%">
+										<th><label><input type="checkbox" name="0"
+												class="ck-all" /></label></th>
+										<th>开始日期</th>
+										<th>结束日期</th>
+										<th>基地名</th>
+										<th>土地编号</th>
+										<th>租赁人</th>
+										<th>申报部门</th>
+										<th>已租用次数</th>
+										<th>种植内容</th>
+										<th>修改</th>
+									</tr>
+								</thead>
 
+								<tbody>
+
+								</tbody>
+
+							</table>
+						</form>
 					</div>
 					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
+						<form action="landManageUpdate.do" method="post"
+							id="landManageUpdate">
+							<div class="modal-dialog">
+								<div class="modal-content" style="border:#3071a9 8px solid">
+									<div class="modal-header"
+										style="background:#3071a9; color:#FFF">
+										<button type="button" class="close" data-dismiss="modal">
+											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
+									</div>
+									<div class="modal-body table-responsive">
+										<table class="table">
+											<tr>
+												<td colspan="4"><input type="text" name="lr_id"
+													id="lr_id" hidden></td>
+											</tr>
+											<tr>
+												<td>基地名 ：</td>
+												<td><input type="text" name="bname" id="bname" disabled /></td>
+
+												<td>租赁人 ：</td>
+												<td><input type="text" name="username" id="username"
+													disabled></td>
+
+											</tr>
+											<tr>
+												<td>申报部门 ：</td>
+												<td><select name="deptSelect" id="deptLaLa">
+														<option value="" id="deptD">请选择</option>
+
+												</select></td>
+
+												<td>土地编号 ：</td>
+												<td><input type="text" name="lid" id="lid" disabled></td>
+
+											</tr>
+
+
+											<tr>
+												<td>土地面积 ：</td>
+												<td><input type="text" name="landArea" id="landArea"
+													disabled></td>
+												<td>适宜从事内容 ：</td>
+												<td><input type="text" name="aptCareer" id="aptCareer"
+													disabled></td>
+											</tr>
+
+											<tr>
+
+
+												<td>计划从事内容 ：</td>
+												<td><input type="text" name="planCareer"
+													id="planCareer"></td>
+												<td>租赁费用 ：</td>
+												<td><input type="text" name="expense" id="expense"></td>
+											</tr>
+
+											<tr>
+
+												<td>交费日期 ：</td>
+												<td colspan="3"><input type="text" name="chargeDate"
+													id="chargeDate" disabled></td>
+
+											</tr>
+
+											<tr>
+												<td>使用年限 :</td>
+												<td><input type="text" name="startTime" id="startTime"></td>
+												<td>-----------</td>
+												<td><input type="text" name="endTime" id="endTime"></td>
+											</tr>
+										</table>
+									</div>
+									<div class="modal-footer table-responsive">
+										<center>
+											<button type="button" class="btn btn-primary" id="definite">确定修改</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+										</center>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<form action="landManageAdd.do" method="post" id="landManageAdd" onSubmit="return checkA()">
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
 									<button type="button" class="close" data-dismiss="modal">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 									</button>
-									<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
+									<h4 class="modal-title text-center" id="myModalLabel">租赁记录增加</h4>
 								</div>
 								<div class="modal-body table-responsive">
 									<table class="table">
 										<tr>
-											<td>基地名 ：</td>
-											<td><input type="text" name="bname" id="bname" /></td>
-
-											<td>租赁人 ：</td>
-											<td><input type="text" name="username"></td>
-
-										</tr>
-										<tr>
-											<td>申报部门 ：</td>
-											<td><select name="deptSelect" id="deptSelect">
-													<option>请选择</option>
-
-											</select></td>
-
 											<td>土地编号 ：</td>
-											<td><input type="text" name="lid" id="lid"></td>
+											<td><input type="text" name="addLid" id="addLid"></td>
+											<td>租赁人编号：</td>
+											<td><input type="text" name="addUserid" id="addUserid"></td>
 
 										</tr>
-
-
 										<tr>
-
-											<td>土地名称 ：</td>
-											<td><input type="text" name="lname" id="lname" disabled></td>
-											<td>土地面积 ：</td>
-											<td><input type="text" name="landArea" id="landArea"
-												disabled></td>
-
+											<td>申报部门：</td>
+											<td><select name="addDept" id="addDept">
+												  <option value="" id="addDepth"/>请选择</option>
+												</select>
+											</td>
+											<td>从事内容 ：</td>
+											<td><input type="text" name="addPlanting" id="addPlanting"/></td>
 										</tr>
-
-										<tr>
-
-											<td>适宜从事内容 ：</td>
-											<td><input type="text" name="aptCareer" id="aptCareer"
-												disabled></td>
-											<td>计划从事内容 ：</td>
-											<td colspan="3"><input type="text" name="planCareer"
-												id="planCareer"></td>
-										</tr>
-
-										<tr>
-											<td>租赁费用 ：</td>
-											<td><input type="text" name="expense" id="expense"
-												disabled></td>
-											<td>交费日期 ：</td>
-											<td><input type="text" name="expense" id="chargeDate"
-												disabled></td>
-
-										</tr>
-
-										<tr>
+                                        <tr>
 											<td>使用年限 :</td>
-											<td><input type="text" name="startTime" id="startTime"></td>
-											<td>-----------</td>
-											<td><input type="text" name="endTime" id="endTime"></td>
+											<td><input type="text" name="addStartTime"
+												id="addStartTime"/>
+											</td>
+											<td>--------</td>
+											<td><input type="text" name="addEndTime"
+												id="addEndTime"/></td>
 										</tr>
+										<tr>
+											<td>交费日期 ：</td>
+											<td><input type="text" name="addChargeDate"
+												id="addChargeDate"/>												
+											</td>
+											<td>租赁费用 ：</td>
+											<td><input type="text" name="addExpense" id="addExpense"/></td>
+
+
+										</tr>
+										
+
 									</table>
 								</div>
 								<div class="modal-footer table-responsive">
 									<center>
-										<button type="button" class="btn btn-primary">确定修改</button>
+										<button type="button" class="btn btn-primary" id="add">确定</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">取消</button>
 									</center>
 								</div>
 							</div>
 						</div>
-					</div>
+						</form>					
+											
+				</div>
+
 				</div>
 			</div>
 			<!-- End Sidebar-->
@@ -383,16 +446,19 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
 						</div>
-						<div class="modal-body" id="daochu" style="height:60px;">
-							<select>
-								<option>全部</option>
-								<option>教务处</option>
-							</select>
-						</div>
+						<form action="exportLandRentInfo.do" method="post"
+							id="landRentForm">
+							<div class="modal-body" id="daochu" style="height:60px;">
+								<select name="dept" id="exportDept">
+									<option value="" id="deptE">全部</option>
+
+								</select>
+							</div>
+						</form>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary">确定</button>
+							<button type="button" class="btn btn-primary" id="certainExport">确定</button>
 						</div>
 					</div>
 				</div>
@@ -407,4 +473,12 @@
 
 
 </body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
+<script src="../js/myNeed/rentMaintain.js"></script>
+ <script src="../dist/jquery.cokie.min.js"></script>    
+<script src="../js/kg.js"></script>
+
 </html>

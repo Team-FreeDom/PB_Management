@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="landrentinfo")
+@Entity
 public class LandRentInfo {
 
 	@Id
@@ -16,9 +16,17 @@ public class LandRentInfo {
 	private String startTime;
 	private String endTime;	
 	private String planting;	
-	private int userId;
+	private String userId;
 	private int rentMoney;
 	private String chargeDate;
+	private int applyDept;
+	
+	public int getApplyDept() {
+		return applyDept;
+	}
+	public void setApplyDept(int applyDept) {
+		this.applyDept = applyDept;
+	}
 	public int getLr_id() {
 		return lr_id;
 	}
@@ -51,10 +59,11 @@ public class LandRentInfo {
 	public void setPlanting(String planting) {
 		this.planting = planting;
 	}
-	public int getUserId() {
+
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public int getRentMoney() {
@@ -72,5 +81,31 @@ public class LandRentInfo {
 	public LandRentInfo() {
 		super();
 	}
+	public LandRentInfo(String lid, String startTime,
+			String endTime, String planting, String userId, int rentMoney,
+			String chargeDate, int applyDept) {
+		super();		
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.rentMoney = rentMoney;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	public LandRentInfo(String lid, String startTime, String endTime,
+			String planting, String userId, String chargeDate, int applyDept) {
+		super();
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	
+	
 	
 }

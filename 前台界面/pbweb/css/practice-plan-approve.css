@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+@charset "utf-8";
+/* CSS Document */
+@charset "utf-8";
+/* CSS Document */
+
+
+#mypracticetable tbody tr td button{
+	float:left;
+	margin-left:5px;}
+
+table thead > tr> td{
+	font-size:16px;
+	background: -moz-linear-gradient(top, #e7eef3 0%, #cedee8 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7eef3), color-stop(100%,#cedee8));
+    background: -webkit-linear-gradient(top, #000000 0%,#cedee8 100%);
+    background: -o-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
+	}
+table thead tr th{
+	text-align:center;}
+table tbody tr td{
+	text-align:center;}
+#dropdown_show li{
+	position:relative;
+	list-style:none;
+	}
+#dropdown_show ul li{
+	list-style:none;
+	position:absolute;
+	top:35px;
+	left:0px;
+	width:100%;
+	}	
+#dropdown_show ul li table tr td{
+	color:#000;
+	font-size:14px;
+	background:#d6dfe9;
+	border:none !important;
+	text-align:left;
+	padding-left:13%;
+	}
+#table2 span{
+	cursor:pointer;}
+.modal{
+	margin-top:5%;}
+.bottom{
+	margin-top:10px;
+	}
+.dataTables_length{
+	margin-left:5%;}
+
+

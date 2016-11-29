@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -163,5 +164,26 @@ public class LandInfoDaoImpl implements LandInfoDao {
 
 	}
 	
+	
+	public void delLayout_info(int bid)
+	{
+		Session session=sessionFactory.openSession();		
+		//hibernate调用存储过程(无返回参数)
+		SQLQuery sqlQuery =session.createSQLQuery("{call baseweb.`delete_land`(?)}");
+		sqlQuery.setInteger(0, bid);		
+		sqlQuery.executeUpdate();
+		session.close();		
+	}
+	
+	public void doLayout_info(String landinfoStr,String layoutStr)
+	{
+		Session session=sessionFactory.openSession();		
+		//hibernate调用存储过程(无返回参数)
+		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_land(?,?)}");
+		sqlQuery.setString(0, landinfoStr);	
+		sqlQuery.setString(1, layoutStr);	
+		sqlQuery.executeUpdate();
+		session.close();		
+	}
 
 }

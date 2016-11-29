@@ -7,59 +7,56 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="temperatesave_view")
+
 public class TemperateSave_View implements Serializable{
 	
-	@Id
-	private int la_id;
-	@Id
-	private String startTime;
-	@Id
-	private String endTime;
-	@Id
-	private String lid;
-	@Id
-	private String lname;
-	@Id
-	private String major_oriented;
 	
-	@Column(name = "landArea")
+	private int la_id;
+	
+	private String startTime;
+	
+	private String endTime;
+	
+	private String lid;
+	
+	private String lname;
+	
+	
 	private int landArea;
 	
-	@Column(name = "afford")
+	
 	private int afford;
 	
-	@Id
+	
 	private String aptPlanting;
 	
-	@Column(name = "buildingArea")
+	
 	private int buildingArea;
 	
-	@Id
+	
 	private String bname;
 	
-	@Column(name = "descp")
+	
 	private String descp;
 	
-	@Column(name = "applicantId")
+	
 	private String applicantId;
 	
-	@Id
+	
 	private int tenancy;
-	@Id
+	
 	private int status;
-	@Id
+	
 	private String planting;
-	@Id
+	
 	private String name;
-	@Id
+	
 	private String college;
 	
-	@Column(name = "resource")
+	
 	private String resource;
 	
-	@Column(name = "applyDept")
+	
 	private int applyDept;
 	
 	
@@ -89,12 +86,7 @@ public class TemperateSave_View implements Serializable{
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	public String getMajor_oriented() {
-		return major_oriented;
-	}
-	public void setMajor_oriented(String major_oriented) {
-		this.major_oriented = major_oriented;
-	}
+
 	public int getLandArea() {
 		return landArea;
 	}
