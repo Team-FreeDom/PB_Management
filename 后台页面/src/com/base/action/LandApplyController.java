@@ -208,14 +208,11 @@ public class LandApplyController {
         
 		int flag=landApplyServiceImpl.submitLandApply(userid,lidList,str,info_str);
 		
-		//将消息值更改
-		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-		int number = Integer.valueOf(noReadNumber)+1;
-		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 
-		String str1 =""+flag+'$'+number ;
+		String str1 =""+flag+'$'+"" ;
 		
 		try {
 			response.getWriter().print(str1);
@@ -410,13 +407,10 @@ public class LandApplyController {
 
 			landApplyServiceImpl.myFameCancel1(la_id,info_str);
 			
-			//将消息值更改
-			String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-			int number = Integer.valueOf(noReadNumber)+1;
-			CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+			
 			
 			flag = true;
-			String str = "[{\"flag\":" + flag +",\"number\":" +number+"}]";
+			String str = "[{\"flag\":" + flag +",\"number\":" +""+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());
