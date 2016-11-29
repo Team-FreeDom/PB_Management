@@ -340,9 +340,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    }
 
 @Override
-public void updateLandApplyDate(String sql) {
+public void updateLandApplyDate(Startplan sp) {
 	// TODO Auto-generated method stub
-	landApplyDaoImpl.updateLandApplyDate(sql);
+	landApplyDaoImpl.updateLandApplyDate(sp);
 	return;
 }
 
@@ -358,6 +358,12 @@ public Startplan getStartPlan(String id){
 	Startplan sp=landApplyDaoImpl.getStartPlan(id);
 	
 	return sp;
+}
+
+public void endStartPlan(){
+	
+	landApplyDaoImpl.endAllRent();	
+	
 }
    
 }

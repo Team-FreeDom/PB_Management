@@ -76,7 +76,7 @@ public interface LandApplyService {
 	 */
 	public void cancelApply(int la_id);
 	
-	public void updateLandApplyDate(String sql);
+	public void updateLandApplyDate(Startplan sp);
 	
 	public List<Startplan> getLandApplyDate();
 	

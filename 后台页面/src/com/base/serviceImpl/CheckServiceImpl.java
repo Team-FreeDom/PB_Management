@@ -61,7 +61,7 @@ public class CheckServiceImpl implements checkService {
 		String insertStr=MessageUtils.getInsertStr(infostr,2);		
 		System.out.println(insertStr);
 		//把审核中的改为待缴费		
-		checkViewDaoImpl.updateStatus(recordstr, 1);		 
+		checkViewDaoImpl.updateStatusP(recordstr, 1);		 
 		
 		//把相同土地的其他申请置为锁定
 		 checkViewDaoImpl.changeSolid(landstr, 4, 2);

@@ -720,16 +720,23 @@ public class LandApplyController {
 		String planstime = request.getParameter("planstime");
 		String planetime = request.getParameter("planetime");
 		
-		String rentstime = request.getParameter("planstime");
-		String rentetime = request.getParameter("planetime");
+		String rentstime = request.getParameter("rentstime");
+		String rentetime = request.getParameter("rentetime");
 		
-		String values = "(\"zl\",\"土地租赁\",\""+planstime+"\",\""+planetime+"\",\""+rentstime+"\",\""+rentetime+"\")";
-		String sql = "insert into Startplan(id,work,applay_start,applay_end,rent_start,rent_end) values"+values+" on duplicate key " +
-				"update applay_start=values(applay_start),applay_end=values(applay_end),rent_start=values(rent_start),rent_end=values(rent_end)";
-
-		System.out.println(sql);
-		landApplyServiceImpl.updateLandApplyDate(sql);
+				
+		Startplan sp =new Startplan("zl","土地租赁",planstime,planetime,rentstime,rentetime);		
+		landApplyServiceImpl.updateLandApplyDate(sp);
 		
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -738,12 +745,44 @@ public class LandApplyController {
 	@RequestMapping("/getLandApplyDate.do")
 	public String getLandApplyDate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
+		String plans="";
+		String plane="";
+		String rents="";
+		String rente="";
+		Startplan sp = landApplyServiceImpl.getStartPlan("zl");
 		
-		List<Startplan> list = landApplyServiceImpl.getLandApplyDate();
-		JSONArray json = JSONArray.fromObject(list.get(0));
+		if(sp!=null){
+		plans=sp.getApply_start();
+		plane=sp.getApply_end();
+		rents=sp.getRent_start();
+		rente=sp.getRent_end();
+		}
+		JSONObject getObj = new JSONObject();
+		getObj.put("planstime",plans);
+		getObj.put("planetime",plane);
+		getObj.put("rentstime",rents);
+		getObj.put("rentetime",rente);
 		response.setContentType("text/html;charset=UTF-8");
 		try {
-			response.getWriter().print(json.toString());
+			response.getWriter().print(getObj.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping("/endLandApply.do")
+	public String endLandApply(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		
+		landApplyServiceImpl.endStartPlan();
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag",true);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(getObj.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

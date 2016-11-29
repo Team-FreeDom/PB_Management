@@ -4,7 +4,7 @@ $(document).ready(function() {
     $.ajax({ //页面加载时自动执行
         type: 'POST',
         dataType: 'json',
-        url: 'getBase_deptInfo.do', ///修改此处
+        url: 'getLandApplyDate.do', ///修改此处
         async: false,
         cache: false,
         error: function(request) {
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
             $.ajax({ //以文本方式提交申请
                 type: 'POST',
-                dataType: 'text',
+                dataType: 'json',
                 data: {
                 	planstime:planstime,
                 	planetime:planetime,
@@ -112,10 +112,12 @@ $(document).ready(function() {
                     return false;
                 }, ///error
                 success: function(data) {
-                        obj.dialog = bootbox.alert({
-                            message: "设置成功！",
-                            size: 'small'
-                        });
+                	if(data.flag){
+                        bootbox.alert({
+                             message: "设置成功！",
+                             size: 'small'
+                         });
+                 	}
                     } //success
             }); //ajax
 
@@ -138,14 +140,17 @@ $(document).ready(function() {
                         data: {
                             "command": "1"
                         },
-                        url: 'submitLandApply.do', //修改此处
+                        url: 'endLandApply.do', //修改此处
                         async: false,
                         cache: false,
                         error: function(request) {
                             alert('网络故障，请稍后重试');
                         }, ///error
                         success: function(data) {
-                                alert('土地租赁工作结束');
+                        	 bootbox.alert({
+                                 message: "土地租赁工作结束！",
+                                 size: 'small'
+                             });
                                 $("#start").show();
                                 $("#set").hide();
                             } //success

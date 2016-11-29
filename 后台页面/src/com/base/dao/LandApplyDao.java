@@ -53,7 +53,7 @@ public interface LandApplyDao {
 	
 	
 	
-	public void updateLandApplyDate(String sql);
+	public void updateLandApplyDate(Startplan sp);
 	
 	
 	public List<Startplan> getLandApplyDate();

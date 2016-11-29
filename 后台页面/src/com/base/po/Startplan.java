@@ -51,6 +51,19 @@ public class Startplan {
 	public void setApply_end(String apply_end) {
 		this.apply_end = apply_end;
 	}
+	public Startplan(String id,String work, String apply_start, String apply_end,
+			String rent_start, String rent_end) {
+		super();
+		this.id = id;
+		this.work=work;
+		this.apply_start = apply_start;
+		this.apply_end = apply_end;
+		this.rent_start = rent_start;
+		this.rent_end = rent_end;
+	}
+	public Startplan() {
+		super();
+	}
 	
 
 }

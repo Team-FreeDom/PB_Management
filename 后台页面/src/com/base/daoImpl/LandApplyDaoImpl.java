@@ -335,16 +335,14 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 
 	@Override
-	public void updateLandApplyDate(String sql) {
+	public void updateLandApplyDate(Startplan sp) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-
-		int i = 0;
+	
 		Transaction t = null;
 		try {
 			t = session.beginTransaction();
-			Query q = session.createSQLQuery(sql);
-			q.executeUpdate();
+			session.saveOrUpdate(sp);
 			t.commit();
 		} catch (Exception ex) {
 			if (t != null) {
@@ -377,7 +375,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
-	@Override
 	public Startplan getStartPlan(String id) {
 		
 		Session session = sessionFactory.openSession();
@@ -397,4 +394,22 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	public void endAllRent(){
+		
+			try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.clear_data()}");
+			
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+		
+	}
+
 }
