@@ -127,10 +127,10 @@ $(document)
 							"click",
 							function() {
 								if ($(this).prop("checked") === true) {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", true);
 								} else {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", false);
 								}
 							});
