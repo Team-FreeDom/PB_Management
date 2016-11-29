@@ -39,6 +39,7 @@ import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
 import com.base.po.RentCollection;
+import com.base.po.Startplan;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
@@ -709,4 +710,41 @@ public class LandApplyController {
 
 	}
 
+	//修改或更新租赁开始时间
+	@RequestMapping("/updateLandApplyDate.do")
+	public String updateLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		String planstime = request.getParameter("planstime");
+		String planetime = request.getParameter("planetime");
+		
+		String rentstime = request.getParameter("planstime");
+		String rentetime = request.getParameter("planetime");
+		
+		String values = "(\"zl\",\"土地租赁\",\""+planstime+"\",\""+planetime+"\",\""+rentstime+"\",\""+rentetime+"\")";
+		String sql = "insert into Startplan(id,work,applay_start,applay_end,rent_start,rent_end) values"+values+" on duplicate key " +
+				"update applay_start=values(applay_start),applay_end=values(applay_end),rent_start=values(rent_start),rent_end=values(rent_end)";
+
+		System.out.println(sql);
+		landApplyServiceImpl.updateLandApplyDate(sql);
+		
+		return null;
+	}
+	
+	
+	//获取租赁开始时间
+	@RequestMapping("/getLandApplyDate.do")
+	public String getLandApplyDate(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		
+		List<Startplan> list = landApplyServiceImpl.getLandApplyDate();
+		JSONArray json = JSONArray.fromObject(list.get(0));
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			response.getWriter().print(json.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

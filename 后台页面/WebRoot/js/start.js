@@ -101,17 +101,20 @@ $(document).ready(function() {
                 });
                 return false;
             }
-            var str = '';
-            str = '{planstime:"' + planstime + '",planetime:"' + planetime + '",rentstime:"' + rentstime + '",rentetime:"' + rentetime + '"}';
+            //var str = '';
+            //str = '{planstime:"' + planstime + '",planetime:"' + planetime + '",rentstime:"' + rentstime + '",rentetime:"' + rentetime + '"}';
             ////数据格式{planstime:"2016-12-1",planetime:"2016-12-30",rentstime:"2016-12-30",rentetime:"2017-12-30"}//////////
 
             $.ajax({ //以文本方式提交申请
                 type: 'POST',
                 dataType: 'text',
                 data: {
-                    "str": str
+                	planstime:planstime,
+                	planetime:planetime,
+                	rentstime:rentstime,
+                	rentetime:rentetime
                 },
-                url: 'submitLandApply.do', //修改此处
+                url: 'updateLandApplyDate.do', //修改此处
                 async: false,
                 cache: false,
                 error: function(request) {

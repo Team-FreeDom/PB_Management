@@ -17,11 +17,13 @@ import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandApplyDao;
+import com.base.po.Admin;
 import com.base.po.College;
 import com.base.po.LandApply;
 import com.base.po.RentAdd;
 import com.base.po.RentCollection;
 import com.base.po.RentMaintain;
+import com.base.po.Startplan;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("landApplyDao")
@@ -330,5 +332,48 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		}			
 	    
 		return flag;
+	}
+
+	@Override
+	public void updateLandApplyDate(String sql) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+
+		int i = 0;
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			Query q = session.createSQLQuery(sql);
+			q.executeUpdate();
+			t.commit();
+		} catch (Exception ex) {
+			if (t != null) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public List<Startplan> getLandApplyDate() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		List<Startplan> list = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			list = query.list();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return list;
+		
 	}
 }
