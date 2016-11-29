@@ -1,5 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
+@charset "utf-8";
+/* CSS Document */
+
 table thead > tr> td{
 	
 	font-size:16px;
@@ -10,34 +13,18 @@ table thead > tr> td{
     background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
     background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
 	}
-table thead tr th{
+table thead > tr> th{
 	text-align:center;}
-table tbody tr td{
-	text-align:center;}
-	
-tbody tr td span{
+#button-right button{
+	float:right;
+	margin-left:5px;}
+#button-left button{
+	margin-right:5px;}
+#sex-style input{
+	width:20px;}
+.input-style input{
 	cursor:pointer;}
-.dropdown_show li{
-	position:relative;
-	list-style:none;
-	}
-.dropdown_show li span{
-	cursor:pointer;
-	}
-.dropdown_show ul li{
-	list-style:none;
-	position:absolute;
-	top:35px;
-	left:0px;
-	width:102%;
-	}	
-.dropdown_show ul li table tr td{
-	color:#000;
-	font-size:14px;
-	background:#d6dfe9;
-	border:none !important;}
-/*#topPlugin{
-	display:inline;}*/
+
 .bottom{
 	margin-top:10px;
 	}
@@ -52,10 +39,6 @@ tbody tr td span{
 	width:140px;}
 .modal{
 	margin-top:5%;}
-#topPlugin{
-	margin-top:10px;
-	}
-/*#rent-approve-table1_info{
-	margin-left:15%;}*/
-#rent-approve-table2_info{
-	margin-left:15%;}
+
+
+

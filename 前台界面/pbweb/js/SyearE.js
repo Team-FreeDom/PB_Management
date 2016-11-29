@@ -17,7 +17,7 @@ YMDselect.SetY=function(YMD){
 	dCurYear = dDate.getFullYear();
 	YMD.SelY.options.add(new Option(SYT,'0'));
 	for(i = dCurYear+AYN; i>(dCurYear-BYN); i--){
-		YMDYT=i+'年';
+		YMDYT=i;
 		YMDYV=i;
 		OptY = new Option(YMDYT,YMDYV);
 		YMD.SelY.options.add(OptY);
@@ -33,7 +33,7 @@ YMDselect.SetM=function(YMD){
 		var index=myselect.selectedIndex ; 
 		var b=parseInt(myselect.options[index].text);
 		for(var i=1;i<=12;i++){
-			YMDMT=b+i+'年';
+			YMDMT=b+i;
 			YMDMV=b+i;
 			OptM=new Option(YMDMT,YMDMV);
 			YMD.SelM.options.add(OptM);
