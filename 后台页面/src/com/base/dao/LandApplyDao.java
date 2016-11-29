@@ -57,5 +57,7 @@ public interface LandApplyDao {
 	
 	
 	public List<Startplan> getLandApplyDate();
+	
+	public Startplan getStartPlan(String id);
 
 }

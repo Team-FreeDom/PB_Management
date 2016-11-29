@@ -6,7 +6,6 @@ import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandInfo;
 import com.base.po.LandLayout;
-
 import com.base.po.Startplan;
 
 
@@ -80,6 +79,8 @@ public interface LandApplyService {
 	public void updateLandApplyDate(String sql);
 	
 	public List<Startplan> getLandApplyDate();
+	
+	public Startplan getStartPlan(String id);
 
 }
  

@@ -80,10 +80,8 @@ public class UserController{
 				userInfoservice.update(id,name,telephone,possword,filename);
 				}
 		}	
-			
-		String image= CookieUtils.getCookieImage(request, response);
-		
-		CookieUtils.addCookie("image", image, response);
+				
+		CookieUtils.addCookie("image", filename, response);
 		
 	        return "user";
 	        }

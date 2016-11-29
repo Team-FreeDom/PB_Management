@@ -376,4 +376,25 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		return list;
 		
 	}
+	
+	@Override
+	public Startplan getStartPlan(String id) {
+		
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		Startplan sp = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			sp = (Startplan) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return sp;
+		
+	}
+	
 }

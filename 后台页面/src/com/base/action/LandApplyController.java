@@ -79,10 +79,13 @@ public class LandApplyController {
 
 		List<BaseInfo> list1 = landApplyServiceImpl.getBaseInfos();
 		List<ApplyDept> list2= landApplyServiceImpl.getDepts();
+		Startplan sp=landApplyServiceImpl.getStartPlan("zl");
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("base",list1);
 		getObj.put("xy",list2);
+		getObj.put("stime", sp.getRent_start());
+		getObj.put("etime",sp.getRent_end());
 		
 		response.setContentType("text/html;charset=UTF-8");
 

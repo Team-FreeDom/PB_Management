@@ -351,5 +351,13 @@ public List<Startplan> getLandApplyDate() {
 	// TODO Auto-generated method stub
 	return landApplyDaoImpl.getLandApplyDate();
 }
+
+@Override
+public Startplan getStartPlan(String id){
+	
+	Startplan sp=landApplyDaoImpl.getStartPlan(id);
+	
+	return sp;
+}
    
 }
