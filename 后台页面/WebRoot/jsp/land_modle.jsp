@@ -3,7 +3,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>湖南微课网-教师中心</title>
+<title>湖南农业大学基地管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -72,11 +72,11 @@
 					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
 						<!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>    
+                          </li>
                           <li class="dropdown-menu-footer text-center">
                               <a href="getMessage.do">更多消息</a>
                           </li>
@@ -160,7 +160,7 @@
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
@@ -216,7 +216,7 @@
 									  <option value="" id="load-gridh" >请选择</option>
 										<!-- <option value="1">长安基地</option>
 										<option value="2">耕耘基地</option> -->
-										
+
 									</select>
 								</div>
 							</div>
@@ -273,7 +273,7 @@
 									<label for="inputname" class="col-sm-3 control-label">土地面积：</label>
 									<div class="col-sm-6">
 										<input type="text" class="form-control" id="tudi_landArea"
-											placeholder="单位：平方">
+											placeholder="单位：亩">
 									</div>
 								</div>
 								<div class="form-group">
@@ -332,10 +332,10 @@
 	<script src="../dist/gridstack.js"></script>
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../dist/bootbox.min.js"></script>
-	<script src="../js/tu.js"></script>	
-	<script src="../dist/jquery.cokie.min.js"></script>    
+	<script src="../js/tu.js"></script>
+	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/kg.js"></script>
-	
-	
+
+
 </body>
 </html>

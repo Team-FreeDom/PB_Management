@@ -197,7 +197,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="index.do"> <i class=" icon-home"></i>首页
+							<li><a href="newlist.do"> <i class=" icon-home"></i>新闻列表
 							</a></li>
 						</ol>
 					</div>
@@ -227,14 +227,14 @@
 								class="list-group-item">Morbi leo risus</a> <a href="#"
 								class="list-group-item">Porta ac consectetur ac</a> <a href="#"
 								class="list-group-item">Vestibulum at eros</a> -->
-								<a class="list-group-item active"> 公告列表 </a> 
+								<a class="list-group-item active"> 公告列表 </a>
 								 <c:forEach items='${notifications}' var='notification'>
-                                   
+
                                        <a href="newdetail.do?id=${notification.id }"	class="list-group-item">${notification.title }</a>
-						
+
                                  </c:forEach>
-						
-						
+
+
 						</div>
 					</div>
 					<div class="col-lg-12">
@@ -329,7 +329,7 @@
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/kg.js"></script>
  <script>
-    
+
     function jumpTo(maxPage){
     var page = $("#jumpTo").val();
     if(page > maxPage || page < 1){
@@ -338,6 +338,6 @@
         $('body').load('newlist.do?page=' + page);
     }
     }
-    </script> 
+    </script>
 </body>
 </html>

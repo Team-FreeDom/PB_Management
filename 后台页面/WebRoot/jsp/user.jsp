@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>湖南农业大学基地管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -40,10 +40,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
               <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
-      
+
           <span class="teachCenterTitle">基地管理系统</span>
           <!-- Navbar Left -->
-    
+
           <!-- Navbar Right -->
           <div class="navbar-right">
               <!-- Notifications -->
@@ -52,16 +52,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
                      <!--  <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>    
+                          </li>
                           <li class="dropdown-menu-footer text-center">
                               <a href="getMessage.do">更多消息</a>
                           </li>
                       </ul> -->
-    
+
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       </a>
                   </li>
               </ul>
-    
+
               <!-- End Notifications -->
           </div>
           <!-- End Navbar Right -->
@@ -80,14 +80,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div class="container-fluid content">
     	<div class="row">
-        	
+
         	<div class="sidebar">
 					<div class="sidebar-collapse">
 						<!-- Sidebar Header Logo-->
 						<div class="sidebar-header ">
 							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
 						</div>
-						
+
 						<!-- Sidebar Menu-->
 						<div class="sidebar-menu" style="height: 384px;">
 							<nav id="menu" class="nav-main" role="navigation">
@@ -98,21 +98,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i> 
+											<i class="icon-circle text-success"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>
 									</div>
 									<div class="divider2"></div>
-									
-									
+
+
 									<li class="menuItem">
 										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
-										
+
 									</li>
-									
+
 									 <li class="menuItem nav-parent">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -161,8 +161,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<li><a href="#"><span class="text">实习分析</span></a></li>
 											<li><a href="#"><span class="text">实习基地统计</span></a></li>
 										</ul>
-									</li>									
-									
+									</li>
+
 								</ul>
 							</nav>
 						</div>
@@ -175,9 +175,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<!-- End Sidebar Footer-->
-				</div>   <!-- End Sidebar--> 
-		        
-                
+				</div>   <!-- End Sidebar-->
+
+
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
 					<div class="page-header">
@@ -197,47 +197,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<!-- 主面板内容 -->
-					
+
 					<div class="row form">
-					
-                    	<form action="Userupdata.do" method="post" role="form" id="userform" enctype="multipart/form-data">  
-                    	            	
-							<div class="col-md-6  col-md-offset-2 form-group xgarea form-horizontal">	
-							  						
+
+                    	<form action="Userupdata.do" method="post" role="form" id="userform" enctype="multipart/form-data">
+
+							<div class="col-md-6  col-md-offset-2 form-group xgarea form-horizontal">
+
                               <div class="form-group jianju text-left">
                                 <label for="inputEmail3" class="col-sm-2 control-label">姓  名</label>
                                 <div class="col-sm-8">
                                   <input type="text" class="form-control" name="name" id="Name">
                                 </div>
                               </div>
-                              
+
                               <div class="form-group jianju">
                                 <label for="inputEmail3" class="col-sm-2 control-label">联系电话</label>
                                 <div class="col-sm-8">
                                   <input type="text" class="form-control" name="telephone" id="TelePhone">
                                 </div>
-                              </div>                              
+                              </div>
                               <div class="form-group jianju">
                                 <label for="inputEmail3" class="col-sm-2 control-label">密码修改</label>
                                 <div class="col-sm-8">
                                   <input type="password" class="form-control" id="possword" name="possword" >
                                 </div>
                               </div>
-                              
+
                               <div class="form-group jianju">
                                 <label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
                                 <div class="col-sm-8">
                                   <input type="password" class="form-control" id="repossword" onBlur="password()">
                                 </div>
-                              </div>                                                                                       
+                              </div>
                               <div class="form-group jianju" >
                                 <div class="col-sm-offset-5 col-sm-5" id="lastxg">
                                    <button type="submit" class="btn btn-success" id="submit">确认修改</button>
                                   <button type="reset" class="btn btn-danger">重置</button>
                                 </div>
-                              </div> 
-                                                        
-						</div>                       
+                              </div>
+
+						</div>
                         <div class="col-md-3">
                         	<div class="form-group">
                                 <div class="col-sm-10">
@@ -246,31 +246,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  </div>
                                   <div style="margin:20px 18px;">
                                   <label class="btn btn-primary" for="file" >浏览头像</label>
-								  <input type="file" name="img" onchange="previewImage(this)" id="file" style="position:absolute;clip:rect(0 0 0 0);" >                           
+								  <input type="file" name="img" onchange="previewImage(this)" id="file" style="position:absolute;clip:rect(0 0 0 0);" >
                                   </div>
                                 </div>
                               </div>
-                               
+
                         </div>
-                       
+
                         </form>
-                       
+
 					</div>
-					
-				</div><!-- End Sidebar-->                 
-                 
-                 
-            
+
+				</div><!-- End Sidebar-->
+
+
+
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    
+
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-     <script src="../dist/jquery.cokie.min.js"></script> 
+     <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>
     <script src="../js/user.js"></script>
@@ -297,7 +297,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 	});
 
-    
+
     </script>
   </body>
 </html>
