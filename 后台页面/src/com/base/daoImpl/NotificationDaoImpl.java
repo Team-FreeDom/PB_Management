@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -53,19 +54,7 @@ public class NotificationDaoImpl implements NotificationDao {
 	@Override
 	public List getNotificationInfo(String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
-		/*Session session = sessionFactory.openSession();
-		String hql = "from Notification";
-		List<Notification> notificationList = null;
-		try {
-			Query query = session.createQuery(hql);
-			notificationList = query.list();
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			session.close();
-		}*/
-		
+				
 		Connection conn=null;
 		CallableStatement sp=null; 
 		ResultSet rs=null;
@@ -93,8 +82,11 @@ public class NotificationDaoImpl implements NotificationDao {
 				listNews.add(notification);
 			}
 			
-			list.add(listNews);
-			list.add(maxItems);
+			//如果新闻列表不为空才添加到List
+			if(CollectionUtils.isNotEmpty(listNews)){
+			   list.add(listNews);
+			   list.add(maxItems);
+			}
 			
 		} catch (SQLException e)
 		{
@@ -142,20 +134,7 @@ public class NotificationDaoImpl implements NotificationDao {
 	@Override
 	public List getMessageInfos(String userid,String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
-		/*Session session = sessionFactory.openSession();
-		String hql = "from Message where userid='" + userid + "' order by time desc limit "+currentPage+","+Integer.valueOf(currentPage)+10;
-		List<Message> list = null;
-
-		try {
-			Query query = session.createQuery(hql);
-			list = query.list();
-
-		} catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			session.close();
-		}*/
-		
+			
 		//转入JDBC模式
 				Connection conn=null;
 				CallableStatement sp=null; 
@@ -192,10 +171,11 @@ public class NotificationDaoImpl implements NotificationDao {
 						messagelist.add(me);
 					}
 					
-					list.add(messagelist);
-					list.add(maxItems);
-					
-					
+					//如果消息列表不为空才添加到List
+					if(CollectionUtils.isNotEmpty(messagelist)){
+					   list.add(messagelist);
+					   list.add(maxItems);
+					}
 				} catch (SQLException e)
 				{
 					// TODO Auto-generated catch block

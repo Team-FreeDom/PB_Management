@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -322,7 +323,7 @@ public class LandApplyController {
 	@RequestMapping("/myRentdetail.do")
 	public String myRentdetail(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println(request.getParameter("来到myRentdetail.do"));
+		//System.out.println(request.getParameter("来到myRentdetail.do"));
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 
 		List<LandApply_view> list = null;
@@ -397,17 +398,15 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("cancel1");
+		//System.out.println("cancel1");
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 		String info_str=request.getParameter("info_str");
-		System.out.println(info_str);
+		//System.out.println(info_str);
 		
 		boolean flag = false;
 		try {
 
 			landApplyServiceImpl.myFameCancel1(la_id,info_str);
-			
-			
 			
 			flag = true;
 			String str = "[{\"flag\":" + flag +",\"number\":" +""+"}]";

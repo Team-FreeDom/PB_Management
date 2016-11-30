@@ -45,13 +45,13 @@ $(document).ready(function() {
 			},
 			async : false,
 			cache : false,
-			error : function(request) {
+			error : function() {
 				bootbox.alert({
 					message : "发布通知失败",
 					size : 'small'
 				});
 			},
-			success : function(em) {
+			success : function() {
 				bootbox.alert({
 					message : "发布通知成功",
 					size : 'small'

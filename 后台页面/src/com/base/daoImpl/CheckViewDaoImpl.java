@@ -105,7 +105,7 @@ public class CheckViewDaoImpl {
 	public CheckList getLandApply(int id, int pageindex, int size,
 			String basename, String username, String usercollage)
 			throws SQLException {
-		CheckList ck = new CheckList();
+		
 		List<CheckView> list = new ArrayList<CheckView>();
 		int recordsTotal = 0;
 		Connection conn = null;
@@ -150,6 +150,8 @@ public class CheckViewDaoImpl {
 		} finally {
 			SqlConnectionUtils.free(conn, sp, rs);
 		}
+		
+		CheckList ck = new CheckList();
 		ck.setRecordsTotal(recordsTotal);
 		ck.setData(list);
 		return ck;
