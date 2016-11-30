@@ -193,6 +193,7 @@
 										<th>开始日期</th>
 										<th>租期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>状态</th>
 										<th>操作</th>
@@ -325,17 +326,17 @@
 										style="background:#4D719B; color:#FFF">
 										<button type="button" class="close" data-dismiss="modal"
 											aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel"></h4>
+										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
 										<h5>您确定要删除吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!--
+										
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                     -->
+                    
 										<button type="button" class="btn btn-primary" id="delSubmit">
 											确认</button>
 									</div>
@@ -618,6 +619,7 @@
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>最终状态期</th>
 										<th>详情</th>

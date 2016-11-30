@@ -256,7 +256,7 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 
@@ -264,8 +264,9 @@
 											<th>开始日期</th>
 											<th>结束日期
 											</td>
-											<th>基地名</th>
+											<th>基地名</th>											
 											<th>土地编号</th>
+											<th>土地名称</th>
 											<th>申请人</th>
 											<th>申报部门
 											</td>
@@ -406,22 +407,19 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 											<th>序号</th>
 											<th>开始日期</th>
-											<th>结束日期
-											</td>
-											<th>基地名</th>
+											<th>结束日期</th>
+											<th>基地名</th>											
 											<th>土地编号</th>
+											<th>土地名称</th>
 											<th>申请人</th>
-											<th>申报部门
-											</td>
-											<th>已租用次数
-											</td>
-											<th>种植内容
-											</td>
+											<th>申报部门</th>
+											<th>已租用次数</th>
+											<th>种植内容</th>
 
 										</tr>
 									</thead>

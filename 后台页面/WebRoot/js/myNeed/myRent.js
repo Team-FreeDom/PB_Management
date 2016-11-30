@@ -39,10 +39,16 @@ $(document).ready(function() {
 													"sWidth" : "6%"
 												},
 												{
+													"mData" : "lname",
+													"orderable" : false, // 禁用排序
+													"sDefaultContent" : "",
+													"sWidth" : "10%"
+												},
+												{
 													"mData" : "lid",
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%"
+													"sWidth" : "6%"
 												},
 												{
 													"mData" : "descp",
@@ -174,6 +180,12 @@ $(document).ready(function() {
 											"orderable" : false, // 禁用排序
 											"sDefaultContent" : "",
 											"sWidth" : "10%"
+										},
+										{
+											"mData" : "lname",
+											"orderable" : true, // 禁用排序
+											"sDefaultContent" : "",
+											"sWidth" : "8%"
 										},
 										{
 											"mData" : "lid",
@@ -348,6 +360,12 @@ $(document).ready(function() {
 													},
 													{
 														"mData" : "bname",
+														"orderable" : false, // ��������
+														"sDefaultContent" : "",
+														"sWidth" : "10%"
+													},
+													{
+														"mData" : "lname",
 														"orderable" : false, // ��������
 														"sDefaultContent" : "",
 														"sWidth" : "10%"

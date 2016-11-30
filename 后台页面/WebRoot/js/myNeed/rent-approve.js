@@ -51,12 +51,21 @@ $(document)
 									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
-								}, {
+								}, 
+								
+								{
 									"mData" : "li",
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "10%"
-								}, {
+								},
+								{
+									"mData" : "landname",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
+								},
+								{
 									"mData" : "username",
 									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
@@ -745,11 +754,18 @@ $(document)
 									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
-								}, {
+								},
+								
+								{
 									"mData" : "li",
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "10%"
+								},{
+									"mData" : "landname",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
 								}, {
 									"mData" : "username",
 									"orderable" : true, // 禁用排序
@@ -865,8 +881,14 @@ $(document)
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
 																	},
+																	
 																	{
 																		"mData" : "li",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
+																	},{
+																		"mData" : "landname",
 																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "10%"
@@ -997,6 +1019,12 @@ $(document)
 																		"orderable" : true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
+																	},
+																	{
+																		"mData" : "landname",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
 																	},
 																	{
 																		"mData" : "li",

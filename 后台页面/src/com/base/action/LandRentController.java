@@ -183,9 +183,13 @@ public class LandRentController<E> {
 		String dept=request.getParameter("dept");	
 		System.out.println(dept);
 		List<RentMaintain> list =landRentServiceImpl.getSingleRentInfo(null,dept);
-	
-		
-		ExcelReport er=new ExcelReport();
+	   
+		/*if(list.size()==0){
+			 System.out.println("ee");
+			return null;
+		}*/
+		System.out.println("hh");
+		ExcelReport er=new ExcelReport();		
 		er.landRentPreserveReport(list);
 		
 		
@@ -219,10 +223,15 @@ public class LandRentController<E> {
 	public String landManageUpdate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws Exception {	
 		
-		
+		int expense=0;
+		String fee=request.getParameter("expense");
 		int deptSelect=Integer.valueOf(request.getParameter("deptSelect"));		
 		String planCareer=request.getParameter("planCareer");
-		int expense=Integer.valueOf(request.getParameter("expense"));		
+		if(fee!=null&&!fee.equals("")){
+			
+		 expense=Integer.valueOf(fee);	
+		
+		}
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
 		int lr_id=Integer.valueOf(request.getParameter("lr_id"));

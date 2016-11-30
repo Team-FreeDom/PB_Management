@@ -409,7 +409,7 @@ public class LandApplyController {
 			landApplyServiceImpl.myFameCancel1(la_id,info_str);
 			
 			flag = true;
-			String str = "[{\"flag\":" + flag +",\"number\":" +""+"}]";
+			String str = "[{\"flag\":" + flag+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());
