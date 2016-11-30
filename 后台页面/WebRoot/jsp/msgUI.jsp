@@ -207,7 +207,8 @@
                                     <c:choose>
                                            <c:when test="${message.isRead==0}">
                                            <tr>
-                                              <td>${message.id}</td>
+                                              <td style="display:none;">${message.id}</td>
+                                              <td>${message.sn} </td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>
@@ -215,7 +216,8 @@
                                            </c:when >
                                            <c:when test="${message.isRead!=0}">
                                               <tr class="read">
-                                              <td>${message.id}</td>
+                                              <td style="display:none;">${message.id}</td>
+                                              <td>${message.sn} </td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>

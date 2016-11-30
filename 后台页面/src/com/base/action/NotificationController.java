@@ -1,29 +1,19 @@
 package com.base.action;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.base.po.Admin;
-import com.base.po.AdminFunction;
 import com.base.po.ApplyDept;
-import com.base.po.Message;
+import com.base.po.MessageShow;
 import com.base.po.Notification;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.serviceImpl.NotificationServiceImpl;
@@ -87,7 +77,7 @@ public class NotificationController {
 		if (list != null){
 			map.addAttribute("notifications", list.get(0));
 				
-			int maxItems = (Integer) list.get(1); // 获取最大记录数
+			int maxItems = (Integer) list.get(1);  // 获取最大记录数
 			map.addAttribute("page", currentPage); // 返回当前页码
 	        int maxPage=0;
 			System.out.println(maxItems);
@@ -144,16 +134,17 @@ public class NotificationController {
 		int itemsPerPage = 10;
 
 		String userid = CookieUtils.getCookieUsername(request, response);
-		List<Message> messageList = null;
+		List<MessageShow> messageList = null;
 		List list = null;
 		// System.out.println(userid);
 		if (userid != "")
 			list = notificationServiceImpl.getMessageInfos(userid, currentPage,
 					String.valueOf(itemsPerPage));
 
-		if (list != null) {
-			map.addAttribute("messageList", list.get(0)); // 展示的消息列表
-
+		if (list.get(0) != null) {
+			messageList = (List<MessageShow>) list.get(0);
+			map.addAttribute("messageList", messageList); // 展示的消息列表
+					
 			int maxItems = (Integer) list.get(1); // 获取最大记录数
 			map.addAttribute("page", currentPage); // 返回当前页码
 			int maxPage=0;
