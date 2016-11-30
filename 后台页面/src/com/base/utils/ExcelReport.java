@@ -584,7 +584,7 @@ public class ExcelReport{
 	 * 
 	 * @see com.base.service.ExcelReportService#systemUsersPreserveReport()
 	 */
-	public void exportPersonInfo(List<Manger> list) {
+	public void exportPersonInfo(List<Manger> list,String fileName) {
 		// 列头信息
 		/*"序号", "员工编号", "身份属性", "姓名", "性别", "员工类型",
 		"出生日期", "身份证号码", "联系电话", "部门", "原工作单位", "来校工作时间", "参加工作时间",
@@ -760,7 +760,7 @@ public class ExcelReport{
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
-		File file = new File("E://PersonInfo.xlsx");
+		File file = new File(fileName);
 		try {
 			file.createNewFile();
 			FileOutputStream stream = FileUtils.openOutputStream(file);

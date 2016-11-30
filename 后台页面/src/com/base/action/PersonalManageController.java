@@ -271,11 +271,14 @@ public class PersonalManageController {
 				dept=null;
 			}
 			List<Manger> list = userinfoservice.exportPersonInfo(dept);
+			String path = request.getSession().getServletContext()
+					.getRealPath("/upload/");
+			String fullFileName = path+"/PersonInfo.xlsx";
 			ExcelReport export=new ExcelReport();
-			export.exportPersonInfo(list);
+			export.exportPersonInfo(list,fullFileName);
 			String filename = "湖南农业大学人员信息表";
+			//System.out.println(fullFileName);
 			
-			String fullFileName = "E://PersonInfo.xlsx";
 			// 显示中文文件名
 			response.setContentType("application/octet-stream;charset=UTF-8");
 			try {
