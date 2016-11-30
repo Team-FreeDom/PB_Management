@@ -128,8 +128,7 @@ public class LandRentController<E> {
 		getObj.put("recordsTotal",str.getRecordsTotal());
 		getObj.put("data",str.getData());	
 		response.setContentType("text/html;charset=UTF-8");
-
-		response.setContentType("text/html;charset=UTF-8");
+	
 
 		try {
 			response.getWriter().print(getObj.toString());
@@ -235,8 +234,8 @@ public class LandRentController<E> {
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
 		int lr_id=Integer.valueOf(request.getParameter("lr_id"));
-		
-		System.out.println(deptSelect+" "+planCareer+" "+expense+"  "+startTime+"  "+endTime+"  "+lr_id);
+		//System.out.println(deptSelect+" "+planCareer+" "+expense+"  "+startTime+"  "+endTime+"  "+lr_id);
+		System.out.println(lr_id);
 		landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
 		
 		
