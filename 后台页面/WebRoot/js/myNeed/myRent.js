@@ -623,8 +623,7 @@ $(document).ready(function() {
 							dataType : "json",
 							cache : false,
 							success : function(data) {
-								
-								$(".msg").html(data[0].number);
+																
 								if (data[0].flag) {
 									window.location.reload();
 								} else {

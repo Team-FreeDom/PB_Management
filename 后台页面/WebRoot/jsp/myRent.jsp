@@ -4,7 +4,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>我的租赁</title>
+<title>湖南农业大学基地管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -48,11 +48,11 @@
 					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
 						<!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>    
+                          </li>
                           <li class="dropdown-menu-footer text-center">
                               <a href="getMessage.do">更多消息</a>
                           </li>
@@ -136,7 +136,7 @@
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
@@ -168,7 +168,7 @@
 				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a>位置</a></li>							
+							<li><a>位置</a></li>
 							<li><a href="myRent.jsp">我的租赁</a></li>
 						</ol>
 					</div>
@@ -299,7 +299,7 @@
 										<h5>您确定要撤销吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!-- 
+										<!--
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
@@ -331,7 +331,7 @@
 										<h5>您确定要删除吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!-- 
+										<!--
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
@@ -363,11 +363,11 @@
 										<h5>您确定要提交吗？</h5>
 									</div>
 									<div class="modal-footer">
-										
+
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                    
+
 										<button type="button" class="btn btn-primary"
 											id="SubmitTemperate">确认</button>
 									</div>
@@ -518,8 +518,8 @@
 											<tr>
 
 												<td colspan="3">
-												
-												
+
+
 											<center>
                                             <div class="form-group" style="position:relative">
                                                 <input type="file"  style=" position:absolute; left:25%" name="fileResource">
@@ -527,8 +527,8 @@
                                             </div>
                                             </center>
 
-												
-												
+
+
 													<!-- <div style="float:right;">
 
 														 <form enctype="multipart/form-data">
@@ -536,7 +536,7 @@
 															type="file" multiple data-min-file-count="1">
 														 </form>
 													</div> -->
-													
+
 												</td>
 											</tr>
 										</table>
@@ -591,7 +591,7 @@
 																		</td>
 																	</tr>
 																	<tr>
-																		
+
 																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
 																			size="1">
 																				<option value="-1">显示全部</option>
@@ -614,7 +614,7 @@
 											</ul>
 									</tr>
 									<tr style="background:#eeeff4">
-										
+
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
@@ -686,7 +686,7 @@
 									>
 									<center  id="scanModal" style="display:none;">
 									<span>	失败原因：<input type="text" id="reason2" readonly></span>
-										
+
 									<%-- </center>申请材料：<a id="source" href="#">点击查看</a> --%>
 								</div>
 
@@ -704,7 +704,7 @@
 		<!--row end-->
 	</div>
 	<div class="clearfix"></div>
-	
+
 
 </body>
 
@@ -722,6 +722,6 @@
     <![endif]-->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
- <script src="../dist/jquery.cokie.min.js"></script>    
+ <script src="../dist/jquery.cokie.min.js"></script>
 <script src="../js/kg.js"></script>
 </html>

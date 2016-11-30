@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.base.dao.NotificationDao;
 import com.base.po.Admin;
 import com.base.po.Message;
+import com.base.po.MessageShow;
 import com.base.po.Notification;
 import com.base.utils.SqlConnectionUtils;
 
@@ -173,16 +174,21 @@ public class NotificationDaoImpl implements NotificationDao {
 					int maxItems=sp.getInt(4);//接收输出参数
 					//接收结果集
 					rs=sp.getResultSet();   //获得结果集
-					List<Message> messagelist=new ArrayList<Message>();//定义一个相应类型的list集合去接受
+					
+					//messagelist列表不是完全保存到 message对象，还增加了一个属性sn,用于显示当前的消息的序号
+					int sn= (Integer.valueOf(currentPage)-1)*10;
+					List<MessageShow> messagelist=new ArrayList<MessageShow>();//定义一个相应类型的list集合去接受
 					while(rs.next())
 					{
-						Message me=new Message();
+						MessageShow me=new MessageShow();
 						me.setId(rs.getInt("id"));
 						me.setContent(rs.getString("content"));
 						me.setIsRead(rs.getInt("isRead"));
 						me.setTime(rs.getString("time"));
 						me.setTitle(rs.getString("title"));
 						me.setUserid(rs.getString("userid"));
+						sn++; //有一条记录就编一个序号，序号从1开始升序排列
+						me.setSn(sn);
 						messagelist.add(me);
 					}
 					

@@ -1,29 +1,19 @@
 package com.base.action;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.base.po.Admin;
-import com.base.po.AdminFunction;
 import com.base.po.ApplyDept;
-import com.base.po.Message;
+import com.base.po.MessageShow;
 import com.base.po.Notification;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.serviceImpl.NotificationServiceImpl;
@@ -79,24 +69,29 @@ public class NotificationController {
 			currentPage = "1";
 		
 		// 每页有多少行，这里固定为每页10行
-		String itemsPerPage = request.getParameter("itemsPerPage");
-		itemsPerPage = "10";
+		//String itemsPerPage = request.getParameter("itemsPerPage");
+		int itemsPerPage = 10;
 		List list = notificationServiceImpl
-				.getNotificationInfo(currentPage, itemsPerPage);
-		System.out.println("getNotification");
+				.getNotificationInfo(currentPage, String.valueOf(itemsPerPage));
+		//System.out.println("getNotification");
 		if (list != null){
 			map.addAttribute("notifications", list.get(0));
-			
-		
-			int maxItems = (Integer) list.get(1); // 获取最大记录数
+				
+			int maxItems = (Integer) list.get(1);  // 获取最大记录数
 			map.addAttribute("page", currentPage); // 返回当前页码
-			map.addAttribute("totalPages",
-					maxItems / Integer.valueOf(itemsPerPage) + 1);// 返回最大页数
+	        int maxPage=0;
+			System.out.println(maxItems);
 			
+			if(maxItems%itemsPerPage==0)//判断是否最大记录是每页记录的整数倍
+				maxPage = maxItems/itemsPerPage;
+			else
+				maxPage = maxItems/itemsPerPage+1;
+			System.out.println(maxPage);
+			map.addAttribute("totalPages",maxPage);// 返回最大页数
 			
 			//下面计算分页的起始页码，最多显示10页
 			List pageList = new ArrayList();
-			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxItems / Integer.valueOf(itemsPerPage) + 1, 5);
+			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxPage, 5);
 			
 			for (int i = (Integer) tempList.get(0); i <= (Integer)tempList.get(1); i++)   
 			    	 pageList.add(i);
@@ -135,29 +130,35 @@ public class NotificationController {
 		if (currentPage == null)
 			currentPage = "1";
 		// 每页有多少行，这里固定为每页10行
-		String itemsPerPage = request.getParameter("itemsPerPage");
-		itemsPerPage = "10";
+		//String itemsPerPage = request.getParameter("itemsPerPage");
+		int itemsPerPage = 10;
 
 		String userid = CookieUtils.getCookieUsername(request, response);
-		List<Message> messageList = null;
+		List<MessageShow> messageList = null;
 		List list = null;
 		// System.out.println(userid);
 		if (userid != "")
 			list = notificationServiceImpl.getMessageInfos(userid, currentPage,
-					itemsPerPage);
+					String.valueOf(itemsPerPage));
 
-		if (list != null) {
-			map.addAttribute("messageList", list.get(0)); // 展示的消息列表
-
+		if (list.get(0) != null) {
+			messageList = (List<MessageShow>) list.get(0);
+			map.addAttribute("messageList", messageList); // 展示的消息列表
+					
 			int maxItems = (Integer) list.get(1); // 获取最大记录数
 			map.addAttribute("page", currentPage); // 返回当前页码
-			map.addAttribute("totalPages",
-					maxItems / Integer.valueOf(itemsPerPage) + 1);// 返回最大页数
+			int maxPage=0;
 			
+			if(maxItems%itemsPerPage==0)//判断是否最大记录是每页记录的整数倍
+				maxPage = maxItems/itemsPerPage;
+			else
+				maxPage = maxItems/itemsPerPage+1;
+			
+			map.addAttribute("totalPages",maxPage);// 返回最大页数
 			
 			//下面计算分页的起始页码，最多显示10页
 			List pageList = new ArrayList();
-			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxItems / Integer.valueOf(itemsPerPage) + 1, 5);
+			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxPage, 5);
 			
 			for (int i = (Integer) tempList.get(0); i <= (Integer)tempList.get(1); i++)   
 			    	 pageList.add(i);

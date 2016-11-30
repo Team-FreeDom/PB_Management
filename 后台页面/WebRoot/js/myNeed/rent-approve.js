@@ -127,10 +127,10 @@ $(document)
 							"click",
 							function() {
 								if ($(this).prop("checked") === true) {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", true);
 								} else {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", false);
 								}
 							});
@@ -379,7 +379,6 @@ $(document)
 											},
 											success : function(msg) {
                                               
-												$(".msg").html(msg.messageCount);
 												
 												bootbox.alert({
 													message : msg.str,
@@ -507,7 +506,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-												$(".msg").html(msg.messageCount);
+											
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'
@@ -633,7 +632,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-												$(".msg").html(msg.messageCount);
+												
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'

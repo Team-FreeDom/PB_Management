@@ -149,15 +149,10 @@ public class CheckController {
 
 		checkservice.agreeApply(landstr, recordstr, infostr);
         
-		//将消息值更改
-		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-		int number = Integer.valueOf(noReadNumber)+1;
-		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
-
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+	
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -179,14 +174,11 @@ public class CheckController {
 		
 		checkservice.refuseapply(recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -209,14 +201,11 @@ public class CheckController {
 
 		checkservice.confirmPayFor(landstr, recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -239,14 +228,11 @@ public class CheckController {
 
 		checkservice.cancelPayFor(landstr, recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {

@@ -197,8 +197,7 @@
 					});
 				  },///error
 				  success : function(data) {
-					  var position=data.indexOf('$');
-					var messageCount=data.substring(position+1);
+					  var position=data.indexOf('$');					
 					var flag=data.substring(0,position);
 
 
@@ -212,7 +211,7 @@
 
 					  }else{
 
-					  $(".msg").html(messageCount);
+					 
 					  fill('','','','','','');
 					  $('#field_rent tbody').html('');
 					  obj.dialog = bootbox.dialog({
