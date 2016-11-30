@@ -194,7 +194,11 @@ public class LandRentController<E> {
 		
 		String filename = "湖南农业大学土地租赁信息表";
 		
-		String fullFileName = "E://landRentPreserveReport.xlsx";
+		//String fullFileName = "E://landRentPreserveReport.xlsx";
+		String path = request.getSession().getServletContext()
+				.getRealPath("/upload/");
+		String fullFileName = path + "/landRentPreserveReport.xlsx";
+		
 		// 显示中文文件名
 		response.setContentType("application/octet-stream;charset=utf-8");
 		try {

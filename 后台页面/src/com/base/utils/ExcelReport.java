@@ -658,7 +658,7 @@ public class ExcelReport{
 		cs2.setWrapText(true);// 设置宽度自适应
 		cs2.setFont(font2);
 		// 合并列 （第一行，最后一行，第一列，最后一列）
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));// 合并列-标题
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));// 合并列-标题
 		
 		// * 插入数据操作
 		 
@@ -766,6 +766,7 @@ public class ExcelReport{
 			FileOutputStream stream = FileUtils.openOutputStream(file);
 			workbook.write(stream);
 			stream.close();
+			workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
