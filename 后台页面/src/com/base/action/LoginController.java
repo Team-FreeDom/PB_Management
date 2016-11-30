@@ -62,8 +62,6 @@ public class LoginController {
 		}else{
 			return "redirect:login_soft.html";
 		}
-		
-	
 	}
 	
 	

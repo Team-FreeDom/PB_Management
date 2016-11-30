@@ -360,7 +360,7 @@ public class PersonalManageController {
 			Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
 			List<List<String>> list = InputExcelServiceImpl.getExcelRows(
 					InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
-			System.out.println("获得数据啦！！！！！！！！！");
+			//System.out.println("获得数据啦！！！！！！！！！");
 			// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 			
 			//实现批量插入
@@ -413,8 +413,9 @@ public class PersonalManageController {
 			outputStream.close();
 			inputStream.close();
 			tempFile.delete(); //删除临时文件
+			
 		}
-		return "mangeruser";
+		return "redirect:mangeruser.jsp";
 	}
 
 	// 筛选userInfo中的部门

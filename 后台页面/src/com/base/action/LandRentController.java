@@ -242,7 +242,6 @@ public class LandRentController<E> {
 		System.out.println(lr_id);
 		landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
 		
-		
 		return "redirect:fieldRent_maintain.jsp";
 	}
 	
