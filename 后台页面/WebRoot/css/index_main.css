@@ -32,9 +32,13 @@
 }
 
 .information a:link {
-    color: #000000;
+    color: #777;
 }
-
+.information .more{
+  bottom: 0px;
+  right:5px;
+  position: absolute;
+}
 .information a:hover {
     color: rgba(#080200, 0.73);
 }

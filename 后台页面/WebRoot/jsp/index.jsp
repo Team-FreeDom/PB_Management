@@ -185,15 +185,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row form">
 						<div class="col-lg-12">
 							<div id="information1" class="col-md-3">
-                <div>
+
 								<p>通知公告</p>
-                 <a  style="float:right; margin-right:15px;" href="newlist.do">更多</a>
-                </div>
+
+
                                 <div class="information">
                                 <c:forEach items='${notificationList}' var='notification'>
-                                    <p><a href="newdetail.do?id=${notification.id }"	class="list-group-item">${notification.title }</a><p>
+                                    <p><a href="newdetail.do?id=${notification.id }">${notification.title }</a></p>
                                 </c:forEach>
-
+                                <a  style="float:right; margin-right:15px;" href="newlist.do" class="more">更多</a>
                                 </div>
 							</div>
 							<div id="information1" class=" col-md-offset-1 col-md-3 ">
