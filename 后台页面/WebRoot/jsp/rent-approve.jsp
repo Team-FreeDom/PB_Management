@@ -226,7 +226,7 @@
 																			</select>  
 																			</td>
 																			<td>申请人: <select name="username" id="usernameid">
-																					<option value="" id="applicantId">请选择</option>
+																					<option value="" id="applicantId">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>
@@ -376,7 +376,7 @@
 																			</td>
 																			<td>申请人: <select name="username2"
 																				id="usernameid2">
-																					<option value="" id="applicantId2">请选择</option>
+																					<option value="" id="applicantId2">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>

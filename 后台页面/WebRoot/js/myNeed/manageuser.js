@@ -2,7 +2,8 @@
 $("#certainExport").click(function(){
         	 $("#lead").modal("hide");
         	 
-         })         
+         })  
+
         //导出功能刷选部门  
         	 $.ajax({
         	type : 'POST',
@@ -34,8 +35,8 @@ $("#addOne").click(function(){
 			$("#workerId").val("");
 			$("#name").val("");
 			$("#demo2").val("");
-			$("#sex1").prop("checked",false);
 			$("#sex2").prop("checked",false);
+			$("#sex1").prop("checked",false);
 			$("#IDnumber").val("");
 			$("#password").val("");
 			$("#Adivision").val("1");
@@ -286,7 +287,7 @@ $("#addOne").click(function(){
 						  size: 'small'
 					  });	
 					}
-				else if($("#sex1").prop("checked") === false && $("#sex2").prop("checked") === false){					
+				else if($("#sex1").prop("checked") == false&&$("#sex2").prop("checked") == false){					
 					bootbox.alert({
 						  message: "请填写性别",
 						  size: 'small'
@@ -374,21 +375,27 @@ $("#addOne").click(function(){
 		           			  size: 'small'
 		           		  });	
 					},
-					success : function(data) {
+					success : function(data) {						
 						var i = 0;
-						for ( var item in data) {							
+						for ( var item in data) {	
 							$("#EworkerId").val(data[i].id);
 							$("#Ename").val(data[i].username);
-							$("#Esex").val(data[i].sex);
-							$("#demo").val(data[i].birth);
+							//$("#sex[value=" + data[i].sex + "]").attr("checked",true);//男和女
+							$("#sex[value=" + data[i].sex + "]").prop("checked",true);
+							$("#Edivision option[value=" + data[i].dept + "]").prop(
+									"selected", true);//部门
+							$("#demo").val(data[i].birth);//出生日期
+							$("#Estatus option[value=" + data[i].attritube + "]").prop(
+									"selected", true);//身份属性
+						    $("#Eworkerclass option[value=" + data[i].category + "]").prop(
+									"selected", true);//员工类别
 							$("#Ephone").val(data[i].telephone);
 							$("#IDnumber").val(data[i].idcard);
 							$("#Epassword").val(data[i].password);
 							}
 							i++;
 						}
-				});
-
+				});    
 		$("#edit").modal('show');
 	}  
     $("#ck1").on("click", function () {

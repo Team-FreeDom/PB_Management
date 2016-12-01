@@ -18,7 +18,7 @@ $(document)
 							{
 								"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-								"bSort" : false,
+								"bSort" : true,
 								"serverSide" : true,
 								"iDisplayLength": 5,
 								//"TotalRecords" : [ 10 ],
@@ -48,26 +48,26 @@ $(document)
 
 								}, {
 									"mData" : "basename",
-									"orderable" : true, // 禁用排序
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
 								}, 
 								
 								{
 									"mData" : "li",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "10%"
 								},
 								{
 									"mData" : "landname",
-									"orderable" : true, // 禁用排序
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
 								},
 								{
 									"mData" : "username",
-									"orderable" : true, // 禁用排序
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%"
 								}, {
@@ -78,7 +78,7 @@ $(document)
 
 								}, {
 									"mData" : "times",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%",
 
@@ -731,7 +731,7 @@ $(document)
 							{
 								"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-								"bSort" : false,
+								"bSort" : true,
 								"serverSide" : true,
 								"iDisplayLength": 5,
 								"dom" : 'tipr<"bottom"l>',
@@ -759,24 +759,24 @@ $(document)
 									"sWidth" : "6%",
 								}, {
 									"mData" : "basename",
-									"orderable" : true, // 禁用排序
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
 								},
 								
 								{
 									"mData" : "li",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "10%"
 								},{
 									"mData" : "landname",
-									"orderable" : true, // 禁用排序
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
 								}, {
 									"mData" : "username",
-									"orderable" : true, // 禁用排序
+									"orderable" :false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%"
 								}, {
@@ -786,7 +786,7 @@ $(document)
 									"sWidth" : "8%",
 								}, {
 									"mData" : "times",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%",
 								}, {
@@ -843,7 +843,7 @@ $(document)
 														{
 															"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"bSort" : false,
+															"bSort" : true,
 															"serverSide" : true,
 															"iDisplayLength": 5,
 															// //默认每页显示多少条记录
@@ -885,14 +885,14 @@ $(document)
 																	},
 																	{
 																		"mData" : "basename",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
 																	},
 																	
 																	{
 																		"mData" : "li",
-																		"orderable" : false, // 禁用排序
+																		"orderable" : true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "10%"
 																	},{
@@ -903,7 +903,7 @@ $(document)
 																	},
 																	{
 																		"mData" : "username",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%"
 																	},
@@ -917,7 +917,7 @@ $(document)
 
 																	{
 																		"mData" : "times",
-																		"orderable" : false, // 禁用排序
+																		"orderable" :true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%",
 
@@ -983,7 +983,7 @@ $(document)
 														{
 															"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"bSort" : false,
+															"bSort" : true,
 															"serverSide" : true,
 															"iDisplayLength": 5,
 															"bDestroy" : true,
@@ -1024,7 +1024,7 @@ $(document)
 																	},
 																	{
 																		"mData" : "basename",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
 																	},
@@ -1036,13 +1036,13 @@ $(document)
 																	},
 																	{
 																		"mData" : "li",
-																		"orderable" : false, // 禁用排序
+																		"orderable" : true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "10%"
 																	},
 																	{
 																		"mData" : "username",
-																		"orderable" : true, // 禁用排序
+																		"orderable" :false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%"
 																	},
@@ -1056,7 +1056,7 @@ $(document)
 
 																	{
 																		"mData" : "times",
-																		"orderable" : false, // 禁用排序
+																		"orderable" :true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%",
 

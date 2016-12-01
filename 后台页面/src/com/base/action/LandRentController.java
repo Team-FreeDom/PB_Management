@@ -147,9 +147,13 @@ public class LandRentController<E> {
 		
 		List<ApplyDept> depts=landApplyServiceImpl.getDepts();
 		List<ApplyDept> existDept=landRentServiceImpl.getExistRentInfo();
+		List<String> existplant=landRentServiceImpl.getExistPlant();
+		
 		List list=new ArrayList<E>();
 		list.add(depts);
 		list.add(existDept);
+		list.add(existplant);
+		
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
 		

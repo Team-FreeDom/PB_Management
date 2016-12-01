@@ -214,7 +214,7 @@
 																		</select>  
 																		</td>
 																		<td>申报部门： <select name="deptS" id="deptSh">
-																				<option value="" id="deptS">请选择</option>
+																				<option value="" id="deptS">显示全部</option>
 
 																		</select>
 																		</td>
@@ -222,9 +222,8 @@
 																	<tr>
 																		<td>种植内容 <select name="contentS" id="contentSh"
 																			size="">
-																				<option value="">显示全部</option>
-																				<option value="玉米">玉米</option>
-																				<option value="棉花">棉花</option>
+																				<option value="" id="contentShh">显示全部</option>
+																				
 																		</select>  
 																		</td>
 																		<td>&nbsp;</td>

@@ -168,6 +168,17 @@ $(document)
 								
 								i++;
 							}
+							
+							i=0;
+							for ( var item in data[2]) {
+								
+								$("#contentShh").after(
+										"<option value=" + data[2][i] + ">"
+												+ data[2][i]+ "</option>");
+								
+								i++;
+								
+							}
 
 						}
 

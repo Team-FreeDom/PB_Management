@@ -123,4 +123,10 @@ public class LandRentServiceImpl implements LandRentService {
 	 return list;
 	 
  }
+ 
+ public List<String> getExistPlant(){
+	 
+	 List<String> list=landRentInfoDaoImpl.getExistPlant();
+	 return list;
+ }
 }

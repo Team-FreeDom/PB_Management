@@ -338,5 +338,40 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	     		} 
 		 return list;
 	}
+	
+public List<String> getExistPlant(){
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+		List<String> list=new ArrayList<String>();
+		String plant=null;
+		
+		 try{
+				
+				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
+				sp = conn.prepareCall("{CALL baseweb.rent_plant()}");				
+				sp.execute();   //执行存储过程			
+				
+				rs=sp.getResultSet(); 
+				if(rs!=null){
+				while(rs.next())    //遍历结果集，赋值给list
+				{
+					plant=rs.getString("planting");
+					list.add(plant);    //加到list中
+				}
+				}
+				
+	             }catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			e.printStackTrace();
+	     		}finally{			
+	     			
+	     			SqlConnectionUtils.free(conn, sp, rs);
+	     			
+	     		} 
+		 return list;
+	}
 
 }
