@@ -367,5 +367,22 @@ public class CheckViewDaoImpl {
 					}		
 
 				}
+				
+				
+				//取消交费，将锁定状态的变为审核状态，发送通知
+				public void confirmInfo(String landstr) {
+					
+					Session session = sessionFactory.openSession();
+					try {
+						// hibernate调用存储过程(无返回参数)
+						SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`trans_fail`(?)}");
+						sqlQuery.setString(0,landstr);				
+						sqlQuery.executeUpdate();
+					} finally {
+						session.close();
+					}		
+
+				}
+						
 
 }

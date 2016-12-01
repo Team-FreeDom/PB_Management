@@ -101,16 +101,16 @@ $(document).ready(function() {
 																	+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ row.la_id+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
-																	+ ' id="frame1_cancel" >撤回</button>';
+																	+ row.la_id+'$0'+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
+																	+ ' id="frame1_cancel">撤回</button>';
 														} else if (data == 1) {
 															return data = '<button type="button"  id='
 																	+ row.la_id
 																	+ ' onclick="payForOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ row.la_id+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
-																	+ ' id="frame1_cancel" >撤回</button>';
+																	+ row.la_id+'$1'+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
+																	+ ' id="frame1_cancel">撤回</button>';
 														} else {
 															return data = '<button type="button" id='
 																	+ row.la_id
@@ -315,8 +315,8 @@ $(document).ready(function() {
 					function unionSelect() {
 
 						var bnameUnion = document.getElementById("bnameUnion").value;						
-						var startTimeUnion = document.getElementById("startTimeUnion").value;
-						var endTimeUnion = document.getElementById("endTimeUnion").value;
+						/*var startTimeUnion = document.getElementById("startTimeUnion").value;
+						var endTimeUnion = document.getElementById("endTimeUnion").value;*/
 						var descUnion = document.getElementById("descUnion").value;
 
 						$('#table2')
@@ -335,8 +335,8 @@ $(document).ready(function() {
 											"ajax" : {
 												"data" : {
 													"bname" : bnameUnion,													
-													"startTime" : startTimeUnion,
-													"endTime" : endTimeUnion,
+													/*"startTime" : startTimeUnion,
+													"endTime" : endTimeUnion,*/
 													"desc" : descUnion
 												},
 												"url" : "selfApply.do",
@@ -620,19 +620,23 @@ $(document).ready(function() {
 
 					});
 
-					$(document).delegate('#cancelSubmit', 'click', function() {//���ȷ�ϳ���İ�ť��ִ��
+					$(document).delegate('#cancelSubmit', 'click', function() {//
 						var str = $(this).val();
 						
 						var position=str.indexOf('$');
-						
+						var position2=str.lastIndexOf('$');
 						var la_id=str.substring(0,position);
-						var info_str=str.substring(position+1);
+						var flag=str.substring(position+1,position2);
+						var info_str=str.substring(position2+1);
 					   
+						
+						
 						$('#cancelOneModal').modal('hide');
 						
 						$.ajax({
 							data : {
 								"la_id" : la_id,
+								"flag":flag,
                                 "info_str":info_str
 							},
 							url : 'myFameCancel1.do',

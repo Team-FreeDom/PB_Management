@@ -231,9 +231,7 @@ public class LandApplyController {
 	public String selfApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
 		
-		String bname = request.getParameter("bname");
-		String startTime = request.getParameter("startTime");
-		String endTime = request.getParameter("endTime");
+		String bname = request.getParameter("bname");		
 		String desc = request.getParameter("desc");
 		
 		int length=Integer.valueOf(request.getParameter("length"));
@@ -246,7 +244,7 @@ public class LandApplyController {
 	    String applicantId = CookieUtils.getUserid(request);	
 		
 		
-		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname, startTime, endTime, desc, page, length);
+		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname,desc, page, length);
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw",draw);
@@ -398,15 +396,15 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		//System.out.println("cancel1");
+		
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 		String info_str=request.getParameter("info_str");
-		//System.out.println(info_str);
+		int tag = Integer.valueOf(request.getParameter("flag"));
 		
 		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id,info_str);
+			landApplyServiceImpl.myFameCancel1(la_id,info_str,tag);
 			
 			flag = true;
 			String str = "[{\"flag\":" + flag+"}]";
