@@ -426,9 +426,17 @@ $(document).delegate('#certainExport', 'click', function() {
 $(document).delegate('#definite', 'click', function() {
 	
 	var dept=$("#deptLaLa").val();
+	var planCareer=$("#planCareer").val();
 	if(dept==""){
 		 bootbox.alert({
 				message : "请选择申报学院",
+				size : 'small'
+			});
+		 return;
+	}
+	if(planCareer==""){
+		 bootbox.alert({
+				message : "计划从事内容不能为空",
 				size : 'small'
 			});
 		 return;

@@ -89,9 +89,9 @@ public class LandRentServiceImpl implements LandRentService {
 	//土地租赁记录修改更新
 	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
 	{
-		if(planCareer!=null&&planCareer.equals("")){
+		/*if(planCareer!=null&&planCareer.equals("")){
 			planCareer=null;
-		}
+		}*/
 		if(startTime!=null&&startTime.equals("")){
 			startTime=null;
 		}
