@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="container-fluid container-nav">
           <!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
           <ul class="nav navbar-nav navbar-actions navbar-left">
-              <li class="visible-md visible-lg"><a href="index.html#"><i class="icon-th-large"></i></a></li>
-              <li class="visible-xs visible-sm"><a href="index.html#"><i class="icon-align-justify"></i></a></li>
+              <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
+              <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
 
           <span class="teachCenterTitle">基地管理系统</span>

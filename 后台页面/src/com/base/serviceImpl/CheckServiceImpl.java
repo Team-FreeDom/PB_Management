@@ -64,7 +64,7 @@ public class CheckServiceImpl implements checkService {
 		checkViewDaoImpl.updateStatusP(recordstr, 1);		 
 		
 		//把相同土地的其他申请置为锁定
-		 checkViewDaoImpl.changeSolid(landstr, 4, 2);
+		 checkViewDaoImpl.lockInfo(landstr);
 		//向消息表中插入信息 
 		 checkViewDaoImpl.insertMessage(insertStr);
 		 
@@ -80,7 +80,7 @@ public class CheckServiceImpl implements checkService {
 		checkViewDaoImpl.updateStatus(recordstr, 10);
 		
 		//把相同土地的状态为锁定的土地状态变为审核中
-		checkViewDaoImpl.changeSolid(landstr, 2, 4);
+		checkViewDaoImpl.releaseInfo(landstr);
 		
 		//向消息表中插入信息 
 		 checkViewDaoImpl.insertMessage(insertStr);

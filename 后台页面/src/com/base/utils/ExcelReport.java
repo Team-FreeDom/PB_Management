@@ -36,7 +36,7 @@ public class ExcelReport{
 	 * 
 	 * @see com.base.service.ExcelReportService#landRentPreserveReport()
 	 */	
-	public void landRentPreserveReport(List<RentMaintain> list) { // 列头信息
+	public void landRentPreserveReport(List<RentMaintain> list,String filename) { // 列头信息
 		String[] col_title = { "序号", "开始日期", "结束日期", "基地名", "土地编号", "租赁人",
 				"申报部门", "已租用次数", "土地名称", "土地面积", "适宜从事内容", "计划从事内容",
 				"租赁费用", "交费日期" };// 15个列头
@@ -214,7 +214,7 @@ public class ExcelReport{
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
-		File file = new File("E://landRentPreserveReport.xlsx");
+		File file = new File(filename);
 		try {
 			file.createNewFile();
 			FileOutputStream stream = FileUtils.openOutputStream(file);
