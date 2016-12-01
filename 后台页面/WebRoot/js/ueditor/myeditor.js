@@ -25,7 +25,6 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", "#sendNotifitation", function() {
-		// ����������ťʱ�༭�����Ѿ�ʧȥ�˽��㣬����ֱ����getText�������õ����ݣ�����Ҫ��ѡ������Ȼ��ȡ������
 		// var range = UE.getEditor('editor').selection.getRange();
 		// range.select();
 		//alert("1234566");

@@ -150,7 +150,7 @@ $("#addOne").click(function(){
 											var data=row.id;
 											return data = '<button type="button"  id='
 												+ row.id
-												+ ' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='+data+' id="frame1_edit">修改</button>';
+												+ ' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='+data+' id="frame1_edit" data-target="#edit" data-toggle="modal">修改</button>';
 										}
 									}
 							//data指该行获取到的该列数据
@@ -377,6 +377,7 @@ $("#addOne").click(function(){
 					},
 					success : function(data) {						
 						var i = 0;
+						//$("#edit").modal('show');
 						for ( var item in data) {	
 							$("#EworkerId").val(data[i].id);
 							$("#Ename").val(data[i].username);
@@ -396,7 +397,7 @@ $("#addOne").click(function(){
 							i++;
 						}
 				});    
-		$("#edit").modal('show');
+		
 	}  
     $("#ck1").on("click", function () {
 		if ($(this).prop("checked") === true) {

@@ -262,9 +262,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <td>性别 ： </td>
                                                 <td id="sex-style2">
                                                   	<label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex" value="男">男                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex" class="form-control input-sm" value="男">男 
+                                                      </label>
                                                     <label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex" value="女">女                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex" class="form-control input-sm" value="女">女
+                                                       </label>
                                                 </td>
                                                 <td>出生年月 ： </td>
                                                 <td class="input-style"
@@ -409,9 +411,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <td>性别 ： </td>
                                                 <td id="sex-style">
                                                   	<label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex1" class="sex" value="男" >男                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex1" class="sex" value="男" >男
+                                                     </label>
+
                                                     <label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex2" class="sex" value="女">女                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex2" class="sex" value="女">女 
+                                                    </label>
                                                 </td>
 
                                                 <td>出生年月 ： </td>
