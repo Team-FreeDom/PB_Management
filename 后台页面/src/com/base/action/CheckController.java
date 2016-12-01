@@ -147,13 +147,13 @@ public class CheckController {
 		String infostr = request.getParameter("infostr");
 		String landstr = request.getParameter("landstr");
 
-		checkservice.agreeApply(landstr, recordstr, infostr);
+		int tag=checkservice.agreeApply(landstr, recordstr, infostr);
         
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
 	
-		
+		getObj.put("tag", tag);
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());

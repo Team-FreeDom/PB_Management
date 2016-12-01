@@ -89,9 +89,9 @@ public class LandRentServiceImpl implements LandRentService {
 	//土地租赁记录修改更新
 	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
 	{
-		/*if(planCareer!=null&&planCareer.equals("")){
-			planCareer=null;
-		}*/
+		if(planCareer==null){
+			planCareer="";
+		}
 		if(startTime!=null&&startTime.equals("")){
 			startTime=null;
 		}
@@ -100,8 +100,7 @@ public class LandRentServiceImpl implements LandRentService {
 		}
 		
 		LandRentInfo lr=landRentInfoDaoImpl.getOne(lr_id);
-		/*System.out.println(lr);
-		System.out.println(dept+" "+planCareer+" "+expense+"  "+startTime+"  "+endTime+"  "+lr_id);*/
+		
 		lr.setEndTime(endTime);
 		lr.setPlanting(planCareer);
 		lr.setRentMoney(expense);

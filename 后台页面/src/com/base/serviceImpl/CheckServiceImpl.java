@@ -55,20 +55,25 @@ public class CheckServiceImpl implements checkService {
 	
 	
 	@Override
-	public void agreeApply(String landstr,String recordstr,String infostr) {
+	public int agreeApply(String landstr,String recordstr,String infostr) {
 		System.out.println("agreeApply---start");
 		//获得插入的消息语句
 		String insertStr=MessageUtils.getInsertStr(infostr,2);		
 		System.out.println(insertStr);
-		//把审核中的改为待缴费		
-		checkViewDaoImpl.updateStatusP(recordstr, 1);		 
 		
+		//把审核中的改为待缴费		
+		//checkViewDaoImpl.updateStatusP(recordstr, 1);	
+		
+		int tag=checkViewDaoImpl.agreeInfo(recordstr, 1);
+		System.out.println(tag+"  hello");
+		if(tag==1){
 		//把相同土地的其他申请置为锁定
 		 checkViewDaoImpl.lockInfo(landstr);
 		//向消息表中插入信息 
 		 checkViewDaoImpl.insertMessage(insertStr);
+		}
 		 
-		 System.out.println("agreeApply---end");
+		 return tag;
 	}
 	
 	public void cancelPayFor(String landstr, String recordstr, String infostr){

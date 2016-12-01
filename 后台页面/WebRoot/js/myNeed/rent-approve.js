@@ -387,13 +387,21 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-                                              
 												
+                                              var tag=msg.tag;
+												if(tag==1){												
 												bootbox.alert({
 													message : msg.str,
 													size : 'small'
 												});
 												Spage.draw(false);
+												}else if(tag==0){
+													
+													bootbox.alert({
+														message : "不允许同一块土地多人申请成功，请检查",
+														size : 'small'
+													});
+												}
 
 											}
 										});

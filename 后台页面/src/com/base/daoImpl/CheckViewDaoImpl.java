@@ -18,6 +18,7 @@ import com.base.po.CheckList;
 import com.base.po.CheckView;
 import com.base.po.LandApply;
 import com.base.po.UserInfo;
+import com.base.utils.CookieUtils;
 import com.base.utils.SqlConnectionUtils;
 
 import java.sql.CallableStatement;
@@ -383,6 +384,39 @@ public class CheckViewDaoImpl {
 					}		
 
 				}
+				
+				//同意申请，将审核中的记录变为交费中，判断土地编号是否有相同的，返回flag值
+				public int agreeInfo(String recordStr, int status) {
+					
+					int tag=0;					
+					Connection conn = null;
+					CallableStatement sp = null;
+					ResultSet rs = null;
+					Session session = sessionFactory.openSession();
+					
+					try {
+						conn = (Connection) SessionFactoryUtils.getDataSource(
+								sessionFactory).getConnection();
+						sp = (CallableStatement) conn
+								.prepareCall("{CALL baseweb.agree_apply(?,?,?)}");
+						sp.setString(1, recordStr);	
+						sp.setInt(2, status);
+						sp.registerOutParameter(3, java.sql.Types.INTEGER);						
+						sp.execute();
+						
+						tag=sp.getInt(3);
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+					}finally {
+						SqlConnectionUtils.free(conn, sp, null);
+					}		
+
+					return tag;
+				}	
+				
 						
 
 }
