@@ -383,13 +383,16 @@ $("#addOne").click(function(){
 							$("#Ename").val(data[i].username);
 							//$("#sex[value=" + data[i].sex + "]").attr("checked",true);//男和女
 							$("#sex[value=" + data[i].sex + "]").prop("checked",true);
-							$("#Edivision option[value=" + data[i].dept + "]").prop(
-									"selected", true);//部门
+              $("#Edivision").val(data[i].dept);//部门
+							//$("#Edivision option[value=" + data[i].dept + "]").prop(
+							//		"selected", true);//部门
 							$("#demo").val(data[i].birth);//出生日期
-							$("#Estatus option[value=" + data[i].attritube + "]").prop(
-									"selected", true);//身份属性
-						    $("#Eworkerclass option[value=" + data[i].category + "]").prop(
-									"selected", true);//员工类别
+              $("#Estatus").val(data[i].attritube);
+							//$("#Estatus option[value=" + data[i].attritube + "]").prop(
+							//		"selected", true);//身份属性
+						  //  $("#Eworkerclass option[value=" + data[i].category + "]").prop(
+							//		"selected", true);//员工类别
+              $("#Eworkerclass").val(data[i].category);
 							$("#Ephone").val(data[i].telephone);
 							$("#IDnumber").val(data[i].idcard);
 							$("#Epassword").val(data[i].password);
