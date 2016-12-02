@@ -1,10 +1,10 @@
  //结束导出任务时隐藏模态框
 $("#certainExport").click(function(){
         	 $("#lead").modal("hide");
-        	 
-         })  
 
-        //导出功能刷选部门  
+         })
+
+        //导出功能刷选部门
         	 $.ajax({
         	type : 'POST',
  			dataType : 'json',
@@ -15,23 +15,23 @@ $("#certainExport").click(function(){
  				bootbox.alert({
          			  message: "error",
          			  size: 'small'
-         		  });	
+         		  });
  			},
- 			success : function(data) {	
+ 			success : function(data) {
  				for (var i=0;i<data.length;i++){
  					$("#EdeptID").after(
  							"<option value="+data[i].college+">"
  									+data[i].college+"</option>");
- 				} 				
+ 				}
  			}
-        });	
+        });
 //每次点击导出清空select
 $("#exportid").click(function(){
 	$("#dept").val("1");
-	
-})   
+
+})
 //增加模态框每次点击赋空值
-$("#addOne").click(function(){	 
+$("#addOne").click(function(){
 			$("#workerId").val("");
 			$("#name").val("");
 			$("#demo2").val("");
@@ -44,25 +44,25 @@ $("#addOne").click(function(){
 			$("#Astatus").val("1");
 		    $("#phone").val("");
 	        $("#IDnumber1").val("");
-	        $("#password").val("");		 
+	        $("#password").val("");
 			 })
    //限制修改用户id
     function stop(){
     	 bootbox.alert({
 			  message: "对不起,此id不可修改",
 			  size: 'small'
-		  });	
-    }  
+		  });
+    }
     $(document).ready(function() {
-    	 
+
         var userInfo=$('#manageusertable').DataTable(
 		  {
 			  "aLengthMenu" : [5,10,20,30], //动态指定分页后每页显示的记录数。
 				"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
-				"bSort" : false,						
-				"serverSide": true,	
+				"bSort" : false,
+				"serverSide": true,
 				"bFilter": true,
-				"dom": 'frtip<"bottom"l>',												
+				"dom": 'frtip<"bottom"l>',
 	             "bDestroy":true,
 					"ajax" : {
 						"url" : "manger.do",
@@ -73,8 +73,8 @@ $("#addOne").click(function(){
 										"mData" : "number",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
-										"sWidth" : "4%",							
-									},   									               
+										"sWidth" : "4%",
+									},
 									{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
 										"mData" : "id",
 										"orderable" : true, // 禁用排序
@@ -111,33 +111,33 @@ $("#addOne").click(function(){
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "8%",
-										
-										
+
+
 									},
-									
+
 									{
 										"mData" : "idcard",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "10%",
-										
-										
+
+
 									},
 									{
 										"mData" : "telephone",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "8%",
-										
-										
+
+
 									},
 									{
 										"mData" : "dept",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "10%",
-										
-										
+
+
 									},
 									{
 										"mData" : "id",
@@ -159,8 +159,8 @@ $("#addOne").click(function(){
 							//meta包含请求行索引，列索引，tables各参数等信息
 
 							],
-				
-				columnDefs : 
+
+				columnDefs :
 				[{
 					"orderable" : false, // 禁用排序
 					"targets" : [0], // 指定的列
@@ -170,7 +170,7 @@ $("#addOne").click(function(){
 						return '<input type="checkbox" value="'+ data + '" name="idname" class="ck"  />';
 					}
 				}],
-				
+
               "language": {
                   "lengthMenu": "每页 _MENU_ 条记录",
                   "zeroRecords": "没有找到记录",
@@ -197,9 +197,9 @@ $("#addOne").click(function(){
  				bootbox.alert({
          			  message: "error",
          			  size: 'small'
-         		  });	
+         		  });
  			},
- 			success : function(data) {				
+ 			success : function(data) {
  				 for (var i=0;i<data[0].length;i++) {
  					$("#EstatusID").after(
  							"<option value="+data[0][i].name+">"
@@ -207,8 +207,8 @@ $("#addOne").click(function(){
  									$("#AstatusID").after(
  				 							"<option value="+data[0][i].name+">"
  				 									+data[0][i].name+"</option>");
- 				 
- 				 }		 	
+
+ 				 }
  				 for ( var i=0;i<data[1].length;i++) {
  					$("#EdivisionID").after(
  							"<option value="+data[1][i].dept+">"
@@ -216,14 +216,14 @@ $("#addOne").click(function(){
  					$("#AdivisionID").after(
  							"<option value="+data[1][i].dept+">"
  									+data[1][i].dept+"</option>");
- 				}		
+ 				}
  			}
- 		});     
-         
- 				
- 			       	
-        	
-       
+ 		});
+
+
+
+
+
       //删除人员基本信息
       var flag=0;
         $('#deleteOne').click(function() {
@@ -231,18 +231,18 @@ $("#addOne").click(function(){
 				if($(this).prop("checked")==true){
 					flag=1;
 			}
-    	}); 
+    	});
 		if(flag==0){
 			bootbox.alert({
 				  message: "您还没有选择任何内容",
 				  size: 'small'
-			  });	
-					} 
+			  });
+					}
 		else{
         	    bootbox.confirm({
-        	    message: "是否确认删除",                                        
+        	    message: "是否确认删除",
         	    buttons: {
-        	        
+
         	    	confirm: {
         	            label: 'Yes',
         	            className: 'btn-success'
@@ -262,36 +262,36 @@ $("#addOne").click(function(){
                             	 bootbox.alert({
                        			  message: msg,
                        			  size: 'small'
-                       		  });	
+                       		  });
                             	userInfo.draw(false);
                             }
                         });
         	    	}
-                    
+
         	        console.log('This was logged in the callback: ' + result);
         	    }
         	});
 		}
-        });		
+        });
       //增加人员基本信息
-        $('#save').click(function() {	 
+        $('#save').click(function() {
 				if($("#workerId").val()==""){
 					 bootbox.alert({
 						  message: "请填写员工编号",
 						  size: 'small'
-					  });	
+					  });
 					}
 				else if($("#name").val()==""){
 					bootbox.alert({
 						  message: "请填写姓名",
 						  size: 'small'
-					  });	
+					  });
 					}
-				else if($("#sex1").prop("checked") == false&&$("#sex2").prop("checked") == false){					
+				else if($("#sex1").prop("checked") == false&&$("#sex2").prop("checked") == false){
 					bootbox.alert({
 						  message: "请填写性别",
 						  size: 'small'
-					  });	
+					  });
 					}
 				else if($("#Awkclass").val()=="1"){
 					bootbox.alert({
@@ -299,7 +299,7 @@ $("#addOne").click(function(){
 						  size: 'small'
 					  });
 					}
-				else if($("#Astatus").val()=="1"){				
+				else if($("#Astatus").val()=="1"){
 					bootbox.alert({
 						  message: "请选择身份属性",
 						  size: 'small'
@@ -311,13 +311,13 @@ $("#addOne").click(function(){
 						  size: 'small'
 					  });
 					}
-				else if($("#phone").val()==""){				
+				else if($("#phone").val()==""){
 					bootbox.alert({
 						  message: "请填写电话号码",
 						  size: 'small'
 					  });
 					}
-				else if($("#IDnumber1").val()==""){					
+				else if($("#IDnumber1").val()==""){
 					bootbox.alert({
 						  message: "请填写身份证号码",
 						  size: 'small'
@@ -337,7 +337,7 @@ $("#addOne").click(function(){
                 	bootbox.alert({
              			  message: "增加失败",
              			  size: 'small'
-             		  });	
+             		  });
      			},
                 success: function(msg) {
                 	if(msg==0){
@@ -348,17 +348,17 @@ $("#addOne").click(function(){
                 	bootbox.alert({
              			  message: msg,
              			  size: 'small'
-             		  });	
+             		  });
                 	userInfo.draw(false);
                 }
             });
             $("#add").modal("hide");
 				}
-        });		
+        });
 });
     //查看详情及修改
     function editOne(obj) {
-    	
+
 		var id = obj.id;
 				$.ajax({
 					type : 'POST',
@@ -373,12 +373,12 @@ $("#addOne").click(function(){
 						bootbox.alert({
 		           			  message: "error",
 		           			  size: 'small'
-		           		  });	
+		           		  });
 					},
-					success : function(data) {						
+					success : function(data) {
 						var i = 0;
-						//$("#edit").modal('show');
-						for ( var item in data) {	
+						$("#edit").modal('show');
+						for ( var item in data) {
 							$("#EworkerId").val(data[i].id);
 							$("#Ename").val(data[i].username);
 							//$("#sex[value=" + data[i].sex + "]").attr("checked",true);//男和女
@@ -396,24 +396,22 @@ $("#addOne").click(function(){
 							}
 							i++;
 						}
-				});    
-		
-	}  
+				});
+
+	}
     $("#ck1").on("click", function () {
 		if ($(this).prop("checked") === true) {
 			$("#manageusertable input[name='idname']").prop("checked", true);
 		} else {
-			$("#manageusertable input[name='idname']").prop("checked", false);	
+			$("#manageusertable input[name='idname']").prop("checked", false);
 		}
 		$("#ck2").prop("checked", false);
 
 	 });
-	 
-	  $("#ck2").click(function () {//反选  
-    		$("#manageusertable input[name='idname']").each(function () {  
-        	$(this).prop("checked", !$(this).prop("checked"));  
-    	});
-	  $("#ck1").prop("checked", false); 
-		 });
 
-	
+	  $("#ck2").click(function () {//反选
+    		$("#manageusertable input[name='idname']").each(function () {
+        	$(this).prop("checked", !$(this).prop("checked"));
+    	});
+	  $("#ck1").prop("checked", false);
+		 });
