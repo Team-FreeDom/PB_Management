@@ -53,7 +53,7 @@ public class NotificationController {
 		String insertSql = "insert into Notification(title,message) values" +
 				"(\'"+ title.trim()+ "\'," +
 				"\'"+ message.trim()+ "\')";
-	    System.out.println(insertSql);
+	    //System.out.println(insertSql);
 	    
 		notificationServiceImpl.setNotification(insertSql);
 
@@ -88,7 +88,7 @@ public class NotificationController {
 				maxPage = maxItems/itemsPerPage;
 			else
 				maxPage = maxItems/itemsPerPage+1;
-			System.out.println(maxPage);
+			//System.out.println(maxPage);
 			map.addAttribute("totalPages",maxPage);// 返回最大页数
 			
 			//下面计算分页的起始页码，最多显示10页
@@ -113,6 +113,7 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");
 		String content = request.getParameter("content");
 		String depatment = request.getParameter("depatment");
+		//System.out.println(depatment);
 	    notificationServiceImpl.addMessage("系统消息", content, depatment.trim());
 
 		return null;

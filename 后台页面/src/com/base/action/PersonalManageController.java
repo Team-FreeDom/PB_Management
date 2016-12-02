@@ -140,41 +140,45 @@ public class PersonalManageController {
 			HttpServletResponse response, ModelMap map) {
 		String id = request.getParameter("EworkerId");// 获取人员id
 		String name = request.getParameter("Ename");// 获取人员名字
-		if (name.equals("")) {
-			name = null;
-		}
+		if(name==null)
+			name="";
+		
 		String sex = request.getParameter("Esex");// 性别
-		if (sex.equals("")) {
-			sex = null;
+		if (sex == null) {
+			sex="";
 		}
 		String birthdate = request.getParameter("demo");// 获取人员出生日期
-		if (birthdate.equals("")) {
-			birthdate = null;
+		if (birthdate == null) {
+			birthdate="";
 		}
 		String category = request.getParameter("Eworkerclass");// 获取员工类别
 		if (category.equals("请选择")) {
-			category = null;
+			category = "";
 		}
 		String attritube = request.getParameter("Estatus");// 获取人员身份属性
 		if (attritube.equals("请选择")) {
-			attritube = null;
+			attritube = "";
 		}
 		String dept = request.getParameter("Edivision");// 获取人员部门
-		if (dept.equals("")) {
-			dept = null;
+		if (dept == null) {
+			dept="";
 		}
+		
 		String telephone = request.getParameter("Ephone");// 获取人员电话
-		if (telephone.equals("")) {
-			telephone = null;
+		if (telephone == null) {
+			telephone="";
 		}
+		
 		String idcard = request.getParameter("IDnumber");// 身份证
-		if (idcard.equals("")) {
-			idcard = null;
+		if (idcard == null) {
+			idcard="";
 		}
+		
 		String password = request.getParameter("Epassword");// 密码
-		if (password.equals("")) {
-			password = null;
+		if (password == null) {
+			password="";
 		}
+		
 		userinfoservice.upInfo(id, name, sex, birthdate, category, attritube,
 				dept, telephone, idcard, password);
 
@@ -273,7 +277,7 @@ public class PersonalManageController {
 	public String exportPersonInfo(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
 		String dept = request.getParameter("dept");
-		System.out.println(dept);
+		//System.out.println(dept);
 		if (dept.equals("1")) {//1表示导出所有部门人员信息
 			dept = null;
 		}
@@ -281,8 +285,9 @@ public class PersonalManageController {
 
 		if (CollectionUtils.isNotEmpty(list)) {
 
-			String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");
+			/*String path = request.getSession().getServletContext()
+					.getRealPath("/upload/");*/
+			String path = ExcelReport.getWebRootUrl(request,"/upload/");
 			String fullFileName = path + "/PersonInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportPersonInfo(list, fullFileName);

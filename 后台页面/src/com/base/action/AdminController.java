@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.base.po.Admin;
 import com.base.po.AdminFunction;
 import com.base.serviceImpl.AdminManageServiceImpl;
+import com.base.utils.CookieUtils;
 
 
 @Controller("adminController")
@@ -27,7 +28,7 @@ public class AdminController {
 	    @Autowired
 	    private AdminManageServiceImpl adminManageServiceImpl;
 	
-	    //获取指定人的权限功能值
+	    //获取所有角色的权限功能值
 		@RequestMapping("jsp/getAdminFunction.do")
 		public String getAdminFunction(HttpServletRequest request, ModelMap map,
 				HttpServletResponse response)
@@ -51,15 +52,21 @@ public class AdminController {
 			return null;		
 		}	
 		
-		//获取指定人的权限功能值
+		//设置所有角色的权限功能值
 		@RequestMapping("jsp/setAdminFunction.do")
 		public String setAdminFunction(HttpServletRequest request, ModelMap map,
 						HttpServletResponse response)
 		{
 			String values = request.getParameter("data");		
 			String insertSql = "insert into Admin(id,upow,name) values"+values.trim()+" on duplicate key update upow=values(upow),name=values(name)";
-			System.out.println(insertSql);
+			//System.out.println(insertSql);
 			adminManageServiceImpl.setAdminFunction(insertSql);
+			
+			//获取当前用户的权限值，更新cookie值
+			String userid = CookieUtils.getCookieUsername(request, response);
+			System.out.println(userid);
+			long adminValue = adminManageServiceImpl.getAdminValue(userid);
+			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
 					
 			return null;
 		}

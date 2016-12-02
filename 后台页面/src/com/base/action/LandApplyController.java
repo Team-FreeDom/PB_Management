@@ -44,6 +44,7 @@ import com.base.po.Startplan;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
+import com.base.utils.ExcelReport;
 
 //申请模块的控制层
 @Controller("landApplyController")
@@ -482,9 +483,10 @@ public class LandApplyController {
 
 		// 读取目标文件，通过response将目标文件写到客户端
 		// 获取目标文件的绝对路径
-		String fullFileName = request.getServletContext().getRealPath(
-				"file/" + fileName);
-
+		/*String fullFileName = request.getServletContext().getRealPath(
+				"file/" + fileName);*/
+		String fullFileName = ExcelReport.getWebRootUrl(request,"/upload/")+ fileName;
+		
 		// 设置Content-Disposition
 		/*response.setHeader("Content-Disposition", "attachment;filename="
 				+ fileName);*/

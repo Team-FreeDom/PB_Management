@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
@@ -772,5 +775,24 @@ public class ExcelReport{
 		}
 
 	}
+	
+	 /*
+     * 获取项目的根目录
+     * 因为tomcat和weblogic获取的根目录不一致，所以需要此方法
+     */
+    public static String getWebRootUrl(HttpServletRequest request,String filename){
+        String fileDirPath = request.getSession().getServletContext().getRealPath(filename);
+        if(fileDirPath == null){
+            //如果返回为空，则表示服务器为weblogic，则需要使用另外的方法
+            try{
+                return request.getSession().getServletContext().getResource(filename).getFile();
+            }catch(MalformedURLException e){
+                e.printStackTrace();
+            }
+        }
+            
+        return fileDirPath;
+        
+    }
 
 }

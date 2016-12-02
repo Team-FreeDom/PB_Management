@@ -377,7 +377,7 @@ $("#addOne").click(function(){
 					},
 					success : function(data) {
 						var i = 0;
-						$("#edit").modal('show');
+						//$("#edit").modal('show');
 						for ( var item in data) {
 							$("#EworkerId").val(data[i].id);
 							$("#Ename").val(data[i].username);

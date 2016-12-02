@@ -43,4 +43,12 @@ public class AdminManageServiceImpl implements AdminManageService {
 		return;
 	}
 
+
+	@Override
+	public long getAdminValue(String userid) {
+		// TODO Auto-generated method stub
+		return adminManageDaoImpl.getAdminValue(userid);
+		//return 0;
+	}
+
 }

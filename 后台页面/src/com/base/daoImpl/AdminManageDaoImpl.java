@@ -1,10 +1,14 @@
 package com.base.daoImpl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.hibernate.Query;
 import org.hibernate.ScrollMode;
 import org.hibernate.ScrollableResults;
@@ -18,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import com.base.dao.AdminMangeDao;
 import com.base.po.Admin;
 import com.base.po.AdminFunction;
+import com.base.po.MessageShow;
 import com.base.po.UserInfo;
 import com.base.utils.SqlConnectionUtils;
 
@@ -109,5 +114,31 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 		  
         
 
+	}
+
+	@Override
+	public long getAdminValue(String userid) {
+		// TODO Auto-generated method stub
+		Connection conn=null;
+		CallableStatement sp=null; 
+		long adminValue = 0;
+		try
+		{
+			conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();	
+			sp = conn.prepareCall("{CALL baseweb.find_upow(?,?)}");  //调用存储过程
+			sp.setString(1, userid);
+			sp.registerOutParameter(2,java.sql.Types.INTEGER);
+			sp.execute(); // 执行存储过程 
+			adminValue=sp.getInt(2);//接收输出参数
+		
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+
+		return adminValue;
 	}
 }

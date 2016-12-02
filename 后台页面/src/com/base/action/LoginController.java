@@ -36,7 +36,7 @@ public class LoginController {
 		//System.out.println(userid+"  "+pwd);	
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
 		UserInfo ui=userInfoServiceImpl.getImage(userid);
-		
+		//System.out.println(ui.getImg());
 		String src="";
 		String name="";
 		if(ui!=null)
