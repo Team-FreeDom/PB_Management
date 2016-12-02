@@ -53,8 +53,7 @@ public class UserController {
 					 * String path = request.getSession().getServletContext()
 					 * .getRealPath("/imgdraw/");
 					 */
-					String path = ExcelReport.getWebRootUrl(request,
-							"/imgdraw/");
+					String path = ExcelReport.getWebRootUrl(request,"/imgdraw/");
 
 					// 得到上传的文件的文件名
 					String fileName = mFile.getOriginalFilename();
@@ -90,7 +89,7 @@ public class UserController {
 
 		CookieUtils.addCookie("image", filename, response);
 
-		return "user";
+		return "redirect:user.jsp";
 	}
 
 	// 获取个人信息

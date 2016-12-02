@@ -134,56 +134,50 @@ public class PersonalManageController {
 		return null;
 	}
 
-	// 修改人员信息
-	@RequestMapping("/upInfo.do")
-	public String upInfo(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
-		String id = request.getParameter("EworkerId");// 获取人员id
-		String name = request.getParameter("Ename");// 获取人员名字
-		if(name==null)
-			name="";
-		
-		String sex = request.getParameter("Esex");// 性别
-		if (sex == null) {
-			sex="";
-		}
-		String birthdate = request.getParameter("demo");// 获取人员出生日期
-		if (birthdate == null) {
-			birthdate="";
-		}
-		String category = request.getParameter("Eworkerclass");// 获取员工类别
-		if (category.equals("请选择")) {
-			category = "";
-		}
-		String attritube = request.getParameter("Estatus");// 获取人员身份属性
-		if (attritube.equals("请选择")) {
-			attritube = "";
-		}
-		String dept = request.getParameter("Edivision");// 获取人员部门
-		if (dept == null) {
-			dept="";
-		}
-		
-		String telephone = request.getParameter("Ephone");// 获取人员电话
-		if (telephone == null) {
-			telephone="";
-		}
-		
-		String idcard = request.getParameter("IDnumber");// 身份证
-		if (idcard == null) {
-			idcard="";
-		}
-		
-		String password = request.getParameter("Epassword");// 密码
-		if (password == null) {
-			password="";
-		}
-		
-		userinfoservice.upInfo(id, name, sex, birthdate, category, attritube,
-				dept, telephone, idcard, password);
-
-		return "mangeruser";
-	}
+	//修改人员信息
+			@RequestMapping("/upInfo.do")
+			public String upInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map){
+				String id=request.getParameter("EworkerId");//获取人员id
+				String name=request.getParameter("Ename");//获取人员名字
+				if(name.equals("")){
+					name=null;
+				}
+				String sex=request.getParameter("inlineRadioOptions");//性别
+				if(sex.equals("")){
+					sex=null;
+				}
+				String birthdate=request.getParameter("demo");//获取人员出生日期
+				if(birthdate.equals("")){
+					birthdate=null;
+				}
+				String category=request.getParameter("Eworkerclass");//获取员工类别 
+				if(category.equals("请选择")){
+					category=null;
+				}
+				String attritube=request.getParameter("Estatus");//获取人员身份属性
+				if(attritube.equals("请选择")){	
+					attritube=null;
+				}
+				String dept=request.getParameter("Edivision");//获取人员部门
+				if(dept.equals("")){
+					dept=null;
+				}
+				String telephone=request.getParameter("Ephone");//获取人员电话
+				if(telephone.equals("")){
+					telephone=null;
+				}
+				String idcard=request.getParameter("IDnumber");//身份证
+				if(idcard.equals("")){
+					idcard=null;
+				}
+				String password=request.getParameter("Epassword");//密码
+				if(password.equals("")){
+					password=null;
+				}
+				userinfoservice.upInfo(id,name,sex,birthdate,category,attritube,dept,telephone,idcard,password);
+				
+				return "mangeruser";
+			}
 
 	// 增加人员信息
 	@RequestMapping("/addInfo.do")
