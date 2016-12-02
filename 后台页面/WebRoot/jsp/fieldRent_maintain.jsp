@@ -214,7 +214,7 @@
 																		</select>  
 																		</td>
 																		<td>申报部门： <select name="deptS" id="deptSh">
-																				<option value="" id="deptS">请选择</option>
+																				<option value="" id="deptS">显示全部</option>
 
 																		</select>
 																		</td>
@@ -222,9 +222,8 @@
 																	<tr>
 																		<td>种植内容 <select name="contentS" id="contentSh"
 																			size="">
-																				<option value="">显示全部</option>
-																				<option value="玉米">玉米</option>
-																				<option value="棉花">棉花</option>
+																				<option value="" id="contentShh">显示全部</option>
+																				
 																		</select>  
 																		</td>
 																		<td>&nbsp;</td>
@@ -242,7 +241,7 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="3">
+										<td colspan="4">
 											<!-- <button type="button" class="btn btn-info button_style"
 												data-toggle="modal" data-target="#myModalAdd">
 												<span class="glyphicon glyphicon-plus"></span>
@@ -262,6 +261,7 @@
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>租赁人</th>
 										<th>申报部门</th>
@@ -278,7 +278,7 @@
 							</table>
 						</form>
 					</div>
-					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+					<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<form action="landManageUpdate.do" method="post"
 							id="landManageUpdate">

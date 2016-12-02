@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">维修审批</span></a></li>
 
 										</ul>
 									</li>
@@ -177,10 +177,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jspl"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+								<li><a><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a><i class="icon-user"></i>实习申请</a></li>
+                                <li><a><i class="icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 					</div>
@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<form action="" method="post"
 								enctype="multipart/form-data" name="formUserInfo" id="formUserInfo" >
 							<table id="manageusertable" class="cell-border" cellspacing="0" width="100%">
-
+							
                                     <thead >
                                     <tr bgcolor="#ECF1F5">
                                             <td colspan="3" id="button-left">
@@ -199,13 +199,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </td>
                                             <td colspan="5" >
                                             </td>
-                                             <td colspan="3" id="button-right">
-                                             <a href="../templet/PersonInfotemplet.zip"  class="btn btn-primary">点击下载导入模板</a>
+                                             <td colspan="3" id="button-right">  
+                                             <a href="../templet/PersonInfotemplet.zip"  class="btn btn-primary">点击下载导入模板</a>                                                                                    		                                        
                                              	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导入<tton>
                                              	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lead" id="exportid">导出<tton>
-                                          </td>
+                                          </td>                                              
                                         </tr>
-
+                                    
                                         <tr style="background:#eeeff4" >
                                             <th>选择</th>
                                             <th>员工编号</th>
@@ -221,11 +221,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </tr>
                                     </thead>
                                     <tbody class="text-center">
-
+                                        
                                     </tbody>
                                     <thead>
                                     	<tr>
-
+                                        	
                                         	<td colspan="12">
                                     			<label><input type="checkbox" name="0" class="ck-all" id="ck1"/>全选</label>
                                 				<label><input type="checkbox" name="0" class="ck-re" id="ck2"/>反选</label>
@@ -236,14 +236,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</form>
 						</div>
 					</div>
-
-
+                    
+                   
 
 				</div><!-- End Sidebar-->
-                			<!-- 弹出框-->
+                			<!-- 弹出框-->                 
                 			<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
                                   <div class="modal-dialog">
-                                  <form action="upInfo.do" method="post" role="form" id="userform" enctype="multipart/form-data">
+                                  <form action="upInfo.do" method="post" role="form" id="userform" enctype="multipart/form-data">  
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -253,40 +253,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <table class="table">
                                             <tr>
                                                 <td>员工编号 ： </td>
-                                                <td><input type="text" onFocus=this.blur() onClick="stop()"  class="form-control"  id="EworkerId" name="EworkerId"
+                                                <td><input type="text" onFocus=this.blur() onClick="stop()"  class="form-control"  id="EworkerId" name="EworkerId" 
                                                  ></td>
                                                 <td>姓名 ： </td>
                                                 <td><input type="text"  class="form-control" id="Ename" name="Ename"></td>
                                             </tr>
                                             <tr>
                                                 <td>性别 ： </td>
-                                                <td><input type="text"  class="form-control" id="Esex" name="Esex"></td>
+                                                <td id="sex-style2">
+                                                  	<label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex" value="男">男 
+                                                      </label>
+                                                    <label class="radio-inline">
+                                                      <input type="radio" name="inlineRadioOptions" id="sex" value="女">女
+                                                       </label>
+                                                </td>
                                                 <td>出生年月 ： </td>
                                                 <td class="input-style"
                                                 ><input class="laydate-icon" id="demo" name="demo"></td>
-                                            </tr>
+                                            </tr>                                                                                     
                                             <tr>
                                                 <td>员工类别 ： </td>
-                                                <td>
+                                                <td>                                               
                                                    <select class="form-control" name="Eworkerclass" id="Eworkerclass">
-                                                      <option id="EworkerclassId">请选择</option>
-                                                       <option id="EworkerclassId">在职员工</option>
-                                                        <option id="EworkerclassId">教师</option>
-                                                         <option id="EworkerclassId">公务员</option>
+                                                      <option id="EworkerclassId" value="">请选择</option> 
+                                                       <option id="EworkerclassId" value="在职员工">在职员工</option>
+                                                        <option id="EworkerclassId" value="教师">教师</option>
+                                                         <option id="EworkerclassId" value="公务员">公务员</option>
                                                     </select>
                                                 </td>
                                                 <td>身份属性 ： </td>
                                                 <td>
                                                 	<select class="form-control" name="Estatus" id="Estatus">
-                                                       <option id="EstatusID">请选择</option>
-
+                                                       <option id="EstatusID">请选择</option> 
+               
                                                     </select>
                                                 </td>
                                             </tr>
-
+                                            
                                             <tr>
                                                 <td>部门 ： </td>
-                                                <td>
+                                                <td>                                             	
                                                      <select class="form-control" name="Edivision" id="Edivision">
                                                       <option id="EdivisionID" value="">请选择</option>
                                                     </select>
@@ -294,18 +301,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <td>联系电话 ： </td>
                                                 <td><input type="text"  class="form-control" id="Ephone" name="Ephone"></td>
                                             </tr>
-
+                                            
                                             <tr>
                                             	<td>身份证号 ： </td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  class="form-control" id="IDnumber" name="IDnumber"></td>
                                             </tr>
-
+                                            
                                             <tr>
                                             	<td>密码修改 ： </td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  class="form-control" id="Epassword" name="Epassword"></td>
                                             </tr>
-
-
+                                            
+                                           
                                         </table>
                                       </div>
                                       <div class="modal-footer table-responsive">
@@ -331,14 +338,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														</button>
 														<h4 class="modal-title" id="myModalLabel">请选择要导入的文件</h4>
 													</div>
-
+													
 														<center>
 														<div class="modal-body" id="exportxsl" style="height:60px;">
 															<input type="file" id="exampleInputFile" name="fileResource">
 														</div>
-														</center>
+														</center>													
 													<div class="modal-footer">
-													<center>
+													<center>														
 														<button type="submit" class="btn btn-primary" id="certainimport">确定</button>
 														<button type="button" class="btn btn-default"
 															data-dismiss="modal" >取消</button>
@@ -348,7 +355,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</form>
 											</div>
 										</div>
-
+										
 
 
 										<!-- Modal 导入-->
@@ -364,16 +371,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														</button>
 														<h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
 													</div>
-
+													
 														<center>
 														<div class="modal-body" id="exportxsl" style="height:60px;">
 															<select name="dept" id="dept">
-																<option  id="EdeptID" value="1">全部</option>
+																<option  id="EdeptID" value="1">全部</option>							
 															</select>
 														</div>
-														</center>
+														</center>													
 													<div class="modal-footer">
-													<center>
+													<center>														
 														<button type="submit" class="btn btn-primary" id="certainExport">确定</button>
 														<button type="button" class="btn btn-default"
 															data-dismiss="modal" >取消</button>
@@ -383,10 +390,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												</form>
 											</div>
 										</div>
-
+                                
                                 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                 <form action="addInfo.do" method="post" role="form" id="adduserform" name="adduserform" enctype="multipart/form-data">
+                                  <div class="modal-dialog">           
+                                 <form action="addInfo.do" method="post" role="form" id="adduserform" name="adduserform" enctype="multipart/form-data">               
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -404,17 +411,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <td>性别 ： </td>
                                                 <td id="sex-style">
                                                   	<label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex1" value="男">男                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex1" class="sex" value="男" >男
+                                                     </label>
+
                                                     <label class="radio-inline">
-                                                      <input type="radio" name="inlineRadioOptions" id="sex2" value="女">女                                                   </label>
+                                                      <input type="radio" name="inlineRadioOptions" id="sex2" class="sex" value="女">女 
+                                                    </label>
                                                 </td>
 
                                                 <td>出生年月 ： </td>
                                                 <td class="input-style"
                                                 ><input class="laydate-icon" id="demo2" name="demo2" ></td>
                                             </tr>
-
-
+                                            
+                                            
                                             <tr>
                                                 <td>员工类别 ： </td>
                                                 <td>
@@ -432,7 +442,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </select>
                                                 </td>
                                             </tr>
-
+                                            
                                             <tr>
                                                 <td>部门 ： </td>
                                                 <td>
@@ -443,18 +453,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <td>联系电话 ： </td>
                                                 <td><input type="text"  id="phone" name="phone" class="form-control"></td>
                                             </tr>
-
+                                            
                                             <tr>
                                             	<td>身份证号 ： </td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  id="IDnumber1" name="IDnumber1" class="form-control"></td>
                                             </tr>
-
+                                            
                                             <tr>
                                             	<td>设置密码 ： </td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  id="password" name="password" class="form-control"></td>
                                             </tr>
-
-
+                                            
+                                           
                                         </table>
                                       </div>
                                       <div class="modal-footer table-responsive">
@@ -467,8 +477,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </form>
                                   </div>
                                 </div>
-
-
+                    
+            
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
@@ -481,7 +491,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/laydate.js"></script>
       <script src="../js/bootbox.min.js"></script>
-     <script src="../dist/jquery.cokie.min.js"></script>
+     <script src="../dist/jquery.cokie.min.js"></script>    
     <script src="../js/kg.js"></script>
     <script src="../js/myNeed/manageuser.js"></script>
     <script>
@@ -492,30 +502,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }();
     </script>
     <script>
-
-    /* $('#save').click(function() {
-    	$.ajax({
-			type : 'POST',
-			data :
-			//dataType : 'json',
-			url:'addInfo.do',
-			async : false,
-			cache : false,
-			error : function(request) {
-				bootbox.alert({
-           			  message: "error",
-           			  size: 'small'
-           		  });
-			},
-			success : function(data) {
-			}
-		});
-    }); */
-
-
-
-
-
+ 
+    
+    
+    
+    
+    
     </script>
   </body>
 </html>

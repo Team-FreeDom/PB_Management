@@ -63,4 +63,36 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
          <filter-name>loginFilter</filter-name>    
          <url-pattern>*.do</url-pattern>
     </filter-mapping> 
+    
+     <!-- TOMCAT移植到WEBLOGIC页面默认编码问题-->
+     <!-- 解决方法：为下载的文件自动装配相应的mime后缀 -->  
+    <mime-mapping>  
+        <extension>doc</extension>  
+        <mime-type>application/vnd.ms-word</mime-type>    
+    </mime-mapping>  
+      
+    <mime-mapping>   
+        <extension>xls</extension>   
+        <mime-type>application/msexcel</mime-type>   
+    </mime-mapping>  
+      
+    <mime-mapping>    
+       <extension>ppt</extension>  
+       <mime-type>application/vnd.ms-powerpoint</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>docx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.wordprocessingml.document</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>pptx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.presentationml.presentation</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>xlsx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</mime-type>  
+    </mime-mapping> 
 </web-app>

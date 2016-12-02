@@ -29,9 +29,7 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("landApplyDao")
 public class LandApplyDaoImpl implements LandApplyDao {
 
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;	
@@ -193,7 +191,12 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 	
 	public List<RentCollection> getRentCollection(int bid)
-	{			
+	{	
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		List<RentCollection> list=new ArrayList<RentCollection>();
 		RentCollection rc=null;		
 		List<RentAdd> lra=getRentAdd(bid);
@@ -252,6 +255,11 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public List<RentAdd> getRentAdd(int bid)
 	{
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		RentAdd ra=null;
 		List<RentAdd> lra=new ArrayList<RentAdd>();
 		
@@ -286,6 +294,10 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public Long getApplyCount(String date)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		System.out.println(date);	
 		Long applyCount=(long) 0;		
 		
@@ -312,6 +324,10 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public int submitApply(String userid,String lidList,String str)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		int flag=0;
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
@@ -395,6 +411,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 	
 	public void endAllRent(){
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 		
 			try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(

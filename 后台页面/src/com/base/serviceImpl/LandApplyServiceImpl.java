@@ -146,7 +146,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	/*
 	 * bname,startTime,endTime,status为筛选条件，规定传入存储过程的整型参数，若没有，则传-1
 	 * */
-	public ApplyList getselfApply(String applicantId,String bname,String startTime,String endTime,String status,int page,int length)
+	public ApplyList getselfApply(String applicantId,String bname,String status,int page,int length)
 	{
 		int start=0;
 		int end=0;
@@ -155,14 +155,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		if(bname!=null&&bname.equals("")){
 			bname=null;			
 		}
-		if(startTime!=null&&startTime.equals(""))
-		{
-			startTime=null;
-		}
-		if(endTime!=null&&endTime.equals(""))
-		{
-			endTime=null;
-		}
+		
 		System.out.println(status);
 		if(status==null){
 			statusZ=-1;
@@ -171,7 +164,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		}
 		
 		
-		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname, startTime, endTime, statusZ, page, length);
+		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname,statusZ, page, length);
 		
 		return al;
 	}
@@ -200,7 +193,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }   
   
     
-    public void myFameCancel1(int la_id,String info_str)
+    public void myFameCancel1(int la_id,String info_str,int tag)
     {
     	 //获得插入的消息语句
   	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
@@ -213,6 +206,13 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
         
         //向消息表中插入数据
         checkViewDaoImpl.insertMessage(insertStr);
+        String landstr=la.getLid();
+        landstr='('+landstr+')';
+        if(tag==1){
+        	
+        	//把相同土地的状态为锁定的土地状态变为审核中
+    		checkViewDaoImpl.releaseInfo(landstr);
+        }
         
     }
     

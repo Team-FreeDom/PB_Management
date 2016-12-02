@@ -42,6 +42,11 @@ $(document)
 													"orderable" : false, // 禁用排序
 													"sDefaultContent" : "",
 													"sWidth" : "10%"
+												},{
+													"mData" : "landname",
+													"orderable" : true, // 禁用排序
+													"sDefaultContent" : "",
+													"sWidth" : "8%"
 												},
 												{
 													"mData" : "lid",
@@ -163,6 +168,17 @@ $(document)
 								
 								i++;
 							}
+							
+							i=0;
+							for ( var item in data[2]) {
+								
+								$("#contentShh").after(
+										"<option value=" + data[2][i] + ">"
+												+ data[2][i]+ "</option>");
+								
+								i++;
+								
+							}
 
 						}
 
@@ -197,6 +213,8 @@ $(document)
 /* 土地租赁记录修改-----start */
 function theEdit(obj) {
 	var lr_id = obj.id;
+	
+	//$("#deptLaLa").val("");
 	$.ajax({
 		type : 'POST',
 		data : {
@@ -213,12 +231,13 @@ function theEdit(obj) {
 
 			var i = 0;
 			for ( var item in data) {
-
+				
 				$("#bname").val(data[i].bname);
 				$("#username").val(data[i].name);
-				$("#deptLaLa option[value=" + data[i].applydept + "]").attr(
+				$("#deptLaLa option[value=" + data[i].applydept + "]").prop(
 						"selected", true);
-
+				//$("#deptLaLa").val();
+				
 				$("#lid").val(data[i].lid);
 				$("#lr_id").val(data[i].lr_id);
 				// $("#lname").val(data[i].landname);
@@ -237,7 +256,7 @@ function theEdit(obj) {
 
 	});
 
-	//$("#rent_edit").modal('show');
+	$("#myModalEdit").modal('show');
 }
 
 /* 土地租赁记录修改-------end */
@@ -294,6 +313,12 @@ $(document).delegate('#submitS', 'click', function() {
 						},
 						{
 							"mData" : "bname",
+							"orderable" : false, // 禁用排序
+							"sDefaultContent" : "",
+							"sWidth" : "10%"
+						},
+						{
+							"mData" : "landname",
 							"orderable" : false, // 禁用排序
 							"sDefaultContent" : "",
 							"sWidth" : "10%"
@@ -389,7 +414,19 @@ $(document).delegate('#submitS', 'click', function() {
 $(document).delegate('#certainExport', 'click', function() {
 	
 	$("#lead").modal('hide');
+	var count=$("#exportDept option").size();
+	if(count==1){
+		
+		bootbox.alert({
+			message : "目前没有任何数据,不能导出",
+			size : 'small'
+		});
+		
+	}else if(count>1){
+		
 	$("#landRentForm").submit();
+	
+	}
 	
 });
 /*提交导出学院----end */
@@ -398,6 +435,23 @@ $(document).delegate('#certainExport', 'click', function() {
 
 /*土地租赁记录修改---start*/
 $(document).delegate('#definite', 'click', function() {
+	
+	var dept=$("#deptLaLa").val();
+	var planCareer=$("#planCareer").val();
+	if(dept==""){
+		 bootbox.alert({
+				message : "请选择申报学院",
+				size : 'small'
+			});
+		 return;
+	}
+	if(planCareer==""){
+		 bootbox.alert({
+				message : "计划从事内容不能为空",
+				size : 'small'
+			});
+		 return;
+	}
 		
 	$("#landManageUpdate").submit();
 	

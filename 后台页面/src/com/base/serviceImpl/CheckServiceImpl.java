@@ -55,20 +55,25 @@ public class CheckServiceImpl implements checkService {
 	
 	
 	@Override
-	public void agreeApply(String landstr,String recordstr,String infostr) {
+	public int agreeApply(String landstr,String recordstr,String infostr) {
 		System.out.println("agreeApply---start");
 		//获得插入的消息语句
 		String insertStr=MessageUtils.getInsertStr(infostr,2);		
 		System.out.println(insertStr);
-		//把审核中的改为待缴费		
-		checkViewDaoImpl.updateStatusP(recordstr, 1);		 
 		
+		//把审核中的改为待缴费		
+		//checkViewDaoImpl.updateStatusP(recordstr, 1);	
+		
+		int tag=checkViewDaoImpl.agreeInfo(recordstr, 1);
+		System.out.println(tag+"  hello");
+		if(tag==1){
 		//把相同土地的其他申请置为锁定
-		 checkViewDaoImpl.changeSolid(landstr, 4, 2);
+		 checkViewDaoImpl.lockInfo(landstr);
 		//向消息表中插入信息 
 		 checkViewDaoImpl.insertMessage(insertStr);
+		}
 		 
-		 System.out.println("agreeApply---end");
+		 return tag;
 	}
 	
 	public void cancelPayFor(String landstr, String recordstr, String infostr){
@@ -80,7 +85,7 @@ public class CheckServiceImpl implements checkService {
 		checkViewDaoImpl.updateStatus(recordstr, 10);
 		
 		//把相同土地的状态为锁定的土地状态变为审核中
-		checkViewDaoImpl.changeSolid(landstr, 2, 4);
+		checkViewDaoImpl.releaseInfo(landstr);
 		
 		//向消息表中插入信息 
 		 checkViewDaoImpl.insertMessage(insertStr);
@@ -98,8 +103,8 @@ public class CheckServiceImpl implements checkService {
 			//把特定记录的状态改为申请成功，并将记录插入土地租赁历史表中
 			checkViewDaoImpl.payForSuccess(recordstr, 6);
 			
-			//把相同土地的状态为锁定的土地状态变为未交费
-			checkViewDaoImpl.changeSolid(landstr, 5, 4);
+			//把相同土地的状态为锁定的土地状态变为同类竞争
+			checkViewDaoImpl.confirmInfo(landstr);
 			
 			//向消息表中插入信息 
 			 checkViewDaoImpl.insertMessage(insertStr);

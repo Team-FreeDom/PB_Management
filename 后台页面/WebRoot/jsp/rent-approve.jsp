@@ -118,7 +118,7 @@
                                             <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="#"><span class="text">基地审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">维修审批</span></a></li>
 
 										</ul>
 								<li class="menuItem nav-parent"><a> <i
@@ -226,7 +226,7 @@
 																			</select>  
 																			</td>
 																			<td>申请人: <select name="username" id="usernameid">
-																					<option value="" id="applicantId">请选择</option>
+																					<option value="" id="applicantId">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>
@@ -256,23 +256,20 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 
 											<th>序号</th>
 											<th>开始日期</th>
-											<th>结束日期
-											</td>
-											<th>基地名</th>
+											<th>结束日期	</th>
+											<th>基地名</th>											
 											<th>土地编号</th>
+											<th>土地名称</th>
 											<th>申请人</th>
-											<th>申报部门
-											</td>
-											<th>已租用次数
-											</td>
-											<th>种植内容
-											</td>
+											<th>申报部门</th>
+											<th>已租用次数</th>
+											<th>种植内容	</th>
 
 										</tr>
 									</thead>
@@ -379,7 +376,7 @@
 																			</td>
 																			<td>申请人: <select name="username2"
 																				id="usernameid2">
-																					<option value="" id="applicantId2">请选择</option>
+																					<option value="" id="applicantId2">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>
@@ -406,22 +403,19 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
 										</tr>
 										<tr style="background:#eeeff4">
 											<th>序号</th>
 											<th>开始日期</th>
-											<th>结束日期
-											</td>
-											<th>基地名</th>
+											<th>结束日期</th>
+											<th>基地名</th>											
 											<th>土地编号</th>
+											<th>土地名称</th>
 											<th>申请人</th>
-											<th>申报部门
-											</td>
-											<th>已租用次数
-											</td>
-											<th>种植内容
-											</td>
+											<th>申报部门</th>
+											<th>已租用次数</th>
+											<th>种植内容</th>
 
 										</tr>
 									</thead>

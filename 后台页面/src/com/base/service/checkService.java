@@ -62,7 +62,7 @@ public interface checkService {
 	public void getApplys(int flag,String la_id) throws SQLException;
 	
 	
-	public void agreeApply(String landstr,String recordstr,String infostr);
+	public int agreeApply(String landstr,String recordstr,String infostr);
 	
 	public void cancelPayFor(String landstr, String recordstr, String infostr);
 	

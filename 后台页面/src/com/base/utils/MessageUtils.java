@@ -85,9 +85,13 @@ public class MessageUtils {
       Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
 		
     	int year = c.get(Calendar.YEAR);  
-    	int month=c.get(Calendar.MONTH);
+    	int month=c.get(Calendar.MONTH)+1;
         int date=c.get(Calendar.DATE);
-    	String dateStr=""+year+"-"+month+"-"+date;
+        String month1=(month>=10?""+month:"0"+month);
+        String date1=(date>=10?""+date:"0"+date);
+       
+        String dateStr=""+year+"-"+month1+"-"+date1;
+       
     	String msg="";
     	
 		JSONArray obj = JSONArray.fromObject(infoStr);

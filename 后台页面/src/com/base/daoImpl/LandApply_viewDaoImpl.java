@@ -38,31 +38,29 @@ public class LandApply_viewDaoImpl {
 	/*
 	 * 可以通过七个参数查询用户租赁历史 
 	 * */
-	public ApplyList getapplys(String applicantId,String bname,String startTime,String endTime,int status,int page,int length)
+	public ApplyList getapplys(String applicantId,String bname,int status,int page,int length)
 	{
 		Connection conn = null;
 		CallableStatement sp = null;
 		ResultSet rs = null;
-		System.out.println(applicantId+"  "+bname+"  "+startTime+"   "+endTime+"  "+status);
+		
 		ApplyList al=new ApplyList();
 		LandApply_view lv=null;
 		List<LandApply_view> list=new ArrayList<LandApply_view>();
 		
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.landapplys(?,?,?,?,?,?,?,?)}");
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.landapplys(?,?,?,?,?,?)}");
 			sp.setString(1,applicantId);
-			sp.setString(2, bname);
-			sp.setString(3, startTime);
-			sp.setString(4,endTime);
-			sp.setInt(5, status);
-			sp.setInt(6, page);
-			sp.setInt(7,length);
-			sp.registerOutParameter(8,java.sql.Types.INTEGER);
+			sp.setString(2, bname);			
+			sp.setInt(3, status);
+			sp.setInt(4, page);
+			sp.setInt(5,length);
+			sp.registerOutParameter(6,java.sql.Types.INTEGER);
 			
 			sp.execute();   //执行存储过程
 			rs=sp.getResultSet();  //获得结果集
-			al.setRecordsTotal(sp.getInt(8));
+			al.setRecordsTotal(sp.getInt(6));
 			
 			while(rs.next())
 			{

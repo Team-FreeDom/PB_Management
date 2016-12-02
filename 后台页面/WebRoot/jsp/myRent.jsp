@@ -193,6 +193,7 @@
 										<th>开始日期</th>
 										<th>租期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>状态</th>
 										<th>操作</th>
@@ -325,17 +326,17 @@
 										style="background:#4D719B; color:#FFF">
 										<button type="button" class="close" data-dismiss="modal"
 											aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel"></h4>
+										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
 										<h5>您确定要删除吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!--
+										
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                     -->
+                    
 										<button type="button" class="btn btn-primary" id="delSubmit">
 											确认</button>
 									</div>
@@ -563,7 +564,7 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td colspan="1">租赁历史</td>
+										<td colspan="1">处理结果</td>
 										<td colspan="6">
 											<!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
 											<ul id="dropdown_show">
@@ -578,7 +579,8 @@
 
 																		</select>
 																		</td>
-																		<td>起止年份： <select name="startTime"
+																		
+																		<!-- <td>起止年份： <select name="startTime"
 																			id="startTimeUnion">
 																				<option value="">请选择</option>
 																				<option value="2015">2015</option>
@@ -588,10 +590,8 @@
 																				<option value="2015">2015</option>
 																				<option value="2016">2016</option>
 																		</select>年
-																		</td>
-																	</tr>
-																	<tr>
-
+																		</td> -->
+																		
 																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
 																			size="1">
 																				<option value="-1">显示全部</option>
@@ -600,6 +600,7 @@
 																		</select>
 																		</td>
 																	</tr>
+																	
 																	<tr>
 																		<td colspan="2">
 																			<button type="reset" class="btn btn-primary">重置</button>
@@ -618,6 +619,7 @@
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>最终状态期</th>
 										<th>详情</th>

@@ -20,9 +20,7 @@ import com.base.po.RentMaintain;
 @Repository("landLayout_infoDao")
 public class LandLayout_infoDaoImpl {
 	
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -47,6 +45,10 @@ public class LandLayout_infoDaoImpl {
 	
 	public List<Layout_InfoView> getlayout_info(int bid)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		Session session=sessionFactory.openSession();			
 		List<Layout_InfoView> li=new ArrayList<Layout_InfoView>();
 		Layout_InfoView liv;

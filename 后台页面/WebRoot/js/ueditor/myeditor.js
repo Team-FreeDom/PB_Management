@@ -25,7 +25,6 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", "#sendNotifitation", function() {
-		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥Ê±ï¿½à¼­ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ê§È¥ï¿½Ë½ï¿½ï¿½ã£¬ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½getTextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		// var range = UE.getEditor('editor').selection.getRange();
 		// range.select();
 		//alert("1234566");
@@ -45,13 +44,13 @@ $(document).ready(function() {
 			},
 			async : false,
 			cache : false,
-			error : function(request) {
+			error : function() {
 				bootbox.alert({
 					message : "·¢²¼Í¨ÖªÊ§°Ü",
 					size : 'small'
 				});
 			},
-			success : function(em) {
+			success : function() {
 				bootbox.alert({
 					message : "·¢²¼Í¨Öª³É¹¦",
 					size : 'small'
