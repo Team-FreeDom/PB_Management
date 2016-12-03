@@ -794,5 +794,18 @@ public class ExcelReport{
         return fileDirPath;
         
     }
+    
+    
+    //方法功能描述:       判断是否是IE浏览器   
+    public static boolean isMSBrowser(HttpServletRequest request) {  
+        String[] IEBrowserSignals = {"MSIE", "Trident", "Edge"};  
+        String userAgent = request.getHeader("User-Agent");  
+        for (String signal : IEBrowserSignals) {  
+            if (userAgent.contains(signal)){  
+                return true;  
+            }  
+        }  
+        return false;  
+    }  
 
 }
