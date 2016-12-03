@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i>
+											<i class="icon-circle text-danger"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>

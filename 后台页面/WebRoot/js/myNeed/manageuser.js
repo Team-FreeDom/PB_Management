@@ -29,7 +29,7 @@ $("#certainExport").click(function(){
 $("#exportid").click(function(){
 	$("#dept").val("1");
 
-})
+});
 //增加模态框每次点击赋空值
 $("#addOne").click(function(){
 			$("#workerId").val("");
@@ -45,7 +45,7 @@ $("#addOne").click(function(){
 		    $("#phone").val("");
 	        $("#IDnumber1").val("");
 	        $("#password").val("");
-			 })
+			 });
    //限制修改用户id
     function stop(){
     	 bootbox.alert({
@@ -227,9 +227,11 @@ $("#addOne").click(function(){
       //删除人员基本信息
       var flag=0;
         $('#deleteOne').click(function() {
+          flag=0;
         	$("#manageusertable input[name='idname']").each(function () {
 				if($(this).prop("checked")==true){
 					flag=1;
+          return false;
 			}
     	});
 		if(flag==0){
@@ -264,13 +266,14 @@ $("#addOne").click(function(){
                        			  size: 'small'
                        		  });
                             	userInfo.draw(false);
+                              $("#ck2").prop("checked", false);
+                              $("#ck1").prop("checked", false);
                             }
                         });
         	    	}
-
-        	        console.log('This was logged in the callback: ' + result);
         	    }
         	});
+
 		}
         });
       //增加人员基本信息
@@ -350,6 +353,8 @@ $("#addOne").click(function(){
              			  size: 'small'
              		  });
                 	userInfo.draw(false);
+                  $("#ck2").prop("checked", false);
+                  $("#ck1").prop("checked", false);
                 }
             });
             $("#add").modal("hide");
@@ -376,28 +381,17 @@ $("#addOne").click(function(){
 		           		  });
 					},
 					success : function(data) {
-						var i = 0;
-						//$("#edit").modal('show');
-						for ( var item in data) {
-							$("#EworkerId").val(data[i].id);
-							$("#Ename").val(data[i].username);
-							//$("#sex[value=" + data[i].sex + "]").attr("checked",true);//男和女
-							$("#sex[value=" + data[i].sex + "]").prop("checked",true);
-              $("#Edivision").val(data[i].dept);//部门
-							//$("#Edivision option[value=" + data[i].dept + "]").prop(
-							//		"selected", true);//部门
-							$("#demo").val(data[i].birth);//出生日期
-              $("#Estatus").val(data[i].attritube);
-							//$("#Estatus option[value=" + data[i].attritube + "]").prop(
-							//		"selected", true);//身份属性
-						  //  $("#Eworkerclass option[value=" + data[i].category + "]").prop(
-							//		"selected", true);//员工类别
-              $("#Eworkerclass").val(data[i].category);
-							$("#Ephone").val(data[i].telephone);
-							$("#IDnumber").val(data[i].idcard);
-							$("#Epassword").val(data[i].password);
-							}
-							i++;
+							$("#EworkerId").val(data[0].id);
+							$("#Ename").val(data[0].username);
+							if(data[0].sex != ''){
+							$("#sex[value=" + data[0].sex + "]").prop("checked",true);}
+              $("#Edivision").val(data[0].dept);//部门
+							$("#demo").val(data[0].birth);//出生日期
+              $("#Estatus").val(data[0].attritube);
+              $("#Eworkerclass").val(data[0].category);
+							$("#Ephone").val(data[0].telephone);
+							$("#IDnumber").val(data[0].idcard);
+							$("#Epassword").val(data[0].password);
 						}
 				});
 

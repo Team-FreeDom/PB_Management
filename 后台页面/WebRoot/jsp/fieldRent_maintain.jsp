@@ -100,7 +100,7 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small></small>
+										<i class="icon-circle text-danger"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
@@ -223,7 +223,7 @@
 																		<td>种植内容 <select name="contentS" id="contentSh"
 																			size="">
 																				<option value="" id="contentShh">显示全部</option>
-																				
+
 																		</select>  
 																		</td>
 																		<td>&nbsp;</td>

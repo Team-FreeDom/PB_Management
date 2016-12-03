@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/user.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-   
+
     <style type="text/css">
 		#preview{width:120px;height:120px;border:1px solid #000;border-radius:60px;overflow:hidden;}
 		#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i>
+											<i class="icon-circle text-danger"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>
@@ -268,10 +268,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-     <script src="../dist/jquery.cokie.min.js"></script>   
+     <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/kg.js"></script>
     <script src="../js/user.js"></script>
     <script>

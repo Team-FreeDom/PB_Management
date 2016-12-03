@@ -93,7 +93,7 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small></small>
+										<i class="icon-circle text-danger"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
@@ -332,11 +332,11 @@
 										<h5>您确定要删除吗？</h5>
 									</div>
 									<div class="modal-footer">
-										
+
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                    
+
 										<button type="button" class="btn btn-primary" id="delSubmit">
 											确认</button>
 									</div>
@@ -579,7 +579,7 @@
 
 																		</select>
 																		</td>
-																		
+
 																		<!-- <td>起止年份： <select name="startTime"
 																			id="startTimeUnion">
 																				<option value="">请选择</option>
@@ -591,7 +591,7 @@
 																				<option value="2016">2016</option>
 																		</select>年
 																		</td> -->
-																		
+
 																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
 																			size="1">
 																				<option value="-1">显示全部</option>
@@ -600,7 +600,7 @@
 																		</select>
 																		</td>
 																	</tr>
-																	
+
 																	<tr>
 																		<td colspan="2">
 																			<button type="reset" class="btn btn-primary">重置</button>

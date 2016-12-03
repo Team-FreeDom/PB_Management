@@ -36,10 +36,10 @@
               <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
               <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
-      
+
           <span class="teachCenterTitle">基地管理系统</span>
           <!-- Navbar Left -->
-    
+
           <!-- Navbar Right -->
           <div class="navbar-right">
               <!-- Notifications -->
@@ -48,16 +48,16 @@
                        <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
                       <!-- <ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <strong>未读消息列表</strong>
-                          </li>    
+                          </li>
                           <li class="dropdown-menu-footer text-center">
                               <a href="../teach/notifications.html">更多消息</a>
                           </li>
                       </ul> -->
-    
+
                   </li>
                   <li>
                       <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
@@ -65,7 +65,7 @@
                       </a>
                   </li>
               </ul>
-    
+
               <!-- End Notifications -->
           </div>
           <!-- End Navbar Right -->
@@ -76,14 +76,14 @@
 
 	<div class="container-fluid content">
     	<div class="row">
-        	
+
         	<div class="sidebar">
 					<div class="sidebar-collapse">
 						<!-- Sidebar Header Logo-->
 						<div class="sidebar-header ">
 							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
 						</div>
-						
+
 						<!-- Sidebar Menu-->
 						<div class="sidebar-menu" style="height: 384px;">
 							<nav id="menu" class="nav-main" role="navigation">
@@ -94,20 +94,20 @@
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i> 
+											<i class="icon-circle text-danger"></i> 
 											<small></small>
 											<!--ms-if-->
 										</div>
 									</div>
 									<div class="divider2"></div>
-									
-									
+
+
 									<li class="menuItem">
 										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
-									
+
 									 <li class="menuItem nav-parent">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
@@ -145,7 +145,7 @@
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -157,8 +157,8 @@
 											<li><a href="#"><span class="text">实习分析</span></a></li>
 											<li><a href="#"><span class="text">实习基地统计</span></a></li>
 										</ul>
-									</li>									
-									
+									</li>
+
 								</ul>
 							</nav>
 						</div>
@@ -171,9 +171,9 @@
 						</div>
 					</div>
 					<!-- End Sidebar Footer-->
-				</div>   <!-- End Sidebar--> 
-		        
-                
+				</div>   <!-- End Sidebar-->
+
+
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
 					<div class="page-header">
@@ -198,7 +198,7 @@
 						<div class="col-lg-12">
 
 								<h1>发送通知公告</h1>
-							
+
 						</div>
 
 						<div class="col-lg-12 form-group">
@@ -215,7 +215,7 @@
                                     </select>
                                   </div>
                                 </div>
-                                </fieldset> 
+                                </fieldset>
                               	<fieldset>
                                 <div class="form-group" id='part' style="display:none;">
                                     <label for="#collage_list" class="col-sm-3 control-label">部门</label>
@@ -233,10 +233,10 @@
                                                                                                                 通知标题：<input type="text"  id="title"></input>
                                  </fieldset>
                               </form>
-                              </div> 
+                              </div>
 
 							</div>
-						
+
                         <div class="col-lg-12 form-group">
                         	<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
                         </div>
@@ -245,16 +245,16 @@
                           <button id="sendNotifitation" class="btn btn-default">发布通知</button>
                           <button id="sendMessage" class="btn btn-default" style="display:none";>发布消息</button>
                           <button id="setContent" class="btn btn-default">清空内容</button>
-                         
-                        
+
+
                         </div>
                         </div>
 
 					</div>
-				</div><!-- End Sidebar-->                 
-                
-                    
-            
+				</div><!-- End Sidebar-->
+
+
+
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
@@ -267,7 +267,7 @@
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <script src="../dist/jquery.cokie.min.js"></script> 
+    <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/kg.js"></script>
     <script type="text/javascript" src="../js/ueditor/myeditor.js"></script>
   </body>
