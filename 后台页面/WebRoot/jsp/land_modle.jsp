@@ -111,16 +111,16 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
-									<div class="bk-avatar">
-										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
-											src="" id="imageMain"></a>
-										<!--ms-if-->
+										<div class="bk-avatar">
+											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
+											<!--ms-if-->
+										</div>
+										<div class="bk-padding-top-10">
+											<i class="icon-circle text-danger"></i>
+											<small></small>
+											<!--ms-if-->
+										</div>
 									</div>
-									<div class="bk-padding-top-10">
-										<i class="icon-circle text-danger"></i> <small></small>
-										<!--ms-if-->
-									</div>
-								</div>
 								<div class="divider2"></div>
 
 

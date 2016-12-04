@@ -40,7 +40,7 @@ $(document).ready(function() {
 			url : 'saveNotification.do',// ��̨�޸�
 			data : {
 				data : message,
-				title:"ceshi"
+				title: title
 			},
 			async : false,
 			cache : false,

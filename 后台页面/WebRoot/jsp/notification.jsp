@@ -60,7 +60,7 @@
 
                   </li>
                   <li>
-                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                      <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
                           <i class="icon-remove"></i>
                       </a>
                   </li>
@@ -90,11 +90,11 @@
 								<ul class="nav nav-sidebar">
 									<div class="panel-body text-center">
 										<div class="bk-avatar">
-											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-danger"></i> 
+											<i class="icon-circle text-danger"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>
@@ -263,6 +263,7 @@
     <script src="../js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../dist/bootbox.min.js"></script>
     <script src="../dist/jquery.cokie.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../js/ueditor/ueditor.all.min.js"></script>
