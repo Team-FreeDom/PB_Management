@@ -33,9 +33,10 @@ public class LoginController {
 	
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
-		System.out.println(userid+"  "+pwd);	
+		//System.out.println(userid+"  "+pwd);	
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
 		UserInfo ui=userInfoServiceImpl.getImage(userid);
+		//System.out.println(ui.getImg());
 		String src="";
 		String name="";
 		if(ui!=null)
@@ -43,10 +44,9 @@ public class LoginController {
 		  src=ui.getImg();
 		  name=ui.getName();
 		}
-		//System.out.println(name);
+	
 		if(adminValue!=-1)
 		{
-			//System.out.println("µÇÂ¼³É¹¦");
 			CookieUtils.addCookie("username", userid, response);
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
@@ -60,11 +60,8 @@ public class LoginController {
 			}
 			return "redirect:jsp/index.do";
 		}else{
-			//System.out.println("µÇÂ¼Ê§°Ü");
 			return "redirect:login_soft.html";
 		}
-		
-	
 	}
 	
 	

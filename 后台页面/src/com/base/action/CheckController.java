@@ -67,7 +67,7 @@ public class CheckController {
 		Integer flag = Integer.valueOf(request.getParameter("flag"));
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		;
+		
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -109,7 +109,7 @@ public class CheckController {
 		Integer flag = Integer.valueOf(request.getParameter("flag"));
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		;
+		
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -147,13 +147,13 @@ public class CheckController {
 		String infostr = request.getParameter("infostr");
 		String landstr = request.getParameter("landstr");
 
-		checkservice.agreeApply(landstr, recordstr, infostr);
+		int tag=checkservice.agreeApply(landstr, recordstr, infostr);
         
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
 	
-		
+		getObj.put("tag", tag);
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());

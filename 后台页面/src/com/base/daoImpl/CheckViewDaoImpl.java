@@ -18,6 +18,7 @@ import com.base.po.CheckList;
 import com.base.po.CheckView;
 import com.base.po.LandApply;
 import com.base.po.UserInfo;
+import com.base.utils.CookieUtils;
 import com.base.utils.SqlConnectionUtils;
 
 import java.sql.CallableStatement;
@@ -105,7 +106,7 @@ public class CheckViewDaoImpl {
 	public CheckList getLandApply(int id, int pageindex, int size,
 			String basename, String username, String usercollage)
 			throws SQLException {
-		CheckList ck = new CheckList();
+		
 		List<CheckView> list = new ArrayList<CheckView>();
 		int recordsTotal = 0;
 		Connection conn = null;
@@ -150,6 +151,8 @@ public class CheckViewDaoImpl {
 		} finally {
 			SqlConnectionUtils.free(conn, sp, rs);
 		}
+		
+		CheckList ck = new CheckList();
 		ck.setRecordsTotal(recordsTotal);
 		ck.setData(list);
 		return ck;
@@ -335,5 +338,85 @@ public class CheckViewDaoImpl {
 		System.out.println("更改完毕");
 
 	}
+	
+	//同意申请，将审核状态的变为锁定状态，同时给锁定状态的发送通知
+		public void lockInfo(String landstr) {
+			
+			Session session = sessionFactory.openSession();
+			try {
+				// hibernate调用存储过程(无返回参数)
+				SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.trans_lock(?)}");
+				sqlQuery.setString(0,landstr);				
+				sqlQuery.executeUpdate();
+			} finally {
+				session.close();
+			}		
+
+		}
+		
+		//取消交费，将锁定状态的变为审核状态，发送通知
+				public void releaseInfo(String landstr) {
+					
+					Session session = sessionFactory.openSession();
+					try {
+						// hibernate调用存储过程(无返回参数)
+						SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.trans_pay(?)}");
+						sqlQuery.setString(0,landstr);				
+						sqlQuery.executeUpdate();
+					} finally {
+						session.close();
+					}		
+
+				}
+				
+				
+				//取消交费，将锁定状态的变为审核状态，发送通知
+				public void confirmInfo(String landstr) {
+					
+					Session session = sessionFactory.openSession();
+					try {
+						// hibernate调用存储过程(无返回参数)
+						SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`trans_fail`(?)}");
+						sqlQuery.setString(0,landstr);				
+						sqlQuery.executeUpdate();
+					} finally {
+						session.close();
+					}		
+
+				}
+				
+				//同意申请，将审核中的记录变为交费中，判断土地编号是否有相同的，返回flag值
+				public int agreeInfo(String recordStr, int status) {
+					
+					int tag=0;					
+					Connection conn = null;
+					CallableStatement sp = null;
+					ResultSet rs = null;
+					Session session = sessionFactory.openSession();
+					
+					try {
+						conn = (Connection) SessionFactoryUtils.getDataSource(
+								sessionFactory).getConnection();
+						sp = (CallableStatement) conn
+								.prepareCall("{CALL baseweb.agree_apply(?,?,?)}");
+						sp.setString(1, recordStr);	
+						sp.setInt(2, status);
+						sp.registerOutParameter(3, java.sql.Types.INTEGER);						
+						sp.execute();
+						
+						tag=sp.getInt(3);
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+					}finally {
+						SqlConnectionUtils.free(conn, sp, null);
+					}		
+
+					return tag;
+				}	
+				
+						
 
 }

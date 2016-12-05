@@ -26,6 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
                 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
+             <style>
+    	#laydate_ys{
+			width:121px;}
+    </style>
+
             </head>
 
             <body>
@@ -49,14 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <i class="icon-envelope"><span class="badge msg"></span></i>
                                         <!--ms-if-->
                                     </a>
-                                    <!--  <ul class="dropdown-menu">
-							<li class="dropdown-header" style="text-align: center;">
-                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>
-                          <li class="dropdown-menu-footer text-center">
-                              <a href="getMessage.do">更多消息</a>
-                          </li>
-						</ul>  -->
                                 </li>
                                 <li>
                                     <a href="../loginout.do" class="dropdown-toggle notification-icon">
@@ -93,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <!--ms-if-->
                                                 </div>
                                                 <div class="bk-padding-top-10">
-                                                    <i class="icon-circle text-success"></i>
+                                                    <i class="icon-circle text-danger"></i>
                                                     <small></small>
                                                     <!--ms-if-->
                                                 </div>
@@ -252,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 
-                                
+
                         </div>
                     </div>
                     <!-- End Sidebar-->

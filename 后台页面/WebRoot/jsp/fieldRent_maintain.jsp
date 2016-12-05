@@ -10,7 +10,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>土地租赁维护</title>
+<title>湖南农业大学基地管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -55,11 +55,11 @@
 					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
 						<!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                                 <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                            </li>    
+                            </li>
                             <li class="dropdown-menu-footer text-center">
                                  <a href="getMessage.do">更多消息</a>
                             </li>
@@ -100,7 +100,7 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small></small>
+										<i class="icon-circle text-danger"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 
 
 								<li class="menuItem">
-								<a href="index.do"> 
+								<a href="index.do">
 								<i	class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
@@ -144,7 +144,7 @@
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
@@ -198,7 +198,7 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-																			
+
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
@@ -214,7 +214,7 @@
 																		</select>  
 																		</td>
 																		<td>申报部门： <select name="deptS" id="deptSh">
-																				<option value="" id="deptS">请选择</option>
+																				<option value="" id="deptS">显示全部</option>
 
 																		</select>
 																		</td>
@@ -222,9 +222,8 @@
 																	<tr>
 																		<td>种植内容 <select name="contentS" id="contentSh"
 																			size="">
-																				<option value="">显示全部</option>
-																				<option value="玉米">玉米</option>
-																				<option value="棉花">棉花</option>
+																				<option value="" id="contentShh">显示全部</option>
+
 																		</select>  
 																		</td>
 																		<td>&nbsp;</td>
@@ -242,12 +241,12 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="3">
+										<td colspan="4">
 											<!-- <button type="button" class="btn btn-info button_style"
 												data-toggle="modal" data-target="#myModalAdd">
 												<span class="glyphicon glyphicon-plus"></span>
 											</button> -->
-										</td>	
+										</td>
 										<td colspan="2">
 											<button type="button" class="btn btn-danger"
 												onClick="deleteInfo()">删除</button>
@@ -262,6 +261,7 @@
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
+										<th>土地名称</th>
 										<th>土地编号</th>
 										<th>租赁人</th>
 										<th>申报部门</th>
@@ -278,7 +278,7 @@
 							</table>
 						</form>
 					</div>
-					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog"
+					<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<form action="landManageUpdate.do" method="post"
 							id="landManageUpdate">
@@ -407,14 +407,14 @@
 										<tr>
 											<td>交费日期 ：</td>
 											<td><input type="text" name="addChargeDate"
-												id="addChargeDate"/>												
+												id="addChargeDate"/>
 											</td>
 											<td>租赁费用 ：</td>
 											<td><input type="text" name="addExpense" id="addExpense"/></td>
 
 
 										</tr>
-										
+
 
 									</table>
 								</div>
@@ -427,8 +427,8 @@
 								</div>
 							</div>
 						</div>
-						</form>					
-											
+						</form>
+
 				</div>
 
 				</div>
@@ -478,7 +478,7 @@
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/bootbox.min.js"></script>
 <script src="../js/myNeed/rentMaintain.js"></script>
- <script src="../dist/jquery.cokie.min.js"></script>    
+ <script src="../dist/jquery.cokie.min.js"></script>
 <script src="../js/kg.js"></script>
 
 </html>

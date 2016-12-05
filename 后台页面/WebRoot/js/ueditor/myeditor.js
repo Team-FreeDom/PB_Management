@@ -25,7 +25,6 @@ $(document).ready(function() {
 	});
 
 	$(document).on("click", "#sendNotifitation", function() {
-		// ����������ťʱ�༭�����Ѿ�ʧȥ�˽��㣬����ֱ����getText�������õ����ݣ�����Ҫ��ѡ������Ȼ��ȡ������
 		// var range = UE.getEditor('editor').selection.getRange();
 		// range.select();
 		//alert("1234566");
@@ -41,19 +40,19 @@ $(document).ready(function() {
 			url : 'saveNotification.do',// ��̨�޸�
 			data : {
 				data : message,
-				title:"ceshi"
+				title: title
 			},
 			async : false,
 			cache : false,
-			error : function(request) {
+			error : function() {
 				bootbox.alert({
-					message : "����ʧ��",
+					message : "发布失败!",
 					size : 'small'
 				});
 			},
-			success : function(em) {
+			success : function() {
 				bootbox.alert({
-					message : "�����ɹ�",
+					message : "发布成功!",
 					size : 'small'
 				});
 			}
@@ -61,10 +60,6 @@ $(document).ready(function() {
 	  });
 
 	$(document).on("click", "#sendMessage", function() {
-		// ����������ťʱ�༭�����Ѿ�ʧȥ�˽��㣬����ֱ����getText�������õ����ݣ�����Ҫ��ѡ������Ȼ��ȡ������
-		// var range = UE.getEditor('editor').selection.getRange();
-		// range.select();
-		alert("1234566");
 		var message = '';
 		message = UE.getEditor('editor').getContentTxt();
 		var depatment = $('#collage_list option:selected').val();
@@ -72,7 +67,7 @@ $(document).ready(function() {
 		$.ajax({
 			type : 'POST',
 			dataType : 'text',
-			url : 'saveMessage.do',// ��̨�޸�
+			url : 'saveMessage.do',
 			data : {
 				content : message,
 				depatment : depatment
@@ -81,13 +76,13 @@ $(document).ready(function() {
 			cache : false,
 			error : function(request) {
 				bootbox.alert({
-					message : "����ʧ��",
+					message : "发布失败!",
 					size : 'small'
 				});
 			},
 			success : function(em) {
 				bootbox.alert({
-					message : "�����ɹ�",
+					message : "发布成功!",
 					size : 'small'
 				});
 			}

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -43,6 +44,7 @@ import com.base.po.Startplan;
 import com.base.po.TemperateSave_View;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
+import com.base.utils.ExcelReport;
 
 //申请模块的控制层
 @Controller("landApplyController")
@@ -230,9 +232,7 @@ public class LandApplyController {
 	public String selfApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
 		
-		String bname = request.getParameter("bname");
-		String startTime = request.getParameter("startTime");
-		String endTime = request.getParameter("endTime");
+		String bname = request.getParameter("bname");		
 		String desc = request.getParameter("desc");
 		
 		int length=Integer.valueOf(request.getParameter("length"));
@@ -245,7 +245,7 @@ public class LandApplyController {
 	    String applicantId = CookieUtils.getUserid(request);	
 		
 		
-		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname, startTime, endTime, desc, page, length);
+		ApplyList al=landApplyServiceImpl.getselfApply(applicantId, bname,desc, page, length);
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw",draw);
@@ -322,7 +322,7 @@ public class LandApplyController {
 	@RequestMapping("/myRentdetail.do")
 	public String myRentdetail(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println(request.getParameter("来到myRentdetail.do"));
+		//System.out.println(request.getParameter("来到myRentdetail.do"));
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 
 		List<LandApply_view> list = null;
@@ -397,20 +397,18 @@ public class LandApplyController {
 	@RequestMapping("/myFameCancel1.do")
 	public String myFameCancel1(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("cancel1");
+		
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 		String info_str=request.getParameter("info_str");
-		System.out.println(info_str);
+		int tag = Integer.valueOf(request.getParameter("flag"));
 		
 		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id,info_str);
-			
-			
+			landApplyServiceImpl.myFameCancel1(la_id,info_str,tag);
 			
 			flag = true;
-			String str = "[{\"flag\":" + flag +",\"number\":" +""+"}]";
+			String str = "[{\"flag\":" + flag+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 
 			response.getWriter().print(json.toString());
@@ -485,9 +483,10 @@ public class LandApplyController {
 
 		// 读取目标文件，通过response将目标文件写到客户端
 		// 获取目标文件的绝对路径
-		String fullFileName = request.getServletContext().getRealPath(
-				"file/" + fileName);
-
+		/*String fullFileName = request.getServletContext().getRealPath(
+				"file/" + fileName);*/
+		String fullFileName = ExcelReport.getWebRootUrl(request,"/upload/")+ fileName;
+		
 		// 设置Content-Disposition
 		/*response.setHeader("Content-Disposition", "attachment;filename="
 				+ fileName);*/

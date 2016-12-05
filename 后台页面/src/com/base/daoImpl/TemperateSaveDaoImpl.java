@@ -25,9 +25,7 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("temperateSaveDao")
 public class TemperateSaveDaoImpl {
 	
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -139,7 +137,10 @@ public class TemperateSaveDaoImpl {
 	}
 	
 public List<TemperateSave_View> getTemperates(int la_id) {
-		
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	
 	Session session=sessionFactory.openSession();
 	
 	List<TemperateSave_View> lav=new ArrayList<TemperateSave_View>();

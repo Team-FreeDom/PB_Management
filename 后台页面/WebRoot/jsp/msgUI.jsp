@@ -29,10 +29,10 @@
               <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
               <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
-      
+
           <span class="teachCenterTitle">基地管理系统</span>
           <!-- Navbar Left -->
-    
+
           <!-- Navbar Right -->
           <div class="navbar-right">
               <!-- Notifications -->
@@ -45,12 +45,12 @@
                       <!--<ul class="dropdown-menu">
                           <li class="dropdown-header" style="text-align: center;">
                           <strong>未读消息列表</strong>
-                          </li>    
+                          </li>
                           <li class="dropdown-menu-footer text-center">
                               <a href="msgUI.jsp">更多消息</a>
                           </li>
                       </ul>-->
-    
+
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">
@@ -58,7 +58,7 @@
                       </a>
                   </li>
               </ul>
-    
+
               <!-- End Notifications -->
           </div>
           <!-- End Navbar Right -->
@@ -69,14 +69,14 @@
 
 	<div class="container-fluid content">
     	<div class="row">
-        	
+
         	<div class="sidebar">
 					<div class="sidebar-collapse">
 						<!-- Sidebar Header Logo-->
 						<div class="sidebar-header ">
 							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
 						</div>
-						
+
 						<!-- Sidebar Menu-->
 						<div class="sidebar-menu" style="height: 384px;">
 							<nav id="menu" class="nav-main" role="navigation">
@@ -87,20 +87,20 @@
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i> 
+											<i class="icon-circle text-danger"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>
 									</div>
 									<div class="divider2"></div>
-									
-																		
+
+
 									<li class="menuItem">
 										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
-									
+
 									 <li class="menuItem nav-parent">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
@@ -126,7 +126,7 @@
 										</ul>
 									</li>
 
-										<li class="menuItem nav-parent">
+										<li class="menuItem nav-parent opened nav-expanded">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
@@ -138,7 +138,7 @@
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -150,8 +150,8 @@
 											<li><a href="#"><span class="text">实习分析</span></a></li>
 											<li><a href="#"><span class="text">实习基地统计</span></a></li>
 										</ul>
-									</li>									
-									
+									</li>
+
 								</ul>
 							</nav>
 						</div>
@@ -164,9 +164,9 @@
 						</div>
 					</div>
 					<!-- End Sidebar Footer-->
-				</div>   <!-- End Sidebar--> 
-		        
-                
+				</div>   <!-- End Sidebar-->
+
+
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
 					<div class="page-header">
@@ -202,12 +202,13 @@
                                             </tr>
                                     </thead>
                                     <tbody>
-                                    
+
                                     <c:forEach items='${messageList}' var='message'>
                                     <c:choose>
                                            <c:when test="${message.isRead==0}">
                                            <tr>
-                                              <td>${message.id}</td>
+                                              <td style="display:none;">${message.id}</td>
+                                              <td>${message.sn} </td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>
@@ -215,16 +216,17 @@
                                            </c:when >
                                            <c:when test="${message.isRead!=0}">
                                               <tr class="read">
-                                              <td>${message.id}</td>
+                                              <td style="display:none;">${message.id}</td>
+                                              <td>${message.sn} </td>
                                               <td>${message.title}</td>
                                               <td>${message.content}</td>
                                               <td>${message.time}</td>
                                             </tr>
                                             </c:when>
                                      </c:choose>
-                                    
-                                    
-                                      
+
+
+
                                     </c:forEach>
                                            <!--  <tr>
                                               <td>2</td>
@@ -244,11 +246,11 @@
                                               <td>土地租赁业务即将开始，请于2012-7-30号前登录</td>
                                               <td>2016-07-20</td>
                                             </tr> -->
-                                            
+
                                     </tbody>
                                     </table>
  <nav>
-  <ul class="pagination">                    
+  <ul class="pagination">
               <!-- 上一页 按钮 -->
 
 <c:choose>
@@ -284,17 +286,17 @@
 
 <!-- 直接跳转 -->
 <li><a>共${totalPages}页 -向<input type="text" id="jumpTo" />页 <input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
- 
+
 
 </ul>
 
-                    
-</nav>                                  
-                                    
-                                    
-                                    
-                                    
-                                    
+
+</nav>
+
+
+
+
+
 <!--   <nav>
   <ul class="pagination">
     <li><a href="#">&laquo;</a></li>
@@ -306,13 +308,13 @@
     <li><a href="#">&raquo;</a></li>
   </ul>
 </nav> -->
-                                    
+
                                     </div>
                             </div>
 						</div>
 
 					</div>
-				</div><!-- End Sidebar-->                 
+				</div><!-- End Sidebar-->
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
@@ -323,11 +325,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
-	 <script src="../dist/jquery.cokie.min.js"></script> 
+	 <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/kg.js"></script>
-    
+
     <script>
-    
+
     function jumpTo(maxPage){
     var page = $("#jumpTo").val();
     if(page > maxPage || page < 1){
@@ -338,6 +340,6 @@
         $('body').load('getMessage.do?page=' + page);
     };
     };
-    </script> 
+    </script>
   </body>
 </html>

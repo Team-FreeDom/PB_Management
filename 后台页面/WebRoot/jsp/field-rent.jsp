@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
-    <title>土地租赁</title>
+    <title>湖南农业大学基地管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    
+
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -38,10 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <li class="visible-md visible-lg"><a><i class="icon-th-large"></i></a></li>
               <li class="visible-xs visible-sm"><a><i class="icon-align-justify"></i></a></li>
           </ul>
-      
+
           <span class="teachCenterTitle">基地管理系统</span>
           <!-- Navbar Left -->
-    
+
           <!-- Navbar Right -->
           <div class="navbar-right">
               <!-- Notifications -->
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                        <a href="getMessage.do" class="dropdown-toggle notification-icon">
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
-                      </a> 
+                      </a>
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon">
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="sidebar-header ">
 							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
 						</div>
-						
+
 						<!-- Sidebar Menu-->
 						<div class="sidebar-menu" >
 							<nav id="menu" class="nav-main" role="navigation">
@@ -85,20 +85,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<!--ms-if-->
 										</div>
 										<div class="bk-padding-top-10">
-											<i class="icon-circle text-success"></i> 
+											<i class="icon-circle text-danger"></i>
 											<small></small>
 											<!--ms-if-->
 										</div>
 									</div>
 									<div class="divider2"></div>
-									
-									
+
+
 									<li class="menuItem">
 										<a href="index.do">
 											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
 										</a>
 									</li>
-									
+
 									 <li class="menuItem nav-parent">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a><span class="text">实习审批</span></a></li>
                                             <li><a><span class="text">基地审批</span></a></li>
-                                            <li><a><span class="text">基地审批</span></a></li>
+                                            <li><a><span class="text">维修审批</span></a></li>
 
 										</ul>
 									</li>
@@ -136,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li> 
+                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -148,8 +148,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<li><a href="#"><span class="text">实习分析</span></a></li>
 											<li><a href="#"><span class="text">实习基地统计</span></a></li>
 										</ul>
-									</li>									
-									
+									</li>
+
 								</ul>
 							</nav>
 						</div>
@@ -162,9 +162,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<!-- End Sidebar Footer-->
-				</div>   <!-- End Sidebar--> 
-		        
-                
+				</div>   <!-- End Sidebar-->
+
+
 			<div class="main " style="min-height: 584px;">
 					<!-- 当前地址导航 -->
 					<div class="page-header">
@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 					<!-- 主面板内容 -->
-					
+
 					<div class="row">
                     	<div class=" col-md-4">
                           <form class="form-horizontal" role="form">
@@ -193,24 +193,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               <div class="col-sm-8">
                                 <select id ="choose-grid" class="form-control">
                                   <option value="" id="choose-gridh">请选择</option>
-                                 
+
                                 </select>
                               </div>
-                            </div>                  
+                            </div>
                           </form>
                         </div>
 
-                        <div class="col-md-4">                   
-						   
+                        <div class="col-md-4">
+
                         </div>
                         <div class="col-md-4">
                             <ul class="nav nav-tabs  nav-justified" role="tablist">
                               <li role="presentation" class="active"><a href="#tuzulin" role="tab" data-toggle="tab">土地信息详情</a></li>
                               <li role="presentation"><a href="#lishi" role="tab" data-toggle="tab">租赁参考信息</a></li>
-                            </ul>                        
-                        
+                            </ul>
+
                         </div>
-                        
+
                     </div>
                     <div class="row form-group">
                       <div class="col-md-8">
@@ -242,7 +242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label for="inputname" class="col-sm-3 control-label">推荐用途：</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="tudi_plantingContent">    
+                                    <input type="text" class="form-control" id="tudi_plantingContent">
                                 </div>
                                 </div>
                                  </fieldset>
@@ -275,13 +275,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#landModal">申 请 租 赁</a>
                                   </div>
                                 </div>
-                                    
+
                                 </form>
-                                </div> 
-                          
+                                </div>
+
                           </div>
                           <div role="tabpanel" class="tab-pane" id="lishi" style="min-height:540px; background:#FFF">
-                         
+
 							<table id="field_rent" class="cell-border" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#3B6290" style="color:#FFF">
@@ -289,11 +289,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th>种植内容</th>
                                             <th>时间</th>
                                         </tr>
-                                    </thead> 
-									<tbody>                       
+                                    </thead>
+									<tbody>
                           			</tbody>
                             </table>
-                         
+
                           </div>
                         </div>
 
@@ -304,17 +304,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div><!-- end row-->
 
 						<div class="col-lg-12 form-group">
-                        
+
 						</div>
 
 					</div>
-				</div><!-- End Sidebar-->                 
-                
-                    
-            
+				</div><!-- End Sidebar-->
+
+
+
         </div><!--row end-->
-  
-  
+
+
 <div class="modal fade bs-example-modal-lg" id="landModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -322,9 +322,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h3 class="modal-title text-center" id="myModalLabel">土地租赁申请工单</h3>
       </div>
-      <div class="modal-body"> 			
+      <div class="modal-body">
           <form class="form-inline" role="form" id='land_lease_table'></form>
-           
+
    		   <div class="text-center" style="margin-top:20px;">
            <form class="form-inline " role="form">
            <div class="form-group">
@@ -342,7 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <input type="text" class="form-control" id="etime" value='2017-2-3' disabled>
             </div>
             </form>
-            </div>    
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -350,15 +350,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
   </div>
-</div>  
-  
+</div>
+
     </div>
 	<div class="clearfix"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery-ui.js"></script>
- 
+
     <script src="../js/bootstrap.min.js"></script>
 <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -371,8 +371,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootbox.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-     <script src="../dist/jquery.cokie.min.js"></script>    
- 	<script src="../js/kg.js"></script>   
+     <script src="../dist/jquery.cokie.min.js"></script>
+ 	<script src="../js/kg.js"></script>
     <script src="../js/tu-zl.js"></script>
   </body>
 </html>

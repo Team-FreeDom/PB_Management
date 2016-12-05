@@ -314,7 +314,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		} finally {
 			session.close();
 		}
-		System.out.println(userCount);
+		//System.out.println(userCount);
 		return userCount;
 	}
 //修改个人信息
