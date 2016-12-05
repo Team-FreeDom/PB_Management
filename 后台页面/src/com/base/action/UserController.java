@@ -70,9 +70,12 @@ public class UserController {
 					inputStream.close();
 					outputStream.close();
 					filename = "../imgdraw/" + filename;
+					
+					//重新写cookie中的img属性值
+					CookieUtils.addCookie("image", filename,response);
 				}
 				String name = request.getParameter("name");
-				if (name.equals("")) {
+				if (name.equals("")){
 					name = null;
 				}
 				String telephone = request.getParameter("telephone");
@@ -87,7 +90,7 @@ public class UserController {
 			}
 		}
 
-		CookieUtils.addCookie("image", filename, response);
+		//CookieUtils.addCookie("image", filename, response);
 
 		return "redirect:user.jsp";
 	}

@@ -46,13 +46,13 @@ $(document).ready(function() {
 			cache : false,
 			error : function() {
 				bootbox.alert({
-					message : "发布通知失败",
+					message : "鍙戝竷澶辫触!",
 					size : 'small'
 				});
 			},
 			success : function() {
 				bootbox.alert({
-					message : "发布通知成功",
+					message : "鍙戝竷鎴愬姛!",
 					size : 'small'
 				});
 			}
@@ -76,13 +76,13 @@ $(document).ready(function() {
 			cache : false,
 			error : function(request) {
 				bootbox.alert({
-					message : "发布消息失败",
+					message : "鍙戝竷澶辫触!",
 					size : 'small'
 				});
 			},
 			success : function(em) {
 				bootbox.alert({
-					message : "发布消息成功",
+					message : "鍙戝竷鎴愬姛!",
 					size : 'small'
 				});
 			}
