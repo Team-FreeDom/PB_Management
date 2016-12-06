@@ -3,7 +3,9 @@ package com.base.daoImpl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -104,7 +106,7 @@ public class CheckViewDaoImpl {
 	 */
 	// 数据库分页
 	public CheckList getLandApply(int id, int pageindex, int size,
-			String basename, String username, String usercollage)
+			String basename, String username, String usercollage,String columnName,String orderDir)
 			throws SQLException {
 		
 		List<CheckView> list = new ArrayList<CheckView>();
@@ -116,16 +118,18 @@ public class CheckViewDaoImpl {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{call baseweb.rent_check(?,?,?,?,?,?,?)}");
+					.prepareCall("{call baseweb.rent_check(?,?,?,?,?,?,?,?,?)}");
 			sp.setInt(1, id);
 			sp.setInt(2, pageindex);
 			sp.setInt(3, size);
 			sp.setString(4, basename);
 			sp.setString(5, username);
 			sp.setString(6, usercollage);
-			sp.registerOutParameter(7, java.sql.Types.INTEGER);
+			sp.setString(7, columnName);
+			sp.setString(8, orderDir);
+			sp.registerOutParameter(9, java.sql.Types.INTEGER);
 			sp.execute();
-			recordsTotal = sp.getInt(7);
+			recordsTotal = sp.getInt(9);
 			rs = sp.getResultSet();
 			while (rs.next()) {
 				CheckView ch = new CheckView();
@@ -417,6 +421,159 @@ public class CheckViewDaoImpl {
 					return tag;
 				}	
 				
-						
+		//租赁审批未审核的申请人		
+		public List<Map<String,String>> getCheckApplicant(){
+			
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
+			Session session = sessionFactory.openSession();
+			List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+			Map<String,String> map=null;
+			
+			try {
+				conn = (Connection) SessionFactoryUtils.getDataSource(
+						sessionFactory).getConnection();
+				sp = (CallableStatement) conn
+						.prepareCall("{call baseweb.check_applicant()}");								
+				sp.execute();		
+				
+				rs = sp.getResultSet();
+				while (rs.next()) {
+					
+					map=new HashMap<String, String>();
+					map.put("userid",rs.getString("userid"));
+					map.put("username", rs.getString("username"));
+					list.add(map);
+					
+				}
 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}finally {
+				SqlConnectionUtils.free(conn, sp, null);
+			}		
+
+			return list;
+			
+		}
+	
+		//租赁审批未交费的申请人
+    public List<Map<String,String>> getPayApplicant(){
+			
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
+			Session session = sessionFactory.openSession();
+			List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+			Map<String,String> map=null;
+			
+			try {
+				conn = (Connection) SessionFactoryUtils.getDataSource(
+						sessionFactory).getConnection();
+				sp = (CallableStatement) conn
+						.prepareCall("{call baseweb.pay_applicant()}");								
+				sp.execute();		
+				
+				rs = sp.getResultSet();
+				while (rs.next()) {
+					
+					map=new HashMap<String, String>();
+					map.put("userid",rs.getString("userid"));
+					map.put("username", rs.getString("username"));
+					list.add(map);
+					
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}finally {
+				SqlConnectionUtils.free(conn, sp, null);
+			}		
+
+			return list;
+			
+		}
+    
+  //租赁审批未审核的部门
+    public List<Map<String,String>> getCheckDept(){
+			
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
+			Session session = sessionFactory.openSession();
+			List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+			Map<String,String> map=null;
+			
+			try {
+				conn = (Connection) SessionFactoryUtils.getDataSource(
+						sessionFactory).getConnection();
+				sp = (CallableStatement) conn
+						.prepareCall("{call baseweb.check_college()}");								
+				sp.execute();		
+				
+				rs = sp.getResultSet();
+				while (rs.next()) {
+					
+					map=new HashMap<String, String>();
+					map.put("deptid",rs.getString("deptid"));
+					map.put("dept", rs.getString("dept"));
+					list.add(map);
+					
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}finally {
+				SqlConnectionUtils.free(conn, sp, null);
+			}		
+
+			return list;
+			
+		}
+    
+    //租赁审批未交费的部门
+    public List<Map<String,String>> getPayDept(){
+			
+			Connection conn = null;
+			CallableStatement sp = null;
+			ResultSet rs = null;
+			Session session = sessionFactory.openSession();
+			List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+			Map<String,String> map=null;
+			
+			try {
+				conn = (Connection) SessionFactoryUtils.getDataSource(
+						sessionFactory).getConnection();
+				sp = (CallableStatement) conn
+						.prepareCall("{call baseweb.pay_college()}");								
+				sp.execute();		
+				
+				rs = sp.getResultSet();
+				while (rs.next()) {
+					
+					map=new HashMap<String, String>();
+					map.put("deptid",rs.getString("deptid"));
+					map.put("dept", rs.getString("dept"));
+					list.add(map);
+					
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			}finally {
+				SqlConnectionUtils.free(conn, sp, null);
+			}		
+
+			return list;
+			
+		}
 }
