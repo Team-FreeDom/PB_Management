@@ -16,10 +16,7 @@ public class LandLayout {
 	private int width;
 	private int height;
 	private int bid;
-	private String lid;
-	private String img;
-
-	
+	private String lid;	
 	public String getId() {
 		return id;
 	}
