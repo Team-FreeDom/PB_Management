@@ -23,10 +23,10 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+		<!--[if lt IE 9]>
+			<script src="../js/html5shiv.min.js"></script>
+			<script src="../js/respond.min.js"></script>
+		<![endif]-->
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -49,15 +49,6 @@
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a>
-                      <!-- <ul class="dropdown-menu">
-                          <li class="dropdown-header" style="text-align: center;">
-                          <strong>未读消息列表</strong>
-                          </li>
-                          <li class="dropdown-menu-footer text-center">
-                              <a href="../teach/notifications.html">更多消息</a>
-                          </li>
-                      </ul> -->
-
                   </li>
                   <li>
                       <a href="../loginout.do" class="dropdown-toggle notification-icon" data-toggle="modal">

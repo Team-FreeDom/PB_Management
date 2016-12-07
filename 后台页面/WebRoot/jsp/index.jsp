@@ -282,13 +282,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!--row end-->
     </div>
 	<div class="clearfix"></div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!--[if lt IE 9]>
+    <script src="../js/html5shiv.min.js"></script>
+    <script src="../js/respond.min.js"></script>
+  <![endif]-->
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/kg.js"></script>
 

@@ -20,11 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    	<script src="../js/html5shiv.min.js"></script>
+    	<script src="../js/respond.min.js"></script>
     <![endif]-->
   </head>
   <body>
@@ -48,14 +46,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <i class="icon-envelope"><span class="badge msg"></span></i>
                               <!--ms-if-->
                       </a>
-                      <!-- <ul class="dropdown-menu">
-                         <li class="dropdown-header" style="text-align: center;">
-                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>
-                          <li class="dropdown-menu-footer text-center">
-                              <a href="getMessage.do">更多消息</a>
-                          </li>
-                      </ul> -->
 
                   </li>
                   <li>
@@ -265,8 +255,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
      <script src="../js/bootbox.min.js"></script>
       <script src="../dist/jquery.cokie.min.js"></script>

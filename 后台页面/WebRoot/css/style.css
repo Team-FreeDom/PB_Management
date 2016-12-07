@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-
+@-ms-viewport{ width: device-width;}
 html, body {
     background: #ecedf0 none repeat scroll 0 0;
     width: 100%;
@@ -585,7 +585,7 @@ a, a:link, a:visited, a:hover, a:active {
 	cursor: pointer;
 	color: #fff;
 	text-align: center;
-	background-color: #9EA4D1;		
+	background-color: #9EA4D1;
 }
 .nx_college{
 	cursor: pointer;
@@ -597,7 +597,7 @@ a, a:link, a:visited, a:hover, a:active {
 	cursor: pointer;
 	color: #fff;
 	text-align: center;
-	background-color: #9EA4D1;	
+	background-color: #9EA4D1;
 }
 .yx_college{
 	cursor: pointer;
