@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-
+@-ms-viewport{ width: device-width;}
 html, body {
     background: #ecedf0 none repeat scroll 0 0;
     width: 100%;
@@ -569,6 +569,54 @@ a, a:link, a:visited, a:hover, a:active {
 .grid-stack {
 	background: #fff;
 }
+.sk_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #5A8246;
+}
+.zh_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9DBE8F;
+}
+.dw_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9EA4D1;
+}
+.nx_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #009200;
+}
+.dy_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9EA4D1;
+}
+.yx_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #3BB500;
+}
+.zb_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #00FF00;
+}
+.other_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #2B83BD;
+}
 
 .gay {
 	cursor: pointer;
@@ -576,7 +624,6 @@ a, a:link, a:visited, a:hover, a:active {
 	text-align: center;
 	background-color: #2B83BD;
 }
-
 .normal {
 	cursor: pointer;
 	color: #fff;

@@ -711,17 +711,16 @@
 </body>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../js/jquery.js"></script>
+<!--[if lt IE 9]>
+	<script src="../js/html5shiv.min.js"></script>
+	<script src="../js/respond.min.js"></script>
+<![endif]-->
+<script src="../js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/myNeed/myRent.js"></script>
 <script src="../js/SyearE.js"></script>
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>
