@@ -675,6 +675,36 @@ public class LandApplyController {
 			for (int i = 0; i < obj.size(); i++) {
 
 				JSONObject temp = obj.getJSONObject(i);
+				
+				// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+				// 得到上传的文件
+				MultipartFile mFile = multipartRequest.getFile("image");
+				String filename = "";
+				if (!mFile.isEmpty()){
+					// 得到上传服务器的路径
+					/*
+					 * String path = request.getSession().getServletContext()
+					 * .getRealPath("/landimg/");
+					 */
+					String path = ExcelReport.getWebRootUrl(request,"/landimg/");
+
+					// 得到上传的文件的文件名
+					String fileName = mFile.getOriginalFilename();
+					String fileType = fileName.substring(fileName
+							.lastIndexOf("."));
+					filename = new Date().getTime() + fileType;
+					InputStream inputStream = mFile.getInputStream();
+					byte[] b = new byte[1048576];
+					int length = inputStream.read(b);
+					path += "/" + filename;
+					// 文件流写到服务器端
+					FileOutputStream outputStream = new FileOutputStream(path);
+					outputStream.write(b, 0, length);
+					inputStream.close();
+					outputStream.close();
+					filename = "../landimg/" + filename;
+				}
 
 				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
 						+ temp.getInt("bid") + ","
@@ -682,7 +712,9 @@ public class LandApplyController {
 						+ temp.getInt("buildingArea") + ","
 						+ temp.getInt("landArea") + ",'"
 						+ temp.getString("lname") + "','"
-						+ temp.getString("plantingContent") + "'";
+						+ temp.getString("plantingContent") +"','"
+						+ temp.getString("aptCollege") +"','"
+						+ filename+"'";
 
 				layoutStr += "(" + temp.getInt("bid") + ","    //拼装土地布局信息
 						+ temp.getInt("height") + "," + temp.getInt("width")

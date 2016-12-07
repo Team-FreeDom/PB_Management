@@ -19,8 +19,24 @@ public class LandInfo {
 	private int bid;
 	private int spareValue;
 	private String remark;
-	
-	
+	private String aptCollege;
+	private String img;
+	public String getAptCollege()
+	{
+		return aptCollege;
+	}
+	public void setAptCollege(String aptCollege)
+	{
+		this.aptCollege = aptCollege;
+	}	
+	public String getImg()
+	{
+		return img;
+	}
+	public void setImg(String img)
+	{
+		this.img = img;
+	}
 	public String getRemark() {
 		return remark;
 	}
