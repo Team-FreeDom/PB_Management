@@ -1,5 +1,8 @@
 // JavaScript Document
-        $(function () {
+
+var aCollege=new Array("生物科学技术学院","资源环境学院","动物科学技术学院","农学院","动物医学院","园艺园林学院","植物保护学院","其他");
+var aClass = new Array("sk_college","zh_college","dw_college","nx_college","dy_college","yx_college","zb_college","other_college");
+$(function () {
             var options = {
 				disableDrag:true,
 				disableResize:true
@@ -55,13 +58,15 @@
 		  this.serializedData = [];//在loadGrid中构成布局对象，关联土地编号id
 		  this.dialog;
 		  this.grid = $('.grid-stack').data('gridstack');
-		  function fill(id,name,plantingContent,landArea,buildingArea,tudi_Afford){
+		  function fill(id,name,aptCollege,plantingContent,landArea,buildingArea,tudi_Afford,img){
 			$('#tudi_id').val(id);
 			$('#tudi_name').val(name);
+			$("#tudi_college").val(aCollege[aptCollege]);
 			$('#tudi_plantingContent').val(plantingContent);
 			$('#tudi_landArea').val(landArea);
 			$('#tudi_buildingArea').val(buildingArea);
 			$('#tudi_Afford').val(tudi_Afford);
+			$('#imghead').prop("src",img);
 		  };
 		  function closeboxEX() {
 			$('#land_lease_table').html('');
@@ -75,7 +80,7 @@
 		  this.loadGrid = function () {
 			  var bid=$('#choose-grid').children('option:selected').val();
 			  var obj=this;
-			  fill('','','','','','');
+			  fill('','','','','','','','');
 			  $('#field_rent tbody').html('');
 			  this.grid.removeAll();
 			  var obj=this;
@@ -98,6 +103,7 @@
 						  obj.serializedData=data;
 						  var items = GridStackUI.Utils.sort(obj.serializedData);
 						  _.each(items, function (node) {
+							  
 							  if(node.name!='')
 							  obj.grid.addWidget($('<div><div class="grid-stack-item-content Havetorent"><span class="lname">从事：'+node.planting+'</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
                 else if(node.tag==1 && node.name=='')
@@ -105,7 +111,7 @@
                   obj.grid.addWidget($('<div><div class="grid-stack-item-content lockdiv"><span class="lname">锁定：等候缴费</span><span class="label label-warning  Lineup">'+node.name+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
                 }
 							  else
-							  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
+							  obj.grid.addWidget($('<div><div class="grid-stack-item-content '+aClass[node.aptCollege]+'"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id='+node.id+' value='+node.id+'>'+node.lname+'</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>'+node.lineup+'</span></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);
 							}, obj);//end each
 						 }//end success
 			  });	//end ajax
@@ -212,7 +218,7 @@
 					  }else{
 
 					 
-					  fill('','','','','','');
+					  fill('','','','','','','','');
 					  $('#field_rent tbody').html('');
 					  obj.dialog = bootbox.dialog({
 						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
@@ -280,8 +286,8 @@
 			  if(tu_zl.serializedData[n].name!='')return false;
 			  if( $(this).is(':checked'))
 			  {
-				fill(id,tu_zl.serializedData[n].lname,tu_zl.serializedData[n].plantingContent,tu_zl.serializedData[n].landArea,tu_zl.serializedData[n].buildingArea,
-				tu_zl.serializedData[n].afford);
+				fill(id,tu_zl.serializedData[n].lname,tu_zl.serializedData[n].aptCollege,tu_zl.serializedData[n].plantingContent,tu_zl.serializedData[n].landArea,tu_zl.serializedData[n].buildingArea,
+				tu_zl.serializedData[n].afford,tu_zl.serializedData[n].img);
 				 var testArray=tu_zl.serializedData[n].data;
 				 var data=new Array();
 				 i=0;
@@ -303,7 +309,7 @@
 				 });
 			  }
 			  else{
-			  fill('','','','','','');
+			  fill('','','','','','','','');
 			  $('#field_rent tbody').html('');
 			  }
 		   });//end click
@@ -313,3 +319,10 @@
 		}//end tu_zl
 
 		});//end function
+        
+        function displayImg(){
+        	
+      	  var img = document.getElementById('belowImg');  	
+           img.src = document.getElementById('imghead').src;         	  
+            
+         }

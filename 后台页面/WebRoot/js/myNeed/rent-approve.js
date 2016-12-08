@@ -147,6 +147,8 @@ $(document)
 								}
 							});
 					$(".icon-filter").on("click", function() {
+						recovery();
+						recovery2();
 						$('.hide_ul').toggle(500);
 					});
 					$('#PayM').click(function() {
@@ -662,7 +664,7 @@ $(document)
 										});
 									});
 					// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+					
 					function recovery() {
 						document.getElementById("basenameid").value = "";
 						document.getElementById("usernameid").value = "";

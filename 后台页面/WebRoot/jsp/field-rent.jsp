@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/gridstack.min.css" />
+    <link rel="stylesheet" href="../css/tu.css">
 	<link rel="stylesheet" href="../css/style.css">
     <style>
     .bottom{
@@ -237,6 +238,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   </div>
                                  </fieldset>
                                  <fieldset disabled>
+                                  <div class="form-group">
+                                      <label for="inputname" class="col-sm-3 control-label">推荐学院：</label>
+                                      <div class="col-sm-6">
+                                          <input type="text" class="form-control" id="tudi_college">
+                                      </div>
+                                  </div>
+                                 </fieldset>
+                                 <fieldset disabled>
                                 <div class="form-group">
                                     <label for="inputname" class="col-sm-3 control-label">推荐用途：</label>
                                 <div class="col-sm-6">
@@ -268,11 +277,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                 </div>
                                 </fieldset>
+                               
                                 <div class="form-group">
                                   <div class="col-sm-offset-3 col-sm-6">
                                     <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#landModal">申 请 租 赁</a>
                                   </div>
                                 </div>
+                                 <div class="form-group">									
+									 <div class="col-sm-9" onclick="displayImg()"  data-toggle="modal" data-target="#myModal">									  
+									    <a href="#" >									     
+										 <img id="imghead" class="bk-img-60 specialOne"  border=0 src="" alt="">
+										 </a>										 
+									</div>
+								</div>
 
                                 </form>
                                 </div>
@@ -312,6 +329,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         </div><!--row end-->
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  style="width:700px;height:700px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">土地效果图</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="belowImg" class="special"/>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade bs-example-modal-lg" id="landModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">

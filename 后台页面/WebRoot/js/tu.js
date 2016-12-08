@@ -1,10 +1,14 @@
 // JavaScript Document
 		
-        $(function () {
+  var aClass = new Array("sk_college","zh_college","dw_college","nx_college","dy_college","yx_college","zb_college","other_college");
+        
+  $(function () {
             var options = {
 				float:true
             };
             $('.grid-stack').gridstack(options);
+            
+          
             
             /*获得基地------start*/
             $.ajax({                //页面加载时自动执行
@@ -40,18 +44,21 @@
                 this.serializedData = [];//在loadGrid中构成布局对象，关联土地编号id
 				this.serializedData2 = [];//在loadGrid中构成土地信息对象,关联土地编号id
                	this.grid = $('.grid-stack').data('gridstack');
-			  	function fill(id,name,plantingContent,landArea,buildingArea,tudi_Afford){
+			  	function fill(id,name,aptCollege,plantingContent,landArea,buildingArea,tudi_Afford,img){
 				  $('#tudi_id').val(id);
-				  $('#tudi_name').val(name);
+				  $('#tudi_name').val(name);				
+				  $("#tudi_aptCollege").val(aptCollege);				
 				  $('#tudi_plantingContent').val(plantingContent);
 				  $('#tudi_landArea').val(landArea);
 				  $('#tudi_buildingArea').val(buildingArea);
-				  $('#tudi_Afford').val(tudi_Afford);					
+				  $('#tudi_Afford').val(tudi_Afford);
+				  $('#imghead').prop("src",img);				  
 				};
 				function fuyuan(){
-				  $('.grid-stack-item-content').removeClass("gay");
-				  $('.grid-stack-item-content').addClass("normal");
-				  fill('','','','','','');
+					var obj=$(".gay");
+					obj.removeClass("gay");
+					obj.addClass(obj.attr("id"));				
+				  fill('','','','','','','','');  //加*
 				};
 				function ishunluan(){
 				  var t=parseInt($('#load-grid').children('option:selected').val());
@@ -99,7 +106,8 @@
 			  });
 			  
 			  ////////////////////单击结点选择事件/////////////////////////////
-			  $(document).on("click", ".grid-stack-item", function() {
+			  $(document).on("click", ".grid-stack-item", function() {				  
+				  $("#file").val("");
 				  if(!ishunluan()){
 					   return false;
 				  }
@@ -107,12 +115,15 @@
 				  var n=_.findIndex(tudi.serializedData2, 'id', id);
 				  if(n<0)
 				  return false;
-				  $('.grid-stack-item-content').removeClass("gay");
-				  $('.grid-stack-item-content').addClass("normal");
-				  $(this).children('div.grid-stack-item-content').removeClass('normal');
+				  
+				//将先前被选中的土地移除 为gay的class  
+				  var objGay=$(".gay");
+				  objGay.removeClass("gay");		
+				  objGay.addClass(objGay.attr("id"));				
+				  $(this).children('div.grid-stack-item-content').removeClass( $(this).children('div.grid-stack-item-content').attr("id"));				  
 				  $(this).children('div.grid-stack-item-content').addClass('gay');
-				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.serializedData2[n].buildingArea,tudi.serializedData2[n].Afford);
-				  return true;
+				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].college,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.serializedData2[n].buildingArea,tudi.serializedData2[n].Afford,tudi.serializedData2[n].img);
+				  return true;  //加*
 			  }); ///单击结点事件	  
 			  
               this.loadGrid = function () {
@@ -128,7 +139,8 @@
 							
 						}
 					}
-					fill('','','','','','');
+					fill('','','','','','','','');//--
+					//alert("hello");
 					this.grid.removeAll();
 					obj=this;	
 					if(bid==""){
@@ -149,15 +161,17 @@
 								},
 								success : function(data) {
 									
-									obj.serializedData2 = _.map(data, function (el) {
+									obj.serializedData2 = _.map(data, function (el) {										
 														  return {
 															  id: el.id,
 															  lname: el.lname,
+															  college:el.aptCollege,    //加*
 															  plantingContent: el.plantingContent,
 															  landArea: el.landArea,
 															  buildingArea:el.buildingArea,
 															  Afford:el.afford,
-															  bid:el.bid
+															  img:el.img,
+															  bid:el.bid															 
 														  };
 													  });
 								  obj.serializedData = _.map(data, function (el) {
@@ -166,7 +180,8 @@
 															  y: el.y,
 															  width: el.width,
 															  height: el.height,
-															  id:el.id
+															  id:el.id,
+															  aptCollege:el.aptCollege, 
 														  };
 													  });	
 								  var items = GridStackUI.Utils.sort(obj.serializedData);
@@ -174,7 +189,8 @@
 									  var name=_.result(_.find(obj.serializedData2, function(chr) {
 										return chr.id == node.id;
 									  }), 'lname');////对象serializedData2查找关联的lname
-									  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//����ڵ�
+									//  alert(aClass[node.aptCollege]);
+									  obj.grid.addWidget($("<div><div class=\"grid-stack-item-content "+aClass[node.aptCollege]+"\""+" id=\""+aClass[node.aptCollege]+"\"><div class=\"lname\">"+name+"</div><button type=\"button\" class=\"close\" ><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button></div><div></div></div>"),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//����ڵ�
 									}, obj);//end each	
 										
 							   }//end success
@@ -211,13 +227,16 @@
 					//var c=this.serializedData.concat(this.serializedData2);
 					c=_.merge(this.serializedData, this.serializedData2);
 						}
-////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////				
+////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////					
+					var json=""+JSON.stringify(c);									
 					$.ajax({  type : 'POST',
 								dataType : 'json',
-								data:{"layInfo":JSON.stringify(c),
-									   "bid":bid, 
-								       "tag":tag
-								      },
+								data:{
+									"bid":bid,
+									"tag":tag,
+									"layinfo":json
+									
+								},
 								url : 'updateLayout_Info.do',
 								async : false,
 								cache : false,
@@ -266,7 +285,7 @@
 							obj.grid.removeAll();
 							obj.serializedData.splice(0,obj.serializedData.length);
 							obj.serializedData2.splice(0,obj.serializedData2.length);
-							fill('','','','','','');
+							fill('','','','','','','','');
 							obj.isModify=true;
 						}
 					}
@@ -281,12 +300,15 @@
 					   return false;
 				  }
 					var id=new Date().getTime().toString();
-					var obj2={id:id,lname:'',plantingContent:'',landArea:0,buildingArea:0,Afford:0,bid:parseInt($('#load-grid').children('option:selected').val())};					
+					var obj2={id:id,lname:'',college:'',plantingContent:'',landArea:0,buildingArea:0,Afford:0,bid:parseInt($('#load-grid').children('option:selected').val()),img:''};					
 					this.serializedData2.push(obj2);
-					fill(id,'','',0,0,0);
-					$('.grid-stack-item-content').removeClass("gay");
-					$('.grid-stack-item-content').addClass("normal");
- 					this.grid.addWidget($('<div><div class="grid-stack-item-content gay"><div class="lname"></div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),
+					fill(id,'','','',0,0,0,'');
+					
+					var obj=$(".gay");
+					obj.removeClass("gay");
+					obj.addClass(obj.attr("id"));	
+					
+ 					this.grid.addWidget($('<div><div class="grid-stack-item-content normal" id="normal"><div class="lname"></div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),
                             0, 0, 1, 1,true,1,4,1,4,id); 
 					var obj={x: parseInt($('.gay').parent().attr('data-gs-x')), y: parseInt($('.gay').parent().attr('data-gs-y')), width: 1, height: 1,id:id};  
 					this.serializedData.push(obj);
@@ -327,12 +349,27 @@
 					  $('#tudi_name')[0].focus();
 					  return false; 				  
 				  }
+				  if($('#tudi_aptCollege').val()=='')
+				  {
+					  bootbox.alert({
+						  message: "推荐学院为必选项， 请补充！",
+						  size: 'small'
+					  });					  
+					  $('#tudi_aptCollege')[0].focus();
+					  return false; 				  
+				  }				 
 				  this.serializedData2[n].lname=$('#tudi_name').val();
+				  this.serializedData2[n].college=$('#tudi_aptCollege').val();
 				  this.serializedData2[n].plantingContent=$('#tudi_plantingContent').val();
 				  this.serializedData2[n].landArea=$('#tudi_landArea').val();
 				  this.serializedData2[n].buildingArea= $('#tudi_buildingArea').val();
 				  this.serializedData2[n].Afford=$('#tudi_Afford').val();
+				  this.serializedData2[n].img=$('#imghead').attr("src");				  
+				 /* var file=$("#file").val();				
+				  this.serializedData2[n].file=file;
+				 */
 				  $('.gay > .lname').html($('#tudi_name').val());
+				  $(".gay").attr("id",aClass[$('#tudi_aptCollege').val()]);
 				  fuyuan();
 				  this.isModify=true;
 				}.bind(this)
@@ -345,3 +382,73 @@
                
             };
         });
+        
+       function displayImg(){
+    	
+    	  var img = document.getElementById('belowImg');  	
+         img.src = document.getElementById('imghead').src;         	  
+          
+       }
+       
+       
+        //图片上传
+        function previewImage(file)
+        {
+          var MAXWIDTH  =250; 
+          var MAXHEIGHT = 250;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id="imghead" class="bk-img-60">';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, 250, 250);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top+'px';
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){
+            	  
+            	  img.src = evt.target.result;
+            	  //alert(img.src);
+              }
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                 
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+        
+      

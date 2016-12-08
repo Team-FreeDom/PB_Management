@@ -15,6 +15,7 @@
 	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../dist/gridstack.css" />
+<link rel="stylesheet" href="../css/tu.css">
 <link rel="stylesheet" href="../css/style.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -68,12 +69,10 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs">
-					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
-                              <!--ms-if-->
-                      </a>
-						<!-- <ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
+						class="dropdown-toggle notification-icon"> <i
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a> <!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>
@@ -111,16 +110,16 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
-										<div class="bk-avatar">
-											<a href="user.jsp"><img class="img-circle bk-img-60" alt="" src="" id="imageMain"></a>
-											<!--ms-if-->
-										</div>
-										<div class="bk-padding-top-10">
-											<i class="icon-circle text-danger"></i>
-											<small></small>
-											<!--ms-if-->
-										</div>
+									<div class="bk-avatar">
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" src="" id="imageMain"></a>
+										<!--ms-if-->
 									</div>
+									<div class="bk-padding-top-10">
+										<i class="icon-circle text-danger"></i> <small></small>
+										<!--ms-if-->
+									</div>
+								</div>
 								<div class="divider2"></div>
 
 
@@ -149,19 +148,25 @@
 
 									</ul></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
-                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul></li>
+										<li><a href="notification.do"><span class="text">
+													发布通知公告</span></a></li>
+										<li><a href="land_modle.jsp"><span class="text">
+													土地布局设置</span></a></li>
+										<li><a href="fieldRent_maintain.jsp"><span
+												class="text"> 土地租赁维护</span></a></li>
+										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+										<li><a href="start.jsp"><span class="text">
+													工作计划制定</span></a></li>
+										<li><a href="mangeruser.jsp"><span class="text">
+													系统用户维护</span></a></li>
+										<li><a href="system_power.jsp"><span class="text">
+													系统权限设置</span></a></li>
+									</ul></li>
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
@@ -197,13 +202,13 @@
 						</ol>
 					</div>
 					<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="#"><i class="icon-home"></i>报修申请</a></li>
-							</ol>
-						</div>
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+							<li><a href="#"><i class="icon-home"></i>报修申请</a></li>
+						</ol>
+					</div>
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row">
@@ -213,7 +218,7 @@
 								<label for="inputEmail3" class="col-sm-4 control-label">选择区域：</label>
 								<div class="col-sm-8">
 									<select id="load-grid" class="form-control">
-									  <option value="" id="load-gridh" >请选择</option>
+										<option value="" id="load-gridh">请选择</option>
 										<!-- <option value="1">长安基地</option>
 										<option value="2">耕耘基地</option> -->
 
@@ -263,12 +268,30 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="inputname" class="col-sm-3 control-label">推荐学院：</label>
+									<div class="col-sm-6">
+										<select class="form-control input-sm" id="tudi_aptCollege"
+											name="tudi_aptCollage">
+											<option value="" id="tudi_scollegeh">请选择</option>
+											<option value="0" >生物科学技术学院</option>
+											<option value="1">资源环境学院</option>
+											<option value="2">动物科学技术学院</option>
+											<option value="3">农学院</option>
+											<option value="4">动物医学院</option>
+											<option value="5">园艺园林学院</option>
+											<option value="6">植物保护学院</option>
+											<option value="7">其他</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="inputname" class="col-sm-3 control-label">推荐用途：</label>
 									<div class="col-sm-6">
 										<input type="text" class="form-control"
 											id="tudi_plantingContent" placeholder="样例：玉米、大豆">
 									</div>
 								</div>
+
 								<div class="form-group">
 									<label for="inputname" class="col-sm-3 control-label">土地面积：</label>
 									<div class="col-sm-6">
@@ -290,8 +313,27 @@
 											placeholder="人数">
 									</div>
 								</div>
+								
 								<div class="form-group">
-									<div class="col-sm-offset-3 col-sm-6">
+								   <div class="col-sm-9">	
+									 <label for="inputname" class="control-label" style="float:left;">土地效果图：</label>
+									 <label style="float:right;" for="file" ><a style="color:#5cb85c;text-decoration:underline;">上传图片</a>	</label>								
+								  </div>
+								</div>
+								<div class="form-group">
+								   <div class="col-sm-9">	
+									 <input hidden="hidden" type="file" name="img" onchange="previewImage(this)" id="file" style="position:absolute;clip:rect(0 0 0 0);" >									
+								  </div>
+								</div>
+								<div class="form-group">									
+									 <div class="col-sm-9" onclick="displayImg()" id="preview" data-toggle="modal" data-target="#myModal">									  
+									    <a href="#" >									     
+										 <img id="imghead" class="bk-img-60 specialOne"  border=0 src="" alt=" ">
+										 </a>										 
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-9">
 										<a class="btn btn-success" style="padding-left:20px;"
 											id="save-array" href="#">土地信息本地保存</a>
 									</div>
@@ -314,10 +356,30 @@
 	</div>
 	<!--row end-->
 	</div>
+	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog"  style="width:700px;height:700px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">土地效果图</h4>
+      </div>
+      <div class="modal-body">
+        <img src="" id="belowImg" class="special"/>
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
 	<div class="clearfix"></div>
-<script>
-
-</script>
+	
+	<script>
+		
+	</script>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

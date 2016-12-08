@@ -615,7 +615,8 @@ a, a:link, a:visited, a:hover, a:active {
 	cursor: pointer;
 	color: #fff;
 	text-align: center;
-	background-color: #2B83BD;
+	background-color: #adf6e0;
+	/* background-color: #2B83BD; */
 }
 
 .gay {
