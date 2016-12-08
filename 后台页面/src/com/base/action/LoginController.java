@@ -96,7 +96,7 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping("/authCode.do")
+	@RequestMapping("/getAuthCode.do")
     public void getAuthCode(HttpServletRequest request, HttpServletResponse response,HttpSession session)
             throws IOException {
 		//System.out.println("yanzhengma");

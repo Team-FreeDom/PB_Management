@@ -40,7 +40,7 @@ public class checkLoginFilter implements Filter {
 			return;
 		}
 
-        if (url.endsWith("authCode.do")) {
+        if (url.endsWith("getAuthCode.do")) {
 			
 			arg2.doFilter(arg0, arg1);
 			return;

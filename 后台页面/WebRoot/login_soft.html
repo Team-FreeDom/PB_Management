@@ -54,9 +54,9 @@
 		<div class="form-group">
                              验证码：<input id="authCode" name="authCode" type="text"/>
             <!--这里img标签的src属性的值为后台实现图片验证码方法的请求地址-->
-           <label><img type="image" src="authCode.do" id="codeImage" onclick="chageCode()" title="图片看不清？点击重新得到验证码" style="cursor:pointer;"/></label>
+           <label><img type="image" src="getAuthCode.do" id="codeImage" onclick="chageCode()" title="图片看不清？点击重新得到验证码" style="cursor:pointer;"/></label>
            <label><a onclick="chageCode()">换一张</a></label>
-          </div>
+        </div>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary pull-right">
 			登录 <i class="m-icon-swapright m-icon-white"></i>
@@ -104,7 +104,7 @@
 		});
 		
 		function chageCode(){
-           $('#codeImage').attr('src','authCode.do?abc='+Math.random());//链接后添加Math.random，确保每次产生新的验证码，避免缓存问题。
+           $('#codeImage').attr('src','getAuthCode.do?abc='+Math.random());//链接后添加Math.random，确保每次产生新的验证码，避免缓存问题。
         };
         
         
