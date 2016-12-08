@@ -659,8 +659,8 @@ public class LandApplyController {
 
 		int bid = Integer.valueOf(request.getParameter("bid"));
 		int tag = Integer.valueOf(request.getParameter("tag"));
+		String path1 = request.getSession().getServletContext().getRealPath("");
 		String str = request.getParameter("layInfo");
-
 		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
 		Layout_InfoView view = null;
 		String layoutStr = "";
@@ -668,7 +668,7 @@ public class LandApplyController {
         System.out.println("tag:"+tag);
 		if (tag == 0) {
 			System.out.println("清空");
-			landApplyServiceImpl.delLayout_info(bid);
+			landApplyServiceImpl.delLayout_info(bid,path1);
 		} else {
 			System.out.println("更新：controller层");
 			JSONArray obj = JSONArray.fromObject(str);
@@ -679,7 +679,7 @@ public class LandApplyController {
 				// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 				MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 				// 得到上传的文件
-				MultipartFile mFile = multipartRequest.getFile("image");
+				MultipartFile mFile = multipartRequest.getFile("image");   //有问题
 				String filename = "";
 				if (!mFile.isEmpty()){
 					// 得到上传服务器的路径
@@ -705,7 +705,6 @@ public class LandApplyController {
 					outputStream.close();
 					filename = "../landimg/" + filename;
 				}
-
 				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
 						+ temp.getInt("bid") + ","
 						+ Integer.valueOf(temp.getString("Afford")) + ","
@@ -731,8 +730,7 @@ public class LandApplyController {
 				}			
 
 			}
-			
-			landApplyServiceImpl.delLayout_info(bid);
+			landApplyServiceImpl.delLayout_info(bid,path1);
 			landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr);
 		}
 

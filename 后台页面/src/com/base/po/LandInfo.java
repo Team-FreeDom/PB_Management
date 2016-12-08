@@ -96,6 +96,11 @@ public class LandInfo {
 	public LandInfo() {
 		super();
 	}
+	public LandInfo(String img)
+	{
+		super();
+		this.img = img;
+	}
 	
 
 }
