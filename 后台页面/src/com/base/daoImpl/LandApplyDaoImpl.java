@@ -228,6 +228,8 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			rc.setPlanting(rs.getString("plants"));
 			rc.setLineup(rs.getInt("lineup"));
 			rc.setTag(rs.getInt("tag"));
+			rc.setAptCollege(rs.getString("aptCollege"));
+			rc.setImg(rs.getString("img"));
 			List<RentAdd> lis=new ArrayList<RentAdd>();
 			for(RentAdd ra:lra)
 			{
