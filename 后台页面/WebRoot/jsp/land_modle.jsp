@@ -7,23 +7,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- Bootstrap -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../dist/gridstack.css" />
-<link rel="stylesheet" href="../css/tu.css">
+<!--<link rel="stylesheet" href="../css/tu.css">-->
 <link rel="stylesheet" href="../css/style.css">
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<script src="../js/html5shiv.min.js"></script>
+	<script src="../js/respond.min.js"></script>
+<![endif]-->
 </head>
 <style type="text/css">
 .lname {
@@ -72,14 +67,7 @@
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a> <!-- <ul class="dropdown-menu">
-							<li class="dropdown-header" style="text-align: center;">
-                          <a href="getMessage.do"><strong>未读消息列表</strong></a>
-                          </li>
-                          <li class="dropdown-menu-footer text-center">
-                              <a href="getMessage.do">更多消息</a>
-                          </li>
-						</ul> --></li>
+					</a> </li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
@@ -91,8 +79,6 @@
 			<!-- End Navbar Right -->
 		</div>
 	</div>
-
-
 
 	<div class="container-fluid content">
 		<div class="row">
@@ -313,23 +299,23 @@
 											placeholder="人数">
 									</div>
 								</div>
-								
+
 								<div class="form-group">
-								   <div class="col-sm-9">	
+								   <div class="col-sm-9">
 									 <label for="inputname" class="control-label" style="float:left;">土地效果图：</label>
-									 <label style="float:right;" for="file" ><a style="color:#5cb85c;text-decoration:underline;">上传图片</a>	</label>								
+									 <label style="float:right;" for="file" ><a href="#" id='upimg' style="color:#5cb85c;text-decoration:underline;">上传图片</a>	</label>
 								  </div>
 								</div>
 								<div class="form-group">
-								   <div class="col-sm-9">	
-									 <input hidden="hidden" type="file" name="img" onchange="previewImage(this)" id="file" style="position:absolute;clip:rect(0 0 0 0);" >									
+								   <div class="col-sm-9">
+									 <input hidden="hidden" type="file" name="imgfile" id="imgfile" style="position:absolute;clip:rect(0 0 0 0);" >
 								  </div>
 								</div>
-								<div class="form-group">									
-									 <div class="col-sm-9" onclick="displayImg()" id="preview" data-toggle="modal" data-target="#myModal">									  
-									    <a href="#" >									     
+								<div class="form-group">
+									 <div class="col-sm-9" id="preview" data-toggle="modal" data-target="#myModal">
+									    <a href="#" >
 										 <img id="imghead" class="bk-img-60 specialOne"  border=0 src="" alt=" ">
-										 </a>										 
+										 </a>
 									</div>
 								</div>
 								<div class="form-group">
@@ -338,15 +324,10 @@
 											id="save-array" href="#">土地信息本地保存</a>
 									</div>
 								</div>
-
 							</form>
 						</div>
 					</div>
 				</div>
-
-
-
-
 			</div>
 		</div>
 		<!-- End Sidebar-->
@@ -356,7 +337,7 @@
 	</div>
 	<!--row end-->
 	</div>
-	
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog"  style="width:700px;height:700px;">
@@ -368,36 +349,27 @@
       <div class="modal-body">
         <img src="" id="belowImg" class="special"/>
       </div>
-      <div class="modal-footer">        
+      <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-	
-	<div class="clearfix"></div>
-	
-	<script>
-		
-	</script>
 
+	<div class="clearfix"></div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script
-		src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/jquery-ui.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/lodash.min.js"></script>
 	<script src="../dist/gridstack.js"></script>
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../dist/bootbox.min.js"></script>
-	<script src="../js/tu.js"></script>
+	<script src="../dist/ajaxfileupload.js" type="text/javascript"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	<script src="../js/tu.js"></script>
 	<script src="../js/kg.js"></script>
-
 
 </body>
 </html>

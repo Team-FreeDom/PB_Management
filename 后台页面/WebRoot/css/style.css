@@ -652,7 +652,19 @@ a, a:link, a:visited, a:hover, a:active {
 .msg{ right: -10px; top:0px; position:absolute; background:#C00}
 .read{ color:#ccc;}
 #msgtable tr{ cursor:pointer;}
+.special{
+	max-width:700px;
+	_width:expression(this.width >700 ? "700px" : this.width);
+	max-height:700px;
+	_height:expression(this.height >700 ? "700px" : this.height);
+}
 
+.specialOne{
+	max-width:300px;
+	_width:expression(this.width >300 ? "300px" : this.width);
+	max-height:250px;
+	_height:expression(this.height >250 ? "250px" : this.height);
+}
 
 @media screen and (min-width:768px) {
 .container-fluid.content {
