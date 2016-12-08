@@ -30,7 +30,11 @@ var Login = function () {
 	                },
 	                remember: {
 	                    required: false
-	                }
+	                },
+	                authCode: {//qb
+	                    required: true
+	                },
+	                
 	            },
 
 	            messages: {
@@ -39,11 +43,14 @@ var Login = function () {
 	                },
 	                password: {
 	                    required: "密码必填"
+	                },
+	                authCode: {//qb
+	                    required: "验证码必填"
 	                }
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
-	                $('.alert-danger', $('.login-form')).show();
+	            	$('.alert-danger', $('.login-form')).show();
 	            },
 
 	            highlight: function (element) { // hightlight error inputs

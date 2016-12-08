@@ -28,7 +28,7 @@
 		<div class="alert alert-danger display-hide">
 			<button class="close" data-close="alert"></button>
 			<span>
-				 请输入用户名和密码
+				 请输入用户名，密码和验证码
 			</span>
 		</div>
 
@@ -50,6 +50,13 @@
                 <span class="help-block">系统初始密码是123456</span>
 			</div>
 		</div>
+		
+		<div class="form-group">
+                             验证码：<input id="authCode" name="authCode" type="text"/>
+            <!--这里img标签的src属性的值为后台实现图片验证码方法的请求地址-->
+           <label><img type="image" src="authCode.do" id="codeImage" onclick="chageCode()" title="图片看不清？点击重新得到验证码" style="cursor:pointer;"/></label>
+           <label><a onclick="chageCode()">换一张</a></label>
+          </div>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary pull-right">
 			登录 <i class="m-icon-swapright m-icon-white"></i>
@@ -79,6 +86,7 @@
 <script src="js/login-soft.js" type="text/javascript"></script>
 <script>
 		jQuery(document).ready(function() {
+		
 
 		var DEFAULT_VERSION = "6.0";
 		var ua = navigator.userAgent.toLowerCase();
@@ -90,8 +98,30 @@
 		if(safariVersion <= DEFAULT_VERSION ){
 			 location.href = "version.html";
 		}
+		
 		  Login.init();
+		 
 		});
+		
+		function chageCode(){
+           $('#codeImage').attr('src','authCode.do?abc='+Math.random());//链接后添加Math.random，确保每次产生新的验证码，避免缓存问题。
+        };
+        
+        
+/*          jQuery.validator.addMethod("checkCode", function(value, element) { 
+                alert("test");      
+                var strCode = ${strCode!"";};//这里用的freemarke取到后台保存在session中的验证码字符。
+                var inpCode = $('#authCode').val();
+                if(strCode==""||strCode == null){
+                    chageCode();
+                    //用后台的字符与页面输入的验证码进行比较
+                }else if(inpCode == strCode){
+                    return true;
+                }else{
+                    return false;
+                }
+         }, "验证码不正确");  */
+		
 </script>
 </body>
 </html>
