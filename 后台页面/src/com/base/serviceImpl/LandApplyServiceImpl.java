@@ -302,11 +302,12 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    
    public void  delLayout_info(int bid,String path)
    {
-	   List<LandInfo> list=new ArrayList<LandInfo>();
+	   List<String> list=new ArrayList<String>();
 	   list=landInfoDaoImpl.deletelandimg(bid);
 	   for(int i=0;i<list.size();i++)
 	   {
-		   String relativePath=list.get(i).getImg();
+		   String relativePath=list.get(i);
+		   System.out.println(path+relativePath.substring(2));
 		   if(relativePath!=null)
 		   {		   
 		   relativePath=relativePath.substring(2);

@@ -683,16 +683,10 @@ public class LandApplyController {
 				String filename = "";
 				if (!mFile.isEmpty()){
 					// 得到上传服务器的路径
-					/*
-					 * String path = request.getSession().getServletContext()
-					 * .getRealPath("/landimg/");
-					 */
-					String path = ExcelReport.getWebRootUrl(request,"/landimg/");
-
+					String path = request.getSession().getServletContext().getRealPath("/landImg/"); 
 					// 得到上传的文件的文件名
 					String fileName = mFile.getOriginalFilename();
-					String fileType = fileName.substring(fileName
-							.lastIndexOf("."));
+					String fileType = fileName.substring(fileName.lastIndexOf("."));
 					filename = new Date().getTime() + fileType;
 					InputStream inputStream = mFile.getInputStream();
 					byte[] b = new byte[1048576];
@@ -703,7 +697,7 @@ public class LandApplyController {
 					outputStream.write(b, 0, length);
 					inputStream.close();
 					outputStream.close();
-					filename = "../landimg/" + filename;
+					filename = "../landImg/" + filename;
 				}
 				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
 						+ temp.getInt("bid") + ","
