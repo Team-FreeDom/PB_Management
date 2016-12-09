@@ -53,7 +53,6 @@ $(function() {
 			var t = parseInt($('#load-grid').children('option:selected').val());
 			if (!_.isEmpty(tudi.serializedData2)) {
 					if (t != tudi.serializedData2[0].bid) {
-
 							bootbox.alert({
 									message: "操作失败",
 									size: 'small'
@@ -87,7 +86,18 @@ $(function() {
 				});
             return false;
 			}
-        $.ajaxFileUpload({
+      var options_v={
+        url:'uploadImage.do',
+        success:function(data){
+          $("#imghead").attr("src", data.imgurl);
+        },
+        error: function(data){
+          $("#imghead").attr("src", '');
+          alert("error");
+        }
+      };
+      $('#imfm').ajaxSubmit(options_v);
+        /*$.ajaxFileUpload({
             url: 'uploadImage.do', //用于文件上传的服务器端请求地址
             secureuri: false, //是否需要安全协议，一般设置为false
             fileElementId: 'imgfile', //文件上传域的ID
@@ -102,7 +112,7 @@ $(function() {
 									$("#imghead").attr("src", "");
                    alert("error");
                 }
-        });
+        });*/
         return false;
     });
 

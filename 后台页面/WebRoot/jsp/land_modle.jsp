@@ -308,8 +308,10 @@
 								</div>
 								<div class="form-group">
 								   <div class="col-sm-9">
+										 <form action="uploadImage.do" method="post" enctype="multipart/form-data" name ='imfm' id='imfm'>
 									 <input hidden="hidden" type="file" name="imgfile" id="imgfile" style="position:absolute;clip:rect(0 0 0 0);" >
-								  </div>
+									 </form>
+									</div>
 								</div>
 								<div class="form-group">
 									 <div class="col-sm-9" id="preview" data-toggle="modal" data-target="#myModal">
@@ -366,7 +368,7 @@
 	<script src="../dist/gridstack.js"></script>
 	<script src="../dist/gridstack.jQueryUI.js"></script>
 	<script src="../dist/bootbox.min.js"></script>
-	<script src="../dist/ajaxfileupload.js" type="text/javascript"></script>
+	<script src="../dist/jquery.form.min.js" type="text/javascript"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/tu.js"></script>
 	<script src="../js/kg.js"></script>
