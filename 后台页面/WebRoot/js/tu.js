@@ -88,15 +88,18 @@ $(function() {
 			}
       var options_v={
         url:'uploadImage.do',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
         success:function(data){
+          alert('hello');
           $("#imghead").attr("src", data.imgurl);
         },
         error: function(data){
-          $("#imghead").attr("src", '');
+          $("#imghead").attr("src", "");
           alert("error");
         }
       };
-      $('#imfm').ajaxSubmit(options_v);
+      $('#imfm').ajaxForm(options_v);
         /*$.ajaxFileUpload({
             url: 'uploadImage.do', //用于文件上传的服务器端请求地址
             secureuri: false, //是否需要安全协议，一般设置为false
