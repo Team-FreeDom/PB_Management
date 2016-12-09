@@ -658,7 +658,7 @@ public class LandApplyController {
 	@ResponseBody
 	public String uploading(HttpServletRequest request,HttpServletResponse response, ModelMap map) 
 	{
-			
+		System.out.println("hello");	
 		//上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
@@ -701,21 +701,20 @@ public class LandApplyController {
 	@RequestMapping("/updateLayout_Info.do")
 	public String updateLayout_Info(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-/*
+
 		String str= request.getParameter("layinfo");
 		int bid=Integer.valueOf(request.getParameter("bid"));
 		int tag=Integer.valueOf(request.getParameter("tag"));
-		String path1=
-		 */
+		String path1 = request.getSession().getServletContext().getRealPath("");	 
 		
-	/*	
-		//List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
-	//	Layout_InfoView view = null;
+		System.out.println(str);
+		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
+	    Layout_InfoView view = null;
 		String layoutStr = "";
 		String landinfoStr = "";       
 		if (tag == 0) {
 			System.out.println("清空");
-		//	landApplyServiceImpl.delLayout_info(bid,path1);
+		    landApplyServiceImpl.delLayout_info(bid,path1);
 		} else {
 			System.out.println("更新：controller层");
 			JSONArray obj = JSONArray.fromObject(str);
@@ -730,7 +729,7 @@ public class LandApplyController {
 						+ temp.getInt("landArea") + ",'"
 						+ temp.getString("lname") + "','"
 						+ temp.getString("plantingContent") +"','"
-						+ temp.getString("aptCollege") +"','"
+						+ temp.getString("college") +"','"
 						+ temp.getString("img")+"'";
 
 				layoutStr += "(" + temp.getInt("bid") + ","    //拼装土地布局信息
@@ -750,7 +749,7 @@ public class LandApplyController {
 			}
 			landApplyServiceImpl.delLayout_info(bid,path1);
 			landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr);
-		}*/
+		}
 
 		String str1 = "[{\"flag\":" + true + "}]";
 		JSONArray json = JSONArray.fromObject(str1);

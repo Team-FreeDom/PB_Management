@@ -169,14 +169,13 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		}
 
 	}
-	public List<LandInfo> deletelandimg(int bid)
+	public List<String> deletelandimg(int bid)
 	{
 		Connection conn = null;
 		CallableStatement sp = null;
 		ResultSet rs = null;
 		Session session=sessionFactory.openSession();
-		List list=new ArrayList<LandInfo>();
-		LandInfo la=null;
+		List<String> list=new ArrayList<String>();
 		try
 		{
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
@@ -186,9 +185,9 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			rs=sp.getResultSet();  //获得结果集
 			while(rs.next())
 			{
-				la=new LandInfo();
-				la.setImg(sp.getString("img"));
-				list.add(la);
+				String str=rs.getString("img");
+				System.out.println(str);
+				list.add(str);
 			}
 
 		}
@@ -204,6 +203,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		return list;
 
 	}
+
 	
 	public void delLayout_info(int bid)
 	{

@@ -108,12 +108,11 @@ $(function() {
             success: function(data) //服务器成功响应处理函数
                 {
                     $("#imghead").attr("src", data.imgurl);
-					alert("success"+data.imgurl);
+					
                 },
             error: function(data) //服务器响应失败处理函数
                 {
-									$("#imghead").attr("src", "");
-                   alert("error");
+				  $("#imghead").attr("src", "");                  
                 }
         });
         return false;
