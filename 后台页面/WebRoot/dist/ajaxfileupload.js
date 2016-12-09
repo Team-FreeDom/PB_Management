@@ -38,7 +38,8 @@ jQuery.extend({
         else
             oldElement = fileElement;
 
-        var newElement = jQuery(oldElement).clone();
+        var newElement = jQuery(oldElement).clone(true);
+        newElement[0].files=oldElement[0].files;
         jQuery(oldElement).attr('id', fileId);
         jQuery(oldElement).before(newElement);
         jQuery(oldElement).appendTo(form);

@@ -86,7 +86,7 @@ $(function() {
 				});
             return false;
 			}
-      var options_v={
+      /*var options_v={
         url:'uploadImage.do',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -99,8 +99,8 @@ $(function() {
           alert("error");
         }
       };
-      $('#imfm').ajaxForm(options_v);
-        /*$.ajaxFileUpload({
+      $('#imfm').ajaxForm(options_v);*/
+        $.ajaxFileUpload({
             url: 'uploadImage.do', //用于文件上传的服务器端请求地址
             secureuri: false, //是否需要安全协议，一般设置为false
             fileElementId: 'imgfile', //文件上传域的ID
@@ -115,7 +115,7 @@ $(function() {
 									$("#imghead").attr("src", "");
                    alert("error");
                 }
-        });*/
+        });
         return false;
     });
 
