@@ -302,7 +302,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    
    public void  delLayout_info(int bid,String path)
    {
-	   List<String> list=new ArrayList<String>();
+	  /* List<String> list=new ArrayList<String>();
 	   list=landInfoDaoImpl.deletelandimg(bid);
 	   for(int i=0;i<list.size();i++)
 	   {
@@ -314,7 +314,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 			File file=new File(path+relativePath);			
 			file.delete(); 
 		   }
-	   }
+	   }*/
 	   landInfoDaoImpl.delLayout_info(bid);
    }
 
