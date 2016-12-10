@@ -314,15 +314,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                     </div>
                                                                     <!-- 主面板内容 -->
                                                                     <div class="row form">
-                                                                        <div class="col-lg-12">
-                                                                            <h2 class="text-center">${notification.title }</h2>
+                                                                        <div class="article">
+                                                                        <div class="title">
+                                                                            <h1 class="text-center">${notification.title }</h1>
                                                                         </div>
-                                                                        <div class="col-lg-12" id="newdetail">
+                                                                        <div class="content" id="newdetail">
                                                                           <!-- 在此插入新闻详情。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
                                                                              ${notification.message }
                                                                         </div>
-
+                                                                          </div>
                                                                     </div>
+
                                                                 </div>
                                                                 <!-- End Sidebar-->
 

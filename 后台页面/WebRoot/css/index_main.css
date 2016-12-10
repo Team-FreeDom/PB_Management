@@ -19,8 +19,8 @@
 }
 
 .information {
-    border: #999 solid 1px;
-    background: #EFF1F7;
+    border: #999 solid 0px;
+    background: #fff;
     height: 177px;
     font-size: 0.9vw;
     text-align: left;

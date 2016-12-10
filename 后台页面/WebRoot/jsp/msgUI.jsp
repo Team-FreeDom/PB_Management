@@ -285,7 +285,7 @@
 </c:choose>
 
 <!-- 直接跳转 -->
-<li><a>共${totalPages}页 -向<input type="text" id="jumpTo" />页 <input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
+<li><a style="padding: 3px 12px;">共${totalPages}页 -向<input type="text" id="jumpTo" />页 <input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
 
 
 </ul>

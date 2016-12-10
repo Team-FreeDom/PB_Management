@@ -665,7 +665,24 @@ a, a:link, a:visited, a:hover, a:active {
 	max-height:250px;
 	_height:expression(this.height >250 ? "250px" : this.height);
 }
-
+.article{
+background: #fff none repeat scroll 0 0;
+padding: 50px 40px;
+}
+.article .title {
+    border-bottom: 1px dashed #ddd;
+    margin: 0 0 20px;
+    text-align: center;
+}
+.article .title h1 {
+    font-family: PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    margin: 0 0 20px;
+}
+.article .content {
+    line-height: 28px;
+}
 @media screen and (min-width:768px) {
 .container-fluid.content {
 	overflow: hidden;
@@ -680,5 +697,5 @@ a, a:link, a:visited, a:hover, a:active {
 
 
 #jumpTo{
-width:40px;
+  width: 40px;
 }
