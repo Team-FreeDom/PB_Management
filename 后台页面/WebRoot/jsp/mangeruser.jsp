@@ -402,13 +402,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                       <div class="modal-body table-responsive">
                                         <table class="table">
                                             <tr>
-                                                <td>员工编号 ： </td>
+                                                <td>员工编号</td>
                                                 <td><input type="text"  id="workerId" name="workerId" class="form-control"></td>
                                                 <td>姓名 ： </td>
                                                 <td><input type="text"  id="name" name="name" class="form-control"></td>
                                             </tr>
                                             <tr>
-                                                <td>性别 ： </td>
+                                                <td>性  别</td>
                                                 <td id="sex-style">
                                                   	<label class="radio-inline">
                                                       <input type="radio" name="inlineRadioOptions" id="sex1" class="sex" value="男" >男
@@ -419,14 +419,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </label>
                                                 </td>
 
-                                                <td>出生年月 ： </td>
+                                                <td>出生年月</td>
                                                 <td class="input-style"
                                                 ><input class="laydate-icon" id="demo2" name="demo2" ></td>
                                             </tr>
 
 
                                             <tr>
-                                                <td>员工类别 ： </td>
+                                                <td>员工类别</td>
                                                 <td>
                                                 	<select class="form-control" name="Awkclass" id="Awkclass">
                                                       <option id="AworkerclassId" value="1">请选择</option>
@@ -435,7 +435,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                          <option id="AworkerclassId">公务员</option>
                                                     </select>
                                                 </td>
-                                                <td>身份属性 ： </td>
+                                                <td>身份属性</td>
                                                 <td>
                                                 	<select class="form-control" name="Astatus" id="Astatus">
                                                       <option id="AstatusID" value="1">请选择</option>
@@ -444,23 +444,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </tr>
 
                                             <tr>
-                                                <td>部门 ： </td>
+                                                <td>部  门</td>
                                                 <td>
                                                 	<select class="form-control" name="Adivision" id="Adivision">
                                                       <option id="AdivisionID" value="1">请选择</option>
                                                     </select>
                                                 </td>
-                                                <td>联系电话 ： </td>
+                                                <td>联系电话</td>
                                                 <td><input type="text"  id="phone" name="phone" class="form-control"></td>
                                             </tr>
 
                                             <tr>
-                                            	<td>身份证号 ： </td>
+                                            	<td>身份证号 </td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  id="IDnumber1" name="IDnumber1" class="form-control"></td>
                                             </tr>
 
                                             <tr>
-                                            	<td>设置密码 ： </td>
+                                            	<td>设置密码</td>
                                                 <td colspan="3"><input style="width:100%;" type="text"  id="password" name="password" class="form-control"></td>
                                             </tr>
 

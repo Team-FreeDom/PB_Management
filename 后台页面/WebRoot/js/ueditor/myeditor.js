@@ -11,8 +11,8 @@ $(document).ready(function() {
 		$("#part").toggle(100);
 		$("#sendMessage").toggle(100);
 		$('#sendNotifitation').toggle(100);
-		$('#title').toggle(100);
-		$('#titletext').toggle(100);
+		$('#titleform').toggle(100);
+		//$('#titletext').toggle(100);
 
 	});
 

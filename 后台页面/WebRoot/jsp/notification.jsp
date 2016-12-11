@@ -186,11 +186,7 @@
 					<!-- 主面板内容 -->
 					<div class="row form">
 
-						<div class="col-lg-12">
 
-								<h1>发送通知公告</h1>
-
-						</div>
 
 						<div class="col-lg-12 form-group">
 
@@ -221,7 +217,12 @@
                                 	</div>
                                  </fieldset>
                                  <fieldset>
-                                                                                                                通知标题：<input type="text"  id="title"></input>
+																	 <div class="form-group" id='titleform'>
+																	 <label for="#title" class="col-sm-3 control-label">通知标题</label>
+																	 <div class="col-sm-6">
+                                      <input type="text" class="form-control" id="title"></input>
+																		</div>
+																		</div>
                                  </fieldset>
                               </form>
                               </div>

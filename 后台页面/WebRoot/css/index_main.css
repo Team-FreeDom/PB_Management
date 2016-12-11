@@ -36,6 +36,9 @@
 	font-size:12px;
     color: #777;
 }
+.information a:visited {
+    color: #777;
+}
 .information .more{
 	font-size:12px;
   bottom: 0px;
