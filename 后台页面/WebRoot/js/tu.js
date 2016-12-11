@@ -302,7 +302,50 @@ $(function() {
                     };
                 }, this);
                 //var c=this.serializedData.concat(this.serializedData2);
-                c = _.merge(this.serializedData, this.serializedData2);
+                //c = _.merge(this.serializedData, this.serializedData2);
+               /* var i=0;
+                for(var node1 in this.serializedData2){
+                	var obj=this.serializedData2[i];
+                	for(var node2 in this.serializedData){
+                		if(node1.id==this.serializedData[].id){
+                            obj=_.union(obj,node1.x);
+                            obj=_.union(obj,node1.y);
+                            obj=_.union(obj,node1.width);
+                            obj=_.union(obj,node1.height);                           
+                            
+                	}              	
+                	
+                }  
+               i++;
+            }*/
+                
+                var c = [];
+                for (var i in this.serializedData) {
+                    //this.serializedData[i].id;
+                    for (var j in this.serializedData2) {
+                        if (this.serializedData[i].id == this.serializedData2[j].id){
+                        	var temp={};
+                        	temp.id=this.serializedData2[j].id;
+                            temp.x=this.serializedData[i].x;
+                            temp.y=this.serializedData[i].y;
+                            temp.width=this.serializedData[i].width;
+                            temp.height=this.serializedData[i].height;
+                            
+                            temp.Afford=this.serializedData2[j].Afford;
+                            temp.buildingArea=this.serializedData2[j].buildingArea;
+                            temp.bid=this.serializedData2[j].bid;
+                            temp.college=this.serializedData2[j].college;
+                            temp.img=this.serializedData2[j].img;
+                            temp.landArea=this.serializedData2[j].landArea;
+                            temp.lname=this.serializedData2[j].lname;
+                            temp.plantingContent=this.serializedData2[j].plantingContent;
+                        
+                        c.push(temp);
+                        break;
+                        }
+                    }	
+                }
+
             }
             ////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////
             var json = "" + JSON.stringify(c);

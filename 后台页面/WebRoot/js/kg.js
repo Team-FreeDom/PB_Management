@@ -39,10 +39,10 @@ $("li.menuItem.nav-parent").click(function(){
 				success : function(data) {	
 					$('.msg').html(data);
 				}
-			});	
-        
+			});	     
        $('.text-success').html($.cookie('name'));     
        $('#imageMain').attr("src",$.cookie('image'));  
+      
  });
 
  
