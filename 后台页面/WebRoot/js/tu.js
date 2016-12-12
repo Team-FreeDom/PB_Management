@@ -145,14 +145,22 @@ $(function() {
         };
         ////滚轮缩放/////////////////////////////////////////
         $('#gridmouse').on('mousewheel', function(event) {
-            if (event.deltaY > 0) {
-                if ($('#gridmouse').width() < 1500)
+            /*if (event.deltaY > 0) {
+                if ($('#gridmouse').width() <= 1400)
                     $('#gridmouse').width($('#gridmouse').width() + 100);
             } else {
-                if ($('#gridmouse').width() > 768)
+                if ($('#gridmouse').width() >= 868)
                     $('#gridmouse').width($('#gridmouse').width() - 100);
             }
-            return false;
+            return false;*/
+        });
+        $(document).on("click", "#girdin", function() {
+          if ($('#gridmouse').width() <= 1400)
+              $('#gridmouse').width($('#gridmouse').width() + 100);
+        });
+        $(document).on("click", "#girdout", function() {
+          if ($('#gridmouse').width() >= 868)
+              $('#gridmouse').width($('#gridmouse').width() - 100);
         });
         /////////////////单击删除按钮事件/////////////////////////////////
         $(document).on("click", ".grid-stack-item .close", function() {
