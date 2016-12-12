@@ -665,8 +665,8 @@ public class LandApplyController {
 		MultipartFile mFile = multipartRequest.getFile("imgfile");   //有问题		
 		String filename = "";
 		if (!mFile.isEmpty()){
-			// 得到上传服务器的路径
-			String path = request.getSession().getServletContext().getRealPath("/landImage/"); 
+			// 得到上传服务器的路径			
+			String path = ExcelReport.getWebRootUrl(request,"/landImage/");
 			// 得到上传的文件的文件名
 			String fileName = mFile.getOriginalFilename();
 			String fileType = fileName.substring(fileName.lastIndexOf("."));
