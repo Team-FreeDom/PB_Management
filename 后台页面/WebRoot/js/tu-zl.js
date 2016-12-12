@@ -231,15 +231,19 @@ $(function() {
 
             }.bind(this);
             ////滚轮缩放/////////////////////////////////////////
-            $('#gridmouse').on('mousewheel', function(event) {
-                /*if (event.deltaY > 0) {
-                    if ($('#gridmouse').width() <= 1400)
-                        $('#gridmouse').width($('#gridmouse').width() + 100);
+            $('#belowImg').on('mousewheel', function(event) {
+                if (event.deltaY > 0) {
+                    if ($('#belowImg').width() <= 1400){
+                        $('#belowImg').width($('#gridmouse').width() + 100);
+                        $('#belowImg').height($('#gridmouse').width());
+                      }
                 } else {
-                    if ($('#gridmouse').width() >= 868)
-                        $('#gridmouse').width($('#gridmouse').width() - 100);
+                    if ($('#belowImg').width() >= 868){
+                        $('#belowImg').width($('#gridmouse').width() - 100);
+                        $('#belowImg').height($('#gridmouse').width());
+                      }
                 }
-                return false;*/
+                return false;
             });
             $(document).on("click", "#girdin", function() {
               if ($('#gridmouse').width() <= 1400)
