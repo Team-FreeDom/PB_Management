@@ -1,11 +1,13 @@
 // JavaScript Document
-		
+
         $(function () {
             var options = {
+							width:20,
+							//minWidth:1000,
 				float:true
             };
             $('.grid-stack').gridstack(options);
-            
+
             /*获得基地------start*/
             $.ajax({                //页面加载时自动执行
 				type : 'POST',
@@ -46,7 +48,7 @@
 				  $('#tudi_plantingContent').val(plantingContent);
 				  $('#tudi_landArea').val(landArea);
 				  $('#tudi_buildingArea').val(buildingArea);
-				  $('#tudi_Afford').val(tudi_Afford);					
+				  $('#tudi_Afford').val(tudi_Afford);
 				};
 				function fuyuan(){
 				  $('.grid-stack-item-content').removeClass("gay");
@@ -54,29 +56,39 @@
 				  fill('','','','','','');
 				};
 				function ishunluan(){
-				  var t=parseInt($('#load-grid').children('option:selected').val());
+				  /*var t=parseInt($('#load-grid').children('option:selected').val());
 				  if(!_.isEmpty(tudi.serializedData2))
-				  {	
+				  {
 					if(t !=  tudi.serializedData2[0].bid){
-						
+
 						  bootbox.alert({
 							  message: "操作失败",
 							  size: 'small'
 						  });
 						 return false;
 					}
-				  }
+				}*/
 				  return true;
 				};
-				
+$('#gridmouse').on('mousewheel', function(event) {
+		if(event.deltaY>0){
+			if($('#gridmouse').width()<1500)
+			$('#gridmouse').width($('#gridmouse').width() +100);
+		}
+		else{
+			if($('#gridmouse').width()>768)
+			$('#gridmouse').width($('#gridmouse').width()-100);
+		}
+		return false;
+});
 				/////////////////单击删除按钮事件/////////////////////////////////
 			  $(document).on("click", ".grid-stack-item .close", function() {
-				 
+
 				  var el=$(this).parents('.grid-stack-item');
 				  var n=_.findIndex(tudi.serializedData, 'id', $(el).attr('data-gs-id'));
 				   if(n==-1)
 				   {
-					  
+
 					  bootbox.alert({
 						  message: "无此节点，操作失败",
 						  size: 'small'
@@ -95,9 +107,9 @@
 				  tudi.grid.removeWidget(el);
 		  		  fuyuan();
 				  this.isModify=true;
-				  return true;					
+				  return true;
 			  });
-			  
+
 			  ////////////////////单击结点选择事件/////////////////////////////
 			  $(document).on("click", ".grid-stack-item", function() {
 				  if(!ishunluan()){
@@ -113,25 +125,25 @@
 				  $(this).children('div.grid-stack-item-content').addClass('gay');
 				  fill(id,tudi.serializedData2[n].lname,tudi.serializedData2[n].plantingContent,tudi.serializedData2[n].landArea,tudi.serializedData2[n].buildingArea,tudi.serializedData2[n].Afford);
 				  return true;
-			  }); ///单击结点事件	  
-			  
+			  }); ///单击结点事件
+
               this.loadGrid = function () {
             	  var bid=$('#load-grid').children('option:selected').val();
 					var obj;
 					if(this.isModify)
 					{
 						if(confirm('您上次的操作尚未保存，是否取消跳转?'))
-						{	
+						{
 							//this.savedata();
 							$('#load-grid').val(this.serializedData2[0].bid);
 							return false;
-							
+
 						}
 					}
 					fill('','','','','','');
 					this.grid.removeAll();
 					obj=this;
-					
+
 					$.ajax({  type : 'POST',
 								dataType : 'json',
 								data:{"bid":bid},
@@ -139,14 +151,14 @@
 								async : false,
 								cache : false,
 								error : function(request) {
-									
+
 									 bootbox.alert({
 										  message: "数据加载失败！",
 										  size: 'small'
 									  });
 								},
 								success : function(data) {
-									
+
 									obj.serializedData2 = _.map(data, function (el) {
 														  return {
 															  id: el.id,
@@ -166,32 +178,32 @@
 															  height: el.height,
 															  id:el.id
 														  };
-													  });	
+													  });
 								  var items = GridStackUI.Utils.sort(obj.serializedData);
 								  _.each(items, function (node) {
 									  var name=_.result(_.find(obj.serializedData2, function(chr) {
 										return chr.id == node.id;
 									  }), 'lname');////对象serializedData2查找关联的lname
 									  obj.grid.addWidget($('<div><div class="grid-stack-item-content normal"><div class="lname">'+name+'</div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),node.x, node.y, node.width, node.height,false,1,4,1,4,node.id);//����ڵ�
-									}, obj);//end each	
-										
+									}, obj);//end each
+
 							   }//end success
-					});	//end ajax				
-					
+					});	//end ajax
+
                 	}.bind(this);////loadgrid
-					
+
 			///////////////////savedate///////////////////////////////////
 				this.savedata = function(){
 					//////
 					var c="";
 					bid=$('#load-grid').children('option:selected').val();
 					var tag=1;
-					
-				
+
+
 					if(_.isEmpty(this.serializedData))
 					{
 						tag=0;//1.
-						
+
 						//return true;
 					}else
 						{
@@ -209,11 +221,11 @@
 					//var c=this.serializedData.concat(this.serializedData2);
 					c=_.merge(this.serializedData, this.serializedData2);
 						}
-////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////				
+////////////////////////////////将JSON.stringify(c)发送过去////////////////////////////////////////////////
 					$.ajax({  type : 'POST',
 								dataType : 'json',
 								data:{"layInfo":JSON.stringify(c),
-									   "bid":bid, 
+									   "bid":bid,
 								       "tag":tag
 								      },
 								url : 'updateLayout_Info.do',
@@ -231,22 +243,22 @@
 										size: 'small'
 									});
 							   }
-					});	
-					
+					});
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				   fuyuan();
-				   this.isModify=false;	
-				   return true;				
+				   this.isModify=false;
+				   return true;
 				}.bind(this);
-				
-				
+
+
 				///////////////////更新到服务器///////////////////////////////////////////////
                 this.saveGrid = function () {
 				  if(!ishunluan()){
 					   return false;
-				  }					
+				  }
 				 this.savedata();
-                   
+
                 }.bind(this);
 				////////////////////////////////清除结点函数////////////////////////////////////////
                 this.clearGrid = function () {
@@ -255,9 +267,9 @@
 				  }
 				  var obj=this;
 
-				 bootbox.confirm({ 
+				 bootbox.confirm({
 					size: "small",
-					message: "确定清空本地节点吗?", 
+					message: "确定清空本地节点吗?",
 					callback: function(result){
 						if(result==true)
 						{
@@ -269,30 +281,30 @@
 						}
 					}
 				  })
-                }.bind(this);	
-				
-				
-					
+                }.bind(this);
+
+
+
           //////////////////增加结点函数//////////////////////////////
                 this.addGrid = function () {
 				  if(!ishunluan()){
 					   return false;
 				  }
 					var id=new Date().getTime().toString();
-					var obj2={id:id,lname:'',plantingContent:'',landArea:0,buildingArea:0,Afford:0,bid:parseInt($('#load-grid').children('option:selected').val())};					
+					var obj2={id:id,lname:'',plantingContent:'',landArea:0,buildingArea:0,Afford:0,bid:parseInt($('#load-grid').children('option:selected').val())};
 					this.serializedData2.push(obj2);
 					fill(id,'','',0,0,0);
 					$('.grid-stack-item-content').removeClass("gay");
 					$('.grid-stack-item-content').addClass("normal");
  					this.grid.addWidget($('<div><div class="grid-stack-item-content gay"><div class="lname"></div><button type="button" class="close" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button></div><div></div></div>'),
-                            0, 0, 1, 1,true,1,4,1,4,id); 
-					var obj={x: parseInt($('.gay').parent().attr('data-gs-x')), y: parseInt($('.gay').parent().attr('data-gs-y')), width: 1, height: 1,id:id};  
+                            0, 0, 1, 1,true,1,4,1,4,id);
+					var obj={x: parseInt($('.gay').parent().attr('data-gs-x')), y: parseInt($('.gay').parent().attr('data-gs-y')), width: 1, height: 1,id:id};
 					this.serializedData.push(obj);
-					$('#tudi_name')[0].focus();  
-					this.isModify=true;    
+					$('#tudi_name')[0].focus();
+					this.isModify=true;
                     return false;
                 }.bind(this);
-				
+
         /////////////////////保存结点信息//////////////////////////////////////
 				this.savearray = function(){
 				  if(!ishunluan()){
@@ -314,16 +326,16 @@
 						  message: "无此节点，操作失败",
 						  size: 'small'
 					  });
-					  return false; 
+					  return false;
 				  }
 				  if($('#tudi_name').val()=='')
 				  {
 					  bootbox.alert({
 						  message: "土地名称为必填项， 请补充！",
 						  size: 'small'
-					  });					  
+					  });
 					  $('#tudi_name')[0].focus();
-					  return false; 				  
+					  return false;
 				  }
 				  this.serializedData2[n].lname=$('#tudi_name').val();
 				  this.serializedData2[n].plantingContent=$('#tudi_plantingContent').val();
@@ -334,12 +346,12 @@
 				  fuyuan();
 				  this.isModify=true;
 				}.bind(this)
-								
+
                 $('#save-grid').click(this.saveGrid);
                 $('#load-grid').change(this.loadGrid);
                 $('#clear-grid').click(this.clearGrid);
 				$('#add-grid').click(this.addGrid);
 				$('#save-array').click(this.savearray);
-               
+
             };
         });

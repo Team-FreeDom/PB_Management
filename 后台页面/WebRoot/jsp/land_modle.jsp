@@ -229,9 +229,8 @@
 				</div>
 				<!-- 土地布局 -->
 				<div class="row">
-					<div class="col-md-8">
-						<div class="grid-stack"></div>
-
+					<div class="col-md-8" style="max-width:1500px;overflow-x:scroll;">
+						<div class="grid-stack" id="gridmouse"></div>
 					</div>
 
 					<div class="col-md-4">
@@ -363,6 +362,7 @@
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery-ui.js"></script>
+	<script src="../dist/jquery.mousewheel.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/lodash.min.js"></script>
 	<script src="../dist/gridstack.js"></script>

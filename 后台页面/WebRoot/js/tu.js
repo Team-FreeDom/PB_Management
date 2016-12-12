@@ -4,6 +4,7 @@ var aClass = new Array("sk_college", "zh_college", "dw_college", "nx_college", "
 
 $(function() {
     var options = {
+        width: 20,
         float: true
     };
     $('.grid-stack').gridstack(options);
@@ -41,65 +42,51 @@ $(function() {
     $(document).on("click", "#upimg", function() {
         $('#imgfile').click();
     });
-		$('#preview').click(function(){
-			//$('#myModal').modal('show')
-			var img = document.getElementById('belowImg');
-			 img.src = document.getElementById('imghead').src;
-		});
-		/*返回的data格式
-		{imgurl:'../image/1.png',msg:'success'}
-		*/
+    $('#preview').click(function() {
+        //$('#myModal').modal('show')
+        var img = document.getElementById('belowImg');
+        img.src = document.getElementById('imghead').src;
+    });
+    /*返回的data格式
+    {imgurl:'../image/1.png',msg:'success'}
+    */
     $('#imgfile').change(function() {
-			var t = parseInt($('#load-grid').children('option:selected').val());
-			if (!_.isEmpty(tudi.serializedData2)) {
-					if (t != tudi.serializedData2[0].bid) {
-							bootbox.alert({
-									message: "操作失败",
-									size: 'small'
-							});
-							return false;
-					}
-			}
-			if (_.isEmpty(tudi.serializedData2)) {
-				bootbox.alert({
-						message: "请先选择土地",
-						size: 'small'
-				});
-				return false;
-			}
-			var filepath = $(this).val();
-			var file_size = this.files[0].size;
-			var size = file_size / 1024;
-			var extStart = filepath.lastIndexOf(".");
-			var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-			if (ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
-				bootbox.alert({
-						message: "图片限于bmp,png,gif,jpeg,jpg格式",
-						size: 'small'
-				});
-            return false;
-      }
-			if (size>1024*3) {
-				bootbox.alert({
-						message: "上传的图片大小不能超过3M！",
-						size: 'small'
-				});
-            return false;
-			}
-      /*var options_v={
-        url:'uploadImage.do',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        success:function(data){
-          alert('hello');
-          $("#imghead").attr("src", data.imgurl);
-        },
-        error: function(data){
-          $("#imghead").attr("src", "");
-          alert("error");
+        var t = parseInt($('#load-grid').children('option:selected').val());
+        if (!_.isEmpty(tudi.serializedData2)) {
+            if (t != tudi.serializedData2[0].bid) {
+                bootbox.alert({
+                    message: "操作失败",
+                    size: 'small'
+                });
+                return false;
+            }
         }
-      };
-      $('#imfm').ajaxForm(options_v);*/
+        if (_.isEmpty(tudi.serializedData2)) {
+            bootbox.alert({
+                message: "请先选择土地",
+                size: 'small'
+            });
+            return false;
+        }
+        var filepath = $(this).val();
+        var file_size = this.files[0].size;
+        var size = file_size / 1024;
+        var extStart = filepath.lastIndexOf(".");
+        var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+        if (ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
+            bootbox.alert({
+                message: "图片限于bmp,png,gif,jpeg,jpg格式",
+                size: 'small'
+            });
+            return false;
+        }
+        if (size > 1024 * 3) {
+            bootbox.alert({
+                message: "上传的图片大小不能超过3M！",
+                size: 'small'
+            });
+            return false;
+        }
         $.ajaxFileUpload({
             url: 'uploadImage.do', //用于文件上传的服务器端请求地址
             secureuri: false, //是否需要安全协议，一般设置为false
@@ -108,11 +95,11 @@ $(function() {
             success: function(data) //服务器成功响应处理函数
                 {
                     $("#imghead").attr("src", data.imgurl);
-					
+
                 },
             error: function(data) //服务器响应失败处理函数
                 {
-				  $("#imghead").attr("src", "");                  
+                    $("#imghead").attr("src", "");
                 }
         });
         return false;
@@ -156,7 +143,17 @@ $(function() {
             }
             return true;
         };
-
+        ////滚轮缩放/////////////////////////////////////////
+        $('#gridmouse').on('mousewheel', function(event) {
+            if (event.deltaY > 0) {
+                if ($('#gridmouse').width() < 1500)
+                    $('#gridmouse').width($('#gridmouse').width() + 100);
+            } else {
+                if ($('#gridmouse').width() > 768)
+                    $('#gridmouse').width($('#gridmouse').width() - 100);
+            }
+            return false;
+        });
         /////////////////单击删除按钮事件/////////////////////////////////
         $(document).on("click", ".grid-stack-item .close", function() {
 
@@ -215,8 +212,7 @@ $(function() {
                     return false;
                 }
             }
-            fill('', '', '', '', '', '', '', ''); //--
-            //alert("hello");
+            fill('', '', '', '', '', '', '', '');
             this.grid.removeAll();
             obj = this;
             if (bid == "") {
@@ -301,49 +297,30 @@ $(function() {
                         id: node.id.toString()
                     };
                 }, this);
-                //var c=this.serializedData.concat(this.serializedData2);
-                //c = _.merge(this.serializedData, this.serializedData2);
-               /* var i=0;
-                for(var node1 in this.serializedData2){
-                	var obj=this.serializedData2[i];
-                	for(var node2 in this.serializedData){
-                		if(node1.id==this.serializedData[].id){
-                            obj=_.union(obj,node1.x);
-                            obj=_.union(obj,node1.y);
-                            obj=_.union(obj,node1.width);
-                            obj=_.union(obj,node1.height);                           
-                            
-                	}              	
-                	
-                }  
-               i++;
-            }*/
-                
                 var c = [];
                 for (var i in this.serializedData) {
                     //this.serializedData[i].id;
                     for (var j in this.serializedData2) {
-                        if (this.serializedData[i].id == this.serializedData2[j].id){
-                        	var temp={};
-                        	temp.id=this.serializedData2[j].id;
-                            temp.x=this.serializedData[i].x;
-                            temp.y=this.serializedData[i].y;
-                            temp.width=this.serializedData[i].width;
-                            temp.height=this.serializedData[i].height;
-                            
-                            temp.Afford=this.serializedData2[j].Afford;
-                            temp.buildingArea=this.serializedData2[j].buildingArea;
-                            temp.bid=this.serializedData2[j].bid;
-                            temp.college=this.serializedData2[j].college;
-                            temp.img=this.serializedData2[j].img;
-                            temp.landArea=this.serializedData2[j].landArea;
-                            temp.lname=this.serializedData2[j].lname;
-                            temp.plantingContent=this.serializedData2[j].plantingContent;
-                        
-                        c.push(temp);
-                        break;
+                        if (this.serializedData[i].id == this.serializedData2[j].id) {
+                            var temp = {};
+                            temp.id = this.serializedData2[j].id;
+                            temp.x = this.serializedData[i].x;
+                            temp.y = this.serializedData[i].y;
+                            temp.width = this.serializedData[i].width;
+                            temp.height = this.serializedData[i].height;
+
+                            temp.Afford = this.serializedData2[j].Afford;
+                            temp.buildingArea = this.serializedData2[j].buildingArea;
+                            temp.bid = this.serializedData2[j].bid;
+                            temp.college = this.serializedData2[j].college;
+                            temp.img = this.serializedData2[j].img;
+                            temp.landArea = this.serializedData2[j].landArea;
+                            temp.lname = this.serializedData2[j].lname;
+                            temp.plantingContent = this.serializedData2[j].plantingContent;
+                            c.push(temp);
+                            break;
                         }
-                    }	
+                    }
                 }
 
             }
@@ -498,9 +475,6 @@ $(function() {
             this.serializedData2[n].buildingArea = $('#tudi_buildingArea').val();
             this.serializedData2[n].Afford = $('#tudi_Afford').val();
             this.serializedData2[n].img = $('#imghead').attr("src");
-            /* var file=$("#file").val();
-             this.serializedData2[n].file=file;
-            */
             $('.gay > .lname').html($('#tudi_name').val());
             $(".gay").attr("id", aClass[$('#tudi_aptCollege').val()]);
             fuyuan();
@@ -515,71 +489,3 @@ $(function() {
 
     }; //end tudi function
 }); //end ready
-
-/*function displayImg(){
-
-    	  var img = document.getElementById('belowImg');
-         img.src = document.getElementById('imghead').src;
-
-       }
-
-
-        //图片上传
-        function previewImage(file)
-        {
-          var MAXWIDTH  =250;
-          var MAXHEIGHT = 250;
-          var div = document.getElementById('preview');
-          if (file.files && file.files[0])
-          {
-              div.innerHTML ='<img id="imghead" class="bk-img-60">';
-              var img = document.getElementById('imghead');
-              img.onload = function(){
-                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, 250, 250);
-                img.width  =  rect.width;
-                img.height =  rect.height;
-//                 img.style.marginLeft = rect.left+'px';
-                img.style.marginTop = rect.top+'px';
-              }
-              var reader = new FileReader();
-              reader.onload = function(evt){
-
-            	  img.src = evt.target.result;
-            	  //alert(img.src);
-              }
-              reader.readAsDataURL(file.files[0]);
-          }
-          else //兼容IE
-          {
-            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
-            file.select();
-            var src = document.selection.createRange().text;
-            div.innerHTML = '<img id=imghead>';
-            var img = document.getElementById('imghead');
-            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
-            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
-            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
-            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
-          }
-        }
-        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
-            var param = {top:0, left:0, width:width, height:height};
-            if( width>maxWidth || height>maxHeight )
-            {
-                rateWidth = width / maxWidth;
-                rateHeight = height / maxHeight;
-
-                if( rateWidth > rateHeight )
-                {
-                    param.width =  maxWidth;
-                    param.height = Math.round(height / rateWidth);
-                }else
-                {
-                    param.width = Math.round(width / rateHeight);
-                    param.height = maxHeight;
-                }
-            }
-            param.left = Math.round((maxWidth - param.width) / 2);
-            param.top = Math.round((maxHeight - param.height) / 2);
-            return param;
-        } */

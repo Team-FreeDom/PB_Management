@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/gridstack.min.css" />
+    <link rel="stylesheet" href="../dist/gridstack.css" />
     <link rel="stylesheet" href="../css/tu.css">
 	<link rel="stylesheet" href="../css/style.css">
     <style>
@@ -211,9 +211,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
 
                     </div>
-                    <div class="row form-group">
-                      <div class="col-md-8">
-                       	<div class="grid-stack"></div>
+                    <div class="row">
+                      <div class="col-md-8" style="max-width:1500px;overflow-x:scroll;">
+                       	<div class="grid-stack" id="gridmouse"></div>
                       </div>
                       <div class="col-md-4">
 
@@ -277,17 +277,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                 </div>
                                 </fieldset>
-                               
+
                                 <div class="form-group">
                                   <div class="col-sm-offset-3 col-sm-6">
                                     <a class="btn btn-success"  style="padding-left:20px;" id="sum_app" data-toggle="modal" data-target="#landModal">申 请 租 赁</a>
                                   </div>
                                 </div>
-                                 <div class="form-group">									
-									 <div class="col-sm-9" onclick="displayImg()"  data-toggle="modal" data-target="#myModal">									  
-									    <a href="#" >									     
+                                 <div class="form-group">
+									 <div class="col-sm-9" onclick="displayImg()"  data-toggle="modal" data-target="#myModal">
+									    <a href="#" >
 										 <img id="imghead" class="bk-img-60 specialOne"  border=0 src="" alt="">
-										 </a>										 
+										 </a>
 									</div>
 								</div>
 
@@ -339,7 +339,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="modal-body">
         <img src="" id="belowImg" class="special"/>
       </div>
-      <div class="modal-footer">        
+      <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -393,6 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
   <script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery-ui.js"></script>
+  <script src="../dist/jquery.mousewheel.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/lodash.min.js"></script>
