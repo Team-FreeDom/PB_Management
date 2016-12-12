@@ -317,19 +317,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                                                         <div class="col-md-4"></div>
                                                                         <div class="col-md-4">
-                                                                            <ul class="nav nav-tabs  nav-justified" role="tablist">
-                                                                                <li role="presentation" class="active">
-                                                                                    <a href="#tuzulin" role="tab" data-toggle="tab">土地信息详情</a>
-                                                                                </li>
-                                                                                <li role="presentation">
-                                                                                    <a href="#lishi" role="tab" data-toggle="tab">租赁参考信息</a>
-                                                                                </li>
-                                                                            </ul>
+
 
                                                                         </div>
 
                                                                     </div>
                                                                     <div class="row">
+                                                                      <div class="col-md-4">
                                                                         <div class="btn-group" style="padding:0px 0px 5px 20px;">
                                                                             <a class="btn btn-default" id="girdin">
                                                                                 <span class="glyphicon glyphicon-zoom-in"></span>
@@ -338,9 +332,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                 <span class="glyphicon glyphicon-zoom-out"></span>
                                                                             </a>
                                                                         </div>
+                                                                      </div>
+                                                                      <div class="col-md-4"></div>
+                                                                      <div class="col-md-4">
+                                                                        <ul class="nav nav-tabs  nav-justified" role="tablist">
+                                                                            <li role="presentation" class="active">
+                                                                                <a href="#tuzulin" role="tab" data-toggle="tab">土地信息详情</a>
+                                                                            </li>
+                                                                            <li role="presentation">
+                                                                                <a href="#lishi" role="tab" data-toggle="tab">租赁参考信息</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                      </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-md-8" style="max-width:1500px;overflow-x:scroll;">
+                                                                        <div class="col-md-8" style="max-width:1800px;overflow-x:scroll;">
                                                                             <div class="grid-stack" id="gridmouse"></div>
                                                                         </div>
                                                                         <div class="col-md-4">

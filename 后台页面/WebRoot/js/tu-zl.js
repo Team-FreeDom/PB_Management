@@ -246,7 +246,7 @@ $(function() {
                 return false;
             });
             $(document).on("click", "#girdin", function() {
-              if ($('#gridmouse').width() <= 1400)
+              if ($('#gridmouse').width() <= 1700)
                   $('#gridmouse').width($('#gridmouse').width() + 100);
             });
             $(document).on("click", "#girdout", function() {

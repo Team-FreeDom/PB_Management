@@ -224,15 +224,21 @@
 
 					</div>
 					<div class="col-md-4">
-						<p class="lead text-center bg-primary">土地信息设置区</p>
+
 					</div>
 				</div>
 				<!-- 土地布局 -->
 				<div class="row">
+					<div class="col-md-4">
 					<div class="btn-group" style="padding:0px 0px 5px 20px;">
 						<a  class="btn btn-default" id="girdin"><span class="glyphicon glyphicon-zoom-in"></span></a>
 						<a  class="btn btn-default" id="girdout"><span class="glyphicon glyphicon-zoom-out"></span></a>
 					</div>
+				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<p class="lead text-center bg-primary">土地信息设置区</p>
+				</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8" style="max-width:1500px;overflow-x:scroll;">
