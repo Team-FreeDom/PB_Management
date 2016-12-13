@@ -5,6 +5,7 @@ var aClass = new Array("sk_college", "zh_college", "dw_college", "nx_college", "
 $(function() {
     var options = {
         width: 20,
+        float: true,
         disableDrag: true,
         disableResize: true
     };
