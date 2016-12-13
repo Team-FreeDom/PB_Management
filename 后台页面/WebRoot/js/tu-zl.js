@@ -279,7 +279,7 @@ $(function() {
 					<div class="form-group">\
 					  <div class="input-group">\
 						<label>推荐从事：</label>\
-						<input class="form-control" type="text" value=' + tu_zl.serializedData[n].plantingContent + ' id="tplan' + i + '" disabled>\
+						<input class="form-control" type="text" value="' + tu_zl.serializedData[n].plantingContent + '"  id="tplan' + i + '" disabled>\
 					  </div>\
 					</div>\
 					<div class="form-group">\
