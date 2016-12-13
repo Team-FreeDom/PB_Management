@@ -1,5 +1,6 @@
 package com.base.action;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +55,16 @@ public class UserController {
 					 * .getRealPath("/imgdraw/");
 					 */
 					String path = ExcelReport.getWebRootUrl(request,"/imgdraw/");
-
+ 
+					//先删除原有的图像
+					String deleteFile = CookieUtils.getCookieImage(request,response);
+					deleteFile = deleteFile.substring(deleteFile.lastIndexOf("/"));
+					File tempFile = new File(path+deleteFile);
+					if (tempFile.isFile() && tempFile.exists()) { 
+					   tempFile.delete();
+					}
+					//System.out.println(path+deleteFile);
+					
 					// 得到上传的文件的文件名
 					String fileName = mFile.getOriginalFilename();
 					String fileType = fileName.substring(fileName
@@ -73,6 +83,8 @@ public class UserController {
 					
 					//重新写cookie中的img属性值
 					CookieUtils.addCookie("image", filename,response);
+					
+					
 				}
 				String name = request.getParameter("name");
 				if (name.equals("")){
