@@ -81,6 +81,38 @@ $(function() {
             function closebox() {
                 tu_zl.dialog.modal('hide');
             }
+            function subString(str, len, hasDot)
+            {
+                var newLength = 0;
+                var newStr = "";
+                var chineseRegex = /[^\x00-\xff]/g;
+                var singleChar = "";
+                var strLength = str.replace(chineseRegex,"**").length;
+                for(var i = 0;i < strLength;i++)
+                {
+                    singleChar = str.charAt(i).toString();
+                    if(singleChar.match(chineseRegex) != null)
+                    {
+                        newLength += 2;
+                    }
+                    else
+                    {
+                        newLength++;
+                    }
+                    if(newLength > len)
+                    {
+                        break;
+                    }
+                    newStr += singleChar;
+                }
+
+                if(hasDot && strLength > len)
+                {
+                    newStr += "...";
+                }
+                return newStr;
+            }
+
             this.loadGrid = function() {
                 var bid = $('#choose-grid').children('option:selected').val();
                 var obj = this;
@@ -116,7 +148,7 @@ $(function() {
                                 else if (node.tag == 1 && node.name == '') {
                                     obj.grid.addWidget($('<div><div class="grid-stack-item-content lockdiv"><span class="lname">锁定：等候缴费</span><span class="label label-warning  Lineup">' + node.name + '</span></div><div></div></div>'), node.x, node.y, node.width, node.height, false, 1, 4, 1, 4, node.id);
                                 } else
-                                    obj.grid.addWidget($('<div><div class="grid-stack-item-content ' + aClass[node.aptCollege] + '"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id=' + node.id + ' value=' + node.id + '>' + node.lname + '</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>' + node.lineup + '</span></div><div></div></div>'), node.x, node.y, node.width, node.height, false, 1, 4, 1, 4, node.id);
+                                    obj.grid.addWidget($('<div><div class="grid-stack-item-content ' + aClass[node.aptCollege] + '"><label class="checkbox-inline lname"><input type="checkbox" class="ck" id=' + node.id + ' value=' + node.id + '>' + subString(node.lname,4) + '</label><span class="label label-primary Lineup "><span class="glyphicon glyphicon-user pull-right"></span>' + node.lineup + '</span></div><div></div></div>'), node.x, node.y, node.width, node.height, false, 1, 4, 1, 4, node.id);
                             }, obj); //end each
                         } //end success
                 }); //end ajax
@@ -254,10 +286,47 @@ $(function() {
               if ($('#gridmouse').width() >= 868)
                   $('#gridmouse').width($('#gridmouse').width() - 100);
             });
+
             $(document).on("click", ".grid-stack-item", function() {
+              //if(e.target.tagName=="INPUT")
+                  //return;
                 var id = $(this).attr('data-gs-id');
-                var oBox = document.getElementById(id);
-                oBox.click();
+                //var oBox = document.getElementById(id);
+                //oBox.click();
+                var cvalue=$("#"+id).prop("checked");
+                $("#"+id).prop("checked",!cvalue);
+
+                var n = _.findIndex(tu_zl.serializedData, 'id', id);
+                if (tu_zl.serializedData[n].name != '') return false;
+                if (!cvalue) {
+                    fill(id, tu_zl.serializedData[n].lname, tu_zl.serializedData[n].aptCollege, tu_zl.serializedData[n].plantingContent, tu_zl.serializedData[n].landArea, tu_zl.serializedData[n].buildingArea,
+                        tu_zl.serializedData[n].afford, tu_zl.serializedData[n].img);
+                    var testArray = tu_zl.serializedData[n].data;
+                    var data = new Array();
+                    i = 0;
+                    _.map(testArray, function(el) {
+                        data[i] = new Array();
+                        data[i][0] = el.name;
+                        data[i][1] = el.planting;
+                        data[i][2] = el.ptime;
+                        i++;
+                    });
+                    $('#field_rent').dataTable({
+                        "destroy": true,
+                        "data": data,
+                        "paging": false,
+                        "searching": false,
+                        "ordering": false,
+                        "info": false,
+                        "order": [
+                            [2, "asc"]
+                        ]
+                    });
+                } else {
+                    fill('', '', '', '', '', '', '', '');
+                    $('#field_rent tbody').html('');
+                }
+
             }).bind(this);
 
             $(document).on("click", "#sum_app", function() {
@@ -302,7 +371,7 @@ $(function() {
                 tu_zl.choose_count = i - 1;
             });
 
-            $(document).on("click", ".ck", function() {
+          /*  $(document).on("click", ".ck", function() {
                 var id = $(this).attr('id');
                 var n = _.findIndex(tu_zl.serializedData, 'id', id);
                 if (tu_zl.serializedData[n].name != '') return false;
@@ -334,7 +403,7 @@ $(function() {
                     fill('', '', '', '', '', '', '', '');
                     $('#field_rent tbody').html('');
                 }
-            }); //end click
+            }); //end click*/
 
             $('#choose-grid').change(this.loadGrid);
             $('#sub_land_apply').click(this.savedate);
