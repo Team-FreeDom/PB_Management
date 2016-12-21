@@ -26,9 +26,9 @@
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<script src="../js/html5shiv.min.js"></script>
+	<script src="../js/respond.min.js"></script>
+<![endif]-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 
@@ -100,7 +100,7 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small></small>
+										<i class="icon-circle text-danger"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
@@ -223,7 +223,7 @@
 																		<td>种植内容 <select name="contentS" id="contentSh"
 																			size="">
 																				<option value="" id="contentShh">显示全部</option>
-																				
+
 																		</select>  
 																		</td>
 																		<td>&nbsp;</td>
@@ -473,7 +473,7 @@
 
 
 </body>
-<script src="../js/jquery.js"></script>
+<script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/bootbox.min.js"></script>

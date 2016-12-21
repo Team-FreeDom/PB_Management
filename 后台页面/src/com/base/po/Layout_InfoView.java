@@ -23,6 +23,24 @@ public class Layout_InfoView{
 	private int buildingArea;
 	private int bid;	
 	private int Afford;
+	private String aptCollege;
+	private String img;
+	public String getAptCollege()
+	{
+		return aptCollege;
+	}
+	public void setAptCollege(String aptCollege)
+	{
+		this.aptCollege = aptCollege;
+	}	
+	public String getImg()
+	{
+		return img;
+	}
+	public void setImg(String img)
+	{
+		this.img = img;
+	}
 
 	public String getId() {
 		return id;

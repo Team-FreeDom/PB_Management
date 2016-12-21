@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -134,56 +136,50 @@ public class PersonalManageController {
 		return null;
 	}
 
-	// 修改人员信息
-	@RequestMapping("/upInfo.do")
-	public String upInfo(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
-		String id = request.getParameter("EworkerId");// 获取人员id
-		String name = request.getParameter("Ename");// 获取人员名字
-		if(name==null)
-			name="";
-		
-		String sex = request.getParameter("Esex");// 性别
-		if (sex == null) {
-			sex="";
-		}
-		String birthdate = request.getParameter("demo");// 获取人员出生日期
-		if (birthdate == null) {
-			birthdate="";
-		}
-		String category = request.getParameter("Eworkerclass");// 获取员工类别
-		if (category.equals("请选择")) {
-			category = "";
-		}
-		String attritube = request.getParameter("Estatus");// 获取人员身份属性
-		if (attritube.equals("请选择")) {
-			attritube = "";
-		}
-		String dept = request.getParameter("Edivision");// 获取人员部门
-		if (dept == null) {
-			dept="";
-		}
-		
-		String telephone = request.getParameter("Ephone");// 获取人员电话
-		if (telephone == null) {
-			telephone="";
-		}
-		
-		String idcard = request.getParameter("IDnumber");// 身份证
-		if (idcard == null) {
-			idcard="";
-		}
-		
-		String password = request.getParameter("Epassword");// 密码
-		if (password == null) {
-			password="";
-		}
-		
-		userinfoservice.upInfo(id, name, sex, birthdate, category, attritube,
-				dept, telephone, idcard, password);
-
-		return "mangeruser";
-	}
+	//修改人员信息
+			@RequestMapping("/upInfo.do")
+			public String upInfo(HttpServletRequest request,HttpServletResponse response,ModelMap map){
+				String id=request.getParameter("EworkerId");//获取人员id
+				String name=request.getParameter("Ename");//获取人员名字
+				if(name.equals("")){
+					name=null;
+				}
+				String sex=request.getParameter("inlineRadioOptions");//性别
+				if(sex.equals("")){
+					sex=null;
+				}
+				String birthdate=request.getParameter("demo");//获取人员出生日期
+				if(birthdate.equals("")){
+					birthdate=null;
+				}
+				String category=request.getParameter("Eworkerclass");//获取员工类别 
+				if(category.equals("请选择")){
+					category=null;
+				}
+				String attritube=request.getParameter("Estatus");//获取人员身份属性
+				if(attritube.equals("请选择")){	
+					attritube=null;
+				}
+				String dept=request.getParameter("Edivision");//获取人员部门
+				if(dept.equals("")){
+					dept=null;
+				}
+				String telephone=request.getParameter("Ephone");//获取人员电话
+				if(telephone.equals("")){
+					telephone=null;
+				}
+				String idcard=request.getParameter("IDnumber");//身份证
+				if(idcard.equals("")){
+					idcard=null;
+				}
+				String password=request.getParameter("Epassword");//密码
+				if(password.equals("")){
+					password=null;
+				}
+				userinfoservice.upInfo(id,name,sex,birthdate,category,attritube,dept,telephone,idcard,password);
+				
+				return "mangeruser";
+			}
 
 	// 增加人员信息
 	@RequestMapping("/addInfo.do")
@@ -291,17 +287,26 @@ public class PersonalManageController {
 			String fullFileName = path + "/PersonInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportPersonInfo(list, fullFileName);
-			String filename = "湖南农业大学人员信息表";
+			String filename = "湖南农业大学人员信息表.xlsx";
 			// System.out.println(fullFileName);
 
 			// 显示中文文件名
 			response.setContentType("application/octet-stream;charset=UTF-8");
 			try {
 
-				response.setHeader("Content-Disposition",
+/*				response.setHeader("Content-Disposition",
 						"attachment;filename="
 								+ new String(filename.getBytes(), "iso-8859-1")
-								+ ".xlsx");
+								+ ".xlsx");*/
+				response.setContentType("application/octet-stream");  
+				 boolean isMSIE = ExcelReport.isMSBrowser(request);  
+				  if (isMSIE) {  
+					  filename = URLEncoder.encode(filename, "UTF-8");  
+				 } else {  
+				       filename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");  
+				 }  
+				 response.setHeader("Content-disposition", "attachment;filename=\"" + filename + "\"");  
+				
 
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
@@ -368,6 +373,7 @@ public class PersonalManageController {
 			//System.out.println("获得数据啦！！！！！！！！！");
 			// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 			
+			if(CollectionUtils.isNotEmpty(list)){
 			//实现批量插入
 			String prefix  = "INSERT IGNORE INTO baseweb.userinfo(id,name,sex,ID_number,"
 					+ "arriveTime,birthdate,college,"
@@ -413,6 +419,7 @@ public class PersonalManageController {
             		",userType=values(userType),workTime=values(workTime),workingForm=values(workingForm)"; 
             //System.out.println(sql);
 			adminManageServiceImpl.setAdminFunction(sql);
+			}
 			
 			wb.close();
 			outputStream.close();

@@ -40,6 +40,12 @@ public class checkLoginFilter implements Filter {
 			return;
 		}
 
+        if (url.endsWith("getAuthCode.do")) {
+			
+			arg2.doFilter(arg0, arg1);
+			return;
+		}
+		
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {
 			

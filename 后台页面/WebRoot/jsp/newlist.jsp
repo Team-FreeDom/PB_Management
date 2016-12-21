@@ -102,7 +102,7 @@
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
-										<i class="icon-circle text-success"></i> <small></small>
+										<i class="icon-circle text-danger"></i> <small></small>
 										<!--ms-if-->
 									</div>
 								</div>
@@ -303,7 +303,7 @@
 								</c:choose>
 
 								<!-- 直接跳转 -->
-								<li><a>共${totalPages}页 -向<input type="text" id="jumpTo" />页<input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
+								<li><a style="padding: 3px 12px;">共${totalPages}页 -向<input type="text" id="jumpTo" />页<input type="button" value="跳转" onclick="jumpTo(${totalPages})" /></a></li>
 
 
 							</ul>
@@ -320,12 +320,12 @@
 	</div>
 	<div class="clearfix"></div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<!--[if lt IE 9]>
+		<script src="../js/html5shiv.min.js"></script>
+		<script src="../js/respond.min.js"></script>
+	<![endif]-->
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/kg.js"></script>
  <script>

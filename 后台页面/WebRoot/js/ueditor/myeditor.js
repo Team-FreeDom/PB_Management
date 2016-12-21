@@ -11,8 +11,8 @@ $(document).ready(function() {
 		$("#part").toggle(100);
 		$("#sendMessage").toggle(100);
 		$('#sendNotifitation').toggle(100);
-		$('#title').toggle(100);
-		$('#titletext').toggle(100);
+		$('#titleform').toggle(100);
+		//$('#titletext').toggle(100);
 
 	});
 
@@ -40,19 +40,19 @@ $(document).ready(function() {
 			url : 'saveNotification.do',// 锟斤拷台锟睫革拷
 			data : {
 				data : message,
-				title:"ceshi"
+				title: title
 			},
 			async : false,
 			cache : false,
 			error : function() {
 				bootbox.alert({
-					message : "发布通知失败",
+					message : "鍙戝竷澶辫触!",
 					size : 'small'
 				});
 			},
 			success : function() {
 				bootbox.alert({
-					message : "发布通知成功",
+					message : "鍙戝竷鎴愬姛!",
 					size : 'small'
 				});
 			}
@@ -76,13 +76,13 @@ $(document).ready(function() {
 			cache : false,
 			error : function(request) {
 				bootbox.alert({
-					message : "发布消息失败",
+					message : "鍙戝竷澶辫触!",
 					size : 'small'
 				});
 			},
 			success : function(em) {
 				bootbox.alert({
-					message : "发布消息成功",
+					message : "鍙戝竷鎴愬姛!",
 					size : 'small'
 				});
 			}

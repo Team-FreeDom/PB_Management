@@ -21,7 +21,24 @@ public class RentCollection {
 	private int Lineup;
 	private int tag;
 	private List<RentAdd> data;
-	
+	private String aptCollege;
+	private String img;
+	public String getAptCollege()
+	{
+		return aptCollege;
+	}
+	public void setAptCollege(String aptCollege)
+	{
+		this.aptCollege = aptCollege;
+	}	
+	public String getImg()
+	{
+		return img;
+	}
+	public void setImg(String img)
+	{
+		this.img = img;
+	}
 		
 	public int getTag() {
 		return tag;

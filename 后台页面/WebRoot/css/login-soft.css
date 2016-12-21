@@ -8,24 +8,43 @@ Login page
 }
 
 .login .logo {
-  margin: 0 auto;   
+  margin: 0 auto;
   margin-top:180px;
   padding: 15px;
   text-align: center;
-}  
+}
 .display-hide {
   display: none;
 }
 
-
+.input-icon i {
+    color: #ccc;
+    display: block;
+    font-size: 16px;
+    height: 16px;
+    margin: 11px 2px 4px 10px;
+    position: absolute;
+    text-align: center;
+    width: 16px;
+    line-height: 14px;
+}
+.input-icon input {
+    padding-left: 33px !important;
+}
+.visible-ie8 {
+    display: none;
+}
+.visible-ie9 {
+    display: none;
+}
 .login .content {
   background: url(../image/bg-white-lock.png) repeat;
   width: 360px;
-  margin: 0 auto; 
+  margin: 0 auto;
   margin-bottom: 0px;
-  padding: 30px;  
-  padding-top: 40px;  
-  padding-bottom: 15px;  
+  padding: 30px;
+  padding-top: 40px;
+  padding-bottom: 15px;
 }
 
 .login .content h3 {
@@ -81,7 +100,7 @@ Login page
   border: 0;
   margin-bottom: 0;
   padding-bottom: 20px;
-}  
+}
 
 .login .content .register-form .form-actions {
   border: 0;
@@ -120,11 +139,11 @@ Login page
   color: #ccc;
   z-index: 1;
   top:1px;
-  margin: 4px 4px 0px 3px; 
+  margin: 4px 4px 0px 3px;
   width: 16px;
   height: 16px;
   font-size: 16px;
-  text-align: center; 
+  text-align: center;
 }
 
 .login .content .has-error .select2-container i {
@@ -142,12 +161,15 @@ Login page
 /* footer copyright */
 .login .copyright {
   text-align: center;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 10px;
   color: #eee;
   font-size: 12px;
 }
-
+.input-icon {
+  border-radius: 0 !important;
+    position: relative;
+}
 @media (max-width: 480px) {
   /***
   Login page
@@ -157,7 +179,7 @@ Login page
   }
 
   .login .content {
-    padding: 30px; 
+    padding: 30px;
     width: 222px;
   }
 

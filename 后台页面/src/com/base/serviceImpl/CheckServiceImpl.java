@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -23,7 +24,7 @@ import com.base.service.checkService;
 import com.base.utils.MessageUtils;
 
 @Service("checkService")
-public class CheckServiceImpl implements checkService {
+public class CheckServiceImpl<E> implements checkService {
 
 	@Autowired
 	private LandApplyDaoImpl landApplyDaoImpl;
@@ -32,8 +33,20 @@ public class CheckServiceImpl implements checkService {
 
 	//查询status中记录为审核的函数（status=2）
 	@Override
-	public CheckList getLandApply(int id,int pageindex,int size) throws SQLException  {
-		CheckList list=checkViewDaoImpl.getLandApply(id,pageindex,size,null,null,null);
+	public CheckList getLandApply(int id,int pageindex,int size,int order,String orderDir) throws SQLException  {
+		String columnName="";
+		if(order==0){
+			columnName="id";
+		}else if(order==1){
+			columnName="startime";
+		}else if(order==2){
+			columnName="endtime";
+		}else if(order==4){
+			columnName="li";
+		}else if(order==8){
+			columnName="times";
+		}
+		CheckList list=checkViewDaoImpl.getLandApply(id,pageindex,size,null,null,null,columnName,orderDir);
 		return list;
 	}
 	
@@ -125,8 +138,21 @@ public class CheckServiceImpl implements checkService {
 		return list;
 	}	
 	//刷选
-	public CheckList getInfo(int flag,int startIndex,int pageindex,String basename,String username,String usercollage) throws SQLException{	   
-		   CheckList list=checkViewDaoImpl.getLandApply(flag,startIndex,pageindex,basename,username,usercollage);
+	public CheckList getInfo(int flag,int startIndex,int pageindex,String basename,String username,String usercollage,int order,String orderDir) throws SQLException{	   
+		   
+		String columnName="";
+		if(order==0){
+			columnName="id";
+		}else if(order==1){
+			columnName="startime";
+		}else if(order==2){
+			columnName="endtime";
+		}else if(order==4){
+			columnName="li";
+		}else if(order==8){
+			columnName="times";
+		}
+		CheckList list=checkViewDaoImpl.getLandApply(flag,startIndex,pageindex,basename,username,usercollage,columnName,orderDir);
 		   return list;
 	   }
 	//基地查询
@@ -155,7 +181,31 @@ public class CheckServiceImpl implements checkService {
 			
 		}
 		
+		@Override
+		public List<Map<String,String>> getCheckDept(){
+			
+			List<Map<String,String>> list=checkViewDaoImpl.getCheckDept();
+			
+			return list;
+		}
 		
-		
-
+		@Override
+		public List getList(){
+			
+			List list=new ArrayList<E>();
+			
+			List<BaseInfo> baseinfo=checkViewDaoImpl.getBaseInfos();
+			List<Map<String,String>> checkApplicant=checkViewDaoImpl.getCheckApplicant();
+			List<Map<String,String>> payApplicant=checkViewDaoImpl.getPayApplicant();
+			List<Map<String,String>> checkDept=checkViewDaoImpl.getCheckDept();
+			List<Map<String,String>> payDept=checkViewDaoImpl.getPayDept();
+			
+			list.add(baseinfo);
+			list.add(checkApplicant);
+			list.add(payApplicant);
+			list.add(checkDept);
+			list.add(payDept);
+			
+			return list;
+		}
 }

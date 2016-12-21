@@ -76,7 +76,8 @@ public class LandLayout_infoDaoImpl {
 				liv.setWidth(rs.getInt("widths"));
 				liv.setX(rs.getInt("xs"));
 				liv.setY(rs.getInt("ys"));
-				
+				liv.setImg(rs.getString("img"));
+				liv.setAptCollege(rs.getString("aptCollege"));
 				li.add(liv);    //º”µΩlist÷–
 			}
 	    	 

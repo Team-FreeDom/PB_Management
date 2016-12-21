@@ -285,7 +285,7 @@ public class NotificationDaoImpl implements NotificationDao {
 	public Notification getNotification(String id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.openSession();
-		String hql = "from Notification where id=" + id + "";
+		String hql = "from Notification where id=" + id;
 		List<Notification> list=null;
 		try {
 			Query query = session.createQuery(hql);

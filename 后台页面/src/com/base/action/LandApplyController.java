@@ -653,36 +653,84 @@ public class LandApplyController {
 
 	}
 
+	
+	@RequestMapping("/uploadImage.do")
+	@ResponseBody
+	public String uploading(HttpServletRequest request,HttpServletResponse response, ModelMap map) 
+	{
+		System.out.println("hello");	
+		//上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		// 得到上传的文件
+		MultipartFile mFile = multipartRequest.getFile("imgfile");   //有问题		
+		String filename = "";
+		if (!mFile.isEmpty()){
+			// 得到上传服务器的路径			
+			String path = ExcelReport.getWebRootUrl(request,"/landImage/");
+			// 得到上传的文件的文件名
+			String fileName = mFile.getOriginalFilename();
+			String fileType = fileName.substring(fileName.lastIndexOf("."));
+			filename = new Date().getTime() + fileType;			
+			InputStream inputStream;
+			try {
+				inputStream = mFile.getInputStream();
+				byte[] b = new byte[1048576];
+				int length = inputStream.read(b);
+				path += "/" + filename;
+				// 文件流写到服务器端
+				FileOutputStream outputStream = new FileOutputStream(path);
+				outputStream.write(b, 0, length);
+				inputStream.close();
+				outputStream.close();
+				filename = "../landImage/" + filename;
+				System.out.println(filename);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		JSONObject getObj = new JSONObject();
+		getObj.put("imgurl",filename);
+		getObj.put("msg","success");
+		return getObj.toString();
+	}
+
+	
 	@RequestMapping("/updateLayout_Info.do")
 	public String updateLayout_Info(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 
-		int bid = Integer.valueOf(request.getParameter("bid"));
-		int tag = Integer.valueOf(request.getParameter("tag"));
-		String str = request.getParameter("layInfo");
-
+		String str= request.getParameter("layinfo");
+		int bid=Integer.valueOf(request.getParameter("bid"));
+		int tag=Integer.valueOf(request.getParameter("tag"));
+		String path1 = request.getSession().getServletContext().getRealPath("");	 
+		
+		System.out.println(str);
 		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
-		Layout_InfoView view = null;
+	    Layout_InfoView view = null;
 		String layoutStr = "";
-		String landinfoStr = "";
-        System.out.println("tag:"+tag);
+		String landinfoStr = "";       
 		if (tag == 0) {
 			System.out.println("清空");
-			landApplyServiceImpl.delLayout_info(bid);
+		    landApplyServiceImpl.delLayout_info(bid,path1);
 		} else {
 			System.out.println("更新：controller层");
 			JSONArray obj = JSONArray.fromObject(str);
 			for (int i = 0; i < obj.size(); i++) {
 
-				JSONObject temp = obj.getJSONObject(i);
-
+				JSONObject temp = obj.getJSONObject(i);		
+				
 				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
 						+ temp.getInt("bid") + ","
 						+ Integer.valueOf(temp.getString("Afford")) + ","
 						+ temp.getInt("buildingArea") + ","
 						+ temp.getInt("landArea") + ",'"
 						+ temp.getString("lname") + "','"
-						+ temp.getString("plantingContent") + "'";
+						+ temp.getString("plantingContent") +"','"
+						+ temp.getString("college") +"','"
+						+ temp.getString("img")+"'";
 
 				layoutStr += "(" + temp.getInt("bid") + ","    //拼装土地布局信息
 						+ temp.getInt("height") + "," + temp.getInt("width")
@@ -699,8 +747,7 @@ public class LandApplyController {
 				}			
 
 			}
-			
-			landApplyServiceImpl.delLayout_info(bid);
+			landApplyServiceImpl.delLayout_info(bid,path1);
 			landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr);
 		}
 

@@ -62,9 +62,13 @@ public class InputExcelServiceImpl
 			endLine += 1;
 		}
 		//System.out.println(startLine+" "+endLine);
+		if(endLine==1)//空表不能导入，否则报错
+			return null;
+		
 		
 		for (int i = startLine; i < endLine; i++) 
 		{
+			//System.out.println("导入表格没有数据 "+endLine);
 			Row row = sheet.getRow(i);
 			if (row == null) 
 			{
@@ -122,14 +126,6 @@ public class InputExcelServiceImpl
 		}
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/** 
      *  下面方法只能读2003的Excel文件，可删除

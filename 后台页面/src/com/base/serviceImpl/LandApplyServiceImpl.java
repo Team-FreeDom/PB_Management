@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -299,11 +300,24 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
    
-   public void  delLayout_info(int bid)
+   public void  delLayout_info(int bid,String path)
    {
+	  /* List<String> list=new ArrayList<String>();
+	   list=landInfoDaoImpl.deletelandimg(bid);
+	   for(int i=0;i<list.size();i++)
+	   {
+		   String relativePath=list.get(i);
+		   System.out.println(path+relativePath.substring(2));
+		   if(relativePath!=null)
+		   {		   
+		   relativePath=relativePath.substring(2);
+			File file=new File(path+relativePath);			
+			file.delete(); 
+		   }
+	   }*/
 	   landInfoDaoImpl.delLayout_info(bid);
-	 
    }
+
    
    public void updateLayInfo(String landinfoStr,String layoutStr)
    {
