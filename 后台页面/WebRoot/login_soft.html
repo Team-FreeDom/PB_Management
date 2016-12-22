@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+
+<head>
+	<meta charset="utf-8" />
+	<title>湖南农业大学基地管理系统 | 登录入口</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="dist/uniform/css/uniform.default.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/login-soft.css" rel="stylesheet" type="text/css" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+
+<body class="login">
+	<!-- BEGIN LOGO -->
+	<div class="logo">
+		<img src="image/logo.png" alt="" />
+	</div>
+	<!-- END LOGO -->
+	<!-- BEGIN LOGIN -->
+	<div class="content">
+		<!-- BEGIN LOGIN FORM -->
+		<form class="login-form" action="login.do" method="post">
+			<h3 class="form-title"></h3>
+			<div class="alert alert-danger display-hide">
+				<button class="close" data-close="alert"></button>
+				<span>
+				 请输入用户名，密码和验证码
+			</span>
+			</div>
+
+
+			<div class="form-group">
+				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+				<label class="control-label visible-ie8 visible-ie9">用户名</label>
+				<div class="input-icon">
+					<i class="icon-user"></i>
+					<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label visible-ie8 visible-ie9">密码</label>
+				<div class="input-icon">
+					<i class="icon-lock"></i>
+					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="pwd" />
+					<span class="help-block">系统初始密码是123456</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-8">
+					<input type="text" class="form-control" id="authCode" name="authCode" placeholder="验证码">
+				</div>
+				<div class="col-xs-4">
+					<label><img type="image" src="getAuthCode.do" id="codeImage" onclick="chageCode()" title="图片看不清？点击重新得到验证码" style="cursor:pointer;"/></label>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary pull-right">
+			登录 <i class="m-icon-swapright m-icon-white"></i>
+			</button>
+			</div>
+
+		</form>
+		<!-- END LOGIN FORM -->
+		<!-- BEGIN FORGOT PASSWORD FORM -->
+
+	</div>
+	<!-- END LOGIN -->
+	<!-- BEGIN COPYRIGHT -->
+	<div class="copyright">
+		2016 &copy; 湖南农业大学
+	</div>
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+<![endif]-->
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="dist/jquery.cokie.min.js" type="text/javascript"></script>
+	<script src="dist/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+	<script src="dist/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+	<!--表单验证-->
+	<script src="dist/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+	<!--背景动态变化的插件-->
+	<script src="js/login-soft.js" type="text/javascript"></script>
+	<script>
+		jQuery(document).ready(function() {
+			var DEFAULT_VERSION = "6.0";
+			var ua = navigator.userAgent.toLowerCase();
+			var isIE = ua.indexOf("msie") > -1;
+			var safariVersion;
+			if (isIE) {
+				safariVersion = ua.match(/msie ([\d.]+)/)[1];
+			}
+			if (safariVersion <= DEFAULT_VERSION) {
+				location.href = "version.html";
+			}
+			Login.init();
+		});
+		function chageCode() {
+			$('#codeImage').attr('src', 'getAuthCode.do?abc=' + Math.random()); //链接后添加Math.random，确保每次产生新的验证码，避免缓存问题。
+		};
+	</script>
+</body>
+
+</html>

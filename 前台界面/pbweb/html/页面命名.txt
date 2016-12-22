@@ -1,0 +1,11 @@
+base_maintain(实习基地维护)
+field_rent(土地租赁)
+fieldrent_maintain(土地租赁维护)
+fieldrent-approve（土地租赁审批）
+index（首页）
+login_soft（登陆界面）
+mybase（我的基地）
+myrent（我的租赁）
+system_power（系统权限设置）
+user（个人中心）
+usermaintain（系统用户维护）

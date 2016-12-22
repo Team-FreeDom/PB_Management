@@ -12,6 +12,6 @@ public interface BaseInfoDao {
 	   返回值：   List<BaseInfo>,为基地信息BaseInfo对象的集合
 	   函数功能：根据基地类型获得相应基地的信息
 	 */
-    public List<BaseInfo> getBaseInfos(int baseType);
+    public List<BaseInfo> getBaseInfos();
 
 }

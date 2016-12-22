@@ -1,32 +1,75 @@
 package com.base.service;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
+import com.base.po.BaseInfo;
+import com.base.po.CheckList;
+import com.base.po.CheckView;
 import com.base.po.LandApply;
+import com.base.po.UserInfo;
 
-//ÉóºËÄ£¿éÒµÎñÂß¼­²ã½Ó¿Ú
+//å®¡æ ¸æ¨¡å—ä¸šåŠ¡é€»è¾‘å±‚æ¥å£
 public interface checkService {
-
 	/*
-	   ²ÎÊıËµÃ÷£ºÎŞ²Î
-	   ·µ»ØÖµ£º   List<LandApply>,ÎªÍÁµØÉêÇëLandApply¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º²éÑ¯ËùÓĞÍÁµØÉêÇë¼ÇÂ¼
+	   å‚æ•°è¯´æ˜ï¼šæ— å‚
+	   è¿”å›å€¼ï¼š   List<CheckView>,ä¸ºåœŸåœ°ç”³è¯·è§†å›¾CheckViewå¯¹è±¡çš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæŸ¥è¯¢æ‰€æœ‰åœŸåœ°ç”³è¯·è®°å½•(è·å¾—çš„è®°å½•æŒ‰ç”³è¯·æ—¶é—´ï¼Œé»˜è®¤ä¸ºå€’åº)
 	 */
-	public List<LandApply> getLandApplys();
-	
-	/*
-	  ²ÎÊıËµÃ÷£ºla_id,ÕûĞÍ£¬ÎªÉêÇë¼ÇÂ¼±àºÅ£»lid,ÕûĞÍ£¬ÎªÍÁµØ±àºÅ	          
-	 ·µ»ØÖµ£º    ÎŞ·µ»ØÖµ
-	 º¯Êı¹¦ÄÜ£º Í¬ÒâÉêÇë
-	  */
-	public void agreeApply(int la_id,int lid);
-	
-	/*
-	  ²ÎÊıËµÃ÷£ºla_id,ÕûĞÍ£¬ÎªÉêÇë¼ÇÂ¼±àºÅ£»lid,ÕûĞÍ£¬ÎªÍÁµØ±àºÅ	          
-	 ·µ»ØÖµ£º    ÎŞ·µ»ØÖµ
-	 º¯Êı¹¦ÄÜ£º ¾Ü¾øËûÈË
-	  */
-	public void refuseOthers(int la_id,int lid);	
+	public CheckList getLandApply(int id,int pageindex,int size,int order,String orderDir) throws SQLException  ;
+	/**
+	 * 
+	 * @param flag 0ä¸ºæ‹’ç»ï¼Œ1ä¸ºåŒæ„
+	 * @param la_id
+	 * @throws SQLException
+	 */
+	public void refuseapply(String recordStr,String infoStr);
 
+    /*
+     * è¯¦æƒ…æŸ¥çœ‹table1(tableCheck)
+     */
+	public List<CheckView> Rentdetail(int la_id) throws SQLException;
+	/*
+	 * è¯¦æƒ…æŸ¥çœ‹table2(tablePay)
+	 */
+	public List<CheckView> Rentdetail2(int la_id) throws SQLException;
+	/*
+	 * ç­›é€‰
+	 */
+	public CheckList getInfo(int flag,int pageindex,int size,String basename,String username,String usercollage,int order,String orderDir) throws SQLException;
+	/*
+	 * åŸºåœ° æŸ¥è¯¢
+	 */
+	public List<BaseInfo> getBaseInfos();
+	/*
+	 * ç”³è¯·äººæŸ¥è¯¢
+	 */
+	public List<UserInfo> getappliInfos() throws SQLException;
 
+    /**
+     * æŸ¥çœ‹éƒ¨é—¨
+     * @return
+     * @throws SQLException
+     */
+	public List<UserInfo> getDept() throws SQLException;
+
+    /**
+     * äº¤è´¹
+     * @param flag  çŠ¶æ€å€¼1ä¸ºå–æ¶ˆ0ä¸ºç¡®è®¤
+     * @param la_id idå·
+     * @throws SQLException
+     */
+	public void getApplys(int flag,String la_id) throws SQLException;
+	
+	
+	public int agreeApply(String landstr,String recordstr,String infostr);
+	
+	public void cancelPayFor(String landstr, String recordstr, String infostr);
+	
+	public void confirmPayFor(String landstr, String recordstr, String infostr);
+	
+	public List<Map<String,String>> getCheckDept();
+	
+	public List getList();
 }

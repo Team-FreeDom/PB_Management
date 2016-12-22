@@ -26,5 +26,5 @@ public interface LandLayoutDao {
 	   返回值：   无返回值
 	   函数功能：删除土地布局管理表中的一条记录
 	 */
-	public void delLandLayout(int id);
+	public void delLandLayout(String id);
 }

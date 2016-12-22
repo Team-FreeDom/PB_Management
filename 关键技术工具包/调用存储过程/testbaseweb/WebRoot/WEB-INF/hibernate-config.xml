@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+  http://www.springframework.org/schema/context   
+   http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- <context:component-scan base-package="com.spoc" /> -->
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://123.207.162.36:3306/baseweb"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="SPOC2016"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- key的名字前面都要加hibernate. -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<value>com.base.po</value>
+		</property>
+	</bean>
+
+	<!-- 定义事务管理器（声明式的事务） -->
+	 <bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<!-- 为事务拦截器注入一个事务管理器 -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> 
+	
+	<!-- 需要引入tx的命名空间 -->  
+    <!-- 这是事务通知操作，使用的事务管理器引用自 transactionManager    --> 
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+        <tx:attributes> 
+         <!-- 指定哪些方法需要加入事务  -->
+            <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="delete*" propagation="REQUIRED" />  
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>  
+            <tx:method name="query*" propagation="REQUIRED" read-only="true"/>  
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/> 
+            <tx:method name="*" propagation="REQUIRED" />  
+        </tx:attributes>  
+    </tx:advice>   
+	
+	<!-- 注册ORM映射文件 -->
+	<!-- <mapping resource="com/base/po/product.hbm.xml" /> -->
+
+</beans>

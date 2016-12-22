@@ -3,6 +3,8 @@ package com.base.service;
 import java.util.List;
 
 import com.base.po.LandRentInfo;
+import com.base.po.RentList;
+import com.base.po.RentMaintain;
 
 //土地使用信息表的业务逻辑层接口
 public interface LandRentService {
@@ -28,5 +30,5 @@ public interface LandRentService {
 	   返回值：   List<LandRentInfo>，为土地使用对象LandRentInfo的集合
 	   函数功能：查询所有土地使用情况
 	 */
-	public List<LandRentInfo> getLandRentInfos();
+	public RentList getLandRentInfos(String bname,String deptName,String plantingContent,int page,int length);
 }

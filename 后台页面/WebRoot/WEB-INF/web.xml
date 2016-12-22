@@ -2,15 +2,11 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns="http://java.sun.com/xml/ns/javaee" 
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>BaseWeb</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login_soft.html</welcome-file>
+  
   </welcome-file-list>
   
   
@@ -51,4 +47,52 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>	
 	  
+	<filter>    
+         <filter-name>loginFilter</filter-name>    
+         <filter-class>com.base.filter.checkLoginFilter</filter-class>    
+    </filter>    
+    <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>/jsp/*</url-pattern>
+    </filter-mapping>
+     <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>/html/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>    
+         <filter-name>loginFilter</filter-name>    
+         <url-pattern>*.do</url-pattern>
+    </filter-mapping> 
+    
+     <!-- TOMCAT移植到WEBLOGIC页面默认编码问题-->
+     <!-- 解决方法：为下载的文件自动装配相应的mime后缀 -->  
+    <mime-mapping>  
+        <extension>doc</extension>  
+        <mime-type>application/vnd.ms-word</mime-type>    
+    </mime-mapping>  
+      
+    <mime-mapping>   
+        <extension>xls</extension>   
+        <mime-type>application/msexcel</mime-type>   
+    </mime-mapping>  
+      
+    <mime-mapping>    
+       <extension>ppt</extension>  
+       <mime-type>application/vnd.ms-powerpoint</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>docx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.wordprocessingml.document</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>pptx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.presentationml.presentation</mime-type>  
+    </mime-mapping>  
+      
+    <mime-mapping>  
+        <extension>xlsx</extension>  
+        <mime-type>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</mime-type>  
+    </mime-mapping> 
 </web-app>

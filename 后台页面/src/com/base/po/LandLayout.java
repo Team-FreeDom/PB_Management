@@ -7,22 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="landLayout")
 public class LandLayout {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	@Id	
+	private String id;
 	private int x_axis;
 	private int y_axis;
 	private int width;
 	private int height;
 	private int bid;
-	private int lid;
-	public int getId() {
+	private String lid;	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getX_axis() {
@@ -55,10 +53,11 @@ public class LandLayout {
 	public void setBid(int bid) {
 		this.bid = bid;
 	}
-	public int getLid() {
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
 	public LandLayout() {

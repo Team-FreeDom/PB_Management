@@ -6,6 +6,8 @@ import com.base.po.BaseInfo;
 import com.base.po.LandApply;
 import com.base.po.LandInfo;
 import com.base.po.LandLayout;
+import com.base.po.Startplan;
+
 
 //土地申请表的业务逻辑层接口
 public interface LandApplyService {
@@ -15,7 +17,7 @@ public interface LandApplyService {
 	   返回值：   List<BaseInfo>,为基地信息BaseInfo对象的集合
 	   函数功能：查询六大基地的信息
 	 */
-	public List<BaseInfo> getBaseInfos(int baseType);
+	public List<BaseInfo> getBaseInfos();
 
 	/*
 	   参数说明：bid,整型，表示基地编号
@@ -29,7 +31,7 @@ public interface LandApplyService {
 	   返回值：   LandInfo,为土地管理LandInfo对象
 	   函数功能：查询土地信息
 	 */
-	public LandInfo getLandInfo(int lid);
+	public List<LandInfo> getLandInfo(String lid);
 	
 	/*
 	   参数说明：la,为土地申请LandApply对象
@@ -65,7 +67,7 @@ public interface LandApplyService {
 	                    3.判断某一月份是否空闲：spareValue与2^(月份值)相与，值为2^(月份值),则
 	                                            该月份空闲
  */
-	public int getSpareValue(int lid);
+	public int getSpareValue(String lid);
 	
 	/*
 	   参数说明：la_id,整型，为申请记录编号
@@ -73,6 +75,12 @@ public interface LandApplyService {
 	   函数功能：取消申请
 	 */
 	public void cancelApply(int la_id);
+	
+	public void updateLandApplyDate(Startplan sp);
+	
+	public List<Startplan> getLandApplyDate();
+	
+	public Startplan getStartPlan(String id);
 
 }
  

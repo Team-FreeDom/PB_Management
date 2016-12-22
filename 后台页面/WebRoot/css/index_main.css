@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+#content-top {
+    height: 215px;
+}
+
+#information1 {
+    height: 200px;
+    font-size: 14px;
+    margin-top: 25px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.information {
+    border: #999 solid 0px;
+    background: #fff;
+    height: 177px;
+    font-size: 0.9vw;
+    text-align: left;
+}
+
+.information p {
+	font-size:12px;
+    margin: 10px 15px;
+    border-bottom: dashed #CCCCCC 1px;
+}
+
+.information a:link {
+	font-size:12px;
+    color: #777;
+}
+.information a:visited {
+    color: #777;
+}
+.information .more{
+	font-size:12px;
+  bottom: 0px;
+  right:5px;
+  position: absolute;
+}
+.information a:hover {
+    color: rgba(#080200, 0.73);
+}
+
+.information a:visited {
+    color: #CCCCCC;
+}
+
+#calendar {
+    height: 177px;
+    background: #0FF;
+    margin-top: 55px;
+}
+
+#caption {
+    clear: both;
+    margin-top: 5%;
+    height: 54px;
+    text-align: center;
+    line-height: 54px;
+    font-size: 28px;
+    font-family: '微软雅黑';
+    background: #EFF1F7;
+}
+
+#data {
+    margin-top: 5%;
+    font-family: '微软雅黑';
+}
+
+.data_display {
+    font-size: 2vw;
+}
+
+.data_display table tr td span {
+    color: #FFF;
+    text-align: center;
+    border-radius: 5px;
+    display: block;
+    margin-top: 20%;
+    padding: 10px 10px;
+}

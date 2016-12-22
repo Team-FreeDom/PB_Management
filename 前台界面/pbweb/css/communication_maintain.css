@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+table thead > tr> td{
+	
+	font-size:16px;
+	background: -moz-linear-gradient(top, #e7eef3 0%, #cedee8 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7eef3), color-stop(100%,#cedee8));
+    background: -webkit-linear-gradient(top, #000000 0%,#cedee8 100%);
+    background: -o-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
+	}
+table thead tr th{
+	text-align:center;}
+table tbody tr td{
+	text-align:center;}
+	
+tbody tr td span{
+	cursor:pointer;}
+.dropdown_show li{
+	position:relative;
+	list-style:none;
+	}
+.dropdown_show li span{
+	cursor:pointer;
+	}
+.dropdown_show ul li{
+	list-style:none;
+	position:absolute;
+	top:35px;
+	left:0px;
+	width:102%;
+	}	
+.dropdown_show ul li table tr td{
+	color:#000;
+	font-size:14px;
+	background:#d6dfe9;
+	border:none !important;}
+/*#topPlugin{
+	display:inline;}*/
+.bottom{
+	margin-top:10px;
+	}
+.dataTables_length{
+	margin-left:5%;}
+.modal-body table tr td{
+	border:none !important;
+	text-align:left;}
+.modal-body tr td input{	
+	width:140px;}
+.modal-body tr td select{	
+	width:140px;}
+.modal{
+	margin-top:5%;}
+#topPlugin{
+	margin-top:10px;
+	}
+/*#rent-approve-table1_info{
+	margin-left:15%;}*/
+#rent-approve-table2_info{
+	margin-left:15%;}

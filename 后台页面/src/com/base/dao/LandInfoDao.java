@@ -8,18 +8,18 @@ import com.base.po.LandInfo;
 public interface LandInfoDao {
 	
 	/*
-	   参数说明：spareValue,整型
+	   参数说明：lid,整型，表示土地编号;spareValue,整型
 	   返回值：   无返回值
 	   函数功能：更改土地空闲值
 	 */
-	public void updateSpareValue(int spareValue);
+	public void updateSpareValue(int lid,int spareValue);
 	
 	/*
 	   参数说明：lid,整型，表示土地编号
-	   返回值：   LandInfo,为土地管理LandInfo对象
+	   返回值：   List<LandInfo>,为土地管理LandInfo对象的集合
 	   函数功能：根据土地编号获取该土地布局管理信息
 	 */
-    public LandInfo getLandInfo(int lid);
+    public List<LandInfo> getLandInfo(String lid);
     
     /*
 	   参数说明：bid,整型，表示基地编号

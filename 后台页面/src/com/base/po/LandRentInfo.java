@@ -7,39 +7,63 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="landRentInfo")
 public class LandRentInfo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int lr_id;
-	private int lid;
-	private int rentTime;
-	private int userId;
+	private String lid;
+	private String startTime;
+	private String endTime;	
+	private String planting;	
+	private String userId;
 	private int rentMoney;
 	private String chargeDate;
+	private int applyDept;
+	
+	public int getApplyDept() {
+		return applyDept;
+	}
+	public void setApplyDept(int applyDept) {
+		this.applyDept = applyDept;
+	}
 	public int getLr_id() {
 		return lr_id;
 	}
 	public void setLr_id(int lr_id) {
 		this.lr_id = lr_id;
 	}
-	public int getLid() {
+
+
+	public String getLid() {
 		return lid;
 	}
-	public void setLid(int lid) {
+	public void setLid(String lid) {
 		this.lid = lid;
 	}
-	public int getRentTime() {
-		return rentTime;
+	public String getStartTime() {
+		return startTime;
 	}
-	public void setRentTime(int rentTime) {
-		this.rentTime = rentTime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
-	public int getUserId() {
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getPlanting() {
+		return planting;
+	}
+	public void setPlanting(String planting) {
+		this.planting = planting;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public int getRentMoney() {
@@ -57,5 +81,31 @@ public class LandRentInfo {
 	public LandRentInfo() {
 		super();
 	}
+	public LandRentInfo(String lid, String startTime,
+			String endTime, String planting, String userId, int rentMoney,
+			String chargeDate, int applyDept) {
+		super();		
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.rentMoney = rentMoney;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	public LandRentInfo(String lid, String startTime, String endTime,
+			String planting, String userId, String chargeDate, int applyDept) {
+		super();
+		this.lid = lid;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.planting = planting;
+		this.userId = userId;
+		this.chargeDate = chargeDate;
+		this.applyDept = applyDept;
+	}
+	
+	
 	
 }
