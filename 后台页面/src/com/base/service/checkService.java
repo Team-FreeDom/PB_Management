@@ -2,6 +2,7 @@ package com.base.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.base.po.BaseInfo;
 import com.base.po.CheckList;
@@ -16,7 +17,7 @@ public interface checkService {
 	   返回值：   List<CheckView>,为土地申请视图CheckView对象的集合
 	   函数功能：查询所有土地申请记录(获得的记录按申请时间，默认为倒序)
 	 */
-	public CheckList getLandApply(int id,int pageindex,int size) throws SQLException  ;
+	public CheckList getLandApply(int id,int pageindex,int size,int order,String orderDir) throws SQLException  ;
 	/**
 	 * 
 	 * @param flag 0为拒绝，1为同意
@@ -36,7 +37,7 @@ public interface checkService {
 	/*
 	 * 筛选
 	 */
-	public CheckList getInfo(int flag,int pageindex,int size,String basename,String username,String usercollage) throws SQLException;
+	public CheckList getInfo(int flag,int pageindex,int size,String basename,String username,String usercollage,int order,String orderDir) throws SQLException;
 	/*
 	 * 基地 查询
 	 */
@@ -62,9 +63,13 @@ public interface checkService {
 	public void getApplys(int flag,String la_id) throws SQLException;
 	
 	
-	public void agreeApply(String landstr,String recordstr,String infostr);
+	public int agreeApply(String landstr,String recordstr,String infostr);
 	
 	public void cancelPayFor(String landstr, String recordstr, String infostr);
 	
 	public void confirmPayFor(String landstr, String recordstr, String infostr);
+	
+	public List<Map<String,String>> getCheckDept();
+	
+	public List getList();
 }

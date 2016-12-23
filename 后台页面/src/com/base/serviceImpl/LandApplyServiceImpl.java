@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import com.base.po.Land_Planting;
 import com.base.po.Land_base;
 import com.base.po.Layout_InfoView;
 import com.base.po.RentCollection;
+import com.base.po.Startplan;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
@@ -145,7 +147,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	/*
 	 * bname,startTime,endTime,status为筛选条件，规定传入存储过程的整型参数，若没有，则传-1
 	 * */
-	public ApplyList getselfApply(String applicantId,String bname,String startTime,String endTime,String status,int page,int length)
+	public ApplyList getselfApply(String applicantId,String bname,String status,int page,int length)
 	{
 		int start=0;
 		int end=0;
@@ -154,14 +156,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		if(bname!=null&&bname.equals("")){
 			bname=null;			
 		}
-		if(startTime!=null&&startTime.equals(""))
-		{
-			startTime=null;
-		}
-		if(endTime!=null&&endTime.equals(""))
-		{
-			endTime=null;
-		}
+		
 		System.out.println(status);
 		if(status==null){
 			statusZ=-1;
@@ -170,7 +165,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		}
 		
 		
-		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname, startTime, endTime, statusZ, page, length);
+		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname,statusZ, page, length);
 		
 		return al;
 	}
@@ -199,7 +194,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }   
   
     
-    public void myFameCancel1(int la_id,String info_str)
+    public void myFameCancel1(int la_id,String info_str,int tag)
     {
     	 //获得插入的消息语句
   	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
@@ -212,6 +207,13 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
         
         //向消息表中插入数据
         checkViewDaoImpl.insertMessage(insertStr);
+        String landstr=la.getLid();
+        landstr='('+landstr+')';
+        if(tag==1){
+        	
+        	//把相同土地的状态为锁定的土地状态变为审核中
+    		checkViewDaoImpl.releaseInfo(landstr);
+        }
         
     }
     
@@ -298,11 +300,24 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
    
-   public void  delLayout_info(int bid)
+   public void  delLayout_info(int bid,String path)
    {
+	  /* List<String> list=new ArrayList<String>();
+	   list=landInfoDaoImpl.deletelandimg(bid);
+	   for(int i=0;i<list.size();i++)
+	   {
+		   String relativePath=list.get(i);
+		   System.out.println(path+relativePath.substring(2));
+		   if(relativePath!=null)
+		   {		   
+		   relativePath=relativePath.substring(2);
+			File file=new File(path+relativePath);			
+			file.delete(); 
+		   }
+	   }*/
 	   landInfoDaoImpl.delLayout_info(bid);
-	 
    }
+
    
    public void updateLayInfo(String landinfoStr,String layoutStr)
    {
@@ -321,18 +336,48 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    //提交租赁申请
    public int submitLandApply(String userid,String lidList,String str,String info_str)
    {
-	  
-	 //获得插入的消息语句
-	  String insertStr=MessageUtils.getInsertStr(info_str,1);	
-	 		
+	  	 		
 	  //提交申请 
 	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
 	   
+	   if(flag==1){
+		   
+	   //获得插入的消息语句
+		  String insertStr=MessageUtils.getInsertStr(info_str,1);	
+		  
 	 //向消息表中插入信息 
-		checkViewDaoImpl.insertMessage(insertStr);
+		  checkViewDaoImpl.insertMessage(insertStr);
+	   }
 	   
 		return flag;
 	   
    }
+
+@Override
+public void updateLandApplyDate(Startplan sp) {
+	// TODO Auto-generated method stub
+	landApplyDaoImpl.updateLandApplyDate(sp);
+	return;
+}
+
+@Override
+public List<Startplan> getLandApplyDate() {
+	// TODO Auto-generated method stub
+	return landApplyDaoImpl.getLandApplyDate();
+}
+
+@Override
+public Startplan getStartPlan(String id){
+	
+	Startplan sp=landApplyDaoImpl.getStartPlan(id);
+	
+	return sp;
+}
+
+public void endStartPlan(){
+	
+	landApplyDaoImpl.endAllRent();	
+	
+}
    
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.daoImpl.LandRentInfoDaoImpl;
+import com.base.po.ApplyDept;
 import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
@@ -53,6 +54,10 @@ public class LandRentServiceImpl implements LandRentService {
 	public List<RentMaintain> getSingleRentInfo(String lr_id,String dept)
 	{
 		System.out.println("哈哈。我来到service层了");
+		if(dept!=null&&dept.equals("")){
+			
+			dept=null;
+		 }
 		List<RentMaintain> list=landRentInfoDaoImpl.getSingleRentInfo(lr_id,dept);
 		return list;
 		
@@ -84,7 +89,18 @@ public class LandRentServiceImpl implements LandRentService {
 	//土地租赁记录修改更新
 	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
 	{
+		if(planCareer==null){
+			planCareer="";
+		}
+		if(startTime!=null&&startTime.equals("")){
+			startTime=null;
+		}
+		if(endTime!=null&&endTime.equals("")){
+			endTime=null;
+		}
+		
 		LandRentInfo lr=landRentInfoDaoImpl.getOne(lr_id);
+		
 		lr.setEndTime(endTime);
 		lr.setPlanting(planCareer);
 		lr.setRentMoney(expense);
@@ -100,4 +116,17 @@ public class LandRentServiceImpl implements LandRentService {
 	 landRentInfoDaoImpl.doLandRentInfo(lr);
  }
  
+ public List<ApplyDept> getExistRentInfo(){
+	 
+	 List<ApplyDept> list=landRentInfoDaoImpl.getExistDept();
+	 
+	 return list;
+	 
+ }
+ 
+ public List<String> getExistPlant(){
+	 
+	 List<String> list=landRentInfoDaoImpl.getExistPlant();
+	 return list;
+ }
 }

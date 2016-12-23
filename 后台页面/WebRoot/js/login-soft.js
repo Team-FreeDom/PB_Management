@@ -30,7 +30,11 @@ var Login = function () {
 	                },
 	                remember: {
 	                    required: false
+	                },
+	                authCode: {
+	                    required: true
 	                }
+	                
 	            },
 
 	            messages: {
@@ -39,6 +43,9 @@ var Login = function () {
 	                },
 	                password: {
 	                    required: "密码必填"
+	                },
+	                authCode: {
+	                    required: "验证码必填"
 	                }
 	            },
 

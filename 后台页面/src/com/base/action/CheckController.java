@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import com.base.po.CheckView;
 import com.base.po.LandApply;
 import com.base.po.UserInfo;
 import com.base.service.checkService;
+import com.base.serviceImpl.CheckServiceImpl;
 import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
 
@@ -40,14 +42,17 @@ public class CheckController {
 	@RequestMapping("/getAllInfos.do")
 	public String getAllInfo(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		List<BaseInfo> list = checkservice.getBaseInfos();// 基地
-		List<ApplyDept> la = landApplyServiceImpl.getDepts();// 部门
+		//List<BaseInfo> list = checkservice.getBaseInfos();// 基地
+		//List<ApplyDept> la = landApplyServiceImpl.getDepts();// 部门
+		//List<Map<String,String>> checkDept=checkservice.getCheckDept();
+		List list1 = checkservice.getList();
+		
 		try {
-			List<UserInfo> ui = checkservice.getappliInfos();
-			List list1 = new ArrayList();
-			list1.add(list);
-			list1.add(la);
-			list1.add(ui);
+		//	List<UserInfo> ui = checkservice.getappliInfos();
+			
+		//	list1.add(list);
+		//	list1.add(checkDept);
+		//	list1.add(ui);
 			JSONArray json = JSONArray.fromObject(list1);
 			response.setContentType("text/html;charset=UTF-8");
 			response.getWriter().print(json.toString());
@@ -67,11 +72,14 @@ public class CheckController {
 		Integer flag = Integer.valueOf(request.getParameter("flag"));
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		;
+		
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 
+		 int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
+         String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+       
 		/*
 		 * int flag=0; int draw=1; int size=4; int startIndex=0;
 		 */
@@ -80,7 +88,7 @@ public class CheckController {
 		Integer pageindex = (startIndex / size + 1);
 		CheckList str = null;
 		try {
-			str = checkservice.getLandApply(flag, pageindex, size);
+			str = checkservice.getLandApply(flag, pageindex, size,order,orderDir);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -109,15 +117,18 @@ public class CheckController {
 		Integer flag = Integer.valueOf(request.getParameter("flag"));
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		;
+		
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
+		 int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
+         String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+         
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
 		CheckList str = null;
 		try {
-			str = checkservice.getLandApply(flag, pageindex, size);
+			str = checkservice.getLandApply(flag, pageindex, size,order,orderDir);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -147,18 +158,13 @@ public class CheckController {
 		String infostr = request.getParameter("infostr");
 		String landstr = request.getParameter("landstr");
 
-		checkservice.agreeApply(landstr, recordstr, infostr);
+		int tag=checkservice.agreeApply(landstr, recordstr, infostr);
         
-		//将消息值更改
-		String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-		int number = Integer.valueOf(noReadNumber)+1;
-		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
-
 		
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
-		
+	
+		getObj.put("tag", tag);
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -179,14 +185,11 @@ public class CheckController {
 		
 		checkservice.refuseapply(recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -209,14 +212,11 @@ public class CheckController {
 
 		checkservice.confirmPayFor(landstr, recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -239,14 +239,11 @@ public class CheckController {
 
 		checkservice.cancelPayFor(landstr, recordstr, infostr);
 		
-		//将消息值更改
-				String noReadNumber = CookieUtils.getCookieNoReadNumber(request, response);
-				int number = Integer.valueOf(noReadNumber)+1;
-				CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
+		
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("str", "此申请处理成功");
-		getObj.put("messageCount", number);
+		
 		
 		response.setContentType("text/html;charset=UTF-8");
 		try {
@@ -321,6 +318,10 @@ public class CheckController {
 		Integer size = Integer.parseInt(request.getParameter("length"));
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
+		
+		 int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
+         String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+         
 		//System.out.println(startIndex);
 		//System.out.println(size);
 		// 通过计算求出当前页面为第几页
@@ -343,7 +344,7 @@ public class CheckController {
 		CheckList list = new CheckList();
 		try {
 			list = checkservice.getInfo(flag, pageindex, size, basename,
-					username, usercollage);
+					username, usercollage,order,orderDir);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -374,6 +375,9 @@ public class CheckController {
 		Integer size = Integer.parseInt(request.getParameter("length"));
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
+		 int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
+         String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+         
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -393,7 +397,7 @@ public class CheckController {
 		CheckList list = new CheckList();
 		try {
 			list = checkservice.getInfo(flag, pageindex, size, basename,
-					username, usercollage);
+					username, usercollage,order,orderDir);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

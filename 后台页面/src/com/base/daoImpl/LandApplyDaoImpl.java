@@ -17,19 +17,19 @@ import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandApplyDao;
+import com.base.po.Admin;
 import com.base.po.College;
 import com.base.po.LandApply;
 import com.base.po.RentAdd;
 import com.base.po.RentCollection;
 import com.base.po.RentMaintain;
+import com.base.po.Startplan;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("landApplyDao")
 public class LandApplyDaoImpl implements LandApplyDao {
 
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;	
@@ -191,7 +191,12 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 	
 	public List<RentCollection> getRentCollection(int bid)
-	{			
+	{	
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		List<RentCollection> list=new ArrayList<RentCollection>();
 		RentCollection rc=null;		
 		List<RentAdd> lra=getRentAdd(bid);
@@ -222,6 +227,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			rc.setName(rs.getString("username"));
 			rc.setPlanting(rs.getString("plants"));
 			rc.setLineup(rs.getInt("lineup"));
+			rc.setTag(rs.getInt("tag"));
+			rc.setAptCollege(rs.getString("aptCollege"));
+			rc.setImg(rs.getString("img"));
 			List<RentAdd> lis=new ArrayList<RentAdd>();
 			for(RentAdd ra:lra)
 			{
@@ -249,6 +257,11 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public List<RentAdd> getRentAdd(int bid)
 	{
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		RentAdd ra=null;
 		List<RentAdd> lra=new ArrayList<RentAdd>();
 		
@@ -283,6 +296,10 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public Long getApplyCount(String date)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		System.out.println(date);	
 		Long applyCount=(long) 0;		
 		
@@ -309,6 +326,10 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	
 	public int submitApply(String userid,String lidList,String str)
 	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		int flag=0;
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
@@ -330,4 +351,86 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    
 		return flag;
 	}
+
+	@Override
+	public void updateLandApplyDate(Startplan sp) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+	
+		Transaction t = null;
+		try {
+			t = session.beginTransaction();
+			session.saveOrUpdate(sp);
+			t.commit();
+		} catch (Exception ex) {
+			if (t != null) {
+				t.rollback();
+			}
+		} finally {
+			session.close();
+		}
+
+	}
+
+	@Override
+	public List<Startplan> getLandApplyDate() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		List<Startplan> list = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			list = query.list();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return list;
+		
+	}
+	
+	public Startplan getStartPlan(String id) {
+		
+		Session session = sessionFactory.openSession();
+		String hql = "from Startplan where id='zl'";
+		Startplan sp = null;
+
+		try {
+			Query query = session.createQuery(hql);
+			sp = (Startplan) query.uniqueResult();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return sp;
+		
+	}
+	
+	public void endAllRent(){
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+			try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.clear_data()}");
+			
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+		
+	}
+
 }

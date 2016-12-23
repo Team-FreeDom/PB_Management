@@ -1,5 +1,9 @@
 package com.base.daoImpl;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +13,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandInfoDao;
 import com.base.po.BaseInfo;
 import com.base.po.LandInfo;
 import com.base.po.Land_base;
+import com.base.utils.SqlConnectionUtils;
 
 @Repository("landInfoDao")
 public class LandInfoDaoImpl implements LandInfoDao {
@@ -163,7 +169,41 @@ public class LandInfoDaoImpl implements LandInfoDao {
 		}
 
 	}
-	
+	public List<String> deletelandimg(int bid)
+	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		Session session=sessionFactory.openSession();
+		List<String> list=new ArrayList<String>();
+		try
+		{
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`findresource`(?)}");
+			sp.setInt(1, bid);
+			sp.execute();   //执行存储过程
+			rs=sp.getResultSet();  //获得结果集
+			while(rs.next())
+			{
+				String str=rs.getString("img");
+				System.out.println(str);
+				list.add(str);
+			}
+
+		}
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}
+		return list;
+
+	}
+
 	
 	public void delLayout_info(int bid)
 	{

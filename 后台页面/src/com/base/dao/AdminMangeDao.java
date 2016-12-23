@@ -23,5 +23,7 @@ public interface AdminMangeDao {
      public List<Admin> getAdminInfos();
      
      public void setAdminFunction(String insertSql);
+     
+     public long getAdminValue(String userid);
 }
 

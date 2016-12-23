@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-
+@-ms-viewport{ width: device-width;}
 html, body {
     background: #ecedf0 none repeat scroll 0 0;
     width: 100%;
@@ -569,6 +569,55 @@ a, a:link, a:visited, a:hover, a:active {
 .grid-stack {
 	background: #fff;
 }
+.sk_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #5A8246;
+}
+.zh_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9DBE8F;
+}
+.dw_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9EA4D1;
+}
+.nx_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #009200;
+}
+.dy_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #9EA4D1;
+}
+.yx_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #017e4d;
+}
+.zb_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #00FF00;
+}
+.other_college{
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	background-color: #adf6e0;
+	/* background-color: #2B83BD; */
+}
 
 .gay {
 	cursor: pointer;
@@ -576,14 +625,17 @@ a, a:link, a:visited, a:hover, a:active {
 	text-align: center;
 	background-color: #2B83BD;
 }
-
 .normal {
 	cursor: pointer;
 	color: #fff;
 	text-align: center;
 	background-color: #63addc;
 }
-
+.lockdiv  {
+	color: #fff;
+	text-align: center;
+	background-color: rgb(128, 40, 51) ;
+}
 .Havetorent  {
 	color: #fff;
 	text-align: center;
@@ -600,16 +652,37 @@ a, a:link, a:visited, a:hover, a:active {
 .msg{ right: -10px; top:0px; position:absolute; background:#C00}
 .read{ color:#ccc;}
 #msgtable tr{ cursor:pointer;}
-#post1{
-min-height: 200px;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-  word-wrap: break-word;
-  word-break: break-all;
- }
+.special{
+	max-width:700px;
+	_width:expression(this.width >700 ? "700px" : this.width);
+	max-height:700px;
+	_height:expression(this.height >700 ? "700px" : this.height);
+}
 
-
+.specialOne{
+	max-width:300px;
+	_width:expression(this.width >300 ? "300px" : this.width);
+	max-height:250px;
+	_height:expression(this.height >250 ? "250px" : this.height);
+}
+.article{
+background: #fff none repeat scroll 0 0;
+padding: 50px 40px;
+}
+.article .title {
+    border-bottom: 1px dashed #ddd;
+    margin: 0 0 20px;
+    text-align: center;
+}
+.article .title h1 {
+    font-family: PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    margin: 0 0 20px;
+}
+.article .content {
+    line-height: 28px;
+}
 @media screen and (min-width:768px) {
 .container-fluid.content {
 	overflow: hidden;
@@ -623,3 +696,6 @@ white-space:nowrap;
 }
 
 
+#jumpTo{
+  width: 40px;
+}

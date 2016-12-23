@@ -5,8 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,34 +27,21 @@ public class MainController {
 	@Autowired
 	private NotificationServiceImpl notificationServiceImpl;
 
-	/*@RequestMapping("/getCount.do")
-	public String getCount(HttpServletRequest request, ModelMap map,
-			HttpServletResponse response) {
-		String str = mainServiceImpl.getCount();
-		JSONArray json = JSONArray.fromObject(str);
-
-		try {
-			response.getWriter().print(json.toString());
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-		return null;
-	}*/
-
 	// 用户单点登录控制
 	@RequestMapping("/index.do")
 	public String index(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		// 获得通知公告
+		// 获得通知公告标题列表
 		response.setContentType("text/html;charset=UTF-8");
-		Notification notification = notificationServiceImpl
-				.getNotificationInfo();
-
-		if (notification != null)
-			map.addAttribute("notification", notification.getMessage());
-
+		List<Notification> notificationList = notificationServiceImpl.getNotificationTop5Infos();
+		
+		if(CollectionUtils.isNotEmpty(notificationList)){
+	
+			map.addAttribute("notificationList", notificationList);
+			//System.out.println("messageList不为空");
+		}
+		
 		//获取注册用户
 		long userCount =  mainServiceImpl.getUserCount();
 		map.addAttribute("userCount", userCount);
@@ -67,16 +53,13 @@ public class MainController {
 		//获取时间排序前5条
 		String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = notificationServiceImpl.getMessageTop5Infos(userid);
-		if (messageList != null){
+		if(CollectionUtils.isNotEmpty(messageList)){
 			map.addAttribute("messageList", messageList);
 			//System.out.println("messageList不为空");
 		}
 		
-		//获取未读消息数，并写入到cookies中
-		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		CookieUtils.addCookie("noReadNumber", String.valueOf(number), response);
-		System.out.println("未读消息数："+number);
-		
 		return "index";
 	}
+	
+	
 }

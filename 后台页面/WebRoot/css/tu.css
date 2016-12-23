@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.special{
+	max-width:700px;
+	_width:expression(this.width >700 ? "700px" : this.width);
+	max-height:700px;
+	_height:expression(this.height >700 ? "700px" : this.height);
+}
+
+.specialOne{
+	max-width:300px;
+	_width:expression(this.width >300 ? "300px" : this.width);
+	max-height:250px;
+	_height:expression(this.height >250 ? "250px" : this.height);
+}

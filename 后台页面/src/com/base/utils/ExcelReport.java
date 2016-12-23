@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
@@ -36,7 +39,7 @@ public class ExcelReport{
 	 * 
 	 * @see com.base.service.ExcelReportService#landRentPreserveReport()
 	 */	
-	public void landRentPreserveReport(List<RentMaintain> list) { // 列头信息
+	public void landRentPreserveReport(List<RentMaintain> list,String filename) { // 列头信息
 		String[] col_title = { "序号", "开始日期", "结束日期", "基地名", "土地编号", "租赁人",
 				"申报部门", "已租用次数", "土地名称", "土地面积", "适宜从事内容", "计划从事内容",
 				"租赁费用", "交费日期" };// 15个列头
@@ -188,33 +191,33 @@ public class ExcelReport{
 			cell8.setCellStyle(cs2);*/
 			
 			// 第十列土地名称
-			Cell cell9 = row_line.createCell(9);
-			cell9.setCellValue(line_data.getLandname());
-			cell9.setCellStyle(cs2);
+			Cell cell8 = row_line.createCell(8);
+			cell8.setCellValue(line_data.getLandname());
+			cell8.setCellStyle(cs2);
 			// 第十一列土地面积
-			Cell cell10 = row_line.createCell(10);
-			cell10.setCellValue(line_data.getLandArea());
-			cell10.setCellStyle(cs2);
+			Cell cell9 = row_line.createCell(9);
+			cell9.setCellValue(line_data.getLandArea());
+			cell9.setCellStyle(cs2);
 			// 第十二列适宜从事内容
-			Cell cell11 = row_line.createCell(11);
-			cell11.setCellValue(line_data.getAptplanting());
-			cell11.setCellStyle(cs2);
+			Cell cell10 = row_line.createCell(10);
+			cell10.setCellValue(line_data.getAptplanting());
+			cell10.setCellStyle(cs2);
 			// 第十三列计划从事内容
-			Cell cell12 = row_line.createCell(12);
-			cell12.setCellValue(line_data.getPlanting());
-			cell12.setCellStyle(cs2);
+			Cell cell11 = row_line.createCell(11);
+			cell11.setCellValue(line_data.getPlanting());
+			cell11.setCellStyle(cs2);
 			// 第十四列租赁费用
-			Cell cell13 = row_line.createCell(13);
-			cell13.setCellValue(line_data.getRentMoney());
-			cell13.setCellStyle(cs2);
+			Cell cell12 = row_line.createCell(12);
+			cell12.setCellValue(line_data.getRentMoney());
+			cell12.setCellStyle(cs2);
 			// 第十五列交费日期
-			Cell cell14 = row_line.createCell(14);
-			cell14.setCellValue(line_data.getChargeDate());
-			cell14.setCellStyle(cs2);
+			Cell cell13 = row_line.createCell(13);
+			cell13.setCellValue(line_data.getChargeDate());
+			cell13.setCellStyle(cs2);
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
-		File file = new File("E://landRentPreserveReport.xlsx");
+		File file = new File(filename);
 		try {
 			file.createNewFile();
 			FileOutputStream stream = FileUtils.openOutputStream(file);
@@ -584,7 +587,7 @@ public class ExcelReport{
 	 * 
 	 * @see com.base.service.ExcelReportService#systemUsersPreserveReport()
 	 */
-	public void exportPersonInfo(List<Manger> list) {
+	public void exportPersonInfo(List<Manger> list,String fileName) {
 		// 列头信息
 		/*"序号", "员工编号", "身份属性", "姓名", "性别", "员工类型",
 		"出生日期", "身份证号码", "联系电话", "部门", "原工作单位", "来校工作时间", "参加工作时间",
@@ -658,7 +661,7 @@ public class ExcelReport{
 		cs2.setWrapText(true);// 设置宽度自适应
 		cs2.setFont(font2);
 		// 合并列 （第一行，最后一行，第一列，最后一列）
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));// 合并列-标题
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));// 合并列-标题
 		
 		// * 插入数据操作
 		 
@@ -760,16 +763,49 @@ public class ExcelReport{
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
-		File file = new File("E://PersonInfo.xlsx");
+		File file = new File(fileName);
 		try {
 			file.createNewFile();
 			FileOutputStream stream = FileUtils.openOutputStream(file);
 			workbook.write(stream);
 			stream.close();
+			workbook.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	
+	 /*
+     * 获取项目的根目录
+     * 因为tomcat和weblogic获取的根目录不一致，所以需要此方法
+     */
+    public static String getWebRootUrl(HttpServletRequest request,String filename){
+        String fileDirPath = request.getSession().getServletContext().getRealPath(filename);
+        if(fileDirPath == null){
+            //如果返回为空，则表示服务器为weblogic，则需要使用另外的方法
+            try{
+                return request.getSession().getServletContext().getResource(filename).getFile();
+            }catch(MalformedURLException e){
+                e.printStackTrace();
+            }
+        }
+            
+        return fileDirPath;
+        
+    }
+    
+    
+    //方法功能描述:       判断是否是IE浏览器   
+    public static boolean isMSBrowser(HttpServletRequest request) {  
+        String[] IEBrowserSignals = {"MSIE", "Trident", "Edge"};  
+        String userAgent = request.getHeader("User-Agent");  
+        for (String signal : IEBrowserSignals) {  
+            if (userAgent.contains(signal)){  
+                return true;  
+            }  
+        }  
+        return false;  
+    }  
 
 }

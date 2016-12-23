@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,20 +22,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.base.po.ApplyDept;
 import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
+import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.serviceImpl.LandRentServiceImpl;
 import com.base.utils.ExcelReport;
 
 //使用模块的控制层
 @Controller("landRentController")
 @RequestMapping("/jsp")
-public class LandRentController {
+public class LandRentController<E> {
 
 	@Autowired
 	private LandRentServiceImpl landRentServiceImpl;
-    
+    @Autowired
+    private LandApplyServiceImpl landApplyServiceImpl;
 	
 	// 土地租赁记录
 	@RequestMapping("/landRentInfo.do")
@@ -46,6 +50,10 @@ public class LandRentController {
 		int length=Integer.valueOf(request.getParameter("length"));
 		int start=Integer.valueOf(request.getParameter("start"));
 		int draw=Integer.valueOf(request.getParameter("draw"));  //从客户端获得length(每页3长度)，start()起始页数，draw计数器
+		
+		/*int length=8;
+		int start=0;
+		int draw=1;*/
 		
 		System.out.println(length+"   "+start+" "+draw);
 		int page=start/length+1; //当前页数
@@ -120,8 +128,7 @@ public class LandRentController {
 		getObj.put("recordsTotal",str.getRecordsTotal());
 		getObj.put("data",str.getData());	
 		response.setContentType("text/html;charset=UTF-8");
-
-		response.setContentType("text/html;charset=UTF-8");
+	
 
 		try {
 			response.getWriter().print(getObj.toString());
@@ -132,6 +139,33 @@ public class LandRentController {
 		}
 		return null;
 
+	}
+	
+	@RequestMapping("/getExistRentInfo.do")
+	public String getExistRentInfo(HttpServletRequest request,
+			HttpServletResponse response, ModelMap map) {
+		
+		List<ApplyDept> depts=landApplyServiceImpl.getDepts();
+		List<ApplyDept> existDept=landRentServiceImpl.getExistRentInfo();
+		List<String> existplant=landRentServiceImpl.getExistPlant();
+		
+		List list=new ArrayList<E>();
+		list.add(depts);
+		list.add(existDept);
+		list.add(existplant);
+		
+		JSONArray json = JSONArray.fromObject(list);
+		response.setContentType("text/html;charset=UTF-8");
+		
+		try {
+			response.getWriter().print(json.toString());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	@RequestMapping("/deleteLandRentInfo.do")
@@ -152,15 +186,23 @@ public class LandRentController {
 		String dept=request.getParameter("dept");	
 		System.out.println(dept);
 		List<RentMaintain> list =landRentServiceImpl.getSingleRentInfo(null,dept);
-	
+	   
+		/*if(list.size()==0){
+			 System.out.println("ee");
+			return null;
+		}*/
+		System.out.println("hh");
+		ExcelReport er=new ExcelReport();		
 		
-		ExcelReport er=new ExcelReport();
-		er.landRentPreserveReport(list);
 		
 		
 		String filename = "湖南农业大学土地租赁信息表";
 		
-		String fullFileName = "E://landRentPreserveReport.xlsx";
+		//String fullFileName = "E://landRentPreserveReport.xlsx";
+		String path = request.getSession().getServletContext()
+				.getRealPath("/upload/");
+		String fullFileName = path + "/landRentPreserveReport.xlsx";
+		er.landRentPreserveReport(list,fullFileName);
 		// 显示中文文件名
 		response.setContentType("application/octet-stream;charset=utf-8");
 		try {
@@ -188,16 +230,21 @@ public class LandRentController {
 	public String landManageUpdate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws Exception {	
 		
-		
+		int expense=0;
+		String fee=request.getParameter("expense");
 		int deptSelect=Integer.valueOf(request.getParameter("deptSelect"));		
 		String planCareer=request.getParameter("planCareer");
-		int expense=Integer.valueOf(request.getParameter("expense"));		
+		if(fee!=null&&!fee.equals("")){
+			
+		 expense=Integer.valueOf(fee);	
+		
+		}
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
 		int lr_id=Integer.valueOf(request.getParameter("lr_id"));
-		
+		//System.out.println(deptSelect+" "+planCareer+" "+expense+"  "+startTime+"  "+endTime+"  "+lr_id);
+		System.out.println(lr_id);
 		landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
-		
 		
 		return "redirect:fieldRent_maintain.jsp";
 	}

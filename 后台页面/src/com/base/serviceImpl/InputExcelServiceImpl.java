@@ -58,20 +58,26 @@ public class InputExcelServiceImpl
 		if (endLine == -1)
 		{
 			endLine = sheet.getLastRowNum() + 1;
-		} 
-		else
-		{
+		}else{
 			endLine += 1;
 		}
+		//System.out.println(startLine+" "+endLine);
+		if(endLine==1)//空表不能导入，否则报错
+			return null;
+		
+		
 		for (int i = startLine; i < endLine; i++) 
 		{
+			//System.out.println("导入表格没有数据 "+endLine);
 			Row row = sheet.getRow(i);
 			if (row == null) 
 			{
-				System.out.println("该行为空，直接跳过");
+				//System.out.println("该行为空，直接跳过");
 				continue;
 			}
-			int rowSize = row.getLastCellNum();
+			//int rowSize = row.getLastCellNum();
+			//System.out.println(rowSize);
+			int rowSize = 16; //固定导入excel表格每行16列
 			List<String> rowList = new ArrayList<String>();
 			for (int j = 0; j < rowSize; j++)
 			{
@@ -79,8 +85,8 @@ public class InputExcelServiceImpl
 				String temp = "";
 				if (cell == null) 
 				{
-					System.out.println("该列为空，赋值双引号");
-					temp = "NULL";
+					//System.out.println("该列为空，赋值双引号");
+					temp = "";
 				} 
 				else 
 				{
@@ -103,7 +109,7 @@ public class InputExcelServiceImpl
 						}
 						break;
 					case Cell.CELL_TYPE_BLANK:
-						temp = "NULL";
+						temp = "";
 						break;
 					case Cell.CELL_TYPE_ERROR:
 						temp = "ERROR";
@@ -116,17 +122,10 @@ public class InputExcelServiceImpl
 				rowList.add(temp);
 			}
 			list.add(rowList);
+			
 		}
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/** 
      *  下面方法只能读2003的Excel文件，可删除

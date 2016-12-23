@@ -18,7 +18,8 @@ $(document)
 							{
 								"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-								"bSort" : false,
+								"bSort" : true,
+								"ordering":true,
 								"serverSide" : true,
 								"iDisplayLength": 5,
 								//"TotalRecords" : [ 10 ],
@@ -32,6 +33,7 @@ $(document)
 								"aoColumns" : [ // [{la_id:1},{startime:"2016-11-15"},{endtime:"2017-11-15"},{basename:"长安基地1号"},{li:"土地编号"},{username:"申请人"},{usercollage:"信息科学技术学院"},{time:"租用次数"},{plant:"种植内容"}]
 								{
 									"mData" : "la_id",
+									
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "2%",
@@ -48,17 +50,27 @@ $(document)
 
 								}, {
 									"mData" : "basename",
-									"orderable" : true, // 禁用排序
-									"sDefaultContent" : "",
-									"sWidth" : "6%"
-								}, {
-									"mData" : "li",
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
-									"sWidth" : "10%"
-								}, {
-									"mData" : "username",
+									"sWidth" : "6%"
+								}, 
+								
+								{
+									"mData" : "li",
+									"bSortable":true,
 									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "10%"
+								},
+								{
+									"mData" : "landname",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
+								},
+								{
+									"mData" : "username",
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%"
 								}, {
@@ -69,7 +81,7 @@ $(document)
 
 								}, {
 									"mData" : "times",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%",
 
@@ -127,14 +139,16 @@ $(document)
 							"click",
 							function() {
 								if ($(this).prop("checked") === true) {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", true);
 								} else {
-									$("#tablePay input[name='idname']").prop(
+									$("#tablePay input[name='iname']").prop(
 											"checked", false);
 								}
 							});
 					$(".icon-filter").on("click", function() {
+						recovery();
+						recovery2();
 						$('.hide_ul').toggle(500);
 					});
 					$('#PayM').click(function() {
@@ -160,6 +174,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 										
 										var record_str = '(';// //申请记录id格(1,2,3,4,5)
@@ -271,6 +286,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 										 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
@@ -376,14 +392,21 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-                                              
-												$(".msg").html(msg.messageCount);
 												
+                                              var tag=msg.tag;
+												if(tag==1){												
 												bootbox.alert({
 													message : msg.str,
 													size : 'small'
 												});
 												Spage.draw(false);
+												}else if(tag==0){
+													
+													bootbox.alert({
+														message : "不允许同一块土地多人申请成功，请检查",
+														size : 'small'
+													});
+												}
 
 											}
 										});
@@ -395,7 +418,7 @@ $(document)
 									function() {
 										
 										var chk_value =[];
-										$('input[name="idname"]:checked').each(function(){
+										$('input[name="iname"]:checked').each(function(){
 										chk_value.push($(this).val());
 										});	
 										
@@ -405,6 +428,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
@@ -504,7 +528,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-												$(".msg").html(msg.messageCount);
+											
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'
@@ -520,7 +544,7 @@ $(document)
 									function() {
 										
 										var chk_value =[];
-										$('input[name="idname"]:checked').each(function(){
+										$('input[name="iname"]:checked').each(function(){
 										chk_value.push($(this).val());
 										});	
 										
@@ -530,6 +554,7 @@ $(document)
 													message : "请至少选择一项",
 													size : 'small'
 												});
+											 return;
 										  }
 
 										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
@@ -629,7 +654,7 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-												$(".msg").html(msg.messageCount);
+												
 												bootbox.alert({
 													message :  msg.str,
 													size : 'small'
@@ -639,16 +664,16 @@ $(document)
 										});
 									});
 					// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+					
 					function recovery() {
 						document.getElementById("basenameid").value = "";
 						document.getElementById("usernameid").value = "";
-						document.getElementById("usercollageid").value = "";
+						document.getElementById("dept").value = "";
 					}
 					function recovery2() {
 						document.getElementById("basenameid2").value = "";
 						document.getElementById("usernameid2").value = "";
-						document.getElementById("usercollageid2").value = "";
+						document.getElementById("dept2").value = "";
 					}
 
 					// 获取用户名////////////////////////////修改后台，一次性取值//////////////////////////////////////////
@@ -663,6 +688,7 @@ $(document)
 						},
 						success : function(data) {
 
+							//alert(data);
 							for ( var i = 0; i < data[0].length; i++) {
 
 								$("#selectallbase").after(
@@ -677,29 +703,43 @@ $(document)
 
 							}
 
+							
+							//alert(data[1][0].username);
 							for ( var i = 0; i < data[1].length; i++) {
-
-								$("#selectdept").after(
-										"<option value=" + data[1][i].dept
-												+ ">" + data[1][i].dept
-												+ "</option>");
-								$("#selectdept2").after(
-										"<option value=" + data[1][i].dept
-												+ ">" + data[1][i].dept
+								
+								$("#applicantId").after(
+										"<option value=" + data[1][i].username
+												+ ">" + data[1][i].username
 												+ "</option>");
 
 							}
 
 							for ( var i = 0; i < data[2].length; i++) {
-								$("#applicantId").after(
-										"<option value=" + data[2][i].name
-												+ ">" + data[2][i].name
+								
+								$("#applicantId2").after(
+										"<option value=" + data[2][i].username
+												+ ">" + data[2][i].username
+												+ "</option>");
+							}
+							
+							for ( var i = 0; i < data[3].length; i++) {
+
+								$("#selectdept").after(
+										"<option value=" + data[3][i].dept
+												+ ">" + data[3][i].dept
+												+ "</option>");
+							
+
+							}
+							
+							for ( var i = 0; i < data[4].length; i++) {
+
+								
+								$("#selectdept2").after(
+										"<option value=" + data[4][i].dept
+												+ ">" + data[4][i].dept
 												+ "</option>");
 
-								$("#applicantId2").after(
-										"<option value=" + data[2][i].name
-												+ ">" + data[2][i].name
-												+ "</option>");
 							}
 
 						}
@@ -711,7 +751,7 @@ $(document)
 							{
 								"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-								"bSort" : false,
+								"bSort" : true,
 								"serverSide" : true,
 								"iDisplayLength": 5,
 								"dom" : 'tipr<"bottom"l>',
@@ -739,17 +779,24 @@ $(document)
 									"sWidth" : "6%",
 								}, {
 									"mData" : "basename",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
+								},
+								
+								{
+									"mData" : "li",
 									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "10%"
+								},{
+									"mData" : "landname",
+									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "6%"
 								}, {
-									"mData" : "li",
-									"orderable" : false, // 禁用排序
-									"sDefaultContent" : "",
-									"sWidth" : "10%"
-								}, {
 									"mData" : "username",
-									"orderable" : true, // 禁用排序
+									"orderable" :false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%"
 								}, {
@@ -759,7 +806,7 @@ $(document)
 									"sWidth" : "8%",
 								}, {
 									"mData" : "times",
-									"orderable" : false, // 禁用排序
+									"orderable" : true, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "8%",
 								}, {
@@ -816,7 +863,7 @@ $(document)
 														{
 															"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"bSort" : false,
+															"bSort" : true,
 															"serverSide" : true,
 															"iDisplayLength": 5,
 															// //默认每页显示多少条记录
@@ -858,19 +905,25 @@ $(document)
 																	},
 																	{
 																		"mData" : "basename",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
 																	},
+																	
 																	{
 																		"mData" : "li",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
+																	},{
+																		"mData" : "landname",
 																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "10%"
 																	},
 																	{
 																		"mData" : "username",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%"
 																	},
@@ -884,7 +937,7 @@ $(document)
 
 																	{
 																		"mData" : "times",
-																		"orderable" : false, // 禁用排序
+																		"orderable" :true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%",
 
@@ -950,7 +1003,7 @@ $(document)
 														{
 															"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"bSort" : false,
+															"bSort" : true,
 															"serverSide" : true,
 															"iDisplayLength": 5,
 															"bDestroy" : true,
@@ -991,19 +1044,25 @@ $(document)
 																	},
 																	{
 																		"mData" : "basename",
-																		"orderable" : true, // 禁用排序
+																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
 																	},
 																	{
-																		"mData" : "li",
+																		"mData" : "landname",
 																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "10%"
 																	},
 																	{
-																		"mData" : "username",
+																		"mData" : "li",
 																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
+																	},
+																	{
+																		"mData" : "username",
+																		"orderable" :false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%"
 																	},
@@ -1017,7 +1076,7 @@ $(document)
 
 																	{
 																		"mData" : "times",
-																		"orderable" : false, // 禁用排序
+																		"orderable" :true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%",
 

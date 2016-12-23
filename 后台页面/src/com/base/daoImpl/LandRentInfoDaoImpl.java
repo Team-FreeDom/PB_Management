@@ -17,6 +17,7 @@ import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandRentInfoDao;
+import com.base.po.ApplyDept;
 import com.base.po.LandApply;
 import com.base.po.LandRentInfo;
 import com.base.po.RentList;
@@ -27,9 +28,7 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("landRentInfoDao")
 public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 
-	Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -134,6 +133,11 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	
 	public RentList getRentMaintain(String bname,String dept,String planting,int page,int length)
 	{
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		RentList rl=new RentList();
 		List<RentMaintain> data=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;
@@ -206,6 +210,11 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	
 	public List<RentMaintain> getSingleRentInfo(String lr_id,String dept )
 	{	
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
 		System.out.println("哈哈，我来到dao层");
 		List<RentMaintain> list=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;		
@@ -222,6 +231,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 			
 			while(rs.next())    //遍历结果集，赋值给list
 			{
+				
 				rm=new RentMaintain();
 				rm.setLr_id(rs.getInt("lrid"));
 				rm.setStartTime(rs.getString("starttime"));
@@ -292,6 +302,76 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		}
 	}
 	
+	public List<ApplyDept> getExistDept(){
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+		List<ApplyDept> list=new ArrayList<ApplyDept>();
+		ApplyDept dept=null;
+		
+		 try{
+				
+				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
+				sp = conn.prepareCall("{call baseweb.`rent_dept`()}");				
+				sp.execute();   //执行存储过程			
+				
+				rs=sp.getResultSet(); 
+				if(rs!=null){
+				while(rs.next())    //遍历结果集，赋值给list
+				{
+					dept=new ApplyDept();
+					dept.setAid(rs.getInt("aid"));
+					dept.setDept(rs.getString("dept"));
+					list.add(dept);    //加到list中
+				}
+				}
+				
+	             }catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			e.printStackTrace();
+	     		}finally{			
+	     			
+	     			SqlConnectionUtils.free(conn, sp, rs);
+	     			
+	     		} 
+		 return list;
+	}
 	
+public List<String> getExistPlant(){
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+		List<String> list=new ArrayList<String>();
+		String plant=null;
+		
+		 try{
+				
+				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
+				sp = conn.prepareCall("{CALL baseweb.rent_plant()}");				
+				sp.execute();   //执行存储过程			
+				
+				rs=sp.getResultSet(); 
+				if(rs!=null){
+				while(rs.next())    //遍历结果集，赋值给list
+				{
+					plant=rs.getString("planting");
+					list.add(plant);    //加到list中
+				}
+				}
+				
+	             }catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			e.printStackTrace();
+	     		}finally{			
+	     			
+	     			SqlConnectionUtils.free(conn, sp, rs);
+	     			
+	     		} 
+		 return list;
+	}
 
 }

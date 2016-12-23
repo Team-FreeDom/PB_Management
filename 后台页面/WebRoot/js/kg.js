@@ -4,8 +4,8 @@ $("li.menuItem.nav-parent").click(function(){
  $(function () {
 	 	$(document).on("click", "#msgtable tr", function() {
 			bootbox.dialog({
-    		title: $(this).find('td').eq(1).html(),
-    		message: $(this).find('td').eq(2).html()
+    		title: $(this).find('td').eq(2).html(),
+    		message: $(this).find('td').eq(3).html()
 			});
 			$(this).removeClass('read');
 			$(this).addClass('read');
@@ -26,12 +26,23 @@ $("li.menuItem.nav-parent").click(function(){
 					$(".msg").html(data);
 				}
 			});	
-		})
+		});
  
-    // var temp = $.cookie("noReadNumber");
-     $('.msg').html($.cookie("noReadNumber"));
-     
-     $('.text-success').html($.cookie('name'));
+       $.ajax({
+				type : 'POST',
+				dataType : 'text',
+				url : 'getNoReadMessageCount.do',
+				async : false,
+				cache : false,
+				error : function(request) {		
+				},
+				success : function(data) {	
+					$('.msg').html(data);
+				}
+			});	     
+       $('.text-success').html($.cookie('name'));     
+       $('#imageMain').attr("src",$.cookie('image'));  
+      
  });
 
  
