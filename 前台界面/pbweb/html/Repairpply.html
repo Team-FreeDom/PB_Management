@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>项目启动</title>
+    <title>报修申请</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/Repairpply.css">
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -170,7 +172,7 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>项目启动</a></li>
+								<li><a href="index.html"><i class=" icon-home"></i>实习基地申请</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
@@ -187,88 +189,85 @@
 
 						<div class="col-lg-12">
 
-							<div class="panel panel-primary">
-                              <div class="panel-heading">土地租赁</div>
-                              <div class="panel-body text-center" id="start">
-                                <button type="button" class="btn btn-danger btn-lg" id="start-btn"><span class="icon-play-circle">启动</span></button>
-                              </div>
-                              <div class="panel-body" id="set" style="display:none">
-                                <center>
-                                    <div><h2>申报设置</h2></div>
-                                    <div>
-                                    	<form  method="post" class="form-horizontal" role="form" id="submit">
+							<div class=" col-md-offset-2 col-md-8 bordor-style">
+								<div class="row text-center interval padding-style">
+                                	<p>报修申请表</p>
+                                </div>
+                                <div class="row padding-style">
+                                
+                                	<form action="" method="post" class="form-horizontal" role="form">
+                                    
+                                      <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">项目名称</label>
+                                        <div class="col-sm-8">
+                                          <input class="form-control" id="projectname" placeholder="">
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                      	<label for="inputPassword3" class="col-sm-2 control-label">报修人</label>
+                                        <div class="col-sm-5">
+                                          <input class="form-control" id="name" value="">
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">具体位置</label>
+                                        <div class="col-sm-8">
+                                         <input class="form-control" id="address" placeholder="">
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">预算金额</label>
+                                        <div class="col-sm-5">
+                                          <input class="form-control" id="budget" placeholder="">
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">基地列表</label>
+                                        <div class="col-sm-5">
+                                          <select class="form-control" id="baselist">
+                                          	<option id="baselistid">请选择</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">原因说明</label>
+                                        <div class="col-sm-8">
+                                          <textarea class="form-control" rows="3" id="reason"></textarea>
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
                                         
-                                          <div class="form-group form-group-lg">
-                                            <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">申报开始时间</label>
-                                            <div class="col-sm-3">
-                                              <input class="form-control laydate-icon" id="demo" value="">
-                                            </div>
-                                            <label for="inputPassword" class="col-sm-2 control-label">申报结束时间</label>
-                                            <div class="col-sm-3">
-                                              <input class="form-control laydate-icon" id="demo2" value="">
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="form-group form-group-lg">
-                                            <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">租赁开始时间</label>
-                                            <div class="col-sm-3">
-                                              <input class="form-control laydate-icon" id="demo3" value="">
-                                            </div>
-                                            <label for="inputPassword" class="col-sm-2 control-label">租赁结束时间</label>
-                                            <div class="col-sm-3">
-                                              <input class="form-control laydate-icon" id="demo4" value="">
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="form-group form-group-lg">
-                                          	<button type="button" class="btn btn-primary" id="save">保存</button>
-                                            <button type="button" class="btn btn-danger" id="end-btn">结束</button>
-                                          </div>
-                                          
-                                        </form>
-                                    </div>
-                                    <div></div>
-                                </center>
-                              </div>
-                            </div>
-                            
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <h3 class="panel-title">实习计划</h3>
-                              </div>
-                              <div class="panel-body">
-                                Panel content
-                              </div>
-                            </div>
-
-							
-
+                                        <label for="inputPassword3" class="col-sm-2 control-label">申请材料</label>
+                                        <div class="col-sm-8">
+                                          <input type="file"  id="applyfile" placeholder="">
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-8 col-sm-4">
+                                          <button type="button" class="btn btn-primary">暂存</button>
+                                          <button type="button" class="btn btn-primary" id="Submit">提交</button>
+                                        </div>
+                                      </div>
+                                      
+                                     
+                                    </form>
+                                    
+                                </div>
+                                
+							</div>
 							
 						</div>
 
-						<div class="col-lg-12 form-group">
-
-							<div class=" col-md-offset-2 col-md-2 ">
-								<a href="#">
-									<h2>均分三列 </h2>
-								</a>
-
-							</div>
-							
-							<div class=" col-md-offset-1 col-md-2 ">
-								<a href="#">
-									<h2>均分三列</h2>
-								</a>
-
-							</div>
-
-							<div class=" col-md-offset-1 col-md-2 ">
-								<!--<a href="message.html">-->
-								<a href="#">
-								<h2>均分三列 </h2>
-								</a>
-							</div>
-						</div>
+						
 
 					</div>
 				</div><!-- End Sidebar-->                 
@@ -285,18 +284,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootbox.min.js"></script>
-    <script type="text/javascript" src="../js/laydate.js"></script>
-
-    <script src="../js/start.js"></script>
     <script src="../js/kg.js"></script>
-    <script>
-		!function(){
-			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库
-			laydate({elem: '#demo'});//绑定元素
-			laydate({elem: '#demo2'});
-			laydate({elem: '#demo3'});
-			laydate({elem: '#demo4'});
-         }();
-	 </script>
+    <script src="../js/Repairpply.js"></script>
   </body>
 </html>

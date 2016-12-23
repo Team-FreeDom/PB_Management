@@ -24,45 +24,26 @@ $(document).ready(function() {
                 	}); 
 					$("#ck1").prop("checked", false); 
            		 }); 
-				
 				 
-				 $(document).on("click", "#ZJ", function() {
+				/* $("#add").click(function () {
+					 
+           		 }); */
+				 
+				 $("#ZJ").click(function(){
 					 
 					 $("#workerId").val("");
 			        $("#sex1").prop("checked",false);
 					$("#sex2").prop("checked",false);
-			        $("#AIDnumber").val("");
+			        $("#IDnumber").val("");
 			        $("#password").val("");
 					$("#Adivision").val("1");
 					$("#Awkclass").val("1");
 					$("#Astatus").val("1");
 					 })
-					
-				var aaa=1;
-				$("#frame1_edit").click(function(){
-					
-					 $("#Eworkerclass option[value=" + aaa + "]").attr("selected", true);
-					 aaa++;
-					 })
 					 
-				/*success : function(data) {
-						var i = 0;
-						for ( var item in data) {							
-							$("#EworkerId").val(data[i].id);
-							$("#Ename").val(data[i].username);
-							$("#Eworkerclass option[value=" + data[i].prototype + "]").attr("selected", true);
-							$("#Edivision option[value=" + data[i].division + "]").attr("selected", true);
-							$("#Estaute option[value=" + data[i].statue + "]").attr("selected", true);
-							$("#Esex").val(data[i].sex);
-							$("#demo").val(data[i].birth);
-							$("#Ephone").val(data[i].telephone);
-							$("#IDnumber").val(data[i].idcard);
-							$("#Epassword").val(data[i].password);
-							}
-							i++;
-						}		*/			 
 					 
 				
+					 
 				 $("#delete").click(function () {  
                 		$("#manageusertable input[name='allcheckbox']").each(function () {
 							if($(this).prop("checked")==true){
