@@ -133,10 +133,11 @@
 										</a></li>
 										<li><a href="#"> <span class="text">实习审批</span>
 										</a></li>
+										<li><a href="baseCheck.jsp"> <span class="text">基地审批</span>
+										</a></li>
 										<li><a href="#"> <span class="text">维修审批</span>
 										</a></li>
-										<li><a href="#"> <span class="text">基地审批</span>
-										</a></li>
+										
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -203,7 +204,7 @@
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-							<li><a href="#"> <i class=" icon-building"></i>基地申报
+							<li><a href="baseApply.jsp"> <i class=" icon-building"></i>基地申报
 							</a></li>
 							<li><a href="field-rent.jsp"> <i class="icon-legal"></i>土地租赁
 							</a></li>

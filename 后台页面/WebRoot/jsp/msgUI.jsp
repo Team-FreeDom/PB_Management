@@ -120,7 +120,7 @@
 										<ul class="nav nav-children">
                                             <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
-                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+                                            <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
                                             <li><a href="#"><span class="text">维修审批</span></a></li>
 
 										</ul>
@@ -178,7 +178,7 @@
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="#"><i class=" icon-building"></i>基地申报</a></li>
+								<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="#"><i class="icon-home"></i>报修申请</a></li>

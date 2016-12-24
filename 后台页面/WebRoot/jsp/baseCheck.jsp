@@ -179,120 +179,95 @@
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
-
+									
 					<div class="col-lg-12">
+						<form action="deleteLandRentInfo.do" method="post" id="deleteInfo">
+							<table id="basecheck" class="cell-border"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr bgcolor="#ECF1F5">
+										<td colspan="5">
+											<ul class="dropdown_show">
+												<li><span style="color:#24354a" class="icon-filter">筛选</span>
+													<ul id="hide_ul" style="display:none;">
+														<li>
+															<form action="submitChoose.do" method="post"
+																id="submitChoose">
+																<table class="table">
+																	<tr>																		
+																		<td>申报部门：
+																		  <select name="deptS" id="deptSh" style="width:150px;">
+																			<option value="" id="deptS">显示全部</option>
+																		  </select>
+																		</td>
+																	</tr>																	
+																	<tr>
+																		<td>
+																		   <button type="reset" class="btn btn-primary">重置</button>
+																		   <button onClick="hidesubmenu()" type="button"
+																				id="submitS" class="btn btn-primary">完成</button>
+																		</td>
+																	</tr>
+																</table>
+															</form>
+														</li>
+													</ul>
+													</li>
+											</ul>
+										</td>
+										<td colspan="8">										
+										</td>										
+									</tr>
+									<tr style="background:#eeeff4" width="100%">
+										<th></th>
+										<th>基地名称</th>
+										<th>基地类型</th>
+										<th>申报部门</th>										
+										<th>土地面积</th>
+										<th>建筑面积</th>
+										<th>通信地址</th>
+										<th>联系人姓名</th>
+										<th>联系人电话</th>
+										<th hidden>面向专业</th>
+										<th hidden>可承担人数</th>
+										<th hidden>申请材料</th>
+										<th>详情</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+								 <tr>
+								 <td><label><input type="checkbox" name='idname'
+												class="ck-all" /></label></td>
+								        <td>基地名称</td>
+										<td>基地类型</td>
+										<td>申报部门</td>										
+										<td>土地面积</td>
+										<td>建筑面积</td>
+										<td>通信地址</td>
+										<td>联系人姓名</td>
+										<td>联系人电话</td>
+										<td hidden>面向专业</td>
+										<td hidden>可承担人数</td>
+										<td hidden>申请材料</td>
+										<td>详情</td>
+								 </tr>
 
-						<div id="rent_nav" class="row">
-							<div class="col-md-10 col-xs-12">
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#home"
-										role="tab" data-toggle="tab" id="NoCheck">未审核</a></li>
-									<li role="presentation"><a href="#profile" role="tab"
-										data-toggle="tab" id="PayM">交费中</a></li>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active col-md-12" id="home">
-							<form action="" method="post" enctype="multipart/form-data"
-								name="formCheck" id="formCheck">
-								<!-- onSubmit="return check1()" -->
-								<table id="tableCheck" class="hover" cellspacing="0"
-									width="100%">
-									<thead>
-										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
-												<ul class="dropdown_show">
-													<li><span class="icon-filter">筛选</span>
-														<ul class="hide_ul" style="display:none">
-															<li>
-																<form>
-																	<table class="table">
-																		<tr>
-																			<td>基地名： <select name="bname" id="basenameid">
-																					<option value="" id="selectallbase">显示全部</option>
-																					<!--  <option value="">耘园科教综合基地</option>
-                                                                      <option value="">西南角农学基地</option>	 -->
-																			</select>  
-																			</td>
-																			<td>申请人: <select name="username" id="usernameid">
-																					<option value="" id="applicantId">显示全部</option>
-																					<!--  <option value="">李彩</option>
-                                                                      <option value="">彭心雨</option>	 -->
-																			</select>
-																			</td>
-
-
-																		</tr>
-                                                                        <tr>
-                                                                          <td colspan="2">学院: <select name="dept" id="dept">
-																					<option value="" id="selectdept">显示全部</option>
-																					<!--  <option value="">信息科学技术学院</option>
-                                                                          <option value="">动科院</option>	 -->
-																			</select>  
-																			</td>
-                                                                        </tr>
-																		<tr>
-																			<td colspan="3">
-																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button id="finish" type="button"
-																					class="btn btn-primary">完成</button>
-																			</td>
-
-																		</tr>
-																	</table>
-																</form>
-															</li>
-														</ul></li>
-												</ul>
-											</td>
-											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
-										</tr>
-										<tr style="background:#eeeff4">
-
-											<th>序号</th>
-											<th>开始日期</th>
-											<th>结束日期	</th>
-											<th>基地名</th>
-											<th>土地编号</th>
-											<th>土地名称</th>
-											<th>申请人</th>
-											<th>申报部门</th>
-											<th>已租用次数</th>
-											<th>种植内容	</th>
-
-										</tr>
-									</thead>
-
-
-									<tbody>
-
-									</tbody>
-									<thead>
+								</tbody>
+								<thead>
 										<tr>
 											<td colspan="2"><label><input type="checkbox"
 													name="0" id="ck1" />全选</label></td>
 											<td colspan="8">
-												<button type="button" class="btn btn-primary" id="agreeOne"
-													name="agreeOne">同意申请</button>
-												<button type="button" class="btn btn-danger" id="deleteOne"
-													name="deleteOne">拒绝申请</button>
+												<button type="button" class="btn btn-primary" id="confim">同意申请</button>
+												<button type="button" class="btn btn-danger" id="refuse">拒绝申请</button>
 											</td>
 										</tr>
 									</thead>
-								</table>
-							</form>
-						</div>
+
+							</table>
+						</form>
+					</div>
 
 						<div class="modal fade" id="scan" tabindex="-1" role="dialog"
 							aria-labelledby="myModalLabel" aria-hidden="true">
@@ -344,149 +319,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-
-						<div role="tabpanel" class="tab-pane col-md-12" id="profile">
-							<form action="" method="post" enctype="multipart/form-data"
-								name="formPay" id="formPay">
-								<table id="tablePay" class="hover" cellspacing="0" width="100%">
-									<thead>
-										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
-												<ul class="dropdown_show">
-													<li><span class="icon-filter">筛选</span>
-														<ul class="hide_ul" style="display:none;">
-															<li>
-																<form>
-																	<table class="table">
-																		<tr>
-																			<td>基地名： <select name="bname2" id="basenameid2">
-																					<option value="" id="selectallbase2">显示全部</option>
-																					<!--  <option value="">耘园科教综合基地</option>
-                                                                      <option value="">西南角农学基地</option>	 -->
-																			</select>  
-																			</td>
-																			<td>申请人: <select name="username2"
-																				id="usernameid2">
-																					<option value="" id="applicantId2">显示全部</option>
-																					<!--  <option value="">李彩</option>
-                                                                      <option value="">彭心雨</option>	 -->
-																			</select>
-																			</td>
-																			<td>学院: <select name="dept2" id="dept2">
-																					<option value="" id="selectdept2">显示全部</option>
-																					<!--  <option value="">信息科学技术学院</option>
-                                                                          <option value="">动科院</option>	 -->
-																			</select>  
-																			</td>
-																		</tr>
-
-																		<tr>
-																			<td colspan="3">
-																				<button type="reset" class="btn btn-primary">重置</button>
-																				<button id="finishPay" type="button"
-																					class="btn btn-primary">完成</button>
-																			</td>
-
-																		</tr>
-																	</table>
-																</form>
-															</li>
-														</ul></li>
-												</ul>
-											</td>
-											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
-										</tr>
-										<tr style="background:#eeeff4">
-											<th>序号</th>
-											<th>开始日期</th>
-											<th>结束日期</th>
-											<th>基地名</th>
-											<th>土地编号</th>
-											<th>土地名称</th>
-											<th>申请人</th>
-											<th>申报部门</th>
-											<th>已租用次数</th>
-											<th>种植内容</th>
-
-										</tr>
-									</thead>
-
-									<tbody>
-
-									</tbody>
-									<thead>
-										<tr>
-											<td colspan="2"><label><input type="checkbox"
-													name="0" id="ck2" />全选</label></td>
-											<td colspan="8">
-												<button type="button" class="btn btn-primary" id="confim">确认交费</button>
-												<button type="button" class="btn btn-danger" id="cancel">取消交费</button>
-											</td>
-										</tr>
-									</thead>
-								</table>
-							</form>
-						</div>
-					</div>
-					<div class="modal fade" id="scan2" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content" style="border:#3071a9 8px solid">
-								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
-									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
-								</div>
-								<div class="modal-body table-responsive">
-									<table class="table">
-										<tr>
-											<td>基地名 ：</td>
-											<td><input type="text" id="basename1" readonly></td>
-											<td>租赁人 ：</td>
-											<td><input type="text" id="username1"></td>
-										</tr>
-										<tr>
-											<td>申请学院 ：</td>
-											<td><input type="text" id="usercollage1" readonly></td>
-											<td>面向专业 ：</td>
-											<td><input type="text" id="landoriented1"></td>
-										</tr>
-
-
-										<tr>
-											<td>土地名称 ：</td>
-											<td><input type="text" id="landname1" readonly></td>
-											<td>土地编号 ：</td>
-											<td><input type="text" id="li"></td>
-										</tr>
-
-										<tr>
-											<td>计划种植内容 ：</td>
-											<td><input type="text" id="plant1" readonly></td>
-										</tr>
-									</table>
-								</div>
-								<div class="modal-footer table-responsive">
-									<center>
-										<button type="button" class="btn btn-primary"
-											data-dismiss="modal">确定</button>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">取消</button>
-									</center>
-								</div>
-							</div>
-						</div>
-					</div>
+						</div>						
+							
 
 				</div>
 			</div>
@@ -508,12 +342,7 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
-	<script src="../js/myNeed/rent-approve.js"></script>
-    <script src="../js/kg.js"></script>
-	<script>
-		/* new YMDselect('year1','month1','day1');
-		new YMDselect('year2','month2','day2'); */
-	</script>
-
+	<script src="../js/myNeed/basecheck.js"></script>
+    <script src="../js/kg.js"></script>	
 </body>
 </html>
