@@ -396,6 +396,7 @@ $("#addOne").click(function(){
 				});
 
 	}
+	
     $("#ck1").on("click", function () {
 		if ($(this).prop("checked") === true) {
 			$("#manageusertable input[name='idname']").prop("checked", true);

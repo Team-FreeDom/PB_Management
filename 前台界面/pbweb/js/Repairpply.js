@@ -77,7 +77,8 @@ $(function () {
 				return 0;
 				}
 			/*************/
-			$.ajax({
+			$("#applyform").submit();
+			/*$.ajax({
 					type : 'POST',
 					data : {
 							"projectname" : projectname,
@@ -102,7 +103,7 @@ $(function () {
 						
 						}
 				
-				})
+				})*/
 			/*************/
 			
 		})
