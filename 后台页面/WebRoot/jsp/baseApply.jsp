@@ -194,7 +194,7 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label fontDire">基地名称</label>
 										<div class="col-md-6">
-											<input type="email" class="form-control" id="basename" name="name"
+											<input type="text" class="form-control" id="basename" name="name"
 												placeholder="例:浏阳基地">
 										</div>
 									</div>
@@ -203,10 +203,10 @@
 										<label class="col-md-3 control-label">申报部门类型</label>
 										<div class="col-md-6">
 											<label class="radio-inline"> <input type="radio"
-												name="inlineRadioOptions" id="deptRadio" value="1" 
+												name="deptRadio" id="deptRadio" value="1" 
 												checked="true"> 学院
 											</label> <label class="radio-inline"> <input type="radio"
-												name="inlineRadioOptions" id="deptRadio" value="2">
+												name="deptRadio" id="deptRadio" value="2">
 												行政部
 											</label>
 										</div>
@@ -215,8 +215,8 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">申报部门</label>
 										<div class="col-md-6">
-											<select class="form-control" id="deptty" name="applyid">
-												<option id="applyDept" value="">请选择</option>
+											<select class="form-control" id="deptty" name="applyid" >
+												<option id="applyDept" value="" >请选择</option>
 											</select>
 										</div>
 									</div>
@@ -249,30 +249,30 @@
 										<label class="col-md-3 control-label">可承担人数</label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" name="undertake"
-												id="limit-population" placeholder="70">
+												id="limit-population" placeholder="单位：人">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-md-3 control-label">土地面积</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="filed-area" name="landarea"
-												placeholder="">
+											<input type="text" class="form-control" id="filed-area" name="landarea"
+												placeholder="单位：亩">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-md-3 control-label">建筑面积</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="base-area" name="constructionarea"
-												placeholder="">
+											<input type="text" class="form-control" id="base-area" name="constructionarea"
+												placeholder="单位：平方">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-md-3 control-label">通信地址</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="baseaddress" name="land_addres"
+											<input type="text" class="form-control" id="baseaddress" name="land_addres"
 												placeholder="">
 										</div>
 									</div>
@@ -280,7 +280,7 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">联系人姓名</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="personName" name="username"
+											<input type="text" class="form-control" id="personName" name="username"
 												placeholder="">
 										</div>
 									</div>
@@ -288,7 +288,7 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">联系人电话</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="personTel" name="phone"
+											<input type="text" class="form-control" id="personTel" name="phone"
 												placeholder="">
 										</div>
 									</div>
@@ -346,7 +346,7 @@
 							
 								<div class="col-md-5">
 											<select class="form-control" id="deptSelectOne">
-												<option id="deptSelect">请选择</option>
+												<option id="deptSelect" value="">请选择</option>
 											</select>
 										</div>
 						
@@ -354,8 +354,8 @@
 				<div class="form-group ">
 							<label class="col-md-3 control-label fontDire">可选专业:</label>							
 							<div class="col-md-6 majorhide">
-									<span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='计算机'/><label>计算机</label>	</span>
-									<span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='电商'/><label>电商</label>	</span>
+									<!-- <span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='计算机'/><label>计算机</label>	</span>
+									<span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='电商'/><label>电商</label>	</span> -->
 										</div>
 						
 				</div>
