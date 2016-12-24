@@ -68,9 +68,12 @@ $(document).on("change", "#deptRadio", function() {
         });
 
 $(document).on("change", "#deptSelectOne", function() {	
-	
 	var id= this.value;	
-	$.ajax({
+	$(".majorhide").html("");
+	if(id==""){
+		return;
+	}
+		$.ajax({
 		type : 'POST',
 		dataType : 'json',
 		data:{

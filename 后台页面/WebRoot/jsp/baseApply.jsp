@@ -225,7 +225,7 @@
 										<label class="col-md-3 control-label">基地类型</label>
 										<div class="col-md-6">
 											<select class="form-control" id="basetype0" name="typeid">
-												<option id="basetype">请选择</option>
+												<option id="basetype" value="">请选择</option>
 											</select>
 										</div>
 									</div>
