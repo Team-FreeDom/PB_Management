@@ -280,7 +280,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                         <div class="pull-right">
                                                                             <ol class="breadcrumb visible-sm visible-md visible-lg wz">
                                                                                 <li>
-                                                                                    <a href="#">
+                                                                                    <a href="baseApply.jsp">
                                                                                         <i class=" icon-building"></i>基地申报</a>
                                                                                 </li>
                                                                                 <li>
