@@ -1,5 +1,3 @@
- 
-
 var deptObj1;
 var deptObj2;
 var flag1=true;
@@ -10,7 +8,7 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',		
-		url : 'BaseApplyInfo.do',  //��ȡ�������
+		url : 'BaseApplyAllInfo.do',  //��ȡ�������
 		async : false,
 		cache : false,
 		error : function(request) {
@@ -18,19 +16,23 @@ $(document).ready(function() {
 		},
 		success : function(data) {
 			
-			for ( var i=0;i<data[1].length;i++) {
+			for ( var i=0;i<data[0].length;i++) {
 				$("#deptSelect").after(
-						"<option value="+data[1][i].aid+">"
-								+ data[1][i].dept + "</option>");				
+						"<option value="+data[0][i].aid+">"
+								+ data[0][i].dept + "</option>");
+				$("#applyDept").after(
+						"<option value="+data[0][i].aid+" class='dee'>"
+								+ data[0][i].dept+ "</option>");
 				
 			}
 			
-			for ( var i=0;i<data[2].length;i++) {
+			for ( var i=0;i<data[1].length;i++) {				
 				$("#basetype").after(
-						"<option value="+data[2][i].id+">"
-								+ data[2][i].name + "</option>");				
+						"<option value="+data[1][i].id+">"
+								+ data[1][i].name + "</option>");				
 				
-			}			
+			}	
+			
 		}
 
 	});
@@ -39,69 +41,42 @@ $(document).ready(function() {
 
 
 $(document).on("change", "#deptRadio", function() {	
-	var type=this.value;	
-	$(".dee").remove();	
-    if(type==1){
-    	if(deptObj1!=null){
-    		for ( var i=0;i<deptObj1[1].length;i++) {
-				$("#applyDept").after(
-						"<option value="+deptObj1[1][i].aid+" class='dee'>"
-								+ deptObj1[1][i].dept + "</option>");
-    		
-    		return;
-    	}
-    }  
-    }
-    if(type==2){
-    	if(deptObj2!=null){    		
-        		for ( var i=0;i<deptObj2[1].length;i++) {
-    				$("#applyDept").after(
-    						"<option value="+deptObj2[1][i].aid+" class='dee'>"
-    								+ deptObj2[1][i].dept + "</option>");
-    		return;
-    	}
-    }  
-    	}
-    
+	var type=$(this).val();		
+	$(".dee").remove();	   
     $.ajax({
 		type : 'POST',
 		dataType : 'json',
 		data:{
 			"typeid":type
 		},
-		url : 'getMajor.do',  //��ȡ����
+		url : 'getBaseSingleDept.do', 
 		async : false,
 		cache : false,
 		error : function(request) {
 			alert("error");
 		},
-		success : function(data) {
-			
-			for ( var i=0;i<data[1].length;i++) {
+		success : function(data) {			
+			for ( var i=0;i<data.length;i++) {
 				$("#applyDept").after(
-						"<option value="+data[1][i].aid+" class='dee'>"
-								+ data[1][i].dept + "</option>");
+						"<option value="+data[i].aid+" class='dee'>"
+								+ data[i].dept + "</option>");
 				
 			}
-			if(type==1){
-				deptObj1=data;
-			}else if(type==2){
-				deptObj2=data;
-			}			
 		}
 
 	});     
         });
 
 $(document).on("change", "#deptSelectOne", function() {	
-	var id= this.value;
+	
+	var id= this.value;	
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',
 		data:{
-			"aid":aid
+			"aid":id
 		},
-		url : '',  //��ȡרҵ
+		url : 'getMajor.do',  //��ȡרҵ
 		async : false,
 		cache : false,
 		error : function(request) {
@@ -109,18 +84,18 @@ $(document).on("change", "#deptSelectOne", function() {
 		},
 		success : function(data) {
 			var tag=false;
-			for ( var i=0;i<data[1].length;i++) {
+			for ( var i=0;i<data.length;i++) {
 				
-				$("#majorSuo").each(function(index){
-					var id=this.value;
-					if(data[1].mid==id){
+				$("#majorSuo input").each(function(index){					
+					var id=$(this).val();				
+					if(data[i].mid==id){
 						tag=true;
-						break;
+						return;
 					}					
 				});
 				if(!tag){
 				$(".majorhide").append(
-						"<span class='majorcheck'><input type='checkbox' value='"+data[1].mid+"' class='"+data[1].mname+"'/><label>"+data[1].mname+"</label></span>");				
+						"<span class='majorcheck'><input type='checkbox' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
 			}			
 		}
@@ -128,6 +103,15 @@ $(document).on("change", "#deptSelectOne", function() {
 	});
 	
 });
+
+/*$(document).on("click", "#deptty", function() {		
+	$(this).prop("size",10);
+});
+
+$(document).on("click", ".dee", function() {		
+	$(this).removeAttribute("size"); 
+});*/
+
 
 $(document).on("click", ".majorcheck", function() {
 	var obj=$(this).children('input');	
@@ -168,6 +152,7 @@ $(document).on("click", ".confirm", function() {
 	if($("#majorSuo .majorchoose")[0]==null){			
 		$("#majormain").css("display","none");
 	}
+	$("#deptSelectOne").val("");
 });
 
 $(document).on("click", ".closeit", function() {
@@ -175,6 +160,7 @@ $(document).on("click", ".closeit", function() {
 	if($("#majorSuo .majorchoose")[0]==null){		
 		$("#majormain").css("display","none");
 	}
+	$("#deptSelectOne").val("");
 });
 
 $(document).on("click", "#submitForm", function() {

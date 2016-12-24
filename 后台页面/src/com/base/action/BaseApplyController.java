@@ -25,9 +25,9 @@ import com.base.service.baseApplyService;
  * @author 梦醒何处
  *
  */
-@Controller("baseApply")
+@Controller("baseApplyController")
 @RequestMapping("/jsp")
-public class baseApply {
+public class BaseApplyController {
     @Autowired
     private baseApplyService baseapplyservice;
 
@@ -105,12 +105,11 @@ public class baseApply {
 
     }
 
-    @RequestMapping("/BaseApplyInfo.do")
+    @RequestMapping("/BaseApplyAllInfo.do")
     public String BaseApplyInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-	 int typeid=Integer.parseInt(request.getParameter("typeid"));
-	// 根据部门类型id获取部门
-	List<ApplyDept> list1 = baseapplyservice.getDept(typeid);
+	    HttpServletResponse response, ModelMap map) {	 
+	// 获取学院
+	List<ApplyDept> list1 = baseapplyservice.getDept(1);
 	// 获取基地类型
 	List<basetype> list2 = baseapplyservice.getBasetype();
 
@@ -119,6 +118,26 @@ public class baseApply {
 	    list4.add(list1);
 	    list4.add(list2);
 	    JSONArray json = JSONArray.fromObject(list4);
+	    response.setContentType("text/html;charset=UTF-8");
+	    response.getWriter().print(json.toString());
+
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+	return null;
+    }
+    
+    @RequestMapping("/getBaseSingleDept.do")
+    public String getBaseSingleDept(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+	 int typeid=Integer.parseInt(request.getParameter("typeid"));
+	// 获取部门
+	List<ApplyDept> list1 = baseapplyservice.getDept(typeid);
+	
+	try {	   
+	    JSONArray json = JSONArray.fromObject(list1);
 	    response.setContentType("text/html;charset=UTF-8");
 	    response.getWriter().print(json.toString());
 
