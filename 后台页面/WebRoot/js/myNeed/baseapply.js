@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',		
-		url : '',  //��ȡ�������
+		url : 'BaseApplyInfo.do',  //��ȡ�������
 		async : false,
 		cache : false,
 		error : function(request) {
@@ -19,18 +19,18 @@ $(document).ready(function() {
 		success : function(data) {
 			
 			for ( var i=0;i<data[1].length;i++) {
-				$("#basetype").after(
-						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");				
-				
-			}
-			for ( var i=0;i<data[2].length;i++) {
 				$("#deptSelect").after(
-						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");				
+						"<option value="+data[1][i].aid+">"
+								+ data[1][i].dept + "</option>");				
 				
 			}
 			
+			for ( var i=0;i<data[2].length;i++) {
+				$("#basetype").after(
+						"<option value="+data[2][i].id+">"
+								+ data[2][i].name + "</option>");				
+				
+			}			
 		}
 
 	});
@@ -69,7 +69,7 @@ $(document).on("change", "#deptRadio", function() {
 		data:{
 			"typeid":type
 		},
-		url : '',  //��ȡ����
+		url : 'getMajor.do',  //��ȡ����
 		async : false,
 		cache : false,
 		error : function(request) {
@@ -145,13 +145,17 @@ $(document).on("click", ".majorchoose", function() {
 	var str="<span class='majorcheck'><input type='checkbox' name='majorcheck' value='"+obj.val()+"' class='"+obj.attr('class')+"'/><label>"+obj.attr('class')+"</label></span>";
 	this.remove();
 	$(".majorhide").append(str);	
-	if($(".majorchoose")[0]==null){			
+	if($("#majorSuo .majorchoose")[0]==null){			
 		$("#majormain").css("display","none");
 	}	
 });
 
 $(document).on("click", "#hit", function() {
 	var content=$("#textContent").html();
+	if(content==null||content==""){	
+	  $("#majormain").css("display","none");
+	  return;
+	}
 	$("#majorSuo").html(content);	
 	$("#majorSuo input").prop("hidden",false);
 });
@@ -161,26 +165,25 @@ $(document).on("click", ".confirm", function() {
 	$("#textContent").html(content);
 	$("#textContent input").prop("hidden",true);
 	$(".majorhide").html("");
-	if($(".majorchoose")[0]==null){	
-		alert("ha");
+	if($("#majorSuo .majorchoose")[0]==null){			
 		$("#majormain").css("display","none");
 	}
 });
 
 $(document).on("click", ".closeit", function() {
 	$(".majorhide").html("");
-	if($(".majorchoose")[0]==null){		
+	if($("#majorSuo .majorchoose")[0]==null){		
 		$("#majormain").css("display","none");
 	}
 });
 
 $(document).on("click", "#submitForm", function() {
-	var basename=$("basename").val();
-	var deptty=$("deptty").val();
-	var basetype=$("basetype0").val();
-	var baseaddress=$("baseaddress").val();
-	var personName=$("personName").val();
-	var personTel=$("personTel").val();
+	var basename=$("#basename").val();
+	var deptty=$("#deptty").val();
+	var basetype=$("#basetype0").val();
+	var baseaddress=$("#baseaddress").val();
+	var personName=$("#personName").val();
+	var personTel=$("#personTel").val();
 	
 	if(basename==""){
 		 bootbox.alert({

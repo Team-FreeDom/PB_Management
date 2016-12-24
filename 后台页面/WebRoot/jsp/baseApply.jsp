@@ -190,7 +190,7 @@
 							</div>
 							<div class="row padding-style">
 
-								<form action="" method="post" id="myForm" class="form-horizontal" role="form">
+								<form action="getRequestBaseInfo.do" method="post" id="myForm" class="form-horizontal" role="form">
 									<div class="form-group">
 										<label class="col-md-3 control-label fontDire">基地名称</label>
 										<div class="col-md-6">
@@ -272,7 +272,7 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">通信地址</label>
 										<div class="col-md-6">
-											<input type="password" class="form-control" id="baseaddress" name="land_address"
+											<input type="password" class="form-control" id="baseaddress" name="land_addres"
 												placeholder="">
 										</div>
 									</div>
