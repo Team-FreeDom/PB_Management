@@ -5,7 +5,7 @@ function a(){
 $(document).ready(function() {
 	
 			////全选反选
-			var flag=0;
+				var flag=0;
 				$("#ck1").on("click", function () {
 					if ($(this).prop("checked") === true) {
 						$("#Repairmanage input[name='allcheckbox']").prop("checked", true);
@@ -165,12 +165,12 @@ $(document).ready(function() {
 		
 					//删除操作	 
 					var flag=0;
-					$('#deleteOne').click(function() {
+					$('#delete').click(function() {
 					  flag=0;
 						$("#Repairmanage input[name='idname']").each(function () {
 							if($(this).prop("checked")==true){
 								flag=1;
-					  return false;
+					  			return false;
 						}
 					});
 					if(flag==0){
@@ -198,7 +198,7 @@ $(document).ready(function() {
 									$.ajax({
 										url: 'deInfo.do',
 										type: 'post',
-										data: $("#formApplyInfo").serializeArray(),
+										data: $("#formApplyInfo").serializeArray(),//修改删除操作
 										success: function(msg) {
 											 bootbox.alert({
 											  message: msg,
@@ -287,20 +287,41 @@ $(document).ready(function() {
 										  size: 'small'
 									  });
 								},
-								success : function(data) {
+								success : function(data) {//修改
 										$("#Eprojectname").val(data[0].projectname);
 										$("#Ebasename").val(data[0].basename);
-						  				$("#Ename").val(data[0].name);//部门
-										$("#Etime").val(data[0].time);//出生日期
+						  				$("#Ename").val(data[0].name);
+										$("#Etime").val(data[0].time);
 						  				$("#Ebudget").val(data[0].budget);
 						  				$("#Eaddress").val(data[0].address);
 										$("#Ereason").val(data[0].reason);
 									}
 							});
-							$("#saverun").click(function(){
-								$("#applyeditform").submit();
-								})
-			
 				}
+				
+				$("#saverun").click(function(){
+								bootbox.confirm({
+								message: "是否确认修改",
+								buttons: {
+				
+									confirm: {
+										label: 'Yes',
+										className: 'btn-success'
+									},
+									cancel: {
+										label: 'No',
+										className: 'btn-danger'
+									},
+								},
+								callback: function (result) {
+									if(result){
+										$("#applyeditform").submit();
+											
+									}
+								}
+							});
+								
+								
+								})
 					 					
 });
