@@ -113,8 +113,9 @@
 									<ul class="nav nav-children">
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="#"><span class="text">实习审批</span></a></li>
+										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
 										<li><a href="#"><span class="text">维修审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
+										
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -225,7 +226,7 @@
 										<label class="col-md-3 control-label">基地类型</label>
 										<div class="col-md-6">
 											<select class="form-control" id="basetype0" name="typeid">
-												<option id="basetype">请选择</option>
+												<option id="basetype" value="">请选择</option>
 											</select>
 										</div>
 									</div>

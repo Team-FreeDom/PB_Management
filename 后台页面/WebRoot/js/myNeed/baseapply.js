@@ -68,9 +68,12 @@ $(document).on("change", "#deptRadio", function() {
         });
 
 $(document).on("change", "#deptSelectOne", function() {	
-	
 	var id= this.value;	
-	$.ajax({
+	$(".majorhide").html("");
+	if(id==""){
+		return;
+	}
+		$.ajax({
 		type : 'POST',
 		dataType : 'json',
 		data:{
@@ -95,7 +98,7 @@ $(document).on("change", "#deptSelectOne", function() {
 				});
 				if(!tag){
 				$(".majorhide").append(
-						"<span class='majorcheck'><input type='checkbox' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
+						"<span class='majorcheck'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
 			}			
 		}
@@ -114,8 +117,8 @@ $(document).on("click", ".dee", function() {
 
 
 $(document).on("click", ".majorcheck", function() {
-	var obj=$(this).children('input');	
-	var str="<span class='majorchoose'><input name='majorid' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"'/><label>"+obj.attr('class')+"</label></span>";
+	var obj=$(this).children('input');		
+	var str="<span class='majorchoose'><input name='majorid' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
 	this.remove();
 	$("#majorSuo").append(str);	
 	var tag=$("#majormain").css("display");
@@ -124,9 +127,19 @@ $(document).on("click", ".majorcheck", function() {
 	}	
 });
 
-$(document).on("click", ".majorchoose", function() {
+$(document).on("click", ".majorchoose", function() {	
 	var obj=$(this).children('input');
-	var str="<span class='majorcheck'><input type='checkbox' name='majorcheck' value='"+obj.val()+"' class='"+obj.attr('class')+"'/><label>"+obj.attr('class')+"</label></span>";
+	var id=$("#deptSelectOne").val();	
+	if(id!=obj.prop("placeholder")){
+		bootbox.alert({
+			message : "请选择相应的学院，再进行更改",
+			size : 'small'
+		});
+		obj.prop("checked",true);
+	 return;
+
+	}
+	var str="<span class='majorcheck'><input type='checkbox' name='majorcheck' value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
 	this.remove();
 	$(".majorhide").append(str);	
 	if($("#majorSuo .majorchoose")[0]==null){			

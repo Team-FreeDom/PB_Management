@@ -133,10 +133,11 @@
 										</a></li>
 										<li><a href="#"> <span class="text">实习审批</span>
 										</a></li>
+										<li><a href="baseCheck.jsp"> <span class="text">基地审批</span>
+										</a></li>
 										<li><a href="#"> <span class="text">维修审批</span>
 										</a></li>
-										<li><a href="#"> <span class="text">基地审批</span>
-										</a></li>
+										
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i

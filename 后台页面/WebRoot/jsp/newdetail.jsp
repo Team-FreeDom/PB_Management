@@ -173,14 +173,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                     <span class="text">实习审批</span>
                                                                                                 </a>
                                                                                             </li>
+                                                                                            
                                                                                             <li>
-                                                                                                <a href="#">
-                                                                                                    <span class="text">维修审批</span>
+                                                                                                <a href="baseCheck.jsp">
+                                                                                                    <span class="text">基地审批</span>
                                                                                                 </a>
                                                                                             </li>
                                                                                             <li>
                                                                                                 <a href="#">
-                                                                                                    <span class="text">基地审批</span>
+                                                                                                    <span class="text">维修审批</span>
                                                                                                 </a>
                                                                                             </li>
                                                                                         </ul>
