@@ -165,7 +165,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置</a></li>
-							<li><a href="rent-approve.jsp"></i>租赁审批</a></li>
+							<li><a href="baseCheck.jsp"></i>基地审批</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
@@ -204,7 +204,7 @@
 																	<tr>
 																		<td>
 																		   <button type="reset" class="btn btn-primary">重置</button>
-																		   <button onClick="hidesubmenu()" type="button"
+																		   <button type="button"
 																				id="submitS" class="btn btn-primary">完成</button>
 																		</td>
 																	</tr>
@@ -215,7 +215,7 @@
 													</li>
 											</ul>
 										</td>
-										<td colspan="8">										
+										<td colspan="9">										
 										</td>										
 									</tr>
 									<tr style="background:#eeeff4" width="100%">
@@ -225,12 +225,13 @@
 										<th>申报部门</th>										
 										<th>土地面积</th>
 										<th>建筑面积</th>
-										<th>通信地址</th>
+										<th hidden>通信地址</th>
 										<th>联系人姓名</th>
 										<th>联系人电话</th>
 										<th hidden>面向专业</th>
 										<th hidden>可承担人数</th>
 										<th hidden>申请材料</th>
+										<th hidden>申请人</th>
 										<th>详情</th>
 										
 									</tr>
@@ -244,13 +245,48 @@
 										<td>申报部门</td>										
 										<td>土地面积</td>
 										<td>建筑面积</td>
-										<td>通信地址</td>
+										<td hidden>通信地址</td>
 										<td>联系人姓名</td>
 										<td>联系人电话</td>
 										<td hidden>面向专业</td>
 										<td hidden>可承担人数</td>
 										<td hidden>申请材料</td>
-										<td>详情</td>
+										<td hidden>申请人</td>
+										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
+								 </tr>
+								  <tr>
+								 <td><label><input type="checkbox" name='idname'
+												class="ck-all" /></label></td>
+								        <td>基地名称</td>
+										<td>基地类型</td>
+										<td>申报部门</td>										
+										<td>土地面积</td>
+										<td>建筑面积</td>
+										<td hidden>通信地址</td>
+										<td>联系人姓名</td>
+										<td>联系人电话</td>
+										<td hidden>面向专业</td>
+										<td hidden>可承担人数</td>
+										<td hidden>申请材料</td>
+										<td hidden>申请人</td>
+										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
+								 </tr>
+								  <tr>
+								 <td><label><input type="checkbox" name='idname'
+												class="ck-all" /></label></td>
+								        <td>基地名称</td>
+										<td>基地类型</td>
+										<td>申报部门</td>										
+										<td>土地面积</td>
+										<td>建筑面积</td>
+										<td hidden>通信地址</td>
+										<td>联系人姓名</td>
+										<td>联系人电话</td>
+										<td hidden>面向专业</td>
+										<td hidden>可承担人数</td>
+										<td hidden>申请材料</td>
+										<td hidden>申请人</td>
+										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
 								 </tr>
 
 								</tbody>
@@ -259,8 +295,8 @@
 											<td colspan="2"><label><input type="checkbox"
 													name="0" id="ck1" />全选</label></td>
 											<td colspan="8">
-												<button type="button" class="btn btn-primary" id="confim">同意申请</button>
-												<button type="button" class="btn btn-danger" id="refuse">拒绝申请</button>
+												<button type="button" class="btn btn-primary" id="confirm">同意申请</button>
+												<button type="button" class="btn btn-danger"  id="refuse">拒绝申请</button>
 											</td>
 										</tr>
 									</thead>
@@ -268,6 +304,60 @@
 							</table>
 						</form>
 					</div>
+				
+					
+			<!-- 同意申请 -->
+			<div class="modal fade" id="applyConfirm" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" id="close1" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">请选择基地有效周期</h5>
+							
+						</div>
+						<div class="modal-body table-responsive">
+						  <select name="valideDate" id="valideDate" style="width:100px;">							 
+							 <option value="1"/>1年</option>
+							 <option value="2"/>2年</option>
+							 <option value="3"/>3年</option>
+							 <option value="10" selected/>长久</option>
+						  </select>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="close1"
+								data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="confirmDate">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+					
+				<!-- Modal -->
+			<div class="modal fade" id="reasonConfirm" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" id="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">请填写拒绝申请的理由</h5>
+							
+						</div>
+						<div class="modal-body table-responsive">
+						  <textarea row=1 col=1 id="reason" placeholder="可不填"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="close"
+								data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="certain">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 						<div class="modal fade" id="scan" tabindex="-1" role="dialog"
 							aria-labelledby="myModalLabel" aria-hidden="true">
@@ -283,39 +373,57 @@
 									<div class="modal-body table-responsive">
 										<table class="table">
 											<tr>
-												<td>基地名 ：</td>
-												<td><input type="text" id="basename" readonly></td>
-												<td>租赁人 ：</td>
-												<td><input type="text" id="username"></td>
+												<td>基地名称 ：</td>
+												<td><input type="text" id="basename" disabled></td>
+												<td>基地类型 ：</td>
+												<td><input type="text" id="basetype" disabled ></td>
 											</tr>
 											<tr>
-												<td>申请学院 ：</td>
-												<td><input type="text" id="usercollage" readonly></td>
+												<td>申请部门 ：</td>
+												<td><input type="text" id="dept0" disabled></td>
+												<td>土地面积 ：</td>
+												<td><input type="text" id="landarea"  disabled/></td>
+											</tr>
+
+
+											<tr>
+												<td>建筑面积 ：</td>
+												<td><input type="text" id="buildingarea" disabled></td>
+												<td>可承担人数 ：</td>
+												<td><input type="text" id="undertakeCount" disabled></td>
+											</tr>
+											<tr>
+												<td>联系人姓名 ：</td>
+												<td><input type="text" id="username" disabled></td>
+												<td>联系人电话 ：</td>
+												<td><input type="text" id="userphone" disabled></td>
+											</tr>
+											<tr>
 												<td>面向专业 ：</td>
-												<td><input type="text" id="landoriented"></td>
+												<td colspan="3"><div id="major_oriented" style="border:#ccc 1px solid;height:80px;"></div></td>
+												
 											</tr>
-
-
+											
 											<tr>
-												<td>土地名称 ：</td>
-												<td><input type="text" id="landname" readonly></td>
-												<td>土地编号 ：</td>
-												<td><input type="text" id="li"></td>
+												<td>通信地址 ：</td>
+												<td colspan="3"><div id="linkAddress" style="border:#ccc 1px solid;height:80px;"></div></td>
+												
 											</tr>
 
+											
 											<tr>
-												<td>计划种植内容 ：</td>
-												<td><input type="text" id="plant" readonly></td>
+												<td>申请材料 ：</td>
+												<td colspan="3"><a id="resource" href="#" style="color:#3071a9;">点击查看</a></td>
+												
 											</tr>
+											
 										</table>
 									</div>
-									<div class="modal-footer table-responsive">
-										<center>
+									<div class="modal-footer table-responsive">										
+											
 											<button type="button" class="btn btn-primary"
-												data-dismiss="modal">确定</button>
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">取消</button>
-										</center>
+												data-dismiss="modal">关闭</button>
+										
 									</div>
 								</div>
 							</div>
