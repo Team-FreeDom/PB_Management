@@ -197,7 +197,7 @@
 																	<tr>																		
 																		<td>申报部门：
 																		  <select name="deptS" id="deptSh" style="width:150px;">
-																			<option value="" id="deptS">显示全部</option>
+																			<option value="" id="deptS" >显示全部</option>
 																		  </select>
 																		</td>
 																	</tr>																	
@@ -237,58 +237,7 @@
 									</tr>
 								</thead>
 								<tbody>
-								 <tr>
-								 <td><label><input type="checkbox" name='idname'
-												class="ck-all" /></label></td>
-								        <td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>										
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td hidden>通信地址</td>
-										<td>联系人姓名</td>
-										<td>联系人电话</td>
-										<td hidden>面向专业</td>
-										<td hidden>可承担人数</td>
-										<td hidden>申请材料</td>
-										<td hidden>申请人</td>
-										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
-								 </tr>
-								  <tr>
-								 <td><label><input type="checkbox" name='idname'
-												class="ck-all" /></label></td>
-								        <td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>										
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td hidden>通信地址</td>
-										<td>联系人姓名</td>
-										<td>联系人电话</td>
-										<td hidden>面向专业</td>
-										<td hidden>可承担人数</td>
-										<td hidden>申请材料</td>
-										<td hidden>申请人</td>
-										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
-								 </tr>
-								  <tr>
-								 <td><label><input type="checkbox" name='idname'
-												class="ck-all" /></label></td>
-								        <td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>										
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td hidden>通信地址</td>
-										<td>联系人姓名</td>
-										<td>联系人电话</td>
-										<td hidden>面向专业</td>
-										<td hidden>可承担人数</td>
-										<td hidden>申请材料</td>
-										<td hidden>申请人</td>
-										<td><button type='button' class='btn btn-warning btn-xs' id='scanDetail'>查看</button></td>
-								 </tr>
-
+								 
 								</tbody>
 								<thead>
 										<tr>
