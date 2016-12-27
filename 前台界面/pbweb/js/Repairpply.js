@@ -23,7 +23,32 @@ $(function () {
 					
 							});
 	 /**************************/
-		
+	$('#applyfile').change(function() {    
+    var filepath = $(this).val();
+    var file_size = this.files[0].size;
+    var size = file_size / 1024;
+    var extStart = filepath.lastIndexOf(".");
+    var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+    if (ext != ".RAR" && ext != ".ZIP") {
+        bootbox.alert({
+            message: "上传资料仅限于压缩包格式ʽ",
+            size: 'small'
+        });
+        flag1=false;
+        return false;
+    }
+    if (size > 1024 * 10) {
+        bootbox.alert({
+            message: "上传资料大小不能大于10M",
+            size: 'small'
+        });
+        flag2=false;
+        return false;
+    }   
+    flag1=true;
+    flag2=true;
+    return false;
+});
 	/*########*/
 	 	$(document).on("click", "#Submit", function() {
 			
@@ -78,32 +103,7 @@ $(function () {
 				}
 			/*************/
 			$("#applyform").submit();
-			/*$.ajax({
-					type : 'POST',
-					data : {
-							"projectname" : projectname,
-							"name" : name,
-							"address" : address,
-							"time" : time,
-							"budget" : budget,
-							"baselist" : baselist,
-							"reason" : reason,
-						},
-					dataType : 'json',
-					url : '',
-					async : false,
-					cache : false,
-					
-					error : function(request) {
-						alert("error");
-						},
-						
-				    success : function(data) {
-						alert("提交成功");
-						
-						}
-				
-				})*/
+			
 			/*************/
 			
 		})
