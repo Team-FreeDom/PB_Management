@@ -104,7 +104,7 @@
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
 										<li><a href="#"><span class="text">我的报修</span></a></li>
-										<li><a href="#"><span class="text">我的基地</span></a></li>
+										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -191,7 +191,8 @@
 							</div>
 							<div class="row padding-style">
 
-								<form action="getRequestBaseInfo.do" method="post" id="myForm" class="form-horizontal" role="form">
+								<form action="getRequestBaseInfo.do" method="post" id="myForm" enctype="multipart/form-data"
+								 class="form-horizontal" role="form">
 									<div class="form-group">
 										<label class="col-md-3 control-label fontDire">基地名称</label>
 										<div class="col-md-6">

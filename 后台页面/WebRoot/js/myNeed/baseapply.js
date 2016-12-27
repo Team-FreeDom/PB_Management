@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',		
-		url : 'BaseApplyAllInfo.do',  //��ȡ�������
+		url : 'BaseApplyAllInfo.do',  
 		async : false,
 		cache : false,
 		error : function(request) {

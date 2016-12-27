@@ -1,14 +1,16 @@
+var obj=[];
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
 			{
-				"aLengthMenu" : [ 2, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
-				"iDisplayLength": 2,				
-				"dom" : 'tipr<"bottom"l>',
+				"bFilter": true,
+				"dom": 'frtip<"bottom"l>',
+				"iDisplayLength": 5,			
 				"ajax" : {
 					"url" : "getBaseCheck.do",
 					"type" : "POST"
@@ -101,8 +103,9 @@ $(document).ready(function() {
 					"orderable" : false, // 禁用排序
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
-					"render":function(data,type, row){
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+data
+					"render":function(data,type,row){					
+						obj.push(row);							
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
 									+ "' id='scanDetail'>查看</button>";
 					}
 
@@ -117,7 +120,7 @@ $(document).ready(function() {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" name="idname" />';
+								+ '" data-id="'+(obj.length)+'" name="idname" />';
 					}
 				} ],
 				"language" : {
@@ -151,6 +154,97 @@ $(document).ready(function() {
 				}
 			
 		});	
+	 
+	//同意申请
+	// //////////状态值1： 2： 3： 4： 。。。。。。。
+	$('#confirmDate').click(function() {
+		
+		                var date=$("#valideDate option:selected").val();					
+						var i=0;
+						var recordstr='(';
+						var infostr="[";
+						var index;
+						$("input[type='checkbox'][name='idname']:checked").each(function() {					
+							index=$(this).data("id");
+							userid =obj[index].userid ;
+							if(i!=0){
+								recordstr=recordstr+","+$(this).val();
+								infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+								
+							}else{
+								recordstr=recordstr+$(this).val();
+								infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+							}					
+											
+								i++;
+							});
+					
+	                    recordstr=recordstr+')';
+	                    infostr=infostr+']';
+	                    
+	                    $.ajax({
+							url : '',
+							type : 'post',
+							dataType : 'json',
+							data : {
+								"resordstr" : recordstr,
+								"infostr" : infostr,
+								"date":date
+							},
+							success : function(msg) {						
+								$("#valideDate").val("10");
+								$("#applyConfirm").modal('hide');
+								Spage.draw(false);
+								}
+							
+						});
+					});
+	
+	//拒绝申请
+////////////状态值1： 2： 3： 4： 。。。。。。。
+$('#certain').click(function() {	
+
+			var i=0;
+			var recordstr='(';
+			var infostr="[";
+			var reason=$("#reason").val();
+			var index;
+			$("input[type='checkbox'][name='idname']:checked").each(function() {					
+				index=$(this).data("id");
+				userid = obj[index].userid;
+				if(i!=0){
+					recordstr=recordstr+","+$(this).val();
+					infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+					
+				}else{
+					recordstr=recordstr+$(this).val();
+					infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+				}					
+								
+					i++;
+				});
+		
+         recordstr=recordstr+')';
+         infostr=infostr+']';                
+         $.ajax({
+				url : '',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					"recordstr" : recordstr,
+					"infostr" : infostr,
+					"reason":reason,
+				},
+				success : function(msg) {						
+					$("#reason").val("");
+					$("#reasonConfirm").modal('hide');
+					Spage.draw(false);
+					}
+				
+			});
+
+     	            	
+});
 	
 });
 
@@ -170,93 +264,9 @@ $(".icon-filter").on("click", function() {
 });
 
 
-//同意申请
-// //////////状态值1： 2： 3： 4： 。。。。。。。
-$('#confirmDate').click(function() {
-	
-					var date=$("#valideDate").val();					
-					var i=0;
-					var recordstr='(';
-					var infostr="[";
-					$("input[type='checkbox'][name='idname']:checked").each(function() {					
-						
-						userid = $(this).closest('tr').find('td:eq(13)').text();
-						if(i!=0){
-							recordstr=recordstr+","+$(this).val();
-							infostr=infostr+',{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-							
-						}else{
-							recordstr=recordstr+$(this).val();
-							infostr=infostr+'{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-						}					
-										
-							i++;
-						});
-				
-                    recordstr=recordstr+')';
-                    infostr=infostr+']';
-                    
-                    $.ajax({
-						url : '',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							"resordstr" : resordstr,
-							"infostr" : info_str,
-							"date":date
-						},
-						success : function(msg) {						
-							$("#valideDate").val("10");
-							$("#applyConfirm").modal('hide');
-							Spage.draw(false);
-							}
-						
-					});
-				});
 
-//拒绝申请
-////////////状态值1： 2： 3： 4： 。。。。。。。
-$('#certain').click(function() {				
-					var i=0;
-					var recordstr='(';
-					var infostr="[";
-					var reason=$("#reason").val();
-					$("input[type='checkbox'][name='idname']:checked").each(function() {					
-						
-						userid = $(this).closest('tr').find('td:eq(13)').text();
-						if(i!=0){
-							recordstr=recordstr+","+$(this).val();
-							infostr=infostr+',{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-							
-						}else{
-							recordstr=recordstr+$(this).val();
-							infostr=infostr+'{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-						}					
-										
-							i++;
-						});
-				
-                 recordstr=recordstr+')';
-                 infostr=infostr+']';                
-                 $.ajax({
-						url : '',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							"resordstr" : resordstr,
-							"infostr" : info_str,
-							"reason":reason,
-						},
-						success : function(msg) {						
-							$("#reason").val("");
-							$("#reasonConfirm").modal('hide');
-							Spage.draw(true);
-							}
-						
-					});
 
-             	            	
-});
+
 
 $(document).on("click", "#close", function() {	
 	$("#reason").val("");
@@ -308,45 +318,37 @@ $(document).on("click", "#confirm", function() {
 
 $(document).on("click", "#scanDetail", function() {	
 	
-	var basename=$(this).closest('tr').find('td:eq(1)').text();
-	var basetype=$(this).closest('tr').find('td:eq(2)').text();
-	var dept=$(this).closest('tr').find('td:eq(3)').text();
-	var landarea=$(this).closest('tr').find('td:eq(4)').text();
-	var buildingarea=$(this).closest('tr').find('td:eq(5)').text();
-	var address=$(this).closest('tr').find('td:eq(6)').text();
-	var username=$(this).closest('tr').find('td:eq(7)').text();	
-	var userphone=$(this).closest('tr').find('td:eq(8)').text();
-	var major=$(this).closest('tr').find('td:eq(9)').text();
-	var undertake=$(this).closest('tr').find('td[type="hidden"]:eq(10)').text();
-	var resource=$(this).closest('tr').find('td:eq(11)').text();
+	var index=$(this).val();
 	
-	$("#basename").val(basename);
-	$("#basetype").val(basetype);
-	$("#dept0").val(dept);
-	$("#landarea").val(landarea);
-	$("#buildingarea").val(buildingarea);
-	$("#undertakeCount").val(undertake);
-	$("#username").val(username);
-	$("#userphone").val(userphone);
-	$("#major_oriented").html(major);
-	$("#linkAddress").html(address);
-	$("#resource").prop("href",resource);
+	$("#basename").val(obj[index].name);
+	$("#basetype").val(obj[index].type);
+	$("#dept0").val(obj[index].applydp);
+	$("#landarea").val(obj[index].landarea);
+	$("#buildingarea").val(obj[index].constructionarea);
+	$("#undertakeCount").val(obj[index].undertake);
+	$("#username").val(obj[index].username);
+	$("#userphone").val(obj[index].phone);
+	$("#major_oriented").html(obj[index].major);
+	$("#linkAddress").html(obj[index].land_address);
+	$("#resource").prop("href",obj[index].material_path);
 	
 	$("#scan").modal('show');
 	
 });
 
 $("#submitS").click(function() {	
-	var dept=$('#deptSh').children('option:selected').val();
-	$('#basecheck').DataTable(
+	var dept=$('#deptSh').children('option:selected').val();	
+	obj=[];	
+	$('#basecheck').DataTable( //getXUBaseCheck.do
 			{
 				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
+				"iDisplayLength": 5,	
 				"bDestroy":true,
-				"iDisplayLength": 5,				
+				"processing":true,
 				"dom" : 'tipr<"bottom"l>',
 				"ajax" : {
 					"url" : "getXUBaseCheck.do",
@@ -442,7 +444,8 @@ $("#submitS").click(function() {
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 					"render":function(data,type, row){
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+ la_id
+						obj.push(row);	
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
 									+ "' id='scanDetail'>查看</button>";
 					}
 
@@ -457,7 +460,7 @@ $("#submitS").click(function() {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" name="idname" />';
+								+ '" data-id="'+(obj.length)+'" name="idname" />';
 					}
 				} ],
 				"language" : {
@@ -473,9 +476,9 @@ $("#submitS").click(function() {
 						"sNext" : " 下一页 ",
 						"sLast" : " 尾页 "
 					}
-				}				
-			});
-	$('.hide_ul').toggle();
+				}			
+			});	
+	$('#hide_ul').toggle(100);
 	
 });
 
