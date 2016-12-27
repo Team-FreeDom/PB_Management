@@ -121,7 +121,7 @@
 										</a></li>
 										<li><a href="#"> <span class="text">我的报修</span>
 										</a></li>
-										<li><a href="#"> <span class="text">我的基地</span>
+										<li><a href="myBase.jsp"> <span class="text">我的基地</span>
 										</a></li>
 									</ul></li>
 
