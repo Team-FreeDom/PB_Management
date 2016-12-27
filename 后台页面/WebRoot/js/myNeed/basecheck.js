@@ -1,82 +1,84 @@
+var obj=[];
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
 			{
-				"aLengthMenu" : [ 2, 10, 20, 30 ], // ¶¯Ì¬Ö¸¶¨·ÖÒ³ºóÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı¡£
-				"lengthChange" : true, // ÊÇ·ñÆôÓÃ¸Ä±äÃ¿Ò³ÏÔÊ¾¶àÉÙÌõÊı¾İµÄ¿Ø¼ş
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // åŠ¨æ€æŒ‡å®šåˆ†é¡µåæ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°ã€‚
+				"lengthChange" : true, // æ˜¯å¦å¯ç”¨æ”¹å˜æ¯é¡µæ˜¾ç¤ºå¤šå°‘æ¡æ•°æ®çš„æ§ä»¶
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
-				"iDisplayLength": 2,				
-				"dom" : 'tipr<"bottom"l>',
+				"bFilter": true,
+				"dom": 'frtip<"bottom"l>',
+				"iDisplayLength": 5,			
 				"ajax" : {
-					"url" : "",
+					"url" : "getBaseCheck.do",
 					"type" : "POST"
 				},
 				"aoColumns" : [ 
 				{
 					"mData" : "id",					
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "2%",
-				}, { // aoColumnsÉèÖÃÁĞÊ±£¬²»¿ÉÒÔÈÎÒâÖ¸¶¨ÁĞ£¬±ØĞëÁĞ³öËùÓĞÁĞ¡£
+				}, { // aoColumnsè®¾ç½®åˆ—æ—¶ï¼Œä¸å¯ä»¥ä»»æ„æŒ‡å®šåˆ—ï¼Œå¿…é¡»åˆ—å‡ºæ‰€æœ‰åˆ—ã€‚
 					"mData" : "name",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
-				}, { // aoColumnsÉèÖÃÁĞÊ±£¬²»¿ÉÒÔÈÎÒâÖ¸¶¨ÁĞ£¬±ØĞëÁĞ³öËùÓĞÁĞ¡£
+				}, { // aoColumnsè®¾ç½®åˆ—æ—¶ï¼Œä¸å¯ä»¥ä»»æ„æŒ‡å®šåˆ—ï¼Œå¿…é¡»åˆ—å‡ºæ‰€æœ‰åˆ—ã€‚
 					"mData" : "type",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				},{
 					"mData" : "applydp",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "landarea",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				}, 
 				
 				{
 					"mData" : "constructionarea",					
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				},
 				{
 					"mData" : "land_address",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"visible":false,
 					"sWidth" : "6%"
 				},
 				{
 					"mData" : "username",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				}, {
 					"mData" : "phone",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "major",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "undertake",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
@@ -84,7 +86,7 @@ $(document).ready(function() {
 				{
 					"mData" : "material_path",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
@@ -92,70 +94,161 @@ $(document).ready(function() {
 				 {
 					"mData" : "userid",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "id",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
-					"render":function(data,type, row){
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+data
-									+ "' id='scanDetail'>²é¿´</button>";
+					"render":function(data,type,row){					
+						obj.push(row);							
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
+									+ "' id='scanDetail'>æŸ¥çœ‹</button>";
 					}
 
 				}
 
 				],
 				"columnDefs" : [ {
-					"orderable" : false, // ½ûÓÃÅÅĞò
-					"targets" : [ 0 ], // Ö¸¶¨µÄÁĞ
+					"orderable" : false, // ç¦ç”¨æ’åº
+					"targets" : [ 0 ], // æŒ‡å®šçš„åˆ—
 					"data" : "id",
 					"render" : function(data, type, row) {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" name="idname" />';
+								+ '" data-id="'+(obj.length)+'" name="idname" />';
 					}
 				} ],
 				"language" : {
-					"lengthMenu" : "Ã¿Ò³ _MENU_ Ìõ¼ÇÂ¼",
-					"zeroRecords" : "Ã»ÓĞÕÒµ½¼ÇÂ¼",
-					"info" : "µÚ _PAGE_ Ò³ ( ×Ü¹² _PAGES_ Ò³ )",
-					"infoEmpty" : "ÎŞ¼ÇÂ¼",
-					"infoFiltered" : "(´Ó _MAX_ Ìõ¼ÇÂ¼¹ıÂË)",
-					"sSearch" : "Ä£ºı²éÑ¯£º",
+					"lengthMenu" : "æ¯é¡µ _MENU_ æ¡è®°å½•",
+					"zeroRecords" : "æ²¡æœ‰æ‰¾åˆ°è®°å½•",
+					"info" : "ç¬¬ _PAGE_ é¡µ ( æ€»å…± _PAGES_ é¡µ )",
+					"infoEmpty" : "æ— è®°å½•",
+					"infoFiltered" : "(ä» _MAX_ æ¡è®°å½•è¿‡æ»¤)",
+					"sSearch" : "æ¨¡ç³ŠæŸ¥è¯¢ï¼š",
 					"oPaginate" : {
-						"sFirst" : "Ê×Ò³",
-						"sPrevious" : " ÉÏÒ»Ò³ ",
-						"sNext" : " ÏÂÒ»Ò³ ",
-						"sLast" : " Î²Ò³ "
+						"sFirst" : "é¦–é¡µ",
+						"sPrevious" : " ä¸Šä¸€é¡µ ",
+						"sNext" : " ä¸‹ä¸€é¡µ ",
+						"sLast" : " å°¾é¡µ "
 					}
 				}
 			});
 	
-	//»ñÈ¡Éê±¨²¿ÃÅ
+	//è·å–ç”³æŠ¥éƒ¨é—¨
 	 $.ajax({
-			url : '',
+			url : 'getApplyDept.do',
 			type : 'post',
 			dataType : 'json',			
-			success : function(data) {						
-          
+			success : function(data) {						         
 				for ( var i=0;i<data.length;i++) {
 					$("#deptS").after(
 							"<option value="+data[i].aid+">"
-									+ data[i].dept + "</option>");
+									+ data[i].applydp + "</option>");
 					
 				}
 				}
 			
 		});	
+	 
+	//åŒæ„ç”³è¯·
+	// //////////çŠ¶æ€å€¼1ï¼š 2ï¼š 3ï¼š 4ï¼š ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚
+	$('#confirmDate').click(function() {
+		
+		                var date=$("#valideDate option:selected").val();					
+						var i=0;
+						var recordstr='(';
+						var infostr="[";
+						var index;
+						$("input[type='checkbox'][name='idname']:checked").each(function() {					
+							index=$(this).data("id");
+							userid =obj[index].userid ;
+							if(i!=0){
+								recordstr=recordstr+","+$(this).val();
+								infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+								
+							}else{
+								recordstr=recordstr+$(this).val();
+								infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+							}					
+											
+								i++;
+							});
+					
+	                    recordstr=recordstr+')';
+	                    infostr=infostr+']';
+	                    
+	                    $.ajax({
+							url : '',
+							type : 'post',
+							dataType : 'json',
+							data : {
+								"resordstr" : recordstr,
+								"infostr" : infostr,
+								"date":date
+							},
+							success : function(msg) {						
+								$("#valideDate").val("10");
+								$("#applyConfirm").modal('hide');
+								Spage.draw(false);
+								}
+							
+						});
+					});
+	
+	//æ‹’ç»ç”³è¯·
+////////////çŠ¶æ€å€¼1ï¼š 2ï¼š 3ï¼š 4ï¼š ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚
+$('#certain').click(function() {	
+
+			var i=0;
+			var recordstr='(';
+			var infostr="[";
+			var reason=$("#reason").val();
+			var index;
+			$("input[type='checkbox'][name='idname']:checked").each(function() {					
+				index=$(this).data("id");
+				userid = obj[index].userid;
+				if(i!=0){
+					recordstr=recordstr+","+$(this).val();
+					infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+					
+				}else{
+					recordstr=recordstr+$(this).val();
+					infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+				}					
+								
+					i++;
+				});
+		
+         recordstr=recordstr+')';
+         infostr=infostr+']';                
+         $.ajax({
+				url : '',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					"recordstr" : recordstr,
+					"infostr" : infostr,
+					"reason":reason,
+				},
+				success : function(msg) {						
+					$("#reason").val("");
+					$("#reasonConfirm").modal('hide');
+					Spage.draw(false);
+					}
+				
+			});
+
+     	            	
+});
 	
 });
 
-////È«Ñ¡·´Ñ¡
+////å…¨é€‰åé€‰
 $("#ck1").on("click",function() {
 	
 			if ($(this).prop("checked") == true) {
@@ -171,93 +264,9 @@ $(".icon-filter").on("click", function() {
 });
 
 
-//Í¬ÒâÉêÇë
-// //////////×´Ì¬Öµ1£º 2£º 3£º 4£º ¡£¡£¡£¡£¡£¡£¡£
-$('#confirmDate').click(function() {
-	
-					var date=$("#valideDate").val();					
-					var i=0;
-					var recordstr='(';
-					var infostr="[";
-					$("input[type='checkbox'][name='idname']:checked").each(function() {					
-						
-						userid = $(this).closest('tr').find('td:eq(13)').text();
-						if(i!=0){
-							recordstr=recordstr+","+$(this).val();
-							infostr=infostr+',{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-							
-						}else{
-							recordstr=recordstr+$(this).val();
-							infostr=infostr+'{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-						}					
-										
-							i++;
-						});
-				
-                    recordstr=recordstr+')';
-                    infostr=infostr+']';
-                    
-                    $.ajax({
-						url : '',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							"resordstr" : resordstr,
-							"infostr" : info_str,
-							"date":date
-						},
-						success : function(msg) {						
-							$("#valideDate").val("10");
-							$("#applyConfirm").modal('hide');
-							Spage.draw(false);
-							}
-						
-					});
-				});
 
-//¾Ü¾øÉêÇë
-////////////×´Ì¬Öµ1£º 2£º 3£º 4£º ¡£¡£¡£¡£¡£¡£¡£
-$('#certain').click(function() {				
-					var i=0;
-					var recordstr='(';
-					var infostr="[";
-					var reason=$("#reason").val();
-					$("input[type='checkbox'][name='idname']:checked").each(function() {					
-						
-						userid = $(this).closest('tr').find('td:eq(13)').text();
-						if(i!=0){
-							recordstr=recordstr+","+$(this).val();
-							infostr=infostr+',{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-							
-						}else{
-							recordstr=recordstr+$(this).val();
-							infostr=infostr+'{userid:"'+userid+'",basename:"'+ $(this).closest('tr').find('td:eq(13)').text()+'"}';
-						}					
-										
-							i++;
-						});
-				
-                 recordstr=recordstr+')';
-                 infostr=infostr+']';                
-                 $.ajax({
-						url : '',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							"resordstr" : resordstr,
-							"infostr" : info_str,
-							"reason":reason,
-						},
-						success : function(msg) {						
-							$("#reason").val("");
-							$("#reasonConfirm").modal('hide');
-							Spage.draw(true);
-							}
-						
-					});
 
-             	            	
-});
+
 
 $(document).on("click", "#close", function() {	
 	$("#reason").val("");
@@ -279,7 +288,7 @@ $(document).on("click", "#refuse", function() {
 	 if(chk_value.length==0)
 	 {
 		 bootbox.alert({
-				message : "ÇëÖÁÉÙÑ¡ÔñÒ»Ïî",
+				message : "è¯·è‡³å°‘é€‰æ‹©ä¸€é¡¹",
 				size : 'small'
 			});
 		 return;
@@ -298,7 +307,7 @@ $(document).on("click", "#confirm", function() {
 	 if(chk_value.length==0)
 	 {
 		 bootbox.alert({
-				message : "ÇëÖÁÉÙÑ¡ÔñÒ»Ïî",
+				message : "è¯·è‡³å°‘é€‰æ‹©ä¸€é¡¹",
 				size : 'small'
 			});
 		 return;
@@ -309,118 +318,107 @@ $(document).on("click", "#confirm", function() {
 
 $(document).on("click", "#scanDetail", function() {	
 	
-	var basename=$(this).closest('tr').find('td:eq(1)').text();
-	var basetype=$(this).closest('tr').find('td:eq(1)').text();
-	var dept=$(this).closest('tr').find('td:eq(3)').text();
-	var landrarea=$(this).closest('tr').find('td:eq(4)').text();
-	var buildingarea=$(this).closest('tr').find('td:eq(5)').text();
-	var undertake=$(this).closest('tr').find('td:eq(10)').text();
-	var username=$(this).closest('tr').find('td:eq(7)').text();
-	var userphone=$(this).closest('tr').find('td:eq(8)').text();
-	var major=$(this).closest('tr').find('td:eq(9)').text();
-	var address=$(this).closest('tr').find('td:eq(8)').text();
-	var resource=$(this).closest('tr').find('td:eq(11)').text();
+	var index=$(this).val();
 	
-	$("#basename").val(basename);
-	$("#basetype").val(basetype);
-	$("#dept0").val(dept);
-	$("#landarea").val(landarea);
-	$("#buildingarea").val(buildingarea);
-	$("#undertakeCount").val(undertake);
-	$("#username").val(username);
-	$("#userphone").val(userphone);
-	$("#major_oriented").val(major);
-	$("#linkAddress").val(address);
-	$("#resource").prop("href",resource);
+	$("#basename").val(obj[index].name);
+	$("#basetype").val(obj[index].type);
+	$("#dept0").val(obj[index].applydp);
+	$("#landarea").val(obj[index].landarea);
+	$("#buildingarea").val(obj[index].constructionarea);
+	$("#undertakeCount").val(obj[index].undertake);
+	$("#username").val(obj[index].username);
+	$("#userphone").val(obj[index].phone);
+	$("#major_oriented").html(obj[index].major);
+	$("#linkAddress").html(obj[index].land_address);
+	$("#resource").prop("href",obj[index].material_path);
 	
 	$("#scan").modal('show');
 	
 });
 
 $("#submitS").click(function() {	
-	
-	var dept=$("deptSh").val();
-	
-	
-	$('#basecheck').DataTable(
+	var dept=$('#deptSh').children('option:selected').val();	
+	obj=[];	
+	$('#basecheck').DataTable( //getXUBaseCheck.do
 			{
-				"aLengthMenu" : [ 5, 10, 20, 30 ], // ¶¯Ì¬Ö¸¶¨·ÖÒ³ºóÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı¡£
-				"lengthChange" : true, // ÊÇ·ñÆôÓÃ¸Ä±äÃ¿Ò³ÏÔÊ¾¶àÉÙÌõÊı¾İµÄ¿Ø¼ş
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // åŠ¨æ€æŒ‡å®šåˆ†é¡µåæ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°ã€‚
+				"lengthChange" : true, // æ˜¯å¦å¯ç”¨æ”¹å˜æ¯é¡µæ˜¾ç¤ºå¤šå°‘æ¡æ•°æ®çš„æ§ä»¶
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
+				"iDisplayLength": 5,	
 				"bDestroy":true,
-				"iDisplayLength": 5,				
+				"processing":true,
 				"dom" : 'tipr<"bottom"l>',
 				"ajax" : {
-					"url" : "",
+					"url" : "getXUBaseCheck.do",
 					"type" : "POST",
 					"data":{"dept":dept}
 				},
 				"aoColumns" : [ 
 				{
 					"mData" : "id",					
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "2%",
-				}, { // aoColumnsÉèÖÃÁĞÊ±£¬²»¿ÉÒÔÈÎÒâÖ¸¶¨ÁĞ£¬±ØĞëÁĞ³öËùÓĞÁĞ¡£
+				}, { // aoColumnsè®¾ç½®åˆ—æ—¶ï¼Œä¸å¯ä»¥ä»»æ„æŒ‡å®šåˆ—ï¼Œå¿…é¡»åˆ—å‡ºæ‰€æœ‰åˆ—ã€‚
 					"mData" : "name",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
-				}, { // aoColumnsÉèÖÃÁĞÊ±£¬²»¿ÉÒÔÈÎÒâÖ¸¶¨ÁĞ£¬±ØĞëÁĞ³öËùÓĞÁĞ¡£
+				}, { // aoColumnsè®¾ç½®åˆ—æ—¶ï¼Œä¸å¯ä»¥ä»»æ„æŒ‡å®šåˆ—ï¼Œå¿…é¡»åˆ—å‡ºæ‰€æœ‰åˆ—ã€‚
 					"mData" : "type",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				},{
 					"mData" : "applydp",
-					"orderable" : true, // ½ûÓÃÅÅĞò
+					"orderable" : true, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "landarea",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				}, 
 				
 				{
 					"mData" : "constructionarea",					
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				},
 				{
 					"mData" : "land_address",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"visible":false,
 					"sWidth" : "6%"
 				},
 				{
 					"mData" : "username",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%"
 				}, {
 					"mData" : "phone",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "major",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "undertake",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
@@ -428,7 +426,7 @@ $("#submitS").click(function() {
 				{
 					"mData" : "material_path",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
@@ -436,49 +434,51 @@ $("#submitS").click(function() {
 				 {
 					"mData" : "userid",
 					"visible":false,
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 
 				}, {
 					"mData" : "id",
-					"orderable" : false, // ½ûÓÃÅÅĞò
+					"orderable" : false, // ç¦ç”¨æ’åº
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 					"render":function(data,type, row){
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+ la_id
-									+ "' id='scanDetail'>²é¿´</button>";
+						obj.push(row);	
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
+									+ "' id='scanDetail'>æŸ¥çœ‹</button>";
 					}
 
 				}
 
 				],
 				"columnDefs" : [ {
-					"orderable" : false, // ½ûÓÃÅÅĞò
-					"targets" : [ 0 ], // Ö¸¶¨µÄÁĞ
+					"orderable" : false, // ç¦ç”¨æ’åº
+					"targets" : [ 0 ], // æŒ‡å®šçš„åˆ—
 					"data" : "id",
 					"render" : function(data, type, row) {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" name="idname" />';
+								+ '" data-id="'+(obj.length)+'" name="idname" />';
 					}
 				} ],
 				"language" : {
-					"lengthMenu" : "Ã¿Ò³ _MENU_ Ìõ¼ÇÂ¼",
-					"zeroRecords" : "Ã»ÓĞÕÒµ½¼ÇÂ¼",
-					"info" : "µÚ _PAGE_ Ò³ ( ×Ü¹² _PAGES_ Ò³ )",
-					"infoEmpty" : "ÎŞ¼ÇÂ¼",
-					"infoFiltered" : "(´Ó _MAX_ Ìõ¼ÇÂ¼¹ıÂË)",
-					"sSearch" : "Ä£ºı²éÑ¯£º",
+					"lengthMenu" : "æ¯é¡µ _MENU_ æ¡è®°å½•",
+					"zeroRecords" : "æ²¡æœ‰æ‰¾åˆ°è®°å½•",
+					"info" : "ç¬¬ _PAGE_ é¡µ ( æ€»å…± _PAGES_ é¡µ )",
+					"infoEmpty" : "æ— è®°å½•",
+					"infoFiltered" : "(ä» _MAX_ æ¡è®°å½•è¿‡æ»¤)",
+					"sSearch" : "æ¨¡ç³ŠæŸ¥è¯¢ï¼š",
 					"oPaginate" : {
-						"sFirst" : "Ê×Ò³",
-						"sPrevious" : " ÉÏÒ»Ò³ ",
-						"sNext" : " ÏÂÒ»Ò³ ",
-						"sLast" : " Î²Ò³ "
+						"sFirst" : "é¦–é¡µ",
+						"sPrevious" : " ä¸Šä¸€é¡µ ",
+						"sNext" : " ä¸‹ä¸€é¡µ ",
+						"sLast" : " å°¾é¡µ "
 					}
-				}
-			});
+				}			
+			});	
+	$('#hide_ul').toggle(100);
 	
 });
 

@@ -150,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                 </a>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="myBase.jsp">
                                                                                                     <span class="text">我的基地</span>
                                                                                                 </a>
                                                                                             </li>

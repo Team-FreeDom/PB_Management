@@ -119,7 +119,7 @@
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a><span class="text">我的实习</span></a></li>
 										<li><a><span class="text">我的报修</span></a></li>
-										<li><a><span class="text">我的基地</span></a></li>
+										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
