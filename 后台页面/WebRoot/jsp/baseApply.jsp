@@ -197,7 +197,8 @@
 										<label class="col-md-3 control-label fontDire">基地名称</label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="basename" name="name"
-												placeholder="例:浏阳基地">
+												placeholder="例:浏阳基地"/>
+											<span id="display" style="color:#f00;"></span>
 										</div>
 									</div>
 

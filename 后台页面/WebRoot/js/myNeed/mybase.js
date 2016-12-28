@@ -108,6 +108,15 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					},{
+						"mData" : "reason",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%",
+
+					},
+					
+					{
 						"mData" : "status",
 						"visible":true,
 						"orderable" : false, // 禁用排序
@@ -252,6 +261,13 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					},{
+						"mData" : "reason",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%",
+
+					},{
 						"mData" : "status",
 						"visible":true,
 						"orderable" : true, // 禁用排序
@@ -308,14 +324,17 @@ $(document).ready(function() {
 					$("#undertakeCount").val(object[index].undertake);
 					$("#username").val(object[index].username);
 					$("#userphone").val(object[index].phone);
-					$("#major_oriented").val(object[index].major);
-					$("#linkAddress").val(object[index].land_address);
+					$("#major_oriented").html(object[index].major);
+					$("#linkAddress").html(object[index].land_address);
 					$("#resource").prop("href",object[index].material_path);
 					
 					if(statusid==6){
 						$("#setdate").val(object[index].time);
 						$("#validdate").val(object[index].limitTime);
 						$("#hidecol").prop("hidden",false);
+					}else if(statusid==12){
+						$("#reason").html(object[index].reason);
+						$("#hideReason").prop("hidden",false);
 					}
 					$("#fontTable").modal('show');
 					
@@ -463,6 +482,13 @@ $(document).ready(function() {
 
 									},{
 										"mData" : "limitTime",
+										"visible":false,
+										"orderable" : false, // 禁用排序
+										"sDefaultContent" : "",
+										"sWidth" : "8%",
+
+									},{
+										"mData" : "reason",
 										"visible":false,
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
