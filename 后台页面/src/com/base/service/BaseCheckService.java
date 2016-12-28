@@ -29,7 +29,7 @@ public interface BaseCheckService {
      */
     public List<BaseCheck> getDept();
     
-    public void refuseapply(String str);
+    public void refuseapply(String str,String infoStr);
     
     public void agreeApply(String str,int date);
 }

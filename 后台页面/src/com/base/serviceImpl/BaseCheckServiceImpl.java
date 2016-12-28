@@ -9,6 +9,7 @@ import com.base.dao.BaseCheckDao;
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
 import com.base.service.BaseCheckService;
+import com.base.utils.MessageUtils;
 
 @Service("BaseCheckService")
 public class BaseCheckServiceImpl implements BaseCheckService {
@@ -59,8 +60,16 @@ public class BaseCheckServiceImpl implements BaseCheckService {
     }
 
     @Override
-    public void refuseapply(String str) {
-	basecheckdao.refuseapply(str);
+    public void refuseapply(String str,String infoStr) {
+	
+	/*//获得插入的消息语句	   
+	String insertStr=MessageUtils.getInsertStr(infoStr,8);		
+	System.out.println(insertStr);
+	*/
+	//申请失败（str:字符串id；12：失败状态值）
+	basecheckdao.refuseapply(str,12);
+	/*//向消息表中插入信息
+	basecheckdao.insertMessage(insertStr);*/
 	
     }
 

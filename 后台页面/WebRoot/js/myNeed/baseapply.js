@@ -2,6 +2,7 @@ var deptObj1;
 var deptObj2;
 var flag1=true;
 var flag2=true;
+var tag=true;
 
 $(document).ready(function() {
 
@@ -67,6 +68,38 @@ $(document).on("change", "#deptRadio", function() {
 	});     
         });
 
+$(document).on("blur", "#basename", function() {
+	var value=$(this).val();
+	
+	if(value!=""){
+		
+		 $.ajax({
+				type : 'POST',
+				dataType : 'json',
+				data:{
+					"name":value
+				},
+				url : '', 
+				async : false,
+				cache : false,
+				error : function(request) {
+					alert("error");
+				},
+				success : function(data) {			
+					if(data.flag==true){
+						$("#display").val("");
+					}else{
+						$("#display").val("该基地名称已存在，请重新输入");
+						$("#basename")[0].focus();
+						tag=false;
+					}
+				}
+
+			}); 
+	}
+	
+});
+
 $(document).on("change", "#deptSelectOne", function() {	
 	var id= this.value;	
 	$(".majorhide").html("");
@@ -106,14 +139,6 @@ $(document).on("change", "#deptSelectOne", function() {
 	});
 	
 });
-
-/*$(document).on("click", "#deptty", function() {		
-	$(this).prop("size",10);
-});
-
-$(document).on("click", ".dee", function() {		
-	$(this).removeAttribute("size"); 
-});*/
 
 
 $(document).on("click", ".majorcheck", function() {
@@ -184,6 +209,13 @@ $(document).on("click", "#submitForm", function() {
 	var personName=$("#personName").val();
 	var personTel=$("#personTel").val();
 	
+	if(!tag){
+		 bootbox.alert({
+				message : "该基地名称已存在，请重新输入",
+				size : 'small'
+			});
+		 return;
+	}	
 	if(basename==""){
 		 bootbox.alert({
 				message : "请填写基地名称",
@@ -221,7 +253,7 @@ $(document).on("click", "#submitForm", function() {
 	}
 	if(!flag1){
 		 bootbox.alert({
-	            message: "上传资料仅限于rar压缩包格式ʽ",
+	            message: "上传资料仅限于rar压缩包格式",
 	            size: 'small'
 	        });
 		 return;

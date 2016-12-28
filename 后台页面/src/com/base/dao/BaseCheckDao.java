@@ -24,7 +24,9 @@ public interface BaseCheckDao {
      */
     public List<BaseCheck> getDept();
     
-    public void refuseapply(String str);
+    public void refuseapply(String str,int status);
     
     public void agreeApply(String str,int date);
+    
+    public void insertMessage(String sql);
 }

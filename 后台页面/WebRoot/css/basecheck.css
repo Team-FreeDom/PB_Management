@@ -4,3 +4,7 @@
 #major_oriented{
 	height:100px;
 }
+
+#add table tr td input{
+	width:100px !important;
+}
