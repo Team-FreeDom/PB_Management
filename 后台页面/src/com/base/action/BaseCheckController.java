@@ -45,23 +45,17 @@ public class BaseCheckController {
     @RequestMapping("/getBaseCheck.do")
     public String getBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("进来没哟普");
 	// 获取申请部门id
 	int applydpid = -1;
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
-	System.out.println(size + "1");
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
-
 	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
-	System.out.println(order + "2");
-	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
-	System.out.println(orderDir + "3"); // desc
+	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-	System.out.println(pageindex + "4");
 	BaseCheckList str = null;
 	str = basecheckservice.getBaseCheck(applydpid, pageindex, size, order,
 		orderDir);
@@ -144,18 +138,14 @@ public class BaseCheckController {
     @RequestMapping("/getXUBaseCheck.do")
     public String getXUBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("这是刷选模块");
 	// 获取申请部门id
 	String Str=request.getParameter("dept");
-	System.out.println(Str+"这是什么");
 	Integer applydpid;
 	if(Str.equals("")){
 	    applydpid=-1;
 	}else{
-	    applydpid= Integer.parseInt(Str);
-	     System.out.println(applydpid+"这是idname");	   
+	    applydpid= Integer.parseInt(Str);   
 	}
-	System.out.println(applydpid + "这是哪个部门id");
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -187,10 +177,13 @@ public class BaseCheckController {
     @RequestMapping("/BaserefuseApply.do")
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
+	//包装单选框的id信息
 	String recordstr = request.getParameter("recordstr");
+	//获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr+"是不是信息");
-	basecheckservice.refuseapply(recordstr);
+	//获取拒绝理由
+	String reason=request.getParameter("reason");
+	basecheckservice.refuseapply(recordstr,infostr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理失败");
 	response.setContentType("text/html;charset=UTF-8");
@@ -202,18 +195,18 @@ public class BaseCheckController {
 	}
 	return null;
     }
- // 同意申请
+ // 同意申请(并且发送消息给用户)
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	System.out.println("哈哈哈哈哈哈");
+	//获取单选id
 	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr+"1111");
+	//获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr+"22222");
+	//获取有效期
 	Integer date=Integer.parseInt(request.getParameter("date"));
-	System.out.println(date+"这是什么日期");
-	basecheckservice.agreeApply(recordstr,date);
+	basecheckservice.agreeApply(recordstr,infostr,date);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");

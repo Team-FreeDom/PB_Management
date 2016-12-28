@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
@@ -107,9 +109,13 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	return list;
     }
-    //拒绝 
+    /**
+     * 
+     * @param str 封装的id表示哪几条数据
+     * @param status 变为申请失败状态（12）
+     */
     @Override
-    public void refuseapply(String str) {
+    public void refuseapply(String str,int status) {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -117,8 +123,9 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.refuse_baseapply(?)}");
+		    .prepareCall("{call baseweb.transstate_baseapply(?,?)}");
 	    sp.setString(1, str);
+	    sp.setInt(2, status);
 	    sp.execute();    
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -128,7 +135,11 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	
     }
-
+    /**
+     * 
+     * @param str 封装的id表示哪几条数据
+     * @param date 基地有效期
+     */
     @Override
     public void agreeApply(String str,int date) {
 	Connection conn = null;
@@ -147,7 +158,25 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
-	}
-	
+	}	
     }
+    /**
+     * 发送消息
+     * @param sql 插入封装好的sql语句
+     */
+    @Override
+    public void insertMessage(String sql) {
+   	System.out.println("insert---start");
+
+   	Session session = sessionFactory.openSession();
+
+   	try {
+   	    SQLQuery sqlQuery = session.createSQLQuery(sql);
+   	    sqlQuery.executeUpdate();
+   	} finally {
+   	    session.close();
+   	}
+   	System.out.println("insert---end");
+
+       }
 }

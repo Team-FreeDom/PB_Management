@@ -9,6 +9,7 @@ import com.base.dao.BaseCheckDao;
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
 import com.base.service.BaseCheckService;
+import com.base.utils.MessageUtils;
 
 @Service("BaseCheckService")
 public class BaseCheckServiceImpl implements BaseCheckService {
@@ -57,17 +58,38 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	List<BaseCheck> list = basecheckdao.getDept();
 	return list;
     }
-
+    /**
+     * 拒绝申请
+     * @param str 封装的id表示哪几条数据
+     * @param infoStr 消息数据
+     */
     @Override
-    public void refuseapply(String str) {
-	basecheckdao.refuseapply(str);
-	
+    public void refuseapply(String str, String infoStr) {
+
+	// 获得插入的消息语句
+	String insertStr = MessageUtils.getinfoMs(infoStr, 8);
+	System.out.println(insertStr + "到底是什么信息");
+
+	// 申请失败（str:字符串id；12：失败状态值）
+	basecheckdao.refuseapply(str, 12);
+	// 向消息表中插入信息
+	basecheckdao.insertMessage(insertStr);
+
     }
-
+    /**
+     * 同意申请
+     * @param str 封装的id表示哪几条数据
+     * @param infoStr 消息数据
+     * @param date 有效期
+     */
     @Override
-    public void agreeApply(String str,int date) {
-	basecheckdao.agreeApply(str,date);
-	
+    public void agreeApply(String str,String infoStr, int date) {
+	basecheckdao.agreeApply(str, date);
+	// 获得插入的消息语句
+	String insertStr = MessageUtils.getinfoMs(infoStr, 9);
+	// 向消息表中插入信息
+	basecheckdao.insertMessage(insertStr);
+
     }
 
 }
