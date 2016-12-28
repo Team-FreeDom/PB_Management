@@ -56,7 +56,7 @@ $(document).ready(function() {
 						},  
 					"aoColumns" : [                                        
 									{
-										"mData" : "number",
+										"mData" : "id",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 										
@@ -114,7 +114,7 @@ $(document).ready(function() {
 							[{
 								"orderable" : false, // 禁用排序
 								"targets" : [0], // 指定的列
-								"data" : "number",
+								"data" : "id",
 								"render" : function(data, type, row) {
 									 data=row.id;
 									return '<input type="checkbox" value="'+ data + '" name="idname" class="ck"  />';
@@ -182,6 +182,7 @@ $(document).ready(function() {
 					else{
 							bootbox.confirm({
 							message: "是否确认删除",
+							size: 'small',
 							buttons: {
 			
 								confirm: {
@@ -195,20 +196,36 @@ $(document).ready(function() {
 							},
 							callback: function (result) {
 								if(result){
-									$.ajax({
-										url: 'deInfo.do',
-										type: 'post',
-										data: $("#formApplyInfo").serializeArray(),//修改删除操作
-										success: function(msg) {
-											 bootbox.alert({
-											  message: msg,
-											  size: 'small'
-										  });
-											applytable.draw(false);
-										  $("#ck2").prop("checked", false);
-										  $("#ck1").prop("checked", false);
-										}
-									});
+									
+									var deletstr = '(';//删除记录的格式(1,2,3,4,5)
+									var keyid;
+									$("input[type='checkbox'][name='idname']:checked").each(function() {
+															keyid = $(this).data("id");
+															if (i != 0) {
+																deletstr = deletstr+ ','+ $(this).val();
+															}
+															else{
+																deletstr = deletstr+ $(this).val();
+																}
+															i++;
+														});
+										deletstr = deletstr + ')';
+										$.ajax({
+											url : '',
+											type : 'post',
+											dataType : 'json',
+											data : {
+												"deletstr" : deletstr,
+											},
+											success : function(msg) {
+												bootbox.alert({
+													message : msg.str,
+													size : 'small'
+												});
+												applytable.draw(false);
+											}
+										});//end
+
 								}
 							}
 						});
@@ -323,5 +340,52 @@ $(document).ready(function() {
 								
 								
 								})
+/*$(document).on("click", "#checkdetale", function() {	
+	
+	var index=$(this).val();
+	
+	$("#basename").val(obj[index].name);
+	$("#basetype").val(obj[index].type);
+	$("#dept0").val(obj[index].applydp);
+	$("#landarea").val(obj[index].landarea);
+	$("#buildingarea").val(obj[index].constructionarea);
+	$("#undertakeCount").val(obj[index].undertake);
+	$("#username").val(obj[index].username);
+	$("#userphone").val(obj[index].phone);
+	$("#major_oriented").html(obj[index].major);
+	$("#linkAddress").html(obj[index].land_address);
+	$("#resource").prop("href",obj[index].material_path);
+	
+	$("#edit").modal('show');
+	
+});*/
+								
+$('.file').change(function() {    
+    var filepath = $(this).val();
+    var file_size = this.files[0].size;
+    var size = file_size / 1024;
+    var extStart = filepath.lastIndexOf(".");
+    var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+    if (ext != ".RAR" && ext != ".Z") {
+        bootbox.alert({
+            message: "上传资料仅限于rar压缩包格式ʽ",
+            size: 'small'
+        });
+        flag1=false;
+        return false;
+    }
+    if (size > 1024 * 10) {
+        bootbox.alert({
+            message: "上传资料大小不能大于10M",
+            size: 'small'
+        });
+        flag2=false;
+        return false;
+    }   
+    flag1=true;
+    flag2=true;
+    return false;
+});
+
 					 					
 });

@@ -1,6 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
-
+.inputmargin{
+	margin-top:10px;}
 .nav-tabs li{
 		margin-left:30px;}
 .nav-tabs li a{
