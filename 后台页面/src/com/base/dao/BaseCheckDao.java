@@ -23,4 +23,8 @@ public interface BaseCheckDao {
      * @return 获取部门集合（部门id和具体部门）
      */
     public List<BaseCheck> getDept();
+    
+    public void refuseapply(String str);
+    
+    public void agreeApply(String str,int date);
 }

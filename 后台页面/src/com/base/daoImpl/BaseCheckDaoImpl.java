@@ -46,7 +46,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    sp.execute();
 	    recordsTotal = sp.getInt(6);
 	    rs = sp.getResultSet();
-	    System.out.println(recordsTotal+"数据库");
 	    while (rs.next()) {
 		BaseCheck ch = new BaseCheck();
 		ch.setId(rs.getInt("id"));
@@ -108,5 +107,47 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	return list;
     }
+    //拒绝 
+    @Override
+    public void refuseapply(String str) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.refuse_baseapply(?)}");
+	    sp.setString(1, str);
+	    sp.execute();    
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	
+    }
 
+    @Override
+    public void agreeApply(String str,int date) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.agree_baseapply(?,?)}");
+	    sp.setString(1, str);
+	    sp.setInt(2, date);
+	    sp.execute();    
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	
+    }
 }

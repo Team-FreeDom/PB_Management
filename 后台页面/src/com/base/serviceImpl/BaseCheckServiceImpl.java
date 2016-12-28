@@ -58,4 +58,16 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	return list;
     }
 
+    @Override
+    public void refuseapply(String str) {
+	basecheckdao.refuseapply(str);
+	
+    }
+
+    @Override
+    public void agreeApply(String str,int date) {
+	basecheckdao.agreeApply(str,date);
+	
+    }
+
 }
