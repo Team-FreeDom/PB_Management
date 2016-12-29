@@ -2,7 +2,7 @@
 <html lang="zh-cn">
   <head>
     <meta charset="UTF-8">
-    <title>土地租赁维护</title>
+    <title>实习基地维护</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="renderer" content="webkit">
@@ -43,7 +43,7 @@
               <ul class="notifications" avalonctrl="subNotificationsController">
                   <li class="hidden-sm hidden-xs">
                       <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                          <i class="icon-envelope"></i>
+                          <i class="icon-envelope"><span class="badge dw-position">4</span></i>
                               <!--ms-if-->
                       </a>
                       <ul class="dropdown-menu">
@@ -175,12 +175,12 @@
 					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a href="index.html">位置</a></li>
-								<li><a href="index.html">土地租赁维护</a></li>
+                            	<li><a>位置</a></li>
+								<li><a href="index.html">实习基地维护</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
@@ -195,9 +195,9 @@
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
                                             <td>
-                                            <button type="button" class="btn btn-info button_style" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+                                            <button type="button" class="btn btn-info button_style" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button>
                                             </td>
-                                            <td colspan="6" >
+                                            <td colspan="7" >
                                                 <ul class="dropdown_show">
                                                 	<li><span style="color:#24354a" class="icon-filter" onClick="showsubmenu()">筛选</span>
                                                     	<ul id="hide_ul" style="display:none;">
@@ -256,6 +256,7 @@
                                              <td colspan="2">
                                            	   <button type="button" class="btn btn-danger">删除</button>
                                              	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_information">批量增加</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_information">导出</button>
                                              </td>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="add_information" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -263,12 +264,11 @@
                                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
                                                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
+                                                        <h4 class="modal-title" id="myModalLabel">增加</h4>
                                                       </div>
                                                       <div class="modal-body">
                                                         <p>请先点击下载好excel模板进行基地数据的填写</p>
-                                                        
-                                                      </div>
+                                                      </div><br>
                                                       <div class="modal-footer">
                                                                 <div style="float:right;">
                                                                 
@@ -292,11 +292,9 @@
                                             <th>基地类型</th>
                                             <th>申报部门</th>
                                             <th>一次性可承担人数</th>
-                                            <th>申请人</th>
-                                            <th>申请人所属学院</th>
-                                            <th>已租用次数</th>
-                                            <th>种植内容</th>
-                                            <th>申请结果</th>
+                                            <th>土地面积/亩</th>
+                                            <th>建筑面积/m²</th>
+                                            <th>星级</th>
                                             <th>修改</th>
                                         </tr>
                                     </thead>
@@ -304,157 +302,171 @@
                                         <tr>
                                             <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
                                             <td>1</td>
-                                            <td>2014</td>
-                                            <td>2015</td>
-                                            <td>耕园科教综合基地</td>
-                                            <td>#21</td>
-                                            <td>张三</td>
+                                            <td>耘园气象站</td>
+                                            <td>校内基地</td>
                                             <td>信息科学技术学院</td>
-                                            <td>0</td>
-                                            <td>水稻</td>
-                                            <td>申请成功</td>
-                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                            <td>30</td>
+                                            <td>1.5</td>
+                                            <td>1000</td>
+                                            <td><span class="icon-star star-color"></span><span class="icon-star star-color"></span><span class="icon-star-empty star-color"></span></td>
+                                            <td><span class="icon-edit edit-color" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
                                             <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
                                             <td>2</td>
-                                            <td>2013</td>
-                                            <td>2015</td>
-                                            <td>西南角农学基地</td>
-                                            <td>#22</td>
-                                            <td>李四</td>
-                                            <td>资源环境保护学院</td>
-                                            <td>1</td>
-                                            <td>大豆</td>
-                                            <td>申请失败</td>
-                                            
-                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal2"></span></td>
+                                            <td>耘园气象站</td>
+                                            <td>校内基地</td>
+                                            <td>信息科学技术学院</td>
+                                            <td>30</td>
+                                            <td>1.5</td>
+                                            <td>1000</td>
+                                            <td><span class="icon-star star-color"></span><span class="icon-star star-color"></span><span class="icon-star-empty star-color"></span></td>
+                                            <td><span class="icon-edit edit-color" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
                                             <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
                                             <td>1</td>
-                                            <td>2014</td>
-                                            <td>2015</td>
-                                            <td>耕园科教综合基地</td>
-                                            <td>#21</td>
-                                            <td>张三</td>
+                                            <td>耘园气象站</td>
+                                            <td>校内基地</td>
                                             <td>信息科学技术学院</td>
-                                            <td>0</td>
-                                            <td>水稻</td>
-                                            <td>申请成功</td>
-                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                            <td>30</td>
+                                            <td>1.5</td>
+                                            <td>1000</td>
+                                            <td><span class="icon-star star-color"></span><span class="icon-star star-color"></span><span class="icon-star star-color"></span></td>
+                                            <td><span class="icon-edit edit-color" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
                                             <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
                                             <td>1</td>
-                                            <td>2014</td>
-                                            <td>2015</td>
-                                            <td>耕园科教综合基地</td>
-                                            <td>#21</td>
-                                            <td>张三</td>
+                                            <td>耘园气象站</td>
+                                            <td>校内基地</td>
                                             <td>信息科学技术学院</td>
-                                            <td>0</td>
-                                            <td>水稻</td>
-                                            <td>申请成功</td>
-                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                            <td>30</td>
+                                            <td>1.5</td>
+                                            <td>1000</td>
+                                            <td><span class="icon-star star-color"></span><span class="icon-star star-color"></span><span class="icon-star-empty star-color"></span></td>
+                                            <td><span class="icon-edit edit-color" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                         <tr>
                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"></label></td>
                                             <td>1</td>
-                                            <td>2014</td>
-                                            <td>2015</td>
-                                            <td>耕园科教综合基地</td>
-                                            <td>#21</td>
-                                            <td>张三</td>
+                                            <td>耘园气象站</td>
+                                            <td>校内基地</td>
                                             <td>信息科学技术学院</td>
-                                            <td>0</td>
-                                            <td>水稻</td>
-                                            <td>申请成功</td>
-                                            <td><span class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#myModal3"></span></td>
+                                            <td>30</td>
+                                            <td>1.5</td>
+                                            <td>1000</td>
+                                            <td><span class="icon-star star-color"></span><span class="icon-star star-color"></span><span class="icon-star-empty star-color"></span></td>
+                                            <td><span class="icon-edit edit-color" data-toggle="modal" data-target="#myModal3"></span></td>
                                         </tr>
                                     </tbody>
                                   </table>
 							
 						</div>
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                    <div class="modal-content" style="border:#3071a9 8px solid">
-                                      <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
-                                      </div>
-                                      <div class="modal-body table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <td>基地名 ： </td>
-                                                <td>
-                                                <select>
-                                                  <option>全部</option>
-                                                  <option>耕园科教综合基地</option>
-                                                  <option>紫东路园林园艺基地</option>
-                                                </select>
-                                                </td>
-                                                <td>土地编号 ： </td>
-                                                <td><input type="text" value="王国忠"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>租赁人 ： </td>
-                                                <td><input type="text" value="王忠国"></td>
-                                                <td>土地名称 ： </td>
-                                                <td><input type="text" value="耕园气象站" disabled></td>
-                                            </tr>
-                                            
-                                            
-                                            <tr>
-                                                <td>租赁人所属学院 ： </td>
-                                                <td>
-                                                <select>
-                                                  <option>农学院</option>
-                                                  <option>信科院</option>
-                                                  <option>农学院</option>
-                                                </select>
-                                                </td>
-                                                <td>计划终止内容 ： </td>
-                                                <td><input type="text" value="玉米"></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>申报部门 ： </td>
-                                                <td><input type="text" value="农学院" disabled></td>
-                                                <td>适宜从事内容 ： </td>
-                                                <td><input type="text" value="玉米" disabled></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>土地面积 ： </td>
-                                                <td><input type="text" value="12平方米" disabled></td>
-                                                <td>建筑面积 ： </td>
-                                                <td><input type="text" value="10平方米" disabled></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>可承担人数 ： </td>
-                                                <td><input type="text" value="70人" disabled></td>
-                                                <td>已租用次数 ： </td>
-                                                <td><input type="text" value="2" disabled></td>
-                                            </tr>
-                                            <tr>
-                                            	<td>使用年限 :</td>
-                                                <td><input type="text" value=""></td>
-                                                <td>-----------</td>
-                                                <td><input type="text" value=""></td>
-                                            </tr>
-                                        </table>
-                                      </div>
-                                      <div class="modal-footer table-responsive">
-                                        <center>
-                                        <button type="button" class="btn btn-primary">确定修改</button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        </center>
-                                      </div>
+                        
+						<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content" style="border:#3071a9 8px solid">
+                                  <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
+                                  </div>
+                                  <div class="modal-body table-responsive">
+                                    <div class="row">
+                                    	<div class="col-md-12">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>基地名称 ：</td>
+                                                    <td><input type="text" value="基地的名称"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>申报部门 ： </td>
+                                                    <td><input type="text" value="农学院"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>基地类型 ： </td>
+                                                    <td><input type="text" value="校内基地"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>一次性可承担人数 ： </td>
+                                                   <td><input type="text" value="70人"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>建筑面积 ： </td>
+                                                   <td><input type="text" value="10平方米"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>土地面积 ： </td>
+                                                    <td><input type="text" value="#001"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>申请结果 :</td>
+                                                    <td><select>
+                                                            <option>申请成功</option>
+                                                            <option>申请失败</option>
+                                                        </select>
+                                                   </td>
+                                                </tr>
+                                            </table>
+                                    	</div>
                                     </div>
                                   </div>
-                      </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            
+                            <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content" style="border:#3071a9 8px solid">
+                                  <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title text-center" id="myModalLabel">增加</h4>
+                                  </div>
+                                  <div class="modal-body table-responsive">
+                                    <div class="row">
+                                    	<div class="col-md-12">
+                                            <table class="table">
+                                                <tr>
+                                                    <td>基地名称 ：</td>
+                                                    <td><input type="text" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>申报部门 ： </td>
+                                                    <td><input type="text" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>基地类型 ： </td>
+                                                    <td><input type="text" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>一次性可承担人数 ： </td>
+                                                   <td><input type="text" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>建筑面积 ： </td>
+                                                   <td><input type="text" value=""></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>土地面积 ： </td>
+                                                    <td><input type="text" value="#001"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>申请结果 :</td>
+                                                    <td><select>
+                                                            <option>申请成功</option>
+                                                            <option>申请失败</option>
+                                                        </select>
+                                                   </td>
+                                                </tr>
+                                            </table>
+                                    	</div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
 			  </div>
 				</div><!-- End Sidebar-->                 
                 
@@ -473,45 +485,8 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/main.js"></script>
-    <script>
-    	allCkBox2(); 
-		function allCkBox2(id){
-        var tableBox = document.getElementById(id||"base_maintain"),
-             ck = tableBox.getElementsByClassName("ck"),
-             ckAll = tableBox.getElementsByClassName("ck-all")[0],
-             ckRe = tableBox.getElementsByClassName("ck-re")[0];
-             ckAll.onchange = function(){
-                                    allCk(this.checked);
-                                };
-              ckRe.onchange = function(){
-                                    reCk();
-                                };
-        function allCk(bool){
-                            for(var i =0; i<ck.length;i++){
-                                   ck[i].checked = bool;
-                                    }
-                             }
-                        
-         function reCk(){
-                         for(var i =0; i<ck.length;i++){
-                                ck[i].checked ? ck[i].checked = false : ck[i].checked = true;
-                                    }
-                                }
-                            }
-							
-							
-		$("#file-0").fileinput({
-	        'allowedFileExtensions' : ['jpg', 'png','gif'],
-	    });
-		 $(document).ready(function() {
-	        $("#test-upload").fileinput({
-	            'showPreview' : false,
-	            'allowedFileExtensions' : ['jpg', 'png','gif'],
-	            'elErrorContainer': '#errorBlock'
-	        });
-	        
-	    });		
-    </script>
+    <script src="../js/base_maintain.js"></script>
+    <script src="../js/kg.js"></script>
+
   </body>
 </html>
