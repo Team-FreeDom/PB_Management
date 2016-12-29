@@ -22,7 +22,11 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
       
     <![endif]-->
-    <style></style>
+    <style>
+    	#laydate_ys{
+			width:150px;
+			}
+    </style>
   </head>
   <body>
     <div class="navbar" role="navigation">
@@ -202,6 +206,7 @@
 						</div>
 						<div class="tab-content">
                               <div role="tabpanel" class="tab-pane active col-md-12" id="home">
+                              <form action="" method="post" id="ApproveingformInfo">
                                 <table id="Approveing" class="hover" cellspacing="0" width="100%">
                                     <thead>
                                         <tr bgcolor="#ECF1F5">
@@ -215,27 +220,27 @@
                                                             	<tr>
                                                                 	<td colspan="2">
                                                                     基地名称：
-                                                                    <select  name="" id="basenameid">
-                                                                      <option value="">显示全部</option>
-                                                                      <option value="">耘园科教综合基地</option>
-                                                                      <option value="">西南角农学基地</option>	
+                                                                    <select  name="" id="searchbase">
+                                                                      <option value="1" id="searchbaseid">请选择</option>
+                                                                      <option value="2">1</option>
+                                                                      <option value="3">2</option>	
                                                                     </select>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                 	<td>
                                                                     	申报人:
-                                                                        <input name="" id="nameid">
+                                                                        <input name="" id="searchname">
                                                                     </td>
                                                                     <td>
                                                                     申报时间：
-                                                                    <input class="laydate-icon" id="demo" id="timeid">
+                                                                    <input class="laydate-icon" id="demo">
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                 	<td colspan="2">
                                                                     	<button type="reset" class="btn btn-primary" >重置</button>
-                                    									<button onClick="hidesubmenu()" type="button" class="btn btn-primary">完成</button>
+                                    									<button type="button" id="finish" class="btn btn-primary">完成</button>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -245,7 +250,7 @@
                                                     </li>
                                                 </ul>
                                             </td>
-                                            <td colspan="2">
+                                            <td colspan="5">
                                             	<button type="button" class="botton btn btn-primary btn-sm" id="agree">同意申请</button>
                                                 <button type="button" class="botton btn btn-danger btn-sm" id="refuse">拒绝申请</button>
                                             </td>
@@ -258,30 +263,13 @@
                                             <th>申报时间</th>
                                             <th>预算金额</th>
                                             <th>申请状态</th>
+                                            <th hidden>具体地址</th>
+                                            <th hidden>原因说明</th>
+                                            <th hidden>材料地址</th>
                                             <th>操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
-                                            <td>耘园基地维修</td>
-                                            <td>浏阳基地</td>
-                                            <td>张三</td>
-                                            <td>2016.12.12</td>
-                                            <td>30000</td>
-                                            <td>申请中</td>
-                                            <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
-                                            <td>耘园基地维修</td>
-                                            <td>浏阳基地</td>
-                                            <td>张三</td>
-                                            <td>2016.12.12</td>
-                                            <td>30000</td>
-                                            <td>申请中</td>
-                                            <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
-                                        </tr>
                                         <tr>
                                             <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
@@ -323,6 +311,7 @@
                                         </tr>
                                     </thead>
                                   </table>
+                              </form>
                               </div>
                              
                                <div class="modal fade" id="Checkdetal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -338,31 +327,31 @@
                                             <table class="table" style="border:none !important;">
                                                 <tr>
                                                     <td>项目名称 ：</td>
-                                                    <td><input type="text" class="form-control" value="基地的名称" disabled></td>
+                                                    <td><input type="text" class="form-control" value="" disabled id="projectname"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>基地名称 ： </td>
-                                                    <td><input type="text" class="form-control" value="农学院" disabled></td>
+                                                    <td><input type="text" class="form-control" id="basename" disabled></td>
                                                 </tr>
                                                 <tr>
                                                     <td>报修人 ： </td>
-                                                    <td><input type="text" class="form-control" value="校内基地" disabled></td>
+                                                    <td><input type="text" class="form-control" id="name" disabled></td>
                                                 </tr>
                                                 <tr>
                                                     <td>申报时间 ： </td>
-                                                   <td><input type="text"  class="form-control" value="70人" disabled></td>
+                                                   <td><input type="text"  class="form-control" id="time" disabled></td>
                                                 </tr>
                                                 <tr>
                                                     <td>预算金额 ： </td>
-                                                   <td><input type="text"  class="form-control" value="10平方米" disabled></td>
+                                                   <td><input type="text"  class="form-control" id="budget" disabled></td>
                                                 </tr>
                                                 <tr>
                                                     <td>具体位置 ： </td>
-                                                    <td><input type="text" class="form-control" value="#001" disabled></td>
+                                                    <td><input type="text" class="form-control" id="address" disabled></td>
                                                 </tr>
                                                 <tr>
                                                 	<td>原因说明 ： </td>
-                                                    <td><textarea class="form-control" disabled></textarea></td>
+                                                    <td><textarea class="form-control" id="reason" disabled></textarea></td>
                                                 </tr>
                                             </table>
                                     	</div>
@@ -370,7 +359,7 @@
                                   </div>
                                   <div class="modal-footer table-responsive">
                                     <center>
-                                    	申请材料：<a href="#" style="color:#00F; text-decoration:underline; font-size:16px;">点击查看</a>
+                                    	申请材料：<a id="linkaddress" href="#" style="color:#00F; text-decoration:underline; font-size:16px;">点击查看</a>
                                     </center>
                                   </div>
                                 </div>
@@ -390,37 +379,28 @@
                                                             	<table class="table"> 
                                                             	<tr>
                                                                 	<td colspan="2">
-                                                                    基地类型：
-                                                                    <select  name="" id="basenameid">
-                                                                      <option value="">显示全部</option>
-                                                                      <option value="">耘园科教综合基地</option>
-                                                                      <option value="">西南角农学基地</option>	
+                                                                    基地名称：
+                                                                    <select  name="" id="searchbase2">
+                                                                      <option value="1" id="searchbaseid2">请选择</option>
+                                                                      <option value="2">1</option>
+                                                                      <option value="3">2</option>	
                                                                     </select>  
                                                                     </td>
-                                                                    
                                                                 </tr>
                                                                 <tr>
                                                                 	<td>
                                                                     	申报人:
-                                                                        <select  name="" id="">
-                                                                          <option value="">显示全部</option>
-                                                                          <option value="">#1</option>
-                                                                          <option value="">#2</option>	
-                                                                        </select>  
+                                                                        <input name="" id="searchname2">
                                                                     </td>
                                                                     <td>
-                                                                    申报时间 ：
-                                                                    <select  name="college" id="college" size="1">
-                                                                      <option value="">显示全部</option>
-                                                                      <option value="">申请成功</option>
-                                                                      <option value="">申请失败</option>	
-                                                                    </select>  
+                                                                    申报时间：
+                                                                    <input class="laydate-icon" id="demo2">
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                 	<td colspan="2">
                                                                     	<button type="reset" class="btn btn-primary" >重置</button>
-                                    									<button onClick="hidesubmenu()" type="button" class="btn btn-primary">完成</button>
+                                    									<button type="button" id="finish2" class="btn btn-primary">完成</button>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -446,7 +426,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
+                                            <td><label><input type="checkbox" name="allcheckbox2" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
                                             <td>浏阳基地</td>
                                             <td>2016.12.12</td>
@@ -455,7 +435,7 @@
                                             <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
+                                            <td><label><input type="checkbox" name="allcheckbox2" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
                                             <td>浏阳基地</td>
                                             <td>2016.12.12</td>
@@ -464,7 +444,7 @@
                                             <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
+                                            <td><label><input type="checkbox" name="allcheckbox2" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
                                             <td>浏阳基地</td>
                                             <td>2016.12.12</td>
@@ -473,7 +453,7 @@
                                             <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
+                                            <td><label><input type="checkbox" name="allcheckbox2" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
                                             <td>浏阳基地</td>
                                             <td>2016.12.12</td>
@@ -482,7 +462,7 @@
                                             <td><span class="icon-search" data-toggle="modal" data-target="#Checkdetal"></span></td>
                                         </tr>
                                         <tr>
-                                            <td><label><input type="checkbox" name="allcheckbox" class="ck"/></label></td>
+                                            <td><label><input type="checkbox" name="allcheckbox2" class="ck"/></label></td>
                                             <td>耘园基地维修</td>
                                             <td>浏阳基地</td>
                                             <td>2016.12.12</td>
@@ -511,13 +491,15 @@
 <!--点击完成按钮弹出的模态框-->
 <div class="modal fade" id="myfinishedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="width:800px">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body" id="modalbody">
-       
+       	<table id="finishtable" class="table">
+        
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

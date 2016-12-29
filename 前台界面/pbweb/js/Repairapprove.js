@@ -1,53 +1,49 @@
-// JavaScript Document
+
+var obj=[];//表格中每一行（row）数组
+var obj2=[];
 $(document).ready(function() {
-	/*筛选的显示与收藏*/
-				$(".icon-filter").on("click", function () {
-					$('.hide_ul').toggle();
-				});
-				
-			/*全选和反选*/
+/*筛选的显示与收藏*/
+$(".icon-filter").on("click", function () {
+	$("#searchbase").val('1');
+	$("#searchname").val("");
+	$('.hide_ul').toggle();
+});
 			
-				//审批中表格的全选反选
-				$(".ck1").on("click", function () {
-					if ($(this).prop("checked") === true) {
-						$("#Approveing input[name='allcheckbox']").prop("checked", true);
-						
-					} else {
-						$("#Approveing input[name='allcheckbox']").prop("checked", false);
-						
-					}
-					$(".ck2").prop("checked", false);
-				 });
+//审批中表格的全选反选
+$(".ck1").on("click", function () {
+		if ($(this).prop("checked") === true) {
+			$("#Approveing input[name='allcheckbox']").prop("checked", true);
+		} else {
+			$("#Approveing input[name='allcheckbox']").prop("checked", false);
+		}
+		$(".ck2").prop("checked", false);
+});
 				 
-				  $(".ck2").click(function () {//反选  
-                		$("#Approveing input[name='allcheckbox']").each(function () {  
-                    	$(this).prop("checked", !$(this).prop("checked"));
-						 
-                	}); 
-					$(".ck1").prop("checked", false); 
-           		 }); 
+$(".ck2").click(function () {//反选  
+        $("#Approveing input[name='allcheckbox']").each(function () {  
+        $(this).prop("checked", !$(this).prop("checked"));
+		}); 
+		$(".ck1").prop("checked", false); 
+ }); 
 				 
-				 //维修中表格的全选反选
-				 $(".ck1").on("click", function () {
-					if ($(this).prop("checked") === true) {
-						$("#Repairing input[name='allcheckbox']").prop("checked", true);
-						
-					} else {
-						$("#Repairing input[name='allcheckbox']").prop("checked", false);
-						
-					}
-					$(".ck2").prop("checked", false);
-				 });
+//维修中表格的全选反选
+$(".ck1").on("click", function () {
+		if ($(this).prop("checked") === true) {
+			$("#Repairing input[name='allcheckbox2']").prop("checked", true);
+		} else {
+			$("#Repairing input[name='allcheckbox2']").prop("checked", false);
+		}
+		$(".ck2").prop("checked", false);
+});
 				 
-				  $(".ck2").click(function () {//反选  
-                		$("#Repairing input[name='allcheckbox']").each(function () {  
-                    	$(this).prop("checked", !$(this).prop("checked"));
-						 
-                	}); 
-					$(".ck1").prop("checked", false); 
-           		 }); 
+$(".ck2").click(function () {//反选  
+        $("#Repairing input[name='allcheckbox2']").each(function () {  
+        $(this).prop("checked", !$(this).prop("checked"));
+		}); 
+		$(".ck1").prop("checked", false); 
+}); 
 				 			
-	//审核中表格
+			//审核中表格
               var Approvetable =$('#Approveing').dataTable(
 			  {
 				  "processing": true,
@@ -63,12 +59,12 @@ $(document).ready(function() {
 						},  
 					"aoColumns" : [                                        
 									{
-										"mData" : "number",
+										"mData" : "id",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 										
 									},
-									{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
+									{ 
 										"mData" : "projectname",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
@@ -100,23 +96,38 @@ $(document).ready(function() {
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 									},
+									{
+										"mData" : "address",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "reason",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "linkaddress",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
 									
 									{
 										"mData" : "id",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : '',
-										"render" : function(
-												data, type,
-												row) { 
-											var data=row.id;
-											return data = '<button type="button"  id='
-												+ row.id
-												+ ' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='+data+' id="frame1_edit" data-target="#edit" data-toggle="modal">修改</button>';
+										"render":function(data,type,row){					
+										obj.push(row);							
+										return data="<span type='button' class='icon-search' value='"+(obj.length-1)
+										+ "' id='scanDetail'>查看</span>";
 										}
 									}
 							],
 							
-							columnDefs :
+							"columnDefs" :
 							[{
 								"orderable" : false, // 禁用排序
 								"targets" : [0], // 指定的列
@@ -142,7 +153,36 @@ $(document).ready(function() {
 					   }
                     }
 			  });
-			  
+//获取申报部门
+$.ajax({
+	url : '',
+	type : 'post',
+	dataType : 'json',			
+	success : function(data) {						         
+		for ( var i=0;i<data.length;i++) {
+				$("#searchbaseid").after("<option value="+data[i].aid+">"+ data[i].applydp + "</option>");
+				$("#searchbaseid2").after("<option value="+data[i].aid+">"+ data[i].applydp + "</option>");
+				}
+		}
+});	
+
+//查看详情
+$(document).on("click", "#scanDetail", function() {	
+	
+	var index=$(this).val();
+	
+	$("#projectname").val(obj[index].projectname);
+	$("#basename").val(obj[index].basename);
+	$("#name").val(obj[index].name);
+	$("#time").val(obj[index].time);
+	$("#budget").val(obj[index].budget);
+	$("#address").val(obj[index].address);
+	$("#reason").val(obj[index].reason);
+	$("#linkAddress").prop("href",obj[index].linkaddress);
+	
+	$("#Checkdetal").modal('show');
+	
+});			  
 			  //同意申请
 			  var flag=0;
 			  $("#agree").click(function(){
@@ -212,6 +252,7 @@ $(document).ready(function() {
 					}
 				  
 				  });
+				  
 			  //拒绝申请
 			  $("#refuse").click(function (){
 				  flag=0;
@@ -280,130 +321,272 @@ $(document).ready(function() {
 					}
 				  
 				  });
-			  //维修中——完成操作
-			  $("#finished").click(function (){
-				  $(".inputmargin").remove();
-				  $("input[type='checkbox'][name='allcheckbox']:checked").each(function() {
-					 $("#modalbody").append('<input type="text" class="inputmargin form-control" value="基地的名称" disabled>');
-						});
-					$("#myfinishedModal").modal('show');
-				  });
+				  
+				  
+//维修中——完成操作
+$("#finished").click(function (){
+		$(".Rtr").remove();
+		$("input[type='checkbox'][name='allcheckbox2']:checked").each(function() {
+			$("#finishtable").append('<tr class="Rtr"><td>基地名称：<td><td><input type="text" class="form-control" disabled></td>'
+			+'<td>申请人: </td><td><input type="text" class="form-control" disabled></td>'
+			+'<td>实际金额: </td><td><input class="form-control"></td>'+'</tr>');
+		});
+		$("#myfinishedModal").modal('show');
+});
 			  
-		//维修中表格	  
-			  $('#Repairing').dataTable(
-			  {
-				  "bSort": false,
-				  "aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
-					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 2,  //默认每页显示多少条记录
-					"dom":'ftipr<"bottom"l>',
-                    "language": {
-                        "lengthMenu": "每页 _MENU_ 条记录",
-                        "zeroRecords": "没有找到记录",
-                        "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-                        "infoEmpty": "无记录",
-                        "infoFiltered": "(从 _MAX_ 条记录过滤)",
-						"sSearch": "查询：",
-						"oPaginate": {
-						   "sFirst": "首页",
-						   "sPrevious": " 上一页 ",
-						   "sNext": " 下一页 ",
-						   "sLast": " 尾页 "
-					   }
-                    }
-			  });
-//筛选功能
+//维修中表格	  
+ $('#Repairing').dataTable(
+{
+	"bSort": false,
+	"aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
+	"lengthChange":true, //是否启用改变每页显示多少条数据的控件
+	"iDisplayLength" : 2,  //默认每页显示多少条记录
+	"dom":'ftipr<"bottom"l>',
+     "language": {
+               "lengthMenu": "每页 _MENU_ 条记录",
+               "zeroRecords": "没有找到记录",
+               "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+               "infoEmpty": "无记录",
+               "infoFiltered": "(从 _MAX_ 条记录过滤)",
+			   "sSearch": "查询：",
+			   "oPaginate": {
+					"sFirst": "首页",
+					"sPrevious": " 上一页 ",
+					"sNext": " 下一页 ",
+					"sLast": " 尾页 "
+			}
+       }
+});
+
+//筛选功能1
 $(document).on("click","#finish",function() {
-	var basenameid = $("#basenameid").value;
-	var timeid = $("#timeid").value;
-	var nameid = $("#nameid").value;
+	var obj=[];
+	var basenameid = $("#searchbase").val();
+	var timeid = $("#demo").val();
+	var nameid = $("#searchname").val();
 	$('#tableCheck').DataTable(
-								{
-									"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
-									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-									"bSort" : true,
-									"serverSide" : true,
-									"iDisplayLength": 5,// //默认每页显示多少条记录
-									"bDestroy" : true,
-									"dom" : 'tipr<"bottom"l>',
+		{
+		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+		"bSort" : true,
+		"serverSide" : true,
+		"iDisplayLength": 5,// //默认每页显示多少条记录
+		"bDestroy" : true,
+		"dom" : 'tipr<"bottom"l>',
+		"ajax" : {
+			"data" : {
+				"basename" : basenameid,
+				"name" : nameid,
+				"time" : timeid,
+			},
+			"url" : "",
+			"type" : "POST"
+		},
 
-									"ajax" : {
-										"data" : {
-										"basename" : basenameid,
-										"name" : nameid,
-										"time" : timeid,
-											},
-										"url" : "",
-										"type" : "POST"
-										},
+		"aoColumns" : [
+			{
+			"mData" : "id",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "projectname",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "basename",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "name",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "time",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "budget",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "status",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "reason",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "address",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "linkaddress",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "id",
+			"orderable" : false, // 禁用排序
+			"sDefaultContent" : '',
+			"render":function(data,type,row){					
+			obj.push(row);							
+			return data="<span type='button' class='icon-search' value='"+(obj.length-1)+ "' id='scanDetail'>查看</span>";
+				}
+			}
+			],
+		"columnDefs" : [ {
+			"orderable" : false, // 禁用排序
+			"targets" : [ 0 ], // 指定的列
+			"data" : "id",
+			"render" : function(data,type,row) {
+					data = row.la_id;
+					return '<input type="checkbox" value="'+ data+ '" name="idname" class="ck"  />';
+					}
+			} ],
+		"language" : {
+			"lengthMenu" : "每页 _MENU_ 条记录",
+			"zeroRecords" : "没有找到记录",
+			"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+			"infoEmpty" : "无记录",
+			"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+			"sSearch" : "模糊查询：",
+			"oPaginate" : {
+			"sFirst" : "首页",
+			"sPrevious" : " 上一页 ",
+			"sNext" : " 下一页 ",
+			"sLast" : " 尾页 "
+			}
+		}
+	});
+	$('.hide_ul').toggle();
+ });
+//筛选功能2
+$(document).on("click","#finish2",function() {
+	var obj=[];
+	var basenameid = $("#searchbase2").val();
+	var timeid = $("#demo2").val();
+	var nameid = $("#searchname2").val();
+	$('#tableCheck').DataTable(
+		{
+		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+		"bSort" : true,
+		"serverSide" : true,
+		"iDisplayLength": 5,// //默认每页显示多少条记录
+		"bDestroy" : true,
+		"dom" : 'tipr<"bottom"l>',
+		"ajax" : {
+			"data" : {
+				"basename" : basenameid,
+				"name" : nameid,
+				"time" : timeid,
+			},
+			"url" : "",
+			"type" : "POST"
+		},
 
-								   "aoColumns" : [
-									{
-										"mData" : "number",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-										
-									},
-									{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
-										"mData" : "projectname",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "basename",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-
-									},
-									{
-										"mData" : "name",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-
-									},
-									{
-										"mData" : "time",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "budget",
-										"orderable" : false, // 禁用排序
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "status",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-									}],
-									"columnDefs" : [ {
-									"orderable" : false, // 禁用排序
-									"targets" : [ 0 ], // 指定的列
-									"data" : "id",
-									"render" : function(data,type,row) {
-												data = row.la_id;
-												return '<input type="checkbox" value="'+ data+ '" name="idname" class="ck"  />';
-																}
-															} ],
-															"language" : {
-																"lengthMenu" : "每页 _MENU_ 条记录",
-																"zeroRecords" : "没有找到记录",
-																"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-																"infoEmpty" : "无记录",
-																"infoFiltered" : "(从 _MAX_ 条记录过滤)",
-																"sSearch" : "模糊查询：",
-																"oPaginate" : {
-																	"sFirst" : "首页",
-																	"sPrevious" : " 上一页 ",
-																	"sNext" : " 下一页 ",
-																	"sLast" : " 尾页 "
-																}
-															}
-														});
-										$('.hide_ul').toggle();
-									});
-
-
-
-
-            } );
+		"aoColumns" : [
+			{
+			"mData" : "id",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "projectname",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "basename",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "name",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "time",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "budget",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "status",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "reason",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "address",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "linkaddress",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "id",
+			"orderable" : false, // 禁用排序
+			"sDefaultContent" : '',
+			"render":function(data,type,row){					
+			obj.push(row);							
+			return data="<span type='button' class='icon-search' value='"+(obj.length-1)+ "' id='scanDetail'>查看</span>";
+				}
+			}
+			],
+		"columnDefs" : [ {
+			"orderable" : false, // 禁用排序
+			"targets" : [ 0 ], // 指定的列
+			"data" : "id",
+			"render" : function(data,type,row) {
+					data = row.la_id;
+					return '<input type="checkbox" value="'+ data+ '" name="idname" class="ck"  />';
+					}
+			} ],
+		"language" : {
+			"lengthMenu" : "每页 _MENU_ 条记录",
+			"zeroRecords" : "没有找到记录",
+			"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+			"infoEmpty" : "无记录",
+			"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+			"sSearch" : "模糊查询：",
+			"oPaginate" : {
+			"sFirst" : "首页",
+			"sPrevious" : " 上一页 ",
+			"sNext" : " 下一页 ",
+			"sLast" : " 尾页 "
+			}
+		}
+	});
+	$('.hide_ul').toggle();
+ });
+ 
+ } );

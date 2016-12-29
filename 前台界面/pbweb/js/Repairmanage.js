@@ -1,45 +1,9 @@
 // JavaScript Document
+var obj=[];
 function a(){
 	alert("on")
 	}						
 $(document).ready(function() {
-	
-			////全选反选
-				var flag=0;
-				$("#ck1").on("click", function () {
-					if ($(this).prop("checked") === true) {
-						$("#Repairmanage input[name='allcheckbox']").prop("checked", true);
-						
-					} else {
-						$("#Repairmanage input[name='allcheckbox']").prop("checked", false);
-						
-					}
-					$("#ck2").prop("checked", false);
-				 });
-				 
-				  $("#ck2").click(function () {//反选  
-                		$("#Repairmanage input[name='allcheckbox']").each(function () {  
-                    	$(this).prop("checked", !$(this).prop("checked"));
-						 
-                	}); 
-					$("#ck1").prop("checked", false); 
-           		 }); 
-				 
-				//点击增加清空数据函数
-				 $("#ZJ").click(function(){
-					 
-					$("#Aprojectname").val("");
-			        $("#Abasename").val("1");
-			        $("#Aname").val("");
-					$("#Atime").val("");
-					$("#Abudget").val("");
-					$("#Aaddress").val("");
-					$("#Areason").val("");
-					 })
-					 
-					 
-				
-
 				//分页表格 
               var applytable =$('#Repairmanage').dataTable(
 			  {
@@ -93,24 +57,39 @@ $(document).ready(function() {
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 									},
+									{
+										"mData" : "reason",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "address",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "linkaddress",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
 									
 									{
 										"mData" : "id",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : '',
-										"render" : function(
-												data, type,
-												row) { 
-											var data=row.id;
-											return data = '<button type="button"  id='
-												+ row.id
-												+ ' onclick="editOne(this)" class="btn btn-warning btn-xs" data-id='+data+' id="frame1_edit" data-target="#edit" data-toggle="modal">修改</button>';
+										"render":function(data,type,row){					
+											obj.push(row);							
+											return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
+														+ "' id='checkdetale'>查看</button>";
 										}
 									}
 							],
 					
 					
-					columnDefs :
+					"columnDefs" :
 							[{
 								"orderable" : false, // 禁用排序
 								"targets" : [0], // 指定的列
@@ -232,134 +211,102 @@ $(document).ready(function() {
 			
 					}
 					});
+//点击增加清空数据函数
+$("#ZJ").click(function(){
+		$("#Aprojectname").val("");
+		$("#Abasename").val("1");
+		$("#Aname").val("");
+		$("#Atime").val("");
+		$("#Abudget").val("");
+		$("#Aaddress").val("");
+		$("#Areason").val("");
+})					
+//增加操作
+$("#save").click(function(){
+		if($("#Aprojectname").val()==""){
+				bootbox.alert({
+				message : "请填写项目名称",
+				size : 'small'
+			});	
+			return 0;
+		}
+		else if($("#Abasename").val()=="1"){
+				bootbox.alert({
+				message : "请选择基地名称",
+				size : 'small'
+				});	
+				return 0;
+		}
 					
-				 //增加操作
-				 $("#save").click(function(){
-					 
-					if($("#Aprojectname").val()==""){
-						bootbox.alert({
-						message : "请填写项目名称",
-						size : 'small'
-						});	
-						return 0;
-						}
-					else if($("#Abasename").val()=="1"){
-						bootbox.alert({
-						message : "请选择基地名称",
-						size : 'small'
-						});	
-						return 0;
-						}
+		else if($("#Aname").val()==""){
+				bootbox.alert({
+				message : "请填写申报人姓名",
+				size : 'small'
+				});	
+				return 0;
+		}
+		else if($("#Abudget").val()==""){
+				bootbox.alert({
+				message : "请填写预算金额",
+				size : 'small'
+				});	
+				return 0;
+		}
+		else if($("Aaddress").val()==""){
+				bootbox.alert({
+				message : "请填写具体地址",
+				size : 'small'
+				});	
+				return 0;
+		}
+		else if($("#Areason").val()==""){
+				bootbox.alert({
+				message : "请填写原因说明",
+				size : 'small'
+				});	
+				return 0;
+		}
+		$("#applyaddform").submit();
 					
-					else if($("#Aname").val()==""){
-						bootbox.alert({
-						message : "请填写申报人姓名",
-						size : 'small'
-						});	
-						return 0;
-						}
-					else if($("#Abudget").val()==""){
-						bootbox.alert({
-						message : "请填写预算金额",
-						size : 'small'
-						});	
-						return 0;
-						}
-					else if($("Aaddress").val()==""){
-						bootbox.alert({
-						message : "请填写具体地址",
-						size : 'small'
-						});	
-						return 0;
-						}
-					else if($("#Areason").val()==""){
-						bootbox.alert({
-						message : "请填写原因说明",
-						size : 'small'
-						});	
-						return 0;
-						}
-					$("#applyaddform").submit();
-					/*bootbox.alert({
-         			  message: "提交成功",
-         			  size: 'small'
-         		  		});*/
-					 })
+})
 					 
-				//修改操作
-				function editOne(obj) {
-						var id = obj.id;
-							$.ajax({
-								type : 'POST',
-								data : {
-									"iddetail" : id
-								},
-								dataType : 'json',
-								url : '.do',
-								async : false,
-								cache : false,
-								error : function(request) {
-									bootbox.alert({
-										  message: "error",
-										  size: 'small'
-									  });
-								},
-								success : function(data) {//修改
-										$("#Eprojectname").val(data[0].projectname);
-										$("#Ebasename").val(data[0].basename);
-						  				$("#Ename").val(data[0].name);
-										$("#Etime").val(data[0].time);
-						  				$("#Ebudget").val(data[0].budget);
-						  				$("#Eaddress").val(data[0].address);
-										$("#Ereason").val(data[0].reason);
-									}
-							});
-				}
-				
-				$("#saverun").click(function(){
-								bootbox.confirm({
-								message: "是否确认修改",
-								buttons: {
-				
-									confirm: {
-										label: 'Yes',
-										className: 'btn-success'
-									},
-									cancel: {
-										label: 'No',
-										className: 'btn-danger'
-									},
-								},
-								callback: function (result) {
-									if(result){
-										$("#applyeditform").submit();
-											
-									}
-								}
-							});
-								
-								
-								})
-/*$(document).on("click", "#checkdetale", function() {	
+//修改操作
+$(document).on("click", "#checkdetale", function() {	
 	
 	var index=$(this).val();
 	
-	$("#basename").val(obj[index].name);
-	$("#basetype").val(obj[index].type);
-	$("#dept0").val(obj[index].applydp);
-	$("#landarea").val(obj[index].landarea);
-	$("#buildingarea").val(obj[index].constructionarea);
-	$("#undertakeCount").val(obj[index].undertake);
-	$("#username").val(obj[index].username);
-	$("#userphone").val(obj[index].phone);
-	$("#major_oriented").html(obj[index].major);
-	$("#linkAddress").html(obj[index].land_address);
-	$("#resource").prop("href",obj[index].material_path);
-	
+	$("#Eprojectname").val(obj[index].projectname);
+	$("#Ebasename").val(obj[index].basename);
+	$("#Ename").val(obj[index].name);
+	$("#Etime").val(obj[index].time);
+	$("#Ebudget").val(obj[index].budget);
+	$("#Eaddress").val(obj[index].address);
+	$("#Ereason").val(obj[index].reason);
+	$("#Elink").prop("href",obj[index].linkaddress);
 	$("#edit").modal('show');
 	
-});*/
-								
+});
+$("#saverun").click(function(){
+				bootbox.confirm({
+				message: "是否确认修改",
+				buttons: {
+						confirm: {
+								label: 'Yes',
+								className: 'btn-success'
+								},
+						cancel: {
+								label: 'No',
+								className: 'btn-danger'
+								},
+							},
+						callback: function (result) {
+								if(result){
+									$("#applyeditform").submit();
+									}
+								}
+							});
+})
+//文件上传限制								
 $('.file').change(function() {    
     var filepath = $(this).val();
     var file_size = this.files[0].size;
@@ -387,5 +334,25 @@ $('.file').change(function() {
     return false;
 });
 
-					 					
+				////全选反选
+				var flag=0;
+				$("#ck1").on("click", function () {
+					if ($(this).prop("checked") === true) {
+						$("#Repairmanage input[name='allcheckbox']").prop("checked", true);
+						
+					} else {
+						$("#Repairmanage input[name='allcheckbox']").prop("checked", false);
+						
+					}
+					$("#ck2").prop("checked", false);
+				 });
+				 
+				  $("#ck2").click(function () {//反选  
+                		$("#Repairmanage input[name='allcheckbox']").each(function () {  
+                    	$(this).prop("checked", !$(this).prop("checked"));
+						 
+                	}); 
+					$("#ck1").prop("checked", false); 
+           		 }); 
+				 					 					
 });
