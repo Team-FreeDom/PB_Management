@@ -133,7 +133,7 @@
 													土地布局设置</span></a></li>
 										<li><a href="fieldRent_maintain.jsp"><span
 												class="text"> 土地租赁维护</span></a></li>
-										<li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+										<li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
@@ -206,6 +206,7 @@
 									<th hidden>申请人</th>
 									<th hidden>创建时间</th>
 									<th hidden>有效周期</th>
+									<th hidden>理由</th>
 									<th>申请状态</th>
 									<th>操作</th>
 								</tr>
@@ -226,6 +227,7 @@
 									<td hidden>213144</td>
 									<td hidden>2016-09-18</td>
 									<td hidden>1</td>
+									<th hidden>理由</th>
 									<td>审核中</td>
 									<td>
 										<button type="button" class="btn btn-warning btn-xs" id="scan">查看</button>
@@ -249,6 +251,7 @@
 									<td hidden>213144</td>
 									<td hidden>2016-09-18</td>
 									<td hidden>1</td>
+									<th hidden>理由</th>
 									<td>申请成功</td>
 									<td>
 										<button type="button" class="btn btn-warning btn-xs" id="scan">查看</button>
@@ -270,6 +273,7 @@
 									<td hidden>213144</td>
 									<td hidden>2016-09-18</td>
 									<td hidden>1</td>
+									<th hidden>理由</th>
 									<td>申请失败</td>
 									<td>
 										<button type="button" class="btn btn-warning btn-xs"
@@ -379,7 +383,12 @@
 													<td>有效周期 ：</td>
 													<td><input type="text" id="validdate" disabled></td>
 												</tr>
-
+                                                <tr>
+                                                  <td hidden id="hideReason">拒绝理由 ：</td>
+													<td colspan="3"><div id="reason"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+                                                  
+                                                </tr>
 											</table>
 										</div>
 									</div>
@@ -447,6 +456,7 @@
 									<th hidden>申请人</th>
 									<th hidden>创建时间</th>
 									<th hidden>有效周期</th>
+									<th hidden>理由</th>
 									<th>申请状态</th>
 									<th>操作</th>
 								</tr>
@@ -467,6 +477,7 @@
 									<td hidden>213144</td>
 									<td hidden>2016-09-14</td>
 									<td hidden>1</td>
+									<th hidden>理由</th>
 									<td>申请成功</td>
 									<td><span class="icon-search" id="scan"></span></td>
 								</tr>
@@ -485,6 +496,7 @@
 									<td hidden>213144</td>
 									<td hidden>2016-09-14</td>
 									<td hidden>1</td>
+									<th hidden>理由</th>
 									<td>申请失败</td>
 									<td><span class="icon-search" data-toggle="modal"
 										data-target="#failapplication"></span></td>

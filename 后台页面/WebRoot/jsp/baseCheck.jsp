@@ -128,7 +128,7 @@
                                         	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
@@ -258,22 +258,19 @@
 			<!-- 同意申请 -->
 			<div class="modal fade" id="applyConfirm" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm">
+				<div class="modal-dialog modal-sm" style="width:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
 							<button type="button" class="close" id="close1" data-dismiss="modal">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 							</button>
-							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">请选择基地有效周期</h5>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">同意申请</h5>
 							
 						</div>
-						<div class="modal-body table-responsive">
-						  <select name="valideDate" id="valideDate" style="width:100px;">							 
-							 <option value="1"/>1年</option>
-							 <option value="2"/>2年</option>
-							 <option value="3"/>3年</option>
-							 <option value="10" selected/>长久</option>
-						  </select>
+						<div class="modal-body table-responsive" id="add" >
+						<table id="increase1" class="table">
+						</table>
+						 
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" id="close1"
@@ -287,17 +284,19 @@
 				<!-- Modal -->
 			<div class="modal fade" id="reasonConfirm" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm">
+				<div class="modal-dialog modal-sm" style="width:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
 							<button type="button" class="close" id="close" data-dismiss="modal">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 							</button>
-							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">请填写拒绝申请的理由</h5>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">拒绝申请</h5>
 							
 						</div>
 						<div class="modal-body table-responsive">
-						  <textarea row=1 col=1 id="reason" placeholder="可不填"></textarea>
+						<table class="table" id="increase2">
+						</table>
+						  
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" id="close"

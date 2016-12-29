@@ -157,39 +157,40 @@ $(document).ready(function() {
 	 
 	//同意申请
 	// //////////状态值1： 2： 3： 4： 。。。。。。。
-	$('#confirmDate').click(function() {
-		
-		                var date=$("#valideDate option:selected").val();					
+	$('#confirmDate').click(function() {		
+		              				
 						var i=0;
-						var recordstr='(';
+						var recordstr='';
 						var infostr="[";
-						var index;
-						$("input[type='checkbox'][name='idname']:checked").each(function() {					
-							index=$(this).data("id");
-							userid =obj[index].userid ;
+						var userid;
+						var basename;
+						var date;
+						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {					
+							
+							userid=$(this).val();
+							basename=$(this).closest('tr').find('td:eq(2) input').val();
+							date=$("#valideDate option:selected").val();
 							if(i!=0){
-								recordstr=recordstr+","+$(this).val();
-								infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+								recordstr=recordstr+",("+this.className+','+date+')';
+								infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
 								
 							}else{
-								recordstr=recordstr+$(this).val();
-								infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+								recordstr=recordstr+'('+this.className+','+date+')';
+								infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
 							}					
 											
 								i++;
-							});
-					
-	                    recordstr=recordstr+')';
-	                    infostr=infostr+']';
+							});					
 	                    
+	                    infostr=infostr+']';
+	                  
 	                    $.ajax({
 							url : '',
 							type : 'post',
 							dataType : 'json',
 							data : {
 								"resordstr" : recordstr,
-								"infostr" : infostr,
-								"date":date
+								"infostr" : infostr								
 							},
 							success : function(msg) {						
 								$("#valideDate").val("10");
@@ -197,7 +198,7 @@ $(document).ready(function() {
 								Spage.draw(false);
 								}
 							
-						});
+						});	                    
 					});
 	
 	//拒绝申请
@@ -205,27 +206,28 @@ $(document).ready(function() {
 $('#certain').click(function() {	
 
 			var i=0;
-			var recordstr='(';
-			var infostr="[";
-			var reason=$("#reason").val();
-			var index;
-			$("input[type='checkbox'][name='idname']:checked").each(function() {					
-				index=$(this).data("id");
-				userid = obj[index].userid;
+			var recordstr='';
+			var infostr="[";			
+			var userid;
+			var basename;
+			var reason;
+			$("input[type='checkbox'][name='checkedIncrease2']:checked").each(function() {			
+				userid=$(this).val();
+				basename=$(this).closest('tr').find('td:eq(2) input').val();
+				reason=$(this).closest('tr').find('td:eq(4) textarea').val();
 				if(i!=0){
-					recordstr=recordstr+","+$(this).val();
-					infostr=infostr+',{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+					recordstr=recordstr+",("+this.className+',"'+reason+'")';
+					infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
 					
 				}else{
-					recordstr=recordstr+$(this).val();
-					infostr=infostr+'{userid:"'+userid+'",basename:"'+ obj[index].name+'"}';
+					recordstr=recordstr+"("+this.className+',"'+reason+'")';
+					infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
 				}					
 								
 					i++;
-				});
-		
-         recordstr=recordstr+')';
-         infostr=infostr+']';                
+				});		
+        
+         infostr=infostr+']';         
          $.ajax({
 				url : '',
 				type : 'post',
@@ -269,12 +271,12 @@ $(".icon-filter").on("click", function() {
 
 
 $(document).on("click", "#close", function() {	
-	$("#reason").val("");
+	$("#increase2").html("");
 	
 });
 
 $(document).on("click", "#close1", function() {	
-	$("#valideDate").val("10");
+	$("#increase1").html("");
 	
 });
 
@@ -293,6 +295,14 @@ $(document).on("click", "#refuse", function() {
 			});
 		 return;
 	  }
+	 
+	 $('input[name="idname"]:checked').each(function(){
+		 index=$(this).data("id");
+		 userid = obj[index].userid;
+		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
+		 
+	 });
+	 
 	$("#reasonConfirm").modal('show');
 	
 });
@@ -312,6 +322,19 @@ $(document).on("click", "#confirm", function() {
 			});
 		 return;
 	  }
+	 
+	 $('input[name="idname"]:checked').each(function(){
+		 index=$(this).data("id");
+		 userid = obj[index].userid;
+		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>有效周期:</td><td> <select name="valideDate" id="valideDate" style="width:100px;">	'+						 
+				 '<option value="1">1年</option>'+
+				 '<option value="2">2年</option>'+
+				 '<option value="3">3年</option>'+
+				 '<option value="10" selected>长久</option>'+
+			   ' </select></td></tr>');
+		 
+	 });
+	 
 	$("#applyConfirm").modal('show');
 	
 });
@@ -330,7 +353,12 @@ $(document).on("click", "#scanDetail", function() {
 	$("#userphone").val(obj[index].phone);
 	$("#major_oriented").html(obj[index].major);
 	$("#linkAddress").html(obj[index].land_address);
-	$("#resource").prop("href",obj[index].material_path);
+	
+	if(obj[index].material_path==""){		
+		$("#resource").prop("hidden",true); 
+	}else{
+		$("#resource").prop("href",obj[index].material_path);
+	}
 	
 	$("#scan").modal('show');
 	

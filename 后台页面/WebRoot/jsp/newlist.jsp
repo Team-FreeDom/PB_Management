@@ -153,7 +153,7 @@
 										<li><a href="fieldRent_maintain.jsp"> <span
 												class="text"> 土地租赁维护</span>
 										</a></li>
-										<li><a href="#"> <span class="text"> 实习基地维护</span>
+										<li><a href="baseMaintain.jsp"> <span class="text"> 实习基地维护</span>
 										</a></li>
 										<li><a href="#"> <span class="text"> 实习计划维护</span>
 										</a></li>

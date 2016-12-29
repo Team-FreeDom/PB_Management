@@ -193,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                 </a>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="baseMaintain.jsp">
                                                                                                     <span class="text">
                                                                                                         实习基地维护</span>
                                                                                                 </a>
@@ -363,8 +363,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                 </fieldset>
                                                                                                 <fieldset disabled>
                                                                                                     <div class="form-group">
-                                                                                                        <label for="inputname" class="col-sm-3 control-label">土地名称：</label>
-                                                                                                        <div class="col-sm-6">
+												<label for="inputname" class="col-sm-3 control-label">土地名称：</label>
+												<div class="col-sm-6">
                                                                                                             <input type="text" class="form-control" id="tudi_name"></div>
                                                                                                         </div>
                                                                                                     </fieldset>

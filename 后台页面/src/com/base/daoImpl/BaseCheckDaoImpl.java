@@ -109,11 +109,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	return list;
     }
-    /**
-     * 
-     * @param str 封装的id表示哪几条数据
-     * @param status 变为申请失败状态（12）
-     */
+    //拒绝申请
     @Override
     public void refuseapply(String str,int status) {
 	Connection conn = null;
@@ -135,11 +131,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	
     }
-    /**
-     * 
-     * @param str 封装的id表示哪几条数据
-     * @param date 基地有效期
-     */
+    //同意
     @Override
     public void agreeApply(String str,int date) {
 	Connection conn = null;
@@ -160,10 +152,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}	
     }
-    /**
-     * 发送消息
-     * @param sql 插入封装好的sql语句
-     */
+    //插入信息方法
     @Override
     public void insertMessage(String sql) {
    	System.out.println("insert---start");

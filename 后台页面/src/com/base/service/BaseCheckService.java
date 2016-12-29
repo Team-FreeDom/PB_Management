@@ -28,17 +28,8 @@ public interface BaseCheckService {
      * @return 获取部门集合（部门id和具体部门）
      */
     public List<BaseCheck> getDept();
-    /**
-     * 拒绝申请
-     * @param str 封装的id表示哪几条数据
-     * @param infoStr 消息数据
-     */
+    
     public void refuseapply(String str,String infoStr);
-    /**
-     * 同意申请
-     * @param str 封装的id表示哪几条数据
-     * @param infoStr 消息数据
-     * @param date 有效期
-     */
-    public void agreeApply(String str,String infoStr,int date);
+    
+    public void agreeApply(String str,int date);
 }

@@ -10,7 +10,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>基地申请</title>
+<title>实习基地维护</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -20,8 +20,11 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
+<!--datatable-->
+<link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practicebaseapply.css">
+<link rel="stylesheet" href="../css/base_maintain.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,10 +54,15 @@
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a>
+					</a> <!-- <ul class="dropdown-menu">
+							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
+							</li>
+							<li class="dropdown-menu-footer text-center"><a
+								href="../teach/notifications.html">更多消息</a></li>
+						</ul> --></li>
 					<li><a href="../loginout.do"
-						class="dropdown-toggle notification-icon"> <i
-							class="icon-remove"></i>
+						class="dropdown-toggle notification-icon" data-toggle="modal">
+							<i class="icon-remove"></i>
 					</a></li>
 				</ul>
 
@@ -78,7 +86,7 @@
 					</div>
 
 					<!-- Sidebar Menu-->
-					<div class="sidebar-menu">
+					<div class="sidebar-menu" style="height: 384px;">
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
@@ -93,6 +101,8 @@
 									</div>
 								</div>
 								<div class="divider2"></div>
+
+
 								<li class="menuItem"><a href="index.do"> <i
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
@@ -115,11 +125,10 @@
 										<li><a href="#"><span class="text">实习审批</span></a></li>
 										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
 										<li><a href="#"><span class="text">维修审批</span></a></li>
-										
-									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+									</ul>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="notification.do"><span class="text">
@@ -128,7 +137,8 @@
 													土地布局设置</span></a></li>
 										<li><a href="fieldRent_maintain.jsp"><span
 												class="text"> 土地租赁维护</span></a></li>
-										<li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li><a href="baseMaintain.jsp"><span class="text">
+													实习基地维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
@@ -164,11 +174,11 @@
 
 			<div class="main " style="min-height: 584px;">
 				<!-- 当前地址导航 -->
-				<div class="page-header row">
+				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a>位置 :</a></li>
-							<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
+							<li><a>位置</a></li>
+							<li><a href="baseMaintain.jsp"></i>实习基地维护</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
@@ -182,16 +192,246 @@
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
-
 					<div class="col-lg-12">
+						<form action="" method="post" enctype="multipart/form-data"
+							name="formApplyInfo" id="formApplyInfo">
+							<table id="baseMaintain" class="cell-border" cellspacing="0"
+								width="100%">
+								<thead>
+									<tr bgcolor="#ECF1F5">
+										<td colspan="2" id="button-left">
+											<button type="button" class="btn btn-danger" id="delete">删除</button>
+											<button type="button" class="btn btn-info"
+												data-toggle="modal" data-target="#add" id="ZJ">增加</button>
+										</td>
+										<td colspan="8"></td>
+										<td colspan="7" id="button-right">
+											<button type="button" class="btn btn-primary"
+												data-toggle="modal" data-target="#import">导出</button>
+										</td>
+									</tr>
+									<tr>
+										<th></th>
+										<th>基地名称</th>
+										<th>基地类型</th>
+										<th>申报部门</th>
+										<th>土地面积</th>
+										<th>建筑面积</th>
+										<th>可承担人数</th>
+										<th hidden>通信地址</th>
+										<th hidden>联系人姓名</th>
+										<th hidden>联系人电话</th>
+										<th hidden>面向专业</th>
+										<th hidden>申请材料</th>
+										<th hidden>申请人</th>
+										<th hidden>创建时间</th>
+										<th hidden>有效周期</th>
+										<th>星级</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+									<tr>
+									<td><label><input type="checkbox"
+											name="recordcheck" class="ck"></label></td>
+									<td>基地名称</td>
+									<td>基地类型</td>
+									<td>申报部门</td>
+									<td>土地面积</td>
+									<td>建筑面积</td>
+									<td>可承担人数</td>
+									<td><span class="icon-star star-color"></span><span
+										class="icon-star star-color"></span><span
+										class="icon-star-empty star-color"></span></td>
+									<td><span class="icon-edit edit-color" data-toggle="modal"
+										data-target="#myModal3"></span></td>
+									</tr>
+									<tr>
+										<td><label><input type="checkbox"
+											name="recordcheck" class="ck"></label></td>
+									<td>基地名称</td>
+									<td>基地类型</td>
+									<td>申报部门</td>
+									<td>土地面积</td>
+									<td>建筑面积</td>
+									<td>可承担人数</td>
+									<td><span class="icon-star star-color"></span><span
+										class="icon-star star-color"></span><span
+										class="icon-star-empty star-color"></span></td>
+									<td><span class="icon-edit edit-color" data-toggle="modal"
+										data-target="#myModal3"></span></td>
+									</tr>
+									<tr>
+										<td><label><input type="checkbox"
+											name="recordcheck" class="ck"></label></td>
+									<td>基地名称</td>
+									<td>基地类型</td>
+									<td>申报部门</td>
+									<td>土地面积</td>
+									<td>建筑面积</td>
+									<td>可承担人数</td>
+									<td><span class="icon-star star-color"></span><span
+										class="icon-star star-color"></span><span
+										class="icon-star-empty star-color"></span></td>
+									<td><span class="icon-edit edit-color" data-toggle="modal"
+										data-target="#myModal3"></span></td>
+									</tr>
+									<tr>
+										<td><label><input type="checkbox"
+											name="recordcheck" class="ck"></label></td>
+									<td>基地名称</td>
+									<td>基地类型</td>
+									<td>申报部门</td>
+									<td>土地面积</td>
+									<td>建筑面积</td>
+									<td>可承担人数</td>
+									<td><span class="icon-star star-color"></span><span
+										class="icon-star star-color"></span><span
+										class="icon-star-empty star-color"></span></td>
+									<td><span class="icon-edit edit-color" data-toggle="modal"
+										data-target="#myModal3"></span></td>
+									</tr>									
+								</tbody>
+								<thead>
+									<tr>
+										<td colspan="11"><label><input type="checkbox"
+												name="0" class="ck-all" id="ck1" />全选</label></td>
+									</tr>
 
-						<div class=" col-md-offset-2 col-md-8 bordor-style">
-							<div class="row text-center interval padding-style">
-								<p>基地申请</p>
+								</thead>
+							</table>
+						</form>
+					</div>
+				</div>
+
+               <!--单个删除确认对话框-->
+					<div class="modal fade" id="deleteOneModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<!-- data-backdrop="static" 禁止点击弹框后面内容 -->
+						<form class="form-horizontal" role="form">
+							<div class="modal-dialog modal-sm ">
+								<!-- modal-sm 小的  modal-lg 大的 -->
+								<div class="modal-content" style="border:#4D719B 8px solid">
+									<div class="modal-header"
+										style="background:#4D719B; color:#FFF">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">&times;</button>
+										<h6 class="modal-title" id="myModalLabel"></h6>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<h5>您确定要删除吗？</h5>
+									</div>
+									<div class="modal-footer">
+
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">取消
+                    </button>
+
+										<button type="button" class="btn btn-primary" id="delSubmit">
+											确认</button>
+									</div>
+								</div>
+								<!-- /.modal-content -->
 							</div>
-							<div class="row padding-style">
+						</form>
+					</div>
+               
 
-								<form action="getRequestBaseInfo.do" method="post" id="myForm" enctype="multipart/form-data"
+			</div>
+			<!-- End Sidebar-->
+			<!-- 弹出框-->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabe" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
+						</div>
+						<div class="modal-body table-responsive">
+							<div class="row">
+								<div class="col-md-12">
+									<form action="" method="post" class="form-horizontal"
+										role="form" id="applyeditform">
+										<table class="table" style="border:none !important;">
+											<tr>
+												<td>项目名称 ：</td>
+												<td><input type="text" class="form-control"
+													id="Eprojectname" value="耕耘基地维修"></td>
+											</tr>
+											<tr>
+												<td>基地名称 ：</td>
+												<td><select class="form-control" id="Ebasename"
+													value="1">
+														<option value="1" id="Ebasenameid">请选择</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td>报修人 ：</td>
+												<td><input type="text" class="form-control" id="Ename"
+													value="张三"></td>
+											</tr>
+											<tr>
+												<td>申报时间 ：</td>
+												<td><input type="text" class="form-control" id="Etime"
+													value="2016-12-12"></td>
+											</tr>
+											<tr>
+												<td>预算金额 ：</td>
+												<td><input type="text" class="form-control"
+													id="Ebudget" value="30000"></td>
+											</tr>
+											<tr>
+												<td>具体位置 ：</td>
+												<td><input type="text" class="form-control"
+													id="Eaddress" value="湖南农业大学"></td>
+											</tr>
+											<tr>
+												<td>原因说明 ：</td>
+												<td><textarea class="form-control" id="Ereason"></textarea></td>
+											</tr>
+											<tr>
+												<td>材料查看 ：</td>
+												<td><a href="#" id="Elink"
+													style="color:#00C; text-decoration:underline">点击查看申请材料</a></td>
+											</tr>
+											<tr>
+												<td>替换材料 ：</td>
+												<td><input type="file" id="file" class="file"></td>
+											</tr>
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer table-responsive">
+							<center>
+								<button type="button" class="btn btn-primary" id="saverun">保存</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">取消</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="add" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabe" aria-hidden="true">
+				<div class="modal-dialog" >
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" id="closebase" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title text-center" id="myModalLabel">增加基地</h4>
+						</div>
+						<div class="modal-body table-responsive">
+							<div class="row">
+								<div class="col-md-12">
+									<form action="getRequestBaseInfo.do" method="post" id="myForm" enctype="multipart/form-data"
 								 class="form-horizontal" role="form">
 									<div class="form-group">
 										<label class="col-md-3 control-label fontDire">基地名称</label>
@@ -267,7 +507,7 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">建筑面积</label>
 										<div class="col-md-6">
-											<input type="text" class="form-control" id="base-area" name="constructionarea"
+											<input type="text" class="form-control" id="building-area" name="constructionarea"
 												placeholder="单位：平方">
 										</div>
 									</div>
@@ -312,26 +552,14 @@
 
 
 								</form>
-
+								</div>
 							</div>
-
-						</div>
-
+						</div>						
 					</div>
-
-
-
 				</div>
 			</div>
-			<!-- End Sidebar-->
 
-
-
-		</div>
-		<!--row end-->
-	</div>
-
-	<!-- Modal -->
+<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -377,16 +605,81 @@
 		</div>
 	</div>
 </div>
+
+			<div class="modal fade" id="import" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width:400px;height:600px;">
+					<div class="modal-content" style="border:#3071a9 8px solid;">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" id="daoclose" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
+						</div>
+						<div class="modal-body" id="daochu" >
+							
+								<table>
+									<tr>
+										<td >基地类型:</td>
+										<td >
+										   <select class="form-control" id="daobaseh">
+											<option value="" id="daobase">全部</option>
+										   </select>
+										</td>
+									</tr>
+									<tr>
+										<td>申报部门:</td>
+										<td>
+										<select class="form-control" id="daodepth">
+											<option value="" id="daodept">全部</option>
+										</select>
+										</td>
+									</tr>
+									<tr>
+										<td>星级:</td>
+										<td>
+										<select class="form-control" id="daostarh">
+											<option value="" >全部</option>
+											<option value="1" >一星级</option>
+											<option value="2" >二星级</option>
+											<option value="3" >三星级</option>
+											<option value="4" >四星级</option>
+											<option value="5" >五星级</option>											
+										</select>
+										</td>
+									</tr>
+								</table>
+							
+						</div>
+						<div class="modal-footer">
+							<center>
+								<button type="button" class="btn btn-default"
+								id="daoclose" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" id="confirmButton">确定</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<!--row end-->
+	</div>
 	<div class="clearfix"></div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
+	<!--datatable javascript-->
 
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../js/bootstrap.min.js"></script>	
-	<script src="../js/bootbox.min.js"></script>
-	<script src="../dist/jquery.cokie.min.js"></script>	
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
+	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/baseapply.js"></script>
+	<script src="../js/myNeed/base_maintain.js"></script>
+	<script src="../js/bootbox.min.js"></script>
 	<script src="../js/kg.js"></script>
+
 </body>
 </html>
