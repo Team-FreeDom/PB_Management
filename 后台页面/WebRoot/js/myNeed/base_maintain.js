@@ -253,7 +253,9 @@ $(document).ready(function() {
 						
 						 $.ajax({
 								data : {
-									"recordstr" : recordstr
+									"basetype" : basetype,
+									"applydept":applydept,
+									"star":star
 								},
 								url : '',
 								async : true,
@@ -261,12 +263,11 @@ $(document).ready(function() {
 								dataType : "json",
 								cache : false, 
 								success : function(data) {									
-									page.draw(false); 
+									$("#export").modal('hide'); 
 								},
 								error : function(data) {
 									alert("请求异常");
-								}
-							});
+								}							
 					 });
 						 
 					 });

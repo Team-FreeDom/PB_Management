@@ -204,10 +204,12 @@
 											<button type="button" class="btn btn-info"
 												data-toggle="modal" data-target="#add" id="ZJ">增加</button>
 										</td>
-										<td colspan="8"></td>
-										<td colspan="7" id="button-right">
+										<td colspan="4"></td>
+										<td colspan="11" id="button-right">
+										 <a href="../templet/PersonInfotemplet.zip"  class="btn btn-primary">点击下载导入模板</a>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导入<tton>
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#import">导出</button>
+												data-toggle="modal" data-target="#export">导出</button>
 										</td>
 									</tr>
 									<tr>
@@ -606,7 +608,7 @@
 	</div>
 </div>
 
-			<div class="modal fade" id="import" tabindex="-1" role="dialog"
+			<div class="modal fade" id="export" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:400px;height:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid;">
