@@ -23,10 +23,24 @@ public interface BaseCheckDao {
      * @return 获取部门集合（部门id和具体部门）
      */
     public List<BaseCheck> getDept();
+    /**
+     * 拒绝申请
+     * @param str 封装的id表示哪几条数据
+     * @param status 变为申请失败状态（12）
+     */
+    public void refuseapply(String recordstr);
+    /**
+     * 同意申请
+     * @param str 封装的id表示哪几条数据
+     * @param recordstr 封装的信息记录id和申请年限
+     */
+    public void agreeApply(String str,String recordstr);
     
-    public void refuseapply(String str,int status);
-    
-    public void agreeApply(String str,int date);
-    
+    /**封装消息的方法
+     * 发送消息
+     * @param sql 插入封装好的sql语句
+     */
     public void insertMessage(String sql);
+    
+    
 }

@@ -109,9 +109,13 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	return list;
     }
-    //拒绝申请
+    /**
+     * 拒绝申请
+     * @param str 封装的id表示哪几条数据
+     * @param status 变为申请失败状态（12）
+     */
     @Override
-    public void refuseapply(String str,int status) {
+    public void refuseapply(String recordstr) {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -119,9 +123,8 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.transstate_baseapply(?,?)}");
-	    sp.setString(1, str);
-	    sp.setInt(2, status);
+		    .prepareCall("{call baseweb.transstate_baseapply(?)}");
+	    sp.setString(1, recordstr);	   
 	    sp.execute();    
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -131,9 +134,13 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	
     }
-    //同意
+    /**
+     * 同意申请
+     * @param str 封装的id表示哪几条数据
+     * @param recordstr 封装的信息记录id和申请年限
+     */
     @Override
-    public void agreeApply(String str,int date) {
+    public void agreeApply(String str,String recordstr) {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -143,7 +150,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.agree_baseapply(?,?)}");
 	    sp.setString(1, str);
-	    sp.setInt(2, date);
+	    sp.setString(2, recordstr);
 	    sp.execute();    
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -152,7 +159,10 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}	
     }
-    //插入信息方法
+    /**
+     * 发送消息
+     * @param sql 插入封装好的sql语句
+     */
     @Override
     public void insertMessage(String sql) {
    	System.out.println("insert---start");
