@@ -30,4 +30,10 @@ public interface baseApplyService {
      * @param str2 (基地id,专业id)
      */
     public void getRequestBaseInfo(String str1,String str2);
+    /**
+     * 是否数据库存在此名字
+     * @param name 用户输入的基地名称
+     * @return
+     */
+    public int CheckName(String name);
 }

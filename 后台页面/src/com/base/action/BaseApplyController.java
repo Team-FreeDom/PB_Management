@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,8 @@ import com.base.service.baseApplyService;
 public class BaseApplyController {
     @Autowired
     private baseApplyService baseapplyservice;
-
+    
+    //获得用户输入的数据
     @RequestMapping("/getRequestBaseInfo.do")
     public String getRequestBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -128,13 +131,16 @@ public class BaseApplyController {
 		} else {
 		    filename = null;
 		}
+		//获取当前年份
+		Calendar c=Calendar.getInstance();
+		int year=c.get(Calendar.YEAR);
 		int Baseid = Integer.valueOf((int) d.getTime());
 		str2 += "('" + Baseid + "','" + name + "'," + type + ","
 			+ landarea + "," + constructionarea + "," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
-			+ userid + "')";
-		System.out.println(str2);
+			+ userid +"','"+ year + "')";
+		System.out.println(str2+"拼装好的数据");
 
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
@@ -167,7 +173,7 @@ public class BaseApplyController {
 	return "redirect:baseApply.jsp";
 
     }
-
+    //获取学院和基地类型
     @RequestMapping("/BaseApplyAllInfo.do")
     public String BaseApplyInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -191,7 +197,7 @@ public class BaseApplyController {
 
 	return null;
     }
-
+    //获取部门
     @RequestMapping("/getBaseSingleDept.do")
     public String getBaseSingleDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -211,7 +217,7 @@ public class BaseApplyController {
 
 	return null;
     }
-
+    //根据学院id获取专业
     @RequestMapping("/getMajor.do")
     public String getMajor(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -222,6 +228,34 @@ public class BaseApplyController {
 	    JSONArray json = JSONArray.fromObject(list);
 	    response.setContentType("text/html;charset=UTF-8");
 	    response.getWriter().print(json.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+    //检测用户输入的基地名称是否存在
+    @RequestMapping("/CheckName.do")
+    public String CheckName(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+	boolean flag=false;
+	//获得用户输入的基地名称
+	String name=request.getParameter("name");
+	System.out.println(name+"什么名字");
+	//获得是否存在
+	int a=baseapplyservice.CheckName(name);
+	System.out.println(a+"到底是谁");
+	
+	if(a==0){
+	    flag=false;
+	}else{
+	    flag=true;
+	}
+	System.out.println(flag+"shenme");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	   // JSONObject json=new JSONObject();	   
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

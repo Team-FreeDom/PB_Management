@@ -107,7 +107,7 @@ public class baseApplyDaoImpl implements baseApplyDao {
 		conn = (Connection) SessionFactoryUtils.getDataSource(
 				sessionFactory).getConnection();
 		sp = (CallableStatement) conn
-				.prepareCall("{call baseweb.baseapply(?,?)}");
+				.prepareCall("{call baseweb.base_apply(?,?)}");
 		sp.setString(1, str1);
 		sp.setString(2, str2);
 		sp.execute();
@@ -118,6 +118,29 @@ public class baseApplyDaoImpl implements baseApplyDao {
 		SqlConnectionUtils.free(conn, sp, null);
 	}
 	
+    }
+    //检测用户输入的名称是否存在
+    @Override
+    public int CheckName(String name) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	int flag = 0;
+	try {
+		conn = (Connection) SessionFactoryUtils.getDataSource(
+				sessionFactory).getConnection();
+		sp = (CallableStatement) conn
+				.prepareCall("{call baseweb.check_baseapplyname(?,?)}");
+		sp.setString(1, name);
+		sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	        sp.execute();
+	        flag=sp.getInt(2);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		SqlConnectionUtils.free(conn, sp, null);
+	}
+	return flag;
     }
 
 }

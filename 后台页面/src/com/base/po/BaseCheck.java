@@ -17,8 +17,12 @@ public class BaseCheck {
     private String material_path;//申请材料地址
     private String userid;//用户id
     private String mmajor;//面向专业
+   
     
     
+    
+   
+  
     public BaseCheck(int id, String bid, String name, String type,
 	    String landarea, String constructionarea, int undertake,
 	    String applydp, int aid, String land_address, String username,
@@ -56,6 +60,7 @@ public class BaseCheck {
     public BaseCheck() {
 	super();
     }
+ 
     public int getId() {
         return id;
     }

@@ -31,4 +31,10 @@ public interface baseApplyDao {
      * @param str2 (基地id,专业id)
      */
     public void getRequestBaseInfo(String str1,String str2);
+    /**
+     * 
+     * @param name 用户输入的名称
+     * @return 0-false 1-true
+     */
+    public int CheckName(String name);
 }
