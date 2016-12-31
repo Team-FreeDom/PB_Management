@@ -21,7 +21,13 @@ $(document).ready(function() {
 					"orderable" : false, // 禁用排序
 					"sDefaultContent" : "",
 					"sWidth" : "2%",
-				}, { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
+				},{
+					"mData" : "bid",					
+					"orderable" : false, // 禁用排序
+					"visible":false,
+					"sDefaultContent" : "",
+					"sWidth" : "2%",
+				},  { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
 					"mData" : "name",
 					"orderable" : true, // 禁用排序
 					"sDefaultContent" : "",
@@ -161,6 +167,7 @@ $(document).ready(function() {
 		              				
 						var i=0;
 						var recordstr='';
+						var recorddigit='(';
 						var infostr="[";
 						var userid;
 						var basename;
@@ -168,21 +175,25 @@ $(document).ready(function() {
 						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {					
 							
 							userid=$(this).val();
-							basename=$(this).closest('tr').find('td:eq(2) input').val();
-							date=$("#valideDate option:selected").val();
+							basename=$(this).closest('tr').find('td:eq(3) input').val();
+							date=$(this).closest('tr').find('td:eq(4) select option:selected').val();
 							if(i!=0){
-								recordstr=recordstr+",("+this.className+','+date+')';
+								recordstr=recordstr+",("+$(this).closest('tr').find('td:eq(1) input').val()+','+date+')';
 								infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+								recorddigit=recorddigit+','+this.className;
 								
 							}else{
 								recordstr=recordstr+'('+this.className+','+date+')';
 								infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+								recorddigit=recorddigit+this.className;
 							}					
 											
 								i++;
 							});					
 	                    
 	                    infostr=infostr+']';
+	                    recorddigit=recorddigit+')';                    
+	                   
 	                  
 	                    $.ajax({
 							url : '',
@@ -190,7 +201,8 @@ $(document).ready(function() {
 							dataType : 'json',
 							data : {
 								"resordstr" : recordstr,
-								"infostr" : infostr								
+								"infostr" : infostr,
+								"recorddigit":recorddigit
 							},
 							success : function(msg) {						
 								$("#valideDate").val("10");
@@ -227,9 +239,7 @@ $('#certain').click(function() {
 					i++;
 				});		
         
-         infostr=infostr+']';  
-         alert(recordstr);
-         alert(infostr);
+         infostr=infostr+']';         
          $.ajax({
 				url : '',
 				type : 'post',
@@ -301,7 +311,7 @@ $(document).on("click", "#refuse", function() {
 	 $('input[name="idname"]:checked').each(function(){
 		 index=$(this).data("id");
 		 userid = obj[index].userid;
-		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
+		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+'$'+obj[index].bid+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
 		 
 	 });
 	 
@@ -328,7 +338,7 @@ $(document).on("click", "#confirm", function() {
 	 $('input[name="idname"]:checked').each(function(){
 		 index=$(this).data("id");
 		 userid = obj[index].userid;
-		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>有效周期:</td><td> <select name="valideDate" id="valideDate" style="width:100px;">	'+						 
+		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td><input type="checkbox" hidden value="'+obj[index].bid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>有效周期:</td><td> <select name="valideDate" id="valideDate" style="width:100px;">	'+						 
 				 '<option value="1">1年</option>'+
 				 '<option value="2">2年</option>'+
 				 '<option value="3">3年</option>'+
@@ -353,7 +363,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#undertakeCount").val(obj[index].undertake);
 	$("#username").val(obj[index].username);
 	$("#userphone").val(obj[index].phone);
-	$("#major_oriented").html(obj[index].major);
+	$("#major_oriented").html(obj[index].mmajor);
 	$("#linkAddress").html(obj[index].land_address);
 	
 	if(obj[index].material_path==""){		
@@ -391,7 +401,13 @@ $("#submitS").click(function() {
 					"orderable" : false, // 禁用排序
 					"sDefaultContent" : "",
 					"sWidth" : "2%",
-				}, { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
+				},{
+					"mData" : "bid",					
+					"orderable" : false, // 禁用排序
+					"visible":false,
+					"sDefaultContent" : "",
+					"sWidth" : "2%",
+				},  { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
 					"mData" : "name",
 					"orderable" : true, // 禁用排序
 					"sDefaultContent" : "",

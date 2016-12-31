@@ -59,3 +59,11 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
+#daochu table tr td{
+	width:150px;
+	text-align:center;
+	height:50px;
+}
+#daochu table tr td select{
+	width:190px;
+}

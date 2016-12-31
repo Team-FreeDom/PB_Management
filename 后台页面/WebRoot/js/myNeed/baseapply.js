@@ -30,7 +30,7 @@ $(document).ready(function() {
 			for ( var i=0;i<data[1].length;i++) {				
 				$("#basetype").after(
 						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");				
+								+ data[1][i].name + "</option>");					
 				
 			}	
 			
@@ -253,7 +253,7 @@ $(document).on("click", "#submitForm", function() {
 	}
 	if(!flag1){
 		 bootbox.alert({
-	            message: "上传资料仅限于rar压缩包格式",
+	            message: "上传资料仅限于rar,zip压缩包格式",
 	            size: 'small'
 	        });
 		 return;
@@ -273,9 +273,9 @@ $('#applyfile').change(function() {
     var size = file_size / 1024;
     var extStart = filepath.lastIndexOf(".");
     var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-    if (ext != ".RAR" && ext != ".Z") {
+    if (ext != ".RAR" && ext != ".ZIP") {
         bootbox.alert({
-            message: "上传资料仅限于rar压缩包格式ʽ",
+            message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
         flag1=false;

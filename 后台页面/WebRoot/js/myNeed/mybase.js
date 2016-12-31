@@ -129,7 +129,7 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 						"render":function(data,type, row){
-							obj1=row;
+							obj1.push(row);
 							if(statusid==2){
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
@@ -280,7 +280,7 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 						"render":function(data,type, row){
-							   obj2=row;
+							obj2.push(row);
 								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
 												
 						}
@@ -379,7 +379,7 @@ $(document).ready(function() {
 				
 				
 				$(document).on("click", "#finish", function() {
-					
+					obj2=[];
 					var status=$("#status option:selected").val();					
 					 page2=$('#mybasetable2').dataTable(
 							  {
@@ -507,7 +507,7 @@ $(document).ready(function() {
 										"sDefaultContent" : "",
 										"sWidth" : "8%",
 										"render":function(data,type, row){
-											   obj2=row;
+											   obj2.push(row);
 												return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
 																
 										}
