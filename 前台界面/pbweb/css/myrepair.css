@@ -31,7 +31,7 @@ table thead tr th{
 	text-align:center;}
 table tbody tr td button{
 	float:left;
-	margin-left:10px;}
+	margin-left:5px;}
 table tbody tr td{
 	text-align:center;}
 	
@@ -54,7 +54,7 @@ table tbody tr td{
 	text-align:left;
 	padding-left:13%;
 	}
-#myapply2 span{
+ span{
 	cursor:pointer;}
 .modal{
 	margin-top:5%;}

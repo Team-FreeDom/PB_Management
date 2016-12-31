@@ -133,8 +133,9 @@ $(".ck2").click(function () {//反选
 								"targets" : [0], // 指定的列
 								"data" : "number",
 								"render" : function(data, type, row) {
-									 data=row.id;
-									return '<input type="checkbox" value="'+ data + '" name="idname" class="ck"  />';
+									return '<input type="checkbox" value="'
+								+ data
+								+ '" data-id="'+(obj.length)+'" name="idname" class="ck"/>';
 								}
 							}],
 							
@@ -153,7 +154,7 @@ $(".ck2").click(function () {//反选
 					   }
                     }
 			  });
-//获取申报部门
+//获取基地名称列表
 $.ajax({
 	url : '',
 	type : 'post',
@@ -201,7 +202,7 @@ $(document).on("click", "#scanDetail", function() {
 								}
 					else{
 							bootbox.confirm({
-							message: "是否确认删除",
+							message: "是否同意申请",
 							size: 'small',
 							buttons: {
 								confirm: {
@@ -254,7 +255,7 @@ $(document).on("click", "#scanDetail", function() {
 				  });
 				  
 			  //拒绝申请
-			  $("#refuse").click(function (){
+			  $("#saverefuse").click(function (){
 				  flag=0;
 					$("#Approveing input[name='idname']").each(function () {
 							if($(this).prop("checked")==true){
@@ -270,7 +271,7 @@ $(document).on("click", "#scanDetail", function() {
 								}
 					else{
 							bootbox.confirm({
-							message: "是否确认删除",
+							message: "是否拒绝申请",
 							size: 'small',
 							buttons: {
 								confirm: {
@@ -284,11 +285,9 @@ $(document).on("click", "#scanDetail", function() {
 							},
 							callback: function (result) {
 								if(result){
-									
 									var refusestr = '(';//拒绝记录的格式(1,2,3,4,5)
 									var keyid;
 									$("input[type='checkbox'][name='idname']:checked").each(function() {
-															keyid = $(this).data("id");
 															if (i != 0) {
 																refusestr = refusestr+ ','+ $(this).val();
 															}
@@ -298,6 +297,7 @@ $(document).on("click", "#scanDetail", function() {
 															i++;
 														});
 										refusestr = refusestr + ')';
+										
 										$.ajax({
 											url : '',
 											type : 'post',
@@ -322,13 +322,24 @@ $(document).on("click", "#scanDetail", function() {
 				  
 				  });
 				  
+$("#saverefuse").click(function (){
+	$(".Rtr").remove();
+	$("input[type='checkbox'][name='allcheckbox']:checked").each(function() {
+	index=$(this).data("id");
+	$("#refusetable").append('<tr class="Rtr"><td>基地名称：<td><td><input type="text" class="form-control" value="'+obj[index].basename+'" disabled></td>'
+	+'<td>申请人: </td><td><input type="text" class="form-control" value="'+obj[index].name+'" disabled></td>'
+	+'<td>拒绝理由: </td><td><textarea row=1 col=1 id="reason"></textarea></td>'+'</tr>');
+		});
+	$("#refuseModal").modal('show');
+	})	
 				  
 //维修中——完成操作
 $("#finished").click(function (){
 		$(".Rtr").remove();
 		$("input[type='checkbox'][name='allcheckbox2']:checked").each(function() {
-			$("#finishtable").append('<tr class="Rtr"><td>基地名称：<td><td><input type="text" class="form-control" disabled></td>'
-			+'<td>申请人: </td><td><input type="text" class="form-control" disabled></td>'
+			index=$(this).data("id");
+			$("#finishtable").append('<tr class="Rtr"><td>基地名称：</td><td><input type="text" value="'+obj[index].basename+'" class="form-control" disabled></td>'
+			+'<td>申请人: </td><td><input type="text" class="form-control"  value="'+obj[index].name+'" disabled></td>'
 			+'<td>实际金额: </td><td><input class="form-control"></td>'+'</tr>');
 		});
 		$("#myfinishedModal").modal('show');
@@ -342,6 +353,83 @@ $("#finished").click(function (){
 	"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 	"iDisplayLength" : 2,  //默认每页显示多少条记录
 	"dom":'ftipr<"bottom"l>',
+	"ajax" : {
+			"url" : "",
+			"type" : "POST"
+			},
+	"aoColumns" : [
+			{
+			"mData" : "id",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "projectname",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "basename",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "name",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "time",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "budget",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "status",
+			"orderable" : true, // 禁用排序
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "reason",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "address",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "linkaddress",
+			"orderable" : true, // 禁用排序
+			"visible" :false,
+			"sDefaultContent" : "",
+			},
+			{
+			"mData" : "id",
+			"orderable" : false, // 禁用排序
+			"sDefaultContent" : '',
+			"render":function(data,type,row){					
+			obj.push(row);							
+			return data="<span type='button' class='icon-search' value='"+(obj.length-1)+ "' id='scanDetail'>查看</span>";
+				}
+			}
+			],
+		"columnDefs" : [ {
+			"orderable" : false, // 禁用排序
+			"targets" : [ 0 ], // 指定的列
+			"data" : "id",
+			"render" : function(data,type,row) {
+					data = row.la_id;
+					return '<input type="checkbox" value="'+ data+ '" name="idname" class="ck"  />';
+					}
+			} ],
      "language": {
                "lengthMenu": "每页 _MENU_ 条记录",
                "zeroRecords": "没有找到记录",

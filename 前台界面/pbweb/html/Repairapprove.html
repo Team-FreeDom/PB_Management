@@ -313,7 +313,26 @@
                                   </table>
                               </form>
                               </div>
-                             
+                              
+<div class="modal fade" id="refuseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:800px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">拒绝详情</h4>
+      </div>
+      <div class="modal-body" id="modalbody">
+       	<table id="refusetable" class="table">
+        
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="saverefuse">保存</button>
+      </div>
+    </div>
+  </div>
+</div>                             
                                <div class="modal fade" id="Checkdetal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                 <div class="modal-content" style="border:#3071a9 8px solid">
@@ -494,9 +513,9 @@
     <div class="modal-content" style="width:800px">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title">完成详情</h4>
       </div>
-      <div class="modal-body" id="modalbody">
+      <div class="modal-body">
        	<table id="finishtable" class="table">
         
         </table>
