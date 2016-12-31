@@ -79,3 +79,6 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
+.Rtr td -> textarea{
+	height:80px!important;
+	}
