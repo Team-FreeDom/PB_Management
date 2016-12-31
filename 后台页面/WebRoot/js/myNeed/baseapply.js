@@ -30,7 +30,10 @@ $(document).ready(function() {
 			for ( var i=0;i<data[1].length;i++) {				
 				$("#basetype").after(
 						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");					
+								+ data[1][i].name + "</option>");	
+				$("#daobase").after(
+						"<option value="+data[1][i].id+">"
+								+ data[1][i].name + "</option>");
 				
 			}	
 			
@@ -75,21 +78,22 @@ $(document).on("blur", "#basename", function() {
 		
 		 $.ajax({
 				type : 'POST',
-				dataType : 'json',
 				data:{
 					"name":value
 				},
-				url : '', 
+				dataType:'text',
+				url : 'CheckName.do', 
 				async : false,
 				cache : false,
 				error : function(request) {
 					alert("error");
 				},
-				success : function(data) {			
-					if(data.flag==true){
-						$("#display").val("");
-					}else{
-						$("#display").val("该基地名称已存在，请重新输入");
+				success : function(data) {	
+					
+					if(data=="false"){						
+						$("#display").html("");
+					}else{						
+						$("#display").html("该基地名称已存在，请重新输入");
 						$("#basename")[0].focus();
 						tag=false;
 					}
