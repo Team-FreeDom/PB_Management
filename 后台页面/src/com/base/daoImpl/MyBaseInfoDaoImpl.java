@@ -72,7 +72,8 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		ch.setApplydp(rs.getString("dept"));
 		ch.setMmajor(rs.getString("mname"));		
 		ch.setReason(rs.getString("reason"));
-		ch.setValid_date(rs.getInt("valid"));		
+		ch.setValid_date(rs.getInt("valid"));	
+		ch.setApplytime(rs.getString("buildtime"));//即将加入申请时间
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

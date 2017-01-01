@@ -178,9 +178,19 @@ public class MybaseController {
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
 		System.out.println(size + "当前几条记录lalalalala");
-		// 获取状态值
+		// 获取状态值 失败0；成功：1 失效：2     正常情况 失败：12 成功：6 失效：11
 		Integer status = Integer.parseInt(request
 			.getParameter("status"));
+		System.out.println(status+"这个状态值是多少aaaa");
+		if(status==0){
+		    status=12;
+		}else if(status==1){
+		    status=6;
+		}else if(status==2){
+		    status=11;
+		}else{
+		    status=-2;
+		}
 		System.out.println(status+"这个状态值是多少");
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request
