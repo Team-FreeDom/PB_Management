@@ -67,3 +67,6 @@ tbody tr td span{
 #daochu table tr td select{
 	width:190px;
 }
+#baseMaintain tr td{
+	 pointer-events:none;
+}

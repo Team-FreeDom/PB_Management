@@ -21,7 +21,7 @@ public interface BaseCheckService {
      * @return 基地审核信息
      */
     public BaseCheckList getBaseCheck(int applydpid, int pageindex, int size,
-	    int order, String orderDir);
+	    int order, String orderDir,String searchValue);
 
     /**
      * 

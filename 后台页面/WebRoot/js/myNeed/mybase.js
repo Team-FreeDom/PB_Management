@@ -13,7 +13,7 @@ $(document).ready(function() {
 					"iDisplayLength": 5,				
 					"dom" : 'tipr<"bottom"l>',
 					"ajax" : {
-						"url" : "",
+						"url" : "MybaseInfo.do",
 						"type" : "POST"
 					},
 					"aoColumns" : [ 
@@ -61,17 +61,19 @@ $(document).ready(function() {
 					},
 					{
 						"mData" : "username",
+						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "8%"
 					}, {
 						"mData" : "phone",
 						"orderable" : false, // 禁用排序
+						"visible":false,
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "major",
+						"mData" : "mmajor",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
@@ -94,14 +96,14 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					},{
-						"mData" : "time",
+						"mData" : "applytime",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 
 					},{
-						"mData" : "limitTime",
+						"mData" : "valid_date",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
@@ -117,7 +119,7 @@ $(document).ready(function() {
 					},
 					
 					{
-						"mData" : "status",
+						"mData" : "statusdigital",
 						"visible":true,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
@@ -130,11 +132,11 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 						"render":function(data,type, row){
 							obj1.push(row);
-							if(statusid==2){
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>'+
+							if(data==2){
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
 							}else{
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>';
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}							
 						}
 					}
@@ -166,7 +168,7 @@ $(document).ready(function() {
 					"iDisplayLength": 5,				
 					"dom" : 'tipr<"bottom"l>',
 					"ajax" : {
-						"url" : "",
+						"url" : "MybaseInfo2.do",
 						"type" : "POST"
 					},
 					"aoColumns" : [ 
@@ -214,17 +216,19 @@ $(document).ready(function() {
 					},
 					{
 						"mData" : "username",
+						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "8%"
 					}, {
 						"mData" : "phone",
+						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "major",
+						"mData" : "mmajor",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
@@ -247,14 +251,14 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					},{
-						"mData" : "time",
+						"mData" : "applytime",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "8%",
 
 					},{
-						"mData" : "limitTime",
+						"mData" : "valid_date",
 						"visible":false,
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
@@ -268,7 +272,7 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					},{
-						"mData" : "status",
+						"mData" : "statusdigital",
 						"visible":true,
 						"orderable" : true, // 禁用排序
 						"sDefaultContent" : "",
@@ -281,7 +285,7 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 						"render":function(data,type, row){
 							obj2.push(row);
-								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
+								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
 												
 						}
 					}
@@ -309,7 +313,7 @@ $(document).ready(function() {
 					var tag=str.substring(position+1);
 					var object=[];
 					if(tag==1){
-						object=obj;
+						object=obj1;
 					}else{
 						object=obj2;
 					}
@@ -324,13 +328,13 @@ $(document).ready(function() {
 					$("#undertakeCount").val(object[index].undertake);
 					$("#username").val(object[index].username);
 					$("#userphone").val(object[index].phone);
-					$("#major_oriented").html(object[index].major);
+					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
 					$("#resource").prop("href",object[index].material_path);
 					
 					if(statusid==6){
-						$("#setdate").val(object[index].time);
-						$("#validdate").val(object[index].limitTime);
+						$("#setdate").val(object[index].applytime);
+						$("#validdate").val(object[index].valid_date);
 						$("#hidecol").prop("hidden",false);
 					}else if(statusid==12){
 						$("#reason").html(object[index].reason);
@@ -347,25 +351,28 @@ $(document).ready(function() {
 
 				//撤回按钮，传给后台id
 				$(document).on("click", "#cancelOneModal", function() {
-					var index=$(this).val();	
-				  	var basename=obj[index].name;
-				  	var userid=obj[index].userid;
+					alert ("进去了么");
+					var index=$(this).val();
+					alert(index);
+				  	var basename=obj1[index].name;
+				  	var userid=obj1[index].userid;
 				  	var info_str='[{userid:"'+userid+'",basename:"'+basename+'"}]';
-				  	var id=obj[index].id;
+				  	var id=obj1[index].id;
 				  	$.ajax({
 				  		type : 'POST',
 				  		dataType : 'json',
-				  		data:{"id":id,
-				  			  "infostr":info_str
+				  		data:{
+				  			"id":id,
+				  			"infostr":info_str
 				  		},
-				  		url : '',   //
+				  		url : 'recall.do',   //
 				  		async : false,
 				  		cache : false,
 				  		error : function(request) {
 				  			alert("error");
 				  		},
 				  		success : function(data) {
-				  			
+				  			alert("撤回了么");
 				  			bootbox.alert({
 				  				message : "成功撤回",
 				  				size : 'small'
@@ -392,7 +399,7 @@ $(document).ready(function() {
 									"bDestroy":true,
 									"dom" : 'tipr<"bottom"l>',
 									"ajax" : {
-										"url" : "",
+										"url" : "getStatus.do",
 										"type" : "POST",
 										"data":{"status":status}
 									},
@@ -441,11 +448,13 @@ $(document).ready(function() {
 									},
 									{
 										"mData" : "username",
+										"visible":false,
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "8%"
 									}, {
 										"mData" : "phone",
+										"visible":false,
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "8%",
@@ -495,7 +504,7 @@ $(document).ready(function() {
 										"sWidth" : "8%",
 
 									},{
-										"mData" : "status",
+										"mData" : "statusdigital",
 										"visible":true,
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",

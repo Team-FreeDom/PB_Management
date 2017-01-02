@@ -441,7 +441,11 @@
 								<div class="col-md-12">
 									<form action="" method="post" class="form-horizontal"
 										role="form" id="applyeditform">
-										<table class="table">
+										<table class="tableupdate">
+										    <tr>
+												<td>基地编号：</td>											
+												<td colspan="3"><input type="text" id="baseid" disabled /></td>
+											</tr>
 											<tr>
 												<td>基地名称 ：</td>
 												<td><input type="text" id="basenamed" disabled></td>
@@ -493,6 +497,14 @@
 												<td><input type="text" id="setdated" disabled></td>
 												<td>有效周期 ：</td>
 												<td><input type="text" id="validdated" disabled></td>
+											</tr>
+											<tr id="hidecol">
+												<td>星级：</td>											
+												<td colspan="3"><div id="starget"></div></td>
+											</tr>
+											<tr id="hidecol">
+												<td>续期：</td>											
+												<td colspan="3"><input type="text" id="adddate" >个月</td>
 											</tr>
 
 										</table>
