@@ -40,7 +40,6 @@ public class MybaseController {
 	    if (co.getName().equals("username")) {
 		// 获取userid
 		String userid = co.getValue();
-		System.out.println(userid + "哈哈哈哈");
 		// 获取年份
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -74,7 +73,7 @@ public class MybaseController {
 		MyBaseList str = null;
 		String columnName = "id";
 		str = mybaseinfoservice.MybaseInfo(pageindex, size, columnName,
-			orderDir, year, -1, userid);
+			orderDir, year, status, userid);
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw", draw);
 		getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -117,7 +116,6 @@ public class MybaseController {
 									// desc
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
-		System.out.println(pageindex + "当前第几页lalalla");
 		// 打包状态的id（status）2-待审核 6-申请成功 11-失效 12-申请失败
 		// Integer st =
 		// Integer.parseInt(request.getParameter("status"));

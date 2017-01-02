@@ -47,60 +47,29 @@ public class BaseCheckController {
 	    HttpServletResponse response, ModelMap map) {
 	// 获取申请部门id
 	int applydpid = -1;
+	// 获取用户过滤框里的字符
+	String searchValue = request.getParameter("search[value]");
+	if (searchValue.equals("")) {
+	    searchValue = null;
+	}
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
 	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
-	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or // desc
+	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
+								// // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
 	BaseCheckList str = null;
 	str = basecheckservice.getBaseCheck(applydpid, pageindex, size, order,
-		orderDir);
-	/*List<BaseCheck> li = new ArrayList();
-	int aid = 0,undertake=0,id=0;
-	String name = null,bid=null,type=null,landarea=null,constructionarea=null,applydp=null,land_address=null,username=null,phone=null,material_path=null,userid=null;
-	List<BaseCheck> list=str.getData();
-	for (int i = 0; i <list.size(); i++) {	
-	    id=list.get(i).getId();	   
-	    aid=list.get(i).getAid();
-	    bid=list.get(i).getBid();
-	    name=list.get(i).getName();
-	    type=list.get(i).getType();
-	    landarea=list.get(i).getLandarea();
-	    constructionarea=list.get(i).getConstructionarea();
-	    undertake=list.get(i).getUndertake();
-	    applydp=list.get(i).getApplydp();
-	    land_address=list.get(i).getLand_address();
-	    username=list.get(i).getUsername();
-	    phone=list.get(i).getPhone();
-	    material_path=list.get(i).getMaterial_path();
-	    userid=list.get(i).getUserid();
-	}
-	   BaseCheck ch=new BaseCheck();
-	   ch.setId(id);
-	    ch.setAid(aid);
-	    ch.setBid(bid);
-	    ch.setName(name);
-	    ch.setType(type);
-	    ch.setApplydp(applydp);
-	    ch.setLandarea(landarea);
-	    ch.setConstructionarea(constructionarea);
-	    ch.setUndertake(undertake);	
-	    ch.setLand_address(land_address);
-	    ch.setUsername(username);
-	    ch.setPhone(phone);	 	    
-	    ch.setMaterial_path( material_path);
-	   // ch.setMmajor(baseCheck.getMmajor());       
-	    ch.setUserid(userid);
-	   li.add(ch);*/
+		orderDir, searchValue);
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
 	getObj.put("recordsTotal", str.getRecordsTotal());
-	getObj.put("data",str.getData());
+	getObj.put("data", str.getData());
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {
@@ -138,13 +107,18 @@ public class BaseCheckController {
     @RequestMapping("/getXUBaseCheck.do")
     public String getXUBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
+	// 获取用户过滤框里的字符
+	String searchValue = request.getParameter("search[value]");
+	if (searchValue.equals("")) {
+	    searchValue = null;
+	}
 	// 获取申请部门id
-	String Str=request.getParameter("dept");
+	String Str = request.getParameter("dept");
 	Integer applydpid;
-	if(Str.equals("")){
-	    applydpid=-1;
-	}else{
-	    applydpid= Integer.parseInt(Str);   
+	if (Str.equals("")) {
+	    applydpid = -1;
+	} else {
+	    applydpid = Integer.parseInt(Str);
 	}
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
@@ -152,12 +126,14 @@ public class BaseCheckController {
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
 	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
-	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or								// // desc
+	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
+								// // // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-	
+
 	BaseCheckList str = null;
-	str = basecheckservice.getBaseCheck(applydpid, pageindex, size, order,orderDir);
+	str = basecheckservice.getBaseCheck(applydpid, pageindex, size, order,
+		orderDir, searchValue);
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -177,15 +153,15 @@ public class BaseCheckController {
     @RequestMapping("/BaserefuseApply.do")
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	//包装单选框的id信息
+	// 包装单选框的id信息
 	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr+"看看是什么");
-	//获取前台json消息数据
+	System.out.println(recordstr + "看看是什么");
+	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr+"消息是什么");
-	//获取拒绝理由
-	//String reason=request.getParameter("reason");
-	basecheckservice.refuseapply(recordstr,infostr);
+	System.out.println(infostr + "消息是什么");
+	// 获取拒绝理由
+	// String reason=request.getParameter("reason");
+	basecheckservice.refuseapply(recordstr, infostr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理失败");
 	response.setContentType("text/html;charset=UTF-8");
@@ -197,20 +173,21 @@ public class BaseCheckController {
 	}
 	return null;
     }
- // 同意申请(并且发送消息给用户)
+
+    // 同意申请(并且发送消息给用户)
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	System.out.println("哈哈哈哈哈哈");
-	//封装的记录id和申请年限
+	// 封装的记录id和申请年限
 	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr+"单选");
-	//获取前台json消息数据
+	System.out.println(recordstr + "单选");
+	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	//获取单选id
-	String recorddigit=request.getParameter("recorddigit");
-	System.out.println(recorddigit+"什么字符串");
-	basecheckservice.agreeApply(recorddigit,infostr,recordstr);
+	// 获取单选id
+	String recorddigit = request.getParameter("recorddigit");
+	System.out.println(recorddigit + "什么字符串");
+	basecheckservice.agreeApply(recorddigit, infostr, recordstr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");
