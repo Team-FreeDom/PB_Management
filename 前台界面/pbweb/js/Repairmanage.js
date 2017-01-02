@@ -137,12 +137,15 @@ $(document).ready(function() {
  			},
  			success : function(data) {
  				 for (var i=0;i<data[0].length;i++) {
- 					$("#Ebasename").after(
- 							"<option value="+data[0][i].name+">"
- 									+data[0][i].name+"</option>");
- 									$("#Abasename").after(
+ 					$("#EbasenameID").after(
+ 							"<option value="+data[0][i].basename+">"
+ 									+data[0][i].basename+"</option>");
+ 									$("#AbasenameID").after(
  				 							"<option value="+data[0][i].name+">"
- 				 									+data[0][i].name+"</option>");
+ 				 									+data[0][i].basename+"</option>");
+													$("#SbasenameID").after(
+														"<option value="+data[0][i].name+">"
+																+data[0][i].basename+"</option>");
 
  				 }
  			}
@@ -361,5 +364,37 @@ $('.file').change(function() {
                 	}); 
 					$("#ck1").prop("checked", false); 
            		 }); 
+	
+$("#import").click(function (){//每次点击导出是清空数据
+	$("#Sbasename").val("1");
+	$("#year").val("");
+	});	
+	
+$("#export").click(function (){
+	
+	var basename=$("#Sbasename option:selected").val();
+	var year=$("#year").val();
+	if(basename=="1"){
+		basename=null;
+	}
+	if(year==''){
+		year="-1";
+		}
+	$.ajax(
+	{
+		url:'',
+		type:POST,
+		datatype:'json',
+		data:{
+			"basename": basename,
+			"year":year,
+			}
+		}
+	
+	);
+	
+	})
+	
+	
 				 					 					
 });

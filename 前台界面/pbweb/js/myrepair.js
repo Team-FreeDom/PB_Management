@@ -97,10 +97,10 @@ var page1=$('#myrepair').dataTable(
 				"render":function(data,type,row){					
 						obj1.push(row);							
 						if(statusid==2){
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>'+
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
 							}else{
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>';
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}
 					}
 					
@@ -212,7 +212,7 @@ var page2=$('#myrepair2').dataTable(
 				//"sWidth" : "",
 				"render":function(data,type, row){
 							obj2.push(row);
-								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
+								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
 												
 					}
 				}
@@ -236,7 +236,10 @@ var page2=$('#myrepair2').dataTable(
 
 //查看详情
 $(document).on("click", "#scan", function() {	
-					var str=$(this).val();
+					var str=$(this).attr("value");
+					var position=str.indexOf('$');
+					var index=str.substring(0,position);
+					var tag=str.substring(position+1);
 					var object=[];
 					if(tag==1){
 						object=obj;
@@ -295,6 +298,7 @@ $(document).on("click", "#finish", function() {
 					"aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 2,  //默认每页显示多少条记录
+					"bDestroy":true,
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
 								"data" : {
