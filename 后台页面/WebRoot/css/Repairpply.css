@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+.bordor-style{
+	border:#416793 3px solid;
+	background:#FFF;}
+.interval{
+	margin:30px auto;
+	color:#416793;
+	font-size:2em;
+	font-weight:bolder;}
+.padding-style{
+	padding:0 30px;}
+
