@@ -28,7 +28,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
      */
     @Override
     public BaseCheckList getBaseCheck(int applydpid, int pageindex,int size,
-	     String columnName, String orderDir)  {
+	     String columnName, String orderDir,String searchValue)  {
 	List<BaseCheck> list = new ArrayList<BaseCheck>();
 	int recordsTotal = 0;
 	Connection conn = null;
@@ -38,21 +38,22 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.query_baseapply(?,?,?,?,?,?)}");
+		    .prepareCall("{call baseweb.query_baseapply(?,?,?,?,?,?,?)}");
 	    sp.setInt(1, applydpid);
 	    sp.setInt(2, size);
 	    sp.setInt(3, pageindex);
 	    sp.setString(4, columnName);
 	    sp.setString(5, orderDir);
-	    sp.registerOutParameter(6, java.sql.Types.INTEGER);
+	    sp.setString(6, searchValue);
+	    sp.registerOutParameter(7, java.sql.Types.INTEGER);
 	    sp.execute();
-	    recordsTotal = sp.getInt(6);
+	    recordsTotal = sp.getInt(7);
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		BaseCheck ch = new BaseCheck();
 		ch.setId(rs.getInt("id"));
 		ch.setBid(rs.getString("bids"));
-		ch.setName(rs.getString("basename"));		
+		ch.setName(rs.getString("basename"));
 		ch.setLandarea(rs.getString("landarea"));
 		ch.setConstructionarea(rs.getString("constructionarea"));
 		ch.setLand_address(rs.getString("land_address"));

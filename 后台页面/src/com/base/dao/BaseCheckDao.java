@@ -17,7 +17,7 @@ public interface BaseCheckDao {
      * @param orderDir  排序顺序
      * @return 基地审核信息
      */
-    public BaseCheckList getBaseCheck(int applydpid,int pageindex,int size, String columnName, String orderDir);
+    public BaseCheckList getBaseCheck(int applydpid,int pageindex,int size, String columnName, String orderDir,String searchValue);
     /**
      * 
      * @return 获取部门集合（部门id和具体部门）

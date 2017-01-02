@@ -33,7 +33,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
      */
     @Override
     public BaseCheckList getBaseCheck(int applydpid, int pageindex, int size,
-	    int order, String orderDir) {
+	    int order, String orderDir,String searchValue) {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
@@ -45,7 +45,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	    columnName = "dept";
 	}
 	BaseCheckList list = basecheckdao.getBaseCheck(applydpid, pageindex,
-		size, columnName, orderDir);
+		size, columnName, orderDir,searchValue);
 	return list;
     }
 
