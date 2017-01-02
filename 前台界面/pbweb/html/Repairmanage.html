@@ -197,7 +197,7 @@
                                             <button type="button" class="btn btn-danger" id="delete">删除</button>
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add" id="ZJ">增加</button>
                                             </td>
-                                            <td colspan="5" >
+                                            <td colspan="6" >
                                             </td>
                                              <td colspan="3" id="button-right">
                                              	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导出</button>
@@ -210,8 +210,9 @@
                                             <th>基地名称</th>
                                             <th>申报人</th>
                                             <th>申报时间</th>
-                                            <th>预算金额</th>
+                                            <th>实际金额</th>
                                             <th>申请状态</th>
+                                            <th hidden>实际金额</th>
                                             <th hidden>具体地址</th>
                                             <th hidden>原因说明</th>
                                             <th hidden>材料地址</th>
@@ -332,6 +333,10 @@
                                                 <tr>
                                                     <td>预算金额 ： </td>
                                                    <td><input type="text"  class="form-control" id="Ebudget" value="30000"></td>
+                                                </tr>
+                                               <tr>
+                                                    <td>实际金额 ： </td>
+                                                   <td><input type="text"  class="form-control" id="Emoney" value="30000"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>具体位置 ： </td>
