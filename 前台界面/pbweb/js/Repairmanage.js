@@ -48,13 +48,19 @@ $(document).ready(function() {
 										"sDefaultContent" : "",
 									},
 									{
-										"mData" : "budget",
+										"mData" : "money",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 									},
 									{
 										"mData" : "status",
 										"orderable" : true, // 禁用排序
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "budget",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
 										"sDefaultContent" : "",
 									},
 									{
@@ -280,6 +286,7 @@ $(document).on("click", "#checkdetale", function() {
 	$("#Ename").val(obj[index].name);
 	$("#Etime").val(obj[index].time);
 	$("#Ebudget").val(obj[index].budget);
+	$("#Emoney").val(obj[index].money);
 	$("#Eaddress").val(obj[index].address);
 	$("#Ereason").val(obj[index].reason);
 	$("#Elink").prop("href",obj[index].linkaddress);
