@@ -404,4 +404,3 @@ $(document).on("click", "#finish", function() {
 	});
 		
 } );
-			
