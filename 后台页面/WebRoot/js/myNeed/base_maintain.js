@@ -183,7 +183,7 @@ $(document)
 											"render" : function(data, type, row) {											
 												return '<label><input type="checkbox" name="recordcheck" value="'
 														+ data
-														+ '" class="ck"></label>';
+														+ '" class="ck" id="checkHa"></label>';
 											}
 										} ],
 
@@ -640,7 +640,7 @@ $(document)
 
 																	return '<label><input type="checkbox" name="recordcheck" value="'
 																			+ data
-																			+ '" class="ck"></label>';
+																			+ '" class="ck" id="checkHa"></label>';
 																}
 															} ],
 

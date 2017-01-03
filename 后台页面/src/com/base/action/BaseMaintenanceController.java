@@ -41,7 +41,7 @@ import com.base.serviceImpl.InputExcelServiceImpl;
 import com.base.utils.ExcelReport;
 
 /**
- * 基地维护
+ * 鍩哄湴缁存姢
  * 
  *
  */
@@ -60,25 +60,25 @@ public class BaseMaintenanceController {
     @RequestMapping("/sendBaseinfo.do")
     public String sendBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){	
-	// 获取当前页面的传输几条记录
+	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�  
+    	System.out.println("获得");
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	
-	// 数据起始位置
+	// 鏁版嵁璧峰浣嶇疆
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));	
-	int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
-    String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+	int order = Integer.valueOf(request.getParameter("order[0][column]"));//鎺掑簭鐨勫垪鍙� 
+    String orderDir = request.getParameter("order[0][dir]");//鎺掑簭鐨勯『搴廰sc or desc 
     String searchValue = request.getParameter("search[value]");
 	if (searchValue.equals("")) {
 		searchValue = null;
 	}
-	// 通过计算求出当前页面为第几页
+	// 閫氳繃璁＄畻姹傚嚭褰撳墠椤甸潰涓虹鍑犻〉
 	Integer pageindex = (startIndex / size + 1);
 	
 	MaintenanceList str=null;
-	/*此处写str接受的方法如：str = userinfoservice.manger(pageindex, size);*/
-	str=maintenanceservice.maintenance(pageindex, size,order,orderDir,searchValue);
-	
+	/*姝ゅ鍐檚tr鎺ュ彈鐨勬柟娉曞锛歴tr = userinfoservice.manger(pageindex, size);*/
+	str=maintenanceservice.maintenance(pageindex, size,order,orderDir,searchValue);	
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -95,7 +95,7 @@ public class BaseMaintenanceController {
 	return null;	
     }
     
-    //删除基地信息
+    //鍒犻櫎鍩哄湴淇℃伅
     @RequestMapping("/delBaseinfo.do")
     public String delBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -117,7 +117,7 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
-    //获得基地类型和申报部门
+    //鑾峰緱鍩哄湴绫诲瀷鍜岀敵鎶ラ儴闂�
     @RequestMapping("/getManyinfo.do")
     public String getManyinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -142,22 +142,23 @@ public class BaseMaintenanceController {
     @RequestMapping("/getshaiBaseinfo.do")
     public String getshaiBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
+    	System.out.println("筛选");
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
     	int dept=Integer.valueOf(request.getParameter("dept"));
     	int star=Integer.valueOf(request.getParameter("star"));
     	
-    	// 获取当前页面的传输几条记录
+    	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�
     	int size = Integer.parseInt(request.getParameter("length"));    	
-    	// 数据起始位置
+    	// 鏁版嵁璧峰浣嶇疆
     	int startIndex = Integer.parseInt(request.getParameter("start"));
     	int draw = Integer.parseInt(request.getParameter("draw"));
-    	int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
-        String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+    	int order = Integer.valueOf(request.getParameter("order[0][column]"));//鎺掑簭鐨勫垪鍙� 
+        String orderDir = request.getParameter("order[0][dir]");//鎺掑簭鐨勯『搴廰sc or desc 
         String searchValue = request.getParameter("search[value]");
     	if (searchValue.equals("")) {
     		searchValue = null;
     	}
-    	// 通过计算求出当前页面为第几页
+    	// 閫氳繃璁＄畻姹傚嚭褰撳墠椤甸潰涓虹鍑犻〉
     	int pageindex = (startIndex / size + 1);
     	
     	MaintenanceList str=maintenanceservice.getshaiBaseInfo(basetype,dept,star,pageindex, size,order,orderDir,searchValue);
@@ -178,7 +179,7 @@ public class BaseMaintenanceController {
     	return null;	
     }
     
-    //修改基地信息
+    //淇敼鍩哄湴淇℃伅
     @RequestMapping("/updateBaseInfo.do")
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -222,9 +223,9 @@ public class BaseMaintenanceController {
 			String fullFileName = path + "/BaseInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportBaseInfo(list, fullFileName);
-			String filename = "实习基地信息表.xlsx";			
+			String filename = "瀹炰範鍩哄湴淇℃伅琛�xlsx";			
 
-			// 显示中文文件名
+			// 鏄剧ず涓枃鏂囦欢鍚�
 			response.setContentType("application/octet-stream;charset=UTF-8");
 			try {
 				response.setContentType("application/octet-stream");  
@@ -241,7 +242,7 @@ public class BaseMaintenanceController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// 读取文件
+			// 璇诲彇鏂囦欢
 			InputStream in=null;
 			OutputStream out = null;
 			try {
@@ -270,14 +271,14 @@ public class BaseMaintenanceController {
     public String importBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) throws IOException{
     	
-    	// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+    	// 涓婁紶鏂囦欢锛堝浘鐗囷級锛屽皢鏂囦欢瀛樺叆鏈嶅姟鍣ㄦ寚瀹氳矾寰勪笅锛屽苟鑾峰緱鏂囦欢鐨勭浉瀵硅矾寰�
     			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-    			// 得到上传的文件
+    			// 寰楀埌涓婁紶鐨勬枃浠�
     			MultipartFile mFile = multipartRequest.getFile("fileResource");
-    			// 得到上传服务器的路径
+    			// 寰楀埌涓婁紶鏈嶅姟鍣ㄧ殑璺緞
     			String path = request.getSession().getServletContext()
     					.getRealPath("/upload/");
-    			// 得到上传的文件的文件名
+    			// 寰楀埌涓婁紶鐨勬枃浠剁殑鏂囦欢鍚�
     			String fileName = mFile.getOriginalFilename();
     			String filename = "";
     			if (!fileName.isEmpty()) {
@@ -286,21 +287,21 @@ public class BaseMaintenanceController {
     				byte[] b = new byte[1048576];
     				int length = inputStream.read(b);
     				path += "\\" + filename;
-    				// 文件流写到服务器端
+    				// 鏂囦欢娴佸啓鍒版湇鍔″櫒绔�
     				File tempFile = new File(path);
     				FileOutputStream outputStream = new FileOutputStream(tempFile);
     				outputStream.write(b, 0, length);
     				
-    				filename = path;   //这是文件在服务器的绝对路径
-    				//遍历文件中的数据：下面的list为读出的数据
+    				filename = path;   //杩欐槸鏂囦欢鍦ㄦ湇鍔″櫒鐨勭粷瀵硅矾寰�
+    				//閬嶅巻鏂囦欢涓殑鏁版嵁锛氫笅闈㈢殑list涓鸿鍑虹殑鏁版嵁
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
     				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(
     						InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
-    				//System.out.println("获得数据啦！！！！！！！！！");
-    				// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
+    				//System.out.println("鑾峰緱鏁版嵁鍟︼紒锛侊紒锛侊紒锛侊紒锛侊紒");
+    				// 锛侊紒锛侊紒锛侊紒娉ㄦ剰姝ゅ鏄亶鍘唋ist锛屽彲鍦ㄤ笅闈㈠啓鎻掑叆鏁版嵁搴撶殑璇彞
     				
     				if(CollectionUtils.isNotEmpty(list)){
-    				//实现批量插入
+    				//瀹炵幇鎵归噺鎻掑叆
     				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,type,applydp,land_address,"
     						+ "undertake) values";
     				String prefix2="INSERT IGNORE INTO baseweb.basemajor(pid,maid) values";
@@ -308,21 +309,21 @@ public class BaseMaintenanceController {
     				
     				 StringBuffer suffix = new StringBuffer(); 
     				 StringBuffer suffix2 = new StringBuffer(); 
-    				// 遍历行（下面当i为0时可看到列头名）
+    				// 閬嶅巻琛岋紙涓嬮潰褰搃涓�鏃跺彲鐪嬪埌鍒楀ご鍚嶏級
     				for (int i = 1; i < list.size(); i++) {
     					String resultStr = "";
     					String resultStr2 = "";
-    					// 循环每一个sheet中的每一行
+    					// 寰幆姣忎竴涓猻heet涓殑姣忎竴琛�
     					List<String> row = list.get(i);    					
     					
-    					// 遍历列
+    					// 閬嶅巻鍒�
     					if (row != null && row.size() > 0) {
     						String bid=String.valueOf(new Date().getTime());
     						resultStr="'"+bid+"',";
     						resultStr2="'"+bid+"',";
     						for (int j = 0; j < row.size(); j++) { 
     							if(j==3){
-        							resultStr2 = resultStr2 + "'" + row.get(j) +"'" + ',';	//设定专业为第四个数据
+        							resultStr2 = resultStr2 + "'" + row.get(j) +"'" + ',';	//璁惧畾涓撲笟涓虹鍥涗釜鏁版嵁
         							continue;
     							}        						
     							resultStr = resultStr + "'" + row.get(j) +"'" + ',';
@@ -335,7 +336,7 @@ public class BaseMaintenanceController {
     								
     					}
     				}
-    				// 构建完整sql  
+    				// 鏋勫缓瀹屾暣sql  
     	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),name=values(name),type=values(type),applydp=values(applydp)" +
     	            		",land_address=values(land_address),undertake=values(undertake)";  
     	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";     	
@@ -348,7 +349,7 @@ public class BaseMaintenanceController {
     				wb.close();
     				outputStream.close();
     				inputStream.close();
-    				tempFile.delete(); //删除临时文件
+    				tempFile.delete(); //鍒犻櫎涓存椂鏂囦欢
     				
     			}
     			return "redirect:baseMaintain.jsp";   	

@@ -36,6 +36,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
+	System.out.println(pageindex+size+order+orderDir+searchValue);
 	try
 	{
 		conn = (Connection) SessionFactoryUtils.getDataSource(
@@ -66,8 +67,8 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 			ch.setPhone(rs.getString("phone"));			
 			ch.setMaterial_path(rs.getString("material_path"));
 			ch.setValid_date(rs.getInt("valid_date"));
-			ch.setFacemajor(rs.getString("mname"));//闂堛垹鎮滄稉鎾茬瑹
-			ch.setStar(rs.getInt("star"));//閺勭喓楠�
+			ch.setFacemajor(rs.getString("mname"));//闂傚牄鍨归幃婊勭▔閹捐尙鐟�
+			ch.setStar(rs.getInt("star"));//闁哄嫮鍠撴锟�			
 			list.add(ch);
 		}
 	} catch (SQLException e)
@@ -79,7 +80,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		SqlConnectionUtils.free(conn, sp, rs);
 	}
 	ma.setRecordsTotal(recordsTotal);
-	ma.setData(list);
+	ma.setData(list);	
 	return ma;
     }
 
@@ -87,7 +88,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	public void delInfo(String str) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.openSession();
-		//hibernate鐠嬪啰鏁ょ�妯哄亶鏉╁洨鈻�閺冪姾绻戦崶鐐插棘閺侊拷
+		//hibernate閻犲鍟伴弫銈囷拷濡搫浜堕弶鈺佹川閳伙拷闁哄啰濮剧换鎴﹀炊閻愭彃妫橀柡渚婃嫹
 		SQLQuery sqlQuery =session.createSQLQuery("{call baseweb.`delete_prabaseinfo`(?)}");
 		sqlQuery.setString(0, str);		
 		sqlQuery.executeUpdate();
@@ -126,7 +127,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		return list;
 	     }
 
-	//绛涢�
+	//缁涙盯锟�
 	@Override
 	public MaintenanceList getshaiBaseInfo(int basetype, int dept, int star,
 			int pageindex, int size,String order,String orderDir,String searchValue) {
@@ -170,8 +171,8 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 				ch.setPhone(rs.getString("phone"));			
 				ch.setMaterial_path(rs.getString("material_path"));
 				ch.setValid_date(rs.getInt("valid_date"));
-				ch.setFacemajor(rs.getString("mname"));//闂堛垹鎮滄稉鎾茬瑹
-				ch.setStar(rs.getInt("star"));//閺勭喓楠�
+				ch.setFacemajor(rs.getString("mname"));//闂傚牄鍨归幃婊勭▔閹捐尙鐟�
+				ch.setStar(rs.getInt("star"));//闁哄嫮鍠撴锟�
 				list.add(ch);
 			}
 		} catch (SQLException e)
@@ -201,17 +202,16 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		transaction.commit();
 		}catch (Exception ex) {
 			if (transaction != null) {
-				transaction.rollback();// 回滚事务，撤消查询语句
+				transaction.rollback();// 鍥炴粴浜嬪姟锛屾挙娑堟煡璇㈣鍙�
 			}
 			System.out.println(ex);
 		} finally {
-			session.close();// 关闭会话状态，清空资源
+			session.close();// 鍏抽棴浼氳瘽鐘舵�锛屾竻绌鸿祫婧�
 		}		
 		
 	}
 
-	//鑾峰緱瀵煎嚭鐨勬暟鎹�
-	@Override
+	//閼惧嘲绶辩�鐓庡毉閻ㄥ嫭鏆熼幑锟�	@Override
 	public List<ExportBase> getInfo(int basetype, int dept, int star) {
 		
 		List<ExportBase> list=new ArrayList<ExportBase>();
@@ -240,7 +240,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 				mt.setUndertake(rs.getInt("undertake"));
 				mt.setApplydp(rs.getString("applydp"));				
 				mt.setLand_address(rs.getString("land_address"));					
-				mt.setFacemajor(rs.getString("mname"));//闂堛垹鎮滄稉鎾茬瑹				
+				mt.setFacemajor(rs.getString("mname"));//闂傚牄鍨归幃婊勭▔閹捐尙鐟�			
 				list.add(mt);
 			}
 		} catch (SQLException e)
