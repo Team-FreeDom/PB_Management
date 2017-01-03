@@ -29,13 +29,14 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue)
     {
     	String columnName="";
-		if(order==0||order==2){
+		if(order==2){
 			columnName="id";
-		}else if(order==1){
+		}else if(order==3){
 			columnName="buildtime";
-		}else if(order==9){
+		}else if(order==4){
 			columnName="star";
 		}
+		System.out.println(order+" order:");
 	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue);
 	  return list;
     }

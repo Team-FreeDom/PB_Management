@@ -74,6 +74,9 @@ tbody tr td span{
 #updateDetail{
 	pointer-events:auto;
 }
+#checkHa{
+	pointer-events:auto;
+}
 .icon-star{
 	color:#D8B500;
 	font-size:16px;
