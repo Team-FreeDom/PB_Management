@@ -43,6 +43,10 @@ public class MessageUtils {
 	    str="基地申请审核失败";
 	}else if(i==9){//管理员同意基地申请
 	    str="基地申请审核成功";
+	}else if(i==10){//用户点击基地撤回
+	    str="基地申请撤回";
+	}else if(i==11){//用户点击报修撤回
+	    str="报修申请撤回";
 	}
 
 	return str;
@@ -82,6 +86,10 @@ public class MessageUtils {
 	    content = bname + "管理员拒绝您的申请";
 	}else if(i==9){
 	    content = bname + "管理员同意您的申请";
+	}else if (i==10){
+	    content = bname + "基地申请已撤回";
+	}else if (i==11){
+	    content = bname + "报修申请已撤回";
 	}
 
 	return content;
