@@ -53,20 +53,18 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 		orderDir, year, status, userid);
 	return list;
     }
-
+   //撤回
     @Override
     public void recall(String id, String infostr) {
 	// 获得插入的消息语句
-	String insertStr = MessageUtils.getinfoMs(infostr, 8);
+	String insertStr = MessageUtils.getinfoMs(infostr,10);
 	System.out.println(insertStr + "到底是什么信息");
-
 	// 撤回（str:字符串id；11：失效的状态值）
-	String recordstr="("+id+","+"11"+","+"null"+")";
+	String recordstr="("+id+","+"null"+","+"11"+")";
 	System.out.println(recordstr+"包装成什么样");
 	basecheckdao.refuseapply(recordstr);
 	// 向消息表中插入信息
 	mybaseinfodao.insertMessage(insertStr);
-
     }
 
 }

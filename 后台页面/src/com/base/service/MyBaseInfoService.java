@@ -34,7 +34,7 @@ public interface MyBaseInfoService {
    public MyBaseList MybaseInfo2(int pageindex,int  size,int order,
 		String orderDir,int year,int status,String userid);
    /**
-    * 
+    * 撤回功能
     * @param id
     * @param infostr
     */
