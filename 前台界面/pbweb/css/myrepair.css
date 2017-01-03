@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-.modal-content{
+#modal-content{
 	position:absolute;
 	top:50%;
 	left:30%;}

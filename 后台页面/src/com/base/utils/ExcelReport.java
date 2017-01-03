@@ -26,7 +26,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+import com.base.po.ExportBase;
 import com.base.po.LandApply_view;
+import com.base.po.Prabaseinfo;
 import com.base.po.Manger;
 import com.base.po.RentMaintain;
 import com.base.po.UserInfo;
@@ -760,6 +762,182 @@ public class ExcelReport{
 			Cell cell15 = row_line.createCell(15);
 			cell15.setCellValue(line_data.getPlanting());
 			cell15.setCellStyle(cs2);*/
+		}
+		// 建立Excel文件
+		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
+		File file = new File(fileName);
+		try {
+			file.createNewFile();
+			FileOutputStream stream = FileUtils.openOutputStream(file);
+			workbook.write(stream);
+			stream.close();
+			workbook.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	/*
+	 * 四:基地信息维护的Excel文件导出 (non-Javadoc)
+	 * 
+	 * @see com.base.service.ExcelReportService#systemUsersPreserveReport()
+	 */
+	public void exportBaseInfo(List<ExportBase> list,String fileName) {
+		// 列头信息
+		/*"序号", "基地编号", "基地名称", "基地类型", "院系编号", "院系名称", "土地面积",
+		"建筑面积", "面向专业","地址",  "可承担人数"*/
+          String[] col_title = { "序号", "基地编号", "基地名称", "基地类型", "院系编号", "院系名称", "土地面积",
+        			"建筑面积", "面向专业","地址",  "可承担人数"};// 16
+		@SuppressWarnings("resource")
+		XSSFWorkbook workbook = new XSSFWorkbook();// 创建一个Excel文档对象
+		Sheet sheet = workbook.createSheet();// 在上面的文档中创建Excel表单
+		// 设置列的宽度
+		sheet.setColumnWidth(0, 1500);
+		sheet.setColumnWidth(1, 2500);
+		sheet.setColumnWidth(2, 3000);
+		sheet.setColumnWidth(3, 2500);
+		sheet.setColumnWidth(4, 1500);
+		sheet.setColumnWidth(5, 3000);
+		sheet.setColumnWidth(6, 3000);
+		sheet.setColumnWidth(7, 5500);
+		sheet.setColumnWidth(8, 4000);
+		sheet.setColumnWidth(9, 4000);
+		sheet.setColumnWidth(10, 4000);
+		
+		// * 设置样式
+		 
+		// 1、设置字体// 设置标题字体
+		Font font_title = workbook.createFont();
+		font_title.setFontName("宋体");
+		font_title.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// 设置字体粗细
+		font_title.setFontHeightInPoints((short) 18);// 设置字体大小
+		// 设置列头字体
+		Font font1 = workbook.createFont();
+		font1.setFontName("宋体");
+		font1.setBoldweight(XSSFFont.BOLDWEIGHT_BOLD);// 设置字体粗细
+		font1.setFontHeightInPoints((short) 11);// 设置字体大小
+		// 设置正文字体1
+		Font font2 = workbook.createFont();
+		font2.setFontName("宋体");
+		font2.setBoldweight(XSSFFont.BOLDWEIGHT_NORMAL);// 设置字体粗细
+		font2.setFontHeightInPoints((short) 11);// 设置字体大小
+		// 2、设置样式
+		// 设置标题样式
+		XSSFCellStyle cs_title = workbook.createCellStyle();
+		cs_title.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 设置字体水平居中
+		cs_title.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 设置字体垂直居中
+		// 依次设置底、左、右、上边框
+		cs_title.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		cs_title.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		cs_title.setBorderRight(XSSFCellStyle.BORDER_THIN);
+		cs_title.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		cs_title.setWrapText(true);// 设置使得单元格的文字按照单元格的列宽来自动！换行！显示
+		cs_title.setFont(font_title);
+		// 设置列头样式
+		XSSFCellStyle cs1 = workbook.createCellStyle();
+		cs1.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 设置字体水平居中
+		cs1.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 设置字体垂直居中
+		// 依次设置底、左、右、上边框
+		cs1.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		cs1.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		cs1.setBorderRight(XSSFCellStyle.BORDER_THIN);
+		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		cs1.setWrapText(true);// 设置宽度自适应
+		cs1.setFont(font1);
+		// 设置正文居中样式
+		XSSFCellStyle cs2 = workbook.createCellStyle();
+		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 设置字体水平居中
+		cs2.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 设置字体垂直居中
+		// 依次设置底、左、右、上边框
+		cs2.setBorderBottom(XSSFCellStyle.BORDER_THIN);
+		cs2.setBorderLeft(XSSFCellStyle.BORDER_THIN);
+		cs2.setBorderRight(XSSFCellStyle.BORDER_THIN);
+		cs2.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		cs2.setWrapText(true);// 设置宽度自适应
+		cs2.setFont(font2);
+		// 合并列 （第一行，最后一行，第一列，最后一列）
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));// 合并列-标题
+		
+		// * 插入数据操作
+		 
+		// 表名（第一排占三行）
+		Row row1 = sheet.createRow(0);
+		row1.setHeight((short) 1000);
+		Cell cell_title = row1.createCell(0);
+		cell_title.setAsActiveCell();
+		cell_title.setCellValue("湖南农业大学系统用户信息表");
+		cell_title.setCellStyle(cs_title);
+		// 第二排填相应列头名
+		Row row2 = sheet.createRow(1);
+		for (int i = 0; i < col_title.length; i++) {
+			Cell cell_line = row2.createCell(i);
+			cell_line.setCellValue(col_title[i]);
+			cell_line.setCellStyle(cs1);
+		}
+		/*// 三排之后
+		
+		 * !!!!!!李彩注意这里是需要土地租赁的数据list的类名和方法名，然后后面还有每条数据中获取单个数值的方法!!!!!!!!!!!!!!!!
+		 * !!!!!!
+		 
+		// 用户ID，以后要从后台获取的！！！！*/		
+		 //* 遍历list中取得的数据
+		 
+		for (int i = 0; i < list.size(); i++) {
+			ExportBase line_data = list.get(i);// 取得list集合中一条数据
+			int line = i + 2;// 多少行
+			Row row_line = sheet.createRow(line);// 创建第line行
+			// 第一列序号自动增加1
+			Cell cell0 = row_line.createCell(0);
+			cell0.setCellValue(i + 1);
+			cell0.setCellStyle(cs2);
+			// String[] col_title = { "序号","员工编号","身份属性","姓名","性别","员工类型",
+			// "出生日期","身份证号码","联系电话","部门","原工作单位",
+			// "来校工作时间","参加工作时间","用工形式","户口性质","密码"};//16
+			// 第二列基地编号
+			Cell cell1 = row_line.createCell(1);
+			// !!!!!!!!!!下面这行代码的line_data.getStartTime()方法获取的值是要对应上面表格顺序的哈李彩，
+			// !!!!!!!!!!!然后后面每列都是同此更改!!!!!!!!!!!!!!!
+			cell1.setCellValue(line_data.getId());
+			cell1.setCellStyle(cs2);
+			// 第三列基地名称
+			Cell cell2 = row_line.createCell(2);
+			cell2.setCellValue(line_data.getName());
+			cell2.setCellStyle(cs2);
+			// 第四列基地类型
+			Cell cell3 = row_line.createCell(3);
+			cell3.setCellValue(line_data.getApplydp());
+			cell3.setCellStyle(cs2);
+			// 第五列院系编号
+			Cell cell4 = row_line.createCell(4);
+			cell4.setCellValue(line_data.getDeptId());
+			cell4.setCellStyle(cs2);
+			// 第六列院系名称
+			Cell cell5 = row_line.createCell(5);
+			cell5.setCellValue(line_data.getApplydp());
+			cell5.setCellStyle(cs2);
+			// 第七列土地面积
+			Cell cell6 = row_line.createCell(6);
+			cell6.setCellValue(line_data.getLandarea());
+			cell6.setCellStyle(cs2);
+			// 第八列建筑面积
+			Cell cell7 = row_line.createCell(7);
+			cell7.setCellValue(line_data.getConstructionarea());
+			cell7.setCellStyle(cs2);
+			// 第九列面向专业
+			Cell cell8 = row_line.createCell(8);
+			cell8.setCellValue(line_data.getFacemajor());
+			cell8.setCellStyle(cs2);
+			// 第十列地址
+			Cell cell9 = row_line.createCell(9);
+			cell9.setCellValue(line_data.getLand_address());
+			cell9.setCellStyle(cs2);
+			// 第十一列可承担人数
+			Cell cell10 = row_line.createCell(10);
+			cell10.setCellValue(line_data.getUndertake());
+			cell10.setCellStyle(cs2);		
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!

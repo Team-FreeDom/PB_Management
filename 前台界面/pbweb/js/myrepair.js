@@ -1,23 +1,12 @@
 // JavaScript Document
-var obj=[];
+var obj1=[];
 var obj2=[];
 
-//获取基地名称列表，在筛选中
-$.ajax({
-	url : '',
-	type : 'post',
-	dataType : 'json',			
-	success : function(data) {						         
-		for ( var i=0;i<data.length;i++) {
-				$("#Optionbase").after("<option value="+data[i].basename+">"+ data[i].applydp + "</option>");
-				}
-		}
-});	
-
-$(document).ready(function() {//点击筛选按钮并清空数据
+$(document).ready(function() {
+	
+//点击筛选按钮并清空数据
 $(".icon-filter").on("click", function () {
-	$("#baseId").val("1");
-	$("#nameId").val("");
+	$("#status").val("-1");
 	$('#hide_ul').toggle();
 });
 				
@@ -35,12 +24,7 @@ var page1=$('#myrepair').dataTable(
 					"type" : "POST"
 				},
 		"aoColumns" : [
-			{
-				"mData" : "id",					
-				"orderable" : false, // 禁用排序
-				"sDefaultContent" : "",
-				//"sWidth" : "",
-				},
+			
 			{
 				"mData" : "projectname",					
 				"orderable" : false, // 禁用排序
@@ -74,6 +58,13 @@ var page1=$('#myrepair').dataTable(
 			{
 				"mData" : "status",					
 				"orderable" : false, // 禁用排序
+				"sDefaultContent" : "",
+				//"sWidth" : "",
+				},
+			{
+				"mData" : "money",					
+				"orderable" : false, // 禁用排序
+				"visible":false,
 				"sDefaultContent" : "",
 				//"sWidth" : "",
 				},
@@ -104,12 +95,12 @@ var page1=$('#myrepair').dataTable(
 				"sDefaultContent" : "",
 				//"sWidth" : "",
 				"render":function(data,type,row){					
-						obj.push(row);							
+						obj1.push(row);							
 						if(statusid==2){
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>'+
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
 							}else{
-								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'">查看</button>';
+								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}
 					}
 					
@@ -135,8 +126,9 @@ var page1=$('#myrepair').dataTable(
 });
 			  
 	  
-var page2=$('#myapply2').dataTable(
+var page2=$('#myrepair2').dataTable(
 	{
+	"serverSide" : true,
 	"bSort": false,
 	"bFilter": false,
 	"aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
@@ -148,12 +140,6 @@ var page2=$('#myapply2').dataTable(
 					"type" : "POST"
 				},
 		"aoColumns" : [
-			{
-				"mData" : "id",					
-				"orderable" : false, // 禁用排序
-				"sDefaultContent" : "",
-				//"sWidth" : "",
-				},
 			{
 				"mData" : "projectname",					
 				"orderable" : false, // 禁用排序
@@ -191,6 +177,14 @@ var page2=$('#myapply2').dataTable(
 				//"sWidth" : "",
 				},
 			{
+				"mData" : "money",					
+				"orderable" : false, // 禁用排序
+				"visible":false,
+				"sDefaultContent" : "",
+				//"sWidth" : "",
+				},
+			
+			{
 				"mData" : "address",					
 				"orderable" : false, // 禁用排序
 				"visible":false,
@@ -218,7 +212,7 @@ var page2=$('#myapply2').dataTable(
 				//"sWidth" : "",
 				"render":function(data,type, row){
 							obj2.push(row);
-								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
+								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
 												
 					}
 				}
@@ -242,7 +236,10 @@ var page2=$('#myapply2').dataTable(
 
 //查看详情
 $(document).on("click", "#scan", function() {	
-					var str=$(this).val();
+					var str=$(this).attr("value");
+					var position=str.indexOf('$');
+					var index=str.substring(0,position);
+					var tag=str.substring(position+1);
 					var object=[];
 					if(tag==1){
 						object=obj;
@@ -256,6 +253,7 @@ $(document).on("click", "#scan", function() {
 					$("#name").val(object[index].name);
 					$("#time").val(object[index].time);
 					$("#budget").val(object[index].budget);
+					$("#money").val(object[index].money);
 					$("#address").val(object[index].address);
 					$("#reason").val(object[index].reason);
 					$("#linkaddress").prop("href",object[index].linkaddress);
@@ -292,9 +290,7 @@ $(document).on("click", "#cancel", function() {
 //筛选操作
 $(document).on("click", "#finish", function() {
 		var obj2=[];
-		var baseID=$("#baseID option:selected").val();
-		var nameID=$("#nameId").val();
-		var time=$("#demo").val();
+		var status=$("#status option:selected").val();
 		page2=$('#myapply2').dataTable(
 					{
 					"bSort": false,
@@ -302,23 +298,16 @@ $(document).on("click", "#finish", function() {
 					"aLengthMenu":[2,4,6,8], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 2,  //默认每页显示多少条记录
+					"bDestroy":true,
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
 								"data" : {
-								"basename" : baseID,
-								"name" : nameID,
-								"time" : time,
+								"status" : status,
 								},
 								"url" : "",
 								"type" : "POST"
 								},
 						"aoColumns" : [
-							{
-								"mData" : "id",					
-								"orderable" : false, // 禁用排序
-								"sDefaultContent" : "",
-								//"sWidth" : "",
-								},
 							{
 								"mData" : "projectname",					
 								"orderable" : false, // 禁用排序
@@ -352,6 +341,13 @@ $(document).on("click", "#finish", function() {
 							{
 								"mData" : "status",					
 								"orderable" : false, // 禁用排序
+								"sDefaultContent" : "",
+								//"sWidth" : "",
+								},
+							{
+								"mData" : "money",					
+								"orderable" : false, // 禁用排序
+								"visible":false,
 								"sDefaultContent" : "",
 								//"sWidth" : "",
 								},
@@ -408,4 +404,3 @@ $(document).on("click", "#finish", function() {
 	});
 		
 } );
-			

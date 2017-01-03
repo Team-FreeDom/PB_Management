@@ -30,10 +30,7 @@ $(document).ready(function() {
 			for ( var i=0;i<data[1].length;i++) {				
 				$("#basetype").after(
 						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");	
-				$("#daobase").after(
-						"<option value="+data[1][i].id+">"
-								+ data[1][i].name + "</option>");
+								+ data[1][i].name + "</option>");				
 				
 			}	
 			

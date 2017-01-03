@@ -1,3 +1,10 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
@@ -216,7 +223,6 @@
                                                     	<ul class="hide_ul" style="display:none;">
                                                         	<li>
                                                             	<form>
-                                                                <center>
                                                             	<table class="table"> 
                                                             	<tr>
                                                                 	<td colspan="2">
@@ -225,7 +231,7 @@
                                                                       <option value="1" id="searchbaseid">请选择</option>
                                                                       <option value="2">1</option>
                                                                       <option value="3">2</option>	
-                                                                    </select>  
+                                                                    </select>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -245,7 +251,6 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                            </center>
                                                         		</form>
                                                             </li>
                                                         </ul>
@@ -405,7 +410,7 @@
                                                                       <option value="1" id="searchbaseid2">请选择</option>
                                                                       <option value="2">1</option>
                                                                       <option value="3">2</option>	
-                                                                    </select>  
+                                                                    </select>  
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -543,7 +548,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/laydate.js"></script>
     <script src="../js/bootbox.min.js"></script>
-    <script src="../js/Repairapprove.js"></script>
+    <script src="../js/myNeed/Repairapprove.js"></script>
 	 <script>
     	!function(){
 			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库

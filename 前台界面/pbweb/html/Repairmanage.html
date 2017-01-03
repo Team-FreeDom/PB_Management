@@ -197,10 +197,10 @@
                                             <button type="button" class="btn btn-danger" id="delete">删除</button>
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#add" id="ZJ">增加</button>
                                             </td>
-                                            <td colspan="5" >
+                                            <td colspan="6" >
                                             </td>
                                              <td colspan="3" id="button-right">
-                                             	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#import">导出</button>
+                                             	<button type="button" id="import" class="btn btn-primary" data-toggle="modal" data-target="#exportmodal">导出</button>
                                              </td>
                                                
                                         </tr>
@@ -210,8 +210,9 @@
                                             <th>基地名称</th>
                                             <th>申报人</th>
                                             <th>申报时间</th>
-                                            <th>预算金额</th>
+                                            <th>实际金额</th>
                                             <th>申请状态</th>
+                                            <th hidden>实际金额</th>
                                             <th hidden>具体地址</th>
                                             <th hidden>原因说明</th>
                                             <th hidden>材料地址</th>
@@ -333,6 +334,10 @@
                                                     <td>预算金额 ： </td>
                                                    <td><input type="text"  class="form-control" id="Ebudget" value="30000"></td>
                                                 </tr>
+                                               <tr>
+                                                    <td>实际金额 ： </td>
+                                                   <td><input type="text"  class="form-control" id="Emoney" value="30000"></td>
+                                                </tr>
                                                 <tr>
                                                     <td>具体位置 ： </td>
                                                     <td><input type="text" class="form-control" id="Eaddress" value="湖南农业大学"></td>
@@ -385,7 +390,7 @@
                                                         <td>基地名称 ： </td>
                                                         <td>
                                                         	<select class="form-control" id="Abasename" value="">
-                                                            	<option>请选择</option>
+                                                            	<option id="AbasenameID">请选择</option>
                                                             </select>
                                                         </td>
                                                     </tr>
@@ -429,7 +434,7 @@
                                 </div>
                                 
                                 
-                                <div class="modal fade" id="import" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exportmodal" tabindex="-1" role="dialog"
                                     aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content" style="border:#3071a9 8px solid">
@@ -445,9 +450,15 @@
                                                   
                                                   <div class="form-group">
                                                     <!--<input type="file" id="exampleInputFile">-->
-                                                    <select class="form-control">
-                                                    	<option>请选择</option>
+                                                    <select class="form-control" id="Sbasename">
+                                                    	<option id="SbasenameID" value="1">请选择</option>
+                                                        <option>请选择1</option>
+                                                        <option>请选择2</option>
+                                                        <option>请选择3</option>
                                                     </select>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <input type="text" class="form-control" id="year" placeholder="请填写年份例如：2016">
                                                   </div>
                                                 </form>
                                             </center>
@@ -456,7 +467,7 @@
                                             	<center>
                                                     <button type="button" class="btn btn-default"
                                                         data-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-primary">确定</button>
+                                                    <button type="button" class="btn btn-primary" id="export">确定</button>
                                                 </center>
                                             </div>
                                         </div>

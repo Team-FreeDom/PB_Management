@@ -223,9 +223,9 @@
 																		</select>  
 																		</td>
 																	</tr>
-																	<tr>																		
-																		<td colspan="2">星级 <select name="status" id="starLink"
-																			style="width:150px;margin-top:0px;">
+																	<tr>
+																		<td colspan="2">星级 <select name="status"
+																			id="starLink" style="width:150px;margin-top:0px;">
 																				<option value="-1" selected>显示全部</option>
 																				<option value="1">一星级</option>
 																				<option value="2">二星级</option>
@@ -245,12 +245,11 @@
 																</table>
 															</form>
 														</li>
-													</ul>
-													</li>
+													</ul></li>
 											</ul>
 										</td>
 										<td colspan="11" id="button-right"><a
-											href="../templet/PersonInfotemplet.zip"
+											href="../templet/BaseInfotemplet.rar"
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#import">导入</button>
@@ -267,90 +266,25 @@
 										<th>土地面积</th>
 										<th>建筑面积</th>
 										<th>可承担人数</th>
+										<th>星级</th>
 										<th hidden>通信地址</th>
 										<th hidden>联系人姓名</th>
 										<th hidden>联系人电话</th>
 										<th hidden>面向专业</th>
 										<th hidden>申请材料</th>
 										<th hidden>申请人</th>
-										<th hidden>有效周期</th>
-										<th>星级</th>
+										<th hidden>有效周期</th>										
 										<th>操作</th>
 									</tr>
 								</thead>
-								<tbody class="text-center">
-									<tr>
-										<td><label><input type="checkbox"
-												name="recordcheck" class="ck"></label></td>
-										<td>创建时间</td>
-										<td>基地编号</td>
-										<td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td>可承担人数</td>
-										<td><span class="icon-star star-color"></span><span
-											class="icon-star star-color"></span><span
-											class="icon-star-empty star-color"></span></td>
-										<td><span class="icon-edit edit-color" id="update"></span></td>
-									</tr>
-									<tr>
-										<td><label><input type="checkbox"
-												name="recordcheck" class="ck"></label></td>
-										<td>创建时间</td>
-										<td>基地编号</td>
-										<td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td>可承担人数</td>
-										<td><span class="icon-star star-color"></span><span
-											class="icon-star star-color"></span><span
-											class="icon-star-empty star-color"></span></td>
-										<td><span class="icon-edit edit-color"
-											data-toggle="modal" data-target="#myModal3"></span></td>
-									</tr>
-									<tr>
-										<td><label><input type="checkbox"
-												name="recordcheck" class="ck"></label></td>
-										<td>创建时间</td>
-										<td>基地编号</td>
-										<td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td>可承担人数</td>
-										<td><span class="icon-star star-color"></span><span
-											class="icon-star star-color"></span><span
-											class="icon-star-empty star-color"></span></td>
-										<td><span class="icon-edit edit-color"
-											data-toggle="modal" data-target="#myModal3"></span></td>
-									</tr>
-									<tr>
-										<td><label><input type="checkbox"
-												name="recordcheck" class="ck"></label></td>
-										<td>创建时间</td>
-										<td>基地编号</td>
-										<td>基地名称</td>
-										<td>基地类型</td>
-										<td>申报部门</td>
-										<td>土地面积</td>
-										<td>建筑面积</td>
-										<td>可承担人数</td>
-										<td><span class="icon-star star-color"></span><span
-											class="icon-star star-color"></span><span
-											class="icon-star-empty star-color"></span></td>
-										<td><span class="icon-edit edit-color"
-											data-toggle="modal" data-target="#myModal3"></span></td>
-									</tr>
+								<tbody class="text-center" id="thistable">
+
 								</tbody>
 								<thead>
 									<tr>
 										<td colspan="11"><label><input type="checkbox"
 												name="0" class="ck-all" id="ck1" />全选</label></td>
+
 									</tr>
 
 								</thead>
@@ -431,7 +365,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" data-dismiss="modal">
+							<button type="button" class="close" data-dismiss="modal" id="cleark">
 								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 							</button>
 							<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
@@ -441,32 +375,50 @@
 								<div class="col-md-12">
 									<form action="" method="post" class="form-horizontal"
 										role="form" id="applyeditform">
-										<table class="table">
+										<table class="table" id="tableupdate">
 											<tr>
+												<td>基地编号：</td>
+												<td><input type="text" id="baseid" disabled /></td>
 												<td>基地名称 ：</td>
 												<td><input type="text" id="basenamed" disabled></td>
+											</tr>
+											<tr>
+
 												<td>基地类型 ：</td>
 												<td><input type="text" id="basetyped" disabled></td>
-											</tr>
-											<tr>
 												<td>申请部门 ：</td>
 												<td><input type="text" id="dept0d" disabled></td>
+											</tr>
+											<tr>
+
 												<td>土地面积 ：</td>
 												<td><input type="text" id="landaread" disabled /></td>
-											</tr>
-
-
-											<tr>
 												<td>建筑面积 ：</td>
 												<td><input type="text" id="buildingaread" disabled></td>
+											</tr>
+
+
+											<tr>
+
 												<td>可承担人数 ：</td>
 												<td><input type="text" id="undertakeCountd" disabled></td>
-											</tr>
-											<tr>
 												<td>联系人姓名 ：</td>
 												<td><input type="text" id="usernamed" disabled></td>
+											</tr>
+											<tr>
+
 												<td>联系人电话 ：</td>
 												<td><input type="text" id="userphoned" disabled></td>
+												<td>创建时间：</td>
+												<td><input type="text" id="setdated" disabled></td>
+											</tr>
+											<tr id="hidecol">
+
+												<td>有效周期 ：</td>
+												<td><input type="text" id="validdated" disabled></td>
+												<td>申请材料 ：</td>
+												<td style="text-align:left;"><a id="resourced" href="#"
+													style="color:#3071a9;">点击查看</a></td>
 											</tr>
 											<tr>
 												<td>面向专业 ：</td>
@@ -483,16 +435,14 @@
 											</tr>
 
 
-											<tr>
-												<td>申请材料 ：</td>
-												<td colspan="3" style="text-align:left;"><a
-													id="resourced" href="#" style="color:#3071a9;">点击查看</a></td>
+
+											<tr id="hidecol">
+												<td>星级：</td>
+												<td colspan="3"><div id="starget"></div></td>
 											</tr>
 											<tr id="hidecol">
-												<td>创建时间：</td>
-												<td><input type="text" id="setdated" disabled></td>
-												<td>有效周期 ：</td>
-												<td><input type="text" id="validdated" disabled></td>
+												<td>续期：</td>
+												<td colspan="3"><input type="text" id="adddate">个月</td>
 											</tr>
 
 										</table>
@@ -504,7 +454,7 @@
 							<center>
 								<button type="button" class="btn btn-primary" id="saverun">保存</button>
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">取消</button>
+									id="cleark" data-dismiss="modal">取消</button>
 							</center>
 						</div>
 					</div>
@@ -659,7 +609,7 @@
 
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
+				aria-labelledby="myModalLabel" aria-hidden="true">				
 				<div class="modal-dialog">
 					<div class="modal-content" style="border:#416793 8px solid">
 						<div class="modal-header">
@@ -714,25 +664,25 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
 						</div>
-						<div class="modal-body" id="daochu">
-
+						<form action="exportThisInfo.do" method="post">
+						<div class="modal-body" id="daochu">                           
 							<table>
 								<tr>
 									<td>基地类型:</td>
-									<td><select class="form-control" id="daobaseh">
-											<option value="" id="daobase">全部</option>
+									<td><select class="form-control" name="basetype" id="daobaseh">
+											<option value="-1" id="daobase">全部</option>
 									</select></td>
 								</tr>
 								<tr>
 									<td>申报部门:</td>
-									<td><select class="form-control" id="daodepth">
-											<option value="" id="daodept">全部</option>
+									<td><select class="form-control" id="daodepth" name="applydept">
+											<option value="-1" id="daodept">全部</option>
 									</select></td>
 								</tr>
 								<tr>
 									<td>星级:</td>
-									<td><select class="form-control" id="daostarh">
-											<option value="">全部</option>
+									<td><select class="form-control" id="daostarh" name="star">
+											<option value="-1">全部</option>
 											<option value="1">一星级</option>
 											<option value="2">二星级</option>
 											<option value="3">三星级</option>
@@ -741,15 +691,16 @@
 									</select></td>
 								</tr>
 							</table>
-
+    
 						</div>
 						<div class="modal-footer">
 							<center>
-								<button type="button" class="btn btn-default" id="daoclose"
+							<button type="button" class="btn btn-default" id="daoclose"
 									data-dismiss="modal">取消</button>
-								<button type="button" class="btn btn-primary" id="confirmButton">确定</button>
+								<button type="submit" class="btn btn-primary" id="confirmButton">确定</button>
 							</center>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
