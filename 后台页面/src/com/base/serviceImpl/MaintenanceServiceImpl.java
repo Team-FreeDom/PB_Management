@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.base.dao.MaintenanceDao;
 import com.base.po.ApplyDept;
 import com.base.po.ExportBase;
-import com.base.po.Maintenance;
+import com.base.po.Prabaseinfo;
 import com.base.po.MaintenanceList;
 import com.base.service.MaintenanceService;
 
@@ -56,8 +56,16 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 	@Override
 	public MaintenanceList getshaiBaseInfo(int basetype, int dept, int star,
-			int pageindex, int size) {
-		MaintenanceList list=maintenancedao.getshaiBaseInfo(basetype,dept,star,pageindex, size);
+			int pageindex, int size,int order,String orderDir,String searchValue) {
+		String columnName="";
+		if(order==0||order==2){
+			columnName="id";
+		}else if(order==1){
+			columnName="buildtime";
+		}else if(order==9){
+			columnName="star";
+		}
+		MaintenanceList list=maintenancedao.getshaiBaseInfo(basetype,dept,star,pageindex, size,columnName,orderDir,searchValue);
 		return list;
 	}
 

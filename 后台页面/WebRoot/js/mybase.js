@@ -308,7 +308,7 @@ $(document).ready(function() {
 			  
 			  $(document).on("click", "#scan", function() {	
 				  
-					var str=$(this).attr("value");
+					var str=$(this).val();
 					var position=str.indexOf('$');
 					var index=str.substring(0,position);
 					var tag=str.substring(position+1);
@@ -344,12 +344,6 @@ $(document).ready(function() {
 					$("#fontTable").modal('show');
 					
 				});
-			  
-			  $(document).on("click", "#closeDe", function() {
-				  $("#hidecol").prop("hidden",true);
-				  $("#hideReason").prop("hidden",true);
-				  $("#fontTable").modal('hide');
-			  });
 
 				$(document).on("click", "#cancel", function() {
 					$("#cancelSubmit").val($(this).val());
@@ -357,9 +351,10 @@ $(document).ready(function() {
 				});
 
 				//撤回按钮，传给后台id
-				$(document).on("click", "#cancelSubmit", function() {
-					
-					var index=$(this).val();					
+				$(document).on("click", "#cancelOneModal", function() {
+					alert ("进去了么");
+					var index=$(this).val();
+					alert(index);
 				  	var basename=obj1[index].name;
 				  	var userid=obj1[index].userid;
 				  	var info_str='[{userid:"'+userid+'",basename:"'+basename+'"}]';

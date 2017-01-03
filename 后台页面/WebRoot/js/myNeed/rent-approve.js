@@ -159,9 +159,7 @@ $(document)
 					});
 
 					// 拒绝申请
-					$('#deleteOne')
-							.click(
-									function() {
+					$('#deleteOne').click(function() {
 										
 										var chk_value =[];
 										$('input[name="idname"]:checked').each(function(){
@@ -271,8 +269,7 @@ $(document)
 
 					// 同意申请
 					// //////////状态值1： 2： 3： 4： 。。。。。。。
-					$('#agreeOne')
-							.click(
+					$('#agreeOne')							.click(
 									function() {
 										
 										var chk_value =[];

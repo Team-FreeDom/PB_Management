@@ -5,7 +5,7 @@ $(document)
 				function() {
 					// 分页表格
 					var page = $('#baseMaintain')
-							.dataTable(
+							.DataTable(
 									{
 
 										"processing" : true,
@@ -14,6 +14,7 @@ $(document)
 										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"iDisplayLength" : 5, // 默认每页显示多少条记录
+										"ordering":true,
 										"filter" : true,
 										"dom" : 'ftipr<"bottom"l>',
 										"ajax" : {
@@ -39,6 +40,10 @@ $(document)
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
 													"sWidth" : "8%",
+													"render":function(data,
+															type, row) {
+														return data='#'+data;
+													}
 
 												},
 												{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
@@ -78,6 +83,28 @@ $(document)
 													"orderable" : false, // 禁用排序
 													"sDefaultContent" : "",
 													"sWidth" : "6%"
+												},
+												{
+													"mData" : "star",
+													"orderable" : true, // 禁用排序
+													"sDefaultContent" : "",
+													"sWidth" : "8%",
+													"render" : function(data,
+															type, row) {
+														var str1 = "";
+														var str2 = "";
+														for (var i = 0; i < data; i++) {
+															str1 = str1
+																	+ "<span class='icon-star' name='color' id='color'></span>";
+														}
+														for (var i = 0; i < 5 - data; i++) {
+															str2 = str2
+																	+ "<span class='icon-star-empty' name='nocolor' id='nocolor'></span>";															
+														}
+														return str1 + str2;
+
+													}
+
 												},
 												{
 													"mData" : "land_address",
@@ -133,31 +160,7 @@ $(document)
 													"sDefaultContent" : "",
 													"sWidth" : "8%",
 
-												},
-												{
-													"mData" : "star",
-													"orderable" : true, // 禁用排序
-													"sDefaultContent" : "",
-													"sWidth" : "8%",
-													"render" : function(data,
-															type, row) {
-														var str1 = "";
-														var str2 = "";
-														for (var i = 0; i < data; i++) {
-															str1 = str1
-																	+ "<span class='icon-star star-color' name='color' id='color'></span>";
-															i++;
-														}
-														for (var i = 0; i < 5 - data; i++) {
-															str2 = str2
-																	+ "<span class='icon-star' name='nocolor' id='nocolor'></span>";
-															i++;
-														}
-														return str1 + str2;
-
-													}
-
-												},
+												},												
 												{
 													"mData" : "id",
 													"orderable" : false, // 禁用排序
@@ -165,8 +168,8 @@ $(document)
 													"sWidth" : "8%",
 													"render" : function(data,
 															type, row) {
-														obj.push(row);
-														return data = '<span id="update" class="icon-edit edit-color" value="'
+														obj.push(row);														
+														return data = '<span id="updateDetail" class="icon-edit edit-color" value="'
 																+ (obj.length - 1)
 																+ '"></span>';
 
@@ -177,8 +180,7 @@ $(document)
 											"orderable" : false, // 禁用排序
 											"targets" : [ 0 ], // 指定的列
 											"data" : "id",
-											"render" : function(data, type, row) {
-
+											"render" : function(data, type, row) {											
 												return '<label><input type="checkbox" name="recordcheck" value="'
 														+ data
 														+ '" class="ck"></label>';
@@ -206,7 +208,7 @@ $(document)
 					 * 
 					 */
 					$.ajax({
-						url : '',
+						url : 'getManyinfo.do',
 						async : true,
 						type : "POST",
 						dataType : "json",
@@ -254,21 +256,19 @@ $(document)
 					// star星级点击的实时改变
 					$(document).on("click", "#color", function() {
 
-						this.removeClass("icon-star");
-						this.addClass("icon-star-empty");
-						$(this).prop("id", "nocolor");
-						page.draw(false);
+						$(this).removeClass("icon-star");
+						$(this).addClass("icon-star-empty");
+						$(this).prop("id", "nocolor");						
 					});
 
 					$(document).on("click", "#nocolor", function() {
-						this.removeClass("icon-star-empty");
-						this.addClass("star-color");
-						$(this).prop("id", "color");
-						page.draw(false);
+						$(this).removeClass("icon-star-empty");
+						$(this).addClass("icon-star");
+						$(this).prop("id", "color");						
 					});
 
 					// 点击删除按钮,判断是否已选择
-					$(document).on("click", "#delete", function() {
+					$("#delete").click(function() {
 
 						var chk_value = [];
 						$('input[name="recordcheck"]:checked').each(function() {
@@ -286,21 +286,21 @@ $(document)
 					});
 
 					$(document).on("click", "#daoclose", function() {
-						$("#daobaseh").val("");
-						$("#daodepth").val("");
-						$("#daostarh").val("");
+						$("#daobaseh").val("-1");
+						$("#daodepth").val("-1");
+						$("#daostarh").val("-1");
 
 					});
 
-					$(document).on("click", "#closeimport", function() {
+					$("#closeimport").click(function() {
 
 						$("#fileResource").val("");
 					});
 
 					// 点击修改图标，填充修改模态框中的内容
-					$(document).on("click", "#update", function() {
-						var index = $(this).val();
-						$("#baseid").val(obj[index].id);
+					$(document).on("click", "#updateDetail", function() {						
+						var index = $(this).attr("value");
+						$("#baseid").val('#'+obj[index].id);
 						$("#basenamed").val(obj[index].name);
 						$("#basetyped").val(obj[index].type);
 						$("#dept0d").val(obj[index].applydp);
@@ -313,20 +313,15 @@ $(document)
 						$("#linkAddressd").html(obj[index].land_address);
 						$("#resourced").prop("href", obj[index].material_path);
 						$("#setdated").val(obj[index].buildtime);
-						$("#validdated").val(obj[index].valid_date);
-						$("#starget").html($(this).closet('tr').find('td:eq(9)').Text());
+						$("#validdated").val(obj[index].valid_date);						
+						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
 						
 						$("#edit").modal('show');
 
 					});
 
 					// 确认删除
-					$(document)
-							.on(
-									"click",
-									"#delSubmit",
-									function() {
-										alert("he");
+					$("#delSubmit").click(function() {										
 										var recordstr = '(';
 										var i = 0;
 										$(
@@ -350,8 +345,7 @@ $(document)
 															i++;
 														});
 
-										recordstr = recordstr + ')';
-										alert(recordstr);
+										recordstr = recordstr + ')';										
 										$.ajax({
 											data : {
 												"recordstr" : recordstr
@@ -362,6 +356,7 @@ $(document)
 											dataType : "json",
 											cache : false,
 											success : function(data) {
+												$("#deleteOneModal").modal('hide');
 												page.draw(false);
 											},
 											error : function(data) {
@@ -371,44 +366,23 @@ $(document)
 									});
 
 					// 确认导出
-					$(document).on("click", "#confirmButton", function() {
-
-						var basetype = $("#daobaseh option:checked").val();
-						var applydept = $("#daodepth option:checked").val();
-						var star = $("#daostarh option:checked").val();
-
-						$.ajax({
-							data : {
-								"basetype" : basetype,
-								"applydept" : applydept,
-								"star" : star
-							},
-							url : 'exportThisInfo.do',
-							async : true,
-							type : "POST",
-							dataType : "json",
-							cache : false,
-							success : function(data) {
-								$("#export").modal('hide');
-							},
-							error : function(data) {
-								alert("请求异常");
-							}
-						});
-
+					$("#confirmButton").click(function() {
+					$("#export").modal('hide');
+                    $("#daoclose").click();
 					});
 					
 					//确认修改
-					$(document).on("click", "#saverun", function() {
+					$("#saverun").click(function() {
 						var baseid=$("#baseid").val();
+						baseid=baseid.substring(1);
 						var i=0;
-						$("#starget .icon-star-empty").each(function() {
+						$("#starget .icon-star").each(function() {
 							i++;
 						});						
 						var star=i;
 						var adddate=$("#adddate").val();
-						var matchstr='/^[0-9]*$/';
-						if(matchstr.exec(valid_date)){
+						var matchstr=/^[0-9]*$/;
+						if(!matchstr.test(adddate)){
 							bootbox.alert({
 								message : "填写的续期必须为数字",
 								size : 'small'
@@ -419,7 +393,7 @@ $(document)
 							data : {
 								"baseid" : baseid,
 								"star" : star,
-								"valid_date" : adddate
+								"adddate" : adddate
 							},
 							url : 'updateBaseInfo.do',
 							async : true,
@@ -428,6 +402,8 @@ $(document)
 							cache : false,
 							success : function(data) {
 								$("#edit").modal('hide');
+								$("#adddate").val("");
+								page.draw(false);
 							},
 							error : function(data) {
 								alert("请求异常");
@@ -437,7 +413,7 @@ $(document)
 						
 					});
 
-					$(document).on("click", "#closebase", function() {
+					$("#closebase").click(function() {
 
 						$("#basename").val("");
 						$("#deptRadio[value='1']").prop("checked", true);
@@ -453,13 +429,13 @@ $(document)
 						$("#applyfile").val("");
 						$("#majorSuo").html("");
 					});
+					
+					$(document).on("click", "#cleark", function() {	
+						$("#adddate").val("");
+					});
 
-					$(document)
-							.on(
-									"click",
-									"#finishshai",
-									function() {
-
+					$("#finishshai").click(function() {
+                            obj=[];
 										var basetype = $(
 												"#shaiType option:selected")
 												.val();
@@ -471,7 +447,7 @@ $(document)
 												.val();
 
 										page = $('#baseMaintain')
-												.dataTable(
+												.DataTable(
 														{
 
 															"processing" : true,
@@ -483,6 +459,7 @@ $(document)
 																	30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"iDisplayLength" : 5, // 默认每页显示多少条记录
+															"ordering":true,
 															"dom" : 'ftipr<"bottom"l>',
 															"ajax" : {
 																"url" : "getshaiBaseinfo.do",
@@ -512,6 +489,10 @@ $(document)
 																		"orderable" : true, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "8%",
+																		"render":function(data,
+																				type, row) {
+																			return data='#'+data;
+																			}
 
 																	},
 																	{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
@@ -551,6 +532,27 @@ $(document)
 																		"orderable" : false, // 禁用排序
 																		"sDefaultContent" : "",
 																		"sWidth" : "6%"
+																	},{
+																		"mData" : "star",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%",
+																		"render" : function(data,
+																				type, row) {
+																			var str1 = "";
+																			var str2 = "";
+																			for (var i = 0; i < data; i++) {
+																				str1 = str1
+																						+ "<span class='icon-star' name='color' id='color'></span>";
+																			}
+																			for (var i = 0; i < 5 - data; i++) {
+																				str2 = str2
+																						+ "<span class='icon-star-empty' name='nocolor' id='nocolor'></span>";															
+																			}
+																			return str1 + str2;
+
+																		}
+
 																	},
 																	{
 																		"mData" : "land_address",
@@ -607,33 +609,7 @@ $(document)
 																		"sWidth" : "8%",
 
 																	},
-																	{
-																		"mData" : "star",
-																		"orderable" : true, // 禁用排序
-																		"sDefaultContent" : "",
-																		"sWidth" : "8%",
-																		"render" : function(
-																				data,
-																				type,
-																				row) {
-																			var str1 = "";
-																			var str2 = "";
-																			for (var i = 0; i < data; i++) {
-																				str1 = str1
-																						+ "<span class='icon-star star-color' name='color' id='color'></span>";
-																				i++;
-																			}
-																			for (var i = 0; i < 5 - data; i++) {
-																				str2 = str2
-																						+ "<span class='icon-star' name='nocolor' id='nocolor'></span>";
-																				i++;
-																			}
-																			return str1
-																					+ str2;
-
-																		}
-
-																	},
+																	
 																	{
 																		"mData" : "id",
 																		"orderable" : false, // 禁用排序
@@ -645,9 +621,10 @@ $(document)
 																				row) {
 																			obj
 																					.push(row);
-																			return data = '<span id="update" class="icon-edit edit-color" value="'
+																			return data = '<span id="updateDetail" class="icon-edit edit-color" value="'
 																					+ (obj.length - 1)
 																					+ '"></span>';
+																			
 
 																		}
 																	} ],

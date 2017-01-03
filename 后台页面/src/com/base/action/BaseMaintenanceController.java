@@ -31,7 +31,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.base.po.ApplyDept;
 import com.base.po.ExportBase;
-import com.base.po.Maintenance;
+import com.base.po.Prabaseinfo;
 import com.base.po.MaintenanceList;
 import com.base.po.basetype;
 import com.base.service.MaintenanceService;
@@ -59,14 +59,13 @@ public class BaseMaintenanceController {
     
     @RequestMapping("/sendBaseinfo.do")
     public String sendBaseinfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map){
-	
+	    HttpServletResponse response, ModelMap map){	
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
-	Integer draw = Integer.parseInt(request.getParameter("draw"));
+	Integer draw = Integer.parseInt(request.getParameter("draw"));	
 	int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
     String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
     String searchValue = request.getParameter("search[value]");
@@ -152,10 +151,16 @@ public class BaseMaintenanceController {
     	// 数据起始位置
     	int startIndex = Integer.parseInt(request.getParameter("start"));
     	int draw = Integer.parseInt(request.getParameter("draw"));
+    	int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
+        String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
+        String searchValue = request.getParameter("search[value]");
+    	if (searchValue.equals("")) {
+    		searchValue = null;
+    	}
     	// 通过计算求出当前页面为第几页
     	int pageindex = (startIndex / size + 1);
     	
-    	MaintenanceList str=maintenanceservice.getshaiBaseInfo(basetype,dept,star,pageindex, size);
+    	MaintenanceList str=maintenanceservice.getshaiBaseInfo(basetype,dept,star,pageindex, size,order,orderDir,searchValue);
     	
     	JSONObject getObj = new JSONObject();
     	getObj.put("draw", draw);
@@ -179,8 +184,11 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map){
     	String baseid=request.getParameter("baseid");    	
     	int star=Integer.valueOf(request.getParameter("star"));
-    	int adddate=Integer.valueOf(request.getParameter("adddate"));
-    	
+    	String date=request.getParameter("adddate");
+    	int adddate=0;
+    	if(!date.equals("")){
+    		 adddate=Integer.valueOf(date);
+    	}    	
     	maintenanceservice.updateBaseInfo(baseid,star,adddate);
     	JSONObject getObj = new JSONObject();
     	getObj.put("flag", true);
@@ -204,14 +212,13 @@ public class BaseMaintenanceController {
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
     	int dept=Integer.valueOf(request.getParameter("applydept"));
     	int star=Integer.valueOf(request.getParameter("star"));
-    	
+    	System.out.println(basetype+"  "+dept+"  "+star);
     	List<ExportBase> list=maintenanceservice.getExportBaseInfo(basetype,dept,star);
     	
-    	if (CollectionUtils.isNotEmpty(list)) {
-
-			/*String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");*/
-			String path = ExcelReport.getWebRootUrl(request,"/upload/");
+    	if (CollectionUtils.isNotEmpty(list)) {         
+			String path = request.getSession().getServletContext()
+					.getRealPath("/upload/");
+			/*String path = ExcelReport.getWebRootUrl(request,"/upload/");*/
 			String fullFileName = path + "/BaseInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportBaseInfo(list, fullFileName);
@@ -253,10 +260,10 @@ public class BaseMaintenanceController {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}		
-		
+			}	
+			return null;		
     }
-    	return null;    	
+    	return "baseMaintain";  	
 }
     
     @RequestMapping("/importBaseExcel.do")   
@@ -287,14 +294,14 @@ public class BaseMaintenanceController {
     				filename = path;   //这是文件在服务器的绝对路径
     				//遍历文件中的数据：下面的list为读出的数据
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
-    				List<List<String>> list = InputExcelServiceImpl.getExcelRows(
+    				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(
     						InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				//System.out.println("获得数据啦！！！！！！！！！");
     				// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
     				
     				if(CollectionUtils.isNotEmpty(list)){
     				//实现批量插入
-    				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,applydp,land_address,"
+    				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,type,applydp,land_address,"
     						+ "undertake) values";
     				String prefix2="INSERT IGNORE INTO baseweb.basemajor(pid,maid) values";
     						
@@ -313,12 +320,13 @@ public class BaseMaintenanceController {
     						String bid=String.valueOf(new Date().getTime());
     						resultStr="'"+bid+"',";
     						resultStr2="'"+bid+"',";
-    						for (int j = 0; j < row.size(); j++) {    							
+    						for (int j = 0; j < row.size(); j++) { 
+    							if(j==3){
+        							resultStr2 = resultStr2 + "'" + row.get(j) +"'" + ',';	//设定专业为第四个数据
+        							continue;
+    							}        						
     							resultStr = resultStr + "'" + row.get(j) +"'" + ',';
-    							if(j==5){
-    							resultStr2 = resultStr2 + "'" + row.get(j) +"'" + ',';	//设定专业为第六个数据
-    							}
-    						
+    							
     						}    						
     						resultStr = resultStr.substring(0, resultStr.length() - 1);
     						resultStr2 = resultStr2.substring(0, resultStr2.length() - 1);
@@ -328,10 +336,12 @@ public class BaseMaintenanceController {
     					}
     				}
     				// 构建完整sql  
-    	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),sex=values(sex),name=values(name),applydp=values(applydp)" +
+    	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),name=values(name),type=values(type),applydp=values(applydp)" +
     	            		",land_address=values(land_address),undertake=values(undertake)";  
     	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";     	
-    				adminManageServiceImpl.setAdminFunction(sql);
+    				System.out.println(sql);
+    				System.out.println(sql2);
+    	            adminManageServiceImpl.setAdminFunction(sql);
     				adminManageServiceImpl.setAdminFunction(sql2);
     				}
     				
