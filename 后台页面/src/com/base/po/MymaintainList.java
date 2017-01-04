@@ -2,14 +2,15 @@ package com.base.po;
 
 import java.util.List;
 
-public class MaintenanceList {
-    private int recordsTotal;
-    private List<Prabaseinfo> data;
+public class MymaintainList {
+
+    private int recordsTotal;//我的 维修总记录数
+    private List<Mymaintain> data;
     
-    public MaintenanceList() {
+    public MymaintainList() {
 	super();
     }
-    public MaintenanceList(int recordsTotal, List<Prabaseinfo> data) {
+    public MymaintainList(int recordsTotal, List<Mymaintain> data) {
 	super();
 	this.recordsTotal = recordsTotal;
 	this.data = data;
@@ -20,10 +21,10 @@ public class MaintenanceList {
     public void setRecordsTotal(int recordsTotal) {
         this.recordsTotal = recordsTotal;
     }
-    public List<Prabaseinfo> getData() {
+    public List<Mymaintain> getData() {
         return data;
     }
-    public void setData(List<Prabaseinfo> data) {
+    public void setData(List<Mymaintain> data) {
         this.data = data;
     }
     

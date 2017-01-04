@@ -1,9 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
-#daochu select{
-	width:100%;}
-.modal-body table tr td select{
-	width:100%;}
+.inputmargin{
+	margin-top:10px;}
+.nav-tabs li{
+		margin-left:30px;}
+.nav-tabs li a{
+		color:#000;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+	color:#fff !important;
+		background:#4a6e98 !important;
+	}
+.nav-tabs li a:hover{
+		color:#FFF !important;
+		background:#4a6e98 !important;}
 table thead > tr> td{
 	
 	font-size:16px;
@@ -18,11 +28,18 @@ table thead tr th{
 	text-align:center;}
 table tbody tr td{
 	text-align:center;}
-	
+.col-md-12 > table tr td{
+	border:none !important;
+	text-align:left;
+	}
+.modal-body table tr td select{
+	width:260px !important;}
+.col-md-12 > table tr td input{
+	width:260px !important;}
+.col-md-12 > table tr td textarea{
+	width:260px !important;}
 tbody tr td span{
 	cursor:pointer;}
-	
-
 .dropdown_show li{
 	position:relative;
 	list-style:none;
@@ -33,9 +50,9 @@ tbody tr td span{
 .dropdown_show ul li{
 	list-style:none;
 	position:absolute;
-	top:42px;
+	top:35px;
 	left:0px;
-	width:120%;
+	width:102%;
 	}	
 .dropdown_show ul li table tr td{
 	color:#000;
@@ -47,9 +64,12 @@ tbody tr td span{
 .bottom{
 	margin-top:10px;
 	}
+.botton{
+	float:right;
+	margin-left:10px;}
 .dataTables_length{
 	margin-left:5%;}
-.modal-body table tr td{
+.modal-body>table tr td{
 	border:none !important;
 	text-align:left;}
 .modal-body tr td input{	
@@ -59,29 +79,6 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
-#daochu table tr td{
-	width:150px;
-	text-align:center;
-	height:50px;
-}
-#daochu table tr td select{
-	width:190px;
-}
-#thistable tr td{
-	pointer-events:none;
-}
-
-#updateDetail{
-	pointer-events:auto;
-}
-#checkHa{
-	pointer-events:auto;
-}
-.icon-star{
-	color:#D8B500;
-	font-size:16px;
-}
-.icon-star-empty{
-	color:#D8B500;
-	font-size:16px;
-}
+.Rtr td -> textarea{
+	height:80px!important;
+	}

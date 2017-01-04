@@ -108,7 +108,7 @@
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
@@ -212,74 +212,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>耘园气象站</td>
-									<td>创业孵化基地</td>
-									<td>信息科学技术学院</td>
-									<td>30</td>
-									<td>1.5</td>
-									<td>1000</td>
-									<td hidden>湖南省</td>
-									<td hidden>张三</td>
-									<td hidden>13567656789</td>
-									<td hidden>计算机</td>
-									<td hidden></td>
-									<td hidden>213144</td>
-									<td hidden>2016-09-18</td>
-									<td hidden>1</td>
-									<th hidden>理由</th>
-									<td>审核中</td>
-									<td>
-										<button type="button" class="btn btn-warning btn-xs" id="scan">查看</button>
-										<button type="button" class="btn btn-danger btn-xs"
-											data-toggle="modal" data-target="#delete_data">撤回</button>
-
-									</td>
-								</tr>
-								<tr>
-									<td>耘园气象站</td>
-									<td>创业孵化基地</td>
-									<td>信息科学技术学院</td>
-									<td>30</td>
-									<td>1.5</td>
-									<td>1000</td>
-									<td hidden>湖南省</td>
-									<td hidden>张三</td>
-									<td hidden>13567656789</td>
-									<td hidden>计算机</td>
-									<td hidden></td>
-									<td hidden>213144</td>
-									<td hidden>2016-09-18</td>
-									<td hidden>1</td>
-									<th hidden>理由</th>
-									<td>申请成功</td>
-									<td>
-										<button type="button" class="btn btn-warning btn-xs" id="scan">查看</button>
-
-									</td>
-								</tr>
-								<tr>
-									<td>耘园气象站</td>
-									<td>创业孵化基地</td>
-									<td>信息科学技术学院</td>
-									<td>30</td>
-									<td>1.5</td>
-									<td>1000</td>
-									<td hidden>湖南省</td>
-									<td hidden>张三</td>
-									<td hidden>13567656789</td>
-									<td hidden>计算机</td>
-									<td hidden></td>
-									<td hidden>213144</td>
-									<td hidden>2016-09-18</td>
-									<td hidden>1</td>
-									<th hidden>理由</th>
-									<td>申请失败</td>
-									<td>
-										<button type="button" class="btn btn-warning btn-xs"
-											data-toggle="modal" data-target="#rent_edit">查看</button>
-									</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -321,7 +254,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
+									<button type="button" class="close" id="closeDe">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 									</button>
 									<h4 class="modal-title text-center" id="myModalLabel">基地申请详情</h4>
@@ -383,8 +316,8 @@
 													<td>有效周期 ：</td>
 													<td><input type="text" id="validdate" disabled></td>
 												</tr>
-                                                <tr>
-                                                  <td hidden id="hideReason">拒绝理由 ：</td>
+                                                <tr hidden id="hideReason">
+                                                  <td>拒绝理由 ：</td>
 													<td colspan="3"><div id="reason"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
                                                   
@@ -395,7 +328,7 @@
 								</div>
 								<div class="modal-footer table-responsive">
 									<button type="button" class="btn btn-primary"
-										data-dismiss="modal">关闭</button>
+										id="closeDe">关闭</button>
 								</div>
 							</div>
 						</div>
@@ -439,7 +372,7 @@
 												</ul></li>
 										</ul>
 									</td>
-                                    <td colspan="3">
+                                    <td colspan="11">
 								</tr>
 								<tr style="background:#eeeff4">
 									<th>基地名称</th>
@@ -462,45 +395,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>耘园气象站</td>
-									<td>创业孵化基地</td>
-									<td>信息科学技术学院</td>
-									<td>30</td>
-									<td>1.5</td>
-									<td>1000</td>
-									<td hidden>湖南省</td>
-									<td hidden>张三</td>
-									<td hidden>13567656789</td>
-									<td hidden>计算机</td>
-									<td hidden></td>
-									<td hidden>213144</td>
-									<td hidden>2016-09-14</td>
-									<td hidden>1</td>
-									<th hidden>理由</th>
-									<td>申请成功</td>
-									<td><span class="icon-search" id="scan"></span></td>
-								</tr>
-								<tr>
-									<td>耘园气象站</td>
-									<td>创业孵化基地</td>
-									<td>信息科学技术学院</td>
-									<td>30</td>
-									<td>1.5</td>
-									<td>1000</td>
-									<td hidden>湖南省</td>
-									<td hidden>张三</td>
-									<td hidden>13567656789</td>
-									<td hidden>计算机</td>
-									<td hidden></td>
-									<td hidden>213144</td>
-									<td hidden>2016-09-14</td>
-									<td hidden>1</td>
-									<th hidden>理由</th>
-									<td>申请失败</td>
-									<td><span class="icon-search" data-toggle="modal"
-										data-target="#failapplication"></span></td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>

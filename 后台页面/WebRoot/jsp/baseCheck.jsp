@@ -118,7 +118,7 @@
                                             <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                             <li><a href="#"><span class="text">实习审批</span></a></li>
                                             <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                            <li><a href="#"><span class="text">维修审批</span></a></li>
+                                            <li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
 										</ul>
 								<li class="menuItem nav-parent"><a> <i
@@ -178,6 +178,7 @@
 						</div>
 				</div>
 				<!-- 主面板内容 -->
+				
 				<div class="row form">
 									
 					<div class="col-lg-12">

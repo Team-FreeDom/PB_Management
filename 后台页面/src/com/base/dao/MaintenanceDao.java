@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.base.po.ApplyDept;
 import com.base.po.ExportBase;
-import com.base.po.Maintenance;
+import com.base.po.Prabaseinfo;
 import com.base.po.MaintenanceList;
 
 public interface MaintenanceDao {
@@ -22,7 +22,7 @@ public interface MaintenanceDao {
     
     public List<ApplyDept> getExistDept();
     
-    public MaintenanceList getshaiBaseInfo(int basetype,int dept,int star,int pageindex, int size);
+    public MaintenanceList getshaiBaseInfo(int basetype,int dept,int star,int pageindex, int size,String order,String orderDir,String searchValue);
     
     public void updateBaseInfo(String baseid, int star, int adddate);
 

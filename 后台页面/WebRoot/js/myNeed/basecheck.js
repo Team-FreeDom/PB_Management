@@ -9,6 +9,7 @@ $(document).ready(function() {
 				"ordering":true,
 				"serverSide" : true,
 				"bFilter": true,
+				"ordering":true,
 				"dom": 'frtip<"bottom"l>',
 				"iDisplayLength": 5,			
 				"ajax" : {

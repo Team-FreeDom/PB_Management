@@ -160,6 +160,14 @@ public class MybaseController {
 	String infostr = request.getParameter("infostr");
 	System.out.println(infostr);
 	mybaseinfoservice.recall(id, infostr);
+	JSONObject getObj = new JSONObject();
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print("成功撤回");
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 	return null;
 
     }

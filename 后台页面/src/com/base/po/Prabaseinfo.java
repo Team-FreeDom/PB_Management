@@ -6,34 +6,34 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Maintenance implements Serializable {
+public class Prabaseinfo implements Serializable {
     
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;  
     @Id
     private String id;
-    private String name;//基地名称
-    private String type;//基地类型
-    private String landarea;//基地面积
-    private String constructionarea;//建筑面积
-    private int undertake;//可承担人数
-    private String applydp;//申报部门   
-    private String land_address;//实习基地地址
-    private String username;//联系人姓名
-    private String phone;//联系人手机号
-    private String material_path;//申请材料地址
+    private String name;//鍩哄湴鍚嶇О
+    private String type;//鍩哄湴绫诲瀷
+    private String landarea;//鍩哄湴闈㈢Н
+    private String constructionarea;//寤虹瓚闈㈢Н
+    private int undertake;//鍙壙鎷呬汉鏁�
+    private String applydp;//鐢虫姤閮ㄩ棬   
+    private String land_address;//瀹炰範鍩哄湴鍦板潃
+    private String username;//鑱旂郴浜哄鍚�
+    private String phone;//鑱旂郴浜烘墜鏈哄彿
+    private String material_path;//鐢宠鏉愭枡鍦板潃
     private int valid_date;
     private String buildtime;
     private String userid;
-    private String facemajor;//面向专业
-    private int star;//星级
+    private String facemajor;//闈㈠悜涓撲笟
+    private int star;//鏄熺骇
   
     
     
  
-	public Maintenance() {
+	public Prabaseinfo() {
 	super();
     }
-    public Maintenance(String id, String name, String type, String landarea,
+    public Prabaseinfo(String id, String name, String type, String landarea,
 	    String constructionarea, int undertake, String applydp,
 	    String land_address, String username, String phone,
 	    String material_path, String facemajor, int star) {
