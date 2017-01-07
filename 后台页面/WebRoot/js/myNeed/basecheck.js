@@ -197,7 +197,7 @@ $(document).ready(function() {
 	                   
 	                  
 	                    $.ajax({
-							url : '',
+							url : 'BasereAgreeApply.do',
 							type : 'post',
 							dataType : 'json',
 							data : {
@@ -242,7 +242,7 @@ $('#certain').click(function() {
         
          infostr=infostr+']';         
          $.ajax({
-				url : '',
+				url : 'BaserefuseApply.do',
 				type : 'post',
 				dataType : 'json',
 				data : {

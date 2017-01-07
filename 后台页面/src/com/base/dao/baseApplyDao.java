@@ -37,4 +37,9 @@ public interface baseApplyDao {
      * @return 0-false 1-true
      */
     public int CheckName(String name);
+    /**封装消息的方法
+     * 发送消息
+     * @param sql 插入封装好的sql语句
+     */
+    public void insertMessage(String sql);
 }

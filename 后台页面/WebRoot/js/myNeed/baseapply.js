@@ -86,9 +86,10 @@ $(document).on("blur", "#basename", function() {
 					alert("error");
 				},
 				success : function(data) {	
-					
+					alert(data);
 					if(data=="false"){						
 						$("#display").html("");
+						tag=true;
 					}else{						
 						$("#display").html("该基地名称已存在，请重新输入");
 						$("#basename")[0].focus();
@@ -211,6 +212,7 @@ $(document).on("click", "#submitForm", function() {
 	var personTel=$("#personTel").val();
 	
 	if(!tag){
+		alert(tag);
 		 bootbox.alert({
 				message : "该基地名称已存在，请重新输入",
 				size : 'small'
