@@ -14,4 +14,10 @@ public interface RepairApproveDao {
 	public List<Map<String,String>> getUser(int status);
 	
 	public List<Map<String,String>> getBase(int status);
+	
+	public void changeStatus(String recordstr,int status);
+	
+	public void refuseApply(String refusestr);
+	
+	public void finish(String storestr);
 }

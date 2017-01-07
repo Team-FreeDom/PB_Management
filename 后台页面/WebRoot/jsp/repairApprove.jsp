@@ -263,8 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
                                     	<tr>
                                         	<td colspan="3">
-                                            	<label><input type="checkbox" name="0" class="ck-all ck1" id=""/>全选</label>
-                                				<label><input type="checkbox" name="0" class="ck-re ck2" id=""/>反选</label>
+                                            	<label><input type="checkbox" name="0" class="ck-all ck1" id=""/>全选</label>                                				
                                             </td>
                                             <td colspan="4" style="text-align:left;">
                                               <button type="button" class="botton btn btn-primary btn-sm" id="agree">同意申请</button>
@@ -407,8 +406,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
                                     	<tr>
                                         	<td colspan="3">
-                                            	<label><input type="checkbox" name="0" class="ck-all ck1"/>全选</label>
-                                				<label><input type="checkbox" name="0" class="ck-re ck2"/>反选</label>
+                                            	<label><input type="checkbox" name="0" class="ck-all ck2"/>全选</label>                                				
                                             </td>
                                               <td  colspan="4">
                                             	<button type="button" class=" botton btn btn-primary" id="finished">维修完成</button>
@@ -438,8 +436,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="storeInfo">保存</button>
       </div>
     </div>
   </div>

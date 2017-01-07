@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,21 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		Connection conn = null;
 		CallableStatement sp = null;
 		ResultSet rs = null;
-		
+	if(baseid==null){
+		baseid="";
+	}
+	if(userid==null){
+		userid="";
+	}
+	if(orderColumn==null){
+		orderColumn="";
+	}
+	if(orderDir==null){
+		orderDir="";
+	}
+	if(searchValue==null){
+		searchValue="";
+	}
 		try
 		{
 			conn = (Connection) SessionFactoryUtils.getDataSource(
@@ -85,6 +100,7 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		}
 		ma.setRecordsTotal(recordsTotal);
 		ma.setData(list);	
+		System.out.println("ma:   "+ma);
 		return ma;
 		
 	}
@@ -117,7 +133,7 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally{
-			session.close();
+			SqlConnectionUtils.free(conn, sp, rs);
 		}
 		return list;
 	}
@@ -151,9 +167,69 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		} catch (Exception e) {
 			System.out.println(e);
 		}finally{
-			session.close();
+			SqlConnectionUtils.free(conn, sp, rs);
 		}
 		return list;
+	}
+	
+	//改变记录的状态
+	@Override
+	public void changeStatus(String recordstr,int status) {
+						
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		Session session = sessionFactory.openSession();
+		
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{call baseweb.trans_maintainstate(?,?)}");
+			sp.setString(1, recordstr);	
+			sp.setInt(2, status);								
+			sp.execute();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}		
+
+	}
+
+	//将记录状态改为申请失败，并填入拒绝原因
+	@Override
+	public void refuseApply(String refusestr) {
+		
+		Session session = sessionFactory.openSession();
+		try {
+			// hibernate调用存储过程(无返回参数)
+			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`refuse_maintain`(?)}");
+			sqlQuery.setString(0,refusestr);				
+			sqlQuery.executeUpdate();
+		} finally {
+			session.close();
+		}		
+
+	}
+
+	//维修完成
+	@Override
+	public void finish(String storestr) {
+		
+		Session session = sessionFactory.openSession();
+		try {
+			// hibernate调用存储过程(无返回参数)
+			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`maintainsuccess`(?)}");
+			sqlQuery.setString(0,storestr);				
+			sqlQuery.executeUpdate();
+		} finally {
+			session.close();
+		}		
+		
 	}
 
 }
