@@ -12,7 +12,7 @@ public class MaintainApply
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;  //维修基地编号
 	private String pro_name;  //维修项目名称
-	private int bid;  //维修基地id
+	private String bid;  //维修基地id
 	private String username;  //申报用户名
 	private String address;   //维修地址ַ
 	private String reason;   //维修原因说明
@@ -21,13 +21,14 @@ public class MaintainApply
 	private String apply_time; //申请时间
 	private int status;  //申请状态值
 	private String userid;  //申请的用户id
+	private double actualmoney;  //维修所需实际金额
 	public MaintainApply()
 	{
 		super();
 	}
-	public MaintainApply(int id, String pro_name, int bid, String username,
+	public MaintainApply(int id, String pro_name, String bid, String username,
 			String address, String reason, String file, double money,
-			String apply_time, int status, String userid)
+			String apply_time, int status, String userid,double actualmoney)
 	{
 		super();
 		this.id = id;
@@ -41,6 +42,15 @@ public class MaintainApply
 		this.apply_time = apply_time;
 		this.status = status;
 		this.userid = userid;
+		this.actualmoney=actualmoney;
+	}
+	public double getActualmoney()
+	{
+		return actualmoney;
+	}
+	public void setActualmoney(double actualmoney)
+	{
+		this.actualmoney = actualmoney;
 	}
 	public int getId()
 	{
@@ -58,11 +68,11 @@ public class MaintainApply
 	{
 		this.pro_name = pro_name;
 	}
-	public int getBid()
+	public String getBid()
 	{
 		return bid;
 	}
-	public void setBid(int bid)
+	public void setBid(String bid)
 	{
 		this.bid = bid;
 	}

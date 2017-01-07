@@ -12,13 +12,14 @@ public class MaintainApplys
 	private String apply_time; //申请时间
 	private String userid;  //申请的用户id
 	private String basename; //基地名称
+	private double actualmoney;  //维修所需实际金额
 	public MaintainApplys()
 	{
 		super();
 	}
 	public MaintainApplys(int id, String pro_name, String username,
 			String address, String reason, String file, double money,
-			String apply_time, String userid, String basename)
+			String apply_time, String userid, String basename,double actualmoney)
 	{
 		super();
 		this.id = id;
@@ -31,6 +32,15 @@ public class MaintainApplys
 		this.apply_time = apply_time;
 		this.userid = userid;
 		this.basename = basename;
+		this.actualmoney=actualmoney;
+	}
+	public double getActualmoney()
+	{
+		return actualmoney;
+	}
+	public void setActualmoney(double actualmoney)
+	{
+		this.actualmoney = actualmoney;
 	}
 	public int getId()
 	{
