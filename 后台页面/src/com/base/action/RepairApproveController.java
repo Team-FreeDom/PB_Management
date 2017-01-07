@@ -187,23 +187,62 @@ public class RepairApproveController {
 	    public String refuseRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
 		   
-		   return null;		   
+		   String refusestr = request.getParameter("recordstr");
+		   String infostr = request.getParameter("infostr");
+		   repairApproveService.refuseRepairApply(refusestr,infostr);
+		   
+		   JSONObject getObj = new JSONObject();
+			getObj.put("str", "成功拒绝申请");
+			response.setContentType("text/html;charset=UTF-8");
+			try {
+			    response.getWriter().print(getObj.toString());
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+			return null;		   
 	   }
 	   
 	   //同意申请
 	   @RequestMapping("/agreeRepairApply.do")
 	    public String agreeRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
-		  
-		   return null;		   
+		   
+		   String agreestr = request.getParameter("agreestr");
+		   String infostr = request.getParameter("infostr");
+		   System.out.println(agreestr);
+		   repairApproveService.agreeRepairApply(agreestr,infostr);
+		   
+		   JSONObject getObj = new JSONObject();
+			getObj.put("str", "成功同意申请");
+			response.setContentType("text/html;charset=UTF-8");
+			try {
+			    response.getWriter().print(getObj.toString());
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+			return null;	   
 	   }
 	   
 	   //维修完成
 	   @RequestMapping("/repairFinish.do")
 	    public String repairFinish(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
+		   String storestr = request.getParameter("recordstr");
+		   String infostr = request.getParameter("infostr");		   
+		   repairApproveService.finishRepairApply(storestr,infostr);
 		   
-		   return null;		   
+		   JSONObject getObj = new JSONObject();
+			getObj.put("str", "已确定维修完成");
+			response.setContentType("text/html;charset=UTF-8");
+			try {
+			    response.getWriter().print(getObj.toString());
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+			return null;	     
 	   }
 	   
 }

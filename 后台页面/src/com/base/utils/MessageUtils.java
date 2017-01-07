@@ -47,6 +47,15 @@ public class MessageUtils {
 	    str="基地申请撤回";
 	}else if(i==11){//用户点击报修撤回
 	    str="报修申请撤回";
+	}else if(i==12){//用户点击报修的同意申请
+		
+	    str="报修申请同意";	    
+	}else if(i==13){//用户点击报修的拒绝申请
+		
+	    str="报修申请拒绝";	    
+	}else if(i==14){//用户点击报修的拒绝申请
+		
+	    str="维修工作完成";	    
 	}
 
 	return str;
@@ -90,6 +99,15 @@ public class MessageUtils {
 	    content = bname + "基地申请已撤回";
 	}else if (i==11){
 	    content = bname + "报修申请已撤回";
+	}else if (i==12){
+		
+	    content = bname + "报修申请已同意";
+	}else if (i==13){
+		
+	    content = bname + "管理员拒绝您的报修申请，可以在我的报修下查看拒绝原因";
+	}else if (i==14){
+		
+	    content = bname + "维修工作已完成";
 	}
 
 	return content;
