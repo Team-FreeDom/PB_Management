@@ -119,7 +119,7 @@
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="#"><span class="text">实习审批</span></a></li>
 										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">维修审批</span></a></li>
+										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
 									</ul></li>
 
@@ -199,6 +199,7 @@
 									<th>建筑面积</th>
 									<th>可承担人数</th>
 									<th hidden>通信地址</th>
+									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
 									<th hidden>联系人电话</th>
 									<th hidden>面向专业</th>
@@ -291,6 +292,11 @@
 													<td><input type="text" id="userphone" disabled></td>
 												</tr>
 												<tr>
+													<td>法定责任人 ：</td>
+													<td colspan="3"><input type="text" id="dutyPerson" disabled></td>
+
+												</tr>
+												<tr>
 													<td>面向专业 ：</td>
 													<td colspan="3"><div id="major_oriented"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
@@ -372,7 +378,7 @@
 												</ul></li>
 										</ul>
 									</td>
-                                    <td colspan="11">
+                                    <td colspan="12">
 								</tr>
 								<tr style="background:#eeeff4">
 									<th>基地名称</th>
@@ -382,6 +388,7 @@
 									<th>建筑面积</th>
 									<th>可承担人数</th>
 									<th hidden>通信地址</th>
+									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
 									<th hidden>联系人电话</th>
 									<th hidden>面向专业</th>

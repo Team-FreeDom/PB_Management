@@ -58,6 +58,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -213,6 +219,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -331,6 +343,7 @@ $(document).ready(function() {
 					$("#userphone").val(object[index].phone);
 					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
+					$("#dutyPerson").html(object[index].resperson);
 					$("#resource").prop("href",object[index].material_path);
 					
 					if(statusid==6){
@@ -450,6 +463,12 @@ $(document).ready(function() {
 										"sDefaultContent" : "",
 										"visible":false,
 										"sWidth" : "6%"
+									},{
+										"mData" : "resperson",
+										"visible":false,
+										"orderable" : false, // 禁用排序
+										"sDefaultContent" : "",
+										"sWidth" : "8%"
 									},
 									{
 										"mData" : "username",

@@ -296,6 +296,17 @@ $(document)
 
 						$("#fileResource").val("");
 					});
+					
+					$(document).on("click", "#ZJ", function() {					
+						$("#add").css("display","block");
+					});
+					
+					$(document).on("click", "#closebas", function() {					
+						$("#add").css("display","none");
+						$("#add input").val('');
+						$(".colle").prop('checked',true);
+						$("#add select").val('');
+					});
 
 					// 点击修改图标，填充修改模态框中的内容
 					$(document).on("click", "#updateDetail", function() {						
@@ -323,7 +334,7 @@ $(document)
 					// 确认删除
 					$("#delSubmit").click(function() {										
 										var recordstr = '(';
-										var i = 0;
+										var i = 0;									
 										$(
 												"input[type='checkbox'][name='recordcheck']:checked")
 												.each(

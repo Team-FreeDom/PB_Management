@@ -36,7 +36,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
-	System.out.println(pageindex+size+order+orderDir+searchValue);
+	//System.out.println(' '+size+','+pageindex+','+order+','+orderDir+','+searchValue);
 	try
 	{
 		conn = (Connection) SessionFactoryUtils.getDataSource(

@@ -85,3 +85,13 @@ tbody tr td span{
 	color:#D8B500;
 	font-size:16px;
 }
+#add{
+	position:absolute !important;
+	top:150px;
+	left:400px;
+	width:600px;
+	height:600px;
+	display:none;
+	scroll:no;
+}
+

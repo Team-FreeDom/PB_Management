@@ -314,7 +314,8 @@ $(document).on("click", "#scanDetail2", function() {
 
 			  //同意申请
 			  var flag=0;
-			  $(document).on("click","#agree",function(){				
+			  $(document).on("click","#agree",function(){			  
+				  
 				  flag=0;
 					$("#Approveing input[name='idname1']").each(function () {
 							if($(this).prop("checked")==true){
@@ -380,6 +381,7 @@ $(document).on("click", "#scanDetail2", function() {
 													size : 'small'
 												});
 												Approvetable.draw(false);
+												repair.draw(false);
 											}
 										});//end
 
@@ -457,8 +459,9 @@ $(document).on("click", "#scanDetail2", function() {
 													message : msg.str,
 													size : 'small'
 												});
-												$("#refuseModal").modal('hide');
+												$("#refuseModal").modal('hide');												
 												Approvetable.draw(false);
+												repair.draw(false);
 											}
 										});//end
 
@@ -512,6 +515,9 @@ $(document).on("click", "#scanDetail2", function() {
 															userid = $(this).val();															
 															basename=$(this).closest('tr').find('td:eq(2) input').val();
 															money=$(this).closest('tr').find('td:eq(6) input').val();
+															if(money==""){
+																money=0;
+															}
 															if (i != 0) {
 																recordstr=recordstr+",("+this.className+",15,"+money+")";
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';

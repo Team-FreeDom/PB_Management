@@ -63,7 +63,13 @@ $(document).ready(function() {
 					"sDefaultContent" : "",
 					"visible":false,
 					"sWidth" : "6%"
-				},
+				},{
+					"mData" : "resperson",
+					"orderable" : false, // 禁用排序
+					"visible":false,
+					"sDefaultContent" : "",
+					"sWidth" : "8%"
+				}, 
 				{
 					"mData" : "username",
 					"orderable" : false, // 禁用排序
@@ -362,6 +368,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#landarea").val(obj[index].landarea);
 	$("#buildingarea").val(obj[index].constructionarea);
 	$("#undertakeCount").val(obj[index].undertake);
+	$("#dutyPerson").html(obj[index].resperson);
 	$("#username").val(obj[index].username);
 	$("#userphone").val(obj[index].phone);
 	$("#major_oriented").html(obj[index].mmajor);
@@ -443,7 +450,13 @@ $("#submitS").click(function() {
 					"sDefaultContent" : "",
 					"visible":false,
 					"sWidth" : "6%"
-				},
+				},{
+					"mData" : "resperson",
+					"orderable" : false, // 禁用排序
+					"visible":false,
+					"sDefaultContent" : "",
+					"sWidth" : "8%"
+				}, 
 				{
 					"mData" : "username",
 					"orderable" : false, // 禁用排序
