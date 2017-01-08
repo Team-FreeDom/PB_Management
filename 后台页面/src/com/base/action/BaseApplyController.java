@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
@@ -166,8 +167,14 @@ public class BaseApplyController {
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		}
+		//[{userid:"1200001",basename:"李彩彩基地"}]
+		map.addAttribute("userid", userid);
+		map.addAttribute("basename", name);
+		//String infostr="";
+		String infostr=JSONArray.fromObject(map).toString();
+		System.out.println(infostr+"封装的信息格式");
 		System.out.println(str1 + "是否正确");
-		baseapplyservice.getRequestBaseInfo(str1, str2);
+		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
 	    }
 	}
 	return "redirect:baseApply.jsp";

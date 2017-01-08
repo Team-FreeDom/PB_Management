@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,5 +143,24 @@ public class baseApplyDaoImpl implements baseApplyDao {
 	}
 	return flag;
     }
+    /**
+     * 发送消息
+     * @param sql 插入封装好的sql语句
+     */
+    @Override
+    public void insertMessage(String sql) {
+   	System.out.println("insert---start");
+
+   	Session session = sessionFactory.openSession();
+
+   	try {
+   	    SQLQuery sqlQuery = session.createSQLQuery(sql);
+   	    sqlQuery.executeUpdate();
+   	} finally {
+   	    session.close();
+   	}
+   	System.out.println("insert---end");
+
+       }
 
 }

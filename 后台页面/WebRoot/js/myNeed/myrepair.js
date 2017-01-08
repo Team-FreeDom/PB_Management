@@ -259,12 +259,12 @@ $(document).on("click", "#scan", function() {
 //撤回操作
 $(document).on("click", "#cancel", function() {
 	var index=$(this).val();					
-  	var basename=obj1[index].name;
+  	var basename=obj1[index].pro_name;
   	var userid=obj1[index].userid;
   	var info_str='[{userid:"'+userid+'",basename:"'+basename+'"}]';
   	var id=obj1[index].id;
 	bootbox.confirm({							
-							message: "是否确认删除",
+							message: "是否确认撤回",
 			        	    buttons: {
 		        	    	confirm: {
 			        	            label: 'Yes',
@@ -276,9 +276,8 @@ $(document).on("click", "#cancel", function() {
 			        	        },
 			        	    },
 							callback: function (result) {
-								alert(result);
 								if(result==true){//上传ID
-									alert("哈哈");
+							
 								  	$.ajax({
 								  		type : 'POST',
 								  		//dataType : 'json',
@@ -297,6 +296,7 @@ $(document).on("click", "#cancel", function() {
 								  				message : msg,
 								  				size : 'small'
 								  			});
+								  			page1.draw(false);
 								  			page2.draw(false);
 								  		}
 								  	});										
