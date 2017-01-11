@@ -17,13 +17,20 @@ public class BaseCheck {
     private String material_path;//申请材料地址
     private String userid;//用户id
     private String mmajor;//面向专业
+    private String resperson;//法定责任人
    
     
     
     
    
   
-    public BaseCheck(int id, String bid, String name, String type,
+    public String getResperson() {
+		return resperson;
+	}
+	public void setResperson(String resperson) {
+		this.resperson = resperson;
+	}
+	public BaseCheck(int id, String bid, String name, String type,
 	    String landarea, String constructionarea, int undertake,
 	    String applydp, int aid, String land_address, String username,
 	    String phone, String material_path, String userid, String mmajor) {
