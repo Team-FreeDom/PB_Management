@@ -367,8 +367,8 @@ $(document).on("click", "#scanDetail", function() {
 	$("#dept0").val(obj[index].applydp);
 	$("#landarea").val(obj[index].landarea);
 	$("#buildingarea").val(obj[index].constructionarea);
-	$("#undertakeCount").val(obj[index].undertake);
-	$("#dutyPerson").html(obj[index].resperson);
+	$("#undertakeCount").val(obj[index].undertake);	
+	$("#dutyPerson").val(obj[index].resperson);
 	$("#username").val(obj[index].username);
 	$("#userphone").val(obj[index].phone);
 	$("#major_oriented").html(obj[index].mmajor);

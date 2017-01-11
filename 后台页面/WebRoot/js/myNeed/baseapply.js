@@ -85,8 +85,7 @@ $(document).on("blur", "#basename", function() {
 				error : function(request) {
 					alert("error");
 				},
-				success : function(data) {	
-					alert(data);
+				success : function(data) {					
 					if(data=="false"){						
 						$("#display").html("");
 						tag=true;
@@ -212,8 +211,7 @@ $(document).on("click", "#submitForm", function() {
 	var personTel=$("#personTel").val();
 	var lawperson=$("#lawPerson").val();
 	
-	if(!tag){
-		alert(tag);
+	if(!tag){		
 		 bootbox.alert({
 				message : "该基地名称已存在，请重新输入",
 				size : 'small'
@@ -241,6 +239,13 @@ $(document).on("click", "#submitForm", function() {
 		});
 	 return;		
 	}
+	if(lawperson==""){
+		bootbox.alert({
+			message : "请填写法定责任人",
+			size : 'small'
+		});
+	 return;	
+	}
 	if(personName==""){
 		bootbox.alert({
 			message : "请填写联系人姓名",
@@ -255,13 +260,7 @@ $(document).on("click", "#submitForm", function() {
 		});
 	 return;	
 	}
-	if(lawperson==""){
-		bootbox.alert({
-			message : "请填写法定责任人",
-			size : 'small'
-		});
-	 return;	
-	}
+	
 	if(!flag1){
 		 bootbox.alert({
 	            message: "上传资料仅限于rar,zip压缩包格式",

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
@@ -42,7 +43,7 @@ public class BaseCheckController {
      * @param map
      * @return
      */
-    @RequestMapping("/getBaseCheck.do")
+    @RequestMapping("/getBaseCheck.do")   
     public String getBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 获取申请部门id
@@ -73,8 +74,8 @@ public class BaseCheckController {
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {
-	    response.getWriter().print(getObj.toString());
-	} catch (IOException e) {
+	   response.getWriter().print(getObj.toString());
+	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}

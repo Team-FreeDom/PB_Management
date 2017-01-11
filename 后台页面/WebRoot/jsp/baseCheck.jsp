@@ -217,7 +217,7 @@
 													</li>
 											</ul>
 										</td>
-										<td colspan="10">										
+										<td colspan="11">										
 										</td>										
 									</tr>
 									<tr style="background:#eeeff4" width="100%">
