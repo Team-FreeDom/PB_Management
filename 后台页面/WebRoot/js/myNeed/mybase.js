@@ -1,9 +1,9 @@
 var obj1=[];
 var obj2=[];
-
+var page1;
 $(document).ready(function() {	
 				
-             var page1=$('#mybasetable1').dataTable(
+            page1=$('#mybasetable1').DataTable(
 			  {
 				  "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 					"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
@@ -58,6 +58,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -158,7 +164,7 @@ $(document).ready(function() {
 			  });
 			  
 			  
-			var  page2=$('#mybasetable2').dataTable(
+			var  page2=$('#mybasetable2').DataTable(
 			  {
 				  "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 					"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
@@ -213,6 +219,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -308,7 +320,7 @@ $(document).ready(function() {
 			  
 			  $(document).on("click", "#scan", function() {	
 				  
-					var str=$(this).attr("value");
+					var str=$(this).attr("value");					
 					var position=str.indexOf('$');
 					var index=str.substring(0,position);
 					var tag=str.substring(position+1);
@@ -331,6 +343,7 @@ $(document).ready(function() {
 					$("#userphone").val(object[index].phone);
 					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
+					$("#dutyPerson").html(object[index].resperson);
 					$("#resource").prop("href",object[index].material_path);
 					
 					if(statusid==6){
@@ -357,8 +370,7 @@ $(document).ready(function() {
 				});
 
 				//撤回按钮，传给后台id
-				$(document).on("click", "#cancelSubmit", function() {
-					
+				$(document).on("click", "#cancelSubmit", function() {					
 					var index=$(this).val();					
 				  	var basename=obj1[index].name;
 				  	var userid=obj1[index].userid;
@@ -366,7 +378,7 @@ $(document).ready(function() {
 				  	var id=obj1[index].id;
 				  	$.ajax({
 				  		type : 'POST',
-				  		dataType : 'json',
+				  		//dataType : 'json',
 				  		data:{
 				  			"id":id,
 				  			"infostr":info_str
@@ -377,13 +389,13 @@ $(document).ready(function() {
 				  		error : function(request) {
 				  			alert("error");
 				  		},
-				  		success : function(data) {
-				  			alert("撤回了么");
+				  		success : function(msg) {
 				  			bootbox.alert({
-				  				message : "成功撤回",
+				  				message : msg,
 				  				size : 'small'
 				  			});
 				  			page1.draw(false);
+				  			page2.draw(false);
 				  		}
 
 				  	});
@@ -394,7 +406,7 @@ $(document).ready(function() {
 				$(document).on("click", "#finish", function() {
 					obj2=[];
 					var status=$("#status option:selected").val();					
-					 page2=$('#mybasetable2').dataTable(
+					 page2=$('#mybasetable2').DataTable(
 							  {
 								  "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
@@ -451,6 +463,12 @@ $(document).ready(function() {
 										"sDefaultContent" : "",
 										"visible":false,
 										"sWidth" : "6%"
+									},{
+										"mData" : "resperson",
+										"visible":false,
+										"orderable" : false, // 禁用排序
+										"sDefaultContent" : "",
+										"sWidth" : "8%"
 									},
 									{
 										"mData" : "username",

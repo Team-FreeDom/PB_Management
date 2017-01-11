@@ -4,18 +4,18 @@ $(function () {
 		$.ajax({
 					type : 'POST',
 					dataType : 'json',
-					url : '',
-					async : false,
+					url : 'basename.do',
+					async : true,
 					cache : false,
 					error : function(request) {
-						alert("error");
+						alert("请求异常");
 						},
 					success : function(data) {
 							var i = 0;
 							for ( var item in data) {
 								$("#baselistid").after(
-									"<option value="+data[i].dept+">"
-											+ data[i].baselistname + "</option>");
+									"<option value="+data[i].id+">"
+											+ data[i].name + "</option>");
 										i++;
 									}
 					

@@ -256,7 +256,7 @@ $("#save").click(function(){
 		}
 		else if($("#Abudget").val()==""){
 				bootbox.alert({
-				message : "请填写实际金额",
+				message : "请填写预算金额",
 				size : 'small'
 				});	
 				return 0;

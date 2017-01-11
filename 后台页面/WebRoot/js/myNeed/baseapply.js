@@ -86,9 +86,10 @@ $(document).on("blur", "#basename", function() {
 					alert("error");
 				},
 				success : function(data) {	
-					
+					alert(data);
 					if(data=="false"){						
 						$("#display").html("");
+						tag=true;
 					}else{						
 						$("#display").html("该基地名称已存在，请重新输入");
 						$("#basename")[0].focus();
@@ -209,8 +210,10 @@ $(document).on("click", "#submitForm", function() {
 	var baseaddress=$("#baseaddress").val();
 	var personName=$("#personName").val();
 	var personTel=$("#personTel").val();
+	var lawperson=$("#lawPerson").val();
 	
 	if(!tag){
+		alert(tag);
 		 bootbox.alert({
 				message : "该基地名称已存在，请重新输入",
 				size : 'small'
@@ -248,6 +251,13 @@ $(document).on("click", "#submitForm", function() {
 	if(personTel==""){
 		bootbox.alert({
 			message : "请填写联系人电话",
+			size : 'small'
+		});
+	 return;	
+	}
+	if(lawperson==""){
+		bootbox.alert({
+			message : "请填写法定责任人",
 			size : 'small'
 		});
 	 return;	

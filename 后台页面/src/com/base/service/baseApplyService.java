@@ -28,8 +28,9 @@ public interface baseApplyService {
      * 插入用户基地申请信息
      * @param str1 基地名称id 申报部门id 基地类型id等的string字符串
      * @param str2 (基地id,专业id)
+     * @param infostr 要插入的信息
      */
-    public void getRequestBaseInfo(String str1,String str2);
+    public void getRequestBaseInfo(String str1,String str2,String infostr);
     /**
      * 是否数据库存在此名字
      * @param name 用户输入的基地名称

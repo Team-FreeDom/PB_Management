@@ -114,7 +114,7 @@
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="repairApprove.jsp"><span class="text">实习审批</span></a></li>
 										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">维修审批</span></a></li>
+										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 										
 									</ul></li>
 
@@ -276,6 +276,14 @@
 										<label class="col-md-3 control-label">通信地址</label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="baseaddress" name="land_addres"
+												placeholder="">
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-md-3 control-label">法定责任人</label>
+										<div class="col-md-6">
+											<input type="text" class="form-control" id="lawPerson" name="lawPerson"
 												placeholder="">
 										</div>
 									</div>

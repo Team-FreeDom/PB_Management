@@ -228,6 +228,7 @@
 										<th>土地面积</th>
 										<th>建筑面积</th>
 										<th hidden>通信地址</th>
+										<th hidden>法定责任人</th>
 										<th>联系人姓名</th>
 										<th>联系人电话</th>
 										<th hidden>面向专业</th>
@@ -347,6 +348,11 @@
 												<td><input type="text" id="username" disabled></td>
 												<td>联系人电话 ：</td>
 												<td><input type="text" id="userphone" disabled></td>
+											</tr>
+											<tr>
+												<td>法定责任人 ：</td>
+												<td colspan="3"><input type="text" id="dutyPerson" disabled></td>
+												
 											</tr>
 											<tr>
 												<td>面向专业 ：</td>
