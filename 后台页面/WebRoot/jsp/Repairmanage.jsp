@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -491,9 +491,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.dataTables.min.js"></script>
-    <script src="../dist/jquery.cokie.min.js"></script>    
     <script src="../js/bootbox.min.js"></script>
-    <script src="../js/myNeed/Repairmanage.js"></script>
+     <script src="../dist/jquery.cokie.min.js"></script>
+    <script src="../js/Repairmanage.js"></script> 
     <script src="../js/kg.js"></script>
     
   </body>
