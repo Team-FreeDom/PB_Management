@@ -125,6 +125,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
+	    System.out.println(recordstr);
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.transstate_baseapply(?)}");
 	    sp.setString(1, recordstr);	   
