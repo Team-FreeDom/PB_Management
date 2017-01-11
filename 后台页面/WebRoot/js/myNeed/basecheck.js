@@ -183,7 +183,7 @@ $(document).ready(function() {
 							
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
-							date=$(this).closest('tr').find('td:eq(4) select option:selected').val();
+							date=$(this).closest('tr').find('td:eq(5) select option:selected').val();
 							if(i!=0){
 								recordstr=recordstr+",("+$(this).closest('tr').find('td:eq(1) input').val()+','+date+')';
 								infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
@@ -207,7 +207,7 @@ $(document).ready(function() {
 							type : 'post',
 							dataType : 'json',
 							data : {
-								"resordstr" : recordstr,
+								"recordstr" : recordstr,
 								"infostr" : infostr,
 								"recorddigit":recorddigit
 							},
@@ -235,11 +235,11 @@ $('#certain').click(function() {
 				basename=$(this).closest('tr').find('td:eq(2) input').val();
 				reason=$(this).closest('tr').find('td:eq(4) textarea').val();
 				if(i!=0){
-					recordstr=recordstr+",("+this.className+',"'+reason+'")';
+					recordstr=recordstr+",("+this.className+",'"+reason+"',12)";
 					infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
 					
 				}else{
-					recordstr=recordstr+"("+this.className+',"'+reason+'")';
+					recordstr=recordstr+"("+this.className+",'"+reason+"',12)";
 					infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
 				}					
 								
@@ -318,7 +318,7 @@ $(document).on("click", "#refuse", function() {
 	 $('input[name="idname"]:checked').each(function(){
 		 index=$(this).data("id");
 		 userid = obj[index].userid;
-		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+'$'+obj[index].bid+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
+		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
 		 
 	 });
 	 
@@ -372,11 +372,11 @@ $(document).on("click", "#scanDetail", function() {
 	$("#username").val(obj[index].username);
 	$("#userphone").val(obj[index].phone);
 	$("#major_oriented").html(obj[index].mmajor);
-	$("#linkAddress").html(obj[index].land_address);
-	
-	if(obj[index].material_path==""){		
-		$("#resource").prop("hidden",true); 
-	}else{
+	$("#linkAddress").html(obj[index].land_address);	
+	if(obj[index].material_path=="null"){			
+		$("#resourcetr").prop("hidden",true); 
+	}else{		
+		$("#resourcetr").prop("hidden",false); 
 		$("#resource").prop("href",obj[index].material_path);
 	}
 	
