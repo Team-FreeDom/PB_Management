@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
-import com.base.serviceImpl.MaintainApplyServiceImpl;
+import com.base.service.MaintainApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
@@ -39,12 +40,12 @@ import com.base.utils.ExcelReport;
 public class MaintainApplyController
 {
 	@Autowired
-	private MaintainApplyServiceImpl applyservice;
+	private MaintainApplyService applyservice;
 	//校内基地名查询
 	@RequestMapping("/basename.do")
 	public String find_basename(HttpServletRequest request, ModelMap map,HttpServletResponse response)
 	{
-		List<Prabaseinfo> list=applyservice.find_basename();
+		List<Map<String, String>> list=applyservice.find_basename();
 		response.setContentType("text/html;charset=UTF-8");
 		try
 		{
@@ -157,6 +158,7 @@ public class MaintainApplyController
 		applyservice.insert_maintain(str);
 		return "index";
 	}
+	
 	//维修管理界面，把所有信息传到（前台当前页面记录数，当前页数，排序列，排序顺序，模糊查询的字符串,返回总记录数）
 	@RequestMapping("/query_maintainapply.do")
 	public String query_maintainapply(HttpServletRequest request, ModelMap map,HttpServletResponse response)
@@ -167,8 +169,7 @@ public class MaintainApplyController
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
-		int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
-		String columnName="";
+		int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号		
 	    String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
 	    String searchValue = request.getParameter("search[value]");
 		if (searchValue.equals("")) {
@@ -176,12 +177,13 @@ public class MaintainApplyController
 		}
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
-		List<MaintainList> list=new ArrayList<MaintainList>();
-		list=applyservice.query_maintainapply(size, pageindex, columnName, orderDir, searchValue);
+		MaintainList list=new MaintainList();
+		list=applyservice.query_maintainapply(size, pageindex, order, orderDir, searchValue);
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw", draw);
-		getObj.put("recordsTotal", ((MaintainList) list).getRecordsTotal());
-		getObj.put("data", ((MaintainList) list).getData());
+		getObj.put("recordsFiltered", list.getRecordsTotal());
+		getObj.put("recordsTotal", list.getRecordsTotal());
+		getObj.put("data", list.getData());
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -195,7 +197,7 @@ public class MaintainApplyController
 	@RequestMapping("/delmaintainapply.do")
 	public String delmaintainapply(HttpServletRequest request,HttpServletResponse response, ModelMap map)
 	{
-		String str=request.getParameter("recordstr");
+		String str=request.getParameter("deletstr");
 		applyservice.delete_maintainapply(str);
 		JSONObject getObj = new JSONObject();
     	getObj.put("flag", true);    	
