@@ -32,7 +32,7 @@ $(document)
 													"mData" : "buildtime",
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%",
+													"sWidth" : "10%",
 
 												},
 												{
@@ -165,7 +165,7 @@ $(document)
 													"mData" : "id",
 													"orderable" : false, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%",
+													"sWidth" : "6%",
 													"render" : function(data,
 															type, row) {
 														obj.push(row);														
