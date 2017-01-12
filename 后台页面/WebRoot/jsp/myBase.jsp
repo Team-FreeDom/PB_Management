@@ -315,14 +315,14 @@
 												</tr>
 												<tr>
 													<td>面向专业 ：</td>
-													<td colspan="3"><div id="major_oriented"
+													<td colspan="3" style="text-align:left;"><div id="major_oriented"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
 
 												<tr>
 													<td>通信地址 ：</td>
-													<td colspan="3"><div id="linkAddress"
+													<td colspan="3"  style="text-align:left;"><div id="linkAddress"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
@@ -407,26 +407,26 @@
 												</tr>
 												<tr>
 													<td>面向专业 ：</td>
-													<td colspan="3"><div id="major_orientedt"
+													<td colspan="3" style="text-align:left;"><div id="major_orientedt"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
 
 												<tr>
 													<td>通信地址 ：</td>
-													<td colspan="3"><div id="linkAddresst"
+													<td colspan="3" style="text-align:left;"><div id="linkAddresst"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
 												<tr id="resourcetr">
 													<td>申请材料 ：</td>
 													<td colspan="3" style="text-align:left;"><a
-														id="resource" href="#" style="color:#3071a9;">点击查看</a></td>
+														id="resource" href="" style="color:#3071a9;">点击查看</a></td>
 												</tr>
 												<tr>
 													<td>续期 ：</td>
 													<td colspan="3" style="text-align:left;"><input type="text" id="adddate"
-														disabled></td>
+														/>个月</td>
 												</tr>
 											</table>
 										</div>
@@ -530,6 +530,7 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	 <script src="../js/bootbox.min.js"></script>
 	<script src="../js/myNeed/mybase.js"></script>
 	<script src="../js/kg.js"></script>
 

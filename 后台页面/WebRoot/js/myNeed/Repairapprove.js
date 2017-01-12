@@ -112,7 +112,7 @@ $(".ck2").click(function () {//反选
 										"render":function(data,type,row){					
 										obj.push(row);							
 										return data="<span type='button' class='icon-search' value='"+(obj.length-1)
-										+ "' id='scanDetail'>查看</span>";
+										+ "' id='scanDetail'></span>";
 										}
 									}
 							],
@@ -227,7 +227,7 @@ $(".ck2").click(function () {//反选
              										"render":function(data,type,row){					
              										obj2.push(row);							
              										return data="<span type='button' class='icon-search' value='"+(obj2.length-1)
-             										+ "' id='scanDetail2'>查看</span>";
+             										+ "' id='scanDetail2'></span>";
              										}
              									}
              			],
@@ -289,7 +289,12 @@ $(document).on("click", "#scanDetail", function() {
 	$("#budget").val(obj[index].money);
 	$("#address").val(obj[index].address);
 	$("#reason").val(obj[index].reason);
-	$("#linkAddress").prop("href",obj[index].file);
+	if(obj[index].file=="null"||obj[index].file==""){			
+		$("#resourcetr").prop("hidden",true); 
+	}else{		
+		$("#resourcetr").prop("hidden",false); 
+		$("#linkaddress").prop("href",obj[index].file);
+	}
 	
 	$("#Checkdetal").modal('show');
 	
@@ -306,7 +311,13 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#budget").val(obj2[index].money);
 	$("#address").val(obj2[index].address);
 	$("#reason").val(obj2[index].reason);
-	$("#linkAddress").prop("href",obj2[index].file);
+	if(obj[index].file=="null"||obj[index].file==""){			
+		$("#resourcetr").prop("hidden",true); 
+	}else{		
+		$("#resourcetr").prop("hidden",false); 
+		$("#linkaddress").prop("href",obj[index].file);
+	}
+	
 	
 	$("#Checkdetal").modal('show');
 	
@@ -695,7 +706,7 @@ $(document).on("click","#finish",function() {
 							"render":function(data,type,row){					
 							obj.push(row);							
 							return data="<span type='button' class='icon-search' value='"+(obj.length-1)
-							+ "' id='scanDetail'>查看</span>";
+							+ "' id='scanDetail'></span>";
 							}
 						}
 				],
@@ -819,7 +830,7 @@ $(document).on("click","#finish2",function() {
 		   										"render":function(data,type,row){					
 		   										obj2.push(row);							
 		   										return data="<span type='button' class='icon-search' value='"+(obj2.length-1)
-		   										+ "' id='scanDetail2'>查看</span>";
+		   										+ "' id='scanDetail2'></span>";
 		   										}
 		   									}
 		   			],

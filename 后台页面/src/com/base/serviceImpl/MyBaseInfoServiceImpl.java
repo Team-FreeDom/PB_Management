@@ -67,4 +67,10 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 	mybaseinfodao.insertMessage(insertStr);
     }
 
+	@Override
+	public void updateDate(String baseid, int adddate) {
+		
+		mybaseinfodao.updateDate(baseid,adddate);
+	}
+
 }

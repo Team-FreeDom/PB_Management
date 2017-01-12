@@ -39,5 +39,7 @@ public interface MyBaseInfoService {
     * @param infostr
     */
    public void recall(String id,String infostr);  
+   
+   public void updateDate(String baseid,int adddate);
 
 }

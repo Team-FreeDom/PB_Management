@@ -142,7 +142,7 @@ $(document).ready(function() {
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
 							}else if(data==17){
-								return data='<button type="button" class="btn btn-warning btn-xs" id="change" value="'+(obj1.length-1)+'$1">修改</button>';
+								return data='<button type="button" class="btn btn-success btn-xs" id="change" value="'+(obj1.length-1)+'$1">修改</button>';
 							}else{
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}							
@@ -349,7 +349,12 @@ $(document).ready(function() {
 					$("#userphone").val(object[index].phone);
 					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
-					$("#dutyPerson").val(object[index].resperson);
+					var resperson=object[index].resperson;
+					if(resperson=="null"){
+					$("#dutyPerson").val("");
+					}else{
+						$("#dutyPerson").val(resperson);	
+					}
 					$("#baseid").val('#'+object[index].bid);					
 					
 					
@@ -399,11 +404,15 @@ $(document).ready(function() {
 					$("#userphonet").val(object[index].phone);
 					$("#major_orientedt").html(object[index].mmajor);
 					$("#linkAddresst").html(object[index].land_address);
-					$("#dutyPersont").val(object[index].resperson);
-										
+					var resperson=object[index].resperson;
+					if(resperson!=null&&resperson!=""){
+						$("#dutyPersont").val(resperson);
+					}else{
+						$("#dutyPersont").val("");
+					}										
 					
 					
-					if(object[index].material_path=="null"){			
+					if(object[index].material_path=="null"||object[index].material_path==""){			
 						$("#resourcetr").prop("hidden",true); 
 					}else{		
 						$("#resourcetr").prop("hidden",false); 
@@ -644,7 +653,11 @@ $(document).ready(function() {
 										"sWidth" : "8%",
 										"render":function(data,type, row){
 											   obj2.push(row);
-												return data='<span class="icon-edit" id="scan" value="'+(obj2.length-1)+'$2"></span>';
+												if(data==17){
+													return data='<span class="icon-edit" id="change" value="'+(obj2.length-1)+'$2"></span>';
+												}else{
+													return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
+												}
 																
 										}
 									}
