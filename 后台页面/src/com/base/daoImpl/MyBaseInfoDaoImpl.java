@@ -42,16 +42,11 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_baseapplyhistory(?,?,?,?,?,?,?,?)}");
-	    sp.setInt(1,pageindex);	
-	    //System.out.println(pageindex);
-	    sp.setInt(2, size);	 
-	   // System.out.println(size);
-	    sp.setString(3, columnName);
-	   // System.out.println(columnName);
-	    sp.setString(4, orderDir);	 
-	   // System.out.println(orderDir);
-	    sp.setInt(5, year);	 
-	    System.out.println(year);
+	    sp.setInt(1,pageindex);		   
+	    sp.setInt(2, size);	  
+	    sp.setString(3, columnName);	   
+	    sp.setString(4, orderDir);	   
+	    sp.setInt(5, year);	 	   
 	    sp.setInt(6, status);
 	   // System.out.println(status);
 	    sp.setString(7, userid);

@@ -373,7 +373,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#userphone").val(obj[index].phone);
 	$("#major_oriented").html(obj[index].mmajor);
 	$("#linkAddress").html(obj[index].land_address);	
-	if(obj[index].material_path=="null"){			
+	if(obj[index].material_path=="null"||obj[index].material_path==""){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 

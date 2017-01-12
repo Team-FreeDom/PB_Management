@@ -179,7 +179,7 @@ public class MybaseController {
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
     	String baseid=request.getParameter("baseid");   	
-    	String date=request.getParameter("adddate");    	
+    	String date=request.getParameter("adddate");      	
     	int adddate=0;
     	if(!date.equals("")&&date!=null){
     		 adddate=Integer.valueOf(date);

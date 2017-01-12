@@ -28,14 +28,14 @@ public class RepairApproveServiceImpl implements RepairApproveService {
 	@Autowired
 	private CheckViewDaoImpl checkViewDaoImpl;
 	
-   //Í¬ÒâÉêÇë
+  //åŒæ„ç”³è¯·
 	@Override
 	public void agreeRepairApply(String agreestr,String infostr) {
-		//»ñµÃÍ¨ÖªÏûÏ¢×Ö·û´®
-		String insertStr=MessageUtils.getinfoMs(infostr,12);
-		//¸Ä±ä¼ÇÂ¼µÄ×´Ì¬£¬½«ÌØ¶¨¼ÇÂ¼µÄ×´Ì¬ÓÉÉêÇëÖĞ¸ÄÎªÎ¬ĞŞÖĞ
+		//è·å¾—æ’å…¥è¯­å¥
+		String insertStr=MessageUtils.getinfoMs(infostr,12);		
+		//å°†ç‰¹å®šè®°å½•çŠ¶æ€æ”¹ä¸º14,ç»´ä¿®ä¸­
 		repairApproveDao.changeStatus(agreestr, 14);
-		//ÏòÏûÏ¢±íÖĞ²åÈëĞÅÏ¢ 
+		//æ’å…¥è¯­å¥
 		 checkViewDaoImpl.insertMessage(insertStr);
 		
 	}
@@ -58,14 +58,14 @@ public class RepairApproveServiceImpl implements RepairApproveService {
 		return list;
 	}
 
-	//¾Ü¾øÉêÇë
+	//æ‹’ç»æŠ¥ä¿®ç”³è¯·
 	@Override
 	public void refuseRepairApply(String refusestr,String infostr) {
-		//»ñµÃÍ¨ÖªÏûÏ¢×Ö·û´®
+		//è·å¾—æ’å…¥è¯­å¥
 		String insertStr=MessageUtils.getinfoMs(infostr,13);
-		//¸Ä±ä¼ÇÂ¼µÄ×´Ì¬£¬½«ÌØ¶¨¼ÇÂ¼µÄ×´Ì¬ÓÉÉêÇëÖĞ¸ÄÎªÉêÇëÊ§°Ü
+		//
 		repairApproveDao.refuseApply(refusestr);
-		//ÏòÏûÏ¢±íÖĞ²åÈëĞÅÏ¢ 
+		//æ’å…¥è¯­å¥
 		checkViewDaoImpl.insertMessage(insertStr);
 		
 	}
@@ -85,14 +85,14 @@ public class RepairApproveServiceImpl implements RepairApproveService {
 		return list;
 	}
 
-	//Î¬ĞŞÍê³É
+	//ç»´ä¿®å®Œæˆ
 	@Override
 	public void finishRepairApply(String storestr, String infostr) {
-		//»ñµÃÍ¨ÖªÏûÏ¢×Ö·û´®
+		//è·å¾—æ’å…¥è¯­å¥
 		String insertStr=MessageUtils.getinfoMs(infostr,14);
-		//¸Ä±ä¼ÇÂ¼µÄ×´Ì¬£¬½«ÌØ¶¨¼ÇÂ¼µÄ×´Ì¬ÓÉÉêÇëÖĞ¸ÄÎªÉêÇëÊ§°Ü
+		//
 		repairApproveDao.finish(storestr);
-		//ÏòÏûÏ¢±íÖĞ²åÈëĞÅÏ¢ 
+		//æ’å…¥è¯­å¥
 		checkViewDaoImpl.insertMessage(insertStr);
 		
 	}

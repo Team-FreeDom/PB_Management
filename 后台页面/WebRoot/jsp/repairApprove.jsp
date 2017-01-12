@@ -344,9 +344,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                   </div>
                                   <div class="modal-footer table-responsive">
-                                    <center>
-                                    	申请材料：<a id="linkaddress" href="#" style="color:#00F; text-decoration:underline; font-size:16px;">点击查看</a>
+                                    <center id="resourcetr">
+                                    	申请材料：<a id="linkaddress" href="" style="color:#00F; text-decoration:underline; font-size:16px;">点击查看</a>
                                     </center>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                                   </div>
                                 </div>
                               </div>
