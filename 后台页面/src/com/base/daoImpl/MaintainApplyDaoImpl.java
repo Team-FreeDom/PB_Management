@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,23 +16,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
+import com.base.dao.MaintainApplyDao;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("MaintainApplyDao")
-public class MaintainApplyDao
+public class MaintainApplyDaoImpl implements MaintainApplyDao
 {
 	@Autowired
 	private SessionFactory sessionfactory;
-	//查询所有的基地列表
-	public List<Prabaseinfo> find_basename()
+	
+	@Override
+	//查询所有的基地列表	
+	public List<Map<String,String>> find_basename()
 	{
 		Connection conn = null;
 		CallableStatement sp = null;
 		ResultSet rs = null;
-		List<Prabaseinfo> list =new ArrayList<Prabaseinfo>();
+		List<Map<String,String>> list =new ArrayList<Map<String,String>>();
+		HashMap<String,String> map=null;
 		try
 		{
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionfactory).getConnection();
@@ -39,10 +45,10 @@ public class MaintainApplyDao
 			rs=sp.getResultSet();
 			while(rs.next())
 			{
-				Prabaseinfo pra=new Prabaseinfo();
-				pra.setId(rs.getString("id"));
-				pra.setName(rs.getString("name"));
-				list.add(pra);
+				map=new HashMap<String, String>();
+				map.put("id",rs.getString("id"));
+				map.put("name",rs.getString("name"));
+				list.add(map);
 			}
 		}
 		catch(SQLException e)
@@ -55,6 +61,8 @@ public class MaintainApplyDao
 		}
 		return list;
 	}
+	
+	@Override
 	//插入项目维修申请
 	public void insert_maintain(String str)
 	{
@@ -75,10 +83,12 @@ public class MaintainApplyDao
 			SqlConnectionUtils.free(conn, sp, null);
 		}
 	}
+	
+	@Override
 	//查询完成的校内基地维修申请记录,参数顺序：当前页面记录数，当前页数，排序列，排序顺序，模糊查询的字符串,返回总记录数
-	public List<MaintainList> query_maintainapply(int offsets,int page,String str,String str1,String str2)
+	public MaintainList query_maintainapply(int offsets,int page,String str,String str1,String str2)
 	{
-		List<MaintainList> list=new ArrayList<MaintainList>();
+		MaintainList list=new MaintainList();
 		List<MaintainApplys> ma=new ArrayList<MaintainApplys>();
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -112,7 +122,7 @@ public class MaintainApplyDao
 				mt.setActualmoney(rs.getDouble("actualmoney"));
 				ma.add(mt);
 			}
-			((MaintainList) list).setData(ma);
+			list.setData(ma);
 		}
 		catch(Exception e)
 		{
@@ -123,6 +133,8 @@ public class MaintainApplyDao
 		}
 		return list;
 	}
+	
+	@Override
 	//删除维修基地申请记录，传的值为维修记录id的集合
 	public void delete_maintainapply(String str)
 	{
@@ -144,6 +156,8 @@ public class MaintainApplyDao
 			SqlConnectionUtils.free(conn, sp, null);
 		}
 	}
+	
+	@Override
 	//增加维修基地记录（已完成的维修）
 	public void add_maintain(String pronames,String bids,String usernames,String address,String reasons,String files,String userids,double actuals)
 	{
@@ -172,6 +186,8 @@ public class MaintainApplyDao
 			SqlConnectionUtils.free(conn, sp, null);
 		}
 	}
+	
+	@Override
 	//导出基地维修记录，参数为筛选条件，第一个基地名字，第二个为年份（如没有，则为-1）
 	public List<MaintainApplys> export_maintainapply(String bname,int years)
 	{

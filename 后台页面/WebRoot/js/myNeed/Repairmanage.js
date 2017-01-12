@@ -1,21 +1,20 @@
 // JavaScript Document
-var obj=[];
-function a(){
-	alert("on")
-	}						
+var obj=[];			
 $(document).ready(function() {
 				//分页表格 
-              var applytable =$('#Repairmanage').dataTable(
+              var applytable =$('#Repairmanage').DataTable(
 			  {
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
+				  "ordering":true,
 				  "aLengthMenu":[5,10,20,30], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 5,  //默认每页显示多少条记录
+					"bfilter":true,
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
-							"url" : "xxx.do",
+							"url" : "query_maintainapply.do",
 							"type" : "POST"
 						},  
 					"aoColumns" : [                                        
@@ -26,8 +25,8 @@ $(document).ready(function() {
 										
 									},
 									{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
-										"mData" : "projectname",
-										"orderable" : true, // 禁用排序
+										"mData" : "pro_name",
+										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 									},
 									{
@@ -37,47 +36,42 @@ $(document).ready(function() {
 
 									},
 									{
-										"mData" : "name",
+										"mData" : "username",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 
 									},
 									{
-										"mData" : "time",
+										"mData" : "apply_time",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 									},
+									{
+										"mData" : "actualmoney",
+										"orderable" : false, // 禁用排序
+										"sDefaultContent" : "",
+									},									
 									{
 										"mData" : "money",
 										"orderable" : false, // 禁用排序
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "status",
-										"orderable" : true, // 禁用排序
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "budget",
-										"orderable" : true, // 禁用排序
-										"visible" :false,
-										"sDefaultContent" : "",
-									},
-									{
-										"mData" : "reason",
-										"orderable" : true, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
 									},
 									{
 										"mData" : "address",
-										"orderable" : true, // 禁用排序
+										"orderable" : false, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
 									},
 									{
-										"mData" : "linkaddress",
-										"orderable" : true, // 禁用排序
+										"mData" : "reason",
+										"orderable" : false, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},									
+									{
+										"mData" : "file",
+										"orderable" : false, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
 									},
@@ -100,8 +94,7 @@ $(document).ready(function() {
 								"orderable" : false, // 禁用排序
 								"targets" : [0], // 指定的列
 								"data" : "id",
-								"render" : function(data, type, row) {
-									 data=row.id;
+								"render" : function(data, type, row) {									
 									return '<input type="checkbox" value="'+ data + '" name="idname" class="ck"  />';
 								}
 							}],
@@ -126,7 +119,7 @@ $(document).ready(function() {
         $.ajax({
  			type : 'POST',
  			dataType : 'json',
- 			url : '.do',
+ 			url : 'basename.do',
  			async : false,
  			cache : false,
  			error : function(request) {
@@ -136,16 +129,13 @@ $(document).ready(function() {
          		  });
  			},
  			success : function(data) {
- 				 for (var i=0;i<data[0].length;i++) {
- 					$("#EbasenameID").after(
- 							"<option value="+data[0][i].basename+">"
- 									+data[0][i].basename+"</option>");
+ 				 for (var i=0;i<data.length;i++) { 					
  									$("#AbasenameID").after(
- 				 							"<option value="+data[0][i].name+">"
- 				 									+data[0][i].basename+"</option>");
+ 				 							"<option value="+data[i].id+">"
+ 				 									+data[i].name+"</option>");
 													$("#SbasenameID").after(
-														"<option value="+data[0][i].name+">"
-																+data[0][i].basename+"</option>");
+														"<option value="+data[i].id+">"
+																+data[i].name+"</option>");
 
  				 }
  			}
@@ -168,25 +158,24 @@ $(document).ready(function() {
 						  });
 								}
 					else{
-							bootbox.confirm({
-							message: "是否确认删除",
+						bootbox.confirm({
+							message: "确定删除？",
 							size: 'small',
 							buttons: {
-			
 								confirm: {
-									label: 'Yes',
+									label: '确定',
 									className: 'btn-success'
 								},
 								cancel: {
-									label: 'No',
+									label: '取消',
 									className: 'btn-danger'
 								},
 							},
-							callback: function (result) {
-								if(result){
-									
+							callback: function (result) {									
+								if(result){									
 									var deletstr = '(';//删除记录的格式(1,2,3,4,5)
 									var keyid;
+									var i=0;
 									$("input[type='checkbox'][name='idname']:checked").each(function() {
 															keyid = $(this).data("id");
 															if (i != 0) {
@@ -199,11 +188,11 @@ $(document).ready(function() {
 														});
 										deletstr = deletstr + ')';
 										$.ajax({
-											url : '',
+											url : 'delmaintainapply.do',
 											type : 'post',
 											dataType : 'json',
 											data : {
-												"deletstr" : deletstr,
+												"deletstr" : deletstr
 											},
 											success : function(msg) {
 												bootbox.alert({
@@ -279,20 +268,26 @@ $("#save").click(function(){
 					
 })
 					 
-//修改操作
+//查看操作
 $(document).on("click", "#checkdetale", function() {	
 	
 	var index=$(this).val();
 	
-	$("#Eprojectname").val(obj[index].projectname);
+	$("#Eprojectname").val(obj[index].pro_name);
 	$("#Ebasename").val(obj[index].basename);
-	$("#Ename").val(obj[index].name);
-	$("#Etime").val(obj[index].time);
-	$("#Ebudget").val(obj[index].budget);
-	$("#Emoney").val(obj[index].money);
+	$("#Ename").val(obj[index].username);
+	$("#Etime").val(obj[index].apply_time);
+	$("#Ebudget").val(obj[index].money);
+	$("#Emoney").val(obj[index].actualmoney);
 	$("#Eaddress").val(obj[index].address);
 	$("#Ereason").val(obj[index].reason);
-	$("#Elink").prop("href",obj[index].linkaddress);
+	var file=obj[index].file;
+	if(file=="null"||file==""){
+		$("#resourcetr").prop("hidden",true);
+	}else{
+		$("#resourcetr").prop("hidden",false);
+		$("#Elink").prop("href",file);
+	}	
 	$("#edit").modal('show');
 	
 });
@@ -348,23 +343,14 @@ $('.file').change(function() {
 				var flag=0;
 				$("#ck1").on("click", function () {
 					if ($(this).prop("checked") === true) {
-						$("#Repairmanage input[name='allcheckbox']").prop("checked", true);
+						$("#Repairmanage input[name='idname']").prop("checked", true);
 						
 					} else {
-						$("#Repairmanage input[name='allcheckbox']").prop("checked", false);
+						$("#Repairmanage input[name='idname']").prop("checked", false);
 						
-					}
-					$("#ck2").prop("checked", false);
+					}					
 				 });
-				 
-				  $("#ck2").click(function () {//反选  
-                		$("#Repairmanage input[name='allcheckbox']").each(function () {  
-                    	$(this).prop("checked", !$(this).prop("checked"));
-						 
-                	}); 
-					$("#ck1").prop("checked", false); 
-           		 }); 
-	
+				
 $("#import").click(function (){//每次点击导出是清空数据
 	$("#Sbasename").val("1");
 	$("#year").val("");
