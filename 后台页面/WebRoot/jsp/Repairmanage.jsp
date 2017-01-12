@@ -305,13 +305,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <div class="modal-dialog">
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title text-center" id="myModalLabel">增加维修信息</h4>
                                       </div>
                                       <div class="modal-body table-responsive">
                                         <div class="row">
                                             <div class="col-md-12">
-                                            	<form action="" method="post" class="form-horizontal" role="form" id="applyaddform">
+                                            	<form action="addmaintainapply.do" method="post" class="form-horizontal"  enctype="multipart/form-data"  role="form" id="applyaddform">
                                                 <table class="table" style="border:none !important;">
                                                     <tr>
                                                         <td>项目名称 ：</td>
@@ -334,8 +334,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                        <td><input type="text"  class="form-control" id="Atime" name="Atime" value=""></td>
                                                     </tr>
                                                     <tr>
+                                                        <td>预算金额 ： </td>
+                                                       <td><input
+													type="text" class="form-control" id="Abudget"
+													name="Abudget" value=""></td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>实际金额 ： </td>
-                                                       <td><input type="text"  class="form-control" id="Abudget" name="Abudget" value=""></td>
+                                                       <td><input type="text"  class="form-control" id="ActualMoney" name="ActualMoney" value=""></td>
                                                     </tr>
                                                     <tr>
                                                         <td>具体位置 ： </td>
@@ -347,7 +353,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </tr>
                                                     <tr>
                                                     	<td>申请材料 ： </td>
-                                                    	<td><input type="file" class="file"></td>
+                                                    	<td><input type="file" class="file" name="file"/></td>
                                                     </tr>
                                                 </table>
                                                 </form>
@@ -367,7 +373,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 
                                 <div class="modal fade" id="exportmodal" tabindex="-1" role="dialog"
                                     aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
+                                    <div class="modal-dialog" style="width:400px;">
                                         <div class="modal-content" style="border:#3071a9 8px solid">
                                             <div class="modal-header" style="background:#3071a9; color:#FFF">
                                                 <button type="button" class="close" data-dismiss="modal">
@@ -375,29 +381,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
                                             </div>
+                                            <form role="form" action="exportmaintainapply.do" method="post">                                                  
                                             <div class="modal-body" id="daochu" style="height:120px;">
                                             <center>
-                                            	<form role="form">
-                                                  
+                                            	
                                                   <div class="form-group">
-                                                    <!--<input type="file" id="exampleInputFile">-->
-                                                    <select class="form-control" id="Sbasename">
+                                                   
+                                                    <select class="form-control" id="Sbasename" name="basename">
                                                     	<option id="SbasenameID" value="-1" selected>请选择</option>                                                        
                                                     </select>
                                                   </div>
-                                                  <div class="form-group">
-                                                    <input type="text" class="form-control" id="year" placeholder="请填写年份例如：2016">
+                                                  <div class="form-group">报修年份
+                                                    <input type="text" class="form-control" name="year" id="year" placeholder="请填写年份例如：2016">
                                                   </div>
-                                                </form>
+                                               
                                             </center>
                                             </div>
                                             <div class="modal-footer">
                                             	<center>
                                                     <button type="button" class="btn btn-default"
                                                         data-dismiss="modal">取消</button>
-                                                    <button type="button" class="btn btn-primary" id="export">确定</button>
+                                                    <button type="submit" class="btn btn-primary" id="export">确定</button>
                                                 </center>
                                             </div>
+                                             </form>
                                         </div>
                                     </div>
                                 </div>

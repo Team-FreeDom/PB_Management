@@ -131,10 +131,10 @@ $(document).ready(function() {
  			success : function(data) {
  				 for (var i=0;i<data.length;i++) { 					
  									$("#AbasenameID").after(
- 				 							"<option value="+data[i].id+">"
+ 				 							"<option value="+data[i].name+">"
  				 									+data[i].name+"</option>");
 													$("#SbasenameID").after(
-														"<option value="+data[i].id+">"
+														"<option value="+data[i].name+">"
 																+data[i].name+"</option>");
 
  				 }
@@ -173,11 +173,9 @@ $(document).ready(function() {
 							},
 							callback: function (result) {									
 								if(result){									
-									var deletstr = '(';//删除记录的格式(1,2,3,4,5)
-									var keyid;
+									var deletstr = '(';//删除记录的格式(1,2,3,4,5)									
 									var i=0;
-									$("input[type='checkbox'][name='idname']:checked").each(function() {
-															keyid = $(this).data("id");
+									$("input[type='checkbox'][name='idname']:checked").each(function() {															
 															if (i != 0) {
 																deletstr = deletstr+ ','+ $(this).val();
 															}
@@ -212,7 +210,7 @@ $(document).ready(function() {
 //点击增加清空数据函数
 $("#ZJ").click(function(){
 		$("#Aprojectname").val("");
-		$("#Abasename").val("1");
+		$("#Abasename").val("-1");
 		$("#Aname").val("");
 		$("#Atime").val("");
 		$("#Abudget").val("");
@@ -226,43 +224,48 @@ $("#save").click(function(){
 				message : "请填写项目名称",
 				size : 'small'
 			});	
-			return 0;
+			return;
 		}
-		else if($("#Abasename").val()=="1"){
+		else if($("#Abasename").val()=="-1"){
 				bootbox.alert({
 				message : "请选择基地名称",
 				size : 'small'
 				});	
-				return 0;
-		}
-					
+				return;
+		}					
 		else if($("#Aname").val()==""){
 				bootbox.alert({
 				message : "请填写申报人姓名",
 				size : 'small'
 				});	
-				return 0;
+				return;
 		}
 		else if($("#Abudget").val()==""){
+				bootbox.alert({
+				message : "请填写预算金额",
+				size : 'small'
+				});	
+				return;
+		}else if($("#ActualMoney").val()==""){
 				bootbox.alert({
 				message : "请填写实际金额",
 				size : 'small'
 				});	
-				return 0;
+				return;
 		}
 		else if($("Aaddress").val()==""){
 				bootbox.alert({
 				message : "请填写具体地址",
 				size : 'small'
 				});	
-				return 0;
+				return;
 		}
 		else if($("#Areason").val()==""){
 				bootbox.alert({
 				message : "请填写原因说明",
 				size : 'small'
 				});	
-				return 0;
+				return;
 		}
 		$("#applyaddform").submit();
 					
@@ -352,35 +355,8 @@ $('.file').change(function() {
 				 });
 				
 $("#import").click(function (){//每次点击导出是清空数据
-	$("#Sbasename").val("1");
+	$("#Sbasename").val("-1");
 	$("#year").val("");
 	});	
-	
-$("#export").click(function (){
-	
-	var basename=$("#Sbasename option:selected").val();
-	var year=$("#year").val();
-	if(basename=="1"){
-		basename=null;
-	}
-	if(year==''){
-		year="-1";
-		}
-	$.ajax(
-	{
-		url:'',
-		type:POST,
-		datatype:'json',
-		data:{
-			"basename": basename,
-			"year":year,
-			}
-		}
-	
-	);
-	
-	})
-	
-	
-				 					 					
+					 					 					
 });

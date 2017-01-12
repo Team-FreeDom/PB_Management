@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.ModelMap;
 
+import com.base.po.MaintainApply;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 
@@ -21,7 +22,7 @@ public interface MaintainApplyService {
 	
 	public void delete_maintainapply(String str);
 	
-	public void insert_maintainhistory(String pronames,String bids,String usernames,String address,String reasons,String files,String userids,double actuals);
+	public void insert_maintainhistory(MaintainApply ma);
 	
 	public List<MaintainApplys> export_maintainapply(String bname,int years);
 	
