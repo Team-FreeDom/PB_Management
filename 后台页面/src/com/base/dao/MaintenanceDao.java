@@ -27,4 +27,8 @@ public interface MaintenanceDao {
     public void updateBaseInfo(String baseid, int star, int adddate);
 
 	public List<ExportBase> getInfo(int basetype, int dept, int star);
+
+	public void increaseBaseInfo(String str1, String str2);
+
+	
 }

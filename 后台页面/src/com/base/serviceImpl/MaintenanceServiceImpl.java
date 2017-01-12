@@ -84,4 +84,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		return list;
 	}
 
+
+	@Override
+	public void increaseBaseInfo(String str1, String str2) {
+		
+		maintenancedao.increaseBaseInfo(str1, str2);
+	}
+
 }

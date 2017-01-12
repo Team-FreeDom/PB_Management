@@ -200,7 +200,7 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td colspan="2" id="button-left">
+										<td colspan="3" id="button-left">
 											<button type="button" class="btn btn-danger" id="delete">删除</button>
 											<button type="button" class="btn btn-info" id="ZJ">增加</button>
 										</td>
@@ -268,6 +268,7 @@
 										<th>可承担人数</th>
 										<th>星级</th>
 										<th hidden>通信地址</th>
+										<th hidden>法定责任人</th>		
 										<th hidden>联系人姓名</th>
 										<th hidden>联系人电话</th>
 										<th hidden>面向专业</th>
@@ -409,15 +410,20 @@
 
 												<td>联系人电话 ：</td>
 												<td><input type="text" id="userphoned" disabled></td>
-												<td>创建时间：</td>
-												<td><input type="text" id="setdated" disabled></td>
+												<td>法定责任人 ：</td>
+												<td><input type="text" id="personDuty" disabled></td>
+												
 											</tr>
 											<tr id="hidecol">
-
+                                                <td>创建时间：</td>
+												<td><input type="text" id="setdated" disabled></td>
 												<td>有效周期 ：</td>
 												<td><input type="text" id="validdated" disabled></td>
+												
+											</tr>
+											<tr id="resourcetr">
 												<td>申请材料 ：</td>
-												<td style="text-align:left;"><a id="resourced" href="#"
+												<td colspan="3" style="text-align:left;"><a id="resourced" href="#"
 													style="color:#3071a9;">点击查看</a></td>
 											</tr>
 											<tr>
@@ -433,9 +439,6 @@
 														style="border:#ccc 1px solid;height:80px;"></div></td>
 
 											</tr>
-
-
-
 											<tr id="hidecol">
 												<td>星级：</td>
 												<td colspan="3"><div id="starget"></div></td>
@@ -580,7 +583,7 @@
 						<div class="table-responsive">
 							<div class="row">
 								<div class="col-md-12">
-									<form action="getRequestBaseInfo.do" method="post" id="myForm"
+									<form action="increaseBaseInfo.do" method="post" id="myForm"
 										enctype="multipart/form-data" class="form-horizontal"
 										role="form">
 										<div class="form-group">
@@ -669,7 +672,13 @@
 													name="land_addres" placeholder="">
 											</div>
 										</div>
-
+                                         <div class="form-group">
+											<label class="col-md-3 control-label">法定负责人</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="personName"
+													name="personDuty" placeholder="">
+											</div>
+										</div>
 										<div class="form-group">
 											<label class="col-md-3 control-label">联系人姓名</label>
 											<div class="col-md-6">
@@ -698,7 +707,7 @@
 											<label class="col-md-3 control-label">有效周期</label>
 											<div class="col-md-6">
 												<input type="text" id="validda" name="validda" placeholder=""
-													name="validda">
+													name="validda">个月
 											</div>
 										</div>
 

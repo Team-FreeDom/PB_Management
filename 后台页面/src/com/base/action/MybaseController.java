@@ -51,6 +51,7 @@ public class MybaseController {
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
+		System.out.println("order:"+order);
 		// String orderDir = request.getParameter("order[0][dir]");//
 		// 排序的顺序asc or
 		String orderDir = "desc"; // // desc
@@ -111,6 +112,7 @@ public class MybaseController {
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
 		String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc
+		
 									// or //
 									// //
 									// desc
@@ -170,6 +172,32 @@ public class MybaseController {
 	}
 	return null;
 
+    }
+    
+    //修改续期
+    @RequestMapping("/updateMyBaseDate.do")
+    public String updateBaseInfo(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map){
+    	String baseid=request.getParameter("baseid");   	
+    	String date=request.getParameter("adddate");    	
+    	int adddate=0;
+    	if(!date.equals("")){
+    		 adddate=Integer.valueOf(date);
+    	}    	
+    //	mybaseinfoservice.updateDate(baseid,adddate);
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("flag", true);
+    	
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    		response.getWriter().print(getObj.toString());
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}   	
+    	
+    	return null;    	
     }
 
     // 刷选(根据状态值刷选)
