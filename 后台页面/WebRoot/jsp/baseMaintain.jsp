@@ -200,7 +200,7 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-										<td colspan="3" id="button-left">
+										<td colspan="2" id="button-left">
 											<button type="button" class="btn btn-danger" id="delete">删除</button>
 											<button type="button" class="btn btn-info" id="ZJ">增加</button>
 										</td>
@@ -248,7 +248,7 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="11" id="button-right"><a
+										<td colspan="12" id="button-right"><a
 											href="../templet/BaseInfotemplet.rar"
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
