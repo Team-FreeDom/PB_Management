@@ -81,6 +81,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		ch.setReason(rs.getString("reason"));
 		ch.setValid_date(rs.getInt("valid"));	
 		ch.setApplytime(rs.getString("buildtime"));//即将加入申请时间
+		ch.setResperson(rs.getString("resperson"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -114,5 +115,19 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
    	System.out.println("insert---end");
 
        }
+    
+	@Override
+	public void updateDate(String baseid, int adddate) {
+		Session session = sessionFactory.openSession();
+
+	   	try {
+	   	    SQLQuery query = session.createSQLQuery("{CALL baseweb.renewal_prabaseinfo(?,?)}");
+             query.setString(0,baseid);
+             query.setInteger(1, adddate); 
+	   	     query.executeUpdate();
+	   	} finally {
+	   	    session.close();
+	   	}
+	}
 
 }

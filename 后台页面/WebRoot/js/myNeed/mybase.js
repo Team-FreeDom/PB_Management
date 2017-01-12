@@ -349,7 +349,12 @@ $(document).ready(function() {
 					$("#userphone").val(object[index].phone);
 					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
-					$("#dutyPerson").val(object[index].resperson);
+					var resperson=object[index].resperson;
+					if(resperson=="null"){
+					$("#dutyPerson").val("");
+					}else{
+						$("#dutyPerson").val(resperson);	
+					}
 					$("#baseid").val('#'+object[index].bid);					
 					
 					

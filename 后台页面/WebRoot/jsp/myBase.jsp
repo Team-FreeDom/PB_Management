@@ -315,14 +315,14 @@
 												</tr>
 												<tr>
 													<td>面向专业 ：</td>
-													<td colspan="3"><div id="major_oriented"
+													<td colspan="3" style="text-align:left;"><div id="major_oriented"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
 
 												<tr>
 													<td>通信地址 ：</td>
-													<td colspan="3"><div id="linkAddress"
+													<td colspan="3"  style="text-align:left;"><div id="linkAddress"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
@@ -530,6 +530,7 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	 <script src="../js/bootbox.min.js"></script>
 	<script src="../js/myNeed/mybase.js"></script>
 	<script src="../js/kg.js"></script>
 

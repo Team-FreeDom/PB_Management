@@ -181,10 +181,10 @@ public class MybaseController {
     	String baseid=request.getParameter("baseid");   	
     	String date=request.getParameter("adddate");    	
     	int adddate=0;
-    	if(!date.equals("")){
+    	if(!date.equals("")&&date!=null){
     		 adddate=Integer.valueOf(date);
     	}    	
-    //	mybaseinfoservice.updateDate(baseid,adddate);
+        mybaseinfoservice.updateDate(baseid,adddate);
     	JSONObject getObj = new JSONObject();
     	getObj.put("flag", true);
     	
