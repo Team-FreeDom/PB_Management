@@ -33,7 +33,7 @@ $(function () {
 			var budget=$("#budget").val();
 			var baselist=$("#baselist").val();
 			var reason=$("#reason").val();
-			//alert(baselist);
+			var strmoney=/^[0-9]*$/.test(budget);
 			if(projectname==""){
 				bootbox.alert({
 					message : "请输入项目名称",
@@ -58,6 +58,13 @@ $(function () {
 			else if(budget==""){
 				bootbox.alert({
 					message : "请输入预算金额",
+					size : 'small'
+					});	
+				return 0;
+				}
+			else if(strmoney==false){
+				bootbox.alert({
+					message : "预算金额只能为数字",
 					size : 'small'
 					});	
 				return 0;
