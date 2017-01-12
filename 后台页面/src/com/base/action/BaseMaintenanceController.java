@@ -188,7 +188,7 @@ public class BaseMaintenanceController {
     	int star=Integer.valueOf(request.getParameter("star"));
     	String date=request.getParameter("adddate");
     	int adddate=0;
-    	if(!date.equals("")){
+    	if(!date.equals("")&&date!=null){
     		 adddate=Integer.valueOf(date);
     	}    	
     	maintenanceservice.updateBaseInfo(baseid,star,adddate);
@@ -386,7 +386,11 @@ public class BaseMaintenanceController {
     		String username = request.getParameter("username");// 联系人姓名    		
     		String phone = request.getParameter("phone");// 联系人电话  	
     		String validdate = request.getParameter("validda");// 联系人电话
-    		
+    		int date=0;
+    		if(validdate!=null&&!validdate.equals("")){
+    			date=Integer.valueOf(validdate);
+    		}
+    		String lawPerson = request.getParameter("personDuty");
     		// 申请材料保存地址
     		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
     		String path = null;
@@ -438,12 +442,12 @@ public class BaseMaintenanceController {
     		//获取当前年份
     		Calendar c=Calendar.getInstance();
     		int year=c.get(Calendar.YEAR);
-    		int Baseid = Integer.valueOf((int) d.getTime());
+    		String Baseid = String.valueOf(d.getTime());
     		str2 += "('" + Baseid + "','" + name + "'," + type + ","
     			+ landarea + "," + constructionarea + "," + undertake
     			+ "," + applyid + ",'" + land_address + "','"
     			+ username + "','" + phone + "','" + filename + "','"
-    			+ userid +"','"+ year + "','"+validdate+"')";
+    			+ userid +"','"+ year + "',"+date+",'"+lawPerson+"')";
     		System.out.println(str2+"拼装好的数据");
 
     		/*------参数1-----------*/
@@ -470,9 +474,9 @@ public class BaseMaintenanceController {
     		    sb.deleteCharAt(sb.length() - 1);
     		    str1 = sb.toString();
     		}    		
-    		//baseapplyservice.getRequestBaseInfo(str1, str2);
+    		maintenanceservice.increaseBaseInfo(str1, str2);
     	    }
     	}
-    	return null;
+    	return "redirect:baseMaintain.jsp";
     }
 }

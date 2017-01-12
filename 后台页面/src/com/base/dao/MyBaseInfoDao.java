@@ -11,4 +11,6 @@ public interface MyBaseInfoDao {
      * @param sql 插入封装好的sql语句
      */
     public void insertMessage(String sql);
+    
+    public void updateDate(String baseid, int adddate);
 }

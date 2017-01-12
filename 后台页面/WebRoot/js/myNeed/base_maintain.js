@@ -39,7 +39,7 @@ $(document)
 													"mData" : "id",
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%",
+													"sWidth" : "6%",
 													"render":function(data,
 															type, row) {
 														return data='#'+data;
@@ -114,6 +114,13 @@ $(document)
 													"sWidth" : "6%"
 												},
 												{
+													"mData" : "resperson",
+													"orderable" : false, // 禁用排序
+													"visible" : false,
+													"sDefaultContent" : "",
+													"sWidth" : "8%"
+												},
+												{
 													"mData" : "username",
 													"orderable" : false, // 禁用排序
 													"visible" : false,
@@ -165,7 +172,7 @@ $(document)
 													"mData" : "id",
 													"orderable" : false, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "6%",
+													"sWidth" : "8%",
 													"render" : function(data,
 															type, row) {
 														obj.push(row);														
@@ -323,9 +330,17 @@ $(document)
 						$("#major_orientedd").html(obj[index].facemajor);
 						$("#linkAddressd").html(obj[index].land_address);
 						$("#resourced").prop("href", obj[index].material_path);
+						
+						if(obj[index].material_path=="null"||obj[index].material_path==""){			
+							$("#resourcetr").prop("hidden",true); 
+						}else{		
+							$("#resourcetr").prop("hidden",false); 
+							$("#resourced").prop("href", obj[index].material_path);
+						}
 						$("#setdated").val(obj[index].buildtime);
 						$("#validdated").val(obj[index].valid_date);						
 						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
+						$("#personDuty").val(obj[index].resperson);
 						
 						$("#edit").modal('show');
 
@@ -400,6 +415,7 @@ $(document)
 							});
 							return;
 						}
+						
 						$.ajax({
 							data : {
 								"baseid" : baseid,
@@ -571,6 +587,13 @@ $(document)
 																		"sDefaultContent" : "",
 																		"visible" : false,
 																		"sWidth" : "6%"
+																	},
+																	{
+																		"mData" : "resperson",
+																		"orderable" : false, // 禁用排序
+																		"visible" : false,
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%"
 																	},
 																	{
 																		"mData" : "username",

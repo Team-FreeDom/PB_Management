@@ -15,7 +15,7 @@ public class Prabaseinfo implements Serializable {
     private String type;//鍩哄湴绫诲瀷
     private String landarea;//鍩哄湴闈㈢Н
     private String constructionarea;//寤虹瓚闈㈢Н
-    private int undertake;//鍙壙鎷呬汉鏁�
+    private Integer undertake;//鍙壙鎷呬汉鏁�
     private String applydp;//鐢虫姤閮ㄩ棬   
     private String land_address;//瀹炰範鍩哄湴鍦板潃
     private String username;//鑱旂郴浜哄鍚�
@@ -26,10 +26,15 @@ public class Prabaseinfo implements Serializable {
     private String userid;
     private String facemajor;//闈㈠悜涓撲笟
     private int star;//鏄熺骇
-  
-    
-    
+    private String resperson;
+       
  
+	public String getResperson() {
+		return resperson;
+	}
+	public void setResperson(String resperson) {
+		this.resperson = resperson;
+	}
 	public Prabaseinfo() {
 	super();
     }
