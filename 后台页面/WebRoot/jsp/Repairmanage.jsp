@@ -381,21 +381,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
                                             </div>
-                                            <form role="form" action="exportmaintainapply.do" method="post">                                                  
+                                            <form role="form" class="form-horizontal" action="exportmaintainapply.do" method="post">                                                  
                                             <div class="modal-body" id="daochu" style="height:120px;">
-                                            <center>
+                                            
                                             	
                                                   <div class="form-group">
-                                                   
+                                                   	 <label for="inputEmail3" class="col-sm-4 control-label">基地列表</label>
+                                                   	 <div class="col-sm-8">
                                                     <select class="form-control" id="Sbasename" name="basename">
                                                     	<option id="SbasenameID" value="-1" selected>请选择</option>                                                        
                                                     </select>
+                                                    </div>
                                                   </div>
-                                                  <div class="form-group">报修年份
+                                                  
+                                                  <div class="form-group">
+                                                  	<label for="inputEmail3" class="col-sm-4 control-label">报修年份</label>
+                                                  	<div class="col-sm-8">
                                                     <input type="text" class="form-control" name="year" id="year" placeholder="请填写年份例如：2016">
+                                                    </div>
                                                   </div>
                                                
-                                            </center>
+                                            
                                             </div>
                                             <div class="modal-footer">
                                             	<center>
