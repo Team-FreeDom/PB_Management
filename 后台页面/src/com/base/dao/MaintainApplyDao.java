@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.base.po.MaintainApplys;
+import com.base.po.MaintainApply;
 import com.base.po.MaintainList;
 
 public interface MaintainApplyDao {
@@ -16,7 +17,7 @@ public interface MaintainApplyDao {
 	
 	public void delete_maintainapply(String str);
 	
-	public void add_maintain(String pronames,String bids,String usernames,String address,String reasons,String files,String userids,double actuals);
+	public void add_maintain(MaintainApply ma);
 	
 	public List<MaintainApplys> export_maintainapply(String bname,int years);
 

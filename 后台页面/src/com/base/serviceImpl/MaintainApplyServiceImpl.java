@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.dao.MaintainApplyDao;
+import com.base.po.MaintainApply;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
@@ -61,9 +62,9 @@ public class MaintainApplyServiceImpl implements MaintainApplyService
 	
 	@Override
 	//增加维修基地记录（已完成的维修）
-	public void insert_maintainhistory(String pronames,String bids,String usernames,String address,String reasons,String files,String userids,double actuals)
+	public void insert_maintainhistory(MaintainApply ma)
 	{
-		maintainapplydao.add_maintain(pronames, bids, usernames, address, reasons, files, userids, actuals);
+		maintainapplydao.add_maintain(ma);
 	}
 	
 	@Override

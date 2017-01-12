@@ -44,6 +44,21 @@ public class MaintainApply
 		this.userid = userid;
 		this.actualmoney=actualmoney;
 	}
+	public MaintainApply(String pro_name, String bid, String username,
+			String address, String reason, String file, double money,
+			String apply_time, int status, double actualmoney) {
+		super();
+		this.pro_name = pro_name;
+		this.bid = bid;
+		this.username = username;
+		this.address = address;
+		this.reason = reason;
+		this.file = file;
+		this.money = money;
+		this.apply_time = apply_time;
+		this.status = status;
+		this.actualmoney = actualmoney;
+	}
 	public double getActualmoney()
 	{
 		return actualmoney;

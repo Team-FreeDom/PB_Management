@@ -12,11 +12,13 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.MaintainApplyDao;
+import com.base.po.MaintainApply;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
@@ -159,31 +161,23 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao
 	
 	@Override
 	//增加维修基地记录（已完成的维修）
-	public void add_maintain(String pronames,String bids,String usernames,String address,String reasons,String files,String userids,double actuals)
+	public void add_maintain(MaintainApply ma)
 	{
-		Connection conn = null;
-		CallableStatement sp = null;
-		try
-		{
-			conn = (Connection)SessionFactoryUtils.getDataSource(sessionfactory).getConnection();
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.add_maintainapply(?,?,?,?,?,?,?,?)}");
-			sp.setString(1, pronames);
-			sp.setString(2, bids);
-			sp.setString(3, usernames);
-			sp.setString(4, address);
-			sp.setString(5, reasons);
-			sp.setString(6, files);
-			sp.setString(7, userids);
-			sp.setDouble(8, actuals);
-			sp.execute();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally 
-		{
-			SqlConnectionUtils.free(conn, sp, null);
+		Session session = sessionfactory.openSession();
+		Transaction tx = null;
+
+		try {
+			tx = session.beginTransaction();
+			session.save(ma);
+			tx.commit();
+
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();//
+			}
+			System.out.println(e);
+		} finally {
+			session.close();
 		}
 	}
 	
