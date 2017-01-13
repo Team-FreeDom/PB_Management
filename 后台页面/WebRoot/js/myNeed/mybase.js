@@ -58,6 +58,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -135,6 +141,8 @@ $(document).ready(function() {
 							if(data==2){
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
+							}else if(data==17){
+								return data='<button type="button" class="btn btn-success btn-xs" id="change" value="'+(obj1.length-1)+'$1">修改</button>';
 							}else{
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}							
@@ -174,7 +182,7 @@ $(document).ready(function() {
 					"aoColumns" : [ 
 					{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
 						"mData" : "name",
-						"orderable" : true, // 禁用排序
+						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "10%"
 					}, { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
@@ -213,6 +221,12 @@ $(document).ready(function() {
 						"sDefaultContent" : "",
 						"visible":false,
 						"sWidth" : "6%"
+					},{
+						"mData" : "resperson",
+						"visible":false,
+						"orderable" : false, // 禁用排序
+						"sDefaultContent" : "",
+						"sWidth" : "8%"
 					},
 					{
 						"mData" : "username",
@@ -285,7 +299,11 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 						"render":function(data,type, row){
 							obj2.push(row);
+							if(data==17){
+								return data='<span class="icon-edit" id="change" value="'+(obj2.length-1)+'$2"></span>';
+							}else{
 								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
+							}
 												
 						}
 					}
@@ -331,7 +349,22 @@ $(document).ready(function() {
 					$("#userphone").val(object[index].phone);
 					$("#major_oriented").html(object[index].mmajor);
 					$("#linkAddress").html(object[index].land_address);
-					$("#resource").prop("href",object[index].material_path);
+					var resperson=object[index].resperson;
+					if(resperson=="null"){
+					$("#dutyPerson").val("");
+					}else{
+						$("#dutyPerson").val(resperson);	
+					}
+					$("#baseid").val('#'+object[index].bid);					
+					
+					
+					if(object[index].material_path=="null"){			
+						$("#resourcetr").prop("hidden",true); 
+					}else{		
+						$("#resourcetr").prop("hidden",false); 
+						$("#resource").prop("href",object[index].material_path);
+					}
+					
 					
 					if(statusid==6){
 						$("#setdate").val(object[index].applytime);
@@ -345,15 +378,106 @@ $(document).ready(function() {
 					
 				});
 			  
+			  $(document).on("click", "#change", function() {	
+				  
+					var str=$(this).attr("value");					
+					var position=str.indexOf('$');
+					var index=str.substring(0,position);
+					var tag=str.substring(position+1);
+					var object=[];
+					if(tag==1){
+						object=obj1;
+					}else{
+						object=obj2;
+					}
+						
+					var statusid=object[index].statusid;	
+					
+					$("#baseidt").val('#'+object[index].bid);
+					$("#basenamet").val(object[index].name);
+					$("#basetypet").val(object[index].type);
+					$("#dept0t").val(object[index].applydp);
+					$("#landareat").val(object[index].landarea);
+					$("#buildingareat").val(object[index].constructionarea);
+					$("#undertakeCountt").val(object[index].undertake);
+					$("#usernamet").val(object[index].username);
+					$("#userphonet").val(object[index].phone);
+					$("#major_orientedt").html(object[index].mmajor);
+					$("#linkAddresst").html(object[index].land_address);
+					var resperson=object[index].resperson;
+					if(resperson!=null&&resperson!=""){
+						$("#dutyPersont").val(resperson);
+					}else{
+						$("#dutyPersont").val("");
+					}										
+					
+					
+					if(object[index].material_path=="null"||object[index].material_path==""){			
+						$("#resourcetr").prop("hidden",true); 
+					}else{		
+						$("#resourcetr").prop("hidden",false); 
+						$("#resource").prop("href",object[index].material_path);
+					}
+				
+					$("#dateMyTable").modal('show');
+					
+				});
+			  
 			  $(document).on("click", "#closeDe", function() {
 				  $("#hidecol").prop("hidden",true);
 				  $("#hideReason").prop("hidden",true);
+				  $("#adddate").val("");
 				  $("#fontTable").modal('hide');
 			  });
 
 				$(document).on("click", "#cancel", function() {
 					$("#cancelSubmit").val($(this).val());
 					$("#cancelOneModal").modal('show');	
+				});
+				
+				$(document).on("click", "#cleark", function() {
+					$("#adddate").val("");
+				});
+				
+				$(document).on("click", "#saveit", function() {
+					var baseid=$("#baseidt").val();					
+					baseid=baseid.substring(1);
+					var adddate=$("#adddate").val();
+					var matchstr=/^[0-9]*$/;
+					if(!matchstr.test(adddate)){
+						bootbox.alert({
+							message : "填写的续期必须为数字",
+							size : 'small'
+						});
+						return;
+					}
+					if(adddate==""){
+						bootbox.alert({
+							message : "请填写续期",
+							size : 'small'
+						});
+						return;
+					}
+					$.ajax({
+						data : {
+							"baseid" : baseid,							
+							"adddate" : adddate							
+						},
+						url : 'updateMyBaseDate.do',
+						async : true,
+						type : "POST",
+						dataType : "json",
+						cache : false,
+						success : function(data) {
+							$("#dateMyTable").modal('hide');
+							$("#adddate").val("");
+							page1.draw(false);
+							page2.draw(false);
+						},
+						error : function(data) {
+							alert("请求异常");
+						}
+					});
 				});
 
 				//撤回按钮，传给后台id
@@ -377,10 +501,11 @@ $(document).ready(function() {
 				  			alert("error");
 				  		},
 				  		success : function(msg) {
+				  			$("#cancelOneModal").modal('hide');	
 				  			bootbox.alert({
 				  				message : msg,
 				  				size : 'small'
-				  			});
+				  			});				  			
 				  			page1.draw(false);
 				  			page2.draw(false);
 				  		}
@@ -411,7 +536,7 @@ $(document).ready(function() {
 									"aoColumns" : [ 
 									{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
 										"mData" : "name",
-										"orderable" : true, // 禁用排序
+										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "10%"
 									}, { // aoColumns设置列时，不可以任意指定列，必须列出所有列。
@@ -450,6 +575,12 @@ $(document).ready(function() {
 										"sDefaultContent" : "",
 										"visible":false,
 										"sWidth" : "6%"
+									},{
+										"mData" : "resperson",
+										"visible":false,
+										"orderable" : false, // 禁用排序
+										"sDefaultContent" : "",
+										"sWidth" : "8%"
 									},
 									{
 										"mData" : "username",
@@ -522,7 +653,11 @@ $(document).ready(function() {
 										"sWidth" : "8%",
 										"render":function(data,type, row){
 											   obj2.push(row);
-												return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
+												if(data==17){
+													return data='<span class="icon-edit" id="change" value="'+(obj2.length-1)+'$2"></span>';
+												}else{
+													return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
+												}
 																
 										}
 									}

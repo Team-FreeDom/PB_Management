@@ -32,14 +32,14 @@ $(document)
 													"mData" : "buildtime",
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%",
+													"sWidth" : "10%",
 
 												},
 												{
 													"mData" : "id",
 													"orderable" : true, // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "8%",
+													"sWidth" : "6%",
 													"render":function(data,
 															type, row) {
 														return data='#'+data;
@@ -112,6 +112,13 @@ $(document)
 													"sDefaultContent" : "",
 													"visible" : false,
 													"sWidth" : "6%"
+												},
+												{
+													"mData" : "resperson",
+													"orderable" : false, // 禁用排序
+													"visible" : false,
+													"sDefaultContent" : "",
+													"sWidth" : "8%"
 												},
 												{
 													"mData" : "username",
@@ -296,6 +303,17 @@ $(document)
 
 						$("#fileResource").val("");
 					});
+					
+					$(document).on("click", "#ZJ", function() {					
+						$("#add").css("display","block");
+					});
+					
+					$(document).on("click", "#closebas", function() {					
+						$("#add").css("display","none");
+						$("#add input").val('');
+						$(".colle").prop('checked',true);
+						$("#add select").val('');
+					});
 
 					// 点击修改图标，填充修改模态框中的内容
 					$(document).on("click", "#updateDetail", function() {						
@@ -312,9 +330,17 @@ $(document)
 						$("#major_orientedd").html(obj[index].facemajor);
 						$("#linkAddressd").html(obj[index].land_address);
 						$("#resourced").prop("href", obj[index].material_path);
+						
+						if(obj[index].material_path=="null"||obj[index].material_path==""){			
+							$("#resourcetr").prop("hidden",true); 
+						}else{		
+							$("#resourcetr").prop("hidden",false); 
+							$("#resourced").prop("href", obj[index].material_path);
+						}
 						$("#setdated").val(obj[index].buildtime);
 						$("#validdated").val(obj[index].valid_date);						
 						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
+						$("#personDuty").val(obj[index].resperson);
 						
 						$("#edit").modal('show');
 
@@ -323,7 +349,7 @@ $(document)
 					// 确认删除
 					$("#delSubmit").click(function() {										
 										var recordstr = '(';
-										var i = 0;
+										var i = 0;									
 										$(
 												"input[type='checkbox'][name='recordcheck']:checked")
 												.each(
@@ -389,6 +415,7 @@ $(document)
 							});
 							return;
 						}
+						
 						$.ajax({
 							data : {
 								"baseid" : baseid,
@@ -560,6 +587,13 @@ $(document)
 																		"sDefaultContent" : "",
 																		"visible" : false,
 																		"sWidth" : "6%"
+																	},
+																	{
+																		"mData" : "resperson",
+																		"orderable" : false, // 禁用排序
+																		"visible" : false,
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%"
 																	},
 																	{
 																		"mData" : "username",

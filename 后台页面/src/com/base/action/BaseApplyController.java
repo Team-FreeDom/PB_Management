@@ -44,43 +44,33 @@ public class BaseApplyController {
     //获得用户输入的数据
     @RequestMapping("/getRequestBaseInfo.do")
     public String getRequestBaseInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-	System.out.println("哈哈我进来了");
+	    HttpServletResponse response, ModelMap map) {	
 	Cookie[] cookies = request.getCookies();// 获得所有cookie对象
 	for (Cookie co : cookies) {
 	    if (co.getName().equals("username")) {
-		String userid = co.getValue();
-		System.out.println(userid + "是哪个用户");
+		String userid = co.getValue();		
 		Date d = new Date();
 		/*------参数2-----------*/
 		String str2 = "";
-		String name = request.getParameter("name");// 基地名称
-		System.out.println("2" + name);
-		String type = request.getParameter("typeid");//基地类型id
-		System.out.println("3" + type);
-		String landarea = request.getParameter("landarea");//基地面积
-		System.out.println("4" + landarea);
+		String name = request.getParameter("name");// 基地名称		
+		String type = request.getParameter("typeid");//基地类型id		
+		String landarea = request.getParameter("landarea");//基地面积		
 		if (landarea.equals("")) {
 		    landarea = null;
 		}
-		String constructionarea = request.getParameter("constructionarea");//建筑面积
-		System.out.println("5" + constructionarea);
+		String constructionarea = request.getParameter("constructionarea");//建筑面积		
 		if (constructionarea.equals("")) {
 		    constructionarea = null;
 		}
-		String undertake = request.getParameter("undertake");//可承担人数
-		System.out.println("6" + undertake);
+		String undertake = request.getParameter("undertake");//可承担人数		
 		if (undertake.equals("")) {
 		    undertake = null;
 		}
-		String applyid = request.getParameter("applyid");//申报部门id
-		System.out.println("7" + applyid);
-		String land_address = request.getParameter("land_addres");// 通讯地址
-		System.out.println("8" + land_address);
-		String username = request.getParameter("username");// 联系人姓名
-		System.out.println("9" + username);
-		String phone = request.getParameter("phone");// 联系人电话
-		System.out.println("10" + phone);
+		String applyid = request.getParameter("applyid");//申报部门id		
+		String land_address = request.getParameter("land_addres");// 通讯地址		
+		String username = request.getParameter("username");// 联系人姓名		
+		String phone = request.getParameter("phone");// 联系人电话		
+		String lawPerson = request.getParameter("lawPerson");// 联系人电话
 		// String material_path =
 		// request.getParameter("material_path");//
 		// 申请材料保存地址
@@ -89,8 +79,7 @@ public class BaseApplyController {
 		String filename = null;
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
-		MultipartFile mFile = multipartRequest.getFile("material_path");// 申请材料保存地址
-		System.out.println("11" + mFile);
+		MultipartFile mFile = multipartRequest.getFile("material_path");// 申请材料保存地址		
 		if (!mFile.isEmpty()) {
 		    // 得到上传服务器的路径
 		    path = request.getSession().getServletContext()
@@ -135,12 +124,12 @@ public class BaseApplyController {
 		//获取当前年份
 		Calendar c=Calendar.getInstance();
 		int year=c.get(Calendar.YEAR);
-		int Baseid = Integer.valueOf((int) d.getTime());
+		String Baseid = String.valueOf(d.getTime());		
 		str2 += "('" + Baseid + "','" + name + "'," + type + ","
 			+ landarea + "," + constructionarea + "," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
-			+ userid +"','"+ year + "')";
+			+ userid +"','"+ year + "','"+lawPerson+"')";
 		System.out.println(str2+"拼装好的数据");
 
 		/*------参数1-----------*/
@@ -177,7 +166,7 @@ public class BaseApplyController {
 		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
 	    }
 	}
-	return "redirect:baseApply.jsp";
+	return "redirect:index.jsp";
 
     }
     //获取学院和基地类型

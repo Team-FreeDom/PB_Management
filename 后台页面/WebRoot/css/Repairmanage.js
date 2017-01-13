@@ -1,20 +1,21 @@
 // JavaScript Document
-var obj=[];			
+var obj=[];
+function a(){
+	alert("on")
+	}						
 $(document).ready(function() {
 				//分页表格 
-              var applytable =$('#Repairmanage').DataTable(
+              var applytable =$('#Repairmanage').dataTable(
 			  {
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
-				  "ordering":true,
 				  "aLengthMenu":[5,10,20,30], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 5,  //默认每页显示多少条记录
-					"bfilter":true,
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
-							"url" : "query_maintainapply.do",
+							"url" : "xxx.do",
 							"type" : "POST"
 						},  
 					"aoColumns" : [                                        
@@ -25,8 +26,8 @@ $(document).ready(function() {
 										
 									},
 									{ //aoColumns设置列时，不可以任意指定列，必须列出所有列。
-										"mData" : "pro_name",
-										"orderable" : false, // 禁用排序
+										"mData" : "projectname",
+										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 									},
 									{
@@ -36,42 +37,47 @@ $(document).ready(function() {
 
 									},
 									{
-										"mData" : "username",
+										"mData" : "name",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 
 									},
 									{
-										"mData" : "apply_time",
+										"mData" : "time",
 										"orderable" : true, // 禁用排序
 										"sDefaultContent" : "",
 									},
 									{
-										"mData" : "actualmoney",
-										"orderable" : false, // 禁用排序
-										"sDefaultContent" : "",
-									},									
-									{
 										"mData" : "money",
 										"orderable" : false, // 禁用排序
-										"visible" :false,
 										"sDefaultContent" : "",
 									},
 									{
-										"mData" : "address",
-										"orderable" : false, // 禁用排序
+										"mData" : "status",
+										"orderable" : true, // 禁用排序
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "budget",
+										"orderable" : true, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
 									},
 									{
 										"mData" : "reason",
-										"orderable" : false, // 禁用排序
+										"orderable" : true, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
-									},									
+									},
 									{
-										"mData" : "file",
-										"orderable" : false, // 禁用排序
+										"mData" : "address",
+										"orderable" : true, // 禁用排序
+										"visible" :false,
+										"sDefaultContent" : "",
+									},
+									{
+										"mData" : "linkaddress",
+										"orderable" : true, // 禁用排序
 										"visible" :false,
 										"sDefaultContent" : "",
 									},
@@ -94,7 +100,8 @@ $(document).ready(function() {
 								"orderable" : false, // 禁用排序
 								"targets" : [0], // 指定的列
 								"data" : "id",
-								"render" : function(data, type, row) {									
+								"render" : function(data, type, row) {
+									 data=row.id;
 									return '<input type="checkbox" value="'+ data + '" name="idname" class="ck"  />';
 								}
 							}],
@@ -119,7 +126,7 @@ $(document).ready(function() {
         $.ajax({
  			type : 'POST',
  			dataType : 'json',
- 			url : 'basename.do',
+ 			url : '.do',
  			async : false,
  			cache : false,
  			error : function(request) {
@@ -129,13 +136,16 @@ $(document).ready(function() {
          		  });
  			},
  			success : function(data) {
- 				 for (var i=0;i<data.length;i++) { 					
+ 				 for (var i=0;i<data[0].length;i++) {
+ 					$("#EbasenameID").after(
+ 							"<option value="+data[0][i].basename+">"
+ 									+data[0][i].basename+"</option>");
  									$("#AbasenameID").after(
- 				 							"<option value="+data[i].name+">"
- 				 									+data[i].name+"</option>");
+ 				 							"<option value="+data[0][i].name+">"
+ 				 									+data[0][i].basename+"</option>");
 													$("#SbasenameID").after(
-														"<option value="+data[i].name+">"
-																+data[i].name+"</option>");
+														"<option value="+data[0][i].name+">"
+																+data[0][i].basename+"</option>");
 
  				 }
  			}
@@ -158,24 +168,27 @@ $(document).ready(function() {
 						  });
 								}
 					else{
-						bootbox.confirm({
-							message: "确定删除？",
+							bootbox.confirm({
+							message: "是否确认删除",
 							size: 'small',
 							buttons: {
+			
 								confirm: {
-									label: '确定',
+									label: 'Yes',
 									className: 'btn-success'
 								},
 								cancel: {
-									label: '取消',
+									label: 'No',
 									className: 'btn-danger'
 								},
 							},
-							callback: function (result) {									
-								if(result){									
-									var deletstr = '(';//删除记录的格式(1,2,3,4,5)									
-									var i=0;
-									$("input[type='checkbox'][name='idname']:checked").each(function() {															
+							callback: function (result) {
+								if(result){
+									
+									var deletstr = '(';//删除记录的格式(1,2,3,4,5)
+									var keyid;
+									$("input[type='checkbox'][name='idname']:checked").each(function() {
+															keyid = $(this).data("id");
 															if (i != 0) {
 																deletstr = deletstr+ ','+ $(this).val();
 															}
@@ -186,11 +199,11 @@ $(document).ready(function() {
 														});
 										deletstr = deletstr + ')';
 										$.ajax({
-											url : 'delmaintainapply.do',
+											url : '',
 											type : 'post',
 											dataType : 'json',
 											data : {
-												"deletstr" : deletstr
+												"deletstr" : deletstr,
 											},
 											success : function(msg) {
 												bootbox.alert({
@@ -210,7 +223,7 @@ $(document).ready(function() {
 //点击增加清空数据函数
 $("#ZJ").click(function(){
 		$("#Aprojectname").val("");
-		$("#Abasename").val("-1");
+		$("#Abasename").val("1");
 		$("#Aname").val("");
 		$("#Atime").val("");
 		$("#Abudget").val("");
@@ -224,73 +237,62 @@ $("#save").click(function(){
 				message : "请填写项目名称",
 				size : 'small'
 			});	
-			return;
+			return 0;
 		}
-		else if($("#Abasename").val()=="-1"){
+		else if($("#Abasename").val()=="1"){
 				bootbox.alert({
 				message : "请选择基地名称",
 				size : 'small'
 				});	
-				return;
-		}					
+				return 0;
+		}
+					
 		else if($("#Aname").val()==""){
 				bootbox.alert({
 				message : "请填写申报人姓名",
 				size : 'small'
 				});	
-				return;
+				return 0;
 		}
 		else if($("#Abudget").val()==""){
 				bootbox.alert({
 				message : "请填写预算金额",
 				size : 'small'
 				});	
-				return;
-		}else if($("#ActualMoney").val()==""){
-				bootbox.alert({
-				message : "请填写实际金额",
-				size : 'small'
-				});	
-				return;
+				return 0;
 		}
 		else if($("Aaddress").val()==""){
 				bootbox.alert({
 				message : "请填写具体地址",
 				size : 'small'
 				});	
-				return;
+				return 0;
 		}
 		else if($("#Areason").val()==""){
 				bootbox.alert({
 				message : "请填写原因说明",
 				size : 'small'
 				});	
-				return;
+				return 0;
 		}
 		$("#applyaddform").submit();
 					
 })
 					 
-//查看操作
+//修改操作
 $(document).on("click", "#checkdetale", function() {	
 	
 	var index=$(this).val();
 	
-	$("#Eprojectname").val(obj[index].pro_name);
+	$("#Eprojectname").val(obj[index].projectname);
 	$("#Ebasename").val(obj[index].basename);
-	$("#Ename").val(obj[index].username);
-	$("#Etime").val(obj[index].apply_time);
-	$("#Ebudget").val(obj[index].money);
-	$("#Emoney").val(obj[index].actualmoney);
+	$("#Ename").val(obj[index].name);
+	$("#Etime").val(obj[index].time);
+	$("#Ebudget").val(obj[index].budget);
+	$("#Emoney").val(obj[index].money);
 	$("#Eaddress").val(obj[index].address);
 	$("#Ereason").val(obj[index].reason);
-	var file=obj[index].file;
-	if(file=="null"||file==""){
-		$("#resourcetr").prop("hidden",true);
-	}else{
-		$("#resourcetr").prop("hidden",false);
-		$("#Elink").prop("href",file);
-	}	
+	$("#Elink").prop("href",obj[index].linkaddress);
 	$("#edit").modal('show');
 	
 });
@@ -346,17 +348,53 @@ $('.file').change(function() {
 				var flag=0;
 				$("#ck1").on("click", function () {
 					if ($(this).prop("checked") === true) {
-						$("#Repairmanage input[name='idname']").prop("checked", true);
+						$("#Repairmanage input[name='allcheckbox']").prop("checked", true);
 						
 					} else {
-						$("#Repairmanage input[name='idname']").prop("checked", false);
+						$("#Repairmanage input[name='allcheckbox']").prop("checked", false);
 						
-					}					
+					}
+					$("#ck2").prop("checked", false);
 				 });
-				
+				 
+				  $("#ck2").click(function () {//反选  
+                		$("#Repairmanage input[name='allcheckbox']").each(function () {  
+                    	$(this).prop("checked", !$(this).prop("checked"));
+						 
+                	}); 
+					$("#ck1").prop("checked", false); 
+           		 }); 
+	
 $("#import").click(function (){//每次点击导出是清空数据
-	$("#Sbasename").val("-1");
+	$("#Sbasename").val("1");
 	$("#year").val("");
 	});	
-					 					 					
+	
+$("#export").click(function (){
+	
+	var basename=$("#Sbasename option:selected").val();
+	var year=$("#year").val();
+	if(basename=="1"){
+		basename=null;
+	}
+	if(year==''){
+		year="-1";
+		}
+	$.ajax(
+	{
+		url:'',
+		type:POST,
+		datatype:'json',
+		data:{
+			"basename": basename,
+			"year":year,
+			}
+		}
+	
+	);
+	
+	})
+	
+	
+				 					 					
 });

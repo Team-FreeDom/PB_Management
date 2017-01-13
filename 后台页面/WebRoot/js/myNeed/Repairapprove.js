@@ -112,7 +112,7 @@ $(".ck2").click(function () {//反选
 										"render":function(data,type,row){					
 										obj.push(row);							
 										return data="<span type='button' class='icon-search' value='"+(obj.length-1)
-										+ "' id='scanDetail'>查看</span>";
+										+ "' id='scanDetail'></span>";
 										}
 									}
 							],
@@ -227,7 +227,7 @@ $(".ck2").click(function () {//反选
              										"render":function(data,type,row){					
              										obj2.push(row);							
              										return data="<span type='button' class='icon-search' value='"+(obj2.length-1)
-             										+ "' id='scanDetail2'>查看</span>";
+             										+ "' id='scanDetail2'></span>";
              										}
              									}
              			],
@@ -289,7 +289,12 @@ $(document).on("click", "#scanDetail", function() {
 	$("#budget").val(obj[index].money);
 	$("#address").val(obj[index].address);
 	$("#reason").val(obj[index].reason);
-	$("#linkAddress").prop("href",obj[index].file);
+	if(obj[index].file=="null"||obj[index].file==""){			
+		$("#resourcetr").prop("hidden",true); 
+	}else{		
+		$("#resourcetr").prop("hidden",false); 
+		$("#linkaddress").prop("href",obj[index].file);
+	}
 	
 	$("#Checkdetal").modal('show');
 	
@@ -306,7 +311,13 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#budget").val(obj2[index].money);
 	$("#address").val(obj2[index].address);
 	$("#reason").val(obj2[index].reason);
-	$("#linkAddress").prop("href",obj2[index].file);
+	if(obj[index].file=="null"||obj[index].file==""){			
+		$("#resourcetr").prop("hidden",true); 
+	}else{		
+		$("#resourcetr").prop("hidden",false); 
+		$("#linkaddress").prop("href",obj[index].file);
+	}
+	
 	
 	$("#Checkdetal").modal('show');
 	
@@ -314,7 +325,8 @@ $(document).on("click", "#scanDetail2", function() {
 
 			  //同意申请
 			  var flag=0;
-			  $(document).on("click","#agree",function(){				
+			  $(document).on("click","#agree",function(){			  
+				  
 				  flag=0;
 					$("#Approveing input[name='idname1']").each(function () {
 							if($(this).prop("checked")==true){
@@ -380,6 +392,7 @@ $(document).on("click", "#scanDetail2", function() {
 													size : 'small'
 												});
 												Approvetable.draw(false);
+												repair.draw(false);
 											}
 										});//end
 
@@ -457,8 +470,9 @@ $(document).on("click", "#scanDetail2", function() {
 													message : msg.str,
 													size : 'small'
 												});
-												$("#refuseModal").modal('hide');
+												$("#refuseModal").modal('hide');												
 												Approvetable.draw(false);
+												repair.draw(false);
 											}
 										});//end
 
@@ -512,6 +526,9 @@ $(document).on("click", "#scanDetail2", function() {
 															userid = $(this).val();															
 															basename=$(this).closest('tr').find('td:eq(2) input').val();
 															money=$(this).closest('tr').find('td:eq(6) input').val();
+															if(money==""){
+																money=0;
+															}
 															if (i != 0) {
 																recordstr=recordstr+",("+this.className+",15,"+money+")";
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
@@ -689,7 +706,7 @@ $(document).on("click","#finish",function() {
 							"render":function(data,type,row){					
 							obj.push(row);							
 							return data="<span type='button' class='icon-search' value='"+(obj.length-1)
-							+ "' id='scanDetail'>查看</span>";
+							+ "' id='scanDetail'></span>";
 							}
 						}
 				],
@@ -813,7 +830,7 @@ $(document).on("click","#finish2",function() {
 		   										"render":function(data,type,row){					
 		   										obj2.push(row);							
 		   										return data="<span type='button' class='icon-search' value='"+(obj2.length-1)
-		   										+ "' id='scanDetail2'>查看</span>";
+		   										+ "' id='scanDetail2'></span>";
 		   										}
 		   									}
 		   			],

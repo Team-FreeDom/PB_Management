@@ -263,6 +263,11 @@ $(document).on("click", "#scan", function() {
 				});
 //撤回操作
 $(document).on("click", "#cancel", function() {
+	var index=$(this).val();					
+  	var basename=obj1[index].name;
+  	var userid=obj1[index].userid;
+  	var info_str='[{userid:"'+userid+'",basename:"'+basename+'"}]';
+  	var id=obj1[index].id;
 	bootbox.confirm({
 							message: "是否确认删除",
 							size: 'small',
@@ -279,7 +284,27 @@ $(document).on("click", "#cancel", function() {
 							},
 							callback: function (result) {
 								if(result){
-										//上传ID
+										$.ajax({
+								  		type : 'POST',
+								  		//dataType : 'json',
+								  		data:{
+								  			"id":id,
+								  			"infostr":info_str
+								  		},
+								  		url : '',  
+								  		async : false,
+								  		cache : false,
+								  		error : function(request) {
+								  			alert("error");
+								  		},
+								  		success : function(msg) {
+								  			bootbox.alert({
+								  				message : msg,
+								  				size : 'small'
+								  			});
+								  			page2.draw(false);
+								  		}
+								  	});					
 										
 									}
 								}

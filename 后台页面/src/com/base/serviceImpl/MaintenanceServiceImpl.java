@@ -29,7 +29,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue)
     {
     	String columnName="";
-		if(order==2){
+		if(order==0||order==2){
 			columnName="id";
 		}else if(order==3){
 			columnName="buildtime";
@@ -70,7 +70,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		return list;
 	}
 
-   //¸üÐÂ»ùµØÐÅÏ¢
+   //ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½ï¿½Ï¢
 	@Override
 	public void updateBaseInfo(String baseid, int star, int adddate) {
 		maintenancedao.updateBaseInfo(baseid,star,adddate);
@@ -82,6 +82,13 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 	public List<ExportBase> getExportBaseInfo(int basetype, int dept, int star) {
 		List<ExportBase> list=maintenancedao.getInfo(basetype,dept,star);
 		return list;
+	}
+
+
+	@Override
+	public void increaseBaseInfo(String str1, String str2) {
+		
+		maintenancedao.increaseBaseInfo(str1, str2);
 	}
 
 }

@@ -20,13 +20,13 @@ import com.base.po.MaintenanceList;
 import com.base.service.RepairApproveService;
 
 @Controller("repairApproveController")
-@RequestMapping("/jsp")   //×´Ì¬£ºÉêÇëÎª13£¬Î¬ĞŞÎª14
+@RequestMapping("/jsp")   //×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª13ï¿½ï¿½Î¬ï¿½ï¿½Îª14
 public class RepairApproveController {
 	
 	@Autowired
 	private RepairApproveService repairApproveService;
 	
-	//»ñµÃÉóºËÖĞµÄ±¨ĞŞĞÅÏ¢
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	   @RequestMapping("/getNoRepair.do")
 	    public String getNoRepair(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -34,11 +34,11 @@ public class RepairApproveController {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ÁĞºÅ
-		    String orderDir = request.getParameter("order[0][dir]");//ÅÅĞò·½·¨
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ï¿½Ğºï¿½
+		    String orderDir = request.getParameter("order[0][dir]");//ï¿½ï¿½ï¿½ò·½·ï¿½
 		    String searchValue = request.getParameter("search[value]");
 		
-			// »ñµÃµ±Ç°Ò³Âë
+			// ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -60,18 +60,18 @@ public class RepairApproveController {
 		 	   
 	   }
 	   
-   //»ñµÃÉóºËÍ¬ÒâºóµÄ±¨ĞŞĞÅÏ¢
+   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	   @RequestMapping("/getAgreeRepair.do")
 	    public String getAgreeRepair(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ÁĞºÅ
-		    String orderDir = request.getParameter("order[0][dir]");//ÅÅĞò·½·¨
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ï¿½Ğºï¿½
+		    String orderDir = request.getParameter("order[0][dir]");//ï¿½ï¿½ï¿½ò·½·ï¿½
 		    String searchValue = request.getParameter("search[value]");
 		
-			// »ñµÃµ±Ç°Ò³Âë
+			// ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -93,7 +93,7 @@ public class RepairApproveController {
 	   }	   
 	 
 	   
-	 //»ñµÃÉ¸Ñ¡ºóµÄÉóºËÖĞµÄ±¨ĞŞĞÅÏ¢
+	 //ï¿½ï¿½ï¿½É¸Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	   @RequestMapping("/getChooseRepair1.do")
 	    public String getChooseRepair1(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -101,14 +101,14 @@ public class RepairApproveController {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ÁĞºÅ
-		    String orderDir = request.getParameter("order[0][dir]");//ÅÅĞò·½·¨
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ï¿½Ğºï¿½
+		    String orderDir = request.getParameter("order[0][dir]");//ï¿½ï¿½ï¿½ò·½·ï¿½
 		    String searchValue = request.getParameter("search[value]");
 		   
 		    String baseid = request.getParameter("baseid");
 		    String username = request.getParameter("username");
 		    
-			// »ñµÃµ±Ç°Ò³Âë
+			// ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -129,21 +129,21 @@ public class RepairApproveController {
 			return null;	   
 	   }
 	   
-	 //»ñµÃÉ¸Ñ¡ºóµÄÉóºËÍ¬ÒâµÄ±¨ĞŞĞÅÏ¢
+	 //ï¿½ï¿½ï¿½É¸Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	   @RequestMapping("/getChooseRepair2.do")
 	    public String getChooseRepair2(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ÁĞºÅ
-		    String orderDir = request.getParameter("order[0][dir]");//ÅÅĞò·½·¨
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));//ï¿½Ğºï¿½
+		    String orderDir = request.getParameter("order[0][dir]");//ï¿½ï¿½ï¿½ò·½·ï¿½
 		    String searchValue = request.getParameter("search[value]");
 		   
 		    String baseid = request.getParameter("baseid");
 		    String username = request.getParameter("username");
 		    
-			// »ñµÃµ±Ç°Ò³Âë
+			// ï¿½ï¿½Ãµï¿½Ç°Ò³ï¿½ï¿½
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -164,7 +164,7 @@ public class RepairApproveController {
 			return null;		   
 	   }
 	   
-	   //»ñµÃÉê±¨ÈËºÍ»ùµØÃû³Æ
+	   //ï¿½ï¿½ï¿½ï¿½ê±¨ï¿½ËºÍ»ï¿½ï¿½ï¿½ï¿½ï¿½
 	   @RequestMapping("/getInfoApply.do")
 	    public String getInfoApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -182,7 +182,7 @@ public class RepairApproveController {
 			return null;		   	   
 	   } 	  
 	   
-	   //¾Ü¾øÉêÇë
+	   //ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½
 	   @RequestMapping("/refuseRepairApply.do")
 	    public String refuseRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -192,7 +192,7 @@ public class RepairApproveController {
 		   repairApproveService.refuseRepairApply(refusestr,infostr);
 		   
 		   JSONObject getObj = new JSONObject();
-			getObj.put("str", "³É¹¦¾Ü¾øÉêÇë");
+			getObj.put("str", "æˆåŠŸæ‹’ç»ç”³è¯·");
 			response.setContentType("text/html;charset=UTF-8");
 			try {
 			    response.getWriter().print(getObj.toString());
@@ -203,7 +203,7 @@ public class RepairApproveController {
 			return null;		   
 	   }
 	   
-	   //Í¬ÒâÉêÇë
+	   //Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	   @RequestMapping("/agreeRepairApply.do")
 	    public String agreeRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -214,7 +214,7 @@ public class RepairApproveController {
 		   repairApproveService.agreeRepairApply(agreestr,infostr);
 		   
 		   JSONObject getObj = new JSONObject();
-			getObj.put("str", "³É¹¦Í¬ÒâÉêÇë");
+			getObj.put("str", "æˆåŠŸåŒæ„ç”³è¯·");
 			response.setContentType("text/html;charset=UTF-8");
 			try {
 			    response.getWriter().print(getObj.toString());
@@ -225,7 +225,7 @@ public class RepairApproveController {
 			return null;	   
 	   }
 	   
-	   //Î¬ĞŞÍê³É
+	   //Î¬ï¿½ï¿½ï¿½ï¿½ï¿½
 	   @RequestMapping("/repairFinish.do")
 	    public String repairFinish(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -234,7 +234,7 @@ public class RepairApproveController {
 		   repairApproveService.finishRepairApply(storestr,infostr);
 		   
 		   JSONObject getObj = new JSONObject();
-			getObj.put("str", "ÒÑÈ·¶¨Î¬ĞŞÍê³É");
+			getObj.put("str", "æˆåŠŸç¡®è®¤ç»´ä¿®å®Œæˆ");
 			response.setContentType("text/html;charset=UTF-8");
 			try {
 			    response.getWriter().print(getObj.toString());

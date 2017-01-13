@@ -10,9 +10,11 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,8 +62,7 @@ public class BaseMaintenanceController {
     @RequestMapping("/sendBaseinfo.do")
     public String sendBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){	
-	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�  
-    	System.out.println("获得");
+	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�      
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	
 	// 鏁版嵁璧峰浣嶇疆
@@ -187,7 +188,7 @@ public class BaseMaintenanceController {
     	int star=Integer.valueOf(request.getParameter("star"));
     	String date=request.getParameter("adddate");
     	int adddate=0;
-    	if(!date.equals("")){
+    	if(!date.equals("")&&date!=null){
     		 adddate=Integer.valueOf(date);
     	}    	
     	maintenanceservice.updateBaseInfo(baseid,star,adddate);
@@ -353,5 +354,129 @@ public class BaseMaintenanceController {
     				
     			}
     			return "redirect:baseMaintain.jsp";   	
+    }
+    
+    //获得用户输入的数据
+    @RequestMapping("/increaseBaseInfo.do")
+    public String increaseBaseInfo(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+    	Cookie[] cookies = request.getCookies();// 获得所有cookie对象
+    	for (Cookie co : cookies) {
+    	    if (co.getName().equals("username")) {
+    		String userid = co.getValue();    		
+    		Date d = new Date();
+    		/*------参数2-----------*/
+    		String str2 = "";
+    		String name = request.getParameter("name");// 基地名称    		
+    		String type = request.getParameter("typeid");//基地类型id    		
+    		String landarea = request.getParameter("landarea");//基地面积    		
+    		if (landarea.equals("")) {
+    		    landarea = null;
+    		}
+    		String constructionarea = request.getParameter("constructionarea");//建筑面积    		
+    		if (constructionarea.equals("")) {
+    		    constructionarea = null;
+    		}
+    		String undertake = request.getParameter("undertake");//可承担人数    		
+    		if (undertake.equals("")) {
+    		    undertake = null;
+    		}
+    		String applyid = request.getParameter("applyid");//申报部门id    		
+    		String land_address = request.getParameter("land_addres");// 通讯地址    		
+    		String username = request.getParameter("username");// 联系人姓名    		
+    		String phone = request.getParameter("phone");// 联系人电话  	
+    		String validdate = request.getParameter("validda");// 联系人电话
+    		int date=0;
+    		if(validdate!=null&&!validdate.equals("")){
+    			date=Integer.valueOf(validdate);
+    		}
+    		String lawPerson = request.getParameter("personDuty");
+    		// 申请材料保存地址
+    		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+    		String path = null;
+    		String filename = null;
+    		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+    		// 得到上传的文件
+    		MultipartFile mFile = multipartRequest.getFile("material_path");// 申请材料保存地址    		
+    		if (!mFile.isEmpty()) {
+    		    // 得到上传服务器的路径
+    		    path = request.getSession().getServletContext()
+    			    .getRealPath("/material/");
+    		    // 得到上传的文件的文件名
+    		    String fileName = mFile.getOriginalFilename();
+    		    System.out.println(fileName);
+    		    String fileType = fileName.substring(fileName
+    			    .lastIndexOf("."));
+    		    filename = new Date().getTime() + fileType;
+    		    InputStream inputStream = null;
+    		    try {
+    			inputStream = mFile.getInputStream();
+    		    } catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		    }
+    		    byte[] b = new byte[1048576];
+    		    int length = 0;
+    		    try {
+    			length = inputStream.read(b);
+    		    } catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		    }
+    		    path += "\\" + filename;
+    		    // 文件流写到服务器端
+    		    try {
+    			FileOutputStream outputStream = new FileOutputStream(
+    				path);
+    			outputStream.write(b, 0, length);
+    			inputStream.close();
+    			outputStream.close();
+    		    } catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		    }
+    		    filename = "../material/" + filename;
+    		} else {
+    		    filename = null;
+    		}
+    		//获取当前年份
+    		Calendar c=Calendar.getInstance();
+    		int year=c.get(Calendar.YEAR);
+    		String Baseid = String.valueOf(d.getTime());
+    		str2 += "('" + Baseid + "','" + name + "'," + type + ","
+    			+ landarea + "," + constructionarea + "," + undertake
+    			+ "," + applyid + ",'" + land_address + "','"
+    			+ username + "','" + phone + "','" + filename + "','"
+    			+ userid +"','"+ year + "',"+date+",'"+lawPerson+"')";
+    		System.out.println(str2+"拼装好的数据");
+
+    		/*------参数1-----------*/
+    		String majorid[] = request.getParameterValues("majorid");// 专业id
+    		String str1 = "";
+    		StringBuffer sb = new StringBuffer();
+    		if (majorid == null) {
+    		    sb.append("(");
+    		    sb.append(Baseid);
+    		    sb.append(",");
+    		    sb.append(majorid);
+    		    sb.append("),");
+    		    sb.deleteCharAt(sb.length() - 1);
+    		    str1 = sb.toString();
+    		} else {
+    		    for (String string : majorid) {
+    			System.out.println(string);
+    			sb.append("(");
+    			sb.append(Baseid);
+    			sb.append(",");
+    			sb.append(string);
+    			sb.append("),");
+    		    }
+    		    sb.deleteCharAt(sb.length() - 1);
+    		    str1 = sb.toString();
+    		}    		
+    		maintenanceservice.increaseBaseInfo(str1, str2);
+    	    }
+    	}
+    	return "redirect:baseMaintain.jsp";
     }
 }

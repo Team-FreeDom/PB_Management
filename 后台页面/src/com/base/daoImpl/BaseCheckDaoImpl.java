@@ -64,7 +64,9 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 		ch.setUserid(rs.getString("userid"));
 		ch.setType(rs.getString("basetype"));
 		ch.setApplydp(rs.getString("dept"));
-		ch.setMmajor(rs.getString("mname"));		
+		ch.setMmajor(rs.getString("mname"));
+		ch.setResperson(rs.getString("resperson"));
+		System.out.println("法定责任人:"+rs.getString("resperson"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -123,6 +125,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
+	    System.out.println(recordstr);
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.transstate_baseapply(?)}");
 	    sp.setString(1, recordstr);	   

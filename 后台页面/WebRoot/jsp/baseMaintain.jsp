@@ -113,7 +113,7 @@
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
@@ -124,7 +124,7 @@
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 										<li><a href="#"><span class="text">实习审批</span></a></li>
 										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">维修审批</span></a></li>
+										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
 									</ul>
 								<li class="menuItem nav-parent opened nav-expanded"><a>
@@ -139,6 +139,7 @@
 												class="text"> 土地租赁维护</span></a></li>
 										<li><a href="baseMaintain.jsp"><span class="text">
 													实习基地维护</span></a></li>
+										<li><a href="repairManage.jsp"><span class="text"> 报修信息维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
@@ -184,9 +185,9 @@
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="#"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="#"><i class="icon-home"></i>报修申请</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -201,8 +202,7 @@
 									<tr bgcolor="#ECF1F5">
 										<td colspan="2" id="button-left">
 											<button type="button" class="btn btn-danger" id="delete">删除</button>
-											<button type="button" class="btn btn-info"
-												data-toggle="modal" data-target="#add" id="ZJ">增加</button>
+											<button type="button" class="btn btn-info" id="ZJ">增加</button>
 										</td>
 										<td colspan="5">
 											<ul class="dropdown_show">
@@ -248,7 +248,7 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="11" id="button-right"><a
+										<td colspan="12" id="button-right"><a
 											href="../templet/BaseInfotemplet.rar"
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
@@ -268,6 +268,7 @@
 										<th>可承担人数</th>
 										<th>星级</th>
 										<th hidden>通信地址</th>
+										<th hidden>法定责任人</th>		
 										<th hidden>联系人姓名</th>
 										<th hidden>联系人电话</th>
 										<th hidden>面向专业</th>
@@ -409,15 +410,20 @@
 
 												<td>联系人电话 ：</td>
 												<td><input type="text" id="userphoned" disabled></td>
-												<td>创建时间：</td>
-												<td><input type="text" id="setdated" disabled></td>
+												<td>法定责任人 ：</td>
+												<td><input type="text" id="personDuty" disabled></td>
+												
 											</tr>
 											<tr id="hidecol">
-
+                                                <td>创建时间：</td>
+												<td><input type="text" id="setdated" disabled></td>
 												<td>有效周期 ：</td>
 												<td><input type="text" id="validdated" disabled></td>
+												
+											</tr>
+											<tr id="resourcetr">
 												<td>申请材料 ：</td>
-												<td style="text-align:left;"><a id="resourced" href="#"
+												<td colspan="3" style="text-align:left;"><a id="resourced" href="#"
 													style="color:#3071a9;">点击查看</a></td>
 											</tr>
 											<tr>
@@ -433,9 +439,6 @@
 														style="border:#ccc 1px solid;height:80px;"></div></td>
 
 											</tr>
-
-
-
 											<tr id="hidecol">
 												<td>星级：</td>
 												<td colspan="3"><div id="starget"></div></td>
@@ -461,151 +464,7 @@
 				</div>
 			</div>
 
-
-			<div class="modal fade" id="add" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabe" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content" style="border:#3071a9 8px solid">
-						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" id="closebase"
-								data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
-							<h4 class="modal-title text-center" id="myModalLabel">增加基地</h4>
-						</div>
-						<div class="modal-body table-responsive">
-							<div class="row">
-								<div class="col-md-12">
-									<form action="getRequestBaseInfo.do" method="post" id="myForm"
-										enctype="multipart/form-data" class="form-horizontal"
-										role="form">
-										<div class="form-group">
-											<label class="col-md-3 control-label fontDire">基地名称</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="basename"
-													name="name" placeholder="例:浏阳基地" /> <span id="display"
-													style="color:#f00;"></span>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">申报部门类型</label>
-											<div class="col-md-6">
-												<label class="radio-inline"> <input type="radio"
-													name="deptRadio" id="deptRadio" value="1" checked="true">
-													学院
-												</label> <label class="radio-inline"> <input type="radio"
-													name="deptRadio" id="deptRadio" value="2"> 行政部
-												</label>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">申报部门</label>
-											<div class="col-md-6">
-												<select class="form-control" id="deptty" name="applyid">
-													<option id="applyDept" value="">请选择</option>
-												</select>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">基地类型</label>
-											<div class="col-md-6">
-												<select class="form-control" id="basetype0" name="typeid">
-													<option id="basetype" value="">请选择</option>
-												</select>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">面向专业</label>
-											<div class="col-md-6" data-toggle="modal"
-												data-target="#myModal" id="hit">
-												<span class="btn btn-primary">请选择</span>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="col-md-offset-3 col-md-6">
-												<div id="textContent"
-													style="border:#ccc 1px solid;height:100px;"></div>
-
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">可承担人数</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" name="undertake"
-													id="limit-population" placeholder="单位：人">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">土地面积</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="filed-area"
-													name="landarea" placeholder="单位：亩">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">建筑面积</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="building-area"
-													name="constructionarea" placeholder="单位：平方">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">通信地址</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="baseaddress"
-													name="land_addres" placeholder="">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">联系人姓名</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="personName"
-													name="username" placeholder="">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-md-3 control-label">联系人电话</label>
-											<div class="col-md-6">
-												<input type="text" class="form-control" id="personTel"
-													name="phone" placeholder="">
-											</div>
-										</div>
-
-										<div class="form-group">
-
-											<label class="col-md-3 control-label">申请材料</label>
-											<div class="col-md-6">
-												<input type="file" id="applyfile" placeholder=""
-													name="material_path">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="col-sm-offset-8 col-sm-4">
-												<button id="submitForm" type="button"
-													class="btn btn-primary">提交</button>
-											</div>
-										</div>
-
-
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+   
 
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -710,6 +569,163 @@
 		<!--row end-->
 	</div>
 	<div class="clearfix"></div>
+	
+	  <!--增加基地start  -->
+			<div id="add">				
+					<div style="border:#3071a9 8px solid;background:#fff;">
+						<div>
+							<button type="button" class="close" id="closebas">
+								
+								<span aria-hidden="true" style="font-size:20px;">&times;</span>
+							</button>
+							<h4 class="text-center" id="myModalLabel">增加基地</h4>
+						</div>
+						<div class="table-responsive">
+							<div class="row">
+								<div class="col-md-12">
+									<form action="increaseBaseInfo.do" method="post" id="myForm"
+										enctype="multipart/form-data" class="form-horizontal"
+										role="form">
+										<div class="form-group">
+											<label class="col-md-3 control-label fontDire">基地名称</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="basename"
+													name="name" placeholder="例:浏阳基地" /> <span id="display"
+													style="color:#f00;"></span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">申报部门类型</label>
+											<div class="col-md-6">
+												<label class="radio-inline"> <input type="radio" class="colle"
+													name="deptRadio" id="deptRadio" value="1" checked="true">
+													学院
+												</label> <label class="radio-inline"> <input type="radio"
+													name="deptRadio" id="deptRadio" value="2"> 行政部
+												</label>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">申报部门</label>
+											<div class="col-md-6">
+												<select class="form-control" id="deptty" name="applyid">
+													<option id="applyDept" value="">请选择</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">基地类型</label>
+											<div class="col-md-6">
+												<select class="form-control" id="basetype0" name="typeid">
+													<option id="basetype" value="">请选择</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">面向专业</label>
+											<div class="col-md-6" data-toggle="modal"
+												data-target="#myModal" id="hit">
+												<span class="btn btn-primary">请选择</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-md-offset-3 col-md-6">
+												<div id="textContent"
+													style="border:#ccc 1px solid;height:100px;"></div>
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">可承担人数</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="undertake"
+													id="limit-population" placeholder="单位：人">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">土地面积</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="filed-area"
+													name="landarea" placeholder="单位：亩">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">建筑面积</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="building-area"
+													name="constructionarea" placeholder="单位：平方">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">通信地址</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="baseaddress"
+													name="land_addres" placeholder="">
+											</div>
+										</div>
+                                         <div class="form-group">
+											<label class="col-md-3 control-label">法定负责人</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="personName"
+													name="personDuty" placeholder="">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label">联系人姓名</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="personName"
+													name="username" placeholder="">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-md-3 control-label">联系人电话</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" id="personTel"
+													name="phone" placeholder="">
+											</div>
+										</div>
+
+										<div class="form-group">
+
+											<label class="col-md-3 control-label">材料</label>
+											<div class="col-md-6">
+												<input type="file" id="applyfile" placeholder=""
+													name="material_path">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label">有效周期</label>
+											<div class="col-md-6">
+												<input type="text" id="validda" name="validda" placeholder=""
+													name="validda">个月
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-sm-offset-8 col-sm-4">
+												<button id="submitForm" type="button"
+													class="btn btn-primary">确定</button>
+											</div>
+										</div>
+
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>				
+			</div>
+			 <!--增加基地end -->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>

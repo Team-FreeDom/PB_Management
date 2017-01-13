@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,10 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.base.po.MaintainApply;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
-import com.base.serviceImpl.MaintainApplyServiceImpl;
+import com.base.service.MaintainApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
@@ -39,12 +41,12 @@ import com.base.utils.ExcelReport;
 public class MaintainApplyController
 {
 	@Autowired
-	private MaintainApplyServiceImpl applyservice;
+	private MaintainApplyService applyservice;
 	//校内基地名查询
 	@RequestMapping("/basename.do")
 	public String find_basename(HttpServletRequest request, ModelMap map,HttpServletResponse response)
 	{
-		List<Prabaseinfo> list=applyservice.find_basename();
+		List<Map<String, String>> list=applyservice.find_basename();
 		response.setContentType("text/html;charset=UTF-8");
 		try
 		{
@@ -63,39 +65,7 @@ public class MaintainApplyController
 	@RequestMapping("/insertmaintain.do")
 	public String insert_maintain(HttpServletRequest request, ModelMap map,HttpServletResponse response)
 	{
-/*		String filename = "";
-		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		// 得到上传的文件
-		MultipartFile mFile = multipartRequest.getFile("applyfile");
-		// 得到上传服务器的路径
-		String path = request.getSession().getServletContext()
-				.getRealPath("/maintainfile/");
-		// 得到上传的文件的文件名
-		String fileName = mFile.getOriginalFilename();
-		System.out.println(fileName);
-		try
-		{
-			if (!fileName.isEmpty()) {
-				filename = new Date().getTime() + "$" + fileName;
-				InputStream inputStream = mFile.getInputStream();
-				byte[] b = new byte[1048576];
-				int length = inputStream.read(b);
-				path += "\\" + filename;
-				// 文件流写到服务器端
-				FileOutputStream outputStream = new FileOutputStream(path);
-				outputStream.write(b, 0, length);
-				inputStream.close();
-				outputStream.close();
-				filename = "../maintainfile/" + filename;
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}*/
-		
 		// 申请材料保存地址
 				// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 				String path = null;
@@ -157,6 +127,7 @@ public class MaintainApplyController
 		applyservice.insert_maintain(str);
 		return "index";
 	}
+	
 	//维修管理界面，把所有信息传到（前台当前页面记录数，当前页数，排序列，排序顺序，模糊查询的字符串,返回总记录数）
 	@RequestMapping("/query_maintainapply.do")
 	public String query_maintainapply(HttpServletRequest request, ModelMap map,HttpServletResponse response)
@@ -167,8 +138,7 @@ public class MaintainApplyController
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
-		int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号  
-		String columnName="";
+		int order = Integer.valueOf(request.getParameter("order[0][column]"));//排序的列号		
 	    String orderDir = request.getParameter("order[0][dir]");//排序的顺序asc or desc 
 	    String searchValue = request.getParameter("search[value]");
 		if (searchValue.equals("")) {
@@ -176,12 +146,13 @@ public class MaintainApplyController
 		}
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
-		List<MaintainList> list=new ArrayList<MaintainList>();
-		list=applyservice.query_maintainapply(size, pageindex, columnName, orderDir, searchValue);
+		MaintainList list=new MaintainList();
+		list=applyservice.query_maintainapply(size, pageindex, order, orderDir, searchValue);
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw", draw);
-		getObj.put("recordsTotal", ((MaintainList) list).getRecordsTotal());
-		getObj.put("data", ((MaintainList) list).getData());
+		getObj.put("recordsFiltered", list.getRecordsTotal());
+		getObj.put("recordsTotal", list.getRecordsTotal());
+		getObj.put("data", list.getData());
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());
@@ -195,10 +166,10 @@ public class MaintainApplyController
 	@RequestMapping("/delmaintainapply.do")
 	public String delmaintainapply(HttpServletRequest request,HttpServletResponse response, ModelMap map)
 	{
-		String str=request.getParameter("recordstr");
+		String str=request.getParameter("deletstr");
 		applyservice.delete_maintainapply(str);
 		JSONObject getObj = new JSONObject();
-    	getObj.put("flag", true);    	
+    	getObj.put("str", "成功删除");    	
     	response.setContentType("text/html;charset=UTF-8");
     	try {
     		response.getWriter().print(getObj.toString());
@@ -212,33 +183,90 @@ public class MaintainApplyController
 	@RequestMapping("/addmaintainapply.do")
 	public String add_maintainhistory(HttpServletRequest request,HttpServletResponse response, ModelMap map)
 	{
+		// 申请材料保存地址
+		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
+		String path = null;
+		String filename = null;
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		// 得到上传的文件
+		MultipartFile mFile = multipartRequest.getFile("file");// 申请材料保存地址
+		System.out.println("11" + mFile);
+		if (!mFile.isEmpty()) {
+		    // 得到上传服务器的路径
+		    path = request.getSession().getServletContext()
+			    .getRealPath("/maintainfile/");
+		    // 得到上传的文件的文件名
+		    String fileName = mFile.getOriginalFilename();
+		    String fileType = fileName.substring(fileName
+			    .lastIndexOf("."));
+		    filename = new Date().getTime() + fileType;
+		    InputStream inputStream = null;
+		    try {
+			inputStream = mFile.getInputStream();
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		    byte[] b = new byte[1048576];
+		    int length = 0;
+		    try {
+			length = inputStream.read(b);
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		    path += "\\" + filename;
+		    // 文件流写到服务器端
+		    try {
+			FileOutputStream outputStream = new FileOutputStream(
+				path);
+			outputStream.write(b, 0, length);
+			inputStream.close();
+			outputStream.close();
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		    filename = "../maintainfile/" + filename;
+		} else {
+		    filename = null;
+		}
+		
 		String pronames=request.getParameter("Aprojectname");
-		String bids=request.getParameter("name");
-		String usernames=request.getParameter("address");
-		double actuals=Double.valueOf(request.getParameter("Abudget"));
+		String bids=request.getParameter("Abasename");
+		String usernames=request.getParameter("Aname");
+		String time=request.getParameter("Atime");
+		double budget=Double.valueOf(request.getParameter("Abudget"));
+		double actualMoney=Double.valueOf(request.getParameter("ActualMoney"));
 		String reasons=request.getParameter("Areason");
-		String files=request.getParameter("reason");
-		String userids=request.getParameter("reason");
 		String address=request.getParameter("Aaddress");
-		applyservice.insert_maintainhistory(pronames, bids, usernames, address, reasons, files, userids, actuals);		
-		//pronames, bids, usernames, address, reasons, files, userids, actuals
-		return null;
+		MaintainApply ma=new MaintainApply(pronames, bids, usernames, address, reasons, filename, budget, time, 15, actualMoney);
+		applyservice.insert_maintainhistory(ma);		
+		
+		return "redirect:Repairmanage.jsp";
 	}
+	
+	
 	//导出基地维修记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
 	@RequestMapping("/exportmaintainapply.do")
 	public String export_maintainapply(HttpServletRequest request,HttpServletResponse response, ModelMap map)
 	{
 		String bname=request.getParameter("basename");
-		int years=Integer.valueOf(request.getParameter("year"));
+		String date=request.getParameter("year");
+		int years=-1;
+		if(date!=null&&!date.equals("")){
+			years=Integer.valueOf(date);
+		}	
+		System.out.println(bname+','+years);
 		List<MaintainApplys> list=new ArrayList<MaintainApplys>();
 		list=applyservice.export_maintainapply(bname, years);
 		if (CollectionUtils.isNotEmpty(list)) {         
 			String path = request.getSession().getServletContext()
 					.getRealPath("/upload/");
 			/*String path = ExcelReport.getWebRootUrl(request,"/upload/");*/
-			String fullFileName = path + "/BaseInfo.xlsx";
+			String fullFileName = path + "/BaseRepairInfo.xlsx";
 			ExcelReport export = new ExcelReport();
-//			export.exportBaseInfo(list, fullFileName);
+		    export.exportBaseRepairInfo(list, fullFileName);
 			String filename = "基地维修信息表.xlsx";			
 
 			// 显示中文文件名
@@ -280,6 +308,6 @@ public class MaintainApplyController
 			}	
 			return null;		
     }
-    	return "baseMaintain"; 
+    	return "Repairmanage"; 
 	}
 }

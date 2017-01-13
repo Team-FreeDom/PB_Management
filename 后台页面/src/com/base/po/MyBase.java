@@ -22,10 +22,18 @@ public class MyBase {
     private int statusid;//状态id;
     private String reason;//拒绝理由
     private String applytime;//申请时间
+    private String resperson;//申请时间   
     
     
-    
-    public MyBase(int id, String bid, String name, String type,
+    public String getResperson() {
+		return resperson;
+	}
+
+	public void setResperson(String resperson) {
+		this.resperson = resperson;
+	}
+
+	public MyBase(int id, String bid, String name, String type,
 	    String landarea, String constructionarea, int undertake,
 	    String applydp, String land_address, String username, String phone,
 	    String material_path, String userid, String mmajor, int valid_date,
