@@ -46,7 +46,7 @@ public class MaintainApplyController
 	@RequestMapping("/basename.do")
 	public String find_basename(HttpServletRequest request, ModelMap map,HttpServletResponse response)
 	{
-		List<Map<String, String>> list=applyservice.find_basename();
+		List list=applyservice.find_basename();
 		response.setContentType("text/html;charset=UTF-8");
 		try
 		{
@@ -124,7 +124,12 @@ public class MaintainApplyController
 		String bid=request.getParameter("baselist");
 		String reason=request.getParameter("reason");
 		String str="("+"'"+pro_name+"',"+"'"+bid+"',"+"'"+username+"',"+"'"+address+"',"+"'"+reason+"',"+"'"+filename+"',"+money+",'"+apply_time+"',"+"'"+userid+"')";
-		applyservice.insert_maintain(str);
+		//获得当前用户id
+		String applicantId = CookieUtils.getUserid(request);
+		map.addAttribute("userid", userid);
+		map.addAttribute("basename", "");		
+		String infostr=JSONArray.fromObject(map).toString();
+		applyservice.insert_maintain(str,infostr);
 		return "index";
 	}
 	
@@ -256,8 +261,7 @@ public class MaintainApplyController
 		int years=-1;
 		if(date!=null&&!date.equals("")){
 			years=Integer.valueOf(date);
-		}	
-		System.out.println(bname+','+years);
+		}			
 		List<MaintainApplys> list=new ArrayList<MaintainApplys>();
 		list=applyservice.export_maintainapply(bname, years);
 		if (CollectionUtils.isNotEmpty(list)) {         
@@ -308,6 +312,6 @@ public class MaintainApplyController
 			}	
 			return null;		
     }
-    	return "Repairmanage"; 
+    	return "redirect:Repairmanage.jsp"; 
 	}
 }

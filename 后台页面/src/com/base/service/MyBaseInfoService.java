@@ -40,6 +40,6 @@ public interface MyBaseInfoService {
     */
    public void recall(String id,String infostr);  
    
-   public void updateDate(String baseid,int adddate);
+   public void updateDate(int id,String adddate);
 
 }

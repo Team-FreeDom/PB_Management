@@ -8,3 +8,8 @@
 #add table tr td input{
 	width:100px !important;
 }
+
+#applyConfirm table tr td input{
+	width:20px !important;
+	height:40px !important;
+}

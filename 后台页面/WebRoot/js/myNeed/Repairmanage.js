@@ -129,15 +129,20 @@ $(document).ready(function() {
          		  });
  			},
  			success : function(data) {
- 				 for (var i=0;i<data.length;i++) { 					
+ 				 for (var i=0;i<data[0].length;i++) { 					
  									$("#AbasenameID").after(
- 				 							"<option value="+data[i].name+">"
- 				 									+data[i].name+"</option>");
-													$("#SbasenameID").after(
-														"<option value="+data[i].name+">"
-																+data[i].name+"</option>");
+ 				 							"<option value="+data[0][i].id+">"
+ 				 									+data[0][i].name+"</option>");
+												
 
  				 }
+ 				 for (var i=0;i<data[1].length;i++) { 					
+						
+										$("#SbasenameID").after(
+											"<option value="+data[1][i].name+">"
+													+data[1][i].name+"</option>");
+
+	 }
  			}
  		}); 
 		

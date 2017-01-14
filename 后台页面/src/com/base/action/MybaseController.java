@@ -178,13 +178,9 @@ public class MybaseController {
     @RequestMapping("/updateMyBaseDate.do")
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
-    	String baseid=request.getParameter("baseid");   	
-    	String date=request.getParameter("adddate");      	
-    	int adddate=0;
-    	if(!date.equals("")&&date!=null){
-    		 adddate=Integer.valueOf(date);
-    	}    	
-        mybaseinfoservice.updateDate(baseid,adddate);
+    	int id=Integer.valueOf(request.getParameter("id"));   	
+    	String date=request.getParameter("adddate");   	
+        mybaseinfoservice.updateDate(id,date);
     	JSONObject getObj = new JSONObject();
     	getObj.put("flag", true);
     	

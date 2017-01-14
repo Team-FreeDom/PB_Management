@@ -186,12 +186,8 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map){
     	String baseid=request.getParameter("baseid");    	
     	int star=Integer.valueOf(request.getParameter("star"));
-    	String date=request.getParameter("adddate");
-    	int adddate=0;
-    	if(!date.equals("")&&date!=null){
-    		 adddate=Integer.valueOf(date);
-    	}    	
-    	maintenanceservice.updateBaseInfo(baseid,star,adddate);
+    	String date=request.getParameter("adddate");    
+    	maintenanceservice.updateBaseInfo(baseid,star,date);
     	JSONObject getObj = new JSONObject();
     	getObj.put("flag", true);
     	
@@ -364,7 +360,7 @@ public class BaseMaintenanceController {
     	for (Cookie co : cookies) {
     	    if (co.getName().equals("username")) {
     		String userid = co.getValue();    		
-    		Date d = new Date();
+    		
     		/*------参数2-----------*/
     		String str2 = "";
     		String name = request.getParameter("name");// 基地名称    		
@@ -385,11 +381,8 @@ public class BaseMaintenanceController {
     		String land_address = request.getParameter("land_addres");// 通讯地址    		
     		String username = request.getParameter("username");// 联系人姓名    		
     		String phone = request.getParameter("phone");// 联系人电话  	
-    		String validdate = request.getParameter("validda");// 联系人电话
-    		int date=0;
-    		if(validdate!=null&&!validdate.equals("")){
-    			date=Integer.valueOf(validdate);
-    		}
+    		String starttime = request.getParameter("start_time");// 创建时间
+    		String endtime = request.getParameter("end_time");//截止时间
     		String lawPerson = request.getParameter("personDuty");
     		// 申请材料保存地址
     		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
@@ -439,16 +432,14 @@ public class BaseMaintenanceController {
     		} else {
     		    filename = null;
     		}
-    		//获取当前年份
-    		Calendar c=Calendar.getInstance();
-    		int year=c.get(Calendar.YEAR);
+    		Date d = new Date();
     		String Baseid = String.valueOf(d.getTime());
     		str2 += "('" + Baseid + "','" + name + "'," + type + ","
     			+ landarea + "," + constructionarea + "," + undertake
     			+ "," + applyid + ",'" + land_address + "','"
     			+ username + "','" + phone + "','" + filename + "','"
-    			+ userid +"','"+ year + "',"+date+",'"+lawPerson+"')";
-    		System.out.println(str2+"拼装好的数据");
+    			+ userid +"','"+starttime + "',"+endtime+",'"+lawPerson+"')";
+    		
 
     		/*------参数1-----------*/
     		String majorid[] = request.getParameterValues("majorid");// 专业id

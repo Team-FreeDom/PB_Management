@@ -342,15 +342,15 @@ $(document).on("click", "#scanDetail2", function() {
 								}
 					else{
 							bootbox.confirm({
-							message: "是否同意申请",
+							message: "确定同意申请",
 							size: 'small',
 							buttons: {
 								confirm: {
-									label: 'Yes',
+									label: '确定',
 									className: 'btn-success'
 								},
 								cancel: {
-									label: 'No',
+									label: '取消',
 									className: 'btn-danger'
 								},
 							},
@@ -422,15 +422,15 @@ $(document).on("click", "#scanDetail2", function() {
 								}
 					else{
 							bootbox.confirm({
-							message: "是否拒绝申请",
+							message: "确定拒绝申请",
 							size: 'small',
 							buttons: {
 								confirm: {
-									label: 'Yes',
+									label: '确定',
 									className: 'btn-success'
 								},
 								cancel: {
-									label: 'No',
+									label: '取消',
 									className: 'btn-danger'
 								},
 							},

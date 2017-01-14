@@ -273,6 +273,7 @@ $(document).on("click", "#submitForm", function() {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+		return;
 	}
 	$("#myForm").submit();
 });

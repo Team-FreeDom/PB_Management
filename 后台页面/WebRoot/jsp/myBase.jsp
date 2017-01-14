@@ -308,9 +308,9 @@
 												</tr>
 												
 												<tr hidden id="hidecol">
-													<td>创建时间：</td>
+													<td>创建日期：</td>
 													<td><input type="text" id="setdate" disabled></td>
-													<td>有效周期 ：</td>
+													<td>截止日期 ：</td>
 													<td><input type="text" id="validdate" disabled></td>
 												</tr>
 												<tr>
@@ -367,7 +367,8 @@
 									<div class="row">
 										<div class="col-md-12">
 											<table class="table">
-												<tr>
+											<tr> <td><input type="text" id="tag" hidden="hidden"/></td></tr>
+												<tr>												  
 													<td>基地编号 ：</td>
 													<td><input type="text" id="baseidt" disabled></td>
 													<td>基地名称 ：</td>
@@ -424,9 +425,10 @@
 														id="resource" href="" style="color:#3071a9;">点击查看</a></td>
 												</tr>
 												<tr>
-													<td>续期 ：</td>
-													<td colspan="3" style="text-align:left;"><input type="text" id="adddate"
-														/>个月</td>
+													<td>创建日期 ：</td>
+													<td><input type="text" id="starttime" disabled></td>
+													<td>截止日期 ：</td>
+													<td><input type="text" id="adddate"></td>												
 												</tr>
 											</table>
 										</div>
@@ -434,7 +436,7 @@
 								</div>
 								<div class="modal-footer table-responsive">
 									<center>
-								<button type="button" class="btn btn-primary" id="saveit">保存</button>
+								<button type="button" class="btn btn-primary" id="saveit">确认续期</button>
 								<button type="button" class="btn btn-default"
 									id="cleark" data-dismiss="modal">取消</button>
 							</center>

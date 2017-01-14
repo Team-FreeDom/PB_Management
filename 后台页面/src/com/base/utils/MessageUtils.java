@@ -59,6 +59,18 @@ public class MessageUtils {
 	}else if(i==15){//用户提交基地申请
 		
 	    str="基地提交申请";	    
+	}else if(i==16){//管理员点击同意申请续期
+		
+	    str="基地续期申请同意";	    
+	}else if(i==17){//管理员点击续期失败
+		
+		 str="基地续期申请失败";
+	}else if(i==18){//管理员点击撤回
+		
+		 str="基地续期申请撤回";
+	}else if(i==19){//管理员提交维修申请
+		
+		 str="报修申请提交";
 	}
 
 	return str;
@@ -114,6 +126,17 @@ public class MessageUtils {
 	}else if (i==15){
 		
 	    content = bname + "您申请的基地已经提交成功";
+	}else if (i==16){
+		
+	    content = bname + "您的基地续期申请已经被管理员同意";
+	}else if(i==17){//管理员点击续期失败
+		
+		content = bname + "您的基地续期申请被管理员，可在我的基地下查看拒绝原因";
+	}else if(i==18){
+		content = bname + "您的基地续期申请已成功撤回";
+	}else if(i==19){
+		
+		content = bname + "您的报修申请已提交成功";
 	}
 
 	return content;

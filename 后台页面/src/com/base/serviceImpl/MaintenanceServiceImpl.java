@@ -72,7 +72,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
    //���»����Ϣ
 	@Override
-	public void updateBaseInfo(String baseid, int star, int adddate) {
+	public void updateBaseInfo(String baseid, int star, String adddate) {
 		maintenancedao.updateBaseInfo(baseid,star,adddate);
 		
 	}

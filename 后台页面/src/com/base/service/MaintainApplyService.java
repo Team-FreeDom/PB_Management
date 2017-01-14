@@ -14,9 +14,9 @@ import com.base.po.MaintainList;
 
 public interface MaintainApplyService {
 
-	public List<Map<String,String>> find_basename();
+	public List find_basename();
 	
-	public void insert_maintain(String str);
+	public void insert_maintain(String str,String infostr);
 	
 	public MaintainList query_maintainapply(int offsets,int page,int order,String str1,String str2);
 	

@@ -20,5 +20,7 @@ public interface MaintainApplyDao {
 	public void add_maintain(MaintainApply ma);
 	
 	public List<MaintainApplys> export_maintainapply(String bname,int years);
+	
+	public List<Map<String,String>> find_basenameFinish();
 
 }

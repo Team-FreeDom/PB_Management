@@ -23,7 +23,7 @@ public interface MaintenanceService {
     
     public MaintenanceList getshaiBaseInfo(int basetype,int dept,int star,int pageindex, int size,int order,String orderDir,String searchValue);
     
-    public void updateBaseInfo(String baseid,int star,int adddate);
+    public void updateBaseInfo(String baseid,int star,String adddate);
     
     public List<ExportBase> getExportBaseInfo(int basetype,int dept,int star);
     

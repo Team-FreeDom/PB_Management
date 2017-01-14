@@ -304,7 +304,12 @@ $(document)
 						$("#fileResource").val("");
 					});
 					
-					$(document).on("click", "#ZJ", function() {					
+					$(document).on("click", "#ZJ", function() {	
+						var now= new Date();
+						var date1 = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+						 var date2= (now.getFullYear()+1)+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+						 $(".start_time").val(date1);
+						 $(".end_time").val(date2);
 						$("#add").css("display","block");
 					});
 					
@@ -338,7 +343,7 @@ $(document)
 							$("#resourced").prop("href", obj[index].material_path);
 						}
 						$("#setdated").val(obj[index].buildtime);
-						$("#validdated").val(obj[index].valid_date);						
+						$("#adddate").val(obj[index].endtime);						
 						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
 						$("#personDuty").val(obj[index].resperson);
 						
@@ -407,7 +412,7 @@ $(document)
 						});						
 						var star=i;
 						var adddate=$("#adddate").val();
-						var matchstr=/^[0-9]*$/;
+						/*var matchstr=/^[0-9]*$/;
 						if(!matchstr.test(adddate)){
 							bootbox.alert({
 								message : "填写的续期必须为数字",
@@ -415,7 +420,7 @@ $(document)
 							});
 							return;
 						}
-						
+						*/
 						$.ajax({
 							data : {
 								"baseid" : baseid,

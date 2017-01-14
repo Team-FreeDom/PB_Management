@@ -265,6 +265,7 @@ $(document).on("click", "#cancel", function() {
   	var id=obj1[index].id;
 	bootbox.confirm({							
 							message: "是否确认撤回",
+							size: 'small',
 			        	    buttons: {
 		        	    	confirm: {
 			        	            label: 'Yes',
