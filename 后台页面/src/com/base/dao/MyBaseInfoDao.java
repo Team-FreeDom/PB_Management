@@ -12,5 +12,5 @@ public interface MyBaseInfoDao {
      */
     public void insertMessage(String sql);
     
-    public void updateDate(String baseid, int adddate);
+    public void updateDate(int id, String adddate);
 }

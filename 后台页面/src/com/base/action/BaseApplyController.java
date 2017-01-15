@@ -3,6 +3,8 @@ package com.base.action;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -121,15 +123,15 @@ public class BaseApplyController {
 		} else {
 		    filename = null;
 		}
-		//获取当前年份
-		Calendar c=Calendar.getInstance();
-		int year=c.get(Calendar.YEAR);
+		//获取当前		
+		  DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+		  String time=format.format(d);
 		String Baseid = String.valueOf(d.getTime());		
 		str2 += "('" + Baseid + "','" + name + "'," + type + ","
 			+ landarea + "," + constructionarea + "," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
-			+ userid +"','"+ year + "','"+lawPerson+"')";
+			+ userid +"','"+ time + "','"+lawPerson+"')";
 		System.out.println(str2+"拼装好的数据");
 
 		/*------参数1-----------*/

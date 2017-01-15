@@ -16,16 +16,32 @@ public class MyBase {
     private String phone;//联系人电话
     private String material_path;//申请材料地址
     private String userid;//用户id
-    private String mmajor;//面向专业
-    private int valid_date;//有效周期
+    private String mmajor;//面向专业   
     private String statusdigital ;//状态文字
     private int statusid;//状态id;
     private String reason;//拒绝理由
     private String applytime;//申请时间
     private String resperson;//申请时间   
+    private String buildtime;//申请时间   
+    private String endtime;//申请时间   
     
-    
-    public String getResperson() {
+    public String getBuildtime() {
+		return buildtime;
+	}
+
+	public void setBuildtime(String buildtime) {
+		this.buildtime = buildtime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+
+	public String getResperson() {
 		return resperson;
 	}
 
@@ -53,7 +69,6 @@ public class MyBase {
 	this.material_path = material_path;
 	this.userid = userid;
 	this.mmajor = mmajor;
-	this.valid_date = valid_date;
 	this.statusdigital = statusdigital;
 	this.statusid = statusid;
 	this.reason = reason;
@@ -164,12 +179,7 @@ public class MyBase {
     public void setMmajor(String mmajor) {
         this.mmajor = mmajor;
     }
-    public int getValid_date() {
-        return valid_date;
-    }
-    public void setValid_date(int valid_date) {
-        this.valid_date = valid_date;
-    }
+
     public String getStatusdigital() {
         return statusdigital;
     }

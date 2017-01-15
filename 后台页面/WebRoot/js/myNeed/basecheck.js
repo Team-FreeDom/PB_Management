@@ -1,4 +1,5 @@
 var obj=[];
+var obj2=[];
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
@@ -164,7 +165,7 @@ $(document).ready(function() {
 				"dom": 'frtip<"bottom"l>',
 				"iDisplayLength": 5,			
 				"ajax" : {
-					"url" : "",
+					"url" : "getaddCheck.do",
 					"type" : "POST"
 				},
 				"aoColumns" : [ 
@@ -284,8 +285,8 @@ $(document).ready(function() {
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 					"render":function(data,type,row){					
-						obj.push(row);							
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
+						obj2.push(row);							
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj2.length-1)
 									+ "' id='scanDetail2'>查看</button>";
 					}
 
@@ -300,7 +301,7 @@ $(document).ready(function() {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" data-id="'+(obj.length)+'" name="idname2" />';
+								+ '" data-id="'+(obj2.length)+'" name="idname2" />';
 					}
 				} ],
 				"language" : {
@@ -325,16 +326,16 @@ $(document).ready(function() {
 			type : 'post',
 			dataType : 'json',			
 			success : function(data) {						         
-				for ( var i=0;i<data.length;i++) {
+				for ( var i=0;i<data[0].length;i++) {
 					$("#deptS").after(
-							"<option value="+data[i].aid+">"
-									+ data[i].applydp + "</option>");
+							"<option class='rest' value="+data[0][i].aid+">"
+									+ data[0][i].dept + "</option>");
 					
 				}
-				for ( var i=0;i<data.length;i++) {
+				for ( var i=0;i<data[1].length;i++) {
 					$("#deptS2").after(
-							"<option value="+data[i].aid+">"
-									+ data[i].applydp + "</option>");
+							"<option  class='rest' value="+data[1][i].aid+">"
+									+ data[1][i].dept + "</option>");
 					
 				}
 				}
@@ -348,22 +349,24 @@ $(document).ready(function() {
 						var i=0;
 						var recordstr='';
 						var recorddigit='(';
-						var infostr="[";
+						var infostr="[";						
 						var userid;
 						var basename;
-						var date;
+						var buildtime;
+						var endtime;
 						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {					
 							
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
-							date=$(this).closest('tr').find('td:eq(5) select option:selected').val();
+							buildtime=$(this).closest('tr').find('td:eq(5) input').val();
+							endtime=$(this).closest('tr').find('td:eq(7) input').val();
 							if(i!=0){
-								recordstr=recordstr+",("+$(this).closest('tr').find('td:eq(1) input').val()+','+date+')';
+								recordstr=recordstr+",("+this.className+",'"+buildtime+"','"+endtime+"')";								
 								infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
 								recorddigit=recorddigit+','+this.className;
 								
 							}else{
-								recordstr=recordstr+'('+this.className+','+date+')';
+								recordstr=recordstr+"("+this.className+",'"+buildtime+"','"+endtime+"')";									
 								infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
 								recorddigit=recorddigit+this.className;
 							}					
@@ -380,13 +383,14 @@ $(document).ready(function() {
 							type : 'post',
 							dataType : 'json',
 							data : {
-								"recordstr" : recordstr,
+								"recordstr" : recordstr,								
 								"infostr" : infostr,
 								"recorddigit":recorddigit
 							},
 							success : function(msg) {						
 								$("#valideDate").val("10");
 								$("#applyConfirm").modal('hide');
+								getDept();
 								Spage.draw(false);
 								}
 							
@@ -432,6 +436,7 @@ $('#certain').click(function() {
 				success : function(msg) {						
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
+					getDept();
 					Spage.draw(false);
 					}
 				
@@ -440,7 +445,7 @@ $('#certain').click(function() {
      	            	
 });
 	
-});
+
 
 ////全选反选
 $("#ck1").on("click",function() {
@@ -456,15 +461,17 @@ $("#ck1").on("click",function() {
 $("#ck2").on("click",function() {
 	
 	if ($(this).prop("checked") == true) {
-		$("#basecheck input[name='idname2']").prop(
+		$("#basecheck2 input[name='idname2']").prop(
 				"checked", true);
 	} else {
-		$("#basecheck input[name='idname2']").prop(
+		$("#basecheck2 input[name='idname2']").prop(
 				"checked", false);
 	}
 });
 
 $(".icon-filter").on("click", function() {	
+	$("#deptSh").val("");
+	$("#deptSh2").val("");
 	$('.hide_ul').toggle();
 });
 
@@ -511,7 +518,7 @@ $(document).on("click", "#refuse", function() {
 });
 //续期拒绝申请
 $(document).on("click", "#refuse2", function() {	
-	
+	$("#increase3").html('');
 	var chk_value =[];
 	$('input[name="idname2"]:checked').each(function(){
 	chk_value.push($(this).val());
@@ -528,15 +535,61 @@ $(document).on("click", "#refuse2", function() {
 	 
 	 $('input[name="idname2"]:checked').each(function(){
 		 index=$(this).data("id");
-		 userid = obj[index].userid;
-		 $("#increase2").append('<tr><td><input type="checkbox" name="checkedIncrease2" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reason" placeholder="可不填"></textarea></td></tr>');
+		 userid = obj2[index].userid;
+		 $("#increase3").append('<tr><td><input type="checkbox" name="checkedIncrease3" class='+obj2[index].id+' checked hidden value="'+userid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj2[index].name+'" disabled/></td><td>拒绝理由:</td><td><textarea row=1 col=1 id="reasonAdd" placeholder="可不填"></textarea></td></tr>');
 		 
 	 });
 	 
-	$("#reasonConfirm").modal('show');
+	$("#addDateConfirm").modal('show');
 	
 });
 
+//续期确认拒绝
+$('#certainAdd').click(function() {	
+
+	var i=0;
+	var recordstr='';
+	var infostr="[";			
+	var userid;
+	var basename;
+	var reason;
+	$("input[type='checkbox'][name='checkedIncrease3']:checked").each(function() {			
+		userid=$(this).val();
+		basename=$(this).closest('tr').find('td:eq(2) input').val();
+		reason=$(this).closest('tr').find('td:eq(4) textarea').val();
+		if(i!=0){
+			recordstr=recordstr+",("+this.className+",'"+reason+"',17)";
+			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+			
+		}else{
+			recordstr=recordstr+"("+this.className+",'"+reason+"',17)";
+			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+		}					
+						
+			i++;
+		});		
+
+ infostr=infostr+']';         
+ $.ajax({
+		url : 'BaserefuseApply.do',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			"recordstr" : recordstr,
+			"infostr" : infostr,
+			"reason":reason,
+		},
+		success : function(msg) {						
+			$("#reasonAdd").val("");
+			$("#addDateConfirm").modal('hide');
+			getDept();
+			Spage2.draw(false);
+			}
+		
+	});
+
+	            	
+});
 
 $(document).on("click", "#confirm", function() {	
 	
@@ -557,13 +610,11 @@ $(document).on("click", "#confirm", function() {
 	 $('input[name="idname"]:checked').each(function(){
 		 index=$(this).data("id");
 		 userid = obj[index].userid;
-		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td><input type="checkbox" hidden value="'+obj[index].bid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td><td>有效周期:</td><td> <select name="valideDate" id="valideDate" style="width:100px;">	'+						 
-				 '<option value="1">1年</option>'+
-				 '<option value="2">2年</option>'+
-				 '<option value="3">3年</option>'+
-				 '<option value="10" selected>长久</option>'+
-			   ' </select></td></tr>');
-		 
+		 var now= new Date();
+		 var date1 = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+		 var date2= (now.getFullYear()+1)+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
+		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td><input type="checkbox" hidden value="'+obj[index].bid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td>'+
+				 '<td>创建日期:</td><td><input class="form-control" id="buildtime" value="'+date1+'" disabled></td><td>截止日期:</td><td><input class="form-control" id="endtime" value="'+date2+'"></td></tr>');
 	 });
 	 
 	$("#applyConfirm").modal('show');
@@ -586,14 +637,13 @@ $(document).on("click", "#confirm2", function() {
 			});
 		 return;
 	  }
-	 
+	 var agreestr = '(';//同意记录的格式(1,2,3,4,5)
+	 var infostr="[";
+	 var i=0;
 	 $('input[name="idname2"]:checked').each(function(){
 		 var index=$(this).data("id");
-		 var userid = obj[index].userid;
-		 var basename=obj[index].bid;
-		 var i=0;
-		 var agreestr = '(';//同意记录的格式(1,2,3,4,5)
-		 var infostr="[";
+		 var userid = obj2[index].userid;
+		 var basename=obj2[index].bid;	
 		 if (i != 0) {
 				agreestr = agreestr+ ','+ $(this).val();
 				infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
@@ -607,11 +657,11 @@ $(document).on("click", "#confirm2", function() {
 	    agreestr = agreestr + ')';
 		infostr=infostr+']';										
 		$.ajax({
-			url : '',
+			url : 'addAgreeApply.do',
 			type : 'post',
 			dataType : 'json',
 			data : {
-				"agreestr" : agreestr,
+				"recordstr" : agreestr,
 				"infostr":infostr
 			},
 			success : function(msg) {
@@ -619,9 +669,11 @@ $(document).on("click", "#confirm2", function() {
 					message : msg.str,
 					size : 'small'
 				});
+				getDept();
 				Spage2.draw(false);
 				Spage1.draw(false);
 			}	
+});
 });
 //审核详情查看
 $(document).on("click", "#scanDetail", function() {	
@@ -656,22 +708,24 @@ $(document).on("click", "#scanDetail2", function() {
 	
 	var index=$(this).val();
 	
-	$("#basename2").val(obj[index].name);
-	$("#basetype2").val(obj[index].type);
-	$("#dept02").val(obj[index].applydp);
-	$("#landarea2").val(obj[index].landarea);
-	$("#buildingarea2").val(obj[index].constructionarea);
-	$("#undertakeCount2").val(obj[index].undertake);	
-	$("#dutyPerson2").val(obj[index].resperson);
-	$("#username2").val(obj[index].username);
-	$("#userphone2").val(obj[index].phone);
-	$("#major_oriented2").html(obj[index].mmajor);
-	$("#linkAddress2").html(obj[index].land_address);	
-	if(obj[index].material_path=="null"||obj[index].material_path==""){			
+	$("#basename2").val(obj2[index].name);
+	$("#basetype2").val(obj2[index].type);
+	$("#dept02").val(obj2[index].applydp);
+	$("#landarea2").val(obj2[index].landarea);
+	$("#buildingarea2").val(obj2[index].constructionarea);
+	$("#undertakeCount2").val(obj2[index].undertake);	
+	$("#dutyPerson2").val(obj2[index].resperson);
+	$("#username2").val(obj2[index].username);
+	$("#userphone2").val(obj2[index].phone);
+	$("#major_oriented2").html(obj2[index].mmajor);
+	$("#linkAddress2").html(obj2[index].land_address);
+	$("#Createdate2").val(obj2[index].buildtime);
+	$("#validdate2").val(obj2[index].endtime);
+	if(obj2[index].material_path=="null"||obj2[index].material_path==""){			
 		$("#resourcetr2").prop("hidden",true); 
 	}else{		
 		$("#resourcetr2").prop("hidden",false); 
-		$("#resource2").prop("href",obj[index].material_path);
+		$("#resource2").prop("href",obj2[index].material_path);
 	}
 	
 	$("#scan2").modal('show');
@@ -839,7 +893,7 @@ $("#submitS").click(function() {
 
 $("#submitS2").click(function() {	
 	var dept=$('#deptSh2').children('option:selected').val();	
-	obj=[];	
+	obj2=[];	
 	$('#basecheck2').DataTable( //getXUBaseCheck.do
 			{
 				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
@@ -974,8 +1028,8 @@ $("#submitS2").click(function() {
 					"sDefaultContent" : "",
 					"sWidth" : "8%",
 					"render":function(data,type, row){
-						obj.push(row);	
-						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj.length-1)
+						obj2.push(row);	
+						return data="<button type='button' class='btn btn-warning btn-xs' value='"+(obj2.length-1)
 									+ "' id='scanDetail2'>查看</button>";
 					}
 
@@ -990,7 +1044,7 @@ $("#submitS2").click(function() {
 						
 						return '<input type="checkbox" value="'
 								+ data
-								+ '" data-id="'+(obj.length)+'" name="idname2" />';
+								+ '" data-id="'+(obj2.length)+'" name="idname2" />';
 					}
 				} ],
 				"language" : {
@@ -1013,4 +1067,30 @@ $("#submitS2").click(function() {
 	});
 
 });
+
+function getDept(){
+	
+	$(".rest").remove();
+	//获取申报部门
+	 $.ajax({
+			url : 'getApplyDept.do',
+			type : 'post',
+			dataType : 'json',			
+			success : function(data) {						         
+				for ( var i=0;i<data[0].length;i++) {
+					$("#deptS").after(
+							"<option  class='rest' value="+data[0][i].aid+">"
+									+ data[0][i].dept + "</option>");
+					
+				}
+				for ( var i=0;i<data[1].length;i++) {
+					$("#deptS2").after(
+							"<option  class='rest' value="+data[1][i].aid+">"
+									+ data[1][i].dept + "</option>");
+					
+				}
+				}
+			
+		});	
+}
 

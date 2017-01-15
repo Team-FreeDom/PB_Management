@@ -308,9 +308,9 @@
 												</tr>
 												
 												<tr hidden id="hidecol">
-													<td>创建时间：</td>
+													<td>创建日期：</td>
 													<td><input type="text" id="setdate" disabled></td>
-													<td>有效周期 ：</td>
+													<td>截止日期 ：</td>
 													<td><input type="text" id="validdate" disabled></td>
 												</tr>
 												<tr>
@@ -330,7 +330,7 @@
 
 												<tr hidden id="hideReason">
 													<td>拒绝理由 ：</td>
-													<td colspan="3"><div id="reason"
+													<td colspan="3" style="text-align:left;"><div id="reason"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
@@ -360,14 +360,15 @@
 									<button type="button" class="close" id="cleark" data-dismiss="modal">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 									</button>
-									<h4 class="modal-title text-center" id="myModalLabel">基地信息修改</h4>
+									<h4 class="modal-title text-center" id="myModalLabel">续期</h4>
 								</div>
 
 								<div class="modal-body table-responsive">
 									<div class="row">
 										<div class="col-md-12">
 											<table class="table">
-												<tr>
+											<tr> <td><input type="text" id="tag" hidden="hidden"/></td></tr>
+												<tr>												  
 													<td>基地编号 ：</td>
 													<td><input type="text" id="baseidt" disabled></td>
 													<td>基地名称 ：</td>
@@ -418,15 +419,16 @@
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
-												<tr id="resourcetr">
+												<tr id="resourcetrt">
 													<td>申请材料 ：</td>
 													<td colspan="3" style="text-align:left;"><a
-														id="resource" href="" style="color:#3071a9;">点击查看</a></td>
+														id="resourcet" href="" style="color:#3071a9;">点击查看</a></td>
 												</tr>
 												<tr>
-													<td>续期 ：</td>
-													<td colspan="3" style="text-align:left;"><input type="text" id="adddate"
-														/>个月</td>
+													<td>创建日期 ：</td>
+													<td><input type="text" id="starttime" disabled></td>
+													<td>截止日期 ：</td>
+													<td><input type="text" id="adddate"></td>												
 												</tr>
 											</table>
 										</div>
@@ -434,7 +436,7 @@
 								</div>
 								<div class="modal-footer table-responsive">
 									<center>
-								<button type="button" class="btn btn-primary" id="saveit">保存</button>
+								<button type="button" class="btn btn-primary" id="saveit">确认续期</button>
 								<button type="button" class="btn btn-default"
 									id="cleark" data-dismiss="modal">取消</button>
 							</center>
@@ -461,10 +463,11 @@
 																<tr>
 																	<td>最终状态 <select name="status" id="status"
 																		style="width:150px;margin-top:0px;">
-																			<option value="-1">显示全部</option>
-																			<option value="1">申请成功</option>
-																			<option value="0">申请失败</option>
-																			<option value="2">失效</option>
+																			<option value="-2">显示全部</option>
+																			<option value="6">申请成功</option>
+																			<option value="12">申请失败</option>
+																			<option value="17">过期失效</option>
+																			<option value="11">失效</option>
 																	</select>  
 																	</td>
 																</tr>

@@ -120,9 +120,9 @@ $(document).on("change", "#deptSelectOne", function() {
 			alert("error");
 		},
 		success : function(data) {
-			var tag=false;
+			var tag;
 			for ( var i=0;i<data.length;i++) {
-				
+				tag=false;
 				$("#majorSuo input").each(function(index){					
 					var id=$(this).val();				
 					if(data[i].mid==id){
@@ -273,6 +273,7 @@ $(document).on("click", "#submitForm", function() {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+		return;
 	}
 	$("#myForm").submit();
 });

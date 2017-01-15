@@ -81,17 +81,52 @@ public class BaseCheckController {
 	}
 	return null;
     }
+    
+    @RequestMapping("/getaddCheck.do")   
+    public String getaddCheck(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+	// 获取申请部门id
+	int applydpid = -1;
+	// 获取用户过滤框里的字符
+	String searchValue = request.getParameter("search[value]");
+	if (searchValue.equals("")) {
+	    searchValue = null;
+	}
+	// 获取当前页面的传输几条记录
+	Integer size = Integer.parseInt(request.getParameter("length"));
+	// 数据起始位置
+	Integer startIndex = Integer.parseInt(request.getParameter("start"));
+	Integer draw = Integer.parseInt(request.getParameter("draw"));
+	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
+	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
+								// // desc
+	// 通过计算求出当前页面为第几页
+	Integer pageindex = (startIndex / size + 1);
+	BaseCheckList str = null;
+	str = basecheckservice.getaddCheck(applydpid, pageindex, size, order,
+		orderDir, searchValue);
+	JSONObject getObj = new JSONObject();
+	getObj.put("draw", draw);
+	getObj.put("recordsFiltered", str.getRecordsTotal());
+	getObj.put("recordsTotal", str.getRecordsTotal());
+	getObj.put("data", str.getData());
+	response.setContentType("text/html;charset=UTF-8");
+
+	try {
+	   response.getWriter().print(getObj.toString());
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
 
     // 获取刷选部门
     @RequestMapping("/getApplyDept.do")
     public String getApplyDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	List<BaseCheck> list = null;
-	list = basecheckservice.getDept();
-	for (BaseCheck baseCheck : list) {
-	    System.out.println(baseCheck.getAid() + "申请部门id");
-	    System.out.println(baseCheck.getApplydp() + "申请部门");
-	}
+    	
+	List list =basecheckservice.getDept();		
 	response.setContentType("text/html;charset=UTF-8");
 	JSONArray json = JSONArray.fromObject(list);
 	try {
@@ -164,7 +199,29 @@ public class BaseCheckController {
 	// String reason=request.getParameter("reason");
 	basecheckservice.refuseapply(recordstr, infostr);
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理失败");
+	getObj.put("str", "此操作处理失败");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+    
+ // 拒绝续期申请
+    @RequestMapping("/refuseAddApply.do")
+    public String refuseAddApply(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+	// 包装单选框的id信息
+	String recordstr = request.getParameter("recordstr");	
+	// 获取前台json消息数据
+	String infostr = request.getParameter("infostr");
+	System.out.println("controller->infostr:"+infostr);
+	basecheckservice.refuseDateApply(recordstr, infostr);
+	JSONObject getObj = new JSONObject();
+	getObj.put("str", "成功拒绝申请");
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());
@@ -178,17 +235,38 @@ public class BaseCheckController {
     // 同意申请(并且发送消息给用户)
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-    	System.out.println("lala,申请");
+	    HttpServletResponse response, ModelMap map) {    	
 	// 封装的记录id和申请年限
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "单选");
+	String recordstr = request.getParameter("recordstr");	
+	// 获取前台json消息数据
+	String infostr = request.getParameter("infostr");	
+	// 获取单选id
+
+	String recorddigit = request.getParameter("recorddigit");	
+	basecheckservice.agreeApply(recorddigit, infostr, recordstr);
+	JSONObject getObj = new JSONObject();
+	getObj.put("str", "此申请处理成功");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+    
+    @RequestMapping("/addAgreeApply.do")
+    public String addagreeApply(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+    
+	// 封装的记录id
+	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	// 获取单选id
-	String recorddigit = request.getParameter("recorddigit");
-	System.out.println(recorddigit + "什么字符串");
-	basecheckservice.agreeApply(recorddigit, infostr, recordstr);
+	// 获取单选id		
+	System.out.println("controller->infostr:"+infostr);
+	basecheckservice.addDateApply(infostr, recordstr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");

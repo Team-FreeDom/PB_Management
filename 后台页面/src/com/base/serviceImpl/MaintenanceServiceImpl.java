@@ -31,9 +31,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     	String columnName="";
 		if(order==0||order==2){
 			columnName="id";
-		}else if(order==3){
+		}else if(order==1){
 			columnName="buildtime";
-		}else if(order==4){
+		}else if(order==9){
 			columnName="star";
 		}
 		System.out.println(order+" order:");
@@ -72,7 +72,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
    //���»����Ϣ
 	@Override
-	public void updateBaseInfo(String baseid, int star, int adddate) {
+	public void updateBaseInfo(String baseid, int star, String adddate) {
 		maintenancedao.updateBaseInfo(baseid,star,adddate);
 		
 	}

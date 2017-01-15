@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a> <i
+								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
@@ -123,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">

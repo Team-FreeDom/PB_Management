@@ -63,3 +63,6 @@ table tbody tr td{
 	}
 .dataTables_length{
 	margin-left:5%;}
+#status{
+	width:120px;
+}

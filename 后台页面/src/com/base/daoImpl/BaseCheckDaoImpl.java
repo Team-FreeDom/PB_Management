@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -65,8 +67,64 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 		ch.setType(rs.getString("basetype"));
 		ch.setApplydp(rs.getString("dept"));
 		ch.setMmajor(rs.getString("mname"));
+		ch.setResperson(rs.getString("resperson"));		
+		list.add(ch);
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	BaseCheckList ck = new BaseCheckList();
+	ck.setRecordsTotal(recordsTotal);
+	ck.setData(list);
+	return ck;
+    }
+   
+    //获得续期中的记录
+    @Override
+    public BaseCheckList getaddCheck(int applydpid, int pageindex,int size,
+	     String columnName, String orderDir,String searchValue)  {
+	List<BaseCheck> list = new ArrayList<BaseCheck>();
+	int recordsTotal = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.query_renewalbaseapply(?,?,?,?,?,?,?)}");
+	    sp.setInt(1, applydpid);
+	    sp.setInt(2, size);
+	    sp.setInt(3, pageindex);
+	    sp.setString(4, columnName);
+	    sp.setString(5, orderDir);
+	    sp.setString(6, searchValue);
+	    sp.registerOutParameter(7, java.sql.Types.INTEGER);
+	    sp.execute();
+	    recordsTotal = sp.getInt(7);
+	    rs = sp.getResultSet();
+	    while (rs.next()) {
+		BaseCheck ch = new BaseCheck();
+		ch.setId(rs.getInt("id"));
+		ch.setBid(rs.getString("bids"));
+		ch.setName(rs.getString("basename"));
+		ch.setLandarea(rs.getString("landarea"));
+		ch.setConstructionarea(rs.getString("constructionarea"));
+		ch.setLand_address(rs.getString("land_address"));
+		ch.setUsername(rs.getString("username"));
+		ch.setPhone(rs.getString("phone"));
+		ch.setUndertake(rs.getInt("undertake"));
+		ch.setMaterial_path(rs.getString("material_path"));
+		ch.setUserid(rs.getString("userid"));
+		ch.setType(rs.getString("basetype"));
+		ch.setApplydp(rs.getString("dept"));
+		ch.setMmajor(rs.getString("mname"));
 		ch.setResperson(rs.getString("resperson"));
-		System.out.println("法定责任人:"+rs.getString("resperson"));
+		ch.setBuildtime(rs.getString("buildtime"));	
+		ch.setEndtime(rs.getString("endtime"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -86,8 +144,9 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
      * @return 获取部门集合（部门id和具体部门）
      */
     @Override
-    public List<BaseCheck> getDept() {
-	List<BaseCheck> list = new ArrayList<BaseCheck>();
+    public List<Map<String,String>> getDept(int tag) {
+	List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+	HashMap<String,String> map=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -95,14 +154,15 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.query_baseapplydept()}");
+		    .prepareCall("{CALL baseweb.query_baseapplydept(?)}");
+	    sp.setInt(1, tag);
 	    sp.execute();
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
-		BaseCheck ch = new BaseCheck();
-		ch.setAid(rs.getInt("aid"));
-		ch.setApplydp(rs.getString("dept"));
-		list.add(ch);
+		map=new HashMap<String, String>();
+		map.put("aid",""+rs.getInt("aid"));
+		map.put("dept",rs.getString("dept"));
+		list.add(map);
 	    }
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -127,7 +187,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 		    sessionFactory).getConnection();
 	    System.out.println(recordstr);
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.transstate_baseapply(?)}");
+		    .prepareCall("{CALL baseweb.transstate_baseapply(?)}");
 	    sp.setString(1, recordstr);	   
 	    sp.execute();    
 	} catch (SQLException e) {
@@ -148,12 +208,13 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
+	System.out.println(str+"       "+recordstr);
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.agree_baseapply(?,?)}");
-	    sp.setString(1, str);
+	    sp.setString(1, str);	 
 	    sp.setString(2, recordstr);
 	    sp.execute();    
 	} catch (SQLException e) {
@@ -182,4 +243,47 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
    	System.out.println("insert---end");
 
        }
+
+	@Override
+	public void addDateApply(String recordstr) {
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		System.out.println(recordstr);
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.agree_renewalbaseapply(?)}");		   
+		    sp.setString(1, recordstr);
+		    sp.execute();    
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}	
+		
+	}
+
+	@Override
+	public void refuseDateApply(String recordstr) {
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.renewalfail(?)}");		   
+		    sp.setString(1, recordstr);
+		    sp.execute();    
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}	
+		
+	}
 }
