@@ -263,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                   </div>
                                   <div class="modal-footer table-responsive">
-                                    <center>
+                                    <center id="resourcetr1">
                                     申请材料：<a id="linkaddress" href="#" style="color:#00F; text-decoration:underline; font-size:16px;">点击查看</a>
                                     </center>
                                   </div>
@@ -278,7 +278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                    <thead>
                                         <tr bgcolor="#ECF1F5">
                                             <td>历史记录</td>
-                                            <td colspan="2" ><!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
+                                            <td colspan="3" ><!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
                                                 <ul id="dropdown_show">
                                                 	<li><span class="icon-filter">筛选</span>
                                                     	<ul id="hide_ul" style="display:none;">
@@ -286,19 +286,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                             	<form id="SearchForm">
                                                             	<table class="table"> 
                                                             	<tr>
-                                                                	<td colspan="2">
-                                                                   维修状态 ：
+                                                                	<td colspan="3"  style="text-align:center;">                                                                   维修状态 ：
                                                                     <select id="status">
-                                                                      <option value="-1">显示全部</option>
-                                                                      <option value="1">维修中</option>
+                                                                      <option value="-1">显示全部</option>  
+                                                                       <option value="3">维修完成</option>                                                                
                                                                       <option value="2">申请失败</option>
-                                                                      <option value="3">维修完成</option>
+                                                                     
                                                                     </select>  
                                                                     </td>
                                                                 </tr>
                                                                 
                                                                 <tr>
-                                                                	<td colspan="2">
+                                                                	<td colspan="3" style="text-align:center">
                                                                     	<button type="reset" class="btn btn-primary" >重置</button>
                                     									<button type="button" class="btn btn-primary" id="finish">完成</button>
                                                                     </td>
@@ -310,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </li>
                                                 </ul>
                                              </td>
-                                             <td colspan="8"></td>
+                                             <td colspan="7"></td>
                                         </tr>
                                         <tr style="background:#eeeff4">
                                             <th>项目名称</th>

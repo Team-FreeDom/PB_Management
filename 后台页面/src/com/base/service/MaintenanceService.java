@@ -28,4 +28,6 @@ public interface MaintenanceService {
     public List<ExportBase> getExportBaseInfo(int basetype,int dept,int star);
     
     public void increaseBaseInfo(String str1,String str2);
+    
+   
 }

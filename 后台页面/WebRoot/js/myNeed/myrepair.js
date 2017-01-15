@@ -253,7 +253,13 @@ $(document).on("click", "#scan", function() {
 					$("#address").val(object[index].address);
 					$("#reason").val(object[index].reason);
 					$("#actualmoney").val(object[index].actualmoney);
-					$("#linkaddress").prop("href",object[index].file);					
+					$("#linkaddress").prop("href",object[index].file);	
+					if(object[index].file=="null"||object[index].file==""){			
+						$("#resourcetr1").prop("hidden",true); 
+					}else{		
+						$("#resourcetr1").prop("hidden",false); 
+						$("#linkaddress").prop("href",object[index].file);	
+					}
 					$("#Checkdetail").modal('show');					
 				});
 //撤回操作
@@ -322,7 +328,7 @@ $(document).on("click", "#finish", function() {
 					"iDisplayLength" : 5,  //默认每页显示多少条记录
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
-								"data" : {"status" : status,},																								
+								"data" : {"status" : status},																								
 								"url" : "screen.do",
 								"type" : "POST"
 								},

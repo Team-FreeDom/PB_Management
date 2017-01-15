@@ -218,7 +218,7 @@ public class BaseCheckController {
 	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	
+	System.out.println("controller->infostr:"+infostr);
 	basecheckservice.refuseDateApply(recordstr, infostr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "成功拒绝申请");
@@ -241,6 +241,7 @@ public class BaseCheckController {
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");	
 	// 获取单选id
+
 	String recorddigit = request.getParameter("recorddigit");	
 	basecheckservice.agreeApply(recorddigit, infostr, recordstr);
 	JSONObject getObj = new JSONObject();
@@ -264,6 +265,7 @@ public class BaseCheckController {
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	// 获取单选id		
+	System.out.println("controller->infostr:"+infostr);
 	basecheckservice.addDateApply(infostr, recordstr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此申请处理成功");

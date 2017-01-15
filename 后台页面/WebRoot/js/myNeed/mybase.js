@@ -416,11 +416,10 @@ $(document).ready(function() {
 					
 					
 					if(object[index].material_path=="null"||object[index].material_path==""){			
-						$("#resourcetr").prop("hidden",true); 
+						$("#resourcetrt").prop("hidden",true); 
 					}else{		
-						$("#resourcetr").prop("hidden",false); 
-						$("#resource").prop("href",object[index].material_path);
-						var file=$("#resource").prop("href");
+						$("#resourcetrt").prop("hidden",false); 
+						$("#resourcet").prop("href",object[index].material_path);						
 					}
 				
 					$("#dateMyTable").modal('show');

@@ -328,13 +328,13 @@ $(document).ready(function() {
 			success : function(data) {						         
 				for ( var i=0;i<data[0].length;i++) {
 					$("#deptS").after(
-							"<option value="+data[0][i].aid+">"
+							"<option class='rest' value="+data[0][i].aid+">"
 									+ data[0][i].dept + "</option>");
 					
 				}
 				for ( var i=0;i<data[1].length;i++) {
 					$("#deptS2").after(
-							"<option value="+data[1][i].aid+">"
+							"<option  class='rest' value="+data[1][i].aid+">"
 									+ data[1][i].dept + "</option>");
 					
 				}
@@ -390,6 +390,7 @@ $(document).ready(function() {
 							success : function(msg) {						
 								$("#valideDate").val("10");
 								$("#applyConfirm").modal('hide');
+								getDept();
 								Spage.draw(false);
 								}
 							
@@ -435,6 +436,7 @@ $('#certain').click(function() {
 				success : function(msg) {						
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
+					getDept();
 					Spage.draw(false);
 					}
 				
@@ -468,6 +470,8 @@ $("#ck2").on("click",function() {
 });
 
 $(".icon-filter").on("click", function() {	
+	$("#deptSh").val("");
+	$("#deptSh2").val("");
 	$('.hide_ul').toggle();
 });
 
@@ -578,7 +582,8 @@ $('#certainAdd').click(function() {
 		success : function(msg) {						
 			$("#reasonAdd").val("");
 			$("#addDateConfirm").modal('hide');
-			Spage.draw(false);
+			getDept();
+			Spage2.draw(false);
 			}
 		
 	});
@@ -664,6 +669,7 @@ $(document).on("click", "#confirm2", function() {
 					message : msg.str,
 					size : 'small'
 				});
+				getDept();
 				Spage2.draw(false);
 				Spage1.draw(false);
 			}	
@@ -1061,4 +1067,30 @@ $("#submitS2").click(function() {
 	});
 
 });
+
+function getDept(){
+	
+	$(".rest").remove();
+	//获取申报部门
+	 $.ajax({
+			url : 'getApplyDept.do',
+			type : 'post',
+			dataType : 'json',			
+			success : function(data) {						         
+				for ( var i=0;i<data[0].length;i++) {
+					$("#deptS").after(
+							"<option  class='rest' value="+data[0][i].aid+">"
+									+ data[0][i].dept + "</option>");
+					
+				}
+				for ( var i=0;i<data[1].length;i++) {
+					$("#deptS2").after(
+							"<option  class='rest' value="+data[1][i].aid+">"
+									+ data[1][i].dept + "</option>");
+					
+				}
+				}
+			
+		});	
+}
 

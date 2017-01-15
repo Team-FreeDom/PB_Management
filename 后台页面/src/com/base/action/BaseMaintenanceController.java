@@ -140,6 +140,23 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
+    @RequestMapping("/getExistDept.do")
+    public String getExistDept(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map){
+    	List<ApplyDept> list=maintenanceservice.getExistDept();
+    	
+    	response.setContentType("text/html;charset=UTF-8");
+    	JSONArray json = JSONArray.fromObject(list);
+    	try {
+    	    response.getWriter().print(json.toString());
+
+    	} catch (IOException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;    	
+    }
+    
     @RequestMapping("/getshaiBaseinfo.do")
     public String getshaiBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){

@@ -571,7 +571,7 @@
 											</tr>
 
 											
-											<tr id="resourcetr">
+											<tr id="resourcetr2">
 												<td>申请材料 ：</td>
 												<td colspan="3"><a id="resource2" href="#" style="color:#3071a9;">点击查看</a></td>
 												

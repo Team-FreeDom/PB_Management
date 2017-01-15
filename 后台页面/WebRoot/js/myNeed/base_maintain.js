@@ -224,13 +224,13 @@ $(document)
 							for (var i = 0; i < data[0].length; i++) {
 								$("#daodept")
 										.after(
-												"<option value="
+												"<option class='rest' value="
 														+ data[0][i].aid + ">"
 														+ data[0][i].dept
 														+ "</option>");
 								$("#shaiDepth")
 										.after(
-												"<option value="
+												"<option class='rest' value="
 														+ data[0][i].aid
 														+ " class='dee'>"
 														+ data[0][i].dept
@@ -388,6 +388,7 @@ $(document)
 											cache : false,
 											success : function(data) {
 												$("#deleteOneModal").modal('hide');
+												getExitDept();
 												page.draw(false);
 											},
 											error : function(data) {
@@ -724,4 +725,36 @@ function recovery() {
 	$("#shaiDept").val("-1");
 	$("#starLink").val("-1");
 
+}
+
+function getExitDept(){
+	$(".rest").remove();
+	$.ajax({
+		url : 'getExistDept.do',
+		async : true,
+		type : "POST",
+		dataType : "json",
+		cache : false,
+		success : function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$("#daodept")
+						.after(
+								"<option value="
+										+ data[i].aid + ">"
+										+ data[i].dept
+										+ "</option>");
+				$("#shaiDepth")
+						.after(
+								"<option value="
+										+ data[i].aid
+										+ " class='dee'>"
+										+ data[i].dept
+										+ "</option>");
+
+			}
+			},
+		error : function(data) {
+			alert("请求异常");
+		}
+	});
 }

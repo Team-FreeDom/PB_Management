@@ -131,7 +131,7 @@ $(document).ready(function() {
  			success : function(data) {
  				 for (var i=0;i<data[0].length;i++) { 					
  									$("#AbasenameID").after(
- 				 							"<option value="+data[0][i].id+">"
+ 				 							"<option class='rest' value="+data[0][i].id+">"
  				 									+data[0][i].name+"</option>");
 												
 
@@ -139,7 +139,7 @@ $(document).ready(function() {
  				 for (var i=0;i<data[1].length;i++) { 					
 						
 										$("#SbasenameID").after(
-											"<option value="+data[1][i].name+">"
+											"<option class='rest' value="+data[1][i].name+">"
 													+data[1][i].name+"</option>");
 
 	 }
@@ -365,3 +365,37 @@ $("#import").click(function (){//每次点击导出是清空数据
 	});	
 					 					 					
 });
+
+function getInfo(){
+	$(".rest").remove();
+	 //获取基地列表
+    $.ajax({
+			type : 'POST',
+			dataType : 'json',
+			url : 'basename.do',
+			async : false,
+			cache : false,
+			error : function(request) {
+				bootbox.alert({
+     			  message: "error",
+     			  size: 'small'
+     		  });
+			},
+			success : function(data) {
+				 for (var i=0;i<data[0].length;i++) { 					
+									$("#AbasenameID").after(
+				 							"<option class='rest' value="+data[0][i].id+">"
+				 									+data[0][i].name+"</option>");
+											
+
+				 }
+				 for (var i=0;i<data[1].length;i++) { 					
+					
+									$("#SbasenameID").after(
+										"<option class='rest' value="+data[1][i].name+">"
+												+data[1][i].name+"</option>");
+
+ }
+			}
+		}); 
+}

@@ -568,7 +568,7 @@
 	<div class="clearfix"></div>
 	
 	  <!--增加基地start  -->
-			<div id="add">				
+			<div id="add" >				
 					<div style="border:#3071a9 8px solid;background:#fff;">
 						<div>
 							<button type="button" class="close" id="closebas">

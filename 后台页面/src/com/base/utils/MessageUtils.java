@@ -176,12 +176,12 @@ public class MessageUtils {
 	System.out.println(insertStr);
 	return insertStr;
     }
-    public static String getinfoMs(String infoStr, int tag){
+    public static String getinfoMs(String infoStr, int tag){   	
+    	
 	String insertStr = "";
 	Date d=new Date();
 	SimpleDateFormat d1=new SimpleDateFormat("yyyy-MM-dd");
 	String date=d1.format(d);
-	System.out.println(date+"时间信息");
 	JSONArray object= JSONArray.fromObject(infoStr);
 	String basename="";
 	for (int i = 0; i <object.size(); i++) {
@@ -194,7 +194,9 @@ public class MessageUtils {
 		insertStr += ")";
 	    } else {
 		insertStr += "),";
-	    }
+	    }	    
+	    System.out.println(MessageUtils.getTitle(tag));
+    	System.out.println(MessageUtils.getContent(tag,basename));    	
 	}
 	insertStr = "insert into baseweb.message(title,content,time,isRead,userid) values"
 		+ insertStr;

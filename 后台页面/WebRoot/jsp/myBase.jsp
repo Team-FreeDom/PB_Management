@@ -330,7 +330,7 @@
 
 												<tr hidden id="hideReason">
 													<td>拒绝理由 ：</td>
-													<td colspan="3"><div id="reason"
+													<td colspan="3" style="text-align:left;"><div id="reason"
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
@@ -360,7 +360,7 @@
 									<button type="button" class="close" id="cleark" data-dismiss="modal">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 									</button>
-									<h4 class="modal-title text-center" id="myModalLabel">基地信息修改</h4>
+									<h4 class="modal-title text-center" id="myModalLabel">续期</h4>
 								</div>
 
 								<div class="modal-body table-responsive">
@@ -419,10 +419,10 @@
 															style="border:#ccc 1px solid;height:80px;"></div></td>
 
 												</tr>
-												<tr id="resourcetr">
+												<tr id="resourcetrt">
 													<td>申请材料 ：</td>
 													<td colspan="3" style="text-align:left;"><a
-														id="resource" href="" style="color:#3071a9;">点击查看</a></td>
+														id="resourcet" href="" style="color:#3071a9;">点击查看</a></td>
 												</tr>
 												<tr>
 													<td>创建日期 ：</td>
@@ -463,10 +463,11 @@
 																<tr>
 																	<td>最终状态 <select name="status" id="status"
 																		style="width:150px;margin-top:0px;">
-																			<option value="-1">显示全部</option>
-																			<option value="1">申请成功</option>
-																			<option value="0">申请失败</option>
-																			<option value="2">失效</option>
+																			<option value="-2">显示全部</option>
+																			<option value="6">申请成功</option>
+																			<option value="12">申请失败</option>
+																			<option value="17">过期失效</option>
+																			<option value="11">失效</option>
 																	</select>  
 																	</td>
 																</tr>

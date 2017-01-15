@@ -120,9 +120,9 @@ $(document).on("change", "#deptSelectOne", function() {
 			alert("error");
 		},
 		success : function(data) {
-			var tag=false;
+			var tag;
 			for ( var i=0;i<data.length;i++) {
-				
+				tag=false;
 				$("#majorSuo input").each(function(index){					
 					var id=$(this).val();				
 					if(data[i].mid==id){

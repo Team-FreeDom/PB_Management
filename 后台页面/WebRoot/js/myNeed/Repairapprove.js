@@ -263,16 +263,16 @@ $.ajax({
 	dataType : 'json',			
 	success : function(data) {
 		for ( var i=0;i<data[0].length;i++) {			
-			$("#searchnamed").after("<option value="+data[0][i].username+">"+ data[0][i].username + "</option>");
+			$("#searchnamed").after("<option class='rest' value="+data[0][i].username+">"+ data[0][i].username + "</option>");
 			}
 		for ( var i=0;i<data[1].length;i++) {
-				$("#searchbaseid").after("<option value="+data[1][i].id+">"+ data[1][i].basename + "</option>");				
+				$("#searchbaseid").after("<option class='rest' value="+data[1][i].id+">"+ data[1][i].basename + "</option>");				
 				}		
 		for ( var i=0;i<data[2].length;i++) {			
-			$("#searchnamed2").after("<option value="+data[2][i].username+">"+ data[2][i].username + "</option>");
+			$("#searchnamed2").after("<option class='rest' value="+data[2][i].username+">"+ data[2][i].username + "</option>");
 			}
 		for ( var i=0;i<data[3].length;i++) {			
-			$("#searchbaseid2").after("<option value="+data[3][i].id+">"+ data[3][i].basename + "</option>");
+			$("#searchbaseid2").after("<option class='rest' value="+data[3][i].id+">"+ data[3][i].basename + "</option>");
 			}
 		
 		}
@@ -311,11 +311,11 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#budget").val(obj2[index].money);
 	$("#address").val(obj2[index].address);
 	$("#reason").val(obj2[index].reason);
-	if(obj[index].file=="null"||obj[index].file==""){			
+	if(obj2[index].file=="null"||obj2[index].file==""){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 
-		$("#linkaddress").prop("href",obj[index].file);
+		$("#linkaddress").prop("href",obj2[index].file);
 	}
 	
 	
@@ -391,6 +391,7 @@ $(document).on("click", "#scanDetail2", function() {
 													message : msg.str,
 													size : 'small'
 												});
+												getInfoApply();
 												Approvetable.draw(false);
 												repair.draw(false);
 											}
@@ -470,7 +471,8 @@ $(document).on("click", "#scanDetail2", function() {
 													message : msg.str,
 													size : 'small'
 												});
-												$("#refuseModal").modal('hide');												
+												$("#refuseModal").modal('hide');
+												getInfoApply();
 												Approvetable.draw(false);
 												repair.draw(false);
 											}
@@ -554,6 +556,7 @@ $(document).on("click", "#scanDetail2", function() {
 													size : 'small'
 												});
 												$("#myfinishedModal").modal('hide');
+												getInfoApply();
 												repair.draw(false);
 											}
 										});//end
@@ -742,8 +745,8 @@ $(document).on("click","#finish",function() {
 //筛选功能2
 $(document).on("click","#finish2",function() {
 	var obj2=[];
-	var baseid = $("#searchbase option:selected").val();	
-	var userid = $("#searchname option:selected").val();
+	var baseid = $("#searchbase2 option:selected").val();	
+	var userid = $("#searchname2 option:selected").val();
 	 repair=$('#Repairing').DataTable(
 		{
 		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
@@ -861,3 +864,28 @@ $(document).on("click","#finish2",function() {
  });
  
  } );
+
+function getInfoApply(){
+	$(".rest").remove();
+	//获取基地名称列表
+	$.ajax({
+		url : 'getInfoApply.do',
+		type : 'post',
+		dataType : 'json',			
+		success : function(data) {
+			for ( var i=0;i<data[0].length;i++) {			
+				$("#searchnamed").after("<option class='rest' value="+data[0][i].username+">"+ data[0][i].username + "</option>");
+				}
+			for ( var i=0;i<data[1].length;i++) {
+					$("#searchbaseid").after("<option class='rest' value="+data[1][i].id+">"+ data[1][i].basename + "</option>");				
+					}		
+			for ( var i=0;i<data[2].length;i++) {			
+				$("#searchnamed2").after("<option class='rest' value="+data[2][i].username+">"+ data[2][i].username + "</option>");
+				}
+			for ( var i=0;i<data[3].length;i++) {			
+				$("#searchbaseid2").after("<option class='rest' value="+data[3][i].id+">"+ data[3][i].basename + "</option>");
+				}
+			
+			}
+	});
+}
