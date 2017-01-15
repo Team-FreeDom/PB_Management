@@ -21,7 +21,7 @@ public class Prabaseinfo implements Serializable {
     private String username;//鑱旂郴浜哄鍚�
     private String phone;//鑱旂郴浜烘墜鏈哄彿
     private String material_path;//鐢宠鏉愭枡鍦板潃
-    private int valid_date;
+    private String endtime;
     private String buildtime;
     private String userid;
     private String facemajor;//闈㈠悜涓撲笟
@@ -139,12 +139,7 @@ public class Prabaseinfo implements Serializable {
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
-	public int getValid_date() {
-		return valid_date;
-	}
-	public void setValid_date(int valid_date) {
-		this.valid_date = valid_date;
-	}
+
 	public String getUserid() {
 		return userid;
 	}
@@ -157,5 +152,15 @@ public class Prabaseinfo implements Serializable {
 	public void setFacemajor(String facemajor) {
 		this.facemajor = facemajor;
 	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public void setUndertake(Integer undertake) {
+		this.undertake = undertake;
+	}
+	
     
 }

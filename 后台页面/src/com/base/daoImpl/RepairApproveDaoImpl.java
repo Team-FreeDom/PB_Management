@@ -69,7 +69,7 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 			sp.setInt(6, status);
 			sp.setString(7, userid);
 			sp.setString(8, baseid);			
-			System.out.println(pageIndex+" "+size+"  "+orderColumn+"  "+orderDir+"  "+searchValue+"  "+status);
+			System.out.println(pageIndex+" "+size+"  "+orderColumn+"  "+orderDir+"  "+searchValue+"  "+status+"  "+userid+"  "+baseid);
 			sp.registerOutParameter(9, java.sql.Types.INTEGER);			
 			sp.execute();
 			System.out.println("haha,weixiu2");
@@ -117,12 +117,12 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainname(?)}");  //·¢ËÍ´æ´¢¹ý³Ì
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainname(?)}");  //ï¿½ï¿½ï¿½Í´æ´¢ï¿½ï¿½ï¿½
 			sp.setInt(1, status);			
-			sp.execute();   //Ö´ÐÐ´æ´¢¹ý³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½
+			rs=sp.getResultSet();  //ï¿½ï¿½Ã½ï¿½ï¿½
 			
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½list
 			{
 				map=new HashMap<String, String>();
 				map.put("username", rs.getString("username"));
@@ -150,12 +150,12 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainbasename(?)}");  //·¢ËÍ´æ´¢¹ý³Ì
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainbasename(?)}");  //ï¿½ï¿½ï¿½Í´æ´¢ï¿½ï¿½ï¿½
 			sp.setInt(1, status);			
-			sp.execute();   //Ö´ÐÐ´æ´¢¹ý³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½
+			rs=sp.getResultSet();  //ï¿½ï¿½Ã½ï¿½ï¿½
 			
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½list
 			{
 				map=new HashMap<String, String>();
 				map.put("id", rs.getString("id"));
@@ -172,7 +172,7 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 		return list;
 	}
 	
-	//¸Ä±ä¼ÇÂ¼µÄ×´Ì¬
+	//ï¿½Ä±ï¿½ï¿½Â¼ï¿½ï¿½×´Ì¬
 	@Override
 	public void changeStatus(String recordstr,int status) {
 						
@@ -200,13 +200,13 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 
 	}
 
-	//½«¼ÇÂ¼×´Ì¬¸ÄÎªÉêÇëÊ§°Ü£¬²¢ÌîÈë¾Ü¾øÔ­Òò
+	//ï¿½ï¿½ï¿½ï¿½Â¼×´Ì¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½Ô­ï¿½ï¿½
 	@Override
 	public void refuseApply(String refusestr) {
 		
 		Session session = sessionFactory.openSession();
 		try {
-			// hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
+			// hibernateï¿½ï¿½ï¿½Ã´æ´¢ï¿½ï¿½ï¿½(ï¿½Þ·ï¿½ï¿½Ø²ï¿½ï¿½ï¿½)
 			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`refuse_maintain`(?)}");
 			sqlQuery.setString(0,refusestr);				
 			sqlQuery.executeUpdate();
@@ -216,13 +216,13 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 
 	}
 
-	//Î¬ÐÞÍê³É
+	//Î¬ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void finish(String storestr) {
 		
 		Session session = sessionFactory.openSession();
 		try {
-			// hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
+			// hibernateï¿½ï¿½ï¿½Ã´æ´¢ï¿½ï¿½ï¿½(ï¿½Þ·ï¿½ï¿½Ø²ï¿½ï¿½ï¿½)
 			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`maintainsuccess`(?)}");
 			sqlQuery.setString(0,storestr);				
 			sqlQuery.executeUpdate();

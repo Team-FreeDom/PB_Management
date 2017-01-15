@@ -7,32 +7,44 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.base.dao.BaseCheckDao;
 import com.base.dao.MaintainApplyDao;
 import com.base.po.MaintainApply;
 import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.Prabaseinfo;
 import com.base.service.MaintainApplyService;
+import com.base.utils.MessageUtils;
 
 @Service("MaintainApplyServiceImpl")
 public class MaintainApplyServiceImpl implements MaintainApplyService
 {
 	@Autowired
 	private MaintainApplyDao maintainapplydao;
-	
+	 @Autowired
+	 private BaseCheckDao basecheckdao;
+
 	@Override
 	//查询所有的基地列表
-	public List<Map<String,String>> find_basename()
+	public List find_basename()
 	{
-		List<Map<String,String>> list=maintainapplydao.find_basename();
+		List<Map<String,String>> list1=maintainapplydao.find_basename();
+		List<Map<String,String>> list2=maintainapplydao.find_basenameFinish();
+		List list=new ArrayList();
+		list.add(list1);
+		list.add(list2);
 		return list;
 	}
 	
 	@Override
 	//插入项目维修申请
-	public void insert_maintain(String str)
+	public void insert_maintain(String str,String infostr)
 	{
+		// 获得插入的消息语句
+		String insertStr = MessageUtils.getinfoMs(infostr, 19);
 		maintainapplydao.insert_maintain(str);
+		// 向消息表中插入信息
+		basecheckdao.insertMessage(insertStr);
 	}
 	
 	@Override

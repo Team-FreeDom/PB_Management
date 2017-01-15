@@ -65,11 +65,12 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 				ch.setLand_address(rs.getString("land_address"));
 				ch.setUsername(rs.getString("username"));
 				ch.setPhone(rs.getString("phone"));
-				ch.setMaterial_path(rs.getString("material_path"));
-				ch.setValid_date(rs.getInt("valid_date"));
+				ch.setMaterial_path(rs.getString("material_path"));			
 				ch.setFacemajor(rs.getString("mname"));// 闂傚牄鍨归幃婊勭▔閹捐尙鐟�
 				ch.setStar(rs.getInt("star"));// 闁哄嫮鍠撴锟�
 				ch.setResperson(rs.getString("resperson"));
+				ch.setBuildtime(rs.getString("buildtime"));
+				ch.setEndtime(rs.getString("endtime"));
 				list.add(ch);
 			}
 		} catch (SQLException e) {
@@ -169,11 +170,12 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 				ch.setLand_address(rs.getString("land_address"));
 				ch.setUsername(rs.getString("username"));
 				ch.setPhone(rs.getString("phone"));
-				ch.setMaterial_path(rs.getString("material_path"));
-				ch.setValid_date(rs.getInt("valid_date"));
+				ch.setMaterial_path(rs.getString("material_path"));				
 				ch.setFacemajor(rs.getString("mname"));// 闂傚牄鍨归幃婊勭▔閹捐尙鐟�
 				ch.setStar(rs.getInt("star"));// 闁哄嫮鍠撴锟�
 				ch.setResperson(rs.getString("resperson"));
+				ch.setBuildtime(rs.getString("buildtime"));
+				ch.setEndtime(rs.getString("endtime"));
 				list.add(ch);
 			}
 		} catch (SQLException e) {
@@ -188,25 +190,25 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	}
 
 	@Override
-	public void updateBaseInfo(String baseid, int star, int adddate) {
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		Prabaseinfo mt = (Prabaseinfo) session.get(Prabaseinfo.class, baseid);
-		mt.setStar(star);
-		mt.setValid_date(mt.getValid_date() + adddate);
-
+	public void updateBaseInfo(String baseid, int star, String adddate) {
+		Connection conn = null;
+		CallableStatement sp = null;
 		try {
-			transaction = session.beginTransaction();
-			session.update(mt);
-			transaction.commit();
-		} catch (Exception ex) {
-			if (transaction != null) {
-				transaction.rollback();// 鍥炴粴浜嬪姟锛屾挙娑堟煡璇㈣鍙�
-			}
-			System.out.println(ex);
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{CALL baseweb.base_management(?,?,?)}");
+			sp.setString(1, baseid);
+			sp.setString(2, adddate);
+			sp.setInt(3, star);
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
-			session.close();// 鍏抽棴浼氳瘽鐘舵�锛屾竻绌鸿祫婧�
+			SqlConnectionUtils.free(conn, sp, null);
 		}
+		
 
 	}
 

@@ -106,7 +106,7 @@ public class RepairApproveController {
 		    String searchValue = request.getParameter("search[value]");
 		   
 		    String baseid = request.getParameter("baseid");
-		    String username = request.getParameter("username");
+		    String username = request.getParameter("userid");
 		    
 			// ��õ�ǰҳ��
 			Integer pageindex = (startIndex / size + 1);
@@ -141,7 +141,7 @@ public class RepairApproveController {
 		    String searchValue = request.getParameter("search[value]");
 		   
 		    String baseid = request.getParameter("baseid");
-		    String username = request.getParameter("username");
+		    String username = request.getParameter("userid");
 		    
 			// ��õ�ǰҳ��
 			Integer pageindex = (startIndex / size + 1);

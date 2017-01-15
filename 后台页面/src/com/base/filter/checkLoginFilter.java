@@ -33,7 +33,7 @@ public class checkLoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String url = request.getServletPath();
-		// ÉèÖÃ²»ĞèÒª¹ıÂËµÄÒ³Ãæ
+		// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ëµï¿½Ò³ï¿½ï¿½
 		if (url.endsWith("login.do")) {
 			
 			arg2.doFilter(arg0, arg1);
@@ -55,14 +55,14 @@ public class checkLoginFilter implements Filter {
       
 		boolean flag = CookieUtils.checkLogin(request, response,cookies);
 		
-		if (!flag) { // Èç¹ûÃ»ÓĞµÇÂ¼»òÕßµÇÂ¼ºó³¬¹ıÊ§Ğ§Ê±¼ä¶¼Ìø×ªµ½µÇÂ¼Ò³Ãæ
+		if (!flag) { // ï¿½ï¿½ï¿½Ã»ï¿½Ğµï¿½Â¼ï¿½ï¿½ï¿½ßµï¿½Â¼ï¿½ó³¬¹ï¿½Ê§Ğ§Ê±ï¿½ä¶¼ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½
 			
 			response.sendRedirect("/BaseWeb/login_soft.html");
 			return;
 		}
 		
-		//·ÃÎÊÈ¨ÏŞ¿ØÖÆ
-		//»ñÈ¡admin.propertiesÖĞµÄÈ¨ÏŞÖµ£¬È»ºóÓÃ»§È¨ÏŞ×ö
+		//ï¿½ï¿½ï¿½ï¿½È¨ï¿½Ş¿ï¿½ï¿½ï¿½
+		//ï¿½ï¿½È¡admin.propertiesï¿½Ğµï¿½È¨ï¿½ï¿½Öµï¿½ï¿½È»ï¿½ï¿½ï¿½Ã»ï¿½È¨ï¿½ï¿½ï¿½ï¿½
 	    Properties prop = new Properties();
 	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
@@ -74,19 +74,19 @@ public class checkLoginFilter implements Filter {
 			{
 	    		if(co.getName().equalsIgnoreCase("adminValue"))
 				{
-	    		  //´óÊıÖµ×Ö·û´®²»ÄÜ×ª»¯ÎªInteger
+	    		  //ï¿½ï¿½ï¿½ï¿½Öµï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªInteger
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
 				  //System.out.println(a);
 				  
-				  if((a & adminValue)==0){ //Èç¹ûÃ»ÓĞ·ÃÎÊÈ¨ÏŞÔò·µ»Ø
+				  if((a & adminValue)==0){ //ï¿½ï¿½ï¿½Ã»ï¿½Ğ·ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ò·µ»ï¿½
 					  response.setContentType("text/html;charset=UTF-8");
 					  PrintWriter out=response.getWriter();
 					  out.println("<HTML><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <BODY>");
 					  out.println("<script language='javascript'>");
-					  out.println("alert('ÄãÃ»ÓĞ·ÃÎÊÈ¨ÏŞ£¡');");//¿ÉÒÔ²»Ğ´
-					  out.println("window.history.back();");//·µ»Ø
+					  out.println("alert('æ‚¨æ²¡æœ‰è®¿é—®çš„æƒé™');");//ï¿½ï¿½ï¿½Ô²ï¿½Ğ´
+					  out.println("window.history.back();");//ï¿½ï¿½ï¿½ï¿½
 					  out.println("</script>");
 					  out.println("</body> </html>"); 
 					  return;

@@ -138,11 +138,11 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 						"render":function(data,type, row){
 							obj1.push(row);
-							if(data==2){
+							if(data==2||data==18){
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>'+
                                     '<button type="button" class="btn btn-danger btn-xs" id="cancel" value="'+(obj1.length-1)+'">撤回</button>';
 							}else if(data==17){
-								return data='<button type="button" class="btn btn-success btn-xs" id="change" value="'+(obj1.length-1)+'$1">修改</button>';
+								return data='<button type="button" class="btn btn-success btn-xs" id="change" value="'+(obj1.length-1)+'$1">续期</button>';
 							}else{
 								return data='<button type="button" class="btn btn-warning btn-xs" id="scan" value="'+(obj1.length-1)+'$1">查看</button>';
 							}							
@@ -366,9 +366,9 @@ $(document).ready(function() {
 					}
 					
 					
-					if(statusid==6){
-						$("#setdate").val(object[index].applytime);
-						$("#validdate").val(object[index].valid_date);
+					if(statusid==6||statusid==18){
+						$("#setdate").val(object[index].buildtime);
+						$("#validdate").val(object[index].endtime);
 						$("#hidecol").prop("hidden",false);
 					}else if(statusid==12){
 						$("#reason").html(object[index].reason);
@@ -403,7 +403,10 @@ $(document).ready(function() {
 					$("#usernamet").val(object[index].username);
 					$("#userphonet").val(object[index].phone);
 					$("#major_orientedt").html(object[index].mmajor);
-					$("#linkAddresst").html(object[index].land_address);
+					$("#linkAddresst").html(object[index].land_address);				
+					$("#starttime").val(object[index].buildtime);
+					$("#adddate").val(object[index].endtime);
+					$("#tag").val(object[index].id);
 					var resperson=object[index].resperson;
 					if(resperson!=null&&resperson!=""){
 						$("#dutyPersont").val(resperson);
@@ -413,10 +416,10 @@ $(document).ready(function() {
 					
 					
 					if(object[index].material_path=="null"||object[index].material_path==""){			
-						$("#resourcetr").prop("hidden",true); 
+						$("#resourcetrt").prop("hidden",true); 
 					}else{		
-						$("#resourcetr").prop("hidden",false); 
-						$("#resource").prop("href",object[index].material_path);
+						$("#resourcetrt").prop("hidden",false); 
+						$("#resourcet").prop("href",object[index].material_path);						
 					}
 				
 					$("#dateMyTable").modal('show');
@@ -440,17 +443,8 @@ $(document).ready(function() {
 				});
 				
 				$(document).on("click", "#saveit", function() {
-					var baseid=$("#baseidt").val();					
-					baseid=baseid.substring(1);
-					var adddate=$("#adddate").val();
-					var matchstr=/^[0-9]*$/;
-					if(!matchstr.test(adddate)){
-						bootbox.alert({
-							message : "填写的续期必须为数字",
-							size : 'small'
-						});
-						return;
-					}
+					var id=$("#tag").val();					
+					var adddate=$("#adddate").val();				
 					if(adddate==""){
 						bootbox.alert({
 							message : "请填写续期",
@@ -460,7 +454,7 @@ $(document).ready(function() {
 					}
 					$.ajax({
 						data : {
-							"baseid" : baseid,							
+							"id" : id,							
 							"adddate" : adddate							
 						},
 						url : 'updateMyBaseDate.do',

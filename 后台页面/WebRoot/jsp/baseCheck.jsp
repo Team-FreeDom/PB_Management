@@ -337,8 +337,8 @@
                                                         <td colspan="2"><label><input type="checkbox"
                                                                 name="0" id="ck2" />全选</label></td>
                                                         <td colspan="8">
-                                                            <button type="button" class="btn btn-primary" id="confirm2">同意申请</button>
-                                                            <button type="button" class="btn btn-danger"  id="refuse2">拒绝申请</button>
+                                                            <button type="button" class="btn btn-primary" id="confirm2">同意续期</button>
+                                                            <button type="button" class="btn btn-danger"  id="refuse2">拒绝续期</button>
                                                         </td>
                                                     </tr>
                                                 </thead>
@@ -356,7 +356,7 @@
 			<!-- 同意申请 -->
 			<div class="modal fade" id="applyConfirm" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" style="width:600px;">
+				<div class="modal-dialog modal-sm" style="width:850px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
 							<button type="button" class="close" id="close1" data-dismiss="modal">
@@ -405,6 +405,34 @@
 				</div>
 			</div>
 
+
+	<!-- Modal -->
+			<div class="modal fade" id="addDateConfirm" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm" style="width:600px;">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<button type="button" class="close" id="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">续期申请拒绝</h5>
+							
+						</div>
+						<div class="modal-body table-responsive">
+						<table class="table" id="increase3">
+						</table>
+						  
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="close"
+								data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="certainAdd">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 						<div class="modal fade" id="scan" tabindex="-1" role="dialog"
 							aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
@@ -414,7 +442,7 @@
 										<button type="button" class="close" data-dismiss="modal">
 											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 										</button>
-										<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
+										<h4 class="modal-title text-center" id="myModalLabel">基地申请详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
 										<table class="table">
@@ -489,7 +517,7 @@
 										<button type="button" class="close" data-dismiss="modal">
 											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 										</button>
-										<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
+										<h4 class="modal-title text-center" id="myModalLabel">续期申请详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
 										<table class="table">
@@ -521,9 +549,9 @@
 											</tr>
 											<tr>
 												<td>创建日期 ：</td>
-												<td><input type="text" id="Createdate" disabled></td>
-												<td>有效周期 ：</td>
-												<td><input type="text" id="validdate" disabled></td>
+												<td><input type="text" id="Createdate2" disabled></td>
+												<td>截止日期 ：</td>
+												<td><input type="text" id="validdate2" disabled></td>
 											</tr>
 											<tr>
 												<td>法定责任人 ：</td>
@@ -543,7 +571,7 @@
 											</tr>
 
 											
-											<tr id="resourcetr">
+											<tr id="resourcetr2">
 												<td>申请材料 ：</td>
 												<td colspan="3"><a id="resource2" href="#" style="color:#3071a9;">点击查看</a></td>
 												
@@ -584,5 +612,6 @@
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/basecheck.js"></script>
     <script src="../js/kg.js"></script>	
+    
 </body>
 </html>

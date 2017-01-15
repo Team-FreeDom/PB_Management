@@ -1,4 +1,6 @@
 // JavaScript Document
+  var flag1=true;
+  var flag2=true;
 $(function () {
 		/*********************/
 		$.ajax({
@@ -12,11 +14,11 @@ $(function () {
 						},
 					success : function(data) {
 							var i = 0;
-							for ( var item in data) {
+							for ( var item in data[0]) {
 								$("#baselistid").after(
-									"<option value="+data[i].id+">"
-											+ data[i].name + "</option>");
-										i++;
+									"<option value="+data[0][i].id+">"
+											+ data[0][i].name + "</option>");
+								i++;
 									}
 					
 								}
@@ -83,25 +85,40 @@ $(function () {
 					});	
 				return 0;
 				}
+			  if (!flag1) {
+			        bootbox.alert({
+			            message: "上传资料仅限于rar,zip压缩包格式",
+			            size: 'small'
+			        });			    
+			        return;
+			    }
+			    if (!flag2) {
+			        bootbox.alert({
+			            message: "上传资料大小不能大于10M",
+			            size: 'small'
+			        });			      
+			        return;
+			    }   
 			/*************/
 			$("#applyform").submit();
 			
 			/*************/
 			
 		})
+		
 		$('#applyfile').change(function() {    
     var filepath = $(this).val();
     var file_size = this.files[0].size;
     var size = file_size / 1024;
     var extStart = filepath.lastIndexOf(".");
     var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-    if (ext != ".RAR" && ext != ".Z") {
+    if (ext != ".RAR" && ext != ".ZIP") {
         bootbox.alert({
-            message: "上传资料仅限于rar压缩包格式ʽ",
+            message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
         flag1=false;
-        return false;
+        return;
     }
     if (size > 1024 * 10) {
         bootbox.alert({
@@ -109,11 +126,10 @@ $(function () {
             size: 'small'
         });
         flag2=false;
-        return false;
+        return;
     }   
     flag1=true;
     flag2=true;
-    return false;
 });
 	/*########*/	 
  });

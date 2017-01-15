@@ -1,6 +1,8 @@
 package com.base.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +39,11 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
-	} else if (order == 1) {
-	    columnName = "basename";
 	} else if (order == 2) {
-	    columnName = "basetype";
+	    columnName = "basename";
 	} else if (order == 3) {
+	    columnName = "basetype";
+	} else if (order == 4) {
 	    columnName = "dept";
 	}
 	BaseCheckList list = basecheckdao.getBaseCheck(applydpid, pageindex,
@@ -54,8 +56,13 @@ public class BaseCheckServiceImpl implements BaseCheckService {
      * @return 获取部门集合（部门id和具体部门）
      */
     @Override
-    public List<BaseCheck> getDept() {
-	List<BaseCheck> list = basecheckdao.getDept();
+    public List<Map<String,String>> getDept() {
+    	
+    List<Map<String,String>> list1 = basecheckdao.getDept(1);
+    List<Map<String,String>> list2 = basecheckdao.getDept(2);
+    List list=new ArrayList();
+    list.add(list1);
+    list.add(list2);
 	return list;
     }
     /**
@@ -91,5 +98,46 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	basecheckdao.insertMessage(insertStr);
 
     }
+
+    //获得续期的记录
+	@Override
+	public BaseCheckList getaddCheck(int applydpid, int pageindex, int size,
+			int order, String orderDir, String searchValue) {
+		String columnName = "";
+		if (order == 0) {
+		    columnName = "id";
+		} else if (order == 2) {
+		    columnName = "basename";
+		} else if (order == 3) {
+		    columnName = "basetype";
+		} else if (order == 4) {
+		    columnName = "dept";
+		}
+		BaseCheckList list = basecheckdao.getaddCheck(applydpid, pageindex,
+			size, columnName, orderDir,searchValue);
+		return list;
+	}
+
+	//续期同意申请
+	@Override
+	public void addDateApply(String infostr, String recordstr) {
+		// 获得插入的消息语句
+		String insertStr = MessageUtils.getinfoMs(infostr, 16);
+		//将申请的状态变为申请成功，并插入prabaseinfo表
+		basecheckdao.addDateApply(recordstr);
+		// 向消息表中插入信息
+		basecheckdao.insertMessage(insertStr);
+	}
+	
+	//续期拒绝申请
+		@Override
+		public void refuseDateApply(String recordstr, String infostr) {
+			// 获得插入的消息语句
+			String insertStr = MessageUtils.getinfoMs(infostr, 17);
+			//将申请的状态变为过期失效
+			basecheckdao.refuseapply(recordstr);
+			// 向消息表中插入信息
+			basecheckdao.insertMessage(insertStr);
+		}
 
 }

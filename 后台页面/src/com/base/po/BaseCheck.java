@@ -18,13 +18,33 @@ public class BaseCheck {
     private String userid;//用户id
     private String mmajor;//面向专业
     private String resperson;//法定责任人
-   
+    private String buildtime;//创建时间
+    private String endtime;//截止时间
+    private String applytime;//申报时间
     
     
     
-   
   
-    public String getResperson() {
+    public String getApplytime() {
+		return applytime;
+	}
+	public void setApplytime(String applytime) {
+		this.applytime = applytime;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public String getBuildtime() {
+		return buildtime;
+	}
+	public void setBuildtime(String buildtime) {
+		this.buildtime = buildtime;
+	}
+
+	public String getResperson() {
 		return resperson;
 	}
 	public void setResperson(String resperson) {

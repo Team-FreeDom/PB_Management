@@ -139,7 +139,7 @@
 												class="text"> 土地租赁维护</span></a></li>
 										<li><a href="baseMaintain.jsp"><span class="text">
 													实习基地维护</span></a></li>
-										<li><a href="repairManage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
 										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
@@ -413,14 +413,7 @@
 												<td>法定责任人 ：</td>
 												<td><input type="text" id="personDuty" disabled></td>
 												
-											</tr>
-											<tr id="hidecol">
-                                                <td>创建时间：</td>
-												<td><input type="text" id="setdated" disabled></td>
-												<td>有效周期 ：</td>
-												<td><input type="text" id="validdated" disabled></td>
-												
-											</tr>
+											</tr>										
 											<tr id="resourcetr">
 												<td>申请材料 ：</td>
 												<td colspan="3" style="text-align:left;"><a id="resourced" href="#"
@@ -444,8 +437,12 @@
 												<td colspan="3"><div id="starget"></div></td>
 											</tr>
 											<tr id="hidecol">
-												<td>续期：</td>
-												<td colspan="3"><input type="text" id="adddate">个月</td>
+											
+                                                <td>创建时间：</td>
+												<td><input type="text" id="setdated" disabled></td>
+												<td>截止日期 ：</td>
+												<td><input type="text" id="adddate" ></td>
+											
 											</tr>
 
 										</table>
@@ -571,7 +568,7 @@
 	<div class="clearfix"></div>
 	
 	  <!--增加基地start  -->
-			<div id="add">				
+			<div id="add" >				
 					<div style="border:#3071a9 8px solid;background:#fff;">
 						<div>
 							<button type="button" class="close" id="closebas">
@@ -704,10 +701,17 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">有效周期</label>
+											<label class="col-md-3 control-label">创建日期</label>
 											<div class="col-md-6">
-												<input type="text" id="validda" name="validda" placeholder=""
-													name="validda">个月
+												<input type="text" id="validda" name="start_time" class="start_time" placeholder=""
+													name="validda">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label">截止日期</label>
+											<div class="col-md-6">
+												<input type="text" id="validda" name="end_time" class="end_time" placeholder=""
+													name="validda">
 											</div>
 										</div>
 

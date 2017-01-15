@@ -74,8 +74,8 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		ch.setApplydp(rs.getString("dept"));
 		ch.setMmajor(rs.getString("mname"));		
 		ch.setReason(rs.getString("reason"));
-		ch.setValid_date(rs.getInt("valid"));	
-		ch.setApplytime(rs.getString("buildtime"));//即将加入申请时间
+		ch.setEndtime(rs.getString("endtime"));	
+		ch.setBuildtime(rs.getString("buildtime"));//创建
 		ch.setResperson(rs.getString("resperson"));
 		list.add(ch);
 	    }
@@ -112,13 +112,13 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
        }
     
 	@Override
-	public void updateDate(String baseid, int adddate) {
+	public void updateDate(int id, String adddate) {
 		Session session = sessionFactory.openSession();
 
 	   	try {
-	   	    SQLQuery query = session.createSQLQuery("{CALL baseweb.renewal_prabaseinfo(?,?)}");
-             query.setString(0,baseid);
-             query.setInteger(1, adddate); 
+	   	    SQLQuery query = session.createSQLQuery("{CALL baseweb.user_renewalbase(?,?)}");
+             query.setInteger(0,id);
+             query.setString(1, adddate); 
 	   	     query.executeUpdate();
 	   	} finally {
 	   	    session.close();
