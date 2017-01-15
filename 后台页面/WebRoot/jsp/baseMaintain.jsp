@@ -568,8 +568,8 @@
 	<div class="clearfix"></div>
 	
 	  <!--增加基地start  -->
-			<div id="add" >				
-					<div style="border:#3071a9 8px solid;background:#fff;">
+			<div id="add">				
+					<div style="border:#3071a9 8px solid;background:#fff;overflow-x:hidden;">
 						<div>
 							<button type="button" class="close" id="closebas">
 								
@@ -578,7 +578,7 @@
 							<h4 class="text-center" id="myModalLabel">增加基地</h4>
 						</div>
 						<div class="table-responsive">
-							<div class="row">
+							<div class="row" style="margin-right:0px;">
 								<div class="col-md-12">
 									<form action="increaseBaseInfo.do" method="post" id="myForm"
 										enctype="multipart/form-data" class="form-horizontal"
