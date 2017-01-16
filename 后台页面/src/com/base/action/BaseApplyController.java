@@ -142,7 +142,7 @@ public class BaseApplyController {
 		    sb.append("(");
 		    sb.append(Baseid);
 		    sb.append(",");
-		    sb.append(majorid);
+		    sb.append("-1");
 		    sb.append("),");
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
