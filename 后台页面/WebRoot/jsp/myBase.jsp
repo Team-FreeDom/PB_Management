@@ -463,7 +463,7 @@
 																<tr>
 																	<td>最终状态 <select name="status" id="status"
 																		style="width:150px;margin-top:0px;">
-																			<option value="-2">显示全部</option>
+																			<option value="-2" selected>显示全部</option>
 																			<option value="6">申请成功</option>
 																			<option value="12">申请失败</option>
 																			<option value="17">过期失效</option>

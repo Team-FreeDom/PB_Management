@@ -33,6 +33,7 @@ encoding//src/com/base/action/RepairApproveController.java=UTF-8
 encoding//src/com/base/action/UserController.java=UTF-8
 encoding//src/com/base/daoImpl/CheckViewDaoImpl.java=UTF-8
 encoding//src/com/base/daoImpl/MaintenanceDaoImpl.java=UTF-8
+encoding//src/com/base/service/LandRentService.java=UTF-8
 encoding//src/com/base/service/checkService.java=UTF-8
 encoding//src/com/base/serviceImpl/BaseCheckServiceImpl.java=UTF-8
 encoding//src/com/base/serviceImpl/CheckServiceImpl.java=UTF-8
