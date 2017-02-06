@@ -78,14 +78,14 @@ public class baseApplyDaoImpl implements baseApplyDao {
      * @return
      */
     @Override
-    public List<Major> getMajor(String aid) {
+    public List<Major> getMajor(int aid) {
 	Session session=sessionFactory.openSession();		
 	String hql="from Major where aid=?";
 	List<Major> list=null;
 	
     try {
     	 Query query=session.createQuery(hql);
-    	 query.setString(0, aid);
+    	 query.setInteger(0, aid);
     	 list=query.list();
 		
 	} catch (Exception e) {
