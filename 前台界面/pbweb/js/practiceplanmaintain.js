@@ -2,7 +2,7 @@
 var obj=[];
 $(document).ready(function() {
 	
-	 var table=$("#practiceapplytable").dataTable({
+	 var table=$("#practiceplanmaintain").dataTable({
 		"processing" : true,
 		"serverSide" : true,
 		"bSort": false,
@@ -122,6 +122,16 @@ $(document).ready(function() {
 			}
 			
 		],
+		"columnDefs" : [ {
+			"orderable" : false,
+			"targets" : [ 0 ],
+			"data" : "id",
+			"render" : function(data, type, row) {
+				return '<input type="checkbox" name="allcheckbox" value="'
+					+data
+					+'">';
+			}
+		} ],
         "language": {
 			"lengthMenu": "每页 _MENU_ 条记录",
             "zeroRecords": "没有找到记录",
@@ -136,10 +146,26 @@ $(document).ready(function() {
 				 "sLast": " 尾页 "
 				}
          }
-	});	
+	});
+	
+//全选
+$("#ck1").on("click", function () {
+	// $("#Applychart").hide();
+	if ($(this).prop("checked") === true) {
+		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", true);
+	} else {
+		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", false);
+	}
+});
 //显示实习申请表
-$("#practiceapplytable tbody").on("click","tr",function(){
-	$("#Applychart").show();
+$("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
+	var index= table.row().data()[0].id;
+	$("#division").val(obj[index].division);
+	$("#classname").val(obj[index].className);
+	$("#major").val(obj[index].major);
+	$("#class").val(obj[index].className);
+	$("#grade").val();
+	//$("#Applychart").show();
 });
 //隐藏实习申请表
 $(document).on("click","#closemodal",function(){
@@ -148,11 +174,8 @@ $(document).on("click","#closemodal",function(){
 	
 });
 
-$(document).on("click","#aaaa",function(){
+
 	
-	$("#Selectname").modal('show');
-	
-});	
 	
 } );
 
