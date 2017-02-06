@@ -114,7 +114,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 			rs = sp.getResultSet();
 			while (rs.next()) {
 				ad = new ApplyDept();
-				ad.setAid(rs.getString("aid"));
+				ad.setAid(rs.getInt("aid"));
 				ad.setDept(rs.getString("dept"));
 				list.add(ad);
 			}

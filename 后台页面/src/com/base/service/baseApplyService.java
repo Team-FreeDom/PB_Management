@@ -23,7 +23,7 @@ public interface baseApplyService {
      * @param aid 学院id
      * @return
      */
-    public List<Major> getMajor(String aid);
+    public List<Major> getMajor(int aid);
     /**
      * 插入用户基地申请信息
      * @param str1 基地名称id 申报部门id 基地类型id等的string字符串

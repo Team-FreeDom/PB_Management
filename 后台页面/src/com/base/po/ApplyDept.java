@@ -11,14 +11,14 @@ public class ApplyDept {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String aid;//����id
+	private int aid;//����id
 	private String dept;//�������
 	private int type;//��ʶλ��������ѧԺ������������
 	
-	public String getAid() {
+	public int getAid() {
 		return aid;
 	}
-	public void setAid(String aid) {
+	public void setAid(int aid) {
 		this.aid = aid;
 	}
 	public String getDept() {
