@@ -47,7 +47,7 @@ public class baseServiceImpl implements baseApplyService {
      *            学院id
      * @return
      */
-    public List<Major> getMajor(int aid) {
+    public List<Major> getMajor(String aid) {
 	List<Major> list = baseapplydao.getMajor(aid);
 	return list;
     }

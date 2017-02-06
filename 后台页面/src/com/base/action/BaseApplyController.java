@@ -220,7 +220,7 @@ public class BaseApplyController {
     public String getMajor(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 根据学院id获取专业
-	int aid = Integer.parseInt(request.getParameter("aid"));
+	String aid = request.getParameter("aid");
 	List<Major> list = baseapplyservice.getMajor(aid);
 	try {
 	    JSONArray json = JSONArray.fromObject(list);

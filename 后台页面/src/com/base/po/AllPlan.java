@@ -14,7 +14,7 @@ public class AllPlan {
 	private int credit;//周学时
 	private String courseNature;//课程性质
 	private String courseCategory;//课程类别
-	private int mid;//专业编号
+	private String mid;//专业编号
 	private String tid;//教师编号
 	private String tname;//教师名称
 	private String semester;//学期
@@ -87,10 +87,10 @@ public class AllPlan {
 	public void setCourseCategory(String courseCategory) {
 		this.courseCategory = courseCategory;
 	}
-	public int getMid() {
+	public String getMid() {
 		return mid;
 	}
-	public void setMid(int mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 	public String getTid() {
