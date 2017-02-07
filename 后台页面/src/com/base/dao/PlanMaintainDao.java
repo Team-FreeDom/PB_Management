@@ -13,7 +13,7 @@ public interface PlanMaintainDao {
 	 2.返回值： PlanList,需要显示给用户的数据对象
 	 3.函数功能：获取当年所有的实习计划
 	 */
-	public PlanList getPlanInfo(String semester,int pageindex,int size,int order,String orderDir,String searchValue);
+	public PlanList getPlanInfo(String semester,int pageindex,int size,String order,String orderDir,String searchValue);
 	
 	/*
 	 1.参数：str,字符串型，为需要插入课程安排表的记录字符串
@@ -27,14 +27,14 @@ public interface PlanMaintainDao {
 	 2.返回值： List<AllPlan>，为导出表所需要的所有记录的对象集合
 	 3.函数功能：获取导出表所需的记录的对象集合
 	 */
-	public List<AllPlan> getPlanTable(String semester);
+	public List<AllPlan> getPlanTable(String semester,String college);
 	
 	/*
 	 1.参数：semester,字符串型,代表某一学年,例：2016-2017; status,整型，修改位，0代表未完善，1代表已完善
 	 2.返回值： List<AllPlan>，为导出表所需要的所有记录的对象集合
 	 3.函数功能：获取未完善的记录
 	 */
-	public PlanList checkIsSave(String semester,int status,int pageindex,int size,int order,String orderDir,String searchValue);
+	public PlanList checkIsSave(String semester,int status,int pageindex,int size,String order,String orderDir,String searchValue);
 	
 	
 	/*

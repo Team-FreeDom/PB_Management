@@ -10,8 +10,8 @@ public class AllPlan {
 	private String composition;//教学班组成
 	private String college;//学院
 	private String coursename;//课程名称
-	private int weekClassify;//课程类别
-	private int credit;//周学时
+	private double weekClassify;//周学时
+	private double credit;//学分
 	private String courseNature;//课程性质
 	private String courseCategory;//课程类别
 	private String mid;//专业编号
@@ -20,6 +20,7 @@ public class AllPlan {
 	private String semester;//学期
 	private String week;//起止周
 	private String checkMethod;//考核方式
+	private String major_oriented;//面向专业
 	
 	public int getId() {
 		return id;
@@ -63,16 +64,16 @@ public class AllPlan {
 	public void setCoursename(String coursename) {
 		this.coursename = coursename;
 	}
-	public int getWeekClassify() {
+	public double getWeekClassify() {
 		return weekClassify;
 	}
-	public void setWeekClassify(int weekClassify) {
+	public void setWeekClassify(double weekClassify) {
 		this.weekClassify = weekClassify;
 	}
-	public int getCredit() {
+	public double getCredit() {
 		return credit;
 	}
-	public void setCredit(int credit) {
+	public void setCredit(double credit) {
 		this.credit = credit;
 	}
 	public String getCourseNature() {
@@ -126,6 +127,13 @@ public class AllPlan {
 	public AllPlan() {
 		super();
 	}
+	public String getMajor_oriented() {
+		return major_oriented;
+	}
+	public void setMajor_oriented(String major_oriented) {
+		this.major_oriented = major_oriented;
+	}
+	
 	
 	
 
