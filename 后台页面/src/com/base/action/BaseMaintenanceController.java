@@ -237,7 +237,7 @@ public class BaseMaintenanceController {
 			String fullFileName = path + "/BaseInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportBaseInfo(list, fullFileName);
-			String filename = "瀹炰範鍩哄湴淇℃伅琛�xlsx";			
+			String filename = "基地信息表.xlsx";			
 
 			// 鏄剧ず涓枃鏂囦欢鍚�
 			response.setContentType("application/octet-stream;charset=UTF-8");

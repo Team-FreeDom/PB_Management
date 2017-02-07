@@ -11,9 +11,9 @@ public class ApplyDept {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int aid;//²¿ÃÅid
-	private String dept;//²¿ÃÅÃû³Æ
-	private int type;//±êÊ¶Î»£¬±íÃ÷ÊÇÑ§Ôº£¬»¹ÊÇÆäËû²¿ÃÅ
+	private int aid;//ï¿½ï¿½ï¿½ï¿½id
+	private String dept;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int type;//ï¿½ï¿½Ê¶Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public int getAid() {
 		return aid;

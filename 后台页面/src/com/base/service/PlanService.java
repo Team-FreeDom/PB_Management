@@ -3,7 +3,7 @@ package com.base.service;
 import java.util.List;
 import java.util.Map;
 
-import com.base.po.Major_aim;
+import com.base.po.Majoraim;
 import com.base.po.PlanList;
 
 public interface PlanService {
@@ -36,7 +36,7 @@ public interface PlanService {
 	 2.返回值： List<major_aim>,存放专业培训表多条记录的对象集合
 	 3.函数功能：根据专业编号获取该专业的培训目的
 	 */
-	public List<Major_aim> getPlanAim(String majorid);
+	public List<Majoraim> getPlanAim(String majorid);
 	
 	/*
 	 1.参数：coid,字符串型，代表学院编号
