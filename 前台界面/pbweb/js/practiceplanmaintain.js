@@ -159,6 +159,46 @@ $("#ck1").on("click", function () {
 	}
 });
 //显示实习申请表
+var tbodyStyle='<tbody><tr>'
+							+'<td>序号</td>'
+							+'<td>周次</td>'
+							+'<td>开始时间</td>'
+							+'<td>结束时间</td>'
+							+'<td>实习内容</td>'
+							+'<td>实习基地来源</td>'
+							+'<td>实习地点</td>'
+							+'<td>实习类别</td>'
+							+'<td>备注</td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td rowspan="3">1</td>'
+						 +'<td><input id="weekend" type="text" class="inputWidth flag"></td>'
+						 +'<td><input id="startweek" type="text" class="inputWidth flag"></td>'
+						 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
+						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
+						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
+						 +'<td id="practicePlace"><select id="schoolBase" class="flag" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth flag" hidden></td>'
+						 +'<td><select name="" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+						 +'<td><input id="remark" type="text" class="flag"></td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td>实习形式</td>'
+						 +'<td colspan="2">实习基地联系人/电话</td>'
+						 +'<td>目的</td>'
+						 +'<td>实习经费预算</td>'
+						 +'<td>指导老师</td>'
+						 +'<td>实验员</td>'
+						 +'<td>操作</td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
+						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
+						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
+						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
+						 +'<td><input type="text" class="adviser2 inputWidth flag"></td>'
+						 +'<td><a class="btn btn-primary choice">选择</a></td>'
+						 +'<td><span class="deleteID">删除</span></td>'
+						 +'</tr></tbody>';
 $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
 	/*var index= table.row().data()[0].id;
 	$("#division").val(obj[index].division);
@@ -169,8 +209,37 @@ $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
 	$("#number").val(obj[index].number);
 	$("#weeks").val(obj[index].Prweeks);
 	$("#leaderTeacher").val(obj[index].leaderTeacher);*/
+	$.ajax({
+		url:"",
+		type:"POST",
+		dataType:"json",
+		success:function(data){
+			
+			for(var i=0;i<data.length;i++){
+				var p=0;
+				$("#table tbody:last-child").after(tbodyStyle);
+				$("#table tbody:last-child").find(".flag").each(function(){
+					$(this).val(data[i][p]);
+					p++;
+				});
+			}
+		}
+	});
 	$("#Applychart").show();
 });
+	
+	
+/*$("#testexmple").click(function(){
+	$("#table tbody:last-child").find(".flag").each(function(){
+					$(this).val("yes");
+					//p++;
+				});
+});	*/
+	
+	
+	
+	
+	
 	
 /*实习申请表里面的操作*/
 	//实习基地来源改变，对应的实习基地改变
@@ -184,7 +253,11 @@ $(document).on("change","#baseFrom",function(e){
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
 		$(this).parent().next().children(":first").hide();
-	}	
+	}
+	if(e.target.value===''){
+		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":first").hide();
+	}
 });	
 	//获取选择的内容
 $.ajax({
@@ -283,58 +356,100 @@ $(document).on("click","#closemodal",function(){
 	
 });
 
-$(document).on("click","#add",function(){
+$(document).on("click","#add",function(){//增加一条实习记录弹出框的弹出
+	$("#addPraItem").find("input").val("");
+	$("#addPraItem").find("select").val("");
 	$("#addPraItem").modal('show');
 });
-
-$(document).on("click","#addTbody",function(){
-	$("#table tbody:last-child").after('<tbody><tr>'
-							+'<td>序号</td>'
-							+'<td>周次</td>'
-							+'<td>开始时间</td>'
-							+'<td>结束时间</td>'
-							+'<td>实习内容</td>'
-							+'<td>实习基地来源</td>'
-							+'<td>实习地点</td>'
-							+'<td>实习类别</td>'
-							+'<td>备注</td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td valign="middle" rowspan="3">1</td>'
-						 +'<td><input id="weekend" type="text" class="inputWidth"></td>'
-						 +'<td><input id="startweek" type="text" class="inputWidth"></td>'
-						 +'<td><input id="endweek" type="text" class="inputWidth"></td>'
-						 +'<td><input id="content" type="text" class="inputWidth"></td>'
-						 +'<td><select name="" id="baseFrom"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
-						 +'<td><select name="" id=""><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
-						 +'<td><input id="remark" type="text"></td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td>实习形式</td>'
-						 +'<td colspan="2">实习基地联系人/电话</td>'
-						 +'<td>目的</td>'
-						 +'<td>实习经费预算</td>'
-						 +'<td>指导老师</td>'
-						 +'<td>实验员</td>'
-						 +'<td>操作</td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td><select name="" id="practiceClass"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-						 +'<td colspan="2"><input id="phone" type="text"></td>'
-						 +'<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>'
-						 +'<td><input id="budget" type="text" class="inputWidth"></td>'
-						 +'<td><input type="text" class="adviser2 inputWidth"></td>'
-						 +'<td><a class="btn btn-primary choice">选择</a></td>'
-						 +'<td><span class="deleteID">删除</span></td>'
-						 +'</tr></tbody>'
-						);
+$(document).on("click","#saveadd",function(){//保存一条增加的实习记录
+	bootbox.confirm({
+			message: "确定保存？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},
+			callback: function (result) {
+				if(result){
+					$("#addForm").submit();
+				}
+			}
+	});
+	$("#addPraItem").modal('hide');
 });
+
+$(document).on("click","#addTbody",function(){//添加一条空表的记录
+	$("#table tbody:last-child").after(tbodyStyle);
+});
+	
 $(document).on("click",".deleteID",function(){//弹出框的删除
 	$(this).closest("tbody").remove();
 });	
+	
+	
 $("#save").click(function(){//弹出框的保存
-	$("#PraForm").submit();
+	//$("#PraForm").submit();
+	bootbox.confirm({
+			message: "确定保存？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},
+			callback: function (result) {
+				if(result){
+					var str="(";
+					var y=0;
+					$("#table").find("tbody").each(function(){
+						var x=0;
+						if(y!==0){
+							str=str+',';
+						}
+						$(this).find(".flag").each(function(){
+							if(x!==0){
+								str=str+','+'"'+$(this).val()+'"';
+							}else{
+								str=str+'"'+$(this).val()+'"';
+								x++;
+							}
+							
+						});
+						str=str+')';
+						y++;
+					});
+					
+					$.ajax({
+						url:"",
+						type:"POST",
+						dataType:"json",
+						data:{
+							"str":str,
+							"courseID":obj[index].courseID
+						},
+						success : function(msg) {
+							bootbox.alert({
+								message : msg.str,
+								size : 'small'
+							});
+							//怎样刷新啊？
+						}
+					});
+					
+				}
+			}
+	});
 });
 //删除表格的中记录	
 $("#delete").click(function(){

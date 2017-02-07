@@ -383,18 +383,18 @@
                                          <br>
                                           <button type="button" class="btn btn-primary" id="addTbody">添加</button>
                                           <button type="button" class="btn btn-success" id="save">保存</button>
-                                          
-                                          <table class="table table-bordered"  id="table">
+<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
+-->                                          <table class="table table-bordered"  id="table">
                                           	
 												<tr>
 													<td>带队老师</td>
-													<td colspan="3"><input class="noborder text-center" readonly id="leaderTeacher" type="text" value="李林"></td>
+													<td colspan="3"><input class="noborder text-center flag" readonly id="leaderTeacher" type="text" value="李林"></td>
 													<td>指导教师</td>
-													<td colspan="4"><input readonly class="noborder text-center" id="adviser" type="text"></td>
+													<td colspan="4"><input readonly class="noborder text-center flag" id="adviser" type="text"></td>
 												</tr>
 												<tr>
 													<td>实验员姓名</td>
-													<td colspan="8"><input class="noborder text-center" readonly id="testername" type="text">
+													<td colspan="8"><input class="noborder text-center flag" readonly id="testername" type="text">
 													</td>
 												</tr>
                                          	
@@ -412,10 +412,10 @@
 												</tr>
 												<tr>
 													<td valign="middle" rowspan="3">1</td>
-													<td><input id="weekend" type="text" class="inputWidth"></td>
-													<td><input id="startweek" type="text" class="inputWidth"></td>
-													<td><input id="endweek" type="text" class="inputWidth"></td>
-													<td><input id="content" type="text" class="inputWidth"></td>
+													<td><input id="weekend" type="text" class="inputWidth flag"></td>
+													<td><input id="startweek" type="text" class="inputWidth flag"></td>
+													<td><input id="endweek" type="text" class="inputWidth flag"></td>
+													<td><input id="content" type="text" class="inputWidth flag"></td>
 													<td>
 														<select name="" id="baseFrom">
 															<option value="">请选择</option>
@@ -540,25 +540,26 @@
         <h4 class="modal-title text-center">增加实习计划</h4>
       </div>
       <div class="modal-body">
+       <form action="" id="addForm">
         <table class="table">
            <tr>
                 <td>教师姓名</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AteacherName" class="form-control"></td>
                 <td>教师编号</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AteacherID" class="form-control"></td>
            </tr>
            <tr>
                 <td>开课学院</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Acollege" class="form-control"></td>
                 <td>班级组成</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Aclass" class="form-control"></td>
            </tr>
            <tr>
                 <td>课程名称</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AcourceName" class="form-control"></td>
                 <td>课程性质</td>
                 <td>
-                    <select class="form-control" name="" id="Adivision">
+                    <select class="form-control" name="" id="AcourceProperty">
                          <option value="">请选择</option>
                          <option value="必修">必修</option>
                          <option value="选修">选修</option>
@@ -568,45 +569,46 @@
            <tr>
                 <td>课程类别</td>
                 <td>
-                    <select class="form-control" name="" id="">
+                    <select class="form-control" name="" id="AcourceClass">
                          <option value="">请选择</option>
                          <option value="必修">必修</option>
                          <option value="选修">选修</option>
                     </select>
                 </td>
                 <td>起始周次</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Aweek" class="form-control"></td>
            </tr>
            <tr>
                 <td>周学时</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AWperiod" class="form-control"></td>
                 <td>学时</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Aperiod" class="form-control"></td>
            </tr>
            <tr>
                 <td>人数</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Anumber" class="form-control"></td>
                 <td>已选人数</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AselectedNum" class="form-control"></td>
            </tr>
            <tr>
                 <td>考核</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Atest" class="form-control"></td>
                 <td>专业编号</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="AmajoyID" class="form-control"></td>
            </tr>
            <tr>
                 <td>面向专业</td>
                 <td><input type="text" value="" id="" class="form-control"></td>
                 <td>所属专业</td>
-                <td><input type="text" value="" id="" class="form-control"></td>
+                <td><input type="text" value="" id="Amajoy" class="form-control"></td>
            </tr>
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveAdd">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
+      </form>
     </div>
   </div>
 </div>                        
