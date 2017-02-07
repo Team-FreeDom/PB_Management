@@ -28,7 +28,7 @@ public interface PlanMaintainService {
 	 2.返回值： List<AllPlan>，为导出表所需要的所有记录的对象集合
 	 3.函数功能：获取导出表所需的记录的对象集合
 	 */
-	public List<AllPlan> getPlanTable(String semester);
+	public List<AllPlan> getPlanTable(String semester,String college);
 	
 	/*
 	 1.参数：semester,字符串型,代表某一学年,例：2016-2017; status,整型，修改位，0代表未完善，1代表已完善
