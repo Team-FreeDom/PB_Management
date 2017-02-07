@@ -196,8 +196,8 @@
                                     <thead>
                                     	<tr bgcolor="#ECF1F5">
                                            <td colspan="7">
-                                           	<button class="btn btn-success">增加</button>
-                                           	<button class="btn btn-danger">删除</button>
+                                           	<button class="btn btn-success" id="add">增加</button>
+                                           	<button class="btn btn-danger" id="delete">删除</button>
                                            	<button class="btn btn-primary">导入</button>
                                            	<button class="btn btn-primary">导出</button>
                                            	<button class="btn btn-warning">检测数据完整性</button>
@@ -214,19 +214,20 @@
                                         </tr>
                                         <tr>
                                             <th><input type="checkbox" id="ck1"></th>
+                                            <th>学年学期</th>
+                                            <th>课程代码</th>
+                                            <th>课程名称</th>
                                             <th>人数</th>
                                             <th>已选人数</th>
                                             <th>教学班组成</th>
                                             <th>开课学院</th>
-                                            <th>课程代码</th>
-                                            <th>课程名称</th>
                                             <th>周学时</th>
                                             <th>学时</th>
                                             <th>课程性质</th>
                                             <th>课程类别</th>
                                             <th>教师职工号</th>
                                             <th>教师姓名</th>
-                                            <th>选课课号</th>
+                                            
                                             <th>起始周</th>
                                             <th hidden>单位</th>
                                             <th hidden>面向专业</th>
@@ -239,91 +240,91 @@
                                     <tbody>
                                         <tr>
                                             <td>1<input type="checkbox" name="allcheckbox"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
                                             <td>26</td>
                                             <td>12</td>
                                             <td>农学隆平15</td>
                                             <td>农学院</td>
-                                            <td>B372J13900</td>
-                                            <td>农学实践（3）</td>
                                             <td>+2</td>
                                             <td>1</td>
                                             <td>必修</td>
                                             <td>实践课</td>
                                             <td>124007</td>
                                             <td>李林</td>
-                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>20-21</td>
                                             <td>考核</td>
                                         </tr>
                                         <tr>
                                             <td>2<input type="checkbox" name="allcheckbox"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
                                             <td>26</td>
                                             <td>12</td>
                                             <td>农学隆平15</td>
                                             <td>农学院</td>
-                                            <td>B372J13900</td>
-                                            <td>农学实践（3）</td>
                                             <td>+2</td>
                                             <td>1</td>
                                             <td>必修</td>
                                             <td>实践课</td>
                                             <td>124007</td>
                                             <td>李林</td>
-                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>20-21</td>
                                             <td>考核</td>
                                         </tr>
                                         <tr>
                                             <td>3<input type="checkbox" name="allcheckbox"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
                                             <td>26</td>
                                             <td>12</td>
                                             <td>农学隆平15</td>
                                             <td>农学院</td>
-                                            <td>B372J13900</td>
-                                            <td>农学实践（3）</td>
                                             <td>+2</td>
                                             <td>1</td>
                                             <td>必修</td>
                                             <td>实践课</td>
                                             <td>124007</td>
                                             <td>李林</td>
-                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>20-21</td>
                                             <td>考核</td>
                                         </tr>
                                         <tr>
                                             <td>4<input type="checkbox" name="allcheckbox"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
                                             <td>26</td>
                                             <td>12</td>
                                             <td>农学隆平15</td>
                                             <td>农学院</td>
-                                            <td>B372J13900</td>
-                                            <td>农学实践（3）</td>
                                             <td>+2</td>
                                             <td>1</td>
                                             <td>必修</td>
                                             <td>实践课</td>
                                             <td>124007</td>
                                             <td>李林</td>
-                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>20-21</td>
                                             <td>考核</td>
                                         </tr>
                                         <tr>
                                             <td>5<input type="checkbox" name="allcheckbox"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
                                             <td>26</td>
                                             <td>12</td>
                                             <td>农学隆平15</td>
                                             <td>农学院</td>
-                                            <td>B372J13900</td>
-                                            <td>农学实践（3）</td>
                                             <td>+2</td>
                                             <td>1</td>
                                             <td>必修</td>
                                             <td>实践课</td>
                                             <td>124007</td>
                                             <td>李林</td>
-                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>20-21</td>
                                             <td>考核</td>
                                         </tr>
@@ -351,7 +352,7 @@
                                   </div>
                                   
                                   <div class="modal-body table-responsive">
-                                  	<form class="form-horizontal" role="form">
+                                  	<form class="form-horizontal" role="form" id="PraForm">
                                         
                                           <table>
                                           	<tr>
@@ -380,10 +381,10 @@
                                           </table>
                                         
                                          <br>
-                                          <button type="button" class="btn btn-primary">增加</button>
-                                          <button type="button" class="btn btn-success">保存</button>
+                                          <button type="button" class="btn btn-primary" id="addTbody">添加</button>
+                                          <button type="button" class="btn btn-success" id="save">保存</button>
                                           
-                                          <table class="table table-bordered">
+                                          <table class="table table-bordered"  id="table">
                                           	
 												<tr>
 													<td>带队老师</td>
@@ -397,7 +398,7 @@
 													</td>
 												</tr>
                                          	
-                                          	<tbody>
+                                          	<tbody id="tbodyID">
 												<tr>
 													<td>序号</td>
 													<td>周次</td>
@@ -408,7 +409,6 @@
 													<td>实习地点</td>
 													<td>实习类别</td>
 													<td>备注</td>
-
 												</tr>
 												<tr>
 													<td valign="middle" rowspan="3">1</td>
@@ -423,7 +423,12 @@
 															<option value="校外基地">校外基地</option>
 														</select>
 													</td>
-													<td id="practicePlace"></td>
+													<td id="practicePlace">
+														<select id="schoolBase" hidden>
+															<option id="schoolBaseID" value="">请选择</option>
+														</select>
+														<input id="outBase" type="text" class="inputWidth" hidden>
+													</td>
 													<td>
 														<select name="" id="">
 															<option value="">请选择</option>
@@ -435,6 +440,7 @@
 													</td>
 													<td><input id="remark" type="text"></td>
 												</tr>
+												<tr>
 													<td>实习形式</td>
 													<td colspan="2">实习基地联系人/电话</td>
 													<td>目的</td>
@@ -442,6 +448,7 @@
 													<td>指导老师</td>
 													<td>实验员</td>
 													<td>操作</td>
+												</tr>
 												<tr>
 													<td>
 														<select name="" id="practiceClass">
@@ -453,9 +460,9 @@
 													<td colspan="2"><input id="phone" type="text"></td>
 													<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>
 													<td><input id="budget" type="text" class="inputWidth"></td>
-													<td><input id="adviser2" type="text" class="inputWidth"></td>
-													<td><a class="btn btn-primary" id="choice">选择</a></td>
-													<td>删除</td>
+													<td><input type="text" class="adviser2 inputWidth"></td>
+													<td><a class="btn btn-primary choice" id="choice">选择</a></td>
+													<td><span class="deleteID">删除</span></td>
 												</tr>
                                           	</tbody>
                                           </table>
@@ -463,12 +470,11 @@
                                   	
                                   </div>
                                   
-                                  <div class="modal-footer table-responsive">
+                                  <!--<div class="modal-footer table-responsive">
                                     <center>
-                                        
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Selectname">取消</button>
+                                        <button type="button" class="btn btn-danger" id="cancelChart">取消</button>
                                     </center>
-                                  </div>
+                                  </div>-->
                                 </div> 
                                 
         <!--弹出框选择--> 
@@ -524,7 +530,86 @@
 						</form>
 					</div>
 				</div>
-                                   
+				
+<!--增加按钮弹出框-->
+<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border:#3071a9 8px solid;">
+      <div class="modal-header" style="background:#3071a9; color:#FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center">增加实习计划</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+           <tr>
+                <td>教师姓名</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>教师编号</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>开课学院</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>班级组成</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>课程名称</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>课程性质</td>
+                <td>
+                    <select class="form-control" name="" id="Adivision">
+                         <option value="">请选择</option>
+                         <option value="必修">必修</option>
+                         <option value="选修">选修</option>
+                    </select>
+                </td>
+           </tr>
+           <tr>
+                <td>课程类别</td>
+                <td>
+                    <select class="form-control" name="" id="">
+                         <option value="">请选择</option>
+                         <option value="必修">必修</option>
+                         <option value="选修">选修</option>
+                    </select>
+                </td>
+                <td>起始周次</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>周学时</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>学时</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>人数</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>已选人数</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>考核</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>专业编号</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>面向专业</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>所属专业</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+           </tr>
+       </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>                        
                                                               
                                                                                                                     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -534,6 +619,7 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootbox.min.js"></script>
     <script src="../js/practiceplanmaintain.js"></script>
     <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>

@@ -23,6 +23,21 @@ $(document).ready(function() {
 				//"sWidth" : "4%"
 			},
 			{
+				"mData" : "selectID",//选课课号
+				"orderable" : false,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "courseID",//课程代码
+				"orderable" : false,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "courseName",//课程名称
+				"orderable" : false,
+				"sDefaultContent" : "",
+			},
+			{
 				"mData" : "number",//人数
 				"orderable" : false,
 				"sDefaultContent" : ""
@@ -42,16 +57,7 @@ $(document).ready(function() {
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
-			{
-				"mData" : "courseID",//课程代码
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "courseName",//课程名称
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
+			
 			{
 				"mData" : "Wperiod",//周学时
 				"orderable" : false,
@@ -79,11 +85,6 @@ $(document).ready(function() {
 			},
 			{
 				"mData" : "teacherName",//教师姓名
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "selectID",//选课课号
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
@@ -173,13 +174,16 @@ $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
 	
 /*实习申请表里面的操作*/
 	//实习基地来源改变，对应的实习基地改变
-$("#baseFrom").change(function(e){
-	$("#practicePlace").empty();
+$(document).on("change","#baseFrom",function(e){
+	//$("#practicePlace").empty();
 	if(e.target.value==='校内基地'){
-		$("#practicePlace").append('<select id="schoolBase"><option id="schoolBaseID" value="">请选择</option></select>');
+		$(this).parent().next().children(":first").show();
+		//$("#schoolBase").show();
+		$(this).parent().next().children(":last").hide();
 	}
 	if(e.target.value==='校外基地'){
-		$("#practicePlace").append('<input id="outBase" type="text" class="inputWidth">');	
+		$(this).parent().next().children(":last").show();
+		$(this).parent().next().children(":first").hide();
 	}	
 });	
 	//获取选择的内容
@@ -208,10 +212,13 @@ $.ajax({
 		}
 	}
 });
-$("#adviser2").change(function(e){//填写指导老师姓名
-	$("#adviser").val(e.target.value);
+var name="";
+$(document).on("change",".adviser2",function(e){//填写指导老师姓名
+	name+=e.target.value+" ";
+	$("#adviser").val(name);
 });
-$("#choice").click(function(){//点击选择弹出 框并且清空框里的数据
+	
+$(document).on("click",".choice",function(){//点击选择弹出 框并且清空框里的数据
 	$("#Selectname").modal('show');
 	$("#selectTname").val("");
 	$("#tester").val("");
@@ -219,8 +226,8 @@ $("#choice").click(function(){//点击选择弹出 框并且清空框里的数�
 });
 	
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
-var obj2=[];
-$("#selectCollege").change(function(){
+var obj2;
+$(document).on("change","#selectCollege",function(){
 	var college=$("#selectCollege").val;
 	$.ajax({
 	url:" ",
@@ -230,29 +237,45 @@ $("#selectCollege").change(function(){
 		"college":college,
 	},
 	success : function(data){
-		obj2=data;
+		obj2=data;//用于下面函数里面的判断
 		for(var i=0;i<data.length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[i].collegeName+">"
-									+ data[i].collegeName + "</option>"
+			"<option class='rest' value="+data[i].teacherName+">"
+									+ data[i].teacherName + "</option>"
 			);
 		}
 	}
 });
 });
-
+//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
 var value=[];
 var value2="";
 var value3=[];
-$("#selectTname").change(function(e){
-	value.push(e.target.value);
-	value2=value.join(" ");
-	$("#tester").val(value2);
+$(document).on("change","#selectTname",function(e){
+	
+	$.each(obj2,function(index,item){
+		if(item.teacherName===e.target.value){
+			if($.inArray(item.teacherID,value3)===-1){
+				value.push(e.target.value);
+			    value3.push(item.teacherID);
+				value2=value.join(" ");
+				$("#tester").val(value2);
+			}else{
+				alert("此人已经存在，请重新选择！");
+			}
+		}
+	});
+	
 });
-$("#finished").click(function(){//点击确定之后讲实验员姓名在表格中显示出来
+	
+$(document).on("click","#finished",function(){//点击确定之后讲实验员姓名在表格中显示出来
 	$("#testername").val(value2);
 	value2="";
 });
+	
+//实习表中添加一条记录
+
+	
 //隐藏实习申请表
 $(document).on("click","#closemodal",function(){
 	
@@ -260,8 +283,117 @@ $(document).on("click","#closemodal",function(){
 	
 });
 
+$(document).on("click","#add",function(){
+	$("#addPraItem").modal('show');
+});
 
-	
+$(document).on("click","#addTbody",function(){
+	$("#table tbody:last-child").after('<tbody><tr>'
+							+'<td>序号</td>'
+							+'<td>周次</td>'
+							+'<td>开始时间</td>'
+							+'<td>结束时间</td>'
+							+'<td>实习内容</td>'
+							+'<td>实习基地来源</td>'
+							+'<td>实习地点</td>'
+							+'<td>实习类别</td>'
+							+'<td>备注</td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td valign="middle" rowspan="3">1</td>'
+						 +'<td><input id="weekend" type="text" class="inputWidth"></td>'
+						 +'<td><input id="startweek" type="text" class="inputWidth"></td>'
+						 +'<td><input id="endweek" type="text" class="inputWidth"></td>'
+						 +'<td><input id="content" type="text" class="inputWidth"></td>'
+						 +'<td><select name="" id="baseFrom"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
+						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
+						 +'<td><select name="" id=""><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+						 +'<td><input id="remark" type="text"></td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td>实习形式</td>'
+						 +'<td colspan="2">实习基地联系人/电话</td>'
+						 +'<td>目的</td>'
+						 +'<td>实习经费预算</td>'
+						 +'<td>指导老师</td>'
+						 +'<td>实验员</td>'
+						 +'<td>操作</td>'
+						 +'</tr>'
+						 +'<tr>'
+						 +'<td><select name="" id="practiceClass"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
+						 +'<td colspan="2"><input id="phone" type="text"></td>'
+						 +'<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>'
+						 +'<td><input id="budget" type="text" class="inputWidth"></td>'
+						 +'<td><input type="text" class="adviser2 inputWidth"></td>'
+						 +'<td><a class="btn btn-primary choice">选择</a></td>'
+						 +'<td><span class="deleteID">删除</span></td>'
+						 +'</tr></tbody>'
+						);
+});
+$(document).on("click",".deleteID",function(){//弹出框的删除
+	$(this).closest("tbody").remove();
+});	
+$("#save").click(function(){//弹出框的保存
+	$("#PraForm").submit();
+});
+//删除表格的中记录	
+$("#delete").click(function(){
+	var flag=0;
+	$('input[name="allcheckbox"]:checked').each(function(){
+		flag++;
+	});
+	if(flag===0){
+		bootbox.alert({
+			message : "您还没有选择任何内容",
+			size : 'small'
+		});
+	}else{
+		bootbox.confirm({
+			message: "确定删除？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},
+			callback: function (result) {
+				if(result){
+					var deletstr = '(';
+					var i=0;
+					$("input[type='checkbox'][name='allcheckbox']:checked").each(function() {
+						if(i!==0){
+							deletstr = deletstr+ ','+ $(this).val();
+						}else{
+							deletstr = deletstr+ $(this).val();
+						}
+						i++;
+					});
+					deletstr = deletstr + ')';
+					$.ajax({
+						url : '',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							"deletstr" : deletstr
+						},
+						success : function(msg) {
+							bootbox.alert({
+								message : msg.str,
+								size : 'small'
+							});
+							table.draw(false);
+						}
+					});
+				}
+			}
+	});
+	}
+});
 	
 } );
 
