@@ -384,56 +384,80 @@
                                           <button type="button" class="btn btn-success">保存</button>
                                           
                                           <table class="table table-bordered">
-                                          	<tr>
-                                          		<td>带队老师</td>
-                                          		<td colspan="3"><input class="noborder text-center" readonly id="Leaderteacher" type="text" value="李林"></td>
-                                          		<td>指导教师</td>
-                                          		<td colspan="4"><input readonly class="noborder text-center" id="adviser" type="text"></td>
-                                          	</tr>
-                                          	<tr>
-                                          		<td>实验员姓名</td>
-                                          		<td colspan="8"><input class="noborder text-center" readonly id="testername" type="text">
-                                          		</td>
-                                          	</tr>
-                                          	<tr>
-                                          		<td>序号</td>
-                                          		<td>周次</td>
-                                          		<td>开始时间</td>
-                                          		<td>结束时间</td>
-                                          		<td>实习内容</td>
-                                          		<td>实习基地来源</td>
-                                          		<td>实习地点</td>
-                                          		<td>实习类别</td>
-                                          		<td>备注</td>
-                                          		
-                                          	</tr>
-                                          	<tr>
-                                          		<td valign="middle" rowspan="3">1</td>
-                                          		<td><input id="weekend" type="text" class="inputWidth"></td>
-                                          		<td><input id="startweek" type="text" class="inputWidth"></td>
-                                          		<td><input id="endweek" type="text" class="inputWidth"></td>
-                                          		<td><input id="content" type="text" class="inputWidth"></td>
-                                          		<td><select name="" id=""><option value="">请选择</option></select></td>
-                                          		<td><select name="" id=""><option value="">请选择</option></select></td>
-                                          		<td><select name="" id=""><option value="">请选择</option></select></td>
-                                          		<td><input id="remark" type="text"></td>
-                                          	</tr>
-                                          		<td>实习形式</td>
-                                          		<td colspan="2">实习基地联系人/电话</td>
-                                          		<td>目的</td>
-                                          		<td>实习经费预算</td>
-                                          		<td>指导老师</td>
-                                          		<td>实验员</td>
-                                          		<td>操作</td>
-                                          	<tr>
-                                          		<td><select name="" id=""><option value="">请选择</option></select></td>
-                                          		<td colspan="2"><input id="phone" type="text"></td>
-                                          		<td><select name="" id=""><option value="">请选择</option></select></td>
-                                          		<td><input id="budget" type="text" class="inputWidth"></td>
-                                          		<td><input id="" type="text" class="inputWidth"></td>
-                                          		<td><a class="btn btn-primary" data-toggle="modal" data-target="#Selectname">选择</a></td>
-                                          		<td>删除</td>
-                                          	</tr>
+                                          	
+												<tr>
+													<td>带队老师</td>
+													<td colspan="3"><input class="noborder text-center" readonly id="leaderTeacher" type="text" value="李林"></td>
+													<td>指导教师</td>
+													<td colspan="4"><input readonly class="noborder text-center" id="adviser" type="text"></td>
+												</tr>
+												<tr>
+													<td>实验员姓名</td>
+													<td colspan="8"><input class="noborder text-center" readonly id="testername" type="text">
+													</td>
+												</tr>
+                                         	
+                                          	<tbody>
+												<tr>
+													<td>序号</td>
+													<td>周次</td>
+													<td>开始时间</td>
+													<td>结束时间</td>
+													<td>实习内容</td>
+													<td>实习基地来源</td>
+													<td>实习地点</td>
+													<td>实习类别</td>
+													<td>备注</td>
+
+												</tr>
+												<tr>
+													<td valign="middle" rowspan="3">1</td>
+													<td><input id="weekend" type="text" class="inputWidth"></td>
+													<td><input id="startweek" type="text" class="inputWidth"></td>
+													<td><input id="endweek" type="text" class="inputWidth"></td>
+													<td><input id="content" type="text" class="inputWidth"></td>
+													<td>
+														<select name="" id="baseFrom">
+															<option value="">请选择</option>
+															<option value="校内基地">校内基地</option>
+															<option value="校外基地">校外基地</option>
+														</select>
+													</td>
+													<td id="practicePlace"></td>
+													<td>
+														<select name="" id="">
+															<option value="">请选择</option>
+															<option value="生产实习">生产实习</option>
+															<option value="教学实习">教学实习</option>
+															<option value="毕业实习">毕业实习</option>
+															<option value="综合实习">综合实习</option>
+														</select>
+													</td>
+													<td><input id="remark" type="text"></td>
+												</tr>
+													<td>实习形式</td>
+													<td colspan="2">实习基地联系人/电话</td>
+													<td>目的</td>
+													<td>实习经费预算</td>
+													<td>指导老师</td>
+													<td>实验员</td>
+													<td>操作</td>
+												<tr>
+													<td>
+														<select name="" id="practiceClass">
+															<option value="">请选择</option>
+															<option value="集中">集中</option>
+															<option value="分散">分散</option>
+														</select>
+													</td>
+													<td colspan="2"><input id="phone" type="text"></td>
+													<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>
+													<td><input id="budget" type="text" class="inputWidth"></td>
+													<td><input id="adviser2" type="text" class="inputWidth"></td>
+													<td><a class="btn btn-primary" id="choice">选择</a></td>
+													<td>删除</td>
+												</tr>
+                                          	</tbody>
                                           </table>
                                         </form>
                                   	
@@ -452,7 +476,7 @@
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<form action="" method="post" id="">
-							<div class="modal-content" id="modalcontent" style="border:#3071a9 8px solid">
+							<div class="modal-content" id="modalcontent" style="border:#3071a9 8px solid;width: 450px">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
 									<button type="button" class="close" data-dismiss="modal">
 										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -460,25 +484,39 @@
 								</div>
 
 								<center>
-									<div class="modal-body" style="height:60px;">
-										
+									<div class="modal-body">
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-12 form-inline">
+												<lable>实验员:</lable>
+												<input id="tester" type="text" class="form-control exeWidth" value="">
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 30px;">
 											<div class="col-sm-6">
-												<select name="" id="" class="form-control">
-													<option value="">请选择学院</option>
+												<select name="" id="selectCollege" class="form-control">
+													<option value="" id="collegeID">请选择学院</option>
+													<option value="test1">test1</option>
+													<option value="test2">test2</option>
+													<option value="test3">test3</option>
 												</select>
 											</div>
 											<div class="col-sm-6">
-												<select name="" id="" class="form-control">
-													<option value="">请选择老师</option>
+												<select name="" id="selectTname" class="form-control">
+													<option value="" id="teacherNmaeID">请选择老师</option>
+													<option value="赵勇">赵勇</option>
+													<option value="李彩">李彩</option>
+													<option value="宋超">宋超</option>
 												</select>
 											</div>
+										</div>
+											
 											
 										
 									</div>
 								</center>
 								<div class="modal-footer">
 									<center>
-										<button type="submit" class="btn btn-primary" id="">确定</button>
+										<button type="button" class="btn btn-primary" data-dismiss="modal" id="finished">确定</button>
 										<button type="button" class="btn btn-default" data-dismiss="modal" id="">取消</button>
 									</center>
 								</div>

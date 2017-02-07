@@ -68,6 +68,9 @@ table tbody tr td{
 .buttonWidth{
 	margin-left: 5px;
 }
+.exeWidth{
+	width: 80% !important;
+}
 .bottom{
 	margin-top:10px;
 	}
