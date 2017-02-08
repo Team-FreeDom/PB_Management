@@ -3,10 +3,11 @@ var obj=[];
 var Oneindex;
 $(document).ready(function() {
 	
-	 var table=$("#practiceapplytable").dataTable({
+	 var table=$("#practiceplanmaintain").dataTable({
 		"processing" : true,
 		"serverSide" : true,
 		"bSort": false,
+		"bFilter": false,
 		"aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。
 		"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 		"iDisplayLength" : 5,  //默认每页显示多少条记录
@@ -16,12 +17,12 @@ $(document).ready(function() {
 			"type":"POST"
 		},
 		"aoColumns" : [
-			/*{
+			{
 				"mData" : "id",
 				"orderable" : false,
 				"sDefaultContent" : "",
 				//"sWidth" : "4%"
-			},*/
+			},
 			{
 				"mData" : "selectID",//选课课号
 				"orderable" : false,
@@ -117,13 +118,21 @@ $(document).ready(function() {
 				"mData" : "examine",//考核
 				"orderable" : false,
 				"sDefaultContent" : "",
-				"render" : function(data,type,row){
+				/*"render" : function(data,type,row){
 					obj.push(row);
-					return '<span id='+(obj.length-1)+'></span>';
-				}
+				}*/
 			}
 			
 		],
+		"columnDefs" : [ {
+			"orderable" : false,
+			"targets" : [ 0 ],
+			"data" : "id",
+			"render" : function(data, type, row) {
+				obj.push(row);
+				return '<input type="checkbox" name="allcheckbox" value=' + data + 'id='+(obj.length-1)+'>';
+			}
+		} ],
         "language": {
 			"lengthMenu": "每页 _MENU_ 条记录",
             "zeroRecords": "没有找到记录",
@@ -140,6 +149,15 @@ $(document).ready(function() {
          }
 	});
 	
+//全选
+$("#ck1").on("click", function () {
+	// $("#Applychart").hide();
+	if ($(this).prop("checked") === true) {
+		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", true);
+	} else {
+		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", false);
+	}
+});
 //显示实习申请表
 var tbodyStyle='<tbody><tr>'
 							+'<td>序号</td>'
@@ -182,8 +200,8 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
 	
-$("#practiceapplytable tbody").on("click","tr",function(){
-	/*Oneindex= $(this).find("span").attr("id");
+$("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
+	/*Oneindex= $(this).closest("tr").children(":first").find("input").attr("id");
 	$("#division").val(obj[Oneindex].division);
 	$("#classname").val(obj[Oneindex].className);
 	$("#major").val(obj[Oneindex].major);
@@ -228,6 +246,18 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	});
 	$("#Applychart").show();
 });
+	
+	
+/*$("#testexmple").click(function(){
+	$("#table tbody:last-child").find(".flag").each(function(){
+					$(this).val("yes");
+					//p++;
+				});
+});	*/
+	
+	
+	
+	
 	
 	
 /*实习申请表里面的操作*/
@@ -341,8 +371,34 @@ $(document).on("click","#closemodal",function(){
 	
 });
 
-
-
+$(document).on("click","#add",function(){//增加一条实习记录弹出框的弹出
+	$("#addPraItem").find("input").val("");
+	$("#addPraItem").find("select").val("");
+	
+	$("#addPraItem").modal('show');
+});
+$(document).on("click","#saveadd",function(){//保存一条增加的实习记录
+	bootbox.confirm({
+			message: "确定保存？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},
+			callback: function (result) {
+				if(result){
+					$("#addForm").submit();
+				}
+			}
+	});
+	$("#addPraItem").modal('hide');
+});
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
@@ -491,7 +547,4 @@ $("#delete").click(function(){
 });
 
 } );
-
-	
-	
 

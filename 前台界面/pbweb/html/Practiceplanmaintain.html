@@ -195,22 +195,23 @@
 							<table id="practiceplanmaintain" class="hover" cellspacing="0" width="100%">
                                     <thead>
                                     	<tr bgcolor="#ECF1F5">
-                                           <td colspan="7">
-                                           	<button class="btn btn-success" id="add">增加</button>
-                                           	<button class="btn btn-danger" id="delete">删除</button>
-                                           	<button class="btn btn-primary">导入</button>
-                                           	<button class="btn btn-primary">导出</button>
+                                          <td colspan="2">
+                                          	<select id="termYear" class="form-control"><option value="" id="termYearID">请选择学年</option></select>
+                                          </td>
+                                          <td colspan="2"> 
+                                          	<select name="" id="term" class="form-control">
+                                          		<option value="">请选择学期</option>
+                                          		<option value="">第一学期</option>
+                                          		<option value="">第二学期</option>
+                                          	</select>
+                                          </td>
+                                           <td colspan="14" id="colspan">
                                            	<button class="btn btn-warning">检测数据完整性</button>
+                                           	<button class="btn btn-primary">导出</button>
+                                           	<button class="btn btn-primary">导入</button>
+                                           	<button class="btn btn-danger" id="delete">删除</button>
+                                           	<button class="btn btn-success" id="add">增加</button>
                                            </td>
-                                            <td colspan="15">
-                                            	<form class="form-inline" role="form" style="float: right">
-                                                  <div class="form-group">
-                                                    <input type="text" class="form-control" id="inputPassword2" placeholder="输入搜索内容">
-                                                  </div>
-                                                  <button type="submit" class="btn btn-primary">搜索</button>
-                                                </form>
-                                            </td>
-                                            
                                         </tr>
                                         <tr>
                                             <th><input type="checkbox" id="ck1"></th>
@@ -222,7 +223,7 @@
                                             <th>教学班组成</th>
                                             <th>开课学院</th>
                                             <th>周学时</th>
-                                            <th>学时</th>
+                                            <th>学分</th>
                                             <th>课程性质</th>
                                             <th>课程类别</th>
                                             <th>教师职工号</th>
@@ -239,7 +240,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>1<input type="checkbox" name="allcheckbox"></td>
+                                            <td><input type="checkbox" name="allcheckbox"></td>
                                             <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>B372J13900</td>
                                             <td>农学实践（3）</td>
@@ -257,7 +258,7 @@
                                             <td>考核</td>
                                         </tr>
                                         <tr>
-                                            <td>2<input type="checkbox" name="allcheckbox"></td>
+                                            <td><input type="checkbox" name="allcheckbox"></td>
                                             <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>B372J13900</td>
                                             <td>农学实践（3）</td>
@@ -275,7 +276,7 @@
                                             <td>考核</td>
                                         </tr>
                                         <tr>
-                                            <td>3<input type="checkbox" name="allcheckbox"></td>
+                                            <td><input type="checkbox" name="allcheckbox"></td>
                                             <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>B372J13900</td>
                                             <td>农学实践（3）</td>
@@ -293,7 +294,7 @@
                                             <td>考核</td>
                                         </tr>
                                         <tr>
-                                            <td>4<input type="checkbox" name="allcheckbox"></td>
+                                            <td><input type="checkbox" name="allcheckbox"></td>
                                             <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>B372J13900</td>
                                             <td>农学实践（3）</td>
@@ -311,7 +312,7 @@
                                             <td>考核</td>
                                         </tr>
                                         <tr>
-                                            <td>5<input type="checkbox" name="allcheckbox"></td>
+                                            <td><input type="checkbox" name="allcheckbox"></td>
                                             <td>(2016-2017-2)-B372J13900-1240071-1</td>
                                             <td>B372J13900</td>
                                             <td>农学实践（3）</td>
@@ -603,12 +604,13 @@
                 <td><input type="text" value="" id="Amajoy" class="form-control"></td>
            </tr>
        </table>
+       </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="saveAdd">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
-      </form>
+      
     </div>
   </div>
 </div>                        
@@ -623,7 +625,6 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootbox.min.js"></script>
     <script src="../js/practiceplanmaintain.js"></script>
-    <script src="../js/tu.js"></script>
     <script src="../js/kg.js"></script>
     
   </body>

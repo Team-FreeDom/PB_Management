@@ -11,7 +11,8 @@ table thead > tr> td{
 	}
 
 table thead tr th{
-	text-align:center;}
+	text-align:center;
+}
 table tbody tr td{
 	text-align:center;
 	cursor: pointer;
@@ -79,6 +80,10 @@ table tbody tr td{
 .deleteID{
 	color:#F90409;
 	text-decoration: underline;
+}
+#colspan button{
+	float: right;
+	margin-right: 10px;
 }
 
 

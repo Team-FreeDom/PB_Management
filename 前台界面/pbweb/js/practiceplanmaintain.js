@@ -7,7 +7,6 @@ $(document).ready(function() {
 		"processing" : true,
 		"serverSide" : true,
 		"bSort": false,
-		"bFilter": false,
 		"aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。
 		"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 		"iDisplayLength" : 5,  //默认每页显示多少条记录
