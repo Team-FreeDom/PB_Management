@@ -215,23 +215,13 @@ $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
 		dataType:"json",
 		success:function(data){
 			
-			for(var i=0;i<data.length;i++){
+			for(var i=1;i<data.length;i++){
 				var p=0;
 				$("#table tbody:last-child").after(tbodyStyle);
 				$("#table tbody:last-child").find(".mark").html(i);
 				$("#table tbody:last-child").find(".flag").each(function(){
-					$(this).val(data[i][p]);
-/*					if(p===5){
-						if(data[i][p-1]==="校内基地"){
-							$(this).show();
-						}
-					}
-					if(p===6){
-						if(data[i][p-2]==="校外基地"){
-							$(this).show();
-						}
-					}
-*/					p++;
+					$(this).val(data[i][p].value);
+					p++;
 				});
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
@@ -285,17 +275,17 @@ $.ajax({
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
+			"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
 			);
 		}
 		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 			$("#aimID").after(
-			"<option class='rest' value="+data[1][i]+">"+ data[1][i] + "</option>"
+			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
 			);
 		}
 		for(i=0;i<data[2].length;i++){//获取学院下拉框
 			$("#collegeID").after(
-			"<option class='rest' value="+data[2][i]+">"+ data[2][i] + "</option>"
+			"<option class='rest' value="+data[2][i].collegename+">"+ data[2][i].collegename + "</option>"
 			);
 		}
 	}
@@ -544,6 +534,7 @@ $("#delete").click(function(){
 	});
 	}
 });
+
 
 } );
 
