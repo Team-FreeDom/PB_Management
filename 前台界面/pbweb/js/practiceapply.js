@@ -3,15 +3,15 @@ var obj=[];
 $(document).ready(function() {
 	
 	 var table=$("#practiceapplytable").dataTable({
-		"processing" : true,
-		"serverSide" : true,
+		//"processing" : true,
+		//"serverSide" : true,
 		"bSort": false,
 		"bFilter": false,
 		"aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。
 		"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 		"iDisplayLength" : 5,  //默认每页显示多少条记录
 		"dom":'ftipr<"bottom"l>',
-		"ajax":{
+		/*"ajax":{
 			"URL":"xxx",
 			"type":"POST"
 		},
@@ -121,7 +121,7 @@ $(document).ready(function() {
 				}
 			}
 			
-		],
+		],*/
         "language": {
 			"lengthMenu": "每页 _MENU_ 条记录",
             "zeroRecords": "没有找到记录",
@@ -139,6 +139,8 @@ $(document).ready(function() {
 	});	
 //显示实习申请表
 $("#practiceapplytable tbody").on("click","tr",function(){
+	var index= table.row().data()[0].html();
+	alert(index);
 	$("#Applychart").show();
 });
 //隐藏实习申请表

@@ -1,5 +1,6 @@
 // JavaScript Document
 var obj=[];
+var Oneindex;
 $(document).ready(function() {
 	
 	 var table=$("#practiceplanmaintain").dataTable({
@@ -128,9 +129,8 @@ $(document).ready(function() {
 			"targets" : [ 0 ],
 			"data" : "id",
 			"render" : function(data, type, row) {
-				return '<input type="checkbox" name="allcheckbox" value="'
-					+data
-					+'">';
+				obj.push(row);
+				return '<input type="checkbox" name="allcheckbox" value=' + data + 'id='+(obj.length-1)+'>';
 			}
 		} ],
         "language": {
@@ -171,7 +171,7 @@ var tbodyStyle='<tbody><tr>'
 							+'<td>备注</td>'
 						 +'</tr>'
 						 +'<tr>'
-						 +'<td rowspan="3">1</td>'
+						 +'<td rowspan="3"><sapn class="mark"></span></td>'
 						 +'<td><input id="weekend" type="text" class="inputWidth flag"></td>'
 						 +'<td><input id="startweek" type="text" class="inputWidth flag"></td>'
 						 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
@@ -197,18 +197,19 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
 						 +'<td><input type="text" class="adviser2 inputWidth flag"></td>'
 						 +'<td><a class="btn btn-primary choice">选择</a></td>'
-						 +'<td><span class="deleteID">删除</span></td>'
+						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
+	
 $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
-	/*var index= table.row().data()[0].id;
-	$("#division").val(obj[index].division);
-	$("#classname").val(obj[index].className);
-	$("#major").val(obj[index].major);
-	$("#class").val(obj[index].className);
-	$("#grade").val(obj[index].grade);
-	$("#number").val(obj[index].number);
-	$("#weeks").val(obj[index].Prweeks);
-	$("#leaderTeacher").val(obj[index].leaderTeacher);*/
+	/*Oneindex= $(this).closest("tr").children(":first").find("input").attr("id");
+	$("#division").val(obj[Oneindex].division);
+	$("#classname").val(obj[Oneindex].className);
+	$("#major").val(obj[Oneindex].major);
+	$("#class").val(obj[Oneindex].className);
+	$("#grade").val(obj[Oneindex].grade);
+	$("#number").val(obj[Oneindex].number);
+	$("#weeks").val(obj[Oneindex].Prweeks);
+	$("#leaderTeacher").val(obj[Oneindex].leaderTeacher);*/
 	$.ajax({
 		url:"",
 		type:"POST",
@@ -218,10 +219,28 @@ $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
 			for(var i=0;i<data.length;i++){
 				var p=0;
 				$("#table tbody:last-child").after(tbodyStyle);
+				$("#table tbody:last-child").find(".mark").html(i);
 				$("#table tbody:last-child").find(".flag").each(function(){
 					$(this).val(data[i][p]);
-					p++;
+/*					if(p===5){
+						if(data[i][p-1]==="校内基地"){
+							$(this).show();
+						}
+					}
+					if(p===6){
+						if(data[i][p-2]==="校外基地"){
+							$(this).show();
+						}
+					}
+*/					p++;
 				});
+				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
+					$("#table tbody:last-child").find("#schoolBase").show();
+				}
+				if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
+					$("#table tbody:last-child").find("#outBase").show();
+				}
+				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p]);
 			}
 		}
 	});
@@ -267,20 +286,17 @@ $.ajax({
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i]+">"
-									+ data[0][i] + "</option>"
+			"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
 			);
 		}
 		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 			$("#aimID").after(
-			"<option class='rest' value="+data[1][i]+">"
-									+ data[1][i] + "</option>"
+			"<option class='rest' value="+data[1][i]+">"+ data[1][i] + "</option>"
 			);
 		}
 		for(i=0;i<data[2].length;i++){//获取学院下拉框
 			$("#collegeID").after(
-			"<option class='rest' value="+data[2][i]+">"
-									+ data[2][i] + "</option>"
+			"<option class='rest' value="+data[2][i]+">"+ data[2][i] + "</option>"
 			);
 		}
 	}
@@ -313,8 +329,7 @@ $(document).on("change","#selectCollege",function(){
 		obj2=data;//用于下面函数里面的判断
 		for(var i=0;i<data.length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[i].teacherName+">"
-									+ data[i].teacherName + "</option>"
+			"<option class='rest' value="+data[i].teacherName+">"+ data[i].teacherName + "</option>"
 			);
 		}
 	}
@@ -359,6 +374,7 @@ $(document).on("click","#closemodal",function(){
 $(document).on("click","#add",function(){//增加一条实习记录弹出框的弹出
 	$("#addPraItem").find("input").val("");
 	$("#addPraItem").find("select").val("");
+	
 	$("#addPraItem").modal('show');
 });
 $(document).on("click","#saveadd",function(){//保存一条增加的实习记录
@@ -388,8 +404,28 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
 });
 	
-$(document).on("click",".deleteID",function(){//弹出框的删除
-	$(this).closest("tbody").remove();
+$(document).on("click",".deleteID",function(){//弹出框里面的记录删除
+	var judget=$(this).attr("id");
+	if(judget!==""){
+		$.ajax({
+			url:"",
+			type:"POST",
+			dataType:"json",
+			data:{
+				"deleteid":judget
+			},
+			success : function(msg){
+				bootbox.alert({
+					message : msg.str,
+					size : 'small'
+				});
+				$(this).closest("tbody").remove();
+			}
+		});
+	}else{
+		$(this).closest("tbody").remove();
+	}
+
 });	
 	
 	
@@ -436,7 +472,7 @@ $("#save").click(function(){//弹出框的保存
 						dataType:"json",
 						data:{
 							"str":str,
-							"courseID":obj[index].courseID
+							"courseID":obj[Oneindex].courseID
 						},
 						success : function(msg) {
 							bootbox.alert({
@@ -509,6 +545,6 @@ $("#delete").click(function(){
 	});
 	}
 });
-	
+
 } );
 
