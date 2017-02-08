@@ -118,9 +118,9 @@ $(document).ready(function() {
 				"mData" : "examine",//考核
 				"orderable" : false,
 				"sDefaultContent" : "",
-				"render" : function(data,type,row){
+				/*"render" : function(data,type,row){
 					obj.push(row);
-				}
+				}*/
 			}
 			
 		],
