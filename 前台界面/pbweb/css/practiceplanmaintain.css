@@ -76,6 +76,9 @@ table tbody tr td{
 	}
 .dataTables_length{
 	margin-left:5%;}
-
+.deleteID{
+	color:#F90409;
+	text-decoration: underline;
+}
 
 
