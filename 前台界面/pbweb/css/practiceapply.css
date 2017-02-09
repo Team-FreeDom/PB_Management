@@ -12,7 +12,6 @@ table thead > tr> td{
 
 table thead tr th{
 	text-align:center;
-	border-top: solid 1px #000000;
 }
 table tbody tr td{
 	text-align:center;
@@ -76,6 +75,10 @@ table tbody tr td{
 .dataTables_length{
 	margin-left:5%;}
 
-
+.selectWidth{
+	width:12%;
+	float: left;
+	margin-right: 20px;
+}
 
 

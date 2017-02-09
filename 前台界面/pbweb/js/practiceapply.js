@@ -23,7 +23,7 @@ $(document).ready(function() {
 				//"sWidth" : "4%"
 			},*/
 			{
-				"mData" : "selectID",//选课课号
+				"mData" : "termYear",//学期学年
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
@@ -141,7 +141,7 @@ $(document).ready(function() {
 	});
 	
 //显示实习申请表
-var tbodyStyle='<tbody><tr>'
+var tbodyStyle='<tbody class="tbodyID"><tr>'
 							+'<td>序号</td>'
 							+'<td>周次</td>'
 							+'<td>开始时间</td>'
@@ -177,8 +177,8 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td><input type="text" value=" " class="adviser2 inputWidth flag"></td>'
-						 +'<td><a class="btn btn-primary choice">选择</a></td>'
+						 +'<td><input type="text" value="" class="adviser2 inputWidth flag"></td>'
+						 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
 						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
 	
@@ -271,17 +271,20 @@ $.ajax({
 var writeName="";
 var showName="";
 var currentName="";
+var teacherString;
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
+	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	teacherString=showName.split(",");
 	writeName=e.target.value;
-	if(currentName!==writeName){
-		var currentvar=showName.split(" ");
-		var x=currentvar.indexOf(currentName);
-		currentvar.splice(x,1);
-		currentvar.push(writeName);
-		showName=currentvar.join(" ");
-		$("#adviser").val(showName);
-		currentName="";
+	if(writeName===""){
+		teacherString[rowNum]="null";
+	}else{
+		teacherString[rowNum]=writeName;
 	}
+	
+	showName=teacherString.join(",");
+	$("#adviser").val(showName);
+	currentName="";
 
 });
 $(document).on("focus",".adviser2",function(e){
@@ -289,13 +292,8 @@ $(document).on("focus",".adviser2",function(e){
 	currentName=e.target.value;
 	writeName="";
 });	
-$(document).on("click",".choice",function(){//点击选择弹出 框并且清空框里的数据
-	$("#Selectname").modal('show');
-	$("#selectTname").val("");
-	$("#tester").val("");
-	$("#selectCollege").val("");
-});
 	
+
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
 var obj2;
 $(document).on("change","#selectCollege",function(){
@@ -317,22 +315,40 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
-//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+var selectNum;
 var value=[];
 var value2="";
 var value3=[];
-$(document).on("change","#selectTname",function(e){
+$(document).on("click",".choice",function(){//点击选择弹出 
 	
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectname").modal('show');
+	$("#selectTname").val("");
+	$("#tester").val(value[selectNum]);
+	$("#selectCollege").val("");
+});
+	
+$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+	var testString=$("#testername").val;
+	value=testString.split(",");
 	$.each(obj2,function(index,item){
 		if(item.teacherName===e.target.value){
 			if($.inArray(item.teacherID,value3)===-1){
-				value.push(e.target.value);
+				value[selectNum]=e.target.value;
 			    value3.push(item.teacherID);
-				value2=value.join(" ");
+				value2=value.join(",");
 				$("#tester").val(value2);
 			}else{
-				alert("此人已经存在，请重新选择！");
+				bootbox.alert({
+					message : msg.str,
+					size : 'small'
+				});
 			}
+		}else{
+			value[selectNum]=e.target.value;
+			value3.push(item.teacherID);
+			value2=value.join(",");
+			$("#tester").val(value2);
 		}
 	});
 	
@@ -358,6 +374,8 @@ $(document).on("click","#closemodal",function(){
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
+	var tbNum=$("#table").children('tbody').length;
+	$("#table tbody:last-child").find(".mark").html(tbNum-1);
 });
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
@@ -380,6 +398,13 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 		});
 	}else{
 		$(this).closest("tbody").remove();
+		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+		teacherString.splice(rowNum,1);
+		showName=teacherString.join(",");
+		$("#adviser").val(showName);
+		value3.splice(rowNum,1);
+		value2=value.join(",");
+		$("#tester").val(value2);
 	}
 
 });	
@@ -402,25 +427,31 @@ $("#save").click(function(){//弹出框的保存
 			},
 			callback: function (result) {
 				if(result){
-					var str="(";
+					/*obj[Oneindex].courseID,obj[Oneindex].termYear
+					var p="courceid";
+					var q="year";*/
+					var str='("'+obj[Oneindex].courseID+'",'+'"'+obj[Oneindex].termYear+'"';
+					var str2=str;
+					alert(str);
 					var y=0;
-					$("#table").find("tbody").each(function(){
-						var x=0;
+					$(".tbodyID").each(function(){
+						var c=$(this).find(".mark").html()-1;
+						str=str+',"'+value[c]+'"';
 						if(y!==0){
-							str=str+',';
+							str=str+','+str2;
 						}
 						$(this).find(".flag").each(function(){
-							if(x!==0){
-								str=str+','+'"'+$(this).val()+'"';
+							if($(this).val()===""){
+								str=str+','+'"null"';
 							}else{
-								str=str+'"'+$(this).val()+'"';
-								x++;
+								str=str+','+'"'+$(this).val()+'"';
 							}
-							
+								
 						});
 						str=str+')';
 						y++;
 					});
+					//alert(str);
 					
 					$.ajax({
 						url:"",
@@ -428,7 +459,8 @@ $("#save").click(function(){//弹出框的保存
 						dataType:"json",
 						data:{
 							"str":str,
-							"courseID":obj[Oneindex].courseID
+							"courseID":obj[Oneindex].courseID,
+							"termYear":obj[Oneindex].termYear,
 						},
 						success : function(msg) {
 							bootbox.alert({

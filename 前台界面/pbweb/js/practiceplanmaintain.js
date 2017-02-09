@@ -23,7 +23,7 @@ $(document).ready(function() {
 				//"sWidth" : "4%"
 			},
 			{
-				"mData" : "selectID",//选课课号
+				"mData" : "termYear",//学期学年
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
