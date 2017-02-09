@@ -177,7 +177,7 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td><input type="text" class="adviser2 inputWidth flag"></td>'
+						 +'<td><input type="text" value=" " class="adviser2 inputWidth flag"></td>'
 						 +'<td><a class="btn btn-primary choice">选择</a></td>'
 						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
@@ -198,23 +198,15 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		dataType:"json",
 		success:function(data){
 			
-			for(var i=0;i<data.length;i++){
-				var p=0;
+			var teachername="";
+			var testername="";
+			for(var i=1;i<data.length;i++){
+				var p=2;//头两个用来存指导老师和实验员
 				$("#table tbody:last-child").after(tbodyStyle);
 				$("#table tbody:last-child").find(".mark").html(i);
 				$("#table tbody:last-child").find(".flag").each(function(){
-					$(this).val(data[i][p]);
-/*					if(p===5){
-						if(data[i][p-1]==="校内基地"){
-							$(this).show();
-						}
-					}
-					if(p===6){
-						if(data[i][p-2]==="校外基地"){
-							$(this).show();
-						}
-					}
-*/					p++;
+					$(this).val(data[i][p].value);
+					p++;
 				});
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
@@ -222,8 +214,12 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
 					$("#table tbody:last-child").find("#outBase").show();
 				}
-				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p]);
+				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p].value);
+				teachername=teachername+data[i][0].value+" ";
+				testername=testername+data[i][1].value+" ";
 			}
+			$("#testername").val(teachername);
+			$("#adviser").val(testername);
 		}
 	});
 	$("#Applychart").show();
@@ -256,27 +252,43 @@ $.ajax({
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
+			"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
 			);
 		}
 		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 			$("#aimID").after(
-			"<option class='rest' value="+data[1][i]+">"+ data[1][i] + "</option>"
+			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
 			);
 		}
 		for(i=0;i<data[2].length;i++){//获取学院下拉框
 			$("#collegeID").after(
-			"<option class='rest' value="+data[2][i]+">"+ data[2][i] + "</option>"
+			"<option class='rest' value="+data[2][i].collegename+">"+ data[2][i].collegename + "</option>"
 			);
 		}
 	}
 });
-var name="";
-$(document).on("change",".adviser2",function(e){//填写指导老师姓名
-	name+=e.target.value+" ";
-	$("#adviser").val(name);
-});
 	
+var writeName="";
+var showName="";
+var currentName="";
+$(document).on("change",".adviser2",function(e){//填写指导老师姓名
+	writeName=e.target.value;
+	if(currentName!==writeName){
+		var currentvar=showName.split(" ");
+		var x=currentvar.indexOf(currentName);
+		currentvar.splice(x,1);
+		currentvar.push(writeName);
+		showName=currentvar.join(" ");
+		$("#adviser").val(showName);
+		currentName="";
+	}
+
+});
+$(document).on("focus",".adviser2",function(e){
+	showName=$("#adviser").val();
+	currentName=e.target.value;
+	writeName="";
+});	
 $(document).on("click",".choice",function(){//点击选择弹出 框并且清空框里的数据
 	$("#Selectname").modal('show');
 	$("#selectTname").val("");
@@ -430,64 +442,6 @@ $("#save").click(function(){//弹出框的保存
 				}
 			}
 	});
-});
-//删除表格的中记录	
-$("#delete").click(function(){
-	var flag=0;
-	$('input[name="allcheckbox"]:checked').each(function(){
-		flag++;
-	});
-	if(flag===0){
-		bootbox.alert({
-			message : "您还没有选择任何内容",
-			size : 'small'
-		});
-	}else{
-		bootbox.confirm({
-			message: "确定删除？",
-			size: 'small',
-			buttons: {
-				confirm: {
-					label: '确定',
-					className: 'btn-success'
-				},
-				cancel: {
-					label: '取消',
-					className: 'btn-danger'
-				},
-			},
-			callback: function (result) {
-				if(result){
-					var deletstr = '(';
-					var i=0;
-					$("input[type='checkbox'][name='allcheckbox']:checked").each(function() {
-						if(i!==0){
-							deletstr = deletstr+ ','+ $(this).val();
-						}else{
-							deletstr = deletstr+ $(this).val();
-						}
-						i++;
-					});
-					deletstr = deletstr + ')';
-					$.ajax({
-						url : '',
-						type : 'post',
-						dataType : 'json',
-						data : {
-							"deletstr" : deletstr
-						},
-						success : function(msg) {
-							bootbox.alert({
-								message : msg.str,
-								size : 'small'
-							});
-							table.draw(false);
-						}
-					});
-				}
-			}
-	});
-	}
 });
 
 } );
