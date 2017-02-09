@@ -194,6 +194,18 @@
 
 							<table id="practiceapplytable" class="hover" cellspacing="0" width="100%">
                                     <thead>
+										<tr>
+											<td colspan="20">
+												<select class="form-control selectWidth">
+													<option value="">请选择学年</option>
+												</select>
+												<select class="form-control selectWidth">
+													<option value="">请选择学期</option>
+													<option value="">第一学期</option>
+													<option value="">第二学期</option>
+												</select>
+											</td>
+										</tr>
                                         <tr>
                                             <th>学年学期</th>
                                             <th>课程代码</th>
@@ -364,15 +376,15 @@
 													<td>带队老师</td>
 													<td colspan="3"><input class="noborder text-center flag" readonly id="leaderTeacher" type="text" value="李林"></td>
 													<td>指导教师</td>
-													<td colspan="4"><input readonly class="noborder text-center flag" id="adviser" type="text"></td>
+													<td colspan="4"><input readonly class="noborder text-center flag" id="adviser" value="" type="text"></td>
 												</tr>
 												<tr>
 													<td>实验员姓名</td>
-													<td colspan="8"><input class="noborder text-center flag" readonly id="testername" type="text">
+													<td colspan="8"><input class="noborder text-center flag" readonly id="testername" value="" type="text">
 													</td>
 												</tr>
                                          	
-                                          	<tbody id="tbodyID">
+                                          	<tbody class="tbodyID">
 												<tr>
 													<td>序号</td>
 													<td>周次</td>
@@ -385,26 +397,26 @@
 													<td>备注</td>
 												</tr>
 												<tr>
-													<td valign="middle" rowspan="3">1</td>
+													<td rowspan="3"><sapn class="mark">1</span></td>
 													<td><input id="weekend" type="text" class="inputWidth flag"></td>
 													<td><input id="startweek" type="text" class="inputWidth flag"></td>
 													<td><input id="endweek" type="text" class="inputWidth flag"></td>
 													<td><input id="content" type="text" class="inputWidth flag"></td>
 													<td>
-														<select name="" id="baseFrom">
+														<select name="" id="baseFrom" class="flag">
 															<option value="">请选择</option>
 															<option value="校内基地">校内基地</option>
 															<option value="校外基地">校外基地</option>
 														</select>
 													</td>
 													<td id="practicePlace">
-														<select id="schoolBase" hidden>
+														<select id="schoolBase" hidden class="flag">
 															<option id="schoolBaseID" value="">请选择</option>
 														</select>
-														<input id="outBase" type="text" class="inputWidth" hidden>
+														<input id="outBase" type="text" class="inputWidth flag" hidden>
 													</td>
 													<td>
-														<select name="" id="">
+														<select name="" id="" class="flag">
 															<option value="">请选择</option>
 															<option value="生产实习">生产实习</option>
 															<option value="教学实习">教学实习</option>
@@ -412,7 +424,7 @@
 															<option value="综合实习">综合实习</option>
 														</select>
 													</td>
-													<td><input id="remark" type="text"></td>
+													<td><input id="remark" type="text" class="flag"></td>
 												</tr>
 												<tr>
 													<td>实习形式</td>
@@ -425,17 +437,17 @@
 												</tr>
 												<tr>
 													<td>
-														<select name="" id="practiceClass">
+														<select name="" id="practiceClass" class="flag">
 															<option value="">请选择</option>
 															<option value="集中">集中</option>
 															<option value="分散">分散</option>
 														</select>
 													</td>
-													<td colspan="2"><input id="phone" type="text"></td>
-													<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>
-													<td><input id="budget" type="text" class="inputWidth"></td>
-													<td><input type="text" value=" " class="adviser2 inputWidth"></td>
-													<td><a class="btn btn-primary choice" id="choice">选择</a></td>
+													<td colspan="2"><input id="phone" type="text" class="flag"></td>
+													<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>
+													<td><input id="budget" type="text" class="inputWidth flag"></td>
+													<td><input type="text" value="" class="adviser2 inputWidth flag"></td>
+													<td><button type="button" value="" class="btn btn-primary choice" id="choice">选择</button></td>
 													<td><span class="deleteID" id="">删除</span></td>
 												</tr>
                                           	</tbody>
