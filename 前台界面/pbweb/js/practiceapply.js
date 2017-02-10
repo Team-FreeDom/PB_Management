@@ -12,7 +12,7 @@ $(document).ready(function() {
 		"iDisplayLength" : 5,  //默认每页显示多少条记录
 		"dom":'ftipr<"bottom"l>',
 		"ajax":{
-			"URL":"xxx",
+			"url":"xxx",
 			"type":"POST"
 		},
 		"aoColumns" : [
@@ -34,12 +34,12 @@ $(document).ready(function() {
 			},
 			{
 				"mData" : "count",//人数
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : ""
 			},
 			{
 				"mData" : "selectedCount",//已选人数
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			{
@@ -49,18 +49,18 @@ $(document).ready(function() {
 			},
 			{
 				"mData" : "college",//开课学院
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			
 			{
 				"mData" : "weekClassify",//周学时
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			{
 				"mData" : "credit",//学分
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			{
@@ -75,17 +75,23 @@ $(document).ready(function() {
 			},
 			{
 				"mData" : "tid",//教职工号
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			{
 				"mData" : "tname",//教师姓名
-				"orderable" : false,
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			{
 				"mData" : "Week",//起始周
 				"orderable" : false,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "mid",//专业编号
+				"orderable" : false,
+				"visible":false,
 				"sDefaultContent" : "",
 			},
 			{
