@@ -63,10 +63,10 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 			
 			var teachername="";
 			var testername="";
-			for(var i=1;i<data.length;i++){
+			for(var i=0;i<data.length;i++){
 				var p=2;//头两个用来存指导老师和实验员
 				$("#table tbody:last-child").after(tbodyStyle);
-				$("#table tbody:last-child").find(".mark").html(i);
+				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find(".flag").each(function(){
 					$(this).val(data[i][p].value);
 					p++;
@@ -78,8 +78,14 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					$("#table tbody:last-child").find("#outBase").show();
 				}
 				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p].value);
-				teachername=teachername+data[i][0].value+" ";
-				testername=testername+data[i][1].value+" ";
+				if(i!==data.length-1){
+					teachername=teachername+data[i][0].value+"，";
+					testername=testername+data[i][1].value+"，";
+				}else{
+					teachername=teachername+data[i][0].value;
+					testername=testername+data[i][1].value;
+				}
+				
 			}
 			$("#testername").val(teachername);
 			$("#adviser").val(testername);
@@ -262,6 +268,12 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	}else{
 		$(this).closest("tbody").remove();
 		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+		$(".mark").each(function(){
+			var htmlValue=$(this).html();
+			if(htmlValue>(rowNum+1)){
+				$(this).html(htmlValue-1);
+			}
+		});
 		teacherString.splice(rowNum,1);
 		showName=teacherString.join(",");
 		$("#adviser").val(showName);
