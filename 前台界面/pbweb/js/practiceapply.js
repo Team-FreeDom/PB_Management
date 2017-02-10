@@ -104,6 +104,12 @@ $(document).ready(function() {
 				"mData" : "checkMethod",//考核
 				"orderable" : false,
 				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "id",//编号
+				"orderable" : false,
+				//"visible":false,
+				"sDefaultContent" : "",
 				"render" : function(data,type,row){
 					obj.push(row);
 					return '<span id='+(obj.length-1)+'></span>';
@@ -146,8 +152,8 @@ $(document).ready(function() {
 						 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
 						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-						 +'<td id="practicePlace"><select id="schoolBase" class="flag" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth flag" hidden></td>'
-						 +'<td><select name="" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
+						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 						 +'<td><input id="remark" type="text" class="flag"></td>'
 						 +'</tr>'
 						 +'<tr>'
@@ -164,14 +170,15 @@ $(document).ready(function() {
 						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td><input type="text" value="" class="adviser2 inputWidth flag"></td>'
+						 +'<td><input id="guideTeacher" type="text" value="" class="adviser2 inputWidth flag"></td>'
 						 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
 						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
-	/*Oneindex= $(this).find("span").attr("id");
-	$("#division").val(obj[Oneindex].college);
+	Oneindex= $(this).find("span").attr("id");
+	alert(Oneindex);
+	/*$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
 	$("#class").val(obj[Oneindex].composition);
@@ -183,31 +190,46 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		url:"",
 		type:"POST",
 		dataType:"json",
+		/*data:{
+		"mid":obj[Oneindex].cid
+	},*/
 		success:function(data){
 			
 			var teachername="";
 			var testername="";
 			for(var i=0;i<data.length;i++){
-				var p=2;//头两个用来存指导老师和实验员
+				
 				$("#table tbody:last-child").after(tbodyStyle);
 				$("#table tbody:last-child").find(".mark").html(i+1);
-				$("#table tbody:last-child").find(".flag").each(function(){
-					$(this).val(data[i][p].value);
-					p++;
-				});
+				$("#table tbody:last-child").find("#weekend").val(data[i].week);
+				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
+				$("#table tbody:last-child").find("#endweek").val(data[i].endtime);
+				$("#table tbody:last-child").find("#content").val(data[i].content);
+				$("#table tbody:last-child").find("#baseFrom").val(data[i].source);
+				$("#table tbody:last-child").find("#category").val(data[i].category);
+				$("#table tbody:last-child").find("#remark").val(data[i].remark);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].form);
+				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
+				$("#table tbody:last-child").find("#aim").val(data[i].aim);
+				$("#table tbody:last-child").find("#budget").val(data[i].expense);
+				$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].site);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].site);
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
+					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
 				}
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
 					$("#table tbody:last-child").find("#outBase").show();
+					$("#table tbody:last-child").find("#outBase").addClass("flag");
 				}
-				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p].value);
+				$("#table tbody:last-child").find(".deleteID").attr("id",data[i].cid);
 				if(i!==data.length-1){
-					teachername=teachername+data[i][0].value+"，";
-					testername=testername+data[i][1].value+"，";
+					teachername=teachername+data[i].guideTeacher+"，";
+					testername=testername+data[i].assistant+"，";
 				}else{
-					teachername=teachername+data[i][0].value;
-					testername=testername+data[i][1].value;
+					teachername=teachername+data[i].guideTeacher;
+					testername=testername+data[i].assistant;
 				}
 				
 			}
@@ -225,16 +247,22 @@ $(document).on("change","#baseFrom",function(e){
 	//$("#practicePlace").empty();
 	if(e.target.value==='校内基地'){
 		$(this).parent().next().children(":first").show();
+		$(this).parent().next().children(":first").addClass("flag");
 		//$("#schoolBase").show();
 		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":last").removeClass("flag");
 	}
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
+		$(this).parent().next().children(":last").addClass("flag");
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").removeClass("flag");
 	}
 	if(e.target.value===''){
 		$(this).parent().next().children(":last").hide();
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").removeClass("flag");
+		$(this).parent().next().children(":last").removeClass("flag");
 	}
 });	
 	//获取选择的内容
@@ -242,6 +270,9 @@ $.ajax({
 	URL:"",
 	type:"POST",
 	dataType : 'json',
+	/*data:{
+		"mid":obj[Oneindex].cid
+	},*/
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 			$("#schoolBaseID").after(
@@ -352,7 +383,6 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	value2="";
 });
 	
-//实习表中添加一条记录
 
 	
 //隐藏实习申请表
@@ -369,6 +399,33 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
 	var tbNum=$("#table").children('tbody').length;
 	$("#table tbody:last-child").find(".mark").html(tbNum-1);
+	
+	$.ajax({
+	URL:"",
+	type:"POST",
+	dataType : 'json',
+	data:{
+		"mid":obj[Oneindex].cid
+	},
+	success : function(data){
+		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
+			$("#schoolBaseID").after(
+			"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
+			);
+		}
+		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+			$("#aimID").after(
+			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+			);
+		}
+		for(i=0;i<data[2].length;i++){//获取学院下拉框
+			$("#collegeID").after(
+			"<option class='rest' value="+data[2][i].collegename+">"+ data[2][i].collegename + "</option>"
+			);
+		}
+	}
+});
+	
 });
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
@@ -429,29 +486,36 @@ $("#save").click(function(){//弹出框的保存
 				if(result){
 					/*obj[Oneindex].courseID,obj[Oneindex].termYear
 					var p="courceid";
-					var q="year";*/
-					var str='("'+obj[Oneindex].courseID+'",'+'"'+obj[Oneindex].termYear+'"';
-					var str2=str;
-					alert(str);
+					var q="year";
+					var str='"'+p+'"'+',"'+q+'",'+'("';*/
+					//alert(str);
+					var str='"'+obj[Oneindex].cid+'"'+',"'+obj[Oneindex].semester+'",'+'("';
 					var y=0;
 					$(".tbodyID").each(function(){
+						var b=$(this).find(".adviser2").val();
 						var c=$(this).find(".mark").html()-1;
-						str=str+',"'+value[c]+'"';
+						str=str+b+'"'+',"'+value[c]+'"';
 						if(y!==0){
-							str=str+','+str2;
+							str=str+',';
 						}
+						var x=0;
 						$(this).find(".flag").each(function(){
-							if($(this).val()===""){
+							
+							x++;
+							if(x!==13){
+								if($(this).val()===""){
 								str=str+','+'"null"';
-							}else{
-								str=str+','+'"'+$(this).val()+'"';
+								}else{
+									str=str+','+'"'+$(this).val()+'"';
+								}
 							}
+							
 								
 						});
 						str=str+')';
 						y++;
 					});
-					//alert(str);
+					alert(str);
 					
 					$.ajax({
 						url:"",
