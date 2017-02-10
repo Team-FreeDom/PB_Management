@@ -16,105 +16,97 @@ $(document).ready(function() {
 			"type":"POST"
 		},
 		"aoColumns" : [
-			/*{
-				"mData" : "id",
+			{
+				"mData" : "Semester",//学期学年
 				"orderable" : false,
 				"sDefaultContent" : "",
-				//"sWidth" : "4%"
-			},*/
+				//"sWidth" : "2%",
+			},
 			{
-				"mData" : "termYear",//学期学年
+				"mData" : "cid",//课程代码
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseID",//课程代码
+				"mData" : "coursename",//课程名称
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseName",//课程名称
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "number",//人数
+				"mData" : "count",//人数
 				"orderable" : false,
 				"sDefaultContent" : ""
 			},
 			{
-				"mData" : "CheckedNum",//已选人数
+				"mData" : "selectedCount",//已选人数
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "className",//教学班组成
+				"mData" : "composition",//教学班组成
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "institute",//开课学院
+				"mData" : "college",//开课学院
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			
 			{
-				"mData" : "Wperiod",//周学时
+				"mData" : "weekClassify",//周学时
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "grade",//学分
+				"mData" : "credit",//学分
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courceProperty",//课程性质
+				"mData" : "courseNature",//课程性质
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseClass",//课程类别
+				"mData" : "courseCategor",//课程类别
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "teacherID",//教职工号
+				"mData" : "tid",//教职工号
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "teacherName",//教师姓名
+				"mData" : "tname",//教师姓名
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "sWeeke",//起始周
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "division",//单位
+				"mData" : "Week",//起始周
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
 				"mData" : "majoy",//面向专业
 				"orderable" : false,
+				"visible":false,
 				"sDefaultContent" : "",
 			},
 			{
 				"mData" : "Prweeks",//实习周数
 				"orderable" : false,
+				"visible":false,
 				"sDefaultContent" : "",
 			},
-			{
+			/*{
 				"mData" : "leadTeacher",//带队老师
 				"orderable" : false,
 				"sDefaultContent" : "",
-			},
+			},*/
 			{
-				"mData" : "examine",//考核
+				"mData" : "checkMethod",//考核
 				"orderable" : false,
 				"sDefaultContent" : "",
 				"render" : function(data,type,row){
@@ -139,9 +131,9 @@ $(document).ready(function() {
 				}
          }
 	});
-	
-//显示实习申请表
-var tbodyStyle='<tbody class="tbodyID"><tr>'
+
+	//显示实习申请表
+	var tbodyStyle='<tbody class="tbodyID"><tr>'
 							+'<td>序号</td>'
 							+'<td>周次</td>'
 							+'<td>开始时间</td>'
@@ -200,10 +192,10 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 			
 			var teachername="";
 			var testername="";
-			for(var i=1;i<data.length;i++){
+			for(var i=0;i<data.length;i++){
 				var p=2;//头两个用来存指导老师和实验员
 				$("#table tbody:last-child").after(tbodyStyle);
-				$("#table tbody:last-child").find(".mark").html(i);
+				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find(".flag").each(function(){
 					$(this).val(data[i][p].value);
 					p++;
@@ -215,8 +207,14 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					$("#table tbody:last-child").find("#outBase").show();
 				}
 				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p].value);
-				teachername=teachername+data[i][0].value+" ";
-				testername=testername+data[i][1].value+" ";
+				if(i!==data.length-1){
+					teachername=teachername+data[i][0].value+"，";
+					testername=testername+data[i][1].value+"，";
+				}else{
+					teachername=teachername+data[i][0].value;
+					testername=testername+data[i][1].value;
+				}
+				
 			}
 			$("#testername").val(teachername);
 			$("#adviser").val(testername);
@@ -399,6 +397,13 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	}else{
 		$(this).closest("tbody").remove();
 		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+
+		$(".mark").each(function(){
+			var htmlValue=$(this).html();
+			if(htmlValue>(rowNum+1)){
+				$(this).html(htmlValue-1);
+			}
+		});
 		teacherString.splice(rowNum,1);
 		showName=teacherString.join(",");
 		$("#adviser").val(showName);
@@ -475,6 +480,7 @@ $("#save").click(function(){//弹出框的保存
 			}
 	});
 });
+	
 
 } );
 
