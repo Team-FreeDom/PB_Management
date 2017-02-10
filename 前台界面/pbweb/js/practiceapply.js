@@ -89,22 +89,11 @@ $(document).ready(function() {
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "majoy",//面向专业
+				"mData" : "major_oriented",//面向专业
 				"orderable" : false,
 				"visible":false,
 				"sDefaultContent" : "",
 			},
-			{
-				"mData" : "Prweeks",//实习周数
-				"orderable" : false,
-				"visible":false,
-				"sDefaultContent" : "",
-			},
-			/*{
-				"mData" : "leadTeacher",//带队老师
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},*/
 			{
 				"mData" : "checkMethod",//考核
 				"orderable" : false,
@@ -176,14 +165,14 @@ $(document).ready(function() {
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
 	/*Oneindex= $(this).find("span").attr("id");
-	$("#division").val(obj[Oneindex].division);
-	$("#classname").val(obj[Oneindex].className);
-	$("#major").val(obj[Oneindex].major);
-	$("#class").val(obj[Oneindex].className);
-	$("#grade").val(obj[Oneindex].grade);
-	$("#number").val(obj[Oneindex].number);
-	$("#weeks").val(obj[Oneindex].Prweeks);
-	$("#leaderTeacher").val(obj[Oneindex].leaderTeacher);*/
+	$("#division").val(obj[Oneindex].college);
+	$("#classname").val(obj[Oneindex].coursename);
+	$("#major").val(obj[Oneindex].major_oriented);
+	$("#class").val(obj[Oneindex].composition);
+	$("#grade").val(obj[Oneindex].credit);
+	$("#number").val(obj[Oneindex].count);
+	$("#weeks").val(obj[Oneindex].weekClassify);
+	$("#leaderTeacher").val(obj[Oneindex].tname);*/
 	$.ajax({
 		url:"",
 		type:"POST",
