@@ -1131,8 +1131,8 @@ public class ExcelReport{
 	public void exportPracticePlanInfo(List<AllPlan> list,String fileName) {
 		// 列头信息
 		/*"序号", "课程代码", "课程名称,"人数", "已选人数", "教学班组成", "开课学院", "周学时",
-		"学分", "课程性质","课程类别",  "所属专业","面向专业","教师职工号","教师名称","学期","起止周","考核方式"*/
-          String[] col_title = { "序号", "课程代码", "课程名称", "人数",  "已选人数", "教学班组成", "开课学院", "周学时", "学分", "课程性质","课程类别",  "所属专业","面向专业","教师职工号","教师名称","学期","起止周","考核方式"};// 18
+		"学分", "课程性质","课程类别",  "所属专业","面向专业","教师职工号","教师名称","学期","起止周","考核方式","专业代码","面向专业"*/
+          String[] col_title = { "序号", "课程代码", "课程名称", "人数",  "已选人数", "教学班组成", "开课学院", "周学时", "学分", "课程性质","课程类别",  "专业代码","面向专业","教师职工号","教师名称","学期","起止周","考核方式"};// 18
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();// 创建一个Excel文档对象
 		Sheet sheet = workbook.createSheet();// 在上面的文档中创建Excel表单
@@ -1209,7 +1209,7 @@ public class ExcelReport{
 		row1.setHeight((short) 1000);
 		Cell cell_title = row1.createCell(0);
 		cell_title.setAsActiveCell();
-		cell_title.setCellValue("湖南农业大学系统用户信息表");
+		cell_title.setCellValue("湖南农业大学系统实习表");
 		cell_title.setCellStyle(cs_title);
 		// 第二排填相应列头名
 		Row row2 = sheet.createRow(1);
@@ -1282,7 +1282,7 @@ public class ExcelReport{
 			cell10.setCellValue(line_data.getCourseCategory());
 			cell10.setCellStyle(cs2);
 
-			// 第十二列所属专业
+			// 第十二列专业代码
 			Cell cell11 = row_line.createCell(11);
 			cell11.setCellValue(line_data.getMid());
 			cell11.setCellStyle(cs2);
@@ -1316,7 +1316,8 @@ public class ExcelReport{
 			Cell cell17 = row_line.createCell(17);
 			cell17.setCellValue(line_data.getCheckMethod());
 			cell17.setCellStyle(cs2);
-						
+			
+
 				
 		}
 		// 建立Excel文件

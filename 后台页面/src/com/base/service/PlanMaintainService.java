@@ -51,4 +51,32 @@ public interface PlanMaintainService {
 	 3.函数功能：提醒用户完善实习计划
 	 */
 	public void callAttention(String recordstr);
+	
+	/*
+	 1.参数：无参
+	 2.返回值：List<String>
+	 3.函数功能：获取学年学期
+	 */
+	public List<String> getSemester();
+	
+	/*
+	 1.参数：id,整型，为用户的id
+	 2.返回值：boolean
+	 3.函数功能：判断是否存在该教师职工号
+	 */
+	public boolean checkIsUser(String id);
+	
+	/*
+	 1.参数：aid,整型，为专业的编号
+	 2.返回值：boolean
+	 3.函数功能：判断是否存在该专业编号
+	 */
+	public boolean checkIsMid(String aid);
+	
+	/*
+	 1.参数：无参
+	 2.返回值：List<String>
+	 3.函数功能：获取实习计划的学院
+	 */
+	public List<String> getPlanCollege();
 }

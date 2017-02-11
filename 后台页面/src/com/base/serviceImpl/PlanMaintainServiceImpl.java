@@ -20,15 +20,23 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	public PlanList getPlanInfo(String semester, int pageindex, int size,
 			int order, String orderDir, String searchValue) {
 		String columnName = "";
-		/*if (order == 0) {
+		if (order == 0) {
 		    columnName = "id";
-		} else if (order == 2) {
-		    columnName = "basename";
-		} else if (order == 3) {
-		    columnName = "basetype";
 		} else if (order == 4) {
-		    columnName = "dept";
-		}*/
+		    columnName = "count";
+		} else if (order == 5) {
+		    columnName = "selectedCount";
+		} else if (order == 7) {
+		    columnName = "college";
+		}else if (order == 8) {
+		    columnName = "weekClassify";
+		}else if (order == 9) {
+		    columnName = "credit";
+		}else if (order == 12) {
+		    columnName = "tid";
+		}else if (order == 13) {
+		    columnName = "tname";
+		}
 		PlanList list = planMaintainDao.getPlanInfo(semester, pageindex, size, columnName, orderDir, searchValue);
 		return list;
 	}
@@ -52,15 +60,23 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 			int size, int order, String orderDir, String searchValue) {
 		
 		String columnName = "";
-		/*if (order == 0) {
+		if (order == 0) {
 		    columnName = "id";
-		} else if (order == 2) {
-		    columnName = "basename";
-		} else if (order == 3) {
-		    columnName = "basetype";
 		} else if (order == 4) {
-		    columnName = "dept";
-		}*/
+		    columnName = "count";
+		} else if (order == 5) {
+		    columnName = "selectedCount";
+		} else if (order == 7) {
+		    columnName = "college";
+		}else if (order == 8) {
+		    columnName = "weekClassify";
+		}else if (order == 9) {
+		    columnName = "credit";
+		}else if (order == 12) {
+		    columnName = "tid";
+		}else if (order == 13) {
+		    columnName = "tname";
+		}
 		PlanList list = planMaintainDao.checkIsSave(semester, status, pageindex, size, columnName, orderDir, searchValue);
 		return list;
 	}
@@ -77,6 +93,30 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		
 		planMaintainDao.callAttention(recordstr);
 
+	}
+
+	@Override
+	public List<String> getSemester() {
+		List<String> list=planMaintainDao.getSemester();
+		return list;
+	}
+
+	@Override
+	public boolean checkIsUser(String id) {
+		boolean flag=planMaintainDao.checkIsUser(id);
+		return flag;
+	}
+
+	@Override
+	public boolean checkIsMid(String aid) {
+		boolean flag=planMaintainDao.checkIsMid(aid);
+		return flag;
+	}
+
+	@Override
+	public List<String> getPlanCollege() {
+		List<String> list=planMaintainDao.getPlanCollege();
+		return list;
 	}
 
 }
