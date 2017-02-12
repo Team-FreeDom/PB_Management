@@ -219,7 +219,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                 <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="practicePlanMaintain.jsp">
                                                                                                     <span class="text">
                                                                                                         实习计划维护</span>
                                                                                                 </a>

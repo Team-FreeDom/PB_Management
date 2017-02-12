@@ -140,7 +140,7 @@
 										<li><a href="baseMaintain.jsp"><span class="text">
 													实习基地维护</span></a></li>
 										<li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+										<li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
 										<li><a href="mangeruser.jsp"><span class="text">
