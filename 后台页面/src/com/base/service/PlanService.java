@@ -3,8 +3,11 @@ package com.base.service;
 import java.util.List;
 import java.util.Map;
 
+import com.base.po.Classarragecourse;
+import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.UserInfo;
 
 public interface PlanService {
 	
@@ -24,26 +27,32 @@ public interface PlanService {
 	public void deleteClassRecord(int id);
 	
 	/*
-	 1.参数： str1,字符串型，为插入  班级安排_课程表 的多条记录所构成的字符串
-	         str2,字符串型，为课程代码
+	 1.参数：str1,字符串型，为课程代码，str2，字符串，为学年学期
+	       str3,字符串型，为插入  班级安排_课程表 的多条记录所构成的字符串
 	 2.返回值： 无返回值
 	 3.函数功能：完善实习计划
 	 */
-	public void savePlanModify(String str1,String str2);
+	public void savePlanModify(String cid,String semester,String plandata);
 	
 	/*
 	 1.参数：majorid,字符串型，代表专业代码
 	 2.返回值： List<major_aim>,存放专业培训表多条记录的对象集合
 	 3.函数功能：根据专业编号获取该专业的培训目的
 	 */
-	public List<Majoraim> getPlanAim(String majorid);
+	public List<Majoraim> getPlanAim(String cid);
 	
 	/*
-	 1.参数：coid,字符串型，代表学院编号
-	 2.返回值： List<String>,教师的字符串集合
+	 1.参数：collagename,字符串型，代表学院名字
+	 2.返回值： List<UserInfo>,教师的字符串集合
 	 3.函数功能：根据学院编号获取该学院的老师
 	 */
-	public List<String> getCollege_Teacher(String coid);
+	public List<UserInfo> getCollege_Teacher(String collagename);
+	/*
+	 1.参数：cid,字符串类型 代表课程代码
+	 2.返回值： List<Classarragecourse>,申请表里的数据集合
+	 3.函数功能：根据课程代码获取申请表的数据集合
+	 */
+	public List<Classcourse> plandata(String cid);
 	
 	
 }

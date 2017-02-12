@@ -1,0 +1,83 @@
+package com.base.serviceImpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.base.dao.PlanDao;
+import com.base.po.Classarragecourse;
+import com.base.po.Classcourse;
+import com.base.po.Majoraim;
+import com.base.po.PlanList;
+import com.base.po.UserInfo;
+import com.base.service.PlanService;
+
+@Service("PlanService")
+public class PlanServiceImpl implements PlanService {
+    @Autowired
+    private PlanDao plandao;
+
+    // 获取该用户所在学院的实习计划
+    @Override
+    public PlanList getThisCollegePlan(String userid, int pageindex, int size,
+	    int order, String orderDir, String searchValue) {
+	String columnName = "";
+	if (order == 0) {
+	    columnName = "id";
+	} else if (order == 4) {
+	    columnName = "count";
+	} else if (order == 5) {
+	    columnName = "selectedCount";
+	} else if (order == 7) {
+	    columnName = "college";
+	} else if (order == 8) {
+	    columnName = "weekClassify";
+	} else if (order == 9) {
+	    columnName = "credit";
+	} else if (order == 12) {
+	    columnName = "tid";
+	} else if (order == 13) {
+	    columnName = "tname";
+	} 
+	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
+		columnName, orderDir, searchValue);
+	return list;
+    }
+
+    // 删除单条班级安排记录
+    @Override
+    public void deleteClassRecord(int id) {
+	plandao.deleteClassPlan(id);
+
+    }
+
+    // 提供保存按钮的功能
+    @Override
+    public void savePlanModify(String cid, String semester, String plandata) {
+
+	plandao.updatePlan(cid, semester, plandata);
+    }
+
+    // 从专业培训表中获取特定专业的多个培训目的
+    @Override
+    public List<Majoraim> getPlanAim(String cid) {
+	List<Majoraim> list = plandao.getPlanAim(cid);
+	return list;
+    }
+
+    // 根据学院编号获取该学院的老师
+    @Override
+    public List<UserInfo> getCollege_Teacher(String collagename) {
+	List<UserInfo> list = plandao.getCollege_Teacher(collagename);
+	return list;
+    }
+
+    // 根据课程代码获取申请表的数据集合
+    @Override
+    public List<Classcourse> plandata(String cid) {
+	List<Classcourse> list = plandao.plandata(cid);
+	return list;
+    }
+
+}
