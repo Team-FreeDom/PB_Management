@@ -114,8 +114,8 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	}
 
 	@Override
-	public List<String> getPlanCollege() {
-		List<String> list=planMaintainDao.getPlanCollege();
+	public List<String> getPlanCollege(String semester) {
+		List<String> list=planMaintainDao.getPlanCollege(semester);
 		return list;
 	}
 

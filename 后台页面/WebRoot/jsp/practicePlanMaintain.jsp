@@ -219,8 +219,7 @@
 										<button class="btn btn-danger" id="delete">删除</button>
 										<button class="btn btn-primary" id="daoru" data-toggle="modal"
 											data-target="#import">导入</button>
-										<button class="btn btn-primary" data-toggle="modal"
-											data-target="#export" id="chu">导出</button>
+										<button class="btn btn-primary" id="chu">导出</button>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
 										<span id="remind" class="glyphicon glyphicon-send" hidden
 										style="color:#3EAB58;padding-top:10px;font-size:20px;"></span>

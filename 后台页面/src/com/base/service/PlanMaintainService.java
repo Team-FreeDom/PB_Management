@@ -78,5 +78,5 @@ public interface PlanMaintainService {
 	 2.返回值：List<String>
 	 3.函数功能：获取实习计划的学院
 	 */
-	public List<String> getPlanCollege();
+	public List<String> getPlanCollege(String semester);
 }

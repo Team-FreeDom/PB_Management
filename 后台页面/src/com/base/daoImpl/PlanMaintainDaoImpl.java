@@ -319,7 +319,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public List<String> getPlanCollege() {
+	public List<String> getPlanCollege(String semester) {
 		List<String> list=new ArrayList<String>();
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -328,7 +328,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		    conn = (Connection) SessionFactoryUtils.getDataSource(
 			    sessionFactory).getConnection();
 		    sp = (CallableStatement) conn
-			    .prepareCall("{CALL baseweb.`query_coursearrangecollege`()}");		   
+			    .prepareCall("{CALL baseweb.`query_coursearrangecollege`(?)}");	
+		    sp.setString(1,semester);
 		    sp.execute(); 
 		    rs = sp.getResultSet();
 		    while (rs.next()) {
