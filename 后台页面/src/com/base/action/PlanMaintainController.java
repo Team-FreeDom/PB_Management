@@ -106,7 +106,7 @@ public class PlanMaintainController {
 	public String exportPlanInfo(HttpServletRequest request,
 			HttpServletResponse response) {
 		String semester =request.getParameter("semester");
-		String college = "农学院";// request.getParameter("college");
+		String college = request.getParameter("college");
 
 		List<AllPlan> list = planMaintainService
 				.getPlanTable(semester, college);
@@ -231,6 +231,26 @@ public class PlanMaintainController {
 		JSONObject getObj = new JSONObject();		
 		getObj.put("college", list1);
 		getObj.put("semester", list2);	
+		response.setContentType("text/html;charset=UTF-8");
+
+		try {
+			response.getWriter().print(getObj.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// 获取开课学院
+	@RequestMapping("/getReadyCollege.do")
+	public String getReadyCollege(HttpServletRequest request,
+			HttpServletResponse response) {
+	    String semester=request.getParameter("semester");
+		//获取开课学院
+		List<String> list=planMaintainService.getPlanCollege(semester);
+		JSONObject getObj = new JSONObject();		
+		getObj.put("college", list);	
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {

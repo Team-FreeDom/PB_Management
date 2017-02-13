@@ -34,19 +34,22 @@ $(document)
 											"mData" : "id",
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "6%"
+											"sWidth" : "2%"
 										}, {
 											"mData" : "semester",// 学期学年
 											"orderable" : false,
 											"sDefaultContent" : "",
+											"sWidth" : "6%"
 										}, {
 											"mData" : "cid",// 课程代码
 											"orderable" : false,
 											"sDefaultContent" : "",
+											"sWidth" : "6%"
 										}, {
 											"mData" : "coursename",// 课程名称
 											"orderable" : false,
 											"sDefaultContent" : "",
+											"sWidth" : "6%"
 										}, {
 											"mData" : "count",// 人数
 											"orderable" : true,
@@ -700,22 +703,48 @@ $(document)
 					});
 					
 					//导出文件的js控制
-                     $("#confirmDaoButton").click(function(){					
+                     $("#confirmDaoButton").click(function(){
                     	
- 						if(str==null){
- 							bootbox.alert({
- 								message : "请先选择学年学期",
- 								size : 'small'
- 							}); 							
- 						}else{
- 							$("#semesterchu").val(str); 	
+                    		$("#semesterchu").val(str); 	
  							$("#daochuForm").submit();
- 						}
- 						$("#export").modal('hide');
+ 							$("#export").modal('hide');
 					});
                      
                      $("#chu").click(function(){
- 						$("#daoCollege").val('-1');
+                    	 
+ 						$("#daoCollege").val('-1');  						
+ 						if($("#export").attr("aria-hidden")=="true"){ 							
+ 						  if(str==null){
+ 							bootbox.alert({
+ 								message : "请先选择学年学期",
+ 								size : 'small'
+ 							}); 	
+ 							return;
+ 						}else{
+ 							//获取开课学院
+ 							$(".removeCollege").remove();
+ 							$.ajax({
+ 								type : 'POST',
+ 								dataType : 'json',
+ 								data:{"semester":str},
+ 								url : 'getReadyCollege.do',
+ 								async : false,
+ 								cache : false,
+ 								error : function(request) {
+ 									alert("error");
+ 								},
+ 								success : function(data) {
+ 									
+ 									  for ( var i=0;i<data.college.length;i++) {
+ 										  $("#daodept").after( "<option class='removeCollege' value="+data.college[i]+">" + data.college[i] + "</option>");
+ 										  }
+ 									}
+ 								
+
+ 							});
+ 							$("#export").modal('show');
+ 						}
+ 						}
  					});
 					
 					// 点击 检测数据完整性
@@ -933,6 +962,19 @@ $(document)
 						});
 					});
 					
+					// 隐藏实习申请表
+					$(document).on("click", "#closemodal", function() {
+
+						$("#Applychart").hide();
+
+					});
+
+					$(document).on("click", "#add", function() {// 增加一条实习记录弹出框的弹出
+						$("#addPraItem").find("input").val("");
+						$("#addPraItem").find("select").val("");
+						$("#addPraItem").modal('show');
+					});
+					
 					
 					// 显示实习申请表
 					var tbodyStyle = '<tbody><tr>'
@@ -1133,19 +1175,7 @@ $(document)
 
 					// 实习表中添加一条记录
 
-					// 隐藏实习申请表
-					$(document).on("click", "#closemodal", function() {
-
-						$("#Applychart").hide();
-
-					});
-
-					$(document).on("click", "#add", function() {// 增加一条实习记录弹出框的弹出
-						$("#addPraItem").find("input").val("");
-						$("#addPraItem").find("select").val("");
-						$("#addPraItem").modal('show');
-					});
-					
+			
 
 					$(document).on("click", "#addTbody", function() {// 添加一条空表的记录
 						$("#table tbody:last-child").after(tbodyStyle);
