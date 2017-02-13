@@ -1,10 +1,15 @@
 package com.base.po;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Classarragecourse {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;//编号
 	private int week;//周次
 	private String starttime;//开始时间
