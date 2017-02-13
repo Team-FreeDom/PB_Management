@@ -85,5 +85,7 @@ table tbody tr td{
 	float: right;
 	margin-right: 10px;
 }
-
+#addForm table tr td{
+	border: none;
+}
 

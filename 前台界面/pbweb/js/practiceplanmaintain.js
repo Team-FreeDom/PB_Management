@@ -23,103 +23,92 @@ $(document).ready(function() {
 				//"sWidth" : "4%"
 			},
 			{
-				"mData" : "termYear",//学期学年
+				"mData" : "semester",//学期学年
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseID",//课程代码
+				"mData" : "cid",//课程代码
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseName",//课程名称
+				"mData" : "coursename",//课程名称
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "number",//人数
-				"orderable" : false,
+				"mData" : "count",//人数
+				"orderable" : true,
 				"sDefaultContent" : ""
 			},
 			{
-				"mData" : "CheckedNum",//已选人数
+				"mData" : "selectedCount",//已选人数
+				"orderable" : true,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "composition",//教学班组成
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "className",//教学班组成
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "institute",//开课学院
-				"orderable" : false,
+				"mData" : "college",//开课学院
+				"orderable" : true,
 				"sDefaultContent" : "",
 			},
 			
 			{
-				"mData" : "Wperiod",//周学时
+				"mData" : "weekClassify",//周学时
+				"orderable" : true,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "credit",//学分
+				"orderable" : true,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "courseNature",//课程性质
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "grade",//学分
+				"mData" : "courseCategory",//课程类别
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courceProperty",//课程性质
+				"mData" : "tid",//教职工号
+				"orderable" : true,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "tname",//教师姓名
+				"orderable" : true,
+				"sDefaultContent" : "",
+			},
+			{
+				"mData" : "week",//起始周
 				"orderable" : false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "courseClass",//课程类别
+				"mData" : "major_oriented",//面向专业
 				"orderable" : false,
+				"visible":false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "teacherID",//教职工号
+				"mData" : "mid",//专业编号
 				"orderable" : false,
+				"visible":false,
 				"sDefaultContent" : "",
 			},
 			{
-				"mData" : "teacherName",//教师姓名
+				"mData" : "checkMethod",//考核
 				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "sWeeke",//起始周
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "division",//单位
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "majoy",//面向专业
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "Prweeks",//实习周数
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "leadTeacher",//带队老师
-				"orderable" : false,
-				"sDefaultContent" : "",
-			},
-			{
-				"mData" : "examine",//考核
-				"orderable" : false,
-				"sDefaultContent" : "",
-				/*"render" : function(data,type,row){
-					obj.push(row);
-				}*/
+				"sDefaultContent" : ""
 			}
 			
 		],
@@ -150,15 +139,15 @@ $(document).ready(function() {
 	
 //全选
 $("#ck1").on("click", function () {
-	// $("#Applychart").hide();
 	if ($(this).prop("checked") === true) {
 		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", true);
 	} else {
 		$("#practiceplanmaintain input[name='allcheckbox']").prop("checked", false);
 	}
 });
+/**弹出框js--start*/
 //显示实习申请表
-var tbodyStyle='<tbody><tr>'
+	var tbodyStyle='<tbody class="tbodyID"><tr>'
 							+'<td>序号</td>'
 							+'<td>周次</td>'
 							+'<td>开始时间</td>'
@@ -176,8 +165,8 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
 						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-						 +'<td id="practicePlace"><select id="schoolBase" class="flag" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth flag" hidden></td>'
-						 +'<td><select name="" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
+						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 						 +'<td><input id="remark" type="text" class="flag"></td>'
 						 +'</tr>'
 						 +'<tr>'
@@ -194,59 +183,97 @@ var tbodyStyle='<tbody><tr>'
 						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td><input type="text" class="adviser2 inputWidth flag"></td>'
-						 +'<td><a class="btn btn-primary choice">选择</a></td>'
+						 +'<td><input id="guideTeacher" type="text" value="" class="adviser2 inputWidth flag"></td>'
+						 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
 						 +'<td><span class="deleteID" id="">删除</span></td>'
 						 +'</tr></tbody>';
 	
 $("#practiceplanmaintain tbody tr").on("click","td:gt(0)",function(){
-	/*Oneindex= $(this).closest("tr").children(":first").find("input").attr("id");
-	$("#division").val(obj[Oneindex].division);
-	$("#classname").val(obj[Oneindex].className);
-	$("#major").val(obj[Oneindex].major);
-	$("#class").val(obj[Oneindex].className);
-	$("#grade").val(obj[Oneindex].grade);
-	$("#number").val(obj[Oneindex].number);
-	$("#weeks").val(obj[Oneindex].Prweeks);
-	$("#leaderTeacher").val(obj[Oneindex].leaderTeacher);*/
+	Oneindex= $(this).closest("tr").children(":first").find("input").attr("id");
+	alert(Oneindex);
+	/*$("#division").val(obj[Oneindex].college);
+	$("#classname").val(obj[Oneindex].coursename);
+	$("#major").val(obj[Oneindex].major_oriented);
+	$("#class").val(obj[Oneindex].composition);
+	$("#grade").val(obj[Oneindex].credit);
+	$("#number").val(obj[Oneindex].count);
+	$("#weeks").val(obj[Oneindex].weekClassify);
+	$("#leaderTeacher").val(obj[Oneindex].tname);*/
 	$.ajax({
 		url:"",
 		type:"POST",
 		dataType:"json",
+		/*data:{
+		"mid":obj[Oneindex].cid
+	},*/
 		success:function(data){
 			
-			for(var i=1;i<data.length;i++){
-				var p=0;
-				$("#table tbody:last-child").after(tbodyStyle);
-				$("#table tbody:last-child").find(".mark").html(i);
-				$("#table tbody:last-child").find(".flag").each(function(){
-					$(this).val(data[i][p].value);
-					p++;
-				});
+			var teachername="";
+			var testername="";
+			for(var i=0;i<data.length;i++){
+				
+				$("#table tbody:last-child").after(tbodyStyle);//前台HTML页面用来测试的HTML要删除
+				
+				$.ajax({
+						URL:"",
+						type:"POST",
+						dataType : 'json',
+						/*data:{
+							"mid":obj[Oneindex].cid
+						},*///后台测试的时候取消此部分注释
+						success : function(data){
+							for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
+								$("#table tbody:last-child").find("#schoolBaseID").after(
+								"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
+								);
+							}
+							for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+								$("#table tbody:last-child").find("#aimID").after(
+								"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+								);
+							}
+							
+						}
+					});
+				$("#table tbody:last-child").find(".mark").html(i+1);
+				$("#table tbody:last-child").find("#weekend").val(data[i].week);
+				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
+				$("#table tbody:last-child").find("#endweek").val(data[i].endtime);
+				$("#table tbody:last-child").find("#content").val(data[i].content);
+				$("#table tbody:last-child").find("#baseFrom").val(data[i].source);
+				$("#table tbody:last-child").find("#category").val(data[i].category);
+				$("#table tbody:last-child").find("#remark").val(data[i].remark);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].form);
+				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
+				$("#table tbody:last-child").find("#aim").val(data[i].aim);
+				$("#table tbody:last-child").find("#budget").val(data[i].expense);
+				$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].site);
+				$("#table tbody:last-child").find("#practiceClass").val(data[i].site);
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
+					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
 				}
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
 					$("#table tbody:last-child").find("#outBase").show();
+					$("#table tbody:last-child").find("#outBase").addClass("flag");
 				}
-				$("#table tbody:last-child").find(".deleteID").attr("id",data[i][p]);
+				$("#table tbody:last-child").find(".deleteID").attr("id",data[i].cid);
+				if(i!==data.length-1){
+					teachername=teachername+data[i].guideTeacher+"，";
+					testername=testername+data[i].assistant+"，";
+				}else{
+					teachername=teachername+data[i].guideTeacher;
+					testername=testername+data[i].assistant;
+				}
+				
 			}
+			$("#testername").val(teachername);
+			$("#adviser").val(testername);
 		}
 	});
 	$("#Applychart").show();
 });
-	
-	
-/*$("#testexmple").click(function(){
-	$("#table tbody:last-child").find(".flag").each(function(){
-					$(this).val("yes");
-					//p++;
-				});
-});	*/
-	
-	
-	
-	
 	
 	
 /*实习申请表里面的操作*/
@@ -255,16 +282,22 @@ $(document).on("change","#baseFrom",function(e){
 	//$("#practicePlace").empty();
 	if(e.target.value==='校内基地'){
 		$(this).parent().next().children(":first").show();
+		$(this).parent().next().children(":first").addClass("flag");
 		//$("#schoolBase").show();
 		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":last").removeClass("flag");
 	}
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
+		$(this).parent().next().children(":last").addClass("flag");
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").removeClass("flag");
 	}
 	if(e.target.value===''){
 		$(this).parent().next().children(":last").hide();
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").removeClass("flag");
+		$(this).parent().next().children(":last").removeClass("flag");
 	}
 });	
 	//获取选择的内容
@@ -273,40 +306,44 @@ $.ajax({
 	type:"POST",
 	dataType : 'json',
 	success : function(data){
-		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
-			$("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
-			);
-		}
-		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
-			$("#aimID").after(
-			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
-			);
-		}
-		for(i=0;i<data[2].length;i++){//获取学院下拉框
+		for(var i=0;i<data.length;i++){//获取学院下拉框
 			$("#collegeID").after(
-			"<option class='rest' value="+data[2][i].collegename+">"+ data[2][i].collegename + "</option>"
+			"<option class='rest' value="+data[i].collegename+">"+ data[i].collegename + "</option>"
 			);
 		}
 	}
 });
-var name="";
+	
+var writeName="";
+var showName="";
+var currentName="";
+var teacherString;
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
-	name+=e.target.value+" ";
-	$("#adviser").val(name);
-});
+	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	teacherString=showName.split(",");
+	writeName=e.target.value;
+	if(writeName===""){
+		teacherString[rowNum]="null";
+	}else{
+		teacherString[rowNum]=writeName;
+	}
 	
-$(document).on("click",".choice",function(){//点击选择弹出 框并且清空框里的数据
-	$("#Selectname").modal('show');
-	$("#selectTname").val("");
-	$("#tester").val("");
-	$("#selectCollege").val("");
+	showName=teacherString.join(",");
+	$("#adviser").val(showName);
+	currentName="";
+
 });
+$(document).on("focus",".adviser2",function(e){
+	showName=$("#adviser").val();
+	currentName=e.target.value;
+	writeName="";
+});	
 	
+
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
 var obj2;
 $(document).on("change","#selectCollege",function(){
-	var college=$("#selectCollege").val;
+	var college=$("#selectCollege").val();
 	$.ajax({
 	url:" ",
 	type:"POST",
@@ -324,22 +361,41 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
-//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+var selectNum;
 var value=[];
 var value2="";
 var value3=[];
-$(document).on("change","#selectTname",function(e){
+$(document).on("click",".choice",function(){//点击选择弹出 
 	
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectname").modal('show');
+	$("#selectTname").val("");
+	$("#tester").val(value[selectNum]);
+	$("#selectCollege").val("");
+});
+	
+$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+	var testString=$("#testername").val();
+	value=testString.split(",");
 	$.each(obj2,function(index,item){
 		if(item.teacherName===e.target.value){
 			if($.inArray(item.teacherID,value3)===-1){
-				value.push(e.target.value);
+				value[selectNum]=e.target.value;
 			    value3.push(item.teacherID);
-				value2=value.join(" ");
+				value2=value.join(",");
 				$("#tester").val(value2);
 			}else{
-				alert("此人已经存在，请重新选择！");
+				bootbox.alert({
+					message : msg.str,
+					size : 'small'
+				});
 			}
+		}else{
+			value[selectNum]=e.target.value;
+			value3.push(item.teacherID);
+
+			value2=value.join(",");
+			$("#tester").val(value2);
 		}
 	});
 	
@@ -350,7 +406,6 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	value2="";
 });
 	
-//实习表中添加一条记录
 
 	
 //隐藏实习申请表
@@ -360,37 +415,35 @@ $(document).on("click","#closemodal",function(){
 	
 });
 
-$(document).on("click","#add",function(){//增加一条实习记录弹出框的弹出
-	$("#addPraItem").find("input").val("");
-	$("#addPraItem").find("select").val("");
-	
-	$("#addPraItem").modal('show');
-});
-$(document).on("click","#saveadd",function(){//保存一条增加的实习记录
-	bootbox.confirm({
-			message: "确定保存？",
-			size: 'small',
-			buttons: {
-				confirm: {
-					label: '确定',
-					className: 'btn-success'
-				},
-				cancel: {
-					label: '取消',
-					className: 'btn-danger'
-				},
-			},
-			callback: function (result) {
-				if(result){
-					$("#addForm").submit();
-				}
-			}
-	});
-	$("#addPraItem").modal('hide');
-});
+
+
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
+	var tbNum=$("#table").children('tbody').length;
+	$("#table tbody:last-child").find(".mark").html(tbNum-1);
+	
+	$.ajax({
+	URL:"",
+	type:"POST",
+	dataType : 'json',
+	data:{
+		"mid":obj[Oneindex].cid
+	},
+	success : function(data){
+		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
+			$("#schoolBaseID").after(
+			"<option class='rest' value="+data[0][i].basename+">"+ data[0][i].basename + "</option>"
+			);
+		}
+		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+			$("#aimID").after(
+			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+			);
+		}
+	}
+});
+	
 });
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
@@ -413,6 +466,20 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 		});
 	}else{
 		$(this).closest("tbody").remove();
+		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+
+		$(".mark").each(function(){
+			var htmlValue=$(this).html();
+			if(htmlValue>(rowNum+1)){
+				$(this).html(htmlValue-1);
+			}
+		});
+		teacherString.splice(rowNum,1);
+		showName=teacherString.join(",");
+		$("#adviser").val(showName);
+		value3.splice(rowNum,1);
+		value2=value.join(",");
+		$("#tester").val(value2);
 	}
 
 });	
@@ -435,25 +502,38 @@ $("#save").click(function(){//弹出框的保存
 			},
 			callback: function (result) {
 				if(result){
-					var str="(";
+					/*obj[Oneindex].courseID,obj[Oneindex].termYear
+					var p="courceid";
+					var q="year";
+					var str='"'+p+'"'+',"'+q+'",'+'("';*/
+					//alert(str);
+					var str='"'+obj[Oneindex].cid+'"'+',"'+obj[Oneindex].semester+'",'+'("';
 					var y=0;
-					$("#table").find("tbody").each(function(){
-						var x=0;
+					$(".tbodyID").each(function(){
+						var b=$(this).find(".adviser2").val();
+						var c=$(this).find(".mark").html()-1;
+						str=str+b+'"'+',"'+value[c]+'"';
 						if(y!==0){
 							str=str+',';
 						}
+						var x=0;
 						$(this).find(".flag").each(function(){
-							if(x!==0){
-								str=str+','+'"'+$(this).val()+'"';
-							}else{
-								str=str+'"'+$(this).val()+'"';
-								x++;
+							
+							x++;
+							if(x!==13){
+								if($(this).val()===""){
+								str=str+','+'"null"';
+								}else{
+									str=str+','+'"'+$(this).val()+'"';
+								}
 							}
 							
+								
 						});
 						str=str+')';
 						y++;
 					});
+					alert(str);
 					
 					$.ajax({
 						url:"",
@@ -461,7 +541,8 @@ $("#save").click(function(){//弹出框的保存
 						dataType:"json",
 						data:{
 							"str":str,
-							"courseID":obj[Oneindex].courseID
+							"courseID":obj[Oneindex].courseID,
+							"termYear":obj[Oneindex].termYear,
 						},
 						success : function(msg) {
 							bootbox.alert({
@@ -476,6 +557,7 @@ $("#save").click(function(){//弹出框的保存
 			}
 	});
 });
+/**弹出框js--end*/
 //删除表格的中记录	
 $("#delete").click(function(){
 	var flag=0;
@@ -534,7 +616,36 @@ $("#delete").click(function(){
 	});
 	}
 });
-
+$(document).on("click","#add",function(){//增加一条实习记录弹出框的弹出
+	$("#addPraItem").find("input").val("");
+	$("#addPraItem").find("select").val("");
+	
+	$("#addPraItem").modal('show');
+});
+$(document).on("click","#saveAdd",function(){//保存一条增加的实习记录
+	bootbox.confirm({
+			message: "确定保存？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},
+			callback: function (result) {
+				if(result){
+					$("#addForm").submit();
+				}
+			}
+	});
+	$("#addPraItem").modal('hide');
+});
 
 } );
+
+
 
