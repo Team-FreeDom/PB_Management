@@ -144,8 +144,8 @@ $(document).ready(function() {
 			+'<td>实习内容</td>'
 			+'<td>实习基地来源</td>'
 			+'<td>实习地点</td>'
-			+'<td>实习类别</td>'
-			+'<td>备注</td>'
+	 		+'<td>实习类别</td>'
+	 		+'<td>备注</td>'
 		 +'</tr>'
 		 +'<tr>'
 		 +'<td rowspan="3"><sapn class="mark"></span></td>'
@@ -156,7 +156,7 @@ $(document).ready(function() {
 		 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
 		 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
 		 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
-		 +'<td><input id="remark" type="text" class="flag"></td>'
+	 	 +'<td><input id="remark" type="text" class="flag"></td>'
 		 +'</tr>'
 		 +'<tr>'
 		 +'<td>实习形式</td>'
@@ -238,13 +238,11 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#category").val(data[i].category);
 				$("#table tbody:last-child").find("#remark").val(data[i].remark);
 				$("#table tbody:last-child").find("#practiceClass").val(data[i].form);
-				//alert(data[i].form);
+				
 				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 				$("#table tbody:last-child").find("#aim").val(data[i].aim);
 				$("#table tbody:last-child").find("#budget").val(data[i].expense);
 				$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
-				//$("#table tbody:last-child").find("#practicePlace").val(data[i].site);
-				//$("#table tbody:last-child").find("#practiceClass").val(data[i].site);
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
 					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
@@ -267,8 +265,8 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				}
 				value[i]=data[i].assistant;
 			}
-			$("#testername").val(teachername);
-			$("#adviser").val(testername);
+			$("#testername").val(testername);
+			$("#adviser").val(teachername);
 		}
 	});
 	
@@ -369,7 +367,6 @@ $(document).on("change","#selectCollege",function(){
 });
 var selectNum;
 
-var value2="";
 var value3=[];
 $(document).on("click",".choice",function(){//点击选择弹出 
 	
@@ -381,13 +378,11 @@ $(document).on("click",".choice",function(){//点击选择弹出
 });
 	
 $(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
-	/*var testString=$("#testername").val;
-	value=testString.split(",");*/
-	var testString=$("#tester").val();
-	value=testString.split(",");
-	value[selectNum]=e.target.value;
-	value2=value.join(",");
-	$("#tester").val(value2);
+	var teststring=$("#tester").val();
+	var testvalue=teststring.split(" ");
+	testvalue.push(e.target.value);
+	teststring=testvalue.join(" ");
+	$("#tester").val(teststring);
 
 	/*$.each(obj2,function(index,item){
 		if(item.teacherName===e.target.value){
@@ -413,8 +408,14 @@ $(document).on("change","#selectTname",function(e){//将实验员姓名显示在
 });
 	
 $(document).on("click","#finished",function(){//点击确定之后讲实验员姓名在表格中显示出来
-	$("#testername").val(value2);
-	value2="";
+	var tester=$("#tester").val();
+	if(tester===""){
+		value[selectNum]="无";
+	}else{
+		value[selectNum]=tester;
+	}	
+	var str=value.join(',');
+	$("#testername").val(str);
 });
 	
 //实习表中添加一条记录
@@ -491,7 +492,6 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	
 	
 $("#save").click(function(){//弹出框的保存
-	//$("#PraForm").submit();
 	bootbox.confirm({
 			message: "确定保存？",
 			size: 'small',
@@ -510,15 +510,17 @@ $("#save").click(function(){//弹出框的保存
 					/*obj[Oneindex].courseID,obj[Oneindex].termYear
 					var p="courceid";
 					var q="year";*/
-					var str="('"+obj[Oneindex].cid+"'"+",'"+obj[Oneindex].semester+"',"+"('";
+					var str="('"+obj[Oneindex].cid+"'"+",'"+obj[Oneindex].semester+"',"+'"'+"('";
 					var y=0;
 					$(".tbodyID").each(function(){
+						if(y!==0){
+							str=str+",('";
+							alert(y);
+						}
 						var b=$(this).find(".adviser2").val();
 						var c=$(this).find(".mark").html()-1;
 						str=str+b+"'"+",'"+value[c]+"'";
-						if(y!==0){
-							str=str+",";
-						}
+						
 						var x=0;
 						$(this).find(".flag").each(function(){
 							
@@ -533,7 +535,7 @@ $("#save").click(function(){//弹出框的保存
 							
 								
 						});
-						str=str+")";
+						str=str+"'"+obj[Oneindex].cid+"','"+obj[Oneindex].semester+"'"+")";
 						y++;
 					});
 					str=str+'")';
@@ -550,8 +552,8 @@ $("#save").click(function(){//弹出框的保存
 						},
 						data:{
 							"str":str,
-							"courseID":obj[Oneindex].courseID,
-							"termYear":obj[Oneindex].termYear,
+							"courseID":obj[Oneindex].cid,
+							"termYear":obj[Oneindex].semester,
 						},
 						success : function(msg) {
 							bootbox.alert({
