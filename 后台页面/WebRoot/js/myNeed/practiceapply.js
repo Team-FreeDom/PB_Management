@@ -564,7 +564,7 @@ $("#save").click(function(){//弹出框的保存
 							alert("error");
 						},
 						data:{
-							"courseID":obj[Oneindex].cid,
+							"courseID":obj[Oneindex].id,
 							"termYear":obj[Oneindex].semester,
 							"str":str,
 						},
