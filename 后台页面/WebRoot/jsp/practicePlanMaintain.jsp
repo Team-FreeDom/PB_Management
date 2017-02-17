@@ -219,8 +219,7 @@
 										<button class="btn btn-danger" id="delete">删除</button>
 										<button class="btn btn-primary" id="daoru" data-toggle="modal"
 											data-target="#import">导入</button>
-										<button class="btn btn-primary" data-toggle="modal"
-											data-target="#export" id="chu">导出</button>
+										<button class="btn btn-primary" id="chu">导出</button>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
 										<span id="remind" class="glyphicon glyphicon-send" hidden
 										style="color:#3EAB58;padding-top:10px;font-size:20px;"></span>
@@ -404,65 +403,8 @@
 							readonly id="testername" type="text"></td>
 					</tr>
 
-					<tbody id="tbodyID">
-						<tr>
-							<td>序号</td>
-							<td>周次</td>
-							<td>开始时间</td>
-							<td>结束时间</td>
-							<td>实习内容</td>
-							<td>实习基地来源</td>
-							<td>实习地点</td>
-							<td>实习类别</td>
-							<td>备注</td>
-						</tr>
-						<tr>
-							<td valign="middle" rowspan="3">1</td>
-							<td><input id="weekend" type="text" class="inputWidth flag"></td>
-							<td><input id="startweek" type="text"
-								class="inputWidth flag"></td>
-							<td><input id="endweek" type="text" class="inputWidth flag"></td>
-							<td><input id="content" type="text" class="inputWidth flag"></td>
-							<td><select name="" id="baseFrom">
-									<option value="">请选择</option>
-									<option value="校内基地">校内基地</option>
-									<option value="校外基地">校外基地</option>
-							</select></td>
-							<td id="practicePlace"><select id="schoolBase" hidden>
-									<option id="schoolBaseID" value="">请选择</option>
-							</select> <input id="outBase" type="text" class="inputWidth" hidden>
-							</td>
-							<td><select name="" id="">
-									<option value="">请选择</option>
-									<option value="生产实习">生产实习</option>
-									<option value="教学实习">教学实习</option>
-									<option value="毕业实习">毕业实习</option>
-									<option value="综合实习">综合实习</option>
-							</select></td>
-							<td><input id="remark" type="text"></td>
-						</tr>
-						<tr>
-							<td>实习形式</td>
-							<td colspan="2">实习基地联系人/电话</td>
-							<td>目的</td>
-							<td>实习经费预算</td>
-							<td>指导老师</td>
-							<td>实验员</td>
-							<td>操作</td>
-						</tr>
-						<tr>
-							<td><select name="" id="practiceClass">
-									<option value="">请选择</option>
-									<option value="集中">集中</option>
-									<option value="分散">分散</option>
-							</select></td>
-							<td colspan="2"><input id="phone" type="text"></td>
-							<td><select id="aim"><option id="aimID" value="">请选择</option></select></td>
-							<td><input id="budget" type="text" class="inputWidth"></td>
-							<td><input type="text" class="adviser2 inputWidth"></td>
-							<td><a class="btn btn-primary choice" id="choice">选择</a></td>
-							<td><span class="deleteID">删除</span></td>
-						</tr>
+					<tbody>
+						
 					</tbody>
 				</table>
 			</form>
