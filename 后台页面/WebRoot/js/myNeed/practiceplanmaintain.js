@@ -121,7 +121,7 @@ $(document)
 											"render" : function(data, type, row) {
 												obj.push(row);
 												return '<input type="checkbox" name="allcheckbox" value="'
-														+ data + '">';
+														+ data + '" id="'+(obj.length-1)+'"/>';
 											}
 										} ],
 										"language" : {
@@ -314,7 +314,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -337,15 +337,17 @@ $(document)
 
 					$("#semester").on("change", function() {
 						var termYear = $("#termYear").val();
+						var semester = $(this).val();
 						if (termYear == "") {
-							$("#semester").val("");
-							bootbox.alert({
+							if(semester!=""){
+							   bootbox.alert({
 								message : "请先选择学年",
 								size : 'small'
 							});
+							$("#semester").val("");
 							return;
-						}
-						var semester = $(this).val();
+							}
+						}						
 						if (semester=="0") {
 							str = termYear;							
 						} else if(semester!=""){
@@ -460,7 +462,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -884,8 +886,7 @@ $(document)
 																	obj.push(row);
 																	userWarn.push(data);
 																	return '<input type="checkbox" name="allcheckbox" value="'
-																			+ data
-																			+ '">';
+																	+ data + '" id="'+(obj.length-1)+'"/>';
 																}
 															} ],
 															"language" : {
@@ -1021,7 +1022,7 @@ $(document)
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
 	
-$("#practiceapplytable tbody").on("click","tr",function(){
+$("#practiceplanmaintain tbody").on("click","tr",function(){
 	
 	Oneindex= $(this).find("input").attr("id");
 	$("#division").val(obj[Oneindex].college);
