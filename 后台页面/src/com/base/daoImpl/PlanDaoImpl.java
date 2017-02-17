@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.base.dao.PlanDao;
 import com.base.po.AllPlan;
-import com.base.po.Classarragecourse;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -29,7 +28,7 @@ public class PlanDaoImpl implements PlanDao {
 
     // 获取该用户所在学院的实习计划
     @Override
-    public PlanList getThisCollegePlan(String userid, int pageindex, int size,
+    public PlanList getThisCollegePlan(String semester,String userid, int pageindex, int size,
 	    String columnName, String orderDir, String searchValue) {
 	List<AllPlan> list = new ArrayList<AllPlan>();
 	int recordsTotal = 0;
@@ -40,16 +39,17 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?)}");
+		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, userid);
 	    sp.setInt(2, pageindex);
 	    sp.setInt(3, size);
 	    sp.setString(4, columnName);
 	    sp.setString(5, orderDir);
 	    sp.setString(6, searchValue);
-	    sp.registerOutParameter(7, java.sql.Types.INTEGER);
+	    sp.setString(7, semester);
+	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
-	    recordsTotal = sp.getInt(7);
+	    recordsTotal = sp.getInt(8);
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		AllPlan ch = new AllPlan();
@@ -88,7 +88,7 @@ public class PlanDaoImpl implements PlanDao {
 
     // 提供保存按钮的功能
     @Override
-    public void updatePlan(String cid, String semester, String plandata) {
+    public void updatePlan(int id, String plandata) {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -96,10 +96,9 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_classarrangecourse(?,?,?)}");
-	    sp.setString(1, cid);
-	    sp.setString(2, semester);
-	    sp.setString(3, plandata);
+		    .prepareCall("{call baseweb.add_classarrangecourse(?,?)}");
+	    sp.setInt(1, id);	  
+	    sp.setString(2, plandata);
 	    sp.execute();    
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -133,7 +132,7 @@ public class PlanDaoImpl implements PlanDao {
 
     // 从专业培训表中获取特定专业的多个培训目的
     @Override
-    public List<Majoraim> getPlanAim(String cid) {
+    public List<Majoraim> getPlanAim(String mid) {
 	List<Majoraim> list = new ArrayList<Majoraim>();
 	Connection conn = null;
 	CallableStatement sp = null;
@@ -143,7 +142,7 @@ public class PlanDaoImpl implements PlanDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_majoraim(?)}");
-	    sp.setString(1, cid);
+	    sp.setString(1, mid);
 	    sp.execute();
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
@@ -193,7 +192,7 @@ public class PlanDaoImpl implements PlanDao {
 
     // 根据课程代码获取申请表的数据集合
     @Override
-    public List<Classcourse> plandata(String cid) {
+    public List<Classcourse> plandata(int id) {
 	List<Classcourse> list = new ArrayList<Classcourse>();
 	Connection conn = null;
 	CallableStatement sp = null;
@@ -203,7 +202,7 @@ public class PlanDaoImpl implements PlanDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_course(?)}");
-	    sp.setString(1, cid);
+	    sp.setInt(1, id);
 	    sp.execute();
 	    rs = sp.getResultSet();
 	    while (rs.next()) {

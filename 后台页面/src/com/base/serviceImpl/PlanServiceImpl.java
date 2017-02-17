@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.dao.PlanDao;
-import com.base.po.Classarragecourse;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -20,7 +19,7 @@ public class PlanServiceImpl implements PlanService {
 
     // 获取该用户所在学院的实习计划
     @Override
-    public PlanList getThisCollegePlan(String userid, int pageindex, int size,
+    public PlanList getThisCollegePlan(String semester,String userid, int pageindex, int size,
 	    int order, String orderDir, String searchValue) {
 	String columnName = "";
 	if (order == 0) {
@@ -40,7 +39,7 @@ public class PlanServiceImpl implements PlanService {
 	} else if (order == 13) {
 	    columnName = "tname";
 	} 
-	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
+	PlanList list = plandao.getThisCollegePlan(semester,userid, pageindex, size,
 		columnName, orderDir, searchValue);
 	return list;
     }
@@ -54,9 +53,9 @@ public class PlanServiceImpl implements PlanService {
 
     // 提供保存按钮的功能
     @Override
-    public void savePlanModify(String cid, String semester, String plandata) {
+    public void savePlanModify(int id, String plandata) {
 
-	plandao.updatePlan(cid, semester, plandata);
+	plandao.updatePlan(id, plandata);
     }
 
     // 从专业培训表中获取特定专业的多个培训目的
@@ -75,8 +74,8 @@ public class PlanServiceImpl implements PlanService {
 
     // 根据课程代码获取申请表的数据集合
     @Override
-    public List<Classcourse> plandata(String cid) {
-	List<Classcourse> list = plandao.plandata(cid);
+    public List<Classcourse> plandata(int id) {
+	List<Classcourse> list = plandao.plandata(id);
 	return list;
     }
 
