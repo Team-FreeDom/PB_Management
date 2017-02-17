@@ -80,5 +80,10 @@ table tbody tr td{
 	float: left;
 	margin-right: 20px;
 }
+#delateTester{
+	color: #F5060A;
+	text-decoration: underline;
+	cursor: pointer;
+}
 
 

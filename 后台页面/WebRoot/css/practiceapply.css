@@ -73,6 +73,10 @@ table tbody tr td{
 	}
 .dataTables_length{
 	margin-left:5%;}
-
+.selectWidth{
+	width:12%;
+	float: left;
+	margin-right: 20px;
+}
 
 
