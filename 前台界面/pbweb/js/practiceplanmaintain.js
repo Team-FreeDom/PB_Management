@@ -192,7 +192,7 @@ $("#ck1").on("click", function () {
 $("#practiceapplytable tbody").on("click","tr",function(){
 	
 	Oneindex= $(this).find("span").attr("id");
-	//alert(Oneindex);
+	
 	/*$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -235,7 +235,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 						}
 						for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
-							"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+							"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
 							);
 						}
 					}
@@ -464,7 +464,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		}
 		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 			$("#table tbody:last-child").find("#aimID").after(
-			"<option class='rest' value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+			"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
 			);
 		}
 	}
@@ -519,25 +519,37 @@ $("#save").click(function(){//弹出框的保存
 			},			
 			callback: function (result) {
 				if(result){
-					/*obj[Oneindex].courseID,obj[Oneindex].termYear
-					var p="courceid";
-					var q="year";*/
-					var str="('"+obj[Oneindex].cid+"'"+",'"+obj[Oneindex].semester+"',"+'"'+"('";
+					var str="(";
 					var y=0;
 					$(".tbodyID").each(function(){
 						if(y!==0){
-							str=str+",('";
-							alert(y);
+							str=str+",(";
 						}
 						var b=$(this).find(".adviser2").val();
 						var c=$(this).find(".mark").html()-1;
-						str=str+b+"'"+",'"+value[c]+"'";
+						str=str+"'"+b+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){
-							
 							x++;
-							if(x!==13){
+							if(x===1){
+								if($(this).val()===""){
+								str=str+','+"'null'";
+								}else{
+									str=str+","+$(this).val();
+								}
+							}
+							if(x<=10&&x>1){
+								if($(this).val()===""){
+								str=str+','+"'null'";
+								}else{
+									str=str+","+"'"+$(this).val()+"'";
+								}
+							}
+							if(x===11){
+								str=str+","+$(this).find("option:selected").attr("id");
+							}
+							if(x===12){
 								if($(this).val()===""){
 								str=str+','+"'null'";
 								}else{
@@ -545,13 +557,10 @@ $("#save").click(function(){//弹出框的保存
 								}
 							}
 							
-								
 						});
-						str=str+"'"+obj[Oneindex].cid+"','"+obj[Oneindex].semester+"'"+")";
+						str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
 						y++;
 					});
-					str=str+'")';
-					//alert(str);
 					
 					$.ajax({
 						type : 'POST',
@@ -563,9 +572,9 @@ $("#save").click(function(){//弹出框的保存
 							alert("error");
 						},
 						data:{
-							"str":str,
 							"courseID":obj[Oneindex].cid,
 							"termYear":obj[Oneindex].semester,
+							"str":str,
 						},
 						success : function(msg) {
 							bootbox.alert({

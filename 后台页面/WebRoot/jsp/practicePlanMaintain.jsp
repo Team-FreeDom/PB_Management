@@ -444,17 +444,13 @@
 								<div class="col-sm-6">
 									<select name="" id="selectCollege" class="form-control">
 										<option value="" id="collegeID">请选择学院</option>
-										<option value="test1">test1</option>
-										<option value="test2">test2</option>
-										<option value="test3">test3</option>
+										
 									</select>
 								</div>
 								<div class="col-sm-6">
 									<select name="" id="selectTname" class="form-control">
 										<option value="" id="teacherNmaeID">请选择老师</option>
-										<option value="赵勇">赵勇</option>
-										<option value="李彩">李彩</option>
-										<option value="宋超">宋超</option>
+										
 									</select>
 								</div>
 							</div>

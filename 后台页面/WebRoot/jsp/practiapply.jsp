@@ -190,13 +190,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
 										<tr>
 											<td colspan="20">
-												<select class="form-control selectWidth">
-													<option value="">请选择学年</option>
+												<select class="form-control selectWidth" id="termYear">
+													<option value="" id="termYearID" selected>请选择学年</option>
 												</select>
-												<select class="form-control selectWidth">
-													<option value="">请选择学期</option>
-													<option value="">第一学期</option>
-													<option value="">第二学期</option>
+												<select class="form-control selectWidth" id="semester">
+													<option value="" selected>请选择学期</option>
+													<option value="0">全部</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
 												</select>
 											</td>
 										</tr>
