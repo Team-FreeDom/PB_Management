@@ -467,6 +467,13 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 $(document).on("click","#closemodal",function(){
 	
 	$("#Applychart").hide();
+	$(".tbodyID").each(function(){
+		var delid=$(this).find(".deleteID").attr("id");
+		alert(delid);
+		if(delid===""){
+			$(this).remove();
+		}
+	});
 	
 });
 
@@ -629,7 +636,7 @@ $("#save").click(function(){//弹出框的保存
 						dataType:"json",
 						data:{
 							"str":str,
-							"courseID":obj[Oneindex].cid,
+							"courseID":obj[Oneindex].id,
 							"termYear":obj[Oneindex].semester,
 						},
 						success : function(msg) {
