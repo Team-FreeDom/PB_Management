@@ -252,16 +252,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                           <table>
                                           	<tr>
                                             	<td>
-                                                    单位：<input readonly type="text" class="noborder" id="division" value="农学院">
+                                                    单位：<input readonly type="text" class="noborder" id="division" value="">
                                                 </td>
                                                 <td>
                                                     课程名称：<input readonly type="text"  id="classname" value="农学实践(3)">
                                                 </td>
                                                 <td>
-                                                	面向专业：<input readonly type="text" class="noborder" id="major" value="农学">
+                                                	面向专业：<input readonly type="text" class="noborder" id="major" value="">
                                                 </td>
                                                 <td>
-                                                	班级：<input readonly type="text" class="noborder" id="class" value="15信工1">
+                                                	班级：<input readonly type="text" class="noborder" id="class" value="">
                                                 </td>
                                                 <td>
                                                 	学分：<input readonly type="text" id="grade" value="4">
@@ -293,7 +293,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													</td>
 												</tr>
                                          	
-                                          	<tbody class="tbodyID">
+                                          	<tbody >
 												
                                           	</tbody>
                                           </table>
