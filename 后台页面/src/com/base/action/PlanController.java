@@ -119,13 +119,23 @@ public class PlanController {
 	System.out.println("这里是哪里====");
 	// 获取课程代码
 	String cid = request.getParameter("courseID");
+	System.out.println(cid+"11111");
 	// 获取学年学期
 	String semester = request.getParameter("termYear");
+	System.out.println(semester+"2222");
 	// 获取打包的数据
 	String plandata = request.getParameter("str");
-	System.out.println(plandata+"haha");
-	planservice.savePlanModify(cid, semester, plandata);
-
+	System.out.println(plandata);
+	planservice.savePlanModify(cid, semester,plandata);
+	JSONObject getObj = new JSONObject();
+	getObj.put("msg", "此申请处理成功");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 	return null;
     }
 
@@ -198,7 +208,6 @@ public class PlanController {
 	    HttpServletResponse response) {
 	// 获取每条班级安排记录的id
 	int planid = Integer.parseInt(request.getParameter("planid"));
-	System.out.println(planid+"66666666");
 	planservice.deleteClassRecord(planid);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", "此申请处理成功");

@@ -96,7 +96,7 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.transstate_baseapply(?,?,?)}");
+		    .prepareCall("{call baseweb.add_classarrangecourse(?,?,?)}");
 	    sp.setString(1, cid);
 	    sp.setString(2, semester);
 	    sp.setString(3, plandata);
@@ -148,6 +148,7 @@ public class PlanDaoImpl implements PlanDao {
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		Majoraim ch = new Majoraim();
+		ch.setId(rs.getInt("id"));
 		ch.setAim(rs.getString("aim"));
 		list.add(ch);
 	    }
