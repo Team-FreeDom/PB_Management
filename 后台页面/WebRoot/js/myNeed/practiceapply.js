@@ -2,12 +2,14 @@
 var obj=[];
 var Oneindex;
 var value=[];
+var table;
+var str = null;
 var writeName="";
 var showName="";
 var teacherString=[];
 $(document).ready(function() {
 	
-	 var table=$("#practiceapplytable").DataTable({
+	 table=$("#practiceapplytable").DataTable({
 		 "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 		 "lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 		 "bSort" : true,
@@ -19,7 +21,8 @@ $(document).ready(function() {
 		 "iDisplayLength": 5,	
 		"ajax":{
 			"url":"displayThisCollegePlan.do",
-			"type":"POST"
+			"type":"POST",
+			"data":{"semester":str}
 		},
 		"aoColumns" : [
 		   			{
@@ -137,6 +140,342 @@ $(document).ready(function() {
 				}
          }
 	});
+	 
+	// 获取学院，学期
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',
+			url : 'getPlanMaintainInfo.do',
+			async : false,
+			cache : false,
+			error : function(request) {
+				alert("error");
+			},
+			success : function(data) {
+
+				for (var i = 0; i < data.semester.length; i++) {
+					$("#termYearID").after(
+							"<option value=" + data.semester[i]
+									+ ">" + data.semester[i]
+									+ "</option>");
+
+				}
+
+				
+			}
+
+		});
+	 
+	 /*学年学期的js控制---start*/
+		$("#termYear").on("change", function() {
+			var termYear = $(this).val();
+			var semester = $("#semester").val();
+			if (termYear != "") {
+				if (semester=="0") {
+					str = termYear;							
+				} else if(semester!=""){
+					str = termYear + '-' + semster;
+				}else{
+					str=null;
+				}	
+				
+			
+			}else{
+				$("#semester").val("");
+				str=null;
+			}
+			
+
+			table=$("#practiceapplytable").DataTable({
+				 "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+				 "lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+				 "bSort" : true,
+				 "ordering":true,
+				 "serverSide" : true,
+				 "bFilter": true,
+				 "ordering":true,
+				  "dom": 'frtip<"bottom"l>',
+				 "iDisplayLength": 5,	
+				 "bDestroy":true,
+				"ajax":{
+					"url":"displayThisCollegePlan.do",
+					"type":"POST",
+					"data":{"semester":str}
+				},
+				"aoColumns" : [
+				   			{
+				   				"mData" : "semester",//学期学年
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   				//"sWidth" : "2%",
+				   			},
+				   			{
+				   				"mData" : "cid",//课程代码
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "coursename",//课程名称
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "count",//人数
+				   				"orderable" : true,
+				   				"sDefaultContent" : ""
+				   			},
+				   			{
+				   				"mData" : "selectedCount",//已选人数
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "composition",//教学班组成
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "college",//开课学院
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			
+				   			{
+				   				"mData" : "weekClassify",//周学时
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "credit",//学分
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "courseNature",//课程性质
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "courseCategory",//课程类别
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "tid",//教职工号
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "tname",//教师姓名
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "week",//起始周
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "mid",//专业编号
+				   				"orderable" : false,
+				   				"visible":false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "major_oriented",//面向专业
+				   				"orderable" : false,
+				   				"visible":false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "checkMethod",//考核
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+							{
+								"mData" : "id",//考核
+								"orderable" : false,
+								"sDefaultContent" : "",
+								"render" : function(data,type,row){
+									obj.push(row);
+									return '<span id='+(obj.length-1)+'></span>';
+								}
+							}
+					
+				],
+		        "language": {
+					"lengthMenu": "每页 _MENU_ 条记录",
+		            "zeroRecords": "没有找到记录",
+		            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+		            "infoEmpty": "无记录",
+		            "infoFiltered": "(从 _MAX_ 条记录过滤)",
+					"sSearch": "模糊查询：",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": " 上一页 ",
+						"sNext": " 下一页 ",
+						 "sLast": " 尾页 "
+						}
+		         }
+			});
+
+		});
+
+		$("#semester").on("change", function() {
+			var termYear = $("#termYear").val();
+			var semester = $(this).val();
+			if (termYear == "") {
+				if(semester!=""){
+				   bootbox.alert({
+					message : "请先选择学年",
+					size : 'small'
+				});
+				$("#semester").val("");
+				return;
+				}
+			}						
+			if (semester=="0") {
+				str = termYear;							
+			} else if(semester!=""){
+				str = termYear + '-' + semester;
+			}else{
+				str=null;
+			}	
+			table=$("#practiceapplytable").DataTable({
+				 "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+				 "lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+				 "bSort" : true,
+				 "ordering":true,
+				 "serverSide" : true,
+				 "bFilter": true,
+				 "ordering":true,
+				  "dom": 'frtip<"bottom"l>',
+				 "iDisplayLength": 5,	
+				 "bDestroy":true,
+				"ajax":{
+					"url":"displayThisCollegePlan.do",
+					"type":"POST",
+					"data":{"semester":str}
+				},
+				"aoColumns" : [
+				   			{
+				   				"mData" : "semester",//学期学年
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   				//"sWidth" : "2%",
+				   			},
+				   			{
+				   				"mData" : "cid",//课程代码
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "coursename",//课程名称
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "count",//人数
+				   				"orderable" : true,
+				   				"sDefaultContent" : ""
+				   			},
+				   			{
+				   				"mData" : "selectedCount",//已选人数
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "composition",//教学班组成
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "college",//开课学院
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			
+				   			{
+				   				"mData" : "weekClassify",//周学时
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "credit",//学分
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "courseNature",//课程性质
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "courseCategory",//课程类别
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "tid",//教职工号
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "tname",//教师姓名
+				   				"orderable" : true,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "week",//起始周
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "mid",//专业编号
+				   				"orderable" : false,
+				   				"visible":false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "major_oriented",//面向专业
+				   				"orderable" : false,
+				   				"visible":false,
+				   				"sDefaultContent" : "",
+				   			},
+				   			{
+				   				"mData" : "checkMethod",//考核
+				   				"orderable" : false,
+				   				"sDefaultContent" : "",
+				   			},
+							{
+								"mData" : "id",//考核
+								"orderable" : false,
+								"sDefaultContent" : "",
+								"render" : function(data,type,row){
+									obj.push(row);
+									return '<span id='+(obj.length-1)+'></span>';
+								}
+							}
+					
+				],
+		        "language": {
+					"lengthMenu": "每页 _MENU_ 条记录",
+		            "zeroRecords": "没有找到记录",
+		            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+		            "infoEmpty": "无记录",
+		            "infoFiltered": "(从 _MAX_ 条记录过滤)",
+					"sSearch": "模糊查询：",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": " 上一页 ",
+						"sNext": " 下一页 ",
+						 "sLast": " 尾页 "
+						}
+		         }
+			});
+		});
+		/*学年学期的js控制---end*/
+	 
 	
 //显示实习申请表
 	 var tbodyStyle='<tbody class="tbodyID"><tr>'
@@ -183,7 +522,6 @@ $(document).ready(function() {
 $("#practiceapplytable tbody").on("click","tr",function(){
 	
 	Oneindex= $(this).find("span").attr("id");
-	//alert(Oneindex);
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -198,10 +536,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		type:"POST",
 		dataType:"json",
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].id
 		},
 		success:function(data){	
-			//alert(data.length);
 			var teachername="";
 			var testername="";
 			for(var i=0;i<data.length;i++){
@@ -213,7 +550,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].cid
+						"mid":obj[Oneindex].mid
 					},
 					error : function(request) {
 						alert("error");
@@ -233,7 +570,6 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 						}
 					}
 				});
-				//alert(data[i].id);
 				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find("#weekend").val(data[i].week);
 				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
@@ -326,7 +662,6 @@ $(document).on("change","#baseFrom",function(e){
 	}
 });	
 
-	
 
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
@@ -386,26 +721,6 @@ $(document).on("change","#selectTname",function(e){//将实验员姓名显示在
 	teststring=testvalue.join(" ");
 	$("#tester").val(teststring);
 
-	/*$.each(obj2,function(index,item){
-		if(item.teacherName===e.target.value){
-			if($.inArray(item.teacherID,value3)===-1){
-				value[selectNum]=e.target.value;
-			    value3.push(item.teacherID);
-				value2=value.join(",");
-				$("#tester").val(value2);
-			}else{
-				bootbox.alert({
-					message : msg.str,
-					size : 'small'
-				});
-			}
-		}else{
-			value[selectNum]=e.target.value;
-			value3.push(item.teacherID);
-			value2=value.join(",");
-			$("#tester").val(value2);
-		}
-	});*/
 	
 });
 	
@@ -445,7 +760,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		async : false,
 		cache : false,
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].mid
 		},
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
@@ -476,6 +791,18 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 				"planid":judget
 			},
 			success : function(msg){
+				$(".mark").each(function(){
+				var htmlValue=$(this).html();
+				if(htmlValue>(rowNum+1)){
+					$(this).html(htmlValue-1);
+					}
+				});
+				teacherString.splice(rowNum,1);
+				showName=teacherString.join(",");
+				$("#adviser").val(showName);
+				value.splice(rowNum,1);
+				var value2=value.join(",");
+				$("#testername").val(value2);
 				bootbox.alert({
 					message : "删除成功",
 					size : 'small'
@@ -533,7 +860,6 @@ $("#save").click(function(){//弹出框的保存
 				},
 			},			
 			callback: function (result) {
-				//alert(obj[Oneindex].id);
 				if(result){
 					var str="(";
 					var y=0;
@@ -550,14 +876,14 @@ $("#save").click(function(){//弹出框的保存
 							x++;
 							if(x===1){
 								if($(this).val()===""){
-								str=str+','+"'null'";
+								str=str+','+"null";
 								}else{
 									str=str+","+$(this).val();
 								}
 							}
 							if(x<=10&&x>1){
 								if($(this).val()===""){
-								str=str+','+"'null'";
+								str=str+','+"null";
 								}else{
 									str=str+","+"'"+$(this).val()+"'";
 								}
@@ -588,8 +914,7 @@ $("#save").click(function(){//弹出框的保存
 							alert("error");
 						},
 						data:{
-							"courseID":obj[Oneindex].id,
-							"termYear":obj[Oneindex].semester,
+							"courseID":obj[Oneindex].id,							
 							"str":str,
 						},
 						success : function(msg) {
@@ -598,7 +923,6 @@ $("#save").click(function(){//弹出框的保存
 								message : "保存成功",
 								size : 'small'
 							});
-							//怎样刷新啊？
 						}
 					});
 					

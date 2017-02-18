@@ -212,7 +212,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					$("#table tbody:last-child").find("#outBase").addClass("flag");
 					$("#table tbody:last-child").find("#outBase").val('data[i].site');
 				}
-				//$("#table tbody:last-child").find(".deleteID").attr("id",'data[i].cid');
+				$("#table tbody:last-child").find(".deleteID").attr("id",'data[i].cid');
 				if(i!==2){
 					teachername=teachername+i+',';
 					testername=testername+i+',';

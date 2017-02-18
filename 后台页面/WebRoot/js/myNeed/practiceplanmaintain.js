@@ -1279,7 +1279,19 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 			data:{
 				"planid":judget
 			},
-			success : function(msg){						
+			success : function(msg){
+				$(".mark").each(function(){
+				var htmlValue=$(this).html();
+				if(htmlValue>(rowNum+1)){
+					$(this).html(htmlValue-1);
+					}
+				});
+				teacherString.splice(rowNum,1);
+				showName=teacherString.join(",");
+				$("#adviser").val(showName);
+				value.splice(rowNum,1);
+				var value2=value.join(",");
+				$("#testername").val(value2);
 				bootbox.alert({
 					message : "删除成功",
 					size : 'small'
