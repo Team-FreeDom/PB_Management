@@ -519,7 +519,6 @@ $(document).ready(function() {
 $("#practiceapplytable tbody").on("click","tr",function(){
 	
 	Oneindex= $(this).find("span").attr("id");
-	//alert(Oneindex);
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -537,7 +536,6 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 			"mid":obj[Oneindex].id
 		},
 		success:function(data){	
-			//alert(data.length);
 			var teachername="";
 			var testername="";
 			for(var i=0;i<data.length;i++){
@@ -569,7 +567,6 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 						}
 					}
 				});
-				//alert(data[i].id);
 				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find("#weekend").val(data[i].week);
 				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
@@ -605,6 +602,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					testername=testername+data[i].assistant;
 				}
 				value[i]=data[i].assistant;
+				teacherString[i]=data[i].guideTeacher;
 			}
 			$("#testername").val(testername);
 			$("#adviser").val(teachername);
@@ -640,31 +638,31 @@ $(document).on("change","#baseFrom",function(e){
 	if(e.target.value==='校内基地'){
 		$(this).parent().next().children(":first").show();
 		$(this).parent().next().children(":first").addClass("flag");
-		//$("#schoolBase").show();
 		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":last").val("");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
 		$(this).parent().next().children(":last").addClass("flag");
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 	}
 	if(e.target.value===''){
 		$(this).parent().next().children(":last").hide();
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":last").val("");
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
 });	
 
-	
-var writeName="";
-var showName="";
-var currentName="";
-var teacherString;
+
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	showName=$("#adviser").val();
 	teacherString=showName.split(",");
 	writeName=e.target.value;
 	if(writeName===""){
@@ -675,14 +673,9 @@ $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	
 	showName=teacherString.join(",");
 	$("#adviser").val(showName);
-	currentName="";
 
 });
-$(document).on("focus",".adviser2",function(e){
-	showName=$("#adviser").val();
-	currentName=e.target.value;
-	writeName="";
-});	
+
 	
 
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
@@ -725,26 +718,6 @@ $(document).on("change","#selectTname",function(e){//将实验员姓名显示在
 	teststring=testvalue.join(" ");
 	$("#tester").val(teststring);
 
-	/*$.each(obj2,function(index,item){
-		if(item.teacherName===e.target.value){
-			if($.inArray(item.teacherID,value3)===-1){
-				value[selectNum]=e.target.value;
-			    value3.push(item.teacherID);
-				value2=value.join(",");
-				$("#tester").val(value2);
-			}else{
-				bootbox.alert({
-					message : msg.str,
-					size : 'small'
-				});
-			}
-		}else{
-			value[selectNum]=e.target.value;
-			value3.push(item.teacherID);
-			value2=value.join(",");
-			$("#tester").val(value2);
-		}
-	});*/
 	
 });
 	
@@ -766,6 +739,7 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 $(document).on("click","#closemodal",function(){
 	
 	$("#Applychart").hide();
+	$(".tbodyID").remove();
 	
 });
 
@@ -803,6 +777,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
+	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
 	$(this).closest("tbody").remove();
 	if(judget!==""){
 		$.ajax({
@@ -812,21 +787,37 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 			data:{
 				"planid":judget
 			},
-			success : function(msg){						
-				//$(this).closest("tbody").remove();
+			success : function(msg){
+				$(".mark").each(function(){
+				var htmlValue=$(this).html();
+				if(htmlValue>(rowNum+1)){
+					$(this).html(htmlValue-1);
+					}
+				});
+				teacherString.splice(rowNum,1);
+				showName=teacherString.join(",");
+				$("#adviser").val(showName);
+				value.splice(rowNum,1);
+				var value2=value.join(",");
+				$("#testername").val(value2);
 				bootbox.alert({
 					message : "删除成功",
 					size : 'small'
 				});											
 			}
 		});
-	}else{	
-		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	}else{
+		$(".mark").each(function(){
+			var htmlValue=$(this).html();
+			if(htmlValue>(rowNum+1)){
+				$(this).html(htmlValue-1);
+			}
+		});
 		teacherString.splice(rowNum,1);
 		showName=teacherString.join(",");
 		$("#adviser").val(showName);
-		value3.splice(rowNum,1);
-		value2=value.join(",");
+		value.splice(rowNum,1);
+		var value2=value.join(",");
 		$("#tester").val(value2);
 	}
 
@@ -834,6 +825,24 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	
 	
 $("#save").click(function(){//弹出框的保存
+	var x=0;
+	var y=0;
+	$(".tbodyID").each(function(){
+		y++;
+		var sSite=$(this).find("#schoolBase").val();
+		var oSite=$(this).find("#outBase").val();
+		if(sSite===""&&oSite===""){
+			x++;
+			return false;
+		}
+	});
+	if(x!==0){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习地点",
+			size : 'small'
+		});
+		return;
+	}
 	bootbox.confirm({
 			message: "确定保存？",
 			size: 'small',
@@ -848,7 +857,6 @@ $("#save").click(function(){//弹出框的保存
 				},
 			},			
 			callback: function (result) {
-				//alert(obj[Oneindex].id);
 				if(result){
 					var str="(";
 					var y=0;
@@ -912,7 +920,6 @@ $("#save").click(function(){//弹出框的保存
 								message : "保存成功",
 								size : 'small'
 							});
-							//怎样刷新啊？
 						}
 					});
 					
