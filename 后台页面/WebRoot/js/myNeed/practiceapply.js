@@ -4,9 +4,6 @@ var Oneindex;
 var value=[];
 var table;
 var str = null;
-var writeName="";
-var showName="";
-var teacherString=[];
 $(document).ready(function() {
 	
 	 table=$("#practiceapplytable").DataTable({
