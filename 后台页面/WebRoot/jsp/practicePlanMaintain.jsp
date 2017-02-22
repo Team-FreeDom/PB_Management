@@ -218,7 +218,7 @@
 										<button class="btn btn-success" id="add">增加</button>
 										<button class="btn btn-danger" id="delete">删除</button>
 										<button class="btn btn-primary" id="daoru" data-toggle="modal"
-											data-target="#import">导入</button>
+											data-target="#writeWeekTime">导入</button>
 										<button class="btn btn-primary" id="chu">导出</button>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
 										<span id="remind" class="glyphicon glyphicon-send" hidden
@@ -299,6 +299,42 @@
 					</div>
 				</div>
 			</form>
+		</div>
+	</div>
+	
+	<!-- 输入学年的第一周-->
+	<div class="modal fade" id="writeWeekTime" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			
+				<div class="modal-content" style="border:#3071a9 8px solid;width:300px;">
+					<div class="modal-header" style="background:#3071a9; color:#FFF">
+						<button type="button" class="close" data-dismiss="modal"
+							id="closeWriteWeekTime">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h5 class="modal-title" id="myModalLabel">请先填写下述消息：</h5>
+					</div>	
+					  <center>				
+						<div class="modal-body" id="weekTime" style="height:200px;">
+						  
+							学年：<input type="text" class="form-control" id="teamYearw" name="teamYearw" placeholder="例：2016-2017"/>
+							
+							第1学期第1周时间：<input type="text" class="form-control laydate-icon" id="oneSemesterTime" style="height:32px;"/>
+							
+							第2学期第1周时间：<input type="text" class="form-control laydate-icon" id="twoSemesterTime" style="height:32px;"/>
+							
+						</div>	
+						</center>			
+					<div class="modal-footer">
+						<center>
+							<button class="btn btn-primary" id="certainWeekTime">确定</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">取消</button>
+						</center>
+					</div>
+				</div>
+			
 		</div>
 	</div>
 
@@ -591,10 +627,19 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	<script type="text/javascript" src="../js/laydate.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
-
 	<script src="../js/kg.js"></script>
-
+    <script>
+                laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
+                laydate({
+                   elem: '#oneSemesterTime'
+                })
+                laydate({
+                    elem: '#twoSemesterTime'
+                });
+              
+                </script>
 </body>
 </html>

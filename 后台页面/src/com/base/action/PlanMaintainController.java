@@ -11,7 +11,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.base.contants.Contants;
 import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
 import com.base.po.BaseCheckList;
@@ -36,6 +39,7 @@ import com.base.service.baseApplyService;
 import com.base.serviceImpl.AdminManageServiceImpl;
 import com.base.serviceImpl.InputExcelServiceImpl;
 import com.base.utils.ExcelReport;
+import com.base.utils.WeekTransformToTime;
 
 @Controller("planMaintainController")
 @RequestMapping("/jsp")
@@ -107,7 +111,9 @@ public class PlanMaintainController {
 			HttpServletResponse response) {
 		String semester =request.getParameter("semester");
 		String college = request.getParameter("college");
-
+        if(college.equals("-1")){
+        	college=null;
+        }
 		List<AllPlan> list = planMaintainService
 				.getPlanTable(semester, college);
 
@@ -301,7 +307,7 @@ public class PlanMaintainController {
 						+ "college,cid,coursename,"
 						+ "weekClassify,credit,courseNature,courseCategory,"
 						+ "siteRepuire,tid,tname,"
-						+ "technicalTitle,semester,week,checkMethod,mid,major_oriented) "
+						+ "technicalTitle,semester,week,checkMethod,mid,major_oriented,checkTime) "
 						+ "values";
 
 				StringBuffer suffix = new StringBuffer();
@@ -315,6 +321,8 @@ public class PlanMaintainController {
 					// 遍历列
 					if (row != null && row.size() > 0) {
 						String value = null;
+						String termYear=null;
+						int week=0;
 						for (int j = 0; j < row.size(); j++) {
 							value = row.get(j);
 							if (j == 6) {
@@ -324,21 +332,27 @@ public class PlanMaintainController {
 									value = value.substring(1);
 								}
 							
-							} if (j == 7) {
+							} else if (j == 7) {
 								if(value.length()==0){
 									value="0";
 								}
+								
+							}else if (j == 15) {								
+								if(value.length()!=0){
+									week=Integer.valueOf(value.substring(0,value.indexOf('-')));
+								}
 							}else if (j == 14) {
-								System.out.println("学年学期：" + value
-										+ "    index:" + value.indexOf('('));
+								
 								value = value.substring(value.indexOf('(') + 1,
 										value.lastIndexOf(')'));
+								termYear=value;
 							}
 							resultStr = resultStr + '"' + value + '"' + ',';
 
 						}
-						resultStr = resultStr.substring(0,
-								resultStr.length() - 1);
+						/*resultStr = resultStr.substring(0,
+								resultStr.length() - 1);*/
+						resultStr=resultStr+"'"+WeekTransformToTime.weekTransformToTime(termYear, week)+"'";
 						suffix.append("(" + resultStr + "),");
 
 					}
@@ -349,7 +363,7 @@ public class PlanMaintainController {
 						+ " on duplicate key update count=values(count),selectedCount=values(selectedCount),composition=values(composition),college=values(college)"
 						+ ",cid=values(cid),coursename=values(coursename),weekClassify=values(weekClassify),credit=values(credit)"
 						+ ",courseNature=values(courseNature),courseCategory=values(courseCategory),siteRepuire=values(siteRepuire),tid=values(tid)"
-						+ ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),mid=values(mid),major_oriented=values(major_oriented)";
+						+ ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),mid=values(mid),major_oriented=values(major_oriented),checkTime=values(checkTime)";
 				System.out.println(sql);
 				adminManageServiceImpl.setAdminFunction(sql);
 			}
@@ -449,4 +463,26 @@ public class PlanMaintainController {
 		return null;
 	}
 
+	// 存储学年第一周的日期
+		@RequestMapping("/saveSemesterTime.do")
+		public String saveSemesterTime(HttpServletRequest request,
+				HttpServletResponse response) {
+			String teamYearw = request.getParameter("teamYearw");
+			String oneSemesterTime = request.getParameter("oneSemesterTime");
+			String twoSemesterTime = request.getParameter("twoSemesterTime");
+			System.out.println("学年:"+teamYearw+",第一学期:"+oneSemesterTime+",第二学期:"+twoSemesterTime);
+			Contants.map.put(teamYearw+"-1", oneSemesterTime);
+			Contants.map.put(teamYearw+"-2", twoSemesterTime);
+			JSONObject getObj = new JSONObject();
+			getObj.put("msg", true);
+			response.setContentType("text/html;charset=UTF-8");
+
+			try {
+				response.getWriter().print(getObj.toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 }

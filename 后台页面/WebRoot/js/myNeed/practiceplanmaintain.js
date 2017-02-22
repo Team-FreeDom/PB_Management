@@ -39,7 +39,7 @@ $(document)
 											"mData" : "id",
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "2%"
+											"sWidth" : "4%"
 										}, {
 											"mData" : "semester",// 学期学年
 											"orderable" : false,
@@ -178,7 +178,7 @@ $(document)
 							.on(
 									"click",
 									function() {
-										// $("#Applychart").hide();
+										
 										if ($(this).prop("checked") === true) {
 											$(
 													"#practiceplanmaintain input[name='allcheckbox']")
@@ -188,6 +188,7 @@ $(document)
 													"#practiceplanmaintain input[name='allcheckbox']")
 													.prop("checked", false);
 										}
+										
 									});
 
 					/*学年学期的js控制---start*/
@@ -706,7 +707,69 @@ $(document)
 					
 					//导入文件的js控制			
 					$("#daoru").click(function(){
+						$("#teamYearw").val('');
+						$("#oneSemesterTime").val('');
+						$("#twoSemesterTime").val('');
 						$("#fileResource").val('');
+					});
+					
+					$("#certainWeekTime").click(function(){
+						
+						var teamYearw=$("#teamYearw").val();
+						var oneSemesterTime=$("#oneSemesterTime").val();
+						var twoSemesterTime=$("#twoSemesterTime").val();
+						var dateFormatP=/^[0-9]{4}-[0-9]{4}$/;
+						if(teamYearw==""){
+							bootbox.alert({
+								message : "请完善要导入的学年",
+								size : 'small'
+							});
+							return;
+						}
+						if (!dateFormatP.exec(teamYearw)) {
+							bootbox.alert({
+								message : "学年的格式不对,请重新填写",
+								size : 'small'
+							});
+							return false;
+						}
+						if(oneSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第1学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						if(twoSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第2学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							data:{"teamYearw":teamYearw,
+								  "oneSemesterTime":oneSemesterTime,
+							      "twoSemesterTime":twoSemesterTime
+							},
+							url : 'saveSemesterTime.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								alert("error");
+							},
+							success : function(data) {
+							
+								$("#writeWeekTime").modal('hide');
+								$("#import").modal('show');
+							}
+
+						});
+						
+						
 					});
 					
 					//导出文件的js控制
@@ -1026,9 +1089,13 @@ $(document)
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
 	
-$("#practiceplanmaintain tbody").on("click","tr",function(){
 	
-	Oneindex= $(this).find("input").attr("id");
+	 $(document).on("click", "#practiceplanmaintain tbody tr td", function() {
+	     var itLength=$(this).find("input").length;
+		 if(itLength!=0){
+		    return;
+	       }
+	Oneindex= $(this).parent('tr').find("input").attr("id");
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
