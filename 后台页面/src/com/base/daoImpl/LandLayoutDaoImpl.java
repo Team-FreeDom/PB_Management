@@ -33,7 +33,7 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -55,7 +55,7 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -77,7 +77,7 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -115,7 +115,7 @@ public class LandLayoutDaoImpl implements LandLayoutDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{

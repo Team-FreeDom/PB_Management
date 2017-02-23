@@ -296,8 +296,7 @@ public class PlanMaintainController {
 			filename = path; // 这是文件在服务器的绝对路径
 			// 遍历文件中的数据：下面的list为读出的数据
 			Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
-			List<List<String>> list = InputExcelServiceImpl.getPlanExcelRows(
-					InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
+			List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
 			// System.out.println("获得数据啦！！！！！！！！！");
 			// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 

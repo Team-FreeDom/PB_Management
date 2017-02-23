@@ -55,13 +55,13 @@ public class LandLayout_infoDaoImpl {
 		
 		try {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landlayout_info(?)}");  //·¢ËÍ´æ´¢¹ı³Ì
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landlayout_info(?)}");  //å‘é€å­˜å‚¨è¿‡ç¨‹
 			sp.setInt(1,bid);	
 			
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				liv=new Layout_InfoView();
 				
@@ -78,7 +78,7 @@ public class LandLayout_infoDaoImpl {
 				liv.setY(rs.getInt("ys"));
 				liv.setImg(rs.getString("img"));
 				liv.setAptCollege(rs.getString("aptCollege"));
-				li.add(liv);    //¼Óµ½listÖĞ
+				li.add(liv);    //åŠ åˆ°listä¸­
 			}
 	    	 
 			

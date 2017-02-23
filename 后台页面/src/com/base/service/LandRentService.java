@@ -6,29 +6,29 @@ import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
 
-//ÍÁµØÊ¹ÓÃĞÅÏ¢±íµÄÒµÎñÂß¼­²ã½Ó¿Ú
+//åœŸåœ°ä½¿ç”¨ä¿¡æ¯è¡¨çš„ä¸šåŠ¡é€»è¾‘å±‚æ¥å£
 public interface LandRentService {
 	
 	/*
-	   ²ÎÊıËµÃ÷£ºlr£¬ÎªÍÁµØÊ¹ÓÃLandRentInfo¶ÔÏóÊµÀı
-	   ·µ»ØÖµ£º    ÎŞ·µ»ØÖµ
-	   º¯Êı¹¦ÄÜ£º1.ÏòÍÁµØÊ¹ÓÃ±íÖĞ²åÈëÒ»ÌõĞÂ¼ÍÂ¼
-	           2.½«ÍÁµØ±àºÅÎª lr.getLid()ÇÒ×´Ì¬ÎªËø¶¨µÄÍÁµØÉêÇë¼ÇÂ¼µÄ×´Ì¬Öµ¸ÄÎªÉêÇëÊ§°Ü               
-	                          ½«ÉêÇë±àºÅÎªlr.getLa_id()µÄÍÁµØÉêÇë¼ÇÂ¼µÄ×´Ì¬Öµ¸ÄÎªÉêÇë³É¹¦
+	   å‚æ•°è¯´æ˜ï¼šlrï¼Œä¸ºåœŸåœ°ä½¿ç”¨LandRentInfoå¯¹è±¡å®ä¾‹
+	   è¿”å›å€¼ï¼š    æ— è¿”å›å€¼
+	   å‡½æ•°åŠŸèƒ½ï¼š1.å‘åœŸåœ°ä½¿ç”¨è¡¨ä¸­æ’å…¥ä¸€æ¡æ–°çºªå½•
+	           2.å°†åœŸåœ°ç¼–å·ä¸º lr.getLid()ä¸”çŠ¶æ€ä¸ºé”å®šçš„åœŸåœ°ç”³è¯·è®°å½•çš„çŠ¶æ€å€¼æ”¹ä¸ºç”³è¯·å¤±è´¥               
+	                          å°†ç”³è¯·ç¼–å·ä¸ºlr.getLa_id()çš„åœŸåœ°ç”³è¯·è®°å½•çš„çŠ¶æ€å€¼æ”¹ä¸ºç”³è¯·æˆåŠŸ
 	 */	
 	public void addLandRent(LandRentInfo lr);
 	
 	/*
-	   ²ÎÊıËµÃ÷£ºuserId,×Ö·û´®ĞÍ£¬ÎªÍÁµØµÄÊ¹ÓÃÈË±àºÅ
-	   ·µ»ØÖµ£º   List<LandRentInfo>£¬ÎªÍÁµØÊ¹ÓÃ¶ÔÏóLandRentInfoµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º²éÑ¯ÓÃ»§¸öÈËµÄÍÁµØÊ¹ÓÃÇé¿ö
+	   å‚æ•°è¯´æ˜ï¼šuserId,å­—ç¬¦ä¸²å‹ï¼Œä¸ºåœŸåœ°çš„ä½¿ç”¨äººç¼–å·
+	   è¿”å›å€¼ï¼š   List<LandRentInfo>ï¼Œä¸ºåœŸåœ°ä½¿ç”¨å¯¹è±¡LandRentInfoçš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæŸ¥è¯¢ç”¨æˆ·ä¸ªäººçš„åœŸåœ°ä½¿ç”¨æƒ…å†µ
 	 */
 	public List<LandRentInfo> getUserRentInfos(String userId);
 	
 	/*
-	   ²ÎÊıËµÃ÷£ºÎŞ²Î
-	   ·µ»ØÖµ£º   List<LandRentInfo>£¬ÎªÍÁµØÊ¹ÓÃ¶ÔÏóLandRentInfoµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º²éÑ¯ËùÓĞÍÁµØÊ¹ÓÃÇé¿ö
+	   å‚æ•°è¯´æ˜ï¼šæ— å‚
+	   è¿”å›å€¼ï¼š   List<LandRentInfo>ï¼Œä¸ºåœŸåœ°ä½¿ç”¨å¯¹è±¡LandRentInfoçš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæŸ¥è¯¢æ‰€æœ‰åœŸåœ°ä½¿ç”¨æƒ…å†µ
 	 */
 	public RentList getLandRentInfos(String bname,String deptName,String plantingContent,int page,int length);
 }

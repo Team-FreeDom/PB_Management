@@ -7,13 +7,13 @@ import javax.persistence.Id;
 public class MessageShow {
 
 	
-	private int id;//ÏûÏ¢±íid
+	private int id;//æ¶ˆæ¯è¡¨id
 	private String title;
 	private String content;
 	private String time;
-	private int isRead; //ÊÇ·ñÒÑ¾­ÔÄ¶ÁÏûÏ¢£¬0ÎªÎ´ÔÄ¶Á£¬1ÎªÒÑ¾­ÔÄ¶Á
+	private int isRead; //æ˜¯å¦å·²ç»é˜…è¯»æ¶ˆæ¯ï¼Œ0ä¸ºæœªé˜…è¯»ï¼Œ1ä¸ºå·²ç»é˜…è¯»
 	private String userid;
-	private int sn;//ÓÃÓÚ½çÃæÏÔÊ¾µÄÏûÏ¢ĞòºÅ
+	private int sn;//ç”¨äºç•Œé¢æ˜¾ç¤ºçš„æ¶ˆæ¯åºå·
 	public int getId() {
 		return id;
 	}
