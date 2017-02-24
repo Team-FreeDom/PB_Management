@@ -36,7 +36,7 @@ public class baseApplyDaoImpl implements baseApplyDao {
     public List<ApplyDept> getDept(int type) {
 	
 	Session session=sessionFactory.openSession();		
-	String hql="from ApplyDept where type=?";
+	String hql="from ApplyDept where type=? and aid !=-1";
 	List<ApplyDept> list=null;
 	
     try {

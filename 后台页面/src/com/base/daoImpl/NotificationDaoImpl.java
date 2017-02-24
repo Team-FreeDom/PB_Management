@@ -64,14 +64,14 @@ public class NotificationDaoImpl implements NotificationDao {
 		{
 			conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 			
-			sp = conn.prepareCall("{call baseweb.find_notification(?,?,?)}");  //µ÷ÓÃ´æ´¢¹ı³Ì
+			sp = conn.prepareCall("{call baseweb.find_notification(?,?,?)}");  //è°ƒç”¨å­˜å‚¨è¿‡ç¨‹
 			sp.setInt(1, Integer.valueOf(currentPage));
 			sp.setInt(2, Integer.valueOf(itemsPerPage));
 			sp.registerOutParameter(3,java.sql.Types.INTEGER);
-			sp.execute(); // Ö´ĞĞ´æ´¢¹ı³Ì 
-			int maxItems=sp.getInt(3);//½ÓÊÕÊä³ö²ÎÊı
-			//½ÓÊÕ½á¹û¼¯
-			rs=sp.getResultSet();   //»ñµÃ½á¹û¼¯
+			sp.execute(); // æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹ 
+			int maxItems=sp.getInt(3);//æ¥æ”¶è¾“å‡ºå‚æ•°
+			//æ¥æ”¶ç»“æœé›†
+			rs=sp.getResultSet();   //è·å¾—ç»“æœé›†
 			
 			while(rs.next())
 			{
@@ -82,7 +82,7 @@ public class NotificationDaoImpl implements NotificationDao {
 				listNews.add(notification);
 			}
 			
-			//Èç¹ûĞÂÎÅÁĞ±í²»Îª¿Õ²ÅÌí¼Óµ½List
+			//å¦‚æœæ–°é—»åˆ—è¡¨ä¸ä¸ºç©ºæ‰æ·»åŠ åˆ°List
 			if(CollectionUtils.isNotEmpty(listNews)){
 			   list.add(listNews);
 			   list.add(maxItems);
@@ -106,7 +106,7 @@ public class NotificationDaoImpl implements NotificationDao {
 
 		int dept = Integer.valueOf(department);
 		SQLQuery sqlQuery=null;
-		// hibernateµ÷ÓÃ´æ´¢¹ı³Ì(ÎŞ·µ»Ø²ÎÊı)
+		// hibernateè°ƒç”¨å­˜å‚¨è¿‡ç¨‹(æ— è¿”å›å‚æ•°)
 		try {
             if(dept==0){
             	sqlQuery = session
@@ -135,7 +135,7 @@ public class NotificationDaoImpl implements NotificationDao {
 	public List getMessageInfos(String userid,String currentPage,String itemsPerPage) {
 		// TODO Auto-generated method stub
 			
-		//×ªÈëJDBCÄ£Ê½
+		//è½¬å…¥JDBCæ¨¡å¼
 				Connection conn=null;
 				CallableStatement sp=null; 
 				ResultSet rs=null;
@@ -144,19 +144,19 @@ public class NotificationDaoImpl implements NotificationDao {
 				{
 					conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 					
-					sp = conn.prepareCall("{call baseweb.find_message(?,?,?,?)}");  //µ÷ÓÃ´æ´¢¹ı³Ì
+					sp = conn.prepareCall("{call baseweb.find_message(?,?,?,?)}");  //è°ƒç”¨å­˜å‚¨è¿‡ç¨‹
 					sp.setString(1, userid);
 					sp.setInt(2, Integer.valueOf(currentPage));
 					sp.setInt(3, Integer.valueOf(itemsPerPage));
 					sp.registerOutParameter(4,java.sql.Types.INTEGER);
-					sp.execute(); // Ö´ĞĞ´æ´¢¹ı³Ì 
-					int maxItems=sp.getInt(4);//½ÓÊÕÊä³ö²ÎÊı
-					//½ÓÊÕ½á¹û¼¯
-					rs=sp.getResultSet();   //»ñµÃ½á¹û¼¯
+					sp.execute(); // æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹ 
+					int maxItems=sp.getInt(4);//æ¥æ”¶è¾“å‡ºå‚æ•°
+					//æ¥æ”¶ç»“æœé›†
+					rs=sp.getResultSet();   //è·å¾—ç»“æœé›†
 					
-					//messagelistÁĞ±í²»ÊÇÍêÈ«±£´æµ½ message¶ÔÏó£¬»¹Ôö¼ÓÁËÒ»¸öÊôĞÔsn,ÓÃÓÚÏÔÊ¾µ±Ç°µÄÏûÏ¢µÄĞòºÅ
+					//messageliståˆ—è¡¨ä¸æ˜¯å®Œå…¨ä¿å­˜åˆ° messageå¯¹è±¡ï¼Œè¿˜å¢åŠ äº†ä¸€ä¸ªå±æ€§sn,ç”¨äºæ˜¾ç¤ºå½“å‰çš„æ¶ˆæ¯çš„åºå·
 					int sn= (Integer.valueOf(currentPage)-1)*10;
-					List<MessageShow> messagelist=new ArrayList<MessageShow>();//¶¨ÒåÒ»¸öÏàÓ¦ÀàĞÍµÄlist¼¯ºÏÈ¥½ÓÊÜ
+					List<MessageShow> messagelist=new ArrayList<MessageShow>();//å®šä¹‰ä¸€ä¸ªç›¸åº”ç±»å‹çš„listé›†åˆå»æ¥å—
 					while(rs.next())
 					{
 						MessageShow me=new MessageShow();
@@ -166,12 +166,12 @@ public class NotificationDaoImpl implements NotificationDao {
 						me.setTime(rs.getString("time"));
 						me.setTitle(rs.getString("title"));
 						me.setUserid(rs.getString("userid"));
-						sn++; //ÓĞÒ»Ìõ¼ÇÂ¼¾Í±àÒ»¸öĞòºÅ£¬ĞòºÅ´Ó1¿ªÊ¼ÉıĞòÅÅÁĞ
+						sn++; //æœ‰ä¸€æ¡è®°å½•å°±ç¼–ä¸€ä¸ªåºå·ï¼Œåºå·ä»1å¼€å§‹å‡åºæ’åˆ—
 						me.setSn(sn);
 						messagelist.add(me);
 					}
 					
-					//Èç¹ûÏûÏ¢ÁĞ±í²»Îª¿Õ²ÅÌí¼Óµ½List
+					//å¦‚æœæ¶ˆæ¯åˆ—è¡¨ä¸ä¸ºç©ºæ‰æ·»åŠ åˆ°List
 					if(CollectionUtils.isNotEmpty(messagelist)){
 					   list.add(messagelist);
 					   list.add(maxItems);
@@ -209,14 +209,14 @@ public class NotificationDaoImpl implements NotificationDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.top_message(?)}"); // ·¢ËÍ´æ´¢¹ı³Ì
+					.prepareCall("{CALL baseweb.top_message(?)}"); // å‘é€å­˜å‚¨è¿‡ç¨‹
 			sp.setString(1, userid);
-			sp.execute(); // Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute(); // æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 
-			rs = sp.getResultSet(); // »ñµÃ½á¹û¼¯
+			rs = sp.getResultSet(); // è·å¾—ç»“æœé›†
 			int i = 0;
 
-			while (rs.next()) // ±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while (rs.next()) // éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				Message message = new Message();
 				message.setId(rs.getInt("id"));
@@ -310,14 +310,14 @@ public class NotificationDaoImpl implements NotificationDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.top_notification()}"); // ·¢ËÍ´æ´¢¹ı³Ì
+					.prepareCall("{CALL baseweb.top_notification()}"); // å‘é€å­˜å‚¨è¿‡ç¨‹
 			
-			sp.execute(); // Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute(); // æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 
-			rs = sp.getResultSet(); // »ñµÃ½á¹û¼¯
+			rs = sp.getResultSet(); // è·å¾—ç»“æœé›†
 			int i = 0;
 
-			while (rs.next()) // ±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while (rs.next()) // éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				Notification notification = new Notification();
 				notification.setId(rs.getInt("id"));

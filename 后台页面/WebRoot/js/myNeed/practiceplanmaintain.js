@@ -39,7 +39,7 @@ $(document)
 											"mData" : "id",
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "2%"
+											"sWidth" : "4%"
 										}, {
 											"mData" : "semester",// 学期学年
 											"orderable" : false,
@@ -124,7 +124,7 @@ $(document)
 											"render" : function(data, type, row) {
 												obj.push(row);
 												return '<input type="checkbox" name="allcheckbox" value="'
-														+ data + '">';
+														+ data + '" id="'+(obj.length-1)+'"/>';
 											}
 										} ],
 										"language" : {
@@ -178,7 +178,7 @@ $(document)
 							.on(
 									"click",
 									function() {
-										// $("#Applychart").hide();
+										
 										if ($(this).prop("checked") === true) {
 											$(
 													"#practiceplanmaintain input[name='allcheckbox']")
@@ -188,6 +188,7 @@ $(document)
 													"#practiceplanmaintain input[name='allcheckbox']")
 													.prop("checked", false);
 										}
+										
 									});
 
 					/*学年学期的js控制---start*/
@@ -317,7 +318,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -340,15 +341,17 @@ $(document)
 
 					$("#semester").on("change", function() {
 						var termYear = $("#termYear").val();
+						var semester = $(this).val();
 						if (termYear == "") {
-							$("#semester").val("");
-							bootbox.alert({
+							if(semester!=""){
+							   bootbox.alert({
 								message : "请先选择学年",
 								size : 'small'
 							});
+							$("#semester").val("");
 							return;
-						}
-						var semester = $(this).val();
+							}
+						}						
 						if (semester=="0") {
 							str = termYear;							
 						} else if(semester!=""){
@@ -463,7 +466,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -704,7 +707,69 @@ $(document)
 					
 					//导入文件的js控制			
 					$("#daoru").click(function(){
+						$("#teamYearw").val('');
+						$("#oneSemesterTime").val('');
+						$("#twoSemesterTime").val('');
 						$("#fileResource").val('');
+					});
+					
+					$("#certainWeekTime").click(function(){
+						
+						var teamYearw=$("#teamYearw").val();
+						var oneSemesterTime=$("#oneSemesterTime").val();
+						var twoSemesterTime=$("#twoSemesterTime").val();
+						var dateFormatP=/^[0-9]{4}-[0-9]{4}$/;
+						if(teamYearw==""){
+							bootbox.alert({
+								message : "请完善要导入的学年",
+								size : 'small'
+							});
+							return;
+						}
+						if (!dateFormatP.exec(teamYearw)) {
+							bootbox.alert({
+								message : "学年的格式不对,请重新填写",
+								size : 'small'
+							});
+							return false;
+						}
+						if(oneSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第1学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						if(twoSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第2学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							data:{"teamYearw":teamYearw,
+								  "oneSemesterTime":oneSemesterTime,
+							      "twoSemesterTime":twoSemesterTime
+							},
+							url : 'saveSemesterTime.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								alert("error");
+							},
+							success : function(data) {
+							
+								$("#writeWeekTime").modal('hide');
+								$("#import").modal('show');
+							}
+
+						});
+						
+						
 					});
 					
 					//导出文件的js控制
@@ -887,8 +952,7 @@ $(document)
 																	obj.push(row);
 																	userWarn.push(data);
 																	return '<input type="checkbox" name="allcheckbox" value="'
-																			+ data
-																			+ '">';
+																	+ data + '" id="'+(obj.length-1)+'"/>';
 																}
 															} ],
 															"language" : {
@@ -1025,9 +1089,13 @@ $(document)
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
 	
-$("#practiceapplytable tbody").on("click","tr",function(){
 	
-	Oneindex= $(this).find("input").attr("id");
+	 $(document).on("click", "#practiceplanmaintain tbody tr td", function() {
+	     var itLength=$(this).find("input").length;
+		 if(itLength!=0){
+		    return;
+	       }
+	Oneindex= $(this).parent('tr').find("input").attr("id");
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -1042,7 +1110,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		type:"POST",
 		dataType:"json",
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].id
 		},
 		success:function(data){		
 			var teachername="";
@@ -1056,7 +1124,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].cid
+						"mid":obj[Oneindex].mid
 					},
 					error : function(request) {
 						alert("error");
@@ -1250,7 +1318,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		async : false,
 		cache : false,
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].mid
 		},
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
@@ -1336,88 +1404,88 @@ $("#save").click(function(){//弹出框的保存
 		return;
 	}
 	bootbox.confirm({
-			message: "确定保存？",
-			size: 'small',
-			buttons: {
-				confirm: {
-					label: '确定',
-					className: 'btn-success'
-				},
-				cancel: {
-					label: '取消',
-					className: 'btn-danger'
-				},
-			},			
-			callback: function (result) {
-				if(result){
-					var str="(";
-					var y=0;
-					$(".tbodyID").each(function(){
-						if(y!==0){
-							str=str+",(";
+		message: "确定保存？",
+		size: 'small',
+		buttons: {
+			confirm: {
+				label: '确定',
+				className: 'btn-success'
+			},
+			cancel: {
+				label: '取消',
+				className: 'btn-danger'
+			},
+		},			
+		callback: function (result) {
+			if(result){
+				var str="(";
+				var y=0;
+				$(".tbodyID").each(function(){
+					if(y!==0){
+						str=str+",(";
+					}
+					var b=$(this).find(".adviser2").val();
+					var c=$(this).find(".mark").html()-1;
+					str=str+"'"+b+"'"+",'"+value[c]+"'";
+					
+					var x=0;
+					$(this).find(".flag").each(function(){
+						x++;
+						if(x===1){
+							if($(this).val()===""){
+							str=str+','+"null";
+							}else{
+								str=str+","+$(this).val();
+							}
 						}
-						var b=$(this).find(".adviser2").val();
-						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+b+"'"+",'"+value[c]+"'";
+						if(x<=10&&x>1){
+							if($(this).val()===""){
+							str=str+','+"null";
+							}else{
+								str=str+","+"'"+$(this).val()+"'";
+							}
+						}
+						if(x===11){
+							str=str+","+$(this).find("option:selected").attr("id");
+						}
+						if(x===12){
+							if($(this).val()===""){
+							str=str+','+"'null'";
+							}else{
+								str=str+","+"'"+$(this).val()+"'";
+							}
+						}
 						
-						var x=0;
-						$(this).find(".flag").each(function(){
-							x++;
-							if(x===1){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+$(this).val();
-								}
-							}
-							if(x<=10&&x>1){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+"'"+$(this).val()+"'";
-								}
-							}
-							if(x===11){
-								str=str+","+$(this).find("option:selected").attr("id");
-							}
-							if(x===12){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+"'"+$(this).val()+"'";
-								}
-							}
-							
+					});
+					str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
+					y++;
+				});
+				
+				$.ajax({
+					type : 'POST',
+					dataType : 'json',		
+					url : 'savePlanModify.do',  
+					async : false,
+					cache : false,
+					error : function(request) {
+						alert("error");
+					},
+					data:{
+						"courseID":obj[Oneindex].id,							
+						"str":str,
+					},
+					success : function(msg) {
+						//alert("hah");
+						bootbox.alert({
+							message : "保存成功",
+							size : 'small'
 						});
-						str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
-						y++;
-					});
-					
-					$.ajax({
-						type : 'POST',
-						dataType : 'json',		
-						url : 'savePlanModify.do',  
-						async : false,
-						cache : false,
-						error : function(request) {
-							alert("error");
-						},
-						data:{
-							"str":str,
-							"courseID":obj[Oneindex].cid,
-							"termYear":obj[Oneindex].semester,
-						},
-						success : function(msg) {
-							bootbox.alert({
-								message : msg.str,
-								size : 'small'
-							});
-						}
-					});
-					
-				}
+					}
+				});
+				
 			}
-	});
+		}
+});
 });
 //</end>
 					// 删除表格的中记录

@@ -4,27 +4,27 @@ import java.util.List;
 
 import com.base.po.LandLayout;
 
-//ÍÁµØ²¼¾Ö¹ÜÀí±íµÄÊý¾Ý¿âÁ¬½Ó²ã½Ó¿Ú
+//åœŸåœ°å¸ƒå±€ç®¡ç†è¡¨çš„æ•°æ®åº“è¿žæŽ¥å±‚æŽ¥å£
 public interface LandLayoutDao {
 
 	/*
-	   ²ÎÊýËµÃ÷£ºlayout,ÎªÍÁµØ²¼¾ÖLandLayout¶ÔÏó
-	   ·µ»ØÖµ£º   ÎÞ·µ»ØÖµ
-	   º¯Êý¹¦ÄÜ£ºÏòÍÁµØ²¼¾Ö¹ÜÀí±íÖÐ²åÈëÒ»Ìõ¼ÇÂ¼
+	   å‚æ•°è¯´æ˜Žï¼šlayout,ä¸ºåœŸåœ°å¸ƒå±€LandLayoutå¯¹è±¡
+	   è¿”å›žå€¼ï¼š   æ— è¿”å›žå€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šå‘åœŸåœ°å¸ƒå±€ç®¡ç†è¡¨ä¸­æ’å…¥ä¸€æ¡è®°å½•
 	 */
 	public void doLandLayout(LandLayout layout);
 	
 	/*
-	   ²ÎÊýËµÃ÷£ºlayout,ÎªÍÁµØ²¼¾ÖLandLayout¶ÔÏó
-	   ·µ»ØÖµ£º   ÎÞ·µ»ØÖµ
-	   º¯Êý¹¦ÄÜ£º¸üÐÂÍÁµØ²¼¾Ö¹ÜÀí±íÖÐµÄÒ»Ìõ¼ÇÂ¼
+	   å‚æ•°è¯´æ˜Žï¼šlayout,ä¸ºåœŸåœ°å¸ƒå±€LandLayoutå¯¹è±¡
+	   è¿”å›žå€¼ï¼š   æ— è¿”å›žå€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šæ›´æ–°åœŸåœ°å¸ƒå±€ç®¡ç†è¡¨ä¸­çš„ä¸€æ¡è®°å½•
 	 */
 	public void updateLandLayout(LandLayout layout);
 	
 	/*
-	   ²ÎÊýËµÃ÷£ºid,ÕûÐÍ£¬±íÊ¾ÍÁµØ²¼¾Ö¼ÇÂ¼µÄ±àºÅ
-	   ·µ»ØÖµ£º   ÎÞ·µ»ØÖµ
-	   º¯Êý¹¦ÄÜ£ºÉ¾³ýÍÁµØ²¼¾Ö¹ÜÀí±íÖÐµÄÒ»Ìõ¼ÇÂ¼
+	   å‚æ•°è¯´æ˜Žï¼šid,æ•´åž‹ï¼Œè¡¨ç¤ºåœŸåœ°å¸ƒå±€è®°å½•çš„ç¼–å·
+	   è¿”å›žå€¼ï¼š   æ— è¿”å›žå€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šåˆ é™¤åœŸåœ°å¸ƒå±€ç®¡ç†è¡¨ä¸­çš„ä¸€æ¡è®°å½•
 	 */
 	public void delLandLayout(String id);
 }

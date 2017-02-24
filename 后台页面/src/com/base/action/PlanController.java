@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
-import com.base.po.Classarragecourse;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -45,6 +45,11 @@ public class PlanController {
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
+	
+	String semester = request.getParameter("semester");
+	if (semester.equals("")) {
+		semester = null;
+	}
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -56,15 +61,22 @@ public class PlanController {
 	String orderDir = "desc"; // // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-	PlanList str = null;
-	// String columnName = "id";
-	str = planservice.getThisCollegePlan(userid, pageindex, size, order,
-		orderDir, searchValue);
+	
+	int recordsTotal=0;
+	List<AllPlan> list=new ArrayList<AllPlan>();
+	if(semester!=null){		
+		PlanList pl = null;
+	    pl = planservice.getThisCollegePlan(semester,userid, pageindex, size, order,
+	    		orderDir, searchValue);
+	    list=pl.getData();
+	recordsTotal=pl.getRecordsTotal();
+	}
+	
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
-	getObj.put("recordsFiltered", str.getRecordsTotal());
-	getObj.put("recordsTotal", str.getRecordsTotal());
-	getObj.put("data", str.getData());
+	getObj.put("recordsFiltered", recordsTotal);
+	getObj.put("recordsTotal", recordsTotal);
+	getObj.put("data", list);
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {
@@ -80,10 +92,10 @@ public class PlanController {
     @RequestMapping("/getplandata.do")
     public String getplandata(HttpServletRequest request,
 	    HttpServletResponse response) {
-	// 前台传过来的课程代码
-	String cid = request.getParameter("mid");	
+	// 前台传过来的课程表id
+	int id = Integer.valueOf(request.getParameter("mid"));	
         List<Classcourse>  list = null;
-	list = planservice.plandata(cid);
+	list = planservice.plandata(id);
 	JSONArray json = JSONArray.fromObject(list);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -116,17 +128,13 @@ public class PlanController {
     @RequestMapping("/savePlanModify.do")
     public String savePlanModify(HttpServletRequest request,
 	    HttpServletResponse response) {
-	System.out.println("这里是哪里====");
-	// 获取课程代码
-	String cid = request.getParameter("courseID");
-	System.out.println(cid+"11111");
-	// 获取学年学期
-	String semester = request.getParameter("termYear");
-	System.out.println(semester+"2222");
-	// 获取打包的数据
+	
+	// 获取课程表记录编号
+	int id = Integer.valueOf(request.getParameter("courseID"));
+
 	String plandata = request.getParameter("str");
 	System.out.println(plandata);
-	planservice.savePlanModify(cid, semester,plandata);
+	planservice.savePlanModify(id,plandata);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");
@@ -148,6 +156,7 @@ public class PlanController {
 	List<basetype> list1 = baseapplyservice.getBasetype();	
 	// 获取课程代码
 	 String cid = request.getParameter("mid");	
+	 System.out.println("目的:"+cid);
 	// 获取获取专业所对应的培训目的
 	 List<Majoraim> list3 = planservice.getPlanAim(cid);
 	try {

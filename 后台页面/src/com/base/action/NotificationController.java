@@ -30,19 +30,19 @@ public class NotificationController {
 	@Autowired
 	private LandApplyServiceImpl landApplyServiceImpl;
 
-	// Í¨Öª·¢²¼Ò³Ãæ
+	// é€šçŸ¥å‘å¸ƒé¡µé¢
 	@RequestMapping("jsp/notification.do")
 	public String notification(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
 
-		// »ñÈ¡ËùÓĞµÄ²¿ÃÅ
+		// è·å–æ‰€æœ‰çš„éƒ¨é—¨
 		List<ApplyDept> applyDeptList = landApplyServiceImpl.getDepts();
 		map.addAttribute("applyDeptList", applyDeptList);
 
 		return "notification";
 	}
 
-	// ·¢²¼Í¨Öª
+	// å‘å¸ƒé€šçŸ¥
 	@RequestMapping("jsp/saveNotification.do")
 	public String saveNotification(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -60,18 +60,18 @@ public class NotificationController {
 		return null;
 	}
 
-	//»ñÈ¡Í¨ÖªÏêÇé
+	//è·å–é€šçŸ¥è¯¦æƒ…
 	@RequestMapping("jsp/newlist.do")
 	public String newlist(ModelMap map, HttpServletResponse response,HttpServletRequest request) {
 
 		response.setContentType("text/html;charset=UTF-8");
-		// »ñÈ¡µ±Ç°ÊÇµÚ¼¸Ò³
+		// è·å–å½“å‰æ˜¯ç¬¬å‡ é¡µ
 		String currentPage = request.getParameter("page");
 		if (currentPage == null)
 			currentPage = "1";
-		map.addAttribute("page", currentPage); // ·µ»Øµ±Ç°Ò³Âë
+		map.addAttribute("page", currentPage); // è¿”å›å½“å‰é¡µç 
 		
-		// Ã¿Ò³ÓĞ¶àÉÙĞĞ£¬ÕâÀï¹Ì¶¨ÎªÃ¿Ò³10ĞĞ
+		// æ¯é¡µæœ‰å¤šå°‘è¡Œï¼Œè¿™é‡Œå›ºå®šä¸ºæ¯é¡µ10è¡Œ
 		//String itemsPerPage = request.getParameter("itemsPerPage");
 		int itemsPerPage = 10;
 		List list = notificationServiceImpl
@@ -80,32 +80,32 @@ public class NotificationController {
 		if(CollectionUtils.isNotEmpty(list)){
 			map.addAttribute("notifications", list.get(0));
 				
-			int maxItems = (Integer) list.get(1);  // »ñÈ¡×î´ó¼ÇÂ¼Êı
+			int maxItems = (Integer) list.get(1);  // è·å–æœ€å¤§è®°å½•æ•°
 	        int maxPage=0;
 			//System.out.println(maxItems);
 			
-			if(maxItems%itemsPerPage==0)//ÅĞ¶ÏÊÇ·ñ×î´ó¼ÇÂ¼ÊÇÃ¿Ò³¼ÇÂ¼µÄÕûÊı±¶
+			if(maxItems%itemsPerPage==0)//åˆ¤æ–­æ˜¯å¦æœ€å¤§è®°å½•æ˜¯æ¯é¡µè®°å½•çš„æ•´æ•°å€
 				maxPage = maxItems/itemsPerPage;
 			else
 				maxPage = maxItems/itemsPerPage+1;
 			//System.out.println(maxPage);
-			map.addAttribute("totalPages",maxPage);// ·µ»Ø×î´óÒ³Êı
+			map.addAttribute("totalPages",maxPage);// è¿”å›æœ€å¤§é¡µæ•°
 			
-			//ÏÂÃæ¼ÆËã·ÖÒ³µÄÆğÊ¼Ò³Âë£¬×î¶àÏÔÊ¾10Ò³
+			//ä¸‹é¢è®¡ç®—åˆ†é¡µçš„èµ·å§‹é¡µç ï¼Œæœ€å¤šæ˜¾ç¤º10é¡µ
 			List pageList = new ArrayList();
 			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxPage, 5);
 			
 			for (int i = (Integer) tempList.get(0); i <= (Integer)tempList.get(1); i++)   
 			    	 pageList.add(i);
 			
-			map.addAttribute("pageList", pageList); // ÓÃÓÚÏÔÊ¾Ò³Ãæ1,2,3,4,...Ğ§¹û
-			// System.out.println("messageList²»Îª¿Õ");
+			map.addAttribute("pageList", pageList); // ç”¨äºæ˜¾ç¤ºé¡µé¢1,2,3,4,...æ•ˆæœ
+			// System.out.println("messageListä¸ä¸ºç©º");
 		}
 
 		return "newlist";
 	}
 
-	//ÏûÏ¢·¢²¼
+	//æ¶ˆæ¯å‘å¸ƒ
 	@RequestMapping("jsp/saveMessage.do")
 	public String saveMessage(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -114,25 +114,25 @@ public class NotificationController {
 		String content = request.getParameter("content");
 		String depatment = request.getParameter("depatment");
 		//System.out.println(depatment);
-	    notificationServiceImpl.addMessage("ÏµÍ³ÏûÏ¢", content, depatment.trim());
+	    notificationServiceImpl.addMessage("ç³»ç»Ÿæ¶ˆæ¯", content, depatment.trim());
 
 		return null;
 	}
 
-	//»ñÈ¡ÏûÏ¢ÁĞ±íÏêÇé
+	//è·å–æ¶ˆæ¯åˆ—è¡¨è¯¦æƒ…
 	@RequestMapping("jsp/getMessage.do")
 	public String getMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		// »ñÈ¡µ±Ç°ÊÇµÚ¼¸Ò³
+		// è·å–å½“å‰æ˜¯ç¬¬å‡ é¡µ
 		String currentPage = request.getParameter("page");
 		if (currentPage == null)
 			currentPage = "1";
-		map.addAttribute("page", currentPage); // ·µ»Øµ±Ç°Ò³Âë
+		map.addAttribute("page", currentPage); // è¿”å›å½“å‰é¡µç 
 		
-		// Ã¿Ò³ÓĞ¶àÉÙĞĞ£¬ÕâÀï¹Ì¶¨ÎªÃ¿Ò³10ĞĞ
+		// æ¯é¡µæœ‰å¤šå°‘è¡Œï¼Œè¿™é‡Œå›ºå®šä¸ºæ¯é¡µ10è¡Œ
 		//String itemsPerPage = request.getParameter("itemsPerPage");
 		int itemsPerPage = 10;
 
@@ -146,40 +146,40 @@ public class NotificationController {
 
 		if(CollectionUtils.isNotEmpty(list)){
 			messageList = (List<MessageShow>) list.get(0);
-			map.addAttribute("messageList", messageList); // Õ¹Ê¾µÄÏûÏ¢ÁĞ±í
+			map.addAttribute("messageList", messageList); // å±•ç¤ºçš„æ¶ˆæ¯åˆ—è¡¨
 					
-			int maxItems = (Integer) list.get(1); // »ñÈ¡×î´ó¼ÇÂ¼Êı
+			int maxItems = (Integer) list.get(1); // è·å–æœ€å¤§è®°å½•æ•°
 			int maxPage=0;
 			
-			if(maxItems%itemsPerPage==0)//ÅĞ¶ÏÊÇ·ñ×î´ó¼ÇÂ¼ÊÇÃ¿Ò³¼ÇÂ¼µÄÕûÊı±¶
+			if(maxItems%itemsPerPage==0)//åˆ¤æ–­æ˜¯å¦æœ€å¤§è®°å½•æ˜¯æ¯é¡µè®°å½•çš„æ•´æ•°å€
 				maxPage = maxItems/itemsPerPage;
 			else
 				maxPage = maxItems/itemsPerPage+1;
 			
-			map.addAttribute("totalPages",maxPage);// ·µ»Ø×î´óÒ³Êı
+			map.addAttribute("totalPages",maxPage);// è¿”å›æœ€å¤§é¡µæ•°
 			
-			//ÏÂÃæ¼ÆËã·ÖÒ³µÄÆğÊ¼Ò³Âë£¬×î¶àÏÔÊ¾10Ò³
+			//ä¸‹é¢è®¡ç®—åˆ†é¡µçš„èµ·å§‹é¡µç ï¼Œæœ€å¤šæ˜¾ç¤º10é¡µ
 			List pageList = new ArrayList();
 			List tempList = MessageUtils.calcPage(Integer.valueOf(currentPage), maxPage, 5);
 			
 			for (int i = (Integer) tempList.get(0); i <= (Integer)tempList.get(1); i++)   
 			    	 pageList.add(i);
 			
-			map.addAttribute("pageList", pageList); // ÓÃÓÚÏÔÊ¾Ò³Ãæ1,2,3,4,...Ğ§¹û
-			// System.out.println("messageList²»Îª¿Õ");
+			map.addAttribute("pageList", pageList); // ç”¨äºæ˜¾ç¤ºé¡µé¢1,2,3,4,...æ•ˆæœ
+			// System.out.println("messageListä¸ä¸ºç©º");
 		}
 
 		return "msgUI";
 	}
 
-	//»ñÈ¡Î´¶ÁÏûÏ¢Êı
+	//è·å–æœªè¯»æ¶ˆæ¯æ•°
 	@RequestMapping("jsp/getNoReadMessageCount.do")
 	public String getNoReadMessageCount(ModelMap map,
 			HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
 		String userid = CookieUtils.getCookieUsername(request, response);
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		// System.out.println("Î´¶ÁÏûÏ¢ÊıÎª£º"+number);
+		// System.out.println("æœªè¯»æ¶ˆæ¯æ•°ä¸ºï¼š"+number);
 		try {
 			if (number == 0)
 				response.getWriter().print("");
@@ -193,7 +193,7 @@ public class NotificationController {
 		return null;
 	}
 
-	//ÉèÖÃÏûÏ¢Îª¡°ÒÑ¶Á¡±×´Ì¬£¬·µ»Ø¡°Î´¶ÁÏûÏ¢Êı¡±
+	//è®¾ç½®æ¶ˆæ¯ä¸ºâ€œå·²è¯»â€çŠ¶æ€ï¼Œè¿”å›â€œæœªè¯»æ¶ˆæ¯æ•°â€
 	@RequestMapping("jsp/setReadMessage.do")
 	public String setReadMessage(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -201,10 +201,10 @@ public class NotificationController {
 		String id = request.getParameter("id");
 		notificationServiceImpl.setReadMessage(Integer.valueOf(id));
 
-		// ¶ÁÈ¡Î´¶ÁÏûÏ¢Êı£¬¸üĞÂÏûÏ¢½çÃæ
+		// è¯»å–æœªè¯»æ¶ˆæ¯æ•°ï¼Œæ›´æ–°æ¶ˆæ¯ç•Œé¢
 		String userid = CookieUtils.getCookieUsername(request, response);
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		// System.out.println("Î´¶ÁÏûÏ¢ÊıÎª£º"+number);
+		// System.out.println("æœªè¯»æ¶ˆæ¯æ•°ä¸ºï¼š"+number);
 		try {
 			if (number == 0)
 				response.getWriter().print("");
@@ -218,13 +218,13 @@ public class NotificationController {
 		return null;
 	}
 	
-	//Í¨ÖªÏêÇéÒ³Ãæ
+	//é€šçŸ¥è¯¦æƒ…é¡µé¢
 	@RequestMapping("jsp/newdetail.do")
 	public String newdetail(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 				
 		response.setContentType("text/html;charset=UTF-8");
-		// »ñÈ¡Òª¶ÁÈ¡µÄÍ¨ÖªÏêÇéid
+		// è·å–è¦è¯»å–çš„é€šçŸ¥è¯¦æƒ…id
 		String id = request.getParameter("id");
 		Notification notification =null;
 		if (id != null)

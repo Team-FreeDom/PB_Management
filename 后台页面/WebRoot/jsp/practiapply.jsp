@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
   </head>
   <body>
-    <div class="navbar" role="navigation">
+	<div class="navbar" role="navigation">
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
 			<ul class="nav navbar-nav navbar-actions navbar-left">
@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a href="#"><span class="text">我的实习</span></a></li>
+										
 										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
@@ -110,14 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										<li><a href="repairApprove.jsp"><span class="text">实习审批</span></a></li>
+										
 										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
 										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
-										
+
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="notification.do"><span class="text">
@@ -126,9 +126,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													土地布局设置</span></a></li>
 										<li><a href="fieldRent_maintain.jsp"><span
 												class="text"> 土地租赁维护</span></a></li>
-										<li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-										<li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-										<li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+										<li><a href="baseMaintain.jsp"><span class="text">
+													实习基地维护</span></a></li>
+										<li><a href="Repairmanage.jsp"><span class="text">
+													报修信息维护</span></a></li>
+										<li><a href="practicePlanMaintain.jsp"><span
+												class="text"> 实习计划维护</span></a></li>
 										<li><a href="start.jsp"><span class="text">
 													工作计划制定</span></a></li>
 										<li><a href="mangeruser.jsp"><span class="text">
@@ -167,19 +170,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
+							<li><a href="practiapply.jsp"><i class=" icon-home"></i>实习申请</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="#"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+							<li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
-					<!-- 主面板内容 -->
+				<!-- 主面板内容 -->
 					<div class="row form">
 						
 						

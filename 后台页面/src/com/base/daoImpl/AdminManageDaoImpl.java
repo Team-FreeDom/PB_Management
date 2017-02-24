@@ -90,20 +90,20 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 			session.close();
 		}*/
 
-		//实现批量插入
+		//瀹炵幇鎵归噺鎻掑叆
 		Connection conn=null;
 		PreparedStatement pst=null;
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-			// 设置事务为非自动提交  
+			// 璁剧疆浜嬪姟涓洪潪鑷姩鎻愪氦  
 	        conn.setAutoCommit(false);
 	        pst = conn.prepareStatement(""); 
 			
-			// 添加执行sql  
+			// 娣诲姞鎵цsql  
 	        pst.addBatch(sql);  
-	        // 执行操作  
+	        // 鎵ц鎿嶄綔  
 	        pst.executeBatch();  
-	        // 提交事务  
+	        // 鎻愪氦浜嬪姟  
 	        conn.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -125,11 +125,11 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 		try
 		{
 			conn = (Connection) SessionFactoryUtils.getDataSource(sessionFactory).getConnection();	
-			sp = conn.prepareCall("{CALL baseweb.find_upow(?,?)}");  //调用存储过程
+			sp = conn.prepareCall("{CALL baseweb.find_upow(?,?)}");  //璋冪敤瀛樺偍杩囩▼
 			sp.setString(1, userid);
 			sp.registerOutParameter(2,java.sql.Types.INTEGER);
-			sp.execute(); // 执行存储过程 
-			adminValue=sp.getInt(2);//接收输出参数
+			sp.execute(); // 鎵ц瀛樺偍杩囩▼ 
+			adminValue=sp.getInt(2);//鎺ユ敹杈撳嚭鍙傛暟
 		
 		} catch (SQLException e)
 		{

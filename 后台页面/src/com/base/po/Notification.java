@@ -7,8 +7,8 @@ import javax.persistence.Id;
 public class Notification {
 
 	@Id
-	private int id;//通知表id
-	private String message;//通知内容
+	private int id;//閫氱煡琛╥d
+	private String message;//閫氱煡鍐呭
 	private String title;
 	public int getId() {
 		return id;
