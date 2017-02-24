@@ -11,9 +11,9 @@ public class BaseInfo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int bid;//»ùµØ±àºÅ
-	private String bname;//»ùµØÃû³Æ
-	private int btype;//»ùµØÀàĞÍ£¬Ä¬ÈÏÎª1£¬´ú±íÎªÆìÏÂÎªÍÁµØ
+	private int bid;//åŸºåœ°ç¼–å·
+	private String bname;//åŸºåœ°åç§°
+	private int btype;//åŸºåœ°ç±»å‹ï¼Œé»˜è®¤ä¸º1ï¼Œä»£è¡¨ä¸ºæ——ä¸‹ä¸ºåœŸåœ°
 	public int getBid() {
 		return bid;
 	}

@@ -36,7 +36,7 @@ public class LandApply_viewDaoImpl {
 	
 	
 	/*
-	 * ¿ÉÒÔÍ¨¹ıÆß¸ö²ÎÊı²éÑ¯ÓÃ»§×âÁŞÀúÊ· 
+	 * å¯ä»¥é€šè¿‡ä¸ƒä¸ªå‚æ•°æŸ¥è¯¢ç”¨æˆ·ç§Ÿèµå†å² 
 	 * */
 	public ApplyList getapplys(String applicantId,String bname,int status,int page,int length)
 	{
@@ -58,8 +58,8 @@ public class LandApply_viewDaoImpl {
 			sp.setInt(5,length);
 			sp.registerOutParameter(6,java.sql.Types.INTEGER);
 			
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			al.setRecordsTotal(sp.getInt(6));
 			
 			while(rs.next())
@@ -141,8 +141,8 @@ public class LandApply_viewDaoImpl {
 			sp.setInt(3,length);
 			sp.registerOutParameter(4,java.sql.Types.INTEGER);
 			
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			al.setRecordsTotal(sp.getInt(4));
 			
 			while(rs.next())
@@ -216,8 +216,8 @@ public class LandApply_viewDaoImpl {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landapply_detail(?)}");
 			sp.setInt(1, la_id);
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯			
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†			
 			
 			while(rs.next())
 			{
@@ -299,11 +299,11 @@ public class LandApply_viewDaoImpl {
 		}
 		
 		if (desc != null && !desc.equals("")) { 
-			if(desc.equals("ÉêÇë³É¹¦"))
+			if(desc.equals("ç”³è¯·æˆåŠŸ"))
 			{
 			hql.append(" and descp=?");
 			paramList.add(desc);
-			}else if(desc.equals("ÉêÇëÊ§°Ü")){
+			}else if(desc.equals("ç”³è¯·å¤±è´¥")){
 				hql.append(" and status in(?,?)");
 				paramList.add(String.valueOf(3));
 				paramList.add(String.valueOf(5));
@@ -323,7 +323,7 @@ public class LandApply_viewDaoImpl {
 						{
 							String str=(String) paramList.get(i);
 							str=str.substring(0, str.indexOf("true"));
-							System.out.println("ÎÒµÃµ½µÄlidÊÇ£º"+str);
+							System.out.println("æˆ‘å¾—åˆ°çš„lidæ˜¯ï¼š"+str);
 							query.setInteger(i, Integer.valueOf(str));
 							
 						}else{

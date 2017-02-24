@@ -8,6 +8,9 @@ var midFlag=true;
 var userWarn=[];
 var Oneindex;
 var value=[];
+var writeName="";
+var showName="";
+var teacherString=[];
 $(document)
 		.ready(
 				function() {
@@ -36,7 +39,7 @@ $(document)
 											"mData" : "id",
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "2%"
+											"sWidth" : "4%"
 										}, {
 											"mData" : "semester",// 学期学年
 											"orderable" : false,
@@ -121,7 +124,7 @@ $(document)
 											"render" : function(data, type, row) {
 												obj.push(row);
 												return '<input type="checkbox" name="allcheckbox" value="'
-														+ data + '">';
+														+ data + '" id="'+(obj.length-1)+'"/>';
 											}
 										} ],
 										"language" : {
@@ -175,7 +178,7 @@ $(document)
 							.on(
 									"click",
 									function() {
-										// $("#Applychart").hide();
+										
 										if ($(this).prop("checked") === true) {
 											$(
 													"#practiceplanmaintain input[name='allcheckbox']")
@@ -185,6 +188,7 @@ $(document)
 													"#practiceplanmaintain input[name='allcheckbox']")
 													.prop("checked", false);
 										}
+										
 									});
 
 					/*学年学期的js控制---start*/
@@ -314,7 +318,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -337,15 +341,17 @@ $(document)
 
 					$("#semester").on("change", function() {
 						var termYear = $("#termYear").val();
+						var semester = $(this).val();
 						if (termYear == "") {
-							$("#semester").val("");
-							bootbox.alert({
+							if(semester!=""){
+							   bootbox.alert({
 								message : "请先选择学年",
 								size : 'small'
 							});
+							$("#semester").val("");
 							return;
-						}
-						var semester = $(this).val();
+							}
+						}						
 						if (semester=="0") {
 							str = termYear;							
 						} else if(semester!=""){
@@ -460,7 +466,7 @@ $(document)
 										"render" : function(data, type, row) {
 											obj.push(row);
 											return '<input type="checkbox" name="allcheckbox" value="'
-													+ data + '">';
+											+ data + '" id="'+(obj.length-1)+'"/>';
 										}
 									} ],
 									"language" : {
@@ -701,7 +707,69 @@ $(document)
 					
 					//导入文件的js控制			
 					$("#daoru").click(function(){
+						$("#teamYearw").val('');
+						$("#oneSemesterTime").val('');
+						$("#twoSemesterTime").val('');
 						$("#fileResource").val('');
+					});
+					
+					$("#certainWeekTime").click(function(){
+						
+						var teamYearw=$("#teamYearw").val();
+						var oneSemesterTime=$("#oneSemesterTime").val();
+						var twoSemesterTime=$("#twoSemesterTime").val();
+						var dateFormatP=/^[0-9]{4}-[0-9]{4}$/;
+						if(teamYearw==""){
+							bootbox.alert({
+								message : "请完善要导入的学年",
+								size : 'small'
+							});
+							return;
+						}
+						if (!dateFormatP.exec(teamYearw)) {
+							bootbox.alert({
+								message : "学年的格式不对,请重新填写",
+								size : 'small'
+							});
+							return false;
+						}
+						if(oneSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第1学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						if(twoSemesterTime==""){
+							bootbox.alert({
+								message : "请完善导入学年的第2学期第1周的具体时间",
+								size : 'small'
+							});
+							return;
+						}
+						
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							data:{"teamYearw":teamYearw,
+								  "oneSemesterTime":oneSemesterTime,
+							      "twoSemesterTime":twoSemesterTime
+							},
+							url : 'saveSemesterTime.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								alert("error");
+							},
+							success : function(data) {
+							
+								$("#writeWeekTime").modal('hide');
+								$("#import").modal('show');
+							}
+
+						});
+						
+						
 					});
 					
 					//导出文件的js控制
@@ -884,8 +952,7 @@ $(document)
 																	obj.push(row);
 																	userWarn.push(data);
 																	return '<input type="checkbox" name="allcheckbox" value="'
-																			+ data
-																			+ '">';
+																	+ data + '" id="'+(obj.length-1)+'"/>';
 																}
 															} ],
 															"language" : {
@@ -968,6 +1035,7 @@ $(document)
 					$(document).on("click", "#closemodal", function() {
 
 						$("#Applychart").hide();
+						$(".tbodyID").remove();
 
 					});
 
@@ -1021,9 +1089,13 @@ $(document)
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
 	
-$("#practiceapplytable tbody").on("click","tr",function(){
 	
-	Oneindex= $(this).find("input").attr("id");
+	 $(document).on("click", "#practiceplanmaintain tbody tr td", function() {
+	     var itLength=$(this).find("input").length;
+		 if(itLength!=0){
+		    return;
+	       }
+	Oneindex= $(this).parent('tr').find("input").attr("id");
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -1038,7 +1110,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		type:"POST",
 		dataType:"json",
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].id
 		},
 		success:function(data){		
 			var teachername="";
@@ -1052,7 +1124,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].cid
+						"mid":obj[Oneindex].mid
 					},
 					error : function(request) {
 						alert("error");
@@ -1106,6 +1178,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					testername=testername+data[i].assistant;
 				}
 				value[i]=data[i].assistant;
+				teacherString[i]=data[i].guideTeacher;
 			}
 			$("#testername").val(testername);
 			$("#adviser").val(teachername);
@@ -1142,46 +1215,42 @@ $(document).on("change","#baseFrom",function(e){
 		$(this).parent().next().children(":first").addClass("flag");
 		//$("#schoolBase").show();
 		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":last").val("");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
 		$(this).parent().next().children(":last").addClass("flag");
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 	}
 	if(e.target.value===''){
 		$(this).parent().next().children(":last").hide();
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":last").val("");
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
 });	
 
 	
-var writeName="";
-var showName="";
-var currentName="";
-var teacherString;
+
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	showName=$("#adviser").val();
 	teacherString=showName.split(",");
 	writeName=e.target.value;
 	if(writeName===""){
 		teacherString[rowNum]="null";
 	}else{
 		teacherString[rowNum]=writeName;
-	}
-	
+	}	
 	showName=teacherString.join(",");
 	$("#adviser").val(showName);
-	currentName="";
 
-});
-$(document).on("focus",".adviser2",function(e){
-	showName=$("#adviser").val();
-	currentName=e.target.value;
-	writeName="";
+
 });	
 	
 
@@ -1249,7 +1318,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		async : false,
 		cache : false,
 		data:{
-			"mid":obj[Oneindex].cid
+			"mid":obj[Oneindex].mid
 		},
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
@@ -1268,6 +1337,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
+	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
 	$(this).closest("tbody").remove();
 	if(judget!==""){
 		$.ajax({
@@ -1277,7 +1347,19 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 			data:{
 				"planid":judget
 			},
-			success : function(msg){						
+			success : function(msg){
+				$(".mark").each(function(){
+				var htmlValue=$(this).html();
+				if(htmlValue>(rowNum+1)){
+					$(this).html(htmlValue-1);
+					}
+				});
+				teacherString.splice(rowNum,1);
+				showName=teacherString.join(",");
+				$("#adviser").val(showName);
+				value.splice(rowNum,1);
+				var value2=value.join(",");
+				$("#testername").val(value2);
 				bootbox.alert({
 					message : "删除成功",
 					size : 'small'
@@ -1285,12 +1367,17 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 			}
 		});
 	}else{	
-		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+		$(".mark").each(function(){
+			var htmlValue=$(this).html();
+			if(htmlValue>(rowNum+1)){
+				$(this).html(htmlValue-1);
+			}
+		});
 		teacherString.splice(rowNum,1);
 		showName=teacherString.join(",");
 		$("#adviser").val(showName);
-		value3.splice(rowNum,1);
-		value2=value.join(",");
+		value.splice(rowNum,1);
+		var value2=value.join(",");
 		$("#tester").val(value2);
 	}
 
@@ -1298,89 +1385,107 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	
 	
 $("#save").click(function(){//弹出框的保存
-	bootbox.confirm({
-			message: "确定保存？",
-			size: 'small',
-			buttons: {
-				confirm: {
-					label: '确定',
-					className: 'btn-success'
-				},
-				cancel: {
-					label: '取消',
-					className: 'btn-danger'
-				},
-			},			
-			callback: function (result) {
-				if(result){
-					var str="(";
-					var y=0;
-					$(".tbodyID").each(function(){
-						if(y!==0){
-							str=str+",(";
-						}
-						var b=$(this).find(".adviser2").val();
-						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+b+"'"+",'"+value[c]+"'";
-						
-						var x=0;
-						$(this).find(".flag").each(function(){
-							x++;
-							if(x===1){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+$(this).val();
-								}
-							}
-							if(x<=10&&x>1){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+"'"+$(this).val()+"'";
-								}
-							}
-							if(x===11){
-								str=str+","+$(this).find("option:selected").attr("id");
-							}
-							if(x===12){
-								if($(this).val()===""){
-								str=str+','+"'null'";
-								}else{
-									str=str+","+"'"+$(this).val()+"'";
-								}
-							}
-							
-						});
-						str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
-						y++;
-					});
-					
-					$.ajax({
-						type : 'POST',
-						dataType : 'json',		
-						url : 'savePlanModify.do',  
-						async : false,
-						cache : false,
-						error : function(request) {
-							alert("error");
-						},
-						data:{
-							"str":str,
-							"courseID":obj[Oneindex].cid,
-							"termYear":obj[Oneindex].semester,
-						},
-						success : function(msg) {
-							bootbox.alert({
-								message : msg.str,
-								size : 'small'
-							});
-						}
-					});
-					
-				}
-			}
+	var x=0;
+	var y=0;
+	$(".tbodyID").each(function(){
+		y++;
+		var sSite=$(this).find("#schoolBase").val();
+		var oSite=$(this).find("#outBase").val();
+		if(sSite===""&&oSite===""){
+			x++;
+			return false;
+		}
 	});
+	if(x!==0){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习地点",
+			size : 'small'
+		});
+		return;
+	}
+	bootbox.confirm({
+		message: "确定保存？",
+		size: 'small',
+		buttons: {
+			confirm: {
+				label: '确定',
+				className: 'btn-success'
+			},
+			cancel: {
+				label: '取消',
+				className: 'btn-danger'
+			},
+		},			
+		callback: function (result) {
+			if(result){
+				var str="(";
+				var y=0;
+				$(".tbodyID").each(function(){
+					if(y!==0){
+						str=str+",(";
+					}
+					var b=$(this).find(".adviser2").val();
+					var c=$(this).find(".mark").html()-1;
+					str=str+"'"+b+"'"+",'"+value[c]+"'";
+					
+					var x=0;
+					$(this).find(".flag").each(function(){
+						x++;
+						if(x===1){
+							if($(this).val()===""){
+							str=str+','+"null";
+							}else{
+								str=str+","+$(this).val();
+							}
+						}
+						if(x<=10&&x>1){
+							if($(this).val()===""){
+							str=str+','+"null";
+							}else{
+								str=str+","+"'"+$(this).val()+"'";
+							}
+						}
+						if(x===11){
+							str=str+","+$(this).find("option:selected").attr("id");
+						}
+						if(x===12){
+							if($(this).val()===""){
+							str=str+','+"'null'";
+							}else{
+								str=str+","+"'"+$(this).val()+"'";
+							}
+						}
+						
+					});
+					str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
+					y++;
+				});
+				
+				$.ajax({
+					type : 'POST',
+					dataType : 'json',		
+					url : 'savePlanModify.do',  
+					async : false,
+					cache : false,
+					error : function(request) {
+						alert("error");
+					},
+					data:{
+						"courseID":obj[Oneindex].id,							
+						"str":str,
+					},
+					success : function(msg) {
+						//alert("hah");
+						bootbox.alert({
+							message : "保存成功",
+							size : 'small'
+						});
+					}
+				});
+				
+			}
+		}
+});
 });
 //</end>
 					// 删除表格的中记录

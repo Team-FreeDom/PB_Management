@@ -65,7 +65,7 @@ public class TemperateSaveDaoImpl {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -86,7 +86,7 @@ public class TemperateSaveDaoImpl {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -107,7 +107,7 @@ public class TemperateSaveDaoImpl {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -151,8 +151,8 @@ public List<TemperateSave_View> getTemperates(int la_id) {
 		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 		sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`temapply_detail`(?)}");
 		sp.setInt(1, la_id);
-		sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-		rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯			
+		sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+		rs=sp.getResultSet();  //è·å¾—ç»“æœé›†			
 		
 		while(rs.next())
 		{

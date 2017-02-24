@@ -28,7 +28,7 @@ public class AdminController {
 	    @Autowired
 	    private AdminManageServiceImpl adminManageServiceImpl;
 	
-	    //»ñÈ¡ËùÓĞ½ÇÉ«µÄÈ¨ÏŞ¹¦ÄÜÖµ
+	    //è·å–æ‰€æœ‰è§’è‰²çš„æƒé™åŠŸèƒ½å€¼
 		@RequestMapping("jsp/getAdminFunction.do")
 		public String getAdminFunction(HttpServletRequest request, ModelMap map,
 				HttpServletResponse response)
@@ -43,7 +43,7 @@ public class AdminController {
 				getObj.put("sf", adminList);
 				getObj.put("qxm", adminFunctionList);	
 				response.getWriter().print(getObj.toString());
-				//response.getWriter().print("['sf':[{id:1,name:'ÏµÍ³¹ÜÀíÔ±',upow:3},{id:2,name:'ÆÕÍ¨½ÌÊ¦',upow:7},{id:3,name:'×âÁŞÒµÎñ×¨Ô±',upow:31},{id:4,name:'ÊµÏ°ÒµÎñ×¨Ô±',upow:63}],'qxm':[{qid:11,value:1,pname:'ÍÁµØ×âÁŞÉóÅú'},{qid:12,value:2,pname:'ÊµÏ°ÉóÅú'},{qid:13,value:4,pname:'ÊµÏ°»ùµØÉóÅú'},{qid:21,value:8,pname:'»ùµØÎ¬»¤ÉóÅú'},{qid:22,value:16,pname:'ÍÁµØ×âÁŞÎ¬»¤'},{qid:31,value:32,pname:'×âÁŞ·ÖÎö'}]]");
+				//response.getWriter().print("['sf':[{id:1,name:'ç³»ç»Ÿç®¡ç†å‘˜',upow:3},{id:2,name:'æ™®é€šæ•™å¸ˆ',upow:7},{id:3,name:'ç§Ÿèµä¸šåŠ¡ä¸“å‘˜',upow:31},{id:4,name:'å®ä¹ ä¸šåŠ¡ä¸“å‘˜',upow:63}],'qxm':[{qid:11,value:1,pname:'åœŸåœ°ç§Ÿèµå®¡æ‰¹'},{qid:12,value:2,pname:'å®ä¹ å®¡æ‰¹'},{qid:13,value:4,pname:'å®ä¹ åŸºåœ°å®¡æ‰¹'},{qid:21,value:8,pname:'åŸºåœ°ç»´æŠ¤å®¡æ‰¹'},{qid:22,value:16,pname:'åœŸåœ°ç§Ÿèµç»´æŠ¤'},{qid:31,value:32,pname:'ç§Ÿèµåˆ†æ'}]]");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -52,7 +52,7 @@ public class AdminController {
 			return null;		
 		}	
 		
-		//ÉèÖÃËùÓĞ½ÇÉ«µÄÈ¨ÏŞ¹¦ÄÜÖµ
+		//è®¾ç½®æ‰€æœ‰è§’è‰²çš„æƒé™åŠŸèƒ½å€¼
 		@RequestMapping("jsp/setAdminFunction.do")
 		public String setAdminFunction(HttpServletRequest request, ModelMap map,
 						HttpServletResponse response)
@@ -62,7 +62,7 @@ public class AdminController {
 			//System.out.println(insertSql);
 			adminManageServiceImpl.setAdminFunction(insertSql);
 			
-			//»ñÈ¡µ±Ç°ÓÃ»§µÄÈ¨ÏŞÖµ£¬¸üĞÂcookieÖµ
+			//è·å–å½“å‰ç”¨æˆ·çš„æƒé™å€¼ï¼Œæ›´æ–°cookieå€¼
 			String userid = CookieUtils.getCookieUsername(request, response);
 			System.out.println(userid);
 			long adminValue = adminManageServiceImpl.getAdminValue(userid);

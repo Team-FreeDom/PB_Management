@@ -27,35 +27,35 @@ public class MainController {
 	@Autowired
 	private NotificationServiceImpl notificationServiceImpl;
 
-	// ÓÃ»§µ¥µãµÇÂ¼¿ØÖÆ
+	// ç”¨æˆ·å•ç‚¹ç™»å½•æ§åˆ¶
 	@RequestMapping("/index.do")
 	public String index(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		// »ñµÃÍ¨Öª¹«¸æ±êÌâÁĞ±í
+		// è·å¾—é€šçŸ¥å…¬å‘Šæ ‡é¢˜åˆ—è¡¨
 		response.setContentType("text/html;charset=UTF-8");
 		List<Notification> notificationList = notificationServiceImpl.getNotificationTop5Infos();
 		
 		if(CollectionUtils.isNotEmpty(notificationList)){
 	
 			map.addAttribute("notificationList", notificationList);
-			//System.out.println("messageList²»Îª¿Õ");
+			//System.out.println("messageListä¸ä¸ºç©º");
 		}
 		
-		//»ñÈ¡×¢²áÓÃ»§
+		//è·å–æ³¨å†Œç”¨æˆ·
 		long userCount =  mainServiceImpl.getUserCount();
 		map.addAttribute("userCount", userCount);
 		
-		//»ñÈ¡×âÁŞÉêÇë
+		//è·å–ç§Ÿèµç”³è¯·
 		long applyCount =  mainServiceImpl.getApplyCount();
 		map.addAttribute("applyCount", applyCount);
 		
-		//»ñÈ¡Ê±¼äÅÅĞòÇ°5Ìõ
+		//è·å–æ—¶é—´æ’åºå‰5æ¡
 		String userid = CookieUtils.getCookieUsername(request, response);
 		List<Message> messageList = notificationServiceImpl.getMessageTop5Infos(userid);
 		if(CollectionUtils.isNotEmpty(messageList)){
 			map.addAttribute("messageList", messageList);
-			//System.out.println("messageList²»Îª¿Õ");
+			//System.out.println("messageListä¸ä¸ºç©º");
 		}
 		
 		return "index";

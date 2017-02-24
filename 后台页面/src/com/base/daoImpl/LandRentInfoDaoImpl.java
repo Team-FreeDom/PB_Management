@@ -46,7 +46,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -87,17 +87,17 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		try {
 			
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //·¢ËÍ´æ´¢¹ı³Ì
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //å‘é€å­˜å‚¨è¿‡ç¨‹
 			sp.setString(1,bname);					
 			sp.setString(2,deptName);
 			sp.setString(3, plantingContent);
 			sp.setString(4, lr_id);
 			
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			int i=0;
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				rm=new RentMaintain();
 				rm.setLr_id(rs.getInt("lrid"));
@@ -115,7 +115,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
 				
-				list.add(rm);    //¼Óµ½listÖĞ
+				list.add(rm);    //åŠ åˆ°listä¸­
 			}
 			
 		} catch (SQLException e) {
@@ -154,12 +154,12 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 			sp.setInt(5, length);
 			sp.registerOutParameter(6,java.sql.Types.INTEGER);
 			
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 			
 			recordsTotal=sp.getInt(6);
 			rs=sp.getResultSet(); 
 			
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				rm=new RentMaintain();
 				rm.setLr_id(rs.getInt("lrid"));
@@ -177,7 +177,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
 				
-				data.add(rm);    //¼Óµ½listÖĞ
+				data.add(rm);    //åŠ åˆ°listä¸­
 			}
 			
              }catch (SQLException e) {
@@ -200,7 +200,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	public void deleteRentInfo(String str) throws SQLException
 	{
 		Session session=sessionFactory.openSession();
-		//hibernateµ÷ÓÃ´æ´¢¹ı³Ì(ÎŞ·µ»Ø²ÎÊı)
+		//hibernateè°ƒç”¨å­˜å‚¨è¿‡ç¨‹(æ— è¿”å›å‚æ•°)
 		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`delete_landrentinfo`(?)}");
 		sqlQuery.setString(0, str);		
 		sqlQuery.executeUpdate();
@@ -215,7 +215,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		CallableStatement sp = null;
 		ResultSet rs = null;
 		
-		System.out.println("¹ş¹ş£¬ÎÒÀ´µ½dao²ã");
+		System.out.println("å“ˆå“ˆï¼Œæˆ‘æ¥åˆ°daoå±‚");
 		List<RentMaintain> list=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;		
 		
@@ -225,11 +225,11 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 			sp = conn.prepareCall("{call baseweb.rentinfo_maintain(?,?)}"); 
 			sp.setString(1,lr_id);			
 			sp.setString(2, dept);
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì			
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹			
 			
 			rs=sp.getResultSet(); 
 			
-			while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+			while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 			{
 				
 				rm=new RentMaintain();
@@ -248,7 +248,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
 				
-				list.add(rm);    //¼Óµ½listÖĞ
+				list.add(rm);    //åŠ åˆ°listä¸­
 			}
 			
              }catch (SQLException e) {
@@ -260,7 +260,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
      			
      		}         
           
-         System.out.println("µ¼³öÑ½"+list);
+         System.out.println("å¯¼å‡ºå‘€"+list);
      	return list;	
 	}
 	
@@ -294,7 +294,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -315,16 +315,16 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				
 				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
 				sp = conn.prepareCall("{call baseweb.`rent_dept`()}");				
-				sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì			
+				sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹			
 				
 				rs=sp.getResultSet(); 
 				if(rs!=null){
-				while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+				while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 				{
 					dept=new ApplyDept();
 					dept.setAid(rs.getInt("aid"));
 					dept.setDept(rs.getString("dept"));
-					list.add(dept);    //¼Óµ½listÖĞ
+					list.add(dept);    //åŠ åˆ°listä¸­
 				}
 				}
 				
@@ -352,14 +352,14 @@ public List<String> getExistPlant(){
 				
 				conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
 				sp = conn.prepareCall("{CALL baseweb.rent_plant()}");				
-				sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì			
+				sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹			
 				
 				rs=sp.getResultSet(); 
 				if(rs!=null){
-				while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+				while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 				{
 					plant=rs.getString("planting");
-					list.add(plant);    //¼Óµ½listÖĞ
+					list.add(plant);    //åŠ åˆ°listä¸­
 				}
 				}
 				

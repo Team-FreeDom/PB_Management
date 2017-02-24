@@ -47,7 +47,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		} finally {
@@ -82,18 +82,18 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		// Session session=sessionFactory.openSession();
 		CallableStatement sp=null;
 		Connection conn = null;
-		// »ñµÃconnection¶ÔÏó
+		// è·å¾—connectionå¯¹è±¡
 		long adminValue = -1;
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
-			sp = conn.prepareCall("{call baseweb.user_login(?,?,?)}"); // µ÷ÓÃ´æ´¢¹ı³Ì
-			sp.setString(1, id); // Ïò´æ´¢¹ı³Ì´«µİÓĞ²ÎµÄ²ÎÊı(²ÎÊıÎª×Ö·û´®ÀàĞÍ),1´ú±íµÚÒ»¸ö²ÎÊı
+			sp = conn.prepareCall("{call baseweb.user_login(?,?,?)}"); // è°ƒç”¨å­˜å‚¨è¿‡ç¨‹
+			sp.setString(1, id); // å‘å­˜å‚¨è¿‡ç¨‹ä¼ é€’æœ‰å‚çš„å‚æ•°(å‚æ•°ä¸ºå­—ç¬¦ä¸²ç±»å‹),1ä»£è¡¨ç¬¬ä¸€ä¸ªå‚æ•°
 			sp.setString(2, pwd);
 			sp.registerOutParameter(3, java.sql.Types.INTEGER);
-			sp.execute(); // Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute(); // æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 			adminValue = sp.getInt(3);
-			// ×îºóµ÷ÓÃ¹¤¾ßÀàÊÍ·ÅÁ¬½Ó
+			// æœ€åè°ƒç”¨å·¥å…·ç±»é‡Šæ”¾è¿æ¥
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -114,7 +114,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		} finally {
@@ -135,7 +135,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		} finally {
@@ -317,7 +317,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		//System.out.println(userCount);
 		return userCount;
 	}
-//ĞŞ¸Ä¸öÈËĞÅÏ¢
+//ä¿®æ”¹ä¸ªäººä¿¡æ¯
 		public void updateuser(String id,String name,String telephone,String password,String img)
 		{
 			Connection conn = null;
@@ -342,7 +342,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			
 			
 		}
-	//»ñÈ¡¸öÈË ĞÅÏ¢
+	//è·å–ä¸ªäºº ä¿¡æ¯
 		public List<UserInfo> getInfoPerson(String id){
 			Connection conn = null;
 			CallableStatement sp = null;
@@ -393,12 +393,12 @@ public UserInfo getUserInfo(String userid)
 	}
 
 /**
- * ÓÃ»§¹ÜÀí(·ÖÒ³)
+ * ç”¨æˆ·ç®¡ç†(åˆ†é¡µ)
  * 
  * @param pageindex
- *            µ±Ç°Ò³Êı
+ *            å½“å‰é¡µæ•°
  * @param size
- *            µ±Ç°ÏÔÊ¾¼¸Ìõ¼ÇÂ¼
+ *            å½“å‰æ˜¾ç¤ºå‡ æ¡è®°å½•
  * @return
  * @throws SQLException
  */
@@ -454,8 +454,8 @@ public MangerList manger(int pageindex, int size,String searchValue)
 /**
  * 
  * @param id
- *            ÓÃ»§id
- * @return ÓÃ»§»ù±¾ĞÅÏ¢
+ *            ç”¨æˆ·id
+ * @return ç”¨æˆ·åŸºæœ¬ä¿¡æ¯
  * @throws SQLException
  */
 @Override
@@ -501,10 +501,10 @@ public List<Manger> Mangerdetail(String id)
 }
 
 /**
- * É¾³ıÈËÔ±»ù±¾ĞÅÏ¢
+ * åˆ é™¤äººå‘˜åŸºæœ¬ä¿¡æ¯
  * 
  * @param str
- *            ÎªÈËÔ±idµÄ×Ö·û´®
+ *            ä¸ºäººå‘˜idçš„å­—ç¬¦ä¸²
  * @throws SQLException
  */
 @Override
@@ -532,7 +532,7 @@ public void deleteInfo(String str)
 }
 
 /**
- * ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+ * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
  * 
  * @param id
  * @param name
@@ -584,7 +584,7 @@ public void upInfo(String id, String name, String sex, String birthdate,
 }
 
 /**
- * ²¿ÃÅ¼¯ºÏ
+ * éƒ¨é—¨é›†åˆ
  * 
  * @return
  */
@@ -610,7 +610,7 @@ public List<ApplyDept> getDepts()
 }
 
 /**
- * AdminÖĞÈËÔ±ÊôĞÔ¼¯ºÏ
+ * Adminä¸­äººå‘˜å±æ€§é›†åˆ
  * 
  * @return
  */
@@ -636,7 +636,7 @@ public List<Admin> getAttritube()
 }
 
 /**
- * Ôö¼ÓÓÃ»§
+ * å¢åŠ ç”¨æˆ·
  * 
  * @param id
  * @param name
@@ -697,7 +697,7 @@ public int addInfo(String id, String name, String sex, String birthdate,
 	return flag;
 }
 /**
- * µ¼³öÈËÔ±ĞÅÏ¢
+ * å¯¼å‡ºäººå‘˜ä¿¡æ¯
  * @return
  */
 @Override
@@ -740,7 +740,7 @@ public List<Manger> exportPersonInfo(String dept)
 	return list;
 }
     /**
-     * É¸Ñ¡userInfoÖĞµÄ²¿ÃÅ
+     * ç­›é€‰userInfoä¸­çš„éƒ¨é—¨
      * @return
      */
 	@Override

@@ -4,27 +4,27 @@ import java.util.List;
 
 import com.base.po.LandInfo;
 
-//ÍÁµØ²¼¾Ö¹ÜÀí±íµÄÊý¾Ý¿âÁ¬½Ó²ã½Ó¿Ú
+//åœŸåœ°å¸ƒå±€ç®¡ç†è¡¨çš„æ•°æ®åº“è¿žæŽ¥å±‚æŽ¥å£
 public interface LandInfoDao {
 	
 	/*
-	   ²ÎÊýËµÃ÷£ºlid,ÕûÐÍ£¬±íÊ¾ÍÁµØ±àºÅ;spareValue,ÕûÐÍ
-	   ·µ»ØÖµ£º   ÎÞ·µ»ØÖµ
-	   º¯Êý¹¦ÄÜ£º¸ü¸ÄÍÁµØ¿ÕÏÐÖµ
+	   å‚æ•°è¯´æ˜Žï¼šlid,æ•´åž‹ï¼Œè¡¨ç¤ºåœŸåœ°ç¼–å·;spareValue,æ•´åž‹
+	   è¿”å›žå€¼ï¼š   æ— è¿”å›žå€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šæ›´æ”¹åœŸåœ°ç©ºé—²å€¼
 	 */
 	public void updateSpareValue(int lid,int spareValue);
 	
 	/*
-	   ²ÎÊýËµÃ÷£ºlid,ÕûÐÍ£¬±íÊ¾ÍÁµØ±àºÅ
-	   ·µ»ØÖµ£º   List<LandInfo>,ÎªÍÁµØ¹ÜÀíLandInfo¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êý¹¦ÄÜ£º¸ù¾ÝÍÁµØ±àºÅ»ñÈ¡¸ÃÍÁµØ²¼¾Ö¹ÜÀíÐÅÏ¢
+	   å‚æ•°è¯´æ˜Žï¼šlid,æ•´åž‹ï¼Œè¡¨ç¤ºåœŸåœ°ç¼–å·
+	   è¿”å›žå€¼ï¼š   List<LandInfo>,ä¸ºåœŸåœ°ç®¡ç†LandInfoå¯¹è±¡çš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæ ¹æ®åœŸåœ°ç¼–å·èŽ·å–è¯¥åœŸåœ°å¸ƒå±€ç®¡ç†ä¿¡æ¯
 	 */
     public List<LandInfo> getLandInfo(String lid);
     
     /*
-	   ²ÎÊýËµÃ÷£ºbid,ÕûÐÍ£¬±íÊ¾»ùµØ±àºÅ
-	   ·µ»ØÖµ£º   List<LandInfo>,ÎªÍÁµØ¹ÜÀíLandInfo¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êý¹¦ÄÜ£º¸ù¾Ý»ùµØ±àºÅ»ñµÃ¸Ã»ùµØÖÐµÄËùÓÐÍÁµØ²¼¾Ö¹ÜÀíÐÅÏ¢
+	   å‚æ•°è¯´æ˜Žï¼šbid,æ•´åž‹ï¼Œè¡¨ç¤ºåŸºåœ°ç¼–å·
+	   è¿”å›žå€¼ï¼š   List<LandInfo>,ä¸ºåœŸåœ°ç®¡ç†LandInfoå¯¹è±¡çš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šæ ¹æ®åŸºåœ°ç¼–å·èŽ·å¾—è¯¥åŸºåœ°ä¸­çš„æ‰€æœ‰åœŸåœ°å¸ƒå±€ç®¡ç†ä¿¡æ¯
 	 */
     public List<LandInfo> getLandInfos(int bid);
 }

@@ -309,10 +309,7 @@ public class BaseMaintenanceController {
     				filename = path;   //杩欐槸鏂囦欢鍦ㄦ湇鍔″櫒鐨勭粷瀵硅矾寰�
     				//閬嶅巻鏂囦欢涓殑鏁版嵁锛氫笅闈㈢殑list涓鸿鍑虹殑鏁版嵁
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
-    				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(
-    						InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
-    				//System.out.println("鑾峰緱鏁版嵁鍟︼紒锛侊紒锛侊紒锛侊紒锛侊紒");
-    				// 锛侊紒锛侊紒锛侊紒娉ㄦ剰姝ゅ鏄亶鍘唋ist锛屽彲鍦ㄤ笅闈㈠啓鎻掑叆鏁版嵁搴撶殑璇彞
+    				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				
     				if(CollectionUtils.isNotEmpty(list)){
     				//瀹炵幇鎵归噺鎻掑叆

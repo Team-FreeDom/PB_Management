@@ -33,7 +33,7 @@ public class checkLoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String url = request.getServletPath();
-		// ���ò���Ҫ���˵�ҳ��
+		// 设置不需要过滤的页面
 		if (url.endsWith("login.do")) {
 			
 			arg2.doFilter(arg0, arg1);
@@ -55,14 +55,14 @@ public class checkLoginFilter implements Filter {
       
 		boolean flag = CookieUtils.checkLogin(request, response,cookies);
 		
-		if (!flag) { // ���û�е�¼���ߵ�¼�󳬹�ʧЧʱ�䶼��ת����¼ҳ��
+		if (!flag) { // 如果没有登录或者登录后超过失效时间都跳转到登录页面
 			
 			response.sendRedirect("/BaseWeb/login_soft.html");
 			return;
 		}
 		
-		//����Ȩ�޿���
-		//��ȡadmin.properties�е�Ȩ��ֵ��Ȼ���û�Ȩ����
+		//访问权限控制
+		//获取admin.properties中的权限值，然后用户权限做
 	    Properties prop = new Properties();
 	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
@@ -74,19 +74,19 @@ public class checkLoginFilter implements Filter {
 			{
 	    		if(co.getName().equalsIgnoreCase("adminValue"))
 				{
-	    		  //����ֵ�ַ���ת��ΪInteger
+	    		  //大数值字符串不能转化为Integer
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
 				  //System.out.println(a);
 				  
-				  if((a & adminValue)==0){ //���û�з���Ȩ���򷵻�
+				  if((a & adminValue)==0){ //如果没有访问权限则返回
 					  response.setContentType("text/html;charset=UTF-8");
 					  PrintWriter out=response.getWriter();
 					  out.println("<HTML><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <BODY>");
 					  out.println("<script language='javascript'>");
-					  out.println("alert('您没有访问的权限');");//���Բ�д
-					  out.println("window.history.back();");//����
+					  out.println("alert('你没有访问权限！');");//可以不写
+					  out.println("window.history.back();");//返回
 					  out.println("</script>");
 					  out.println("</body> </html>"); 
 					  return;

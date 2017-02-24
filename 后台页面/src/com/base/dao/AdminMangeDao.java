@@ -8,17 +8,17 @@ import com.base.po.AdminFunction;
 public interface AdminMangeDao {
 
 	   /*
-	   ²ÎÊıËµÃ÷£º
-	   ·µ»ØÖµ£º   List<AdminFunction>,ÎªÈ¨ÏŞ¹¦ÄÜµÄAdminFunction¶ÔÏóµÄ¼¯ºÏ
-	   º¯Êı¹¦ÄÜ£º·µ»ØËùÓĞĞèÒª¿ØÖÆµÄÈ¨ÏŞ¹¦ÄÜIDºÍÃû³Æ
+	   å‚æ•°è¯´æ˜ï¼š
+	   è¿”å›å€¼ï¼š   List<AdminFunction>,ä¸ºæƒé™åŠŸèƒ½çš„AdminFunctionå¯¹è±¡çš„é›†åˆ
+	   å‡½æ•°åŠŸèƒ½ï¼šè¿”å›æ‰€æœ‰éœ€è¦æ§åˆ¶çš„æƒé™åŠŸèƒ½IDå’Œåç§°
 	 */
      public List<AdminFunction> getAdminFunctionInfos();
      
      
      /*
-	   ²ÎÊıËµÃ÷£º
-	   ·µ»ØÖµ£º   List<Admin>
-	   º¯Êı¹¦ÄÜ£º»ñÈ¡Admin±íÖĞµÄËùÓĞĞÅÏ¢
+	   å‚æ•°è¯´æ˜ï¼š
+	   è¿”å›å€¼ï¼š   List<Admin>
+	   å‡½æ•°åŠŸèƒ½ï¼šè·å–Adminè¡¨ä¸­çš„æ‰€æœ‰ä¿¡æ¯
 	 */
      public List<Admin> getAdminInfos();
      

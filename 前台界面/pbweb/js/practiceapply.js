@@ -3,6 +3,9 @@
 var obj=[];
 var Oneindex;
 var value=[];
+var writeName="";
+var showName="";
+var teacherString=[];
 $(document).ready(function() {
 	
 	 var table=$("#practiceapplytable").dataTable({
@@ -211,15 +214,15 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				}
 				$("#table tbody:last-child").find(".deleteID").attr("id",'data[i].cid');
 				if(i!==2){
-					teachername=teachername+i+"，";
-					testername=testername+i+"，";
+					teachername=teachername+i+',';
+					testername=testername+i+',';
 				}else{
 					teachername=teachername+i;
 					testername=testername+i;
 				}
 				
 				value[i]=i;
-				
+				teacherString[i]=i;
 	}
 			$("#testername").val(teachername);
 			$("#adviser").val(testername);
@@ -327,17 +330,21 @@ $(document).on("change","#baseFrom",function(e){
 		$(this).parent().next().children(":first").addClass("flag");
 		//$("#schoolBase").show();
 		$(this).parent().next().children(":last").hide();
+		$(this).parent().next().children(":last").val("");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
 	if(e.target.value==='校外基地'){
 		$(this).parent().next().children(":last").show();
 		$(this).parent().next().children(":last").addClass("flag");
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 	}
 	if(e.target.value===''){
 		$(this).parent().next().children(":last").hide();
 		$(this).parent().next().children(":first").hide();
+		$(this).parent().next().children(":last").val("");
+		$(this).parent().next().children(":first").val("");
 		$(this).parent().next().children(":first").removeClass("flag");
 		$(this).parent().next().children(":last").removeClass("flag");
 	}
@@ -356,13 +363,13 @@ $.ajax({
 	}
 });
 	
-var writeName="";
-var showName="";
-var currentName="";
-var teacherString;
+
+
+	
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-	teacherString=showName.split(",");
+	showName=$("#adviser").val();
+	teacherString=showName.split(',');
 	writeName=e.target.value;
 	if(writeName===""){
 		teacherString[rowNum]="null";
@@ -371,15 +378,10 @@ $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	}
 	
 	showName=teacherString.join(",");
+	
 	$("#adviser").val(showName);
-	currentName="";
 
 });
-$(document).on("focus",".adviser2",function(e){
-	showName=$("#adviser").val();
-	currentName=e.target.value;
-	writeName="";
-});	
 	
 $("#delateTester").click(function(){
 	$("#tester").val("");
@@ -467,6 +469,7 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 $(document).on("click","#closemodal",function(){
 	
 	$("#Applychart").hide();
+	$(".tbodyID").remove();
 	
 });
 
@@ -503,7 +506,8 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
-	$(this).closest("tbody").remove();
+	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
+	alert(judget);
 	if(judget!==""){
 		$.ajax({
 			url:"",
@@ -513,7 +517,6 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 				"deleteid":judget
 			},
 			success : function(msg){
-				//$(this).closest("tbody").remove();
 				$(".mark").each(function(){
 				var htmlValue=$(this).html();
 				if(htmlValue>(rowNum+1)){
@@ -523,9 +526,9 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 				teacherString.splice(rowNum,1);
 				showName=teacherString.join(",");
 				$("#adviser").val(showName);
-				value3.splice(rowNum,1);
-				value2=value.join(",");
-				$("#tester").val(value2);
+				value.splice(rowNum,1);
+				var value2=value.join(",");
+				$("#testername").val(value2);
 				bootbox.alert({
 					message : msg.str,
 					size : 'small'
@@ -534,8 +537,6 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 		});
 	}else{
 		
-		var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-
 		$(".mark").each(function(){
 			var htmlValue=$(this).html();
 			if(htmlValue>(rowNum+1)){
@@ -545,16 +546,35 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 		teacherString.splice(rowNum,1);
 		showName=teacherString.join(",");
 		$("#adviser").val(showName);
-		value3.splice(rowNum,1);
-		value2=value.join(",");
-		$("#tester").val(value2);
+		
+		value.splice(rowNum,1);
+		var value2=value.join(",");
+		alert(value2);
+		$("#testername").val(value2);
 	}
-
+	$(this).closest("tbody").remove();
 });	
 	
 	
 $("#save").click(function(){//弹出框的保存
-	//$("#PraForm").submit();
+	var x=0;
+	var y=0;
+	$(".tbodyID").each(function(){
+		y++;
+		var sSite=$(this).find("#schoolBase").val();
+		var oSite=$(this).find("#outBase").val();
+		if(sSite===""&&oSite===""){
+			x++;
+			return false;
+		}
+	});
+	if(x!==0){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习地点",
+			size : 'small'
+		});
+		return;
+	}
 	bootbox.confirm({
 			message: "确定保存？",
 			size: 'small',
@@ -629,7 +649,7 @@ $("#save").click(function(){//弹出框的保存
 						dataType:"json",
 						data:{
 							"str":str,
-							"courseID":obj[Oneindex].cid,
+							"courseID":obj[Oneindex].id,
 							"termYear":obj[Oneindex].semester,
 						},
 						success : function(msg) {
