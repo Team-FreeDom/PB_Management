@@ -153,26 +153,26 @@ $(document)
 						error : function(request) {
 							alert("error");
 						},
-						success : function(data) {
-
+						success : function(data) {          
+				          
 							for (var i = 0; i < data.semester.length; i++) {
 								$("#termYearID").after(
 										"<option value=" + data.semester[i]
-												+ ">" + data.semester[i]
+												+ " class='semeUp1'>" + data.semester[i]
 												+ "</option>");
 
 							}
-
 							
 							  for ( var i=0;i<data.college.length;i++) {
-							  $("#Acollegeh").after( "<option value="+data.college[i].dept+">" + data.college[i].dept + "</option>");
+							  $("#Acollegeh").after( "<option value="+data.college[i].dept+" class='semeUp2'>" + data.college[i].dept + "</option>");
 							  }
 							 
 
 						}
 
 					});
-
+					chooseSeme("Ainsemester");
+					chooseSeme("AteamYearw");
 					// 全选
 					$("#ck1")
 							.on(
@@ -195,21 +195,15 @@ $(document)
 					$("#termYear").on("change", function() {
 						var termYear = $(this).val();
 						var semester = $("#semester").val();
-						if (termYear != "") {
+						if (termYear!= "") {
 							if (semester=="0") {
 								str = termYear;							
 							} else if(semester!=""){
-								str = termYear + '-' + semster;
-							}else{
-								str=null;
-							}	
-							
-						
-						}else{
-							$("#semester").val("");
+								str = termYear + '-' + semester;
+							}
+						}else{						
 							str=null;
-						}
-						
+						}						
 
 						table = $("#practiceplanmaintain")
 						.DataTable(
@@ -342,23 +336,14 @@ $(document)
 					$("#semester").on("change", function() {
 						var termYear = $("#termYear").val();
 						var semester = $(this).val();
-						if (termYear == "") {
-							if(semester!=""){
-							   bootbox.alert({
-								message : "请先选择学年",
-								size : 'small'
-							});
-							$("#semester").val("");
-							return;
-							}
+						if (termYear == "") {							
+							return;							
 						}						
 						if (semester=="0") {
 							str = termYear;							
 						} else if(semester!=""){
 							str = termYear + '-' + semester;
-						}else{
-							str=null;
-						}	
+						}
 						table = $("#practiceplanmaintain")
 						.DataTable(
 								{
@@ -565,9 +550,8 @@ $(document)
 						var week = $("#inweek").val();// 起始周
 						var checkMethod = $("#incheckMethod").val();
 						var mid = $("#inmid").val();
-						var major_oriented =$("#inmajor_oriented").val();
-						var dateFormatP=/^[0-9]{4}-[0-9]{4}-[12]$/;
-						
+						var major_oriented =$("#inmajor_oriented").val();					
+						var insemester2=$("#insemester2").val();
 						if(count==""){
 							count="0";
 						}
@@ -646,7 +630,14 @@ $(document)
 						}
 						if(semester==""){
 							bootbox.alert({
-								message : "请填写学年学期",
+								message : "请选择学年",
+								size : 'small'
+							});
+							return;
+						}
+						if(insemester2==""){
+							bootbox.alert({
+								message : "请选择学期",
 								size : 'small'
 							});
 							return;
@@ -665,14 +656,9 @@ $(document)
 							});
 							return;
 						}
-						if (!dateFormatP.exec(semester)) {
-							bootbox.alert({
-								message : "学年学期的格式不对，格式为：××××-××××-×",
-								size : 'small'
-							});
-							return false;
-						}
-						var str1 = "('" + semester + "','" + college + "','" + cid + "',"
+						
+						var zong=semester+'-'+insemester2;
+						var str1 = "('" + zong + "','" + college + "','" + cid + "',"
 						+ count + ',' + selectedCount + ",'" + composition + "','"
 						+ coursename + "'," + weekhours + ',' + credit + ",'"
 						+ courseNature + "','" + courseCategory + "','" + tid + "','"
@@ -695,6 +681,9 @@ $(document)
 									message : "保存成功",
 									size : 'small'
 								});
+								if($("#termYear").val()!=semester){
+								semeUp('0');
+								}
 								table.draw(false);
 								}
 							}
@@ -708,52 +697,60 @@ $(document)
 					//导入文件的js控制			
 					$("#daoru").click(function(){
 						$("#teamYearw").val('');
-						$("#oneSemesterTime").val('');
-						$("#twoSemesterTime").val('');
+						$("#semesterw").val('');
+						$("#oneSemesterTime").val('');						
 						$("#fileResource").val('');
 					});
 					
+					$(document).on("change","#semesterw,#teamYearw",function(){						
+						var semesterw=$("#semesterw").val();
+						var teamYearw=$("#teamYearw").val();
+						if(semesterw==""||teamYearw==""){
+							$("#weekTi").hide();
+							$("#oneSemesterTime").val('');
+						}else{
+							$("#weekTiSpan").html(teamYearw+"学年的第"+semesterw+"学期第1周的具体时间");
+							$("#weekTi").show();
+						}
+					});
+					
+				
 					$("#certainWeekTime").click(function(){
 						
 						var teamYearw=$("#teamYearw").val();
+						var semesterw=$("#semesterw").val();
 						var oneSemesterTime=$("#oneSemesterTime").val();
-						var twoSemesterTime=$("#twoSemesterTime").val();
-						var dateFormatP=/^[0-9]{4}-[0-9]{4}$/;
+						
 						if(teamYearw==""){
 							bootbox.alert({
-								message : "请完善要导入的学年",
+								message : "请选择要导入的学年",
 								size : 'small'
 							});
 							return;
 						}
-						if (!dateFormatP.exec(teamYearw)) {
+
+						if(semesterw==""){
 							bootbox.alert({
-								message : "学年的格式不对,请重新填写",
+								message : "请选择要导入的学期",
 								size : 'small'
 							});
-							return false;
+							return;
 						}
+					
 						if(oneSemesterTime==""){
 							bootbox.alert({
-								message : "请完善导入学年的第1学期第1周的具体时间",
-								size : 'small'
-							});
-							return;
-						}
-						if(twoSemesterTime==""){
-							bootbox.alert({
-								message : "请完善导入学年的第2学期第1周的具体时间",
+								message : "请完善导入"+teamYearw+"学年的第"+semesterw+"学期第1周的具体时间",
 								size : 'small'
 							});
 							return;
 						}
 						
+						teamYearw=teamYearw+'-'+semesterw;
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
-							data:{"teamYearw":teamYearw,
-								  "oneSemesterTime":oneSemesterTime,
-							      "twoSemesterTime":twoSemesterTime
+							data:{"teamYearw":teamYearw,								 
+								  "oneSemesterTime":oneSemesterTime
 							},
 							url : 'saveSemesterTime.do',
 							async : false,
@@ -764,6 +761,8 @@ $(document)
 							success : function(data) {
 							
 								$("#writeWeekTime").modal('hide');
+								$("#weekTi").hide();
+								$("#semesterfile").val(teamYearw);
 								$("#import").modal('show');
 							}
 
@@ -816,6 +815,8 @@ $(document)
  						}
  						}
  					});
+                     
+                   
 					
 					// 点击 检测数据完整性
 					$(document).on("click","#checkIsSave",function() {
@@ -1039,9 +1040,9 @@ $(document)
 
 					});
 
-					$(document).on("click", "#add", function() {// 增加一条实习记录弹出框的弹出
+					$(document).on("click", "#add", function() {// 增加一条实习记录弹出框的弹出						
 						$("#addPraItem").find("input").val("");
-						$("#addPraItem").find("select").val("");
+						$("#addPraItem").find("select").val("");						
 						$("#addPraItem").modal('show');
 					});
 					
@@ -1493,6 +1494,7 @@ $("#save").click(function(){//弹出框的保存
 							.click(
 									function() {
 										var flag = 0;
+										var termYear = $("#termYear").val();
 										$('input[name="allcheckbox"]:checked')
 												.each(function() {
 													flag++;
@@ -1557,6 +1559,7 @@ $("#save").click(function(){//弹出框的保存
 																							message : data.msg,
 																							size : 'small'
 																						});
+																				semeUp(termYear);
 																				table
 																						.draw(false);
 																			}
@@ -1568,3 +1571,58 @@ $("#save").click(function(){//弹出框的保存
 									});
 
 				});
+
+//学年学期的选择控制
+function chooseSeme(selector){
+	
+	 var year=new Date().getFullYear();
+	 var sem1;
+	 var sem2;
+	 var sem;
+	 var sel='#'+selector;
+	 for(var i=-20;i<20;i++){
+		 sem1=year+i;
+		 sem2=year+i+1;
+		 sem=sem1+'-'+sem2;
+		 $(sel).after("<option value='"+sem+"' class='chooseSeme'>"+sem+"</option>");
+	 }
+}
+
+function semeUp(sel){
+	
+	$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		url : 'getPlanMaintainInfo.do',
+		async : false,
+		cache : false,
+		error : function(request) {
+			alert("error");
+		},
+		success : function(data) {  
+		 if(sel!='0'){					
+			for (var i= 0; i < data.semester.length; i++) {
+				if(data.semester[i]==sel){
+					return;
+				}
+			}			
+		}
+		  $("#termYear").val('');
+          $("#semester").val('0');
+          $(".semeUp1").remove();
+		 for (var i = 0; i < data.semester.length; i++) {
+				$("#termYearID").after(
+						"<option value=" + data.semester[i]
+								+ " class='semeUp1'>" + data.semester[i]
+								+ "</option>");
+
+			}
+			$("#termYear").change(); 
+		 
+		}
+
+	});
+	
+}
+	
+
