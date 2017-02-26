@@ -188,9 +188,9 @@ $("#ck1").on("click", function () {
 		 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
-	
-$("#practiceapplytable tbody").on("click","tr",function(){
-	
+$()	
+$("#practiceplanmaintain tbody").on("click","tr td:gt(0):lt(13)",function(){
+	$("#Applychart").show();
 	Oneindex= $(this).find("span").attr("id");
 	
 	/*$("#division").val(obj[Oneindex].college);
@@ -301,7 +301,7 @@ $.ajax({
 	}
 });
 	
-	$("#Applychart").show();
+	
 });
 	
 	
