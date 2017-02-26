@@ -746,7 +746,7 @@ $(document)
 						}
 						
 						teamYearw=teamYearw+'-'+semesterw;
-						$.ajax({
+						/*$.ajax({
 							type : 'POST',
 							dataType : 'json',
 							data:{"teamYearw":teamYearw,								 
@@ -758,16 +758,17 @@ $(document)
 							error : function(request) {
 								alert("error");
 							},
-							success : function(data) {
+							success : function(data) {*/
 							
 								$("#writeWeekTime").modal('hide');
 								$("#weekTi").hide();
 								$("#semesterfile").val(teamYearw);
+								$("#timeDi").val(oneSemesterTime);
 								$("#import").modal('show');
-							}
+						/*	}
 
 						});
-						
+						*/
 						
 					});
 					

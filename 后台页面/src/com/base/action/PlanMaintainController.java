@@ -273,6 +273,7 @@ public class PlanMaintainController {
 	public String importPlanInfo(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String semesterfile=request.getParameter("semesterfile");
+		String timeDi=request.getParameter("timeDi");
 		System.out.println("semesterfile:"+semesterfile);
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -352,7 +353,7 @@ public class PlanMaintainController {
 
 						}
 						
-						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(termYear, week);
+						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(timeDi, week);
 						suffix.append("(" + resultStr + "),");
 
 					}

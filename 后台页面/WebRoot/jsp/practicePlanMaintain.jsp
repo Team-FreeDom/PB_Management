@@ -288,6 +288,7 @@
 						<div class="modal-body" id="exportxsl" style="height:60px;">
 							<input type="file" id="fileResource" name="fileResource">
 							<input hidden type="text" name="semesterfile" id="semesterfile" />
+							<input hidden type="text" name="timeDi" id="timeDi" />
 						</div>
 					</center>
 					<div class="modal-footer">
