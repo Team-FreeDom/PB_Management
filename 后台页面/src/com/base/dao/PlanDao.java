@@ -8,6 +8,8 @@ import java.util.List;
 
 
 
+
+import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -22,7 +24,7 @@ public interface PlanDao {
 	 2.返回值： PlanList,需要显示给用户的数据对象
 	 3.函数功能：获取该用户所在学院的实习计划
 	 */
-	public PlanList getThisCollegePlan(String semester,String userid,int pageindex,int size,String columnName,String orderDir,String searchValue);
+	public PlanList getThisCollegePlan(String userid,int pageindex,int size,String columnName,String orderDir,String searchValue);
 
 	/*
 	 1.参数：str1,整型，为课程表id
@@ -58,4 +60,9 @@ public interface PlanDao {
 	 3.函数功能：根据课程代码获取申请表的数据集合
 	 */
 	public List<Classcourse> plandata(int id);
+	/**
+	 * 获取基地集合
+	 * @return 基地集合
+	 */
+	public List<BaseInfo> getBaseInfo();
 }
