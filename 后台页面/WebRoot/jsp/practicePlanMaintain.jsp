@@ -204,9 +204,8 @@
 									</td>
 									
 									<td colspan="16">
-									  <select name="semester" id="semester" class="form-control" style="width:150px;">
-									        <option value="" selected>请选择学期</option>
-											<option value="0">全部</option>
+									  <select name="semester" id="semester" class="form-control" style="width:150px;">									       
+											<option value="0" selected>全部</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 									</select></td>
@@ -274,7 +273,7 @@
 	<div class="modal fade" id="import" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
-			<form action="importPlanInfo.do" method="post" id="daoruform"
+			<form action="importPlanInfo.do" method="post" id="daoruform" onsubmit="submitThis()"
 				enctype="multipart/form-data">
 				<div class="modal-content" style="border:#3071a9 8px solid">
 					<div class="modal-header" style="background:#3071a9; color:#FFF">
@@ -288,6 +287,8 @@
 					<center>
 						<div class="modal-body" id="exportxsl" style="height:60px;">
 							<input type="file" id="fileResource" name="fileResource">
+							<input hidden type="text" name="semesterfile" id="semesterfile" />
+							<input hidden type="text" name="timeDi" id="timeDi" />
 						</div>
 					</center>
 					<div class="modal-footer">
@@ -317,13 +318,22 @@
 					</div>	
 					  <center>				
 						<div class="modal-body" id="weekTime" style="height:200px;">
-						  
-							学年：<input type="text" class="form-control" id="teamYearw" name="teamYearw" placeholder="例：2016-2017"/>
+						  <div>
+							<span>学年：</span><select class="form-control" name="teamYearw" style="width:150px;"
+									id="teamYearw">
+									<option value="" id="AteamYearw">请选择学年</option>
+								  </select>
+							学期：<select class="form-control" name="semesterw" style="width:150px;"
+									id="semesterw">
+									<option value="" id="Asemesterw">请选择学期</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+								  </select>
+						</div>
+					    <div id="weekTi" hidden>
+							<span id="weekTiSpan"></span><input type="text" class="form-control laydate-icon" id="oneSemesterTime" style="height:32px;"/>
 							
-							第1学期第1周时间：<input type="text" class="form-control laydate-icon" id="oneSemesterTime" style="height:32px;"/>
-							
-							第2学期第1周时间：<input type="text" class="form-control laydate-icon" id="twoSemesterTime" style="height:32px;"/>
-							
+						</div>	
 						</div>	
 						</center>			
 					<div class="modal-footer">
@@ -507,7 +517,7 @@
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -553,7 +563,6 @@
 							</div>
 					</div>
 				</div>  
-	
 	<!--增加按钮弹出框-->
 	<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -570,24 +579,24 @@
 					<form id="addForm">
 						<table class="table">
 						    <tr>
-								<td>课程代码</td>
+								<td>课程代码<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="cid"
 									id="incid" class="form-control">
 								</td>
-								<td>课程名称</td>
+								<td>课程名称<span class="setTag">*</span></td>
 								<td><input type="text" name="coursename" id="incoursename"
 									class="form-control"></td>
 							</tr>
 							<tr>
 								
-								<td>课程性质</td>
+								<td>课程性质<span class="setTag">*</span></td>
 								<td><select class="form-control" name="courseNature"
 									id="incourseNature">
 										<option value="">请选择</option>
 										<option value="必修">必修</option>
 										<option value="选修">选修</option>
 								</select></td>
-								<td>课程类别</td>
+								<td>课程类别<span class="setTag">*</span></td>
 								<td><select class="form-control" name="courseCategory"
 									id="incourseCategory">
 										<option value="">请选择</option>
@@ -604,7 +613,7 @@
 									id="inselectedCount" class="form-control"></td>
 							</tr>
 							<tr>
-								<td>开课学院</td>
+								<td>开课学院<span class="setTag">*</span></td>
 								<td><select class="form-control" name="college"
 									id="incollege">
 										<option value="" id="Acollegeh">请选择</option>
@@ -614,10 +623,10 @@
 									class="form-control"></td>
 							</tr>
 							<tr>
-								<td>带队教师</td>
+								<td>带队教师<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="tname" 
 									id="intname" class="form-control"></td>
-								<td>教师职工号</td>
+								<td>教师职工号<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="tid" id="intid"
 									class="form-control"></td>
 							</tr>
@@ -631,7 +640,7 @@
 							</tr>
 							
 							<tr>								
-								<td>起始周次</td>
+								<td>起始周次<span class="setTag">*</span></td>
 								<td><input type="text" name="week" id="inweek"
 									class="form-control"></td>
 								<td>考核方式</td>
@@ -639,12 +648,28 @@
 									class="form-control"></td>
 							</tr>						
 							<tr>								
-								<td>专业编号</td>
+								<td>专业编号<span class="setTag">*</span></td>
 								<td><input type="text" name="mid" id="inmid"
 									class="form-control"></td>
-								<td>学年学期</td>
-								<td><input type="text" name="semester"
-									placeholder="格式为××××-××××-×" id="insemester" class="form-control"></td>
+								
+								</td>	
+								<td colspan="2"></td>							
+							</tr>
+							<tr>
+							<td>学年学期<span class="setTag">*</span></td>
+							<td><select class="form-control" name="semester" style="width:120px;"
+									id="insemester">
+										<option value="" id="Ainsemester">请选择学年</option>
+								           </select>
+						   </td>
+						   <td  colspan="2" style="text-align:left;">
+								    <select class="form-control" name="semester2" style="width:120px;"
+									id="insemester2">
+										<option value="">请选择学期</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+								</select>
+							</td>	
 							</tr>
 							<tr>
 								<td>面向专业</td>

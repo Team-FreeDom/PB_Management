@@ -355,7 +355,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				
 				
-            <div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
+           <div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
