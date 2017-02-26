@@ -23,4 +23,5 @@ public interface MaintainApplyDao {
 	
 	public List<Map<String,String>> find_basenameFinish();
 
+	public List<String> getThoseYear();
 }

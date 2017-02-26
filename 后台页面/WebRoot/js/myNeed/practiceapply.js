@@ -140,360 +140,26 @@ $(document).ready(function() {
 				}
          }
 	});
-	 
-	// 获取学院，学期
-		$.ajax({
-			type : 'POST',
-			dataType : 'json',
-			url : 'getPlanMaintainInfo.do',
-			async : false,
-			cache : false,
-			error : function(request) {
-				alert("error");
-			},
-			success : function(data) {
-
-				for (var i = 0; i < data.semester.length; i++) {
-					$("#termYearID").after(
-							"<option value=" + data.semester[i]
-									+ ">" + data.semester[i]
-									+ "</option>");
-
-				}
-
-				
-			}
-
-		});
-	 
-	 /*学年学期的js控制---start*/
-		$("#termYear").on("change", function() {
-			var termYear = $(this).val();
-			var semester = $("#semester").val();
-			if (termYear != "") {
-				if (semester=="0") {
-					str = termYear;							
-				} else if(semester!=""){
-					str = termYear + '-' + semster;
-				}else{
-					str=null;
-				}	
-				
-			
-			}else{
-				$("#semester").val("");
-				str=null;
-			}
-			
-
-			table=$("#practiceapplytable").DataTable({
-				 "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
-				 "lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-				 "bSort" : true,
-				 "ordering":true,
-				 "serverSide" : true,
-				 "bFilter": true,
-				 "ordering":true,
-				  "dom": 'frtip<"bottom"l>',
-				 "iDisplayLength": 5,	
-				 "bDestroy":true,
-				"ajax":{
-					"url":"displayThisCollegePlan.do",
-					"type":"POST",
-					"data":{"semester":str}
-				},
-				"aoColumns" : [
-				   			{
-				   				"mData" : "semester",//学期学年
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   				//"sWidth" : "2%",
-				   			},
-				   			{
-				   				"mData" : "cid",//课程代码
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "coursename",//课程名称
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "count",//人数
-				   				"orderable" : true,
-				   				"sDefaultContent" : ""
-				   			},
-				   			{
-				   				"mData" : "selectedCount",//已选人数
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "composition",//教学班组成
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "college",//开课学院
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			
-				   			{
-				   				"mData" : "weekClassify",//周学时
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "credit",//学分
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "courseNature",//课程性质
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "courseCategory",//课程类别
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "tid",//教职工号
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "tname",//教师姓名
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "week",//起始周
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "mid",//专业编号
-				   				"orderable" : false,
-				   				"visible":false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "major_oriented",//面向专业
-				   				"orderable" : false,
-				   				"visible":false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "checkMethod",//考核
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-							{
-								"mData" : "id",//考核
-								"orderable" : false,
-								"sDefaultContent" : "",
-								"render" : function(data,type,row){
-									obj.push(row);
-									return '<span id='+(obj.length-1)+'></span>';
-								}
-							}
-					
-				],
-		        "language": {
-					"lengthMenu": "每页 _MENU_ 条记录",
-		            "zeroRecords": "没有找到记录",
-		            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-		            "infoEmpty": "无记录",
-		            "infoFiltered": "(从 _MAX_ 条记录过滤)",
-					"sSearch": "模糊查询：",
-					"oPaginate": {
-						"sFirst": "首页",
-						"sPrevious": " 上一页 ",
-						"sNext": " 下一页 ",
-						 "sLast": " 尾页 "
-						}
-		         }
-			});
-
-		});
-
-		$("#semester").on("change", function() {
-			var termYear = $("#termYear").val();
-			var semester = $(this).val();
-			if (termYear == "") {
-				if(semester!=""){
-				   bootbox.alert({
-					message : "请先选择学年",
-					size : 'small'
-				});
-				$("#semester").val("");
-				return;
-				}
-			}						
-			if (semester=="0") {
-				str = termYear;							
-			} else if(semester!=""){
-				str = termYear + '-' + semester;
-			}else{
-				str=null;
-			}	
-			table=$("#practiceapplytable").DataTable({
-				 "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
-				 "lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-				 "bSort" : true,
-				 "ordering":true,
-				 "serverSide" : true,
-				 "bFilter": true,
-				 "ordering":true,
-				  "dom": 'frtip<"bottom"l>',
-				 "iDisplayLength": 5,	
-				 "bDestroy":true,
-				"ajax":{
-					"url":"displayThisCollegePlan.do",
-					"type":"POST",
-					"data":{"semester":str}
-				},
-				"aoColumns" : [
-				   			{
-				   				"mData" : "semester",//学期学年
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   				//"sWidth" : "2%",
-				   			},
-				   			{
-				   				"mData" : "cid",//课程代码
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "coursename",//课程名称
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "count",//人数
-				   				"orderable" : true,
-				   				"sDefaultContent" : ""
-				   			},
-				   			{
-				   				"mData" : "selectedCount",//已选人数
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "composition",//教学班组成
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "college",//开课学院
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			
-				   			{
-				   				"mData" : "weekClassify",//周学时
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "credit",//学分
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "courseNature",//课程性质
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "courseCategory",//课程类别
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "tid",//教职工号
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "tname",//教师姓名
-				   				"orderable" : true,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "week",//起始周
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "mid",//专业编号
-				   				"orderable" : false,
-				   				"visible":false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "major_oriented",//面向专业
-				   				"orderable" : false,
-				   				"visible":false,
-				   				"sDefaultContent" : "",
-				   			},
-				   			{
-				   				"mData" : "checkMethod",//考核
-				   				"orderable" : false,
-				   				"sDefaultContent" : "",
-				   			},
-							{
-								"mData" : "id",//考核
-								"orderable" : false,
-								"sDefaultContent" : "",
-								"render" : function(data,type,row){
-									obj.push(row);
-									return '<span id='+(obj.length-1)+'></span>';
-								}
-							}
-					
-				],
-		        "language": {
-					"lengthMenu": "每页 _MENU_ 条记录",
-		            "zeroRecords": "没有找到记录",
-		            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-		            "infoEmpty": "无记录",
-		            "infoFiltered": "(从 _MAX_ 条记录过滤)",
-					"sSearch": "模糊查询：",
-					"oPaginate": {
-						"sFirst": "首页",
-						"sPrevious": " 上一页 ",
-						"sNext": " 下一页 ",
-						 "sLast": " 尾页 "
-						}
-		         }
-			});
-		});
-		/*学年学期的js控制---end*/
+	
 	 
 	
 //显示实习申请表
 	 var tbodyStyle='<tbody class="tbodyID"><tr>'
 			+'<td>序号</td>'
-			+'<td>周次</td>'
-			+'<td>开始时间</td>'
-			+'<td>结束时间</td>'
-			+'<td>实习内容</td>'
-			+'<td>实习基地来源</td>'
-			+'<td>实习地点</td>'
-	 		+'<td>实习类别</td>'
+			+'<td>周次<span class="starColor">*</span></td>'
+			+'<td>开始时间<span class="starColor">*</span></td>'
+			+'<td>结束时间<span class="starColor">*</span></td>'
+			+'<td>实习内容<span class="starColor">*</span></td>'
+			+'<td>实习基地来源<span class="starColor">*</span></td>'
+			+'<td>实习地点<span class="starColor">*</span></td>'
+	 		+'<td>实习类别<span class="starColor">*</span></td>'
 	 		+'<td>备注</td>'
 		 +'</tr>'
 		 +'<tr>'
 		 +'<td rowspan="3"><sapn class="mark"></span></td>'
-		 +'<td><input id="weekend" type="text" class="inputWidth flag"></td>'
-		 +'<td><input id="startweek" type="text" class="inputWidth flag"></td>'
-		 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
+		 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
+		 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
+		 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
 		 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 		 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
 		 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'	 	 
@@ -501,20 +167,22 @@ $(document).ready(function() {
 	 	+'<td><input id="remark" type="text" class="flag"></td>'
 		 +'</tr>'
 		 +'<tr>'
-		 +'<td>实习形式</td>'
-		 +'<td colspan="2">实习基地联系人/电话</td>'
-		 +'<td>目的</td>'
+		 +'<td>实习形式<span class="starColor">*</span></td>'
+		 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
+		 +'<td>目的<span class="starColor">*</span></td>'
 		 +'<td>实习经费预算</td>'
+		 +'<td>指导老师/实验员<span class="starColor">*</span></td>'
 		 +'<td>指导老师</td>'
 		 +'<td>实验员</td>'
 		 +'<td>操作</td>'
 		 +'</tr>'
 		 +'<tr>'
 		 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-		 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
+		 +'<td><input id="phone" type="text" class="flag"></td>'
 		 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 		 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-		 +'<td><input id="guideTeacher" type="text" value="" class="adviser2 inputWidth flag"></td>'
+		 +'<td><div class="spanstyle" id="Tea"></div><div class="spanstyle" id="tes"></div></td>'
+		 +'<td><button type="button" class="btn btn-primary choice2" value="">选择</button></td>'
 		 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
 		 +'<td><span class="deleteID" id="">删除</span></td>'
 		 +'</tr></tbody>';
@@ -557,14 +225,14 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					},
 					success : function(data){
 						
-						for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
+						for(var j=0;j<data[0].length;j++){//获取校内基地的实习地点下拉框
 							$("#table tbody:last-child").find("#schoolBaseID").after(
-							"<option class='rest' value="+data[0][i].name+">"+ data[0][i].name + "</option>"
+							"<option class='rest' value="+data[0][j].bname+">"+ data[0][j].bname + "</option>"
 							);
 						}
-						for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+						for(j=0;j<data[1].length;j++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
-							"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+							"<option class='rest' id="+data[1][j].id+" value="+data[1][j].aim+">"+ data[1][j].aim + "</option>"
 
 							);
 						}
@@ -583,7 +251,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 				$("#table tbody:last-child").find("#aim").val(data[i].aim);
 				$("#table tbody:last-child").find("#budget").val(data[i].expense);
-				$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
+				//$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
+				$("#table tbody:last-child").find("#Tea").html("老师:"+data[i].guideTeacher);
+				$("#table tbody:last-child").find("#tes").html("实验员:"+data[i].assistant);
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
 					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
@@ -627,6 +297,9 @@ $.ajax({
 			$("#collegeID").after(
 			"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
 			);
+			$("#collegeID2").after(
+					"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+					);
 		}
 	}
 });
@@ -663,23 +336,6 @@ $(document).on("change","#baseFrom",function(e){
 });	
 
 
-$(document).on("change",".adviser2",function(e){//填写指导老师姓名
-	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-	showName=$("#adviser").val();
-	teacherString=showName.split(",");
-	writeName=e.target.value;
-	if(writeName===""){
-		teacherString[rowNum]="null";
-	}else{
-		teacherString[rowNum]=writeName;
-	}
-	
-	showName=teacherString.join(",");
-	$("#adviser").val(showName);
-
-});
-
-	
 
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
 var obj2;
@@ -702,8 +358,64 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
-var selectNum;
+$(document).on("change","#selectCollege2",function(){
+	var college=$("#selectCollege2").val();
+	$.ajax({
+		url : 'getCollege_Teacher.do',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			"college" : college,								
+		},
+	success : function(data){
+		
+		for(var i=0;i<data.length;i++){//获取老师名字下拉框
+			$("#teacherNmaeID2").after(
+			"<option class='rest' value="+data[i].name+">"+ data[i].name + "</option>"
+			);
+		}
+	}
+});
+});
 
+var selectNum;
+$(document).on("click",".choice2",function(){//点击选择弹出 
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectteacher").modal('show');
+	$("#selectTname").val("");
+	$("#leadteachername").val(teacherString[selectNum]);
+	$("#selectCollege").val("");
+});
+
+$(document).on("change","#selectTname2",function(e){//将指导老师姓名显示在界面中
+	var teststring=$("#leadteachername").val();
+	var testvalue=teststring.split(" ");
+	testvalue.push(e.target.value);	
+	teststring=testvalue.join(" ");
+	$("#leadteachername").val(teststring);
+	
+});
+
+$(document).on("click","#finished2",function(){//点击确定之后讲指导老师姓名在表格中显示出来
+	var tester=$("#leadteachername").val();
+	if(tester===""){
+		bootbox.alert({
+			message : "指导老师不能为空",
+			size : 'small'
+		});
+		return;
+	}else{
+		teacherString[selectNum]=tester;
+	}
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===selectNum){
+			$(this).find('#Tea').text("老师："+tester);
+		}
+	});
+	var str=teacherString.join(',');
+	$("#adviser").val(str);
+});
 var value3=[];
 $(document).on("click",".choice",function(){//点击选择弹出 
 	
@@ -720,17 +432,27 @@ $(document).on("change","#selectTname",function(e){//将实验员姓名显示在
 	testvalue.push(e.target.value);
 	teststring=testvalue.join(" ");
 	$("#tester").val(teststring);
-
+	
 	
 });
 	
 $(document).on("click","#finished",function(){//点击确定之后讲实验员姓名在表格中显示出来
 	var tester=$("#tester").val();
 	if(tester===""){
-		value[selectNum]="无";
+		bootbox.alert({
+			message : "实验员不能为空",
+			size : 'small'
+		});
+		return;
 	}else{
 		value[selectNum]=tester;
-	}	
+	}
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===selectNum){
+			$(this).find('#tes').text("实验员："+tester);
+		}
+	});
 	var str=value.join(',');
 	$("#testername").val(str);
 });
@@ -752,7 +474,7 @@ $(document).on("click","#closemodal",function(){
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
 	var tbNum=$("#table").children('tbody').length;
-	$("#table tbody:last-child").find(".mark").html(tbNum-1);
+	$("#table tbody:last-child").find(".mark").html(tbNum-2);
 	$.ajax({
 		type : 'POST',
 		dataType : 'json',		
@@ -765,7 +487,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	success : function(data){
 		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 			$("#table tbody:last-child").find("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i].name+">"+ data[0][i].name + "</option>"
+			"<option class='rest' value="+data[0][i].bname+">"+ data[0][i].bname + "</option>"
 			);
 		}
 		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
@@ -830,15 +552,125 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 $("#save").click(function(){//弹出框的保存
 	var x=0;
 	var y=0;
+	var week="";        var startweek="";
+	var endweek="";     var content="";
+    var category="";
+	var practiceClass="";     var phone="";
+	var aim="";     var Tea="";
+	var tes="";
 	$(".tbodyID").each(function(){
 		y++;
+		week=$(this).find("#weekend").val();
+		if(week===""){
+			return false;
+		}
+				
+		startweek=$(this).find("#startweek").val();
+		if(startweek===""){
+			return false;
+		}
+		
+		endweek=$(this).find("#endweek").val();
+		if(endweek===""){
+			return false;
+		}
+		
+		content=$(this).find("#content").val();
+		if(content===""){
+			return false;
+		}
+		
 		var sSite=$(this).find("#schoolBase").val();
 		var oSite=$(this).find("#outBase").val();
 		if(sSite===""&&oSite===""){
 			x++;
 			return false;
 		}
+		
+		category=$(this).find("#category").val();
+		if(category===""){
+			return false;
+		}
+		
+		practiceClass=$(this).find("#practiceClass").val();
+		if(practiceClass===""){
+			return false;
+		}
+		
+		phone=$(this).find("#phone").val();
+		if(phone===""){
+			return false;
+		}
+		
+		aim=$(this).find("#aim").val();
+		if(aim===""){
+			return false;
+		}
+		
+		Tea=$(this).find("#Tea").text();
+		if(Tea===""){
+			return false;
+		}
+		
+		tes=$(this).find("#tes").text();
+		if(tes===""){
+			return false;
+		}
 	});
+	
+	if(week===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习周次",
+			size : 'small'
+		});
+		return;
+		}
+	if(startweek===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的开始时间",
+			size : 'small'
+		});
+		return;
+		}
+	if(endweek===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的结束时间",
+			size : 'small'
+		});
+		return;
+		}
+	var start=startweek.split("-");
+	var end=endweek.split("-");
+	var time=0;
+	if((end[0]-start[0])<0){
+		time++;
+	}else{
+		if(end[0]===start[0]){
+			if((end[1]-start[1])<0){
+				time++;
+			}else{
+				if(end[1]===start[1]){
+				   if((end[2]-start[2]<0)){
+					   time++;
+				   }
+				   }
+			}
+		}
+	}
+	if(time!==0){
+		bootbox.alert({
+			message : "第"+y+"条记录的结束时间有错误",
+			size : 'small'
+		});
+		return;
+	}
+	if(content===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习内容",
+			size : 'small'
+		});
+		return;
+		}
 	if(x!==0){
 		bootbox.alert({
 			message : "请填写第"+y+"条记录的实习地点",
@@ -846,6 +678,49 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 	}
+	
+	if(category===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习类别",
+			size : 'small'
+		});
+		return;
+		}
+	if(practiceClass===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习形式",
+			size : 'small'
+		});
+		return;
+		}
+	if(phone===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的联系电话",
+			size : 'small'
+		});
+		return;
+		}
+	if(aim===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习目的",
+			size : 'small'
+		});
+		return;
+		}
+	if(Tea===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的指导老师",
+			size : 'small'
+		});
+		return;
+		}
+	if(tes===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实验员",
+			size : 'small'
+		});
+		return;
+		}
 	bootbox.confirm({
 			message: "确定保存？",
 			size: 'small',
@@ -867,9 +742,9 @@ $("#save").click(function(){//弹出框的保存
 						if(y!==0){
 							str=str+",(";
 						}
-						var b=$(this).find(".adviser2").val();
+						//var b=$(this).find(".adviser2").val();
 						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+b+"'"+",'"+value[c]+"'";
+						str=str+"'"+teacherString[c]+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){
@@ -893,7 +768,7 @@ $("#save").click(function(){//弹出框的保存
 							}
 							if(x===12){
 								if($(this).val()===""){
-								str=str+','+"'null'";
+								str=str+','+"null";
 								}else{
 									str=str+","+"'"+$(this).val()+"'";
 								}
@@ -903,7 +778,6 @@ $("#save").click(function(){//弹出框的保存
 						str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
 						y++;
 					});
-					
 					$.ajax({
 						type : 'POST',
 						dataType : 'json',		

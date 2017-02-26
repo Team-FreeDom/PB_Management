@@ -361,9 +361,24 @@ $('.file').change(function() {
 				
 $("#import").click(function (){//每次点击导出是清空数据
 	$("#Sbasename").val("-1");
-	$("#year").val("");
+	$("#year").val("-1");
+	$.ajax({
+		url : 'getThoseYear.do',
+		type : 'post',
+		dataType : 'json',		
+		success : function(data) {
+			$(".removeThis").remove();
+			 for (var i=0;i<data.list.length;i++) {
+			$("#yearId").after("<option class='removeThis' value='"+data.list[i]+"'>"+data.list[i]+"</option>");
+			 }
+		}
+	});
 	});	
 					 					 					
+});
+
+$("#export").click(function(){
+	$("#exportmodal").modal('hide');
 });
 
 function getInfo(){

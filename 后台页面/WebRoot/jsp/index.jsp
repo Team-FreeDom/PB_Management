@@ -257,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="practiceCount">0</td>
+                                        <td style="font-size:120%" id="practiceCount">${praticecount }</td>
                                     </tr>
                                 </table>
 							</div>
@@ -270,7 +270,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <td rowspan="2"><span class="icon-wrench" style="background:#CC82B5;"></span></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:120%" id="maintainCount">0</td>
+                                        <td style="font-size:120%" id="maintainCount">${repairCount }</td>
                                     </tr>
                                 </table>
 							</div>

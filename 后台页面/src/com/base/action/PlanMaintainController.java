@@ -118,9 +118,9 @@ public class PlanMaintainController {
 				.getPlanTable(semester, college);
 
 		if (CollectionUtils.isNotEmpty(list)) {
-			String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");
-			/* String path = ExcelReport.getWebRootUrl(request,"/upload/"); */
+			/*String path = request.getSession().getServletContext()
+					.getRealPath("/upload/");*/
+			 String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 			String fullFileName = path + "/PracticePlanInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportPracticePlanInfo(list, fullFileName);
@@ -272,6 +272,9 @@ public class PlanMaintainController {
 	@RequestMapping("/importPlanInfo.do")
 	public String importPlanInfo(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
+		String semesterfile=request.getParameter("semesterfile");
+		String timeDi=request.getParameter("timeDi");
+		System.out.println("semesterfile:"+semesterfile);
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
@@ -349,9 +352,8 @@ public class PlanMaintainController {
 							resultStr = resultStr + '"' + value + '"' + ',';
 
 						}
-						/*resultStr = resultStr.substring(0,
-								resultStr.length() - 1);*/
-						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(termYear, week);
+						
+						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(timeDi, week);
 						suffix.append("(" + resultStr + "),");
 
 					}
@@ -364,7 +366,7 @@ public class PlanMaintainController {
 						+ ",courseNature=values(courseNature),courseCategory=values(courseCategory),siteRepuire=values(siteRepuire),tid=values(tid)"
 						+ ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),mid=values(mid),major_oriented=values(major_oriented),checkTime=values(checkTime)";
 				System.out.println(sql);
-				adminManageServiceImpl.setAdminFunction(sql);
+				planMaintainService.deleteAndAdd(semesterfile, sql);
 			}
 
 			wb.close();
@@ -467,11 +469,8 @@ public class PlanMaintainController {
 		public String saveSemesterTime(HttpServletRequest request,
 				HttpServletResponse response) {
 			String teamYearw = request.getParameter("teamYearw");
-			String oneSemesterTime = request.getParameter("oneSemesterTime");
-			String twoSemesterTime = request.getParameter("twoSemesterTime");
-			System.out.println("学年:"+teamYearw+",第一学期:"+oneSemesterTime+",第二学期:"+twoSemesterTime);
-			Contants.map.put(teamYearw+"-1", oneSemesterTime);
-			Contants.map.put(teamYearw+"-2", twoSemesterTime);
+			String oneSemesterTime = request.getParameter("oneSemesterTime");			
+			Contants.map.put(teamYearw, oneSemesterTime);			
 			JSONObject getObj = new JSONObject();
 			getObj.put("msg", true);
 			response.setContentType("text/html;charset=UTF-8");

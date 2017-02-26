@@ -191,19 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<table id="practiceapplytable" class="hover" cellspacing="0" width="100%">
                                     <thead>
-										<tr>
-											<td colspan="20">
-												<select class="form-control selectWidth" id="termYear">
-													<option value="" id="termYearID" selected>请选择学年</option>
-												</select>
-												<select class="form-control selectWidth" id="semester">
-													<option value="" selected>请选择学期</option>
-													<option value="0">全部</option>
-													<option value="1">1</option>
-													<option value="2">2</option>
-												</select>
-											</td>
-										</tr>
+										
                                         <tr>
                                             <th>学年学期</th>
                                             <th>课程代码</th>
@@ -283,7 +271,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                           <button type="button" class="btn btn-primary" id="addTbody">添加</button>
                                           <button type="button" class="btn btn-success" id="save">保存</button>
 <!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
--->                                          <table class="table table-bordered"  id="table">
+-->                                          <table class="table-bordered"  id="table">
                                           	
 												<tr>
 													<td>带队老师</td>
@@ -365,7 +353,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</form>
 					</div>
 				</div>
-                                   
+				
+				
+            <div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+								</div>
+
+								<center>
+									<div class="modal-body">
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-12 form-inline">
+												<lable>指导老师:</lable>
+												<input id="leadteachername" type="text" class="form-control exeWidth" value="">
+											</div>
+											
+										</div>
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-6">
+												<select name="" id="selectCollege2" class="form-control">
+													<option value="" id="collegeID2">请选择学院</option>
+												</select>
+											</div>
+											<div class="col-sm-6">
+												<select name="" id="selectTname2" class="form-control">
+													<option value="" id="teacherNmaeID2">请选择老师</option>
+												</select>
+											</div>
+										</div>
+											
+											
+										
+									</div>
+								</center>
+								<div class="modal-footer">
+									<center>
+										<button type="button" class="btn btn-primary" data-dismiss="modal" id="finished2">确定</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" id="">取消</button>
+									</center>
+								</div>
+							</div>
+					</div>
+				</div>                         
                                                               
                                                                                                                     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -376,18 +410,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
      <script src="../js/bootbox.min.js"></script>
-    <script type="text/javascript" src="../js/laydate.js"></script>
     <script src="../dist/jquery.cokie.min.js"></script>
-    <script src="../js/myNeed/practiceapply.js"></script>
-    <script src="../js/tu.js"></script>
+    <script src="../js/Calendar.js"></script> 
+    <script src="../js/myNeed/practiceapply.js"></script>   
     <script src="../js/kg.js"></script>
-    <script>
-    	!function(){
-			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库
-			laydate({elem: '#demo'});//绑定元素
-			laydate({elem: '#demo2'});
-         }();
-		 
-    </script>
+    
   </body>
 </html>

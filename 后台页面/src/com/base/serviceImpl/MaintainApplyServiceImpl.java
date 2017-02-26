@@ -87,4 +87,10 @@ public class MaintainApplyServiceImpl implements MaintainApplyService
 		ma=maintainapplydao.export_maintainapply(bname, years);
 		return ma;
 	}
+	
+   public List<String> getThoseYear(){
+	   List<String> list=maintainapplydao.getThoseYear();
+		return list;
+		
+	}
 }

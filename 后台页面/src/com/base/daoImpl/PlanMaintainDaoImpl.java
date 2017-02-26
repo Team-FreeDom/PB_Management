@@ -20,6 +20,7 @@ import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
+import com.base.po.Major;
 import com.base.po.PlanList;
 import com.base.po.UserInfo;
 import com.base.utils.SqlConnectionUtils;
@@ -299,13 +300,13 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	@Override
 	public boolean checkIsMid(String aid) {
 		Session session = sessionFactory.openSession();
-		String hql = "from ApplyDept where aid=?";
+		String hql = "from Major where mid=?";
 		boolean flag = false;
 
 		try {
 			Query query = session.createQuery(hql);
 			query.setString(0, aid);			
-			ApplyDept ad = (ApplyDept) query.uniqueResult();
+			Major ad = (Major) query.uniqueResult();
 			if (ad != null) {
 				flag = true;
 			}
@@ -342,5 +343,27 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		    SqlConnectionUtils.free(conn, sp, rs);
 		}
 		return list;
+	}
+
+	@Override
+	public void deleteAndAdd(String semester, String str) {
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;		
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{ call baseweb.`add_coursearrange`(?,?)}");		   
+		    sp.setString(1, semester);
+		    sp.setString(2, str);
+		    sp.execute();    
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}	
 	}
 }

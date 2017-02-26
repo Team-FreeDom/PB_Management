@@ -197,35 +197,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 	<form action="insertmaintain.do" method="post" class="form-horizontal" enctype="multipart/form-data" role="form" id="applyform">
                                     
                                       <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">项目名称</label>
+                                        <label for="inputEmail3" class="col-sm-2 control-label">项目名称<span class="setTag">*</span></label>
                                         <div class="col-sm-8">
                                           <input class="form-control" id="projectname" name="projectname" placeholder="">
                                         </div>
                                       </div>
                                       
                                       <div class="form-group">
-                                      	<label for="inputPassword3" class="col-sm-2 control-label">报修人</label>
+                                      	<label for="inputPassword3" class="col-sm-2 control-label">报修人<span class="setTag">*</span></label>
                                         <div class="col-sm-5">
                                           <input class="form-control" id="name" name="name" value="">
                                         </div>
                                       </div>
                                       
                                       <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">具体位置</label>
+                                        <label for="inputPassword3" class="col-sm-2 control-label">具体位置<span class="setTag">*</span></label>
                                         <div class="col-sm-8">
                                          <input class="form-control" id="address" name="address" placeholder="">
                                         </div>
                                       </div>
                                       
                                       <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">预算金额</label>
+                                        <label for="inputPassword3" class="col-sm-2 control-label">预算金额<span class="setTag">*</span></label>
                                         <div class="col-sm-5">
                                           <input class="form-control" id="budget" name="budget" placeholder="">
                                         </div>
                                       </div>
                                       
                                       <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">基地列表</label>
+                                        <label for="inputPassword3" class="col-sm-2 control-label">基地列表<span class="setTag">*</span></label>
                                         <div class="col-sm-5">
                                           <select class="form-control" id="baselist" name="baselist">
                                           	<option id="baselistid">请选择</option>
@@ -234,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                       </div>
                                       
                                       <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">原因说明</label>
+                                        <label for="inputPassword3" class="col-sm-2 control-label">原因说明<span class="setTag">*</span></label>
                                         <div class="col-sm-8">
                                           <textarea class="form-control" rows="3" id="reason" name="reason"></textarea>
                                         </div>

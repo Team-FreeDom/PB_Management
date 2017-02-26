@@ -26,6 +26,7 @@ public interface MaintainApplyService {
 	
 	public List<MaintainApplys> export_maintainapply(String bname,int years);
 	
+	public List<String> getThoseYear();
 	
 	
 	

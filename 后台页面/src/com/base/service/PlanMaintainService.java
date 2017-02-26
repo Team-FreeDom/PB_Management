@@ -79,4 +79,11 @@ public interface PlanMaintainService {
 	 3.函数功能：获取实习计划的学院
 	 */
 	public List<String> getPlanCollege(String semester);
+	
+	/*
+	 1.参数：semester,字符串，为学年学期;str,字符串，为课程表记录的插入语句
+	 2.返回值：无参
+	 3.函数功能：删除原来学年学期的记录，并且执行插入语句
+	 */
+	public void deleteAndAdd(String semester,String str);
 }

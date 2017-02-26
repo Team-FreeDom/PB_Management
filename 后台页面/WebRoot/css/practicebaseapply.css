@@ -22,6 +22,10 @@
 #majormain{
 	display:none;
 }
+.setTag{
+	color:#3071a9;
+	font-size:20px;
+}
 .majorchoose{
 	margin-right:10px;
 }
