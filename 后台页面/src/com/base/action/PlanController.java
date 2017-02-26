@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
+import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
 import com.base.po.UserInfo;
-import com.base.po.basetype;
 import com.base.service.PlanService;
 import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
@@ -44,12 +44,7 @@ public class PlanController {
 	String searchValue = request.getParameter("search[value]");
 	if (searchValue.equals("")) {
 	    searchValue = null;
-	}
-	
-	String semester = request.getParameter("semester");
-	if (semester.equals("")) {
-		semester = null;
-	}
+	}	
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -61,17 +56,15 @@ public class PlanController {
 	String orderDir = "desc"; // // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-	
-	int recordsTotal=0;
-	List<AllPlan> list=new ArrayList<AllPlan>();
-	if(semester!=null){		
-		PlanList pl = null;
-	    pl = planservice.getThisCollegePlan(semester,userid, pageindex, size, order,
-	    		orderDir, searchValue);
-	    list=pl.getData();
-	recordsTotal=pl.getRecordsTotal();
-	}
-	
+
+	int recordsTotal = 0;
+	List<AllPlan> list = new ArrayList<AllPlan>();
+	PlanList pl = null;
+	pl = planservice.getThisCollegePlan(userid, pageindex, size, order,
+		orderDir, searchValue);
+	list = pl.getData();
+	recordsTotal = pl.getRecordsTotal();
+
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", recordsTotal);
@@ -93,8 +86,8 @@ public class PlanController {
     public String getplandata(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 前台传过来的课程表id
-	int id = Integer.valueOf(request.getParameter("mid"));	
-        List<Classcourse>  list = null;
+	int id = Integer.valueOf(request.getParameter("mid"));
+	List<Classcourse> list = null;
 	list = planservice.plandata(id);
 	JSONArray json = JSONArray.fromObject(list);
 	response.setContentType("text/html;charset=UTF-8");
@@ -106,35 +99,19 @@ public class PlanController {
 	}
 	return null;
     }
-
-   /* // 获取校内实习基地
-    @RequestMapping("/getbaseinfo.do")
-    public String getbaseinfo(HttpServletRequest request,
-	    HttpServletResponse response) {
-	System.out.println("基地什么类型");
-	// 获取基地类型
-	List<basetype> list = baseapplyservice.getBasetype();
-	JSONArray json = JSONArray.fromObject(list);
-	try {
-	    response.getWriter().print(json.toString());
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-	return null;
-    }*/
-
+  
     // 保存对实习计划的修改
     @RequestMapping("/savePlanModify.do")
     public String savePlanModify(HttpServletRequest request,
 	    HttpServletResponse response) {
-	
+
 	// 获取课程表记录编号
 	int id = Integer.valueOf(request.getParameter("courseID"));
+	System.out.println(id+"=====haha");
 
 	String plandata = request.getParameter("str");
-	System.out.println(plandata);
-	planservice.savePlanModify(id,plandata);
+	System.out.println(plandata+"liiiiiii");
+	planservice.savePlanModify(id, plandata);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");
@@ -151,18 +128,18 @@ public class PlanController {
     @SuppressWarnings("rawtypes")
     @RequestMapping("/getPlanAim.do")
     public String getPlanAim(HttpServletRequest request,
-	    HttpServletResponse response) {	
-	// 获取基地类型
-	List<basetype> list1 = baseapplyservice.getBasetype();	
+	    HttpServletResponse response) {
+	// 获取基地集合
+	List<BaseInfo> list1 = planservice.getBaseInfo();	
 	// 获取课程代码
-	 String cid = request.getParameter("mid");	
-	 System.out.println("目的:"+cid);
+	String cid = request.getParameter("mid");
+	//System.out.println("目的:" + cid);
 	// 获取获取专业所对应的培训目的
-	 List<Majoraim> list3 = planservice.getPlanAim(cid);
+	List<Majoraim> list3 = planservice.getPlanAim(cid);
 	try {
 	    List list4 = new ArrayList();
 	    list4.add(list1);
-	    list4.add(list3);	    
+	    list4.add(list3);
 	    JSONArray json = JSONArray.fromObject(list4);
 	    response.setContentType("text/html;charset=UTF-8");
 	    response.getWriter().print(json.toString());
@@ -173,7 +150,7 @@ public class PlanController {
 	return null;
     }
 
-   // 获取所有学院
+    // 获取所有学院
     @RequestMapping("/getCollege.do")
     public String getCollege(HttpServletRequest request,
 	    HttpServletResponse response) {
@@ -194,15 +171,15 @@ public class PlanController {
     @RequestMapping("/getCollege_Teacher.do")
     public String getCollege_Teacher(HttpServletRequest request,
 	    HttpServletResponse response) {
-	
+
 	// 获取前台传过来的学院
 	String college = request.getParameter("college");
 	// 获得userinfo表里的教师集合
 	List<UserInfo> list = planservice.getCollege_Teacher(college);
-	 JSONArray json = JSONArray.fromObject(list);
+	JSONArray json = JSONArray.fromObject(list);
 	response.setContentType("text/html;charset=UTF-8");
-	try {	    
-		response.getWriter().print(json.toString());
+	try {
+	    response.getWriter().print(json.toString());
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.base.dao.PlanDao;
+import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -19,7 +20,7 @@ public class PlanServiceImpl implements PlanService {
 
     // 获取该用户所在学院的实习计划
     @Override
-    public PlanList getThisCollegePlan(String semester,String userid, int pageindex, int size,
+    public PlanList getThisCollegePlan(String userid, int pageindex, int size,
 	    int order, String orderDir, String searchValue) {
 	String columnName = "";
 	if (order == 0) {
@@ -39,7 +40,7 @@ public class PlanServiceImpl implements PlanService {
 	} else if (order == 13) {
 	    columnName = "tname";
 	} 
-	PlanList list = plandao.getThisCollegePlan(semester,userid, pageindex, size,
+	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
 		columnName, orderDir, searchValue);
 	return list;
     }
@@ -76,6 +77,12 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public List<Classcourse> plandata(int id) {
 	List<Classcourse> list = plandao.plandata(id);
+	return list;
+    }
+
+    @Override
+    public List<BaseInfo> getBaseInfo() {
+	List<BaseInfo> list = plandao.getBaseInfo();
 	return list;
     }
 

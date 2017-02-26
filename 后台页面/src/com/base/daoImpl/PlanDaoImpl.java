@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.base.dao.PlanDao;
 import com.base.po.AllPlan;
+import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
@@ -28,7 +31,7 @@ public class PlanDaoImpl implements PlanDao {
 
     // 获取该用户所在学院的实习计划
     @Override
-    public PlanList getThisCollegePlan(String semester,String userid, int pageindex, int size,
+    public PlanList getThisCollegePlan(String userid, int pageindex, int size,
 	    String columnName, String orderDir, String searchValue) {
 	List<AllPlan> list = new ArrayList<AllPlan>();
 	int recordsTotal = 0;
@@ -39,17 +42,16 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?,?)}");
+		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?)}");
 	    sp.setString(1, userid);
 	    sp.setInt(2, pageindex);
 	    sp.setInt(3, size);
 	    sp.setString(4, columnName);
 	    sp.setString(5, orderDir);
 	    sp.setString(6, searchValue);
-	    sp.setString(7, semester);
-	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
+	    sp.registerOutParameter(7, java.sql.Types.INTEGER);
 	    sp.execute();
-	    recordsTotal = sp.getInt(8);
+	    recordsTotal = sp.getInt(7);
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		AllPlan ch = new AllPlan();
@@ -230,6 +232,24 @@ public class PlanDaoImpl implements PlanDao {
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return list;
+    }
+   //获取基地集合
+    @Override
+    public List<BaseInfo> getBaseInfo() {
+	Session session=sessionFactory.openSession();		
+	String hql="from BaseInfo";
+	List<BaseInfo> list=null;
+	
+    try {
+    	 Query query=session.createQuery(hql);
+    	 list=query.list();
+		
+	} catch (Exception e) {
+		System.out.println(e);
+	}finally{
+		session.close();
 	}
 	return list;
     }
