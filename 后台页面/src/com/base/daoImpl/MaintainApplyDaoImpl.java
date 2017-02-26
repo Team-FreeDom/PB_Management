@@ -255,4 +255,33 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao
 		}
 		return ma;
 	}
+	
+	public List<String> getThoseYear(){
+		List<String> ma=new ArrayList<String>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try
+		{
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionfactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`count_maintainyear`()}");			
+			sp.execute();
+			rs=sp.getResultSet();
+			while(rs.next())
+			{
+				ma.add(rs.getString("years"));
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return ma;
+		
+	}
 }

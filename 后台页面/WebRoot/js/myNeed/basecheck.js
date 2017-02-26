@@ -614,7 +614,7 @@ $(document).on("click", "#confirm", function() {
 		 var date1 = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
 		 var date2= (now.getFullYear()+1)+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
 		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td><input type="checkbox" hidden value="'+obj[index].bid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td>'+
-				 '<td>创建日期:</td><td><input class="form-control" id="buildtime" value="'+date1+'" disabled></td><td>截止日期:</td><td><input class="form-control" id="endtime" value="'+date2+'"></td></tr>');
+				 '<td>创建日期:</td><td><input class="form-control" id="buildtime" value="'+date1+'" disabled></td><td>截止日期:</td><td><input class="form-control" onClick="new Calendar().show(this)" id="endtime" value="'+date2+'"></td></tr>');
 	 });
 	 
 	$("#applyConfirm").modal('show');

@@ -366,35 +366,38 @@ $('.file').change(function() {
            		 }); 
 	
 $("#import").click(function (){//每次点击导出是清空数据
-	$("#Sbasename").val("1");
-	$("#year").val("");
+	$("#Sbasename").val("-1");
+	$("#year").val("-1");
+	$.ajax({
+		url : 'getThoseYear.do',
+		type : 'post',
+		dataType : 'json',		
+		success : function(date) {
+			$(".removeThis").remove();
+			 for (var i=0;i<data.list.length;i++) {
+			$("#yearId").after("<option class='removeThis' value='"+data.list[i]+"'>"+data.list[i]+"</option>");
+			 }
+		}
+	});
 	});	
 	
 $("#export").click(function (){
 	
-	var basename=$("#Sbasename option:selected").val();
+	/*var basename=$("#Sbasename option:selected").val();
 	var year=$("#year").val();
-	if(basename=="1"){
+	if(basename=="-1"){
 		basename=null;
 	}
 	if(year==''){
 		year="-1";
 		}
-	$.ajax(
-	{
-		url:'',
-		type:POST,
-		datatype:'json',
-		data:{
-			"basename": basename,
-			"year":year,
-			}
-		}
-	
-	);
-	
-	})
-	
+	*/
+	$("#exportmodal").modal('hide');
+	});
+function daoBaseThis(){
+	var basename=$("#Sbasename option:selected").val();
+	var year=$("#year").val();
+}
 	
 				 					 					
 });

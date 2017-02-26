@@ -252,7 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <td><input type="text" class="form-control" id="Eprojectname"  disabled/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>基地名称 ： </td>
+                                                    <td>基地名称 ：</td>
                                                     <td>
                                                     <input type="text" class="form-control" id="Ebasename"  disabled/>                                                    	
                                                     </td>
@@ -278,7 +278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <td><input type="text" class="form-control" id="Eaddress"  disabled/></td>
                                                 </tr>
                                                 <tr>
-                                                	<td>原因说明 ： </td>
+                                                	<td>原因说明 ：</td>
                                                     <td><textarea class="form-control" id="Ereason"  disabled></textarea></td>
                                                 </tr>
                                                 <tr id="resourcetr">
@@ -314,11 +314,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             	<form action="addmaintainapply.do" method="post" class="form-horizontal"  enctype="multipart/form-data"  role="form" id="applyaddform">
                                                 <table class="table" style="border:none !important;">
                                                     <tr>
-                                                        <td>项目名称 ：</td>
+                                                        <td>项目名称 ： <span class="setTag">*</span></td>
                                                         <td><input type="text" class="form-control" id="Aprojectname" name="Aprojectname" value=""></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>基地名称 ： </td>
+                                                        <td>基地名称 ：  <span class="setTag">*</span></td>
                                                         <td>
                                                         	<select class="form-control" id="Abasename" name="Abasename" value="">
                                                             	<option id="AbasenameID" value="-1" selected>请选择</option>
@@ -326,7 +326,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>报修人 ： </td>
+                                                        <td>报修人 ： <span class="setTag">*</span> </td>
                                                         <td><input type="text" class="form-control" id="Aname" name="Aname" value=""></td>
                                                     </tr>
                                                     <tr>
@@ -334,21 +334,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                        <td><input type="text"  class="form-control" id="Atime" name="Atime" value=""></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>预算金额 ： </td>
+                                                        <td>预算金额 ：  <span class="setTag">*</span></td>
                                                        <td><input
 													type="text" class="form-control" id="Abudget"
 													name="Abudget" value=""></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>实际金额 ： </td>
+                                                        <td>实际金额 ：  <span class="setTag">*</span></td>
                                                        <td><input type="text"  class="form-control" id="ActualMoney" name="ActualMoney" value=""></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>具体位置 ： </td>
+                                                        <td>具体位置 ：  <span class="setTag">*</span></td>
                                                         <td><input type="text" class="form-control" id="Aaddress" name="Aaddress" value=""></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>原因说明 ： </td>
+                                                        <td>原因说明 ：  <span class="setTag">*</span></td>
                                                         <td><textarea class="form-control" id="Areason" name="Areason"></textarea></td>
                                                     </tr>
                                                     <tr>
@@ -381,7 +381,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
                                             </div>
-                                            <form role="form" class="form-horizontal" action="exportmaintainapply.do" method="post">                                                  
+                                            <form role="form" class="form-horizontal" action="exportmaintainapply.do" method="post" onsubmit="return daoBaseThis();">                                                  
                                             <div class="modal-body" id="daochu" style="height:120px;">
                                             
                                             	
@@ -389,7 +389,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                    	 <label for="inputEmail3" class="col-sm-4 control-label">基地列表</label>
                                                    	 <div class="col-sm-8">
                                                     <select class="form-control" id="Sbasename" name="basename">
-                                                    	<option id="SbasenameID" value="-1" selected>请选择</option>                                                        
+                                                    	<option id="SbasenameID" value="-1" selected>全部</option>                                                        
                                                     </select>
                                                     </div>
                                                   </div>
@@ -397,7 +397,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                   <div class="form-group">
                                                   	<label for="inputEmail3" class="col-sm-4 control-label">报修年份</label>
                                                   	<div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="year" id="year" placeholder="请填写年份例如：2016">
+                                                  	 <select class="form-control" name="year" id="year">
+                                                    	<option id="yearId" value="-1" selected>全部</option>                                                        
+                                                    </select>                                                    
                                                     </div>
                                                   </div>
                                                

@@ -533,9 +533,16 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
-	 <script src="../js/bootbox.min.js"></script>
+	<script type="text/javascript" src="../js/laydate.js"></script>
+	<script src="../js/bootbox.min.js"></script>
 	<script src="../js/myNeed/mybase.js"></script>
 	<script src="../js/kg.js"></script>
-
+    <script>
+                laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
+                laydate({
+                   elem: '#adddate'
+                })
+                
+    </script>
 </body>
 </html>
