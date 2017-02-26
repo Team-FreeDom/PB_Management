@@ -231,9 +231,9 @@ public class BaseMaintenanceController {
     	List<ExportBase> list=maintenanceservice.getExportBaseInfo(basetype,dept,star);
     	
     	if (CollectionUtils.isNotEmpty(list)) {         
-			String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");
-			/*String path = ExcelReport.getWebRootUrl(request,"/upload/");*/
+		/*	String path = request.getSession().getServletContext()
+					.getRealPath("/upload/");*/
+			String path = ExcelReport.getWebRootUrl(request,"/upload/");
 			String fullFileName = path + "/BaseInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportBaseInfo(list, fullFileName);

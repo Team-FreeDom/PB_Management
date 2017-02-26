@@ -14,9 +14,8 @@ import com.base.contants.Contants;
 
 public class WeekTransformToTime {
 	
-	public static String weekTransformToTime(String termYear,int week){
-		String time=null;
-		String startTime=(String) Contants.map.get(termYear);		
+	public static String weekTransformToTime(String startTime,int week){
+		String time=null;				
 		SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		int tag=1;

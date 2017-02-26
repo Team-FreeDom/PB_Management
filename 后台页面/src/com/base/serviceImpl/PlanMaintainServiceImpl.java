@@ -119,4 +119,10 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		return list;
 	}
 
+	@Override
+	public void deleteAndAdd(String semester, String str) {
+		
+		planMaintainDao.deleteAndAdd(semester, str);
+	}
+
 }

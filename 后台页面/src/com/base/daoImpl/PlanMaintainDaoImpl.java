@@ -343,4 +343,26 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		}
 		return list;
 	}
+
+	@Override
+	public void deleteAndAdd(String semester, String str) {
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;		
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{ call baseweb.`add_coursearrange`(?,?)}");		   
+		    sp.setString(1, semester);
+		    sp.setString(2, str);
+		    sp.execute();    
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}	
+	}
 }
