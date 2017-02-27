@@ -167,7 +167,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
+							<li><a href="baseApply.jsp"><i class=" icon-home"></i>基地申报</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">

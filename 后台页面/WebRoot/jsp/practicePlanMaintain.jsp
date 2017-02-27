@@ -174,7 +174,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
+							<li><a href="practicePlanMaintain.jsp"><i class=" icon-home"></i>实习计划维护</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">

@@ -461,6 +461,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="../js/jquery.dataTables.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/laydate.js"></script>
     <script src="../js/bootbox.min.js"></script>
     <script src="../js/myNeed/Repairapprove.js"></script>

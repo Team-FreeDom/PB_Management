@@ -171,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">
                             	<li><a>位置</a></li>
-								<li><a href="index.html"><i class=" icon-home"></i>实习基地申请</a></li>
+								<li><a href="Repairpply.jsp"><i class=" icon-home"></i>报修申请</a></li>
 							</ol>
 						</div>
 						<div class="pull-right">
