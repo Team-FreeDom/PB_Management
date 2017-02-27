@@ -341,7 +341,6 @@ $(document).on("change","#baseFrom",function(e){
 var obj2;
 $(document).on("change","#selectCollege",function(){
 	var college=$("#selectCollege").val();
-	$("#selectTname option:gt(0)").remove();
 	$.ajax({
 		url : 'getCollege_Teacher.do',
 		type : 'post',
@@ -361,7 +360,6 @@ $(document).on("change","#selectCollege",function(){
 });
 $(document).on("change","#selectCollege2",function(){
 	var college=$("#selectCollege2").val();
-	$("#selectTname2 option:gt(0)").remove();
 	$.ajax({
 		url : 'getCollege_Teacher.do',
 		type : 'post',

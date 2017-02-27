@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
-<link href="../css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practicebaseapply.css">
 <link rel="stylesheet" href="../css/base_maintain.css">
@@ -433,10 +432,7 @@
 											</tr>
 											<tr id="hidecol">
 												<td>星级：</td>
-												<td colspan="3">
-												<!--  <div id="starget"></div>-->
-												<input id="input-21e" value="" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-												</td>
+												<td colspan="3"><div id="starget"></div></td>
 											</tr>
 											<tr id="hidecol">
 											
@@ -743,7 +739,6 @@
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 	<script type="text/javascript" src="../js/laydate.js"></script>
-	<script src="../js/star-rating.min.js"></script>
 	<script src="../js/myNeed/baseapply.js"></script>
 	<script src="../js/myNeed/base_maintain.js"></script>
 	<script src="../js/kg.js"></script>
@@ -759,14 +754,5 @@
                     elem: '#adddate'
                  });
     </script>
-	<script>
-
-    jQuery(document).ready(function () {
-
-        $(".rating-kv").rating();
-
-    });
-
-</script>
 </body>
 </html>
