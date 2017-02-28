@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Contants {
 	
-	public static HashMap map=new HashMap<String, String>();
+	public  static HashMap map=new HashMap<String, String>();
 	
 	
 

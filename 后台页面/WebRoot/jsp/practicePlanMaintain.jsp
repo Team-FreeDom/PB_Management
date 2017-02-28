@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+      
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -198,27 +200,32 @@
 							<thead>
 								<tr>	
 								  	<td colspan="2">
-									  <select name="termYear" id="termYear" class="form-control" style="width:150px;">
+									  <select name="termYear" id="termYear" class="form-control" style="width:150px;" >
 									    <option value="" id="termYearID" selected>请选择学年</option>
 									  </select>
 									</td>
 									
-									<td colspan="16">
+									<td colspan="10">
 									  <select name="semester" id="semester" class="form-control" style="width:150px;">									       
-											<option value="0" selected>全部</option>
+											<option value="" selected>请选择学期</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 									</select></td>
+									<td hidden id="ta1">${teamYear}</td>
+									<td hidden id="ta2">${sem}</td>
+									<td colspan="6">
+									  <button class="btn btn-primary" id="daoru" data-toggle="modal"
+											data-target="#writeWeekTime">导入</button>
+										<button class="btn btn-primary" id="chu">导出</button>
+									</td>
 
 								</tr>
 								<tr bgcolor="#ECF1F5">
 								<td colspan="9"></td>
 									<td colspan="9">
 										<button class="btn btn-success" id="add">增加</button>
-										<button class="btn btn-danger" id="delete">删除</button>
-										<button class="btn btn-primary" id="daoru" data-toggle="modal"
-											data-target="#writeWeekTime">导入</button>
-										<button class="btn btn-primary" id="chu">导出</button>
+										<button class="btn btn-success" id="updatePlan">修改</button>
+										<button class="btn btn-danger" id="delete">删除</button>										
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
 										<span id="remind" class="glyphicon glyphicon-send" hidden
 										style="color:#3EAB58;padding-top:10px;font-size:20px;"></span>
@@ -320,7 +327,7 @@
 						<div class="modal-body" id="weekTime" style="height:200px;">
 						  <div>
 							<span>学年：</span><select class="form-control" name="teamYearw" style="width:150px;"
-									id="teamYearw">
+									id="teamYearw" value={}>
 									<option value="" id="AteamYearw">请选择学年</option>
 								  </select>
 							学期：<select class="form-control" name="semesterw" style="width:150px;"
@@ -363,15 +370,32 @@
 				<form action="exportPlanInfo.do" method="post" id="daochuForm">
 					<div class="modal-body" id="daochu">
 						<table>
+						   <tr>
+								<td>学年:</td>
+								<td><select class="form-control" id="daoYear"
+									name="daoYear" style="width:180px;margin-left:20px;">
+										<option value="-1" id="daoYearh">全部</option>
+								</select>
+								</td>								
+							</tr>
+							<tr>
+								<td>学期:</td>
+								<td><select class="form-control" id="daosemster"
+									name="daosemster" style="width:180px;margin-left:20px;">
+										<option value="-1" id="daosemsterh">全部</option>
+										<option value="1" class="daosem">1</option>
+										<option value="2" class="daosem">2</option>
+								</select>
+								</td>								
+							</tr>
 							<tr>
 								<td>学院:</td>
-								<td><select class="form-control" id="daoCollege"
+								<td><select class="form-control" id="daoColleget"
 									name="college" style="width:180px;margin-left:20px;">
 										<option value="-1" id="daodept">全部</option>
 								</select>
 								</td>
-								<td><input hidden type="text" name="semester"
-							        id="semesterchu" /></td>
+								
 							</tr>
 						</table>
 
@@ -433,7 +457,7 @@
 				<button type="button" class="btn btn-success" id="save">保存</button>
 				<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
 -->
-				<table class="table table-bordered" id="table">
+				<table class="table-bordered" id="table">
 
 					<tr>
 						<td>带队老师</td>
@@ -518,6 +542,51 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+								</div>
+
+								<center>
+									<div class="modal-body">
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-12 form-inline">
+												<lable>指导老师:</lable>
+												<input id="leadteachername" type="text" class="form-control exeWidth" value="">
+											</div>
+											
+										</div>
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-6">
+												<select name="" id="selectCollege2" class="form-control">
+													<option value="" id="collegeID2">请选择学院</option>
+												</select>
+											</div>
+											<div class="col-sm-6">
+												<select name="" id="selectTname2" class="form-control">
+													<option value="" id="teacherNmaeID2">请选择老师</option>
+												</select>
+											</div>
+										</div>
+											
+											
+										
+									</div>
+								</center>
+								<div class="modal-footer">
+									<center>
+										<button type="button" class="btn btn-primary" data-dismiss="modal" id="finished2">确定</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" id="">取消</button>
+									</center>
+								</div>
+							</div>
+					</div>
+				</div>  
 	<!--增加按钮弹出框-->
 	<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -534,48 +603,41 @@
 					<form id="addForm">
 						<table class="table">
 						    <tr>
+						        <td>学年学期<span class="setTag">*</span></td>
+								<td><input type="text" name="semester2" id="insemester2"
+									class="form-control" disabled></td>		
 								<td>课程代码<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="cid"
 									id="incid" class="form-control">
 								</td>
+								
+							</tr>
+							<tr>
 								<td>课程名称<span class="setTag">*</span></td>
 								<td><input type="text" name="coursename" id="incoursename"
 									class="form-control"></td>
-							</tr>
-							<tr>
-								
 								<td>课程性质<span class="setTag">*</span></td>
 								<td><select class="form-control" name="courseNature"
 									id="incourseNature">
 										<option value="">请选择</option>
 										<option value="必修">必修</option>
 										<option value="选修">选修</option>
-								</select></td>
-								<td>课程类别<span class="setTag">*</span></td>
+								</select></td>								
+							</tr>
+							<tr>
+							  <td>课程类别<span class="setTag">*</span></td>
 								<td><select class="form-control" name="courseCategory"
 									id="incourseCategory">
 										<option value="">请选择</option>
 										<option value="实践课">实践课</option>
 										<option value="理论课">理论课</option>
 								</select></td>
-							</tr>
-							<tr>
-								<td>人数</td>
-								<td><input type="text" name="count" id="incount"
-									class="form-control"></td>
-								<td>已选人数</td>
-								<td><input type="text" name="selectedCount"
-									id="inselectedCount" class="form-control"></td>
-							</tr>
-							<tr>
 								<td>开课学院<span class="setTag">*</span></td>
 								<td><select class="form-control" name="college"
 									id="incollege">
 										<option value="" id="Acollegeh">请选择</option>
 								</select></td>
-								<td>班级组成</td>
-								<td><input type="text" name="composition" id="incomposition"
-									class="form-control"></td>
+								
 							</tr>
 							<tr>
 								<td>带队教师<span class="setTag">*</span></td>
@@ -585,6 +647,26 @@
 								<td><input type="text" value="" name="tid" id="intid"
 									class="form-control"></td>
 							</tr>
+							<tr>								
+								<td>专业编号<span class="setTag">*</span></td>
+								<td><input type="text" name="mid" id="inmid"
+									class="form-control"></td>								
+								</td>	
+									<td>起始周次<span class="setTag">*</span></td>
+								<td><input type="text" name="week" id="inweek"
+									class="form-control"></td>
+													
+							</tr>	
+							<tr>
+								<td>人数</td>
+								<td><input type="text" name="count" id="incount"
+									class="form-control"></td>
+								<td>已选人数</td>
+								<td><input type="text" name="selectedCount"
+									id="inselectedCount" class="form-control"></td>
+							
+							</tr>
+							
 							<tr>
 								<td>周学时</td>
 								<td><input type="text" name="weekClassify" id="inweekClassify"
@@ -595,37 +677,14 @@
 							</tr>
 							
 							<tr>								
-								<td>起始周次<span class="setTag">*</span></td>
-								<td><input type="text" name="week" id="inweek"
+							    	<td>班级组成</td>
+								<td><input type="text" name="composition" id="incomposition"
 									class="form-control"></td>
 								<td>考核方式</td>
 								<td><input type="text" name="checkMethod" id="incheckMethod"
 									class="form-control"></td>
 							</tr>						
-							<tr>								
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" name="mid" id="inmid"
-									class="form-control"></td>
-								
-								</td>	
-								<td colspan="2"></td>							
-							</tr>
-							<tr>
-							<td>学年学期<span class="setTag">*</span></td>
-							<td><select class="form-control" name="semester" style="width:120px;"
-									id="insemester">
-										<option value="" id="Ainsemester">请选择学年</option>
-								           </select>
-						   </td>
-						   <td  colspan="2" style="text-align:left;">
-								    <select class="form-control" name="semester2" style="width:120px;"
-									id="insemester2">
-										<option value="">请选择学期</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-								</select>
-							</td>	
-							</tr>
+													
 							<tr>
 								<td>面向专业</td>
 								<td colspan="3"><input type="text" name="major_oriented" id="inmajor_oriented"
@@ -644,6 +703,121 @@
 		</div>
 	</div>
 
+   <!-- 修改按钮弹出框-->
+	<div class="modal fade" id="updatePlanItem" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="border:#3071a9 8px solid;">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-center">修改实习计划</h4>
+				</div>
+				<div class="modal-body">
+					<form id="addForm">
+						<table class="table">
+						    <tr>
+						        <td>学年学期<span class="setTag">*</span></td>
+								<td><input type="text"  id="semsYear_0"
+									class="form-control" disabled></td>		
+								<td>课程代码<span class="setTag">*</span></td>
+								<td><input type="text" value=""
+									id="cid_0" class="form-control">
+								</td>
+								
+							</tr>
+							<tr>
+								<td>课程名称<span class="setTag">*</span></td>
+								<td><input type="text"  id="coursename_0"
+									class="form-control"></td>
+								<td>课程性质<span class="setTag">*</span></td>
+								<td><select class="form-control" 
+									id="courseNature_0">
+										<option value="">请选择</option>
+										<option value="必修">必修</option>
+										<option value="选修">选修</option>
+								</select></td>								
+							</tr>
+							<tr>
+							  <td>课程类别<span class="setTag">*</span></td>
+								<td><select class="form-control" 
+									id="courseCategory_0">
+										<option value="">请选择</option>
+										<option value="实践课">实践课</option>
+										<option value="理论课">理论课</option>
+								</select></td>
+								<td>开课学院<span class="setTag">*</span></td>
+								<td><select class="form-control" name="college"
+									id="college_0">
+										<option value="" id="college_00">请选择</option>
+								</select></td>
+								
+							</tr>
+							<tr>
+								<td>带队教师<span class="setTag">*</span></td>
+								<td><input type="text" value="" 
+									id="tname_0" class="form-control"></td>
+								<td>教师职工号<span class="setTag">*</span></td>
+								<td><input type="text" value=""  id="tid_0"
+									class="form-control"></td>
+							</tr>
+							<tr>								
+								<td>专业编号<span class="setTag">*</span></td>
+								<td><input type="text"  id="mid_0"
+									class="form-control"></td>								
+								</td>	
+									<td>起始周次<span class="setTag">*</span></td>
+								<td><input type="text"  id="week_0"
+									class="form-control"></td>
+													
+							</tr>	
+							<tr>
+								<td>人数</td>
+								<td><input type="text"  id="count_0"
+									class="form-control"></td>
+								<td>已选人数</td>
+								<td><input type="text" 
+									id="selectedCount_0" class="form-control"></td>
+							
+							</tr>
+							
+							<tr>
+								<td>周学时</td>
+								<td><input type="text"  id="weekClassify_0"
+									class="form-control"></td>
+								<td>学分</td>
+								<td><input type="text"  id="credit_0"
+									class="form-control"></td>
+							</tr>
+							
+							<tr>								
+							    	<td>班级组成</td>
+								<td><input type="text"  id="composition_0"
+									class="form-control"></td>
+								<td>考核方式</td>
+								<td><input type="text"  id="checkMethod_0"
+									class="form-control"></td>
+							</tr>						
+													
+							<tr>
+								<td>面向专业</td>
+								<td colspan="3"><input type="text"  id="major_oriented_0"
+									class="form-control"></td>
+								
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="saveUpdate">确定修改</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
@@ -655,6 +829,7 @@
 	<script src="../js/bootbox.min.js"></script>
 	<script type="text/javascript" src="../js/laydate.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	<script src="../js/Calendar.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
 	<script src="../js/kg.js"></script>
     <script>

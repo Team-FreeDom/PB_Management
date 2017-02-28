@@ -103,7 +103,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public List<AllPlan> getPlanTable(String semester,String college) {
+	public List<AllPlan> getPlanTable(String year,int semester,String college) {
 		
 		List<AllPlan> list = new ArrayList<AllPlan>();	
 		Connection conn = null;
@@ -113,9 +113,10 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		    conn = (Connection) SessionFactoryUtils.getDataSource(
 			    sessionFactory).getConnection();
 		    sp = (CallableStatement) conn
-			    .prepareCall("{call baseweb.find_coursearrange(?,?)}");
-		    sp.setString(1, semester);
-		    sp.setString(2, college);		   
+			    .prepareCall("{call baseweb.find_coursearrange(?,?,?)}");
+		    sp.setString(1, year);
+		    sp.setInt(2, semester);
+		    sp.setString(3, college);		   
 		    sp.execute();		   
 		    rs = sp.getResultSet();
 		    while (rs.next()) {
@@ -365,5 +366,82 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		} finally {
 		    SqlConnectionUtils.free(conn, sp, rs);
 		}	
+	}
+
+	@Override
+	public int checkIsCid(String semester,String cid) {
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		int flag=0;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.`check_courseid`(?,?,?)}");	
+		    sp.setString(1, cid);
+		    sp.setString(2, semester);		    
+		    sp.execute(); 
+		    flag=sp.getInt(3);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
+	}
+
+	@Override
+	public List<String> getSem(String semester) {
+		List<String> list=new ArrayList<String>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;		
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL  baseweb.query_semesternumber(?)}");	
+		    sp.setString(1,semester);
+		    sp.execute(); 
+		    rs = sp.getResultSet();
+		    while (rs.next()) {		    	
+		    	list.add(String.valueOf(rs.getInt("number")));
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}	
+
+	@Override
+	public List<String> getCollegehh(String year, int semester) {
+		List<String> list=new ArrayList<String>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;		
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.export_college(?,?)}");	
+		    sp.setString(1,year);
+		    sp.setInt(2, semester);
+		    sp.execute(); 
+		    rs = sp.getResultSet();
+		    while (rs.next()) {		    	
+		    	list.add(rs.getString("college"));
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
 	}
 }

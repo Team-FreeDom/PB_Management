@@ -27,7 +27,7 @@ public interface PlanMaintainDao {
 	 2.返回值： List<AllPlan>，为导出表所需要的所有记录的对象集合
 	 3.函数功能：获取导出表所需的记录的对象集合
 	 */
-	public List<AllPlan> getPlanTable(String semester,String college);
+	public List<AllPlan> getPlanTable(String year,int semester,String college);
 	
 	/*
 	 1.参数：semester,字符串型,代表某一学年,例：2016-2017; status,整型，修改位，0代表未完善，1代表已完善
@@ -73,6 +73,13 @@ public interface PlanMaintainDao {
 	public boolean checkIsMid(String aid);
 	
 	/*
+	 1.参数：semester,为学年学期，cid,整型，为课程代码
+	 2.返回值：int,0代表没有该课程代码,1代表存在该课程代码
+	 3.函数功能：判断是否该学期是否存在该课程代码
+	 */
+	public int checkIsCid(String semester,String cid);
+	
+	/*
 	 1.参数：无参
 	 2.返回值：List<String>
 	 3.函数功能：获取实习计划的学院
@@ -85,4 +92,10 @@ public interface PlanMaintainDao {
 	 3.函数功能：删除原来学年学期的记录，并且执行插入语句
 	 */
 	public void deleteAndAdd(String semester,String str);
+
+	//根据学年获取学期
+	public List<String> getSem(String semester);
+	
+	//根据学年,学期获取学院
+	public List<String> getCollegehh(String year,int semester);
 }
