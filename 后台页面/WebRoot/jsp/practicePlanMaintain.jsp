@@ -433,7 +433,7 @@
 				<button type="button" class="btn btn-success" id="save">保存</button>
 				<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
 -->
-				<table class="table table-bordered" id="table">
+				<table class="table-bordered" id="table">
 
 					<tr>
 						<td>带队老师</td>
@@ -518,6 +518,51 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+								</div>
+
+								<center>
+									<div class="modal-body">
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-12 form-inline">
+												<lable>指导老师:</lable>
+												<input id="leadteachername" type="text" class="form-control exeWidth" value="">
+											</div>
+											
+										</div>
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-6">
+												<select name="" id="selectCollege2" class="form-control">
+													<option value="" id="collegeID2">请选择学院</option>
+												</select>
+											</div>
+											<div class="col-sm-6">
+												<select name="" id="selectTname2" class="form-control">
+													<option value="" id="teacherNmaeID2">请选择老师</option>
+												</select>
+											</div>
+										</div>
+											
+											
+										
+									</div>
+								</center>
+								<div class="modal-footer">
+									<center>
+										<button type="button" class="btn btn-primary" data-dismiss="modal" id="finished2">确定</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" id="">取消</button>
+									</center>
+								</div>
+							</div>
+					</div>
+				</div>  
 	<!--增加按钮弹出框-->
 	<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -655,6 +700,7 @@
 	<script src="../js/bootbox.min.js"></script>
 	<script type="text/javascript" src="../js/laydate.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	<script src="../js/Calendar.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
 	<script src="../js/kg.js"></script>
     <script>

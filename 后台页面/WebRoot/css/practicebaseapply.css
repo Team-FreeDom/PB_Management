@@ -23,7 +23,7 @@
 	display:none;
 }
 .setTag{
-	color:#3071a9;
+	color: #F70004;
 	font-size:20px;
 }
 .majorchoose{
@@ -36,3 +36,4 @@
 #textContent{
   pointer-events:none;
 }
+
