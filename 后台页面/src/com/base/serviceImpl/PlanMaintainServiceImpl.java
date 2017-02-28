@@ -16,6 +16,7 @@ import com.base.dao.PlanMaintainDao;
 import com.base.po.AllPlan;
 import com.base.po.BaseCheckList;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 import com.base.service.PlanMaintainService;
 
 @Service("planMaintainService")
@@ -147,6 +148,18 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	@Override
 	public List<String> getCollegehh(String year, int semester) {
 		List<String> list=planMaintainDao.getCollegehh(year, semester);
+		return list;
+	}
+
+	@Override
+	public void addStartDate(String semester, String startTime) {
+		
+		planMaintainDao.addStartDate(semester, startTime);
+	}
+
+	@Override
+	public List<StartDate> getStartDate() {
+		List<StartDate> list=planMaintainDao.getStartDate();
 		return list;
 	}
 	

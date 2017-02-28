@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.base.po.AllPlan;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 
 public interface PlanMaintainDao {
 
@@ -98,4 +99,10 @@ public interface PlanMaintainDao {
 	
 	//根据学年,学期获取学院
 	public List<String> getCollegehh(String year,int semester);
+	
+	//根据学年,学期获取学院
+	public void addStartDate(String semester,String startTime );
+	
+	//获取学年学期的开始时间
+	public List<StartDate> getStartDate();
 }

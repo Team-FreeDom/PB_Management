@@ -15,14 +15,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Application;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +38,7 @@ import com.base.po.ApplyDept;
 import com.base.po.BaseCheckList;
 import com.base.po.ExportBase;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 import com.base.service.PlanMaintainService;
 import com.base.service.baseApplyService;
 import com.base.serviceImpl.AdminManageServiceImpl;
@@ -368,8 +372,17 @@ public class PlanMaintainController {
 			HttpServletResponse response,ModelMap map) throws IOException {
 		String semesterfile=request.getParameter("semesterfile");
 		String timeDi=request.getParameter("timeDi");
-		System.out.println("semesterfile:"+semesterfile);
-		Contants.map.put(semesterfile, timeDi);//将该学期的开学时间存储
+		
+		planMaintainService.addStartDate(semesterfile, timeDi);//将特定学期的数据更新至数据库
+		ServletContext application=request.getServletContext();
+		if(application==null){
+			List<StartDate> list=planMaintainService.getStartDate();
+			WeekTransformToTime.getLatestStartTime(application,list);
+		}else{
+		    application.setAttribute(semesterfile, timeDi);//将该学期的开学时间存储
+		}
+		
+		
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
@@ -483,7 +496,7 @@ public class PlanMaintainController {
 	public String checkIsSave(HttpServletRequest request,
 			HttpServletResponse response) {
 		// 获取学年学期
-		String semester = "2016-2017-1";// request.getParameter("semester");
+		String semester = request.getParameter("semester");
 		if (semester.equals("")) {
 			semester = null;
 		}
