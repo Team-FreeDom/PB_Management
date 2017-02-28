@@ -24,6 +24,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -109,13 +110,14 @@ public class PlanMaintainController {
 	@RequestMapping("/exportPlanInfo.do")
 	public String exportPlanInfo(HttpServletRequest request,
 			HttpServletResponse response) {
-		String semester =request.getParameter("semester");
+		String daoYear =request.getParameter("daoYear");
+		int daoSemester=Integer.valueOf(request.getParameter("daosemster"));
 		String college = request.getParameter("college");
         if(college.equals("-1")){
         	college=null;
         }
 		List<AllPlan> list = planMaintainService
-				.getPlanTable(semester, college);
+				.getPlanTable(daoYear,daoSemester, college);
 
 		if (CollectionUtils.isNotEmpty(list)) {
 			/*String path = request.getSession().getServletContext()
@@ -203,15 +205,41 @@ public class PlanMaintainController {
 			}
 			return null;
 		}
+		
+		// 判断是否存在该课程代码
+				@RequestMapping("/checkIsThisCid.do")
+				public String checkIsThisCid(HttpServletRequest request,
+						HttpServletResponse response) {
+					String cid = request.getParameter("cid");
+					String semester=request.getParameter("semester");
+					int flag=planMaintainService.checkIsCid(semester,cid);
+					JSONObject getObj = new JSONObject();		
+					getObj.put("flag", flag);			
+					response.setContentType("text/html;charset=UTF-8");
+
+					try {
+						response.getWriter().print(getObj.toString());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return null;
+				}
 
 	// 增加单条实习计划数据
 	@RequestMapping("/addOnePlanInfo.do")
 	public String addOnePlanInfo(HttpServletRequest request,
 			HttpServletResponse response) {
 		String str = request.getParameter("str");
-		System.out.println(str);
+		String semester= request.getParameter("semester");
+		int weekCount=Integer.valueOf(request.getParameter("weekCount"));
+		String startTime=(String) Contants.map.get(semester);
+		String checkTime=WeekTransformToTime.weekTransformToTime(startTime, weekCount);
+		str=str+",'"+checkTime+"')";
+		System.out.println(semester);
+		System.out.println("checktime:"+checkTime);
 		str = "insert into baseweb.coursearrange(semester,college,cid,count,selectedCount,composition,coursename,weekClassify,credit,courseNature,courseCategory,tid,tname,"
-				+ "Week,checkMethod,mid,major_oriented) values" + str;
+				+ "Week,checkMethod,mid,major_oriented,checkTime) values" + str;
 		planMaintainService.addOnePlanInfo(str);
 		JSONObject getObj = new JSONObject();		
 		getObj.put("flag", true);			
@@ -255,8 +283,10 @@ public class PlanMaintainController {
 	    String semester=request.getParameter("semester");
 		//获取开课学院
 		List<String> list=planMaintainService.getPlanCollege(semester);
+		
 		JSONObject getObj = new JSONObject();		
-		getObj.put("college", list);	
+		getObj.put("college", list);
+		
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
@@ -267,14 +297,79 @@ public class PlanMaintainController {
 		}
 		return null;
 	}
+	
+	// 获取学年
+		@RequestMapping("/getReadyYear.do")
+		public String getReadyYear(HttpServletRequest request,
+				HttpServletResponse response) {
+		  
+			//获取学年
+			List<String> list2=planMaintainService.getSemester();
+			JSONObject getObj = new JSONObject();	
+			
+			getObj.put("semester", list2);
+			response.setContentType("text/html;charset=UTF-8");
+
+			try {
+				response.getWriter().print(getObj.toString());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		// 获取学期
+				@RequestMapping("/getReadySem.do")
+				public String getReadySem(HttpServletRequest request,
+						HttpServletResponse response) {
+				  String year=request.getParameter("year");
+					//获取学年
+					List<String> list2=planMaintainService.getSem(year);
+					JSONObject getObj = new JSONObject();	
+					
+					getObj.put("semNumber", list2);
+					response.setContentType("text/html;charset=UTF-8");
+
+					try {
+						response.getWriter().print(getObj.toString());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return null;
+				}
+				
+				// 获取学院
+				@RequestMapping("/getReadyco.do")
+				public String getReadyco(HttpServletRequest request,
+						HttpServletResponse response) {
+				  String year=request.getParameter("year");
+				  int semester=Integer.valueOf(request.getParameter("semester"));
+				
+					List<String> list2=planMaintainService.getCollegehh(year, semester);
+					JSONObject getObj = new JSONObject();	
+					
+					getObj.put("college", list2);
+					response.setContentType("text/html;charset=UTF-8");
+
+					try {
+						response.getWriter().print(getObj.toString());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return null;
+				}
 
 	// 导入实习计划数据
 	@RequestMapping("/importPlanInfo.do")
 	public String importPlanInfo(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response,ModelMap map) throws IOException {
 		String semesterfile=request.getParameter("semesterfile");
 		String timeDi=request.getParameter("timeDi");
 		System.out.println("semesterfile:"+semesterfile);
+		Contants.map.put(semesterfile, timeDi);//将该学期的开学时间存储
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
@@ -345,8 +440,7 @@ public class PlanMaintainController {
 								}
 							}else if (j == 14) {
 								
-								value = value.substring(value.indexOf('(') + 1,
-										value.lastIndexOf(')'));
+								value = semesterfile;
 								termYear=value;
 							}
 							resultStr = resultStr + '"' + value + '"' + ',';
@@ -375,7 +469,13 @@ public class PlanMaintainController {
 			tempFile.delete(); // 删除临时文件
 
 		}
-		return "redirect:practicePlanMaintain.jsp";
+		int tag=semesterfile.lastIndexOf('-');
+		String teamYear=semesterfile.substring(0,tag);
+		String sem=semesterfile.substring(tag+1);
+		System.out.println(teamYear+"-  ha  "+sem);
+		map.addAttribute("teamYear", teamYear);
+		map.addAttribute("sem", sem);
+		return "practicePlanMaintain";
 	}
 
 	// 检测数据完整性
@@ -464,23 +564,5 @@ public class PlanMaintainController {
 		return null;
 	}
 
-	// 存储学年第一周的日期
-		@RequestMapping("/saveSemesterTime.do")
-		public String saveSemesterTime(HttpServletRequest request,
-				HttpServletResponse response) {
-			String teamYearw = request.getParameter("teamYearw");
-			String oneSemesterTime = request.getParameter("oneSemesterTime");			
-			Contants.map.put(teamYearw, oneSemesterTime);			
-			JSONObject getObj = new JSONObject();
-			getObj.put("msg", true);
-			response.setContentType("text/html;charset=UTF-8");
-
-			try {
-				response.getWriter().print(getObj.toString());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return null;
-		}
+	
 }
