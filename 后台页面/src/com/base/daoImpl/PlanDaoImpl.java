@@ -72,7 +72,7 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setSemester(rs.getString("semester"));
 		ch.setWeek(rs.getString("week"));
 		ch.setCheckMethod(rs.getString("checkMethod"));
-		//System.out.println(ch.getCheckMethod()+"有没有");
+		// System.out.println(ch.getCheckMethod()+"有没有");
 		ch.setMajor_oriented(rs.getString("major_oriented"));
 		list.add(ch);
 	    }
@@ -99,9 +99,9 @@ public class PlanDaoImpl implements PlanDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.add_classarrangecourse(?,?)}");
-	    sp.setInt(1, id);	  
+	    sp.setInt(1, id);
 	    sp.setString(2, plandata);
-	    sp.execute();    
+	    sp.execute();
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -180,7 +180,7 @@ public class PlanDaoImpl implements PlanDao {
 	    while (rs.next()) {
 		UserInfo ch = new UserInfo();
 		ch.setName(rs.getString("name"));
-		//System.out.println(ch.getName());
+		// System.out.println(ch.getName());
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -235,23 +235,45 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	return list;
     }
-   //获取基地集合
+
+    // 获取基地集合
     @Override
     public List<BaseInfo> getBaseInfo() {
-	Session session=sessionFactory.openSession();		
-	String hql="from BaseInfo";
-	List<BaseInfo> list=null;
-	
-    try {
-    	 Query query=session.createQuery(hql);
-    	 list=query.list();
-		
+	Session session = sessionFactory.openSession();
+	String hql = "from BaseInfo";
+	List<BaseInfo> list = null;
+
+	try {
+	    Query query = session.createQuery(hql);
+	    list = query.list();
+
 	} catch (Exception e) {
-		System.out.println(e);
-	}finally{
-		session.close();
+	    System.out.println(e);
+	} finally {
+	    session.close();
 	}
 	return list;
+    }
+
+    // 修改课程安排表(单条)李彩页面功能
+    @Override
+    public void alterRecord(String plandata) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call alter_coursearrange(?)}");
+	    sp.setString(1, plandata);
+	    sp.execute();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+
     }
 
 }

@@ -53,5 +53,10 @@ public interface PlanService {
      * @return 基地集合
      */
     public List<BaseInfo> getBaseInfo();
+    /**
+     * 修改课程安排表(单条)李彩页面功能
+     * @param plandata
+     */
+    public void alterRecord(String plandata);
 
 }

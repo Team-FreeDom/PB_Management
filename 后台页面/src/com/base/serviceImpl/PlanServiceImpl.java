@@ -39,7 +39,7 @@ public class PlanServiceImpl implements PlanService {
 	    columnName = "tid";
 	} else if (order == 13) {
 	    columnName = "tname";
-	} 
+	}
 	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
 		columnName, orderDir, searchValue);
 	return list;
@@ -84,6 +84,13 @@ public class PlanServiceImpl implements PlanService {
     public List<BaseInfo> getBaseInfo() {
 	List<BaseInfo> list = plandao.getBaseInfo();
 	return list;
+    }
+
+    // 修改课程安排表(单条)李彩页面功能
+    @Override
+    public void alterRecord(String plandata) {
+	plandao.alterRecord(plandata);
+
     }
 
 }
