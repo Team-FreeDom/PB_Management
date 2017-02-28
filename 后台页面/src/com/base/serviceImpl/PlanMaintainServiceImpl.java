@@ -2,13 +2,21 @@ package com.base.serviceImpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.base.contants.Contants;
 import com.base.dao.PlanMaintainDao;
 import com.base.po.AllPlan;
 import com.base.po.BaseCheckList;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 import com.base.service.PlanMaintainService;
 
 @Service("planMaintainService")
@@ -49,9 +57,9 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	}
 
 	@Override
-	public List<AllPlan> getPlanTable(String semester,String college) {
+	public List<AllPlan> getPlanTable(String year,int semester,String college) {
 		
-		List<AllPlan> list=planMaintainDao.getPlanTable(semester, college);
+		List<AllPlan> list=planMaintainDao.getPlanTable(year,semester, college);
 		return list;
 	}
 
@@ -124,5 +132,36 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		
 		planMaintainDao.deleteAndAdd(semester, str);
 	}
+
+	@Override
+	public int checkIsCid(String semester,String cid) {
+		int flag=planMaintainDao.checkIsCid(semester,cid);
+		return flag;
+	}
+
+	@Override
+	public List<String> getSem(String semester) {
+		List<String> list=planMaintainDao.getSem(semester);		
+		return list;
+	}
+
+	@Override
+	public List<String> getCollegehh(String year, int semester) {
+		List<String> list=planMaintainDao.getCollegehh(year, semester);
+		return list;
+	}
+
+	@Override
+	public void addStartDate(String semester, String startTime) {
+		
+		planMaintainDao.addStartDate(semester, startTime);
+	}
+
+	@Override
+	public List<StartDate> getStartDate() {
+		List<StartDate> list=planMaintainDao.getStartDate();
+		return list;
+	}
+	
 
 }

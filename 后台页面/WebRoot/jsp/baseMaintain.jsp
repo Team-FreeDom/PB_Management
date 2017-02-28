@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
-<link href="../css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practicebaseapply.css">
 <link rel="stylesheet" href="../css/base_maintain.css">
@@ -434,8 +433,7 @@
 											<tr id="hidecol">
 												<td>星级：</td>
 												<td colspan="3">
-												<!--  <div id="starget"></div>-->
-												<input id="input-21e" value="" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+												  <div id="starget"></div>
 												</td>
 											</tr>
 											<tr id="hidecol">

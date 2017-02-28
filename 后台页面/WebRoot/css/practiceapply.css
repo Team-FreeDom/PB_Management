@@ -17,6 +17,7 @@ table tbody tr td{
 	text-align:center;
 	cursor: pointer;
 }
+
 #Applychart{
 	position:absolute !important;
 	top:187px;
@@ -101,12 +102,15 @@ table tbody tr td{
 #table tr{
 	line-height: 30px;
 }
-
+#table tbody td{
+	padding:0px 3px;
+}
 #table input{
 	line-height: 23px !important;
 }
 #table select{
 	line-height: 23px !important;
+	width: 100%;
 }
 .spanstyle{
 	font-size: 10px;
@@ -115,3 +119,11 @@ table tbody tr td{
 .starColor{
 	color: #F70004;
 }
+.padding{
+	margin-left: 15px !important;
+}
+.deleteID{
+	color:#F90409;
+	text-decoration: underline;
+}
+

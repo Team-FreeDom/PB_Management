@@ -85,6 +85,9 @@ tbody tr td span{
 	color:#D8B500;
 	font-size:16px;
 }
+.icon-remove-sign{
+	font-size:16px;
+}
 #add{
 	position:absolute !important;
 	top:150px;
