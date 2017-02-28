@@ -20,8 +20,10 @@ import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
+import com.base.po.LandInfo;
 import com.base.po.Major;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 import com.base.po.UserInfo;
 import com.base.utils.SqlConnectionUtils;
 
@@ -443,5 +445,51 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		    SqlConnectionUtils.free(conn, sp, rs);
 		}
 		return list;
+	}
+
+	@Override
+	public void addStartDate(String semester, String startTime) {
+		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.check_startdate(?,?)}");	
+		    sp.setString(1,semester);
+		    sp.setString(2, startTime);
+		    sp.execute(); 
+		   
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		
+	}
+
+	@Override
+	public List<StartDate> getStartDate() {
+		Session session=sessionFactory.openSession();		
+		String hql="from StartDate";		
+		List<StartDate> list=null;
+		
+		 try {
+	    	 Query query=session.createQuery(hql);	    	 
+	    	 list=query.list();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		// System.out.println(bid+list.get(0).getAfford());
+		return list;
+		
+		
+		
 	}
 }

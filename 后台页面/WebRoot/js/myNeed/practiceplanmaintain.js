@@ -49,7 +49,9 @@ $(document)
 					//导入功能刷新页面，给学年学期赋值，获取数据
 					$("#termYear").val($("#ta1").text());
 					$("#semester").val($("#ta2").text());
-					str=$("#termYear").val()+'-'+$("#semester").val();
+					if($("#termYear").val()!='-1'&&$("#semester").val()!='-1'){
+					   str=$("#termYear").val()+'-'+$("#semester").val();
+					}
 				
 					table = $("#practiceplanmaintain")
 							.DataTable(
@@ -604,7 +606,7 @@ $(document)
 						var mid = $("#inmid").val();
 						var major_oriented =$("#inmajor_oriented").val();					
 						var insemester2=$("#insemester2").val();
-						var weekCount=week.substring(0,value.indexOf('-'));
+						var weekCount=week.substring(0,week.indexOf('-'));
 						if(count==""){
 							count="0";
 						}
@@ -931,7 +933,7 @@ $(document)
 					
 					// 点击 检测数据完整性
 					$(document).on("click","#checkIsSave",function() {
-                           if(str==null){
+                           if(str==null||str=='-'){
                         	   bootbox.alert({
     								message : "请先选择学年学期",
     								size : 'small'

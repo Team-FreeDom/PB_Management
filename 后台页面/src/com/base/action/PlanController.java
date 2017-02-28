@@ -44,7 +44,7 @@ public class PlanController {
 	String searchValue = request.getParameter("search[value]");
 	if (searchValue.equals("")) {
 	    searchValue = null;
-	}	
+	}
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -56,7 +56,6 @@ public class PlanController {
 	String orderDir = "desc"; // // desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-
 	int recordsTotal = 0;
 	List<AllPlan> list = new ArrayList<AllPlan>();
 	PlanList pl = null;
@@ -99,7 +98,7 @@ public class PlanController {
 	}
 	return null;
     }
-  
+
     // 保存对实习计划的修改
     @RequestMapping("/savePlanModify.do")
     public String savePlanModify(HttpServletRequest request,
@@ -107,10 +106,10 @@ public class PlanController {
 
 	// 获取课程表记录编号
 	int id = Integer.valueOf(request.getParameter("courseID"));
-	System.out.println(id+"=====haha");
+	System.out.println(id + "=====haha");
 
 	String plandata = request.getParameter("str");
-	System.out.println(plandata+"liiiiiii");
+	System.out.println(plandata + "liiiiiii");
 	planservice.savePlanModify(id, plandata);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", "此申请处理成功");
@@ -130,10 +129,10 @@ public class PlanController {
     public String getPlanAim(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取基地集合
-	List<BaseInfo> list1 = planservice.getBaseInfo();	
+	List<BaseInfo> list1 = planservice.getBaseInfo();
 	// 获取课程代码
 	String cid = request.getParameter("mid");
-	//System.out.println("目的:" + cid);
+	// System.out.println("目的:" + cid);
 	// 获取获取专业所对应的培训目的
 	List<Majoraim> list3 = planservice.getPlanAim(cid);
 	try {
@@ -195,6 +194,25 @@ public class PlanController {
 	// 获取每条班级安排记录的id
 	int planid = Integer.parseInt(request.getParameter("planid"));
 	planservice.deleteClassRecord(planid);
+	JSONObject getObj = new JSONObject();
+	getObj.put("msg", "此申请处理成功");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+
+    // 修改课程安排表(单条)李彩页面功能
+    @RequestMapping("/alterRecord.do")
+    public String alterRecord(HttpServletRequest request,
+	    HttpServletResponse response) {
+	// 获取需要修改打包的数据
+	String plandata = request.getParameter("str");
+	planservice.alterRecord(plandata);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", "此申请处理成功");
 	response.setContentType("text/html;charset=UTF-8");
