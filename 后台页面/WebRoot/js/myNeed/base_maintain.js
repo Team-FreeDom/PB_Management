@@ -95,11 +95,11 @@ $(document)
 														var str2 = "";
 														for (var i = 0; i < data; i++) {
 															str1 = str1
-																	+ "<span class='icon-star' name='color' id='color'></span>";
+																	+ "<span class='icon-star star-flag' name='color' id='color' value="i+1"></span>";
 														}
 														for (var i = 0; i < 5 - data; i++) {
 															str2 = str2
-																	+ "<span class='icon-star-empty' name='nocolor' id='nocolor'></span>";															
+																	+ "<span class='icon-star-empty star-flag' name='nocolor' id='nocolor' value="date+1+i"></span>";															
 														}
 														return str1 + str2;
 
@@ -262,16 +262,37 @@ $(document)
 
 					// star星级点击的实时改变
 					$(document).on("click", "#color", function() {
-
-						$(this).removeClass("icon-star");
-						$(this).addClass("icon-star-empty");
-						$(this).prop("id", "nocolor");						
+						var starNum=$(this).attr('value');
+						$(".star-flag").each(function(){
+							if($(this).attr('value')>starNum){
+								$(this).removeClass("icon-star");
+								$(this).addClass("icon-star-empty");
+								$(this).prop("id", "nocolor");
+							}
+						});
 					});
 
 					$(document).on("click", "#nocolor", function() {
-						$(this).removeClass("icon-star-empty");
-						$(this).addClass("icon-star");
-						$(this).prop("id", "color");						
+						var starNum=$(this).attr('value');
+						$(".star-flag").each(function(){
+							$(this).removeClass("icon-star-empty");
+							$(this).addClass("icon-star");
+							$(this).prop("id", "color");
+							if(--starNum==0){
+								return false;
+							}
+						});
+												
+					});
+					
+					$(document).on("click","#delateStar",function(){
+						$(".star-flag").each(function(){
+							
+								$(this).removeClass("icon-star");
+								$(this).addClass("icon-star-empty");
+								$(this).prop("id", "nocolor");
+							
+						});				   
 					});
 
 					// 点击删除按钮,判断是否已选择
@@ -344,11 +365,8 @@ $(document)
 						}
 						$("#setdated").val(obj[index].buildtime);
 						$("#adddate").val(obj[index].endtime);						
-						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
-						alert(obj[index].star);
-						$("#input-21e").val('');
-						$("#input-21e").attr("value",obj[index].star);
-						
+						$("#starget").html("<span id='delateStar' class='icon-remove-sign'></span>"+$(this).closest('tr').find('td:eq(9)').html());
+						$("#input-21e").val("1");
 						$("#personDuty").val(obj[index].resperson);
 						
 						$("#edit").modal('show');
