@@ -345,6 +345,10 @@ $(document)
 						$("#setdated").val(obj[index].buildtime);
 						$("#adddate").val(obj[index].endtime);						
 						$("#starget").html($(this).closest('tr').find('td:eq(9)').html());
+						alert(obj[index].star);
+						$("#input-21e").val('');
+						$("#input-21e").attr("value",obj[index].star);
+						
 						$("#personDuty").val(obj[index].resperson);
 						
 						$("#edit").modal('show');

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <!--datatable-->
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+<link href="../css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practicebaseapply.css">
 <link rel="stylesheet" href="../css/base_maintain.css">
@@ -432,14 +433,17 @@
 											</tr>
 											<tr id="hidecol">
 												<td>星级：</td>
-												<td colspan="3"><div id="starget"></div></td>
+												<td colspan="3">
+												<!--  <div id="starget"></div>-->
+												<input id="input-21e" value="" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+												</td>
 											</tr>
 											<tr id="hidecol">
 											
                                                 <td>创建时间：</td>
 												<td><input type="text" id="setdated" disabled></td>
 												<td>截止日期 ：</td>
-												<td><input type="text" id="adddate" ></td>
+												<td><input type="text" id="adddate" class="laydate-icon"></td>
 											
 											</tr>
 
@@ -582,7 +586,7 @@
 										enctype="multipart/form-data" class="form-horizontal"
 										role="form">
 										<div class="form-group">
-											<label class="col-md-3 control-label fontDire">基地名称</label>
+											<label class="col-md-3 control-label fontDire">基地名称<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<input type="text" class="form-control" id="basename"
 													name="name" placeholder="例:浏阳基地" /> <span id="display"
@@ -591,7 +595,7 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-md-3 control-label">申报部门类型</label>
+											<label class="col-md-3 control-label">申报部门类型<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<label class="radio-inline"> <input type="radio" class="colle"
 													name="deptRadio" id="deptRadio" value="1" checked="true">
@@ -603,7 +607,7 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-md-3 control-label">申报部门</label>
+											<label class="col-md-3 control-label">申报部门<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<select class="form-control" id="deptty" name="applyid">
 													<option id="applyDept" value="">请选择</option>
@@ -612,7 +616,7 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-md-3 control-label">基地类型</label>
+											<label class="col-md-3 control-label">基地类型<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<select class="form-control" id="basetype0" name="typeid">
 													<option id="basetype" value="">请选择</option>
@@ -661,21 +665,21 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-md-3 control-label">通信地址</label>
+											<label class="col-md-3 control-label">通信地址<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<input type="text" class="form-control" id="baseaddress"
 													name="land_addres" placeholder="">
 											</div>
 										</div>
                                          <div class="form-group">
-											<label class="col-md-3 control-label">法定负责人</label>
+											<label class="col-md-3 control-label">法定负责人<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<input type="text" class="form-control" id="personName"
 													name="personDuty" placeholder="">
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">联系人姓名</label>
+											<label class="col-md-3 control-label">联系人姓名<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<input type="text" class="form-control" id="personName"
 													name="username" placeholder="">
@@ -683,7 +687,7 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-md-3 control-label">联系人电话</label>
+											<label class="col-md-3 control-label">联系人电话<span class="setTag">*</span></label>
 											<div class="col-md-6">
 												<input type="text" class="form-control" id="personTel"
 													name="phone" placeholder="">
@@ -701,14 +705,14 @@
 										<div class="form-group">
 											<label class="col-md-3 control-label">创建日期</label>
 											<div class="col-md-6">
-												<input type="text" id="validda" name="start_time" class="start_time" placeholder=""
+												<input type="text" id="validdastart" name="start_time" class="start_time laydate-icon" placeholder=""
 													name="validda">
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-md-3 control-label">截止日期</label>
 											<div class="col-md-6">
-												<input type="text" id="validda" name="end_time" class="end_time" placeholder=""
+												<input type="text" id="validdaend" name="end_time" class="end_time laydate-icon" placeholder=""
 													name="validda">
 											</div>
 										</div>
@@ -738,9 +742,31 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
+	<script type="text/javascript" src="../js/laydate.js"></script>
+	<script src="../js/star-rating.min.js"></script>
 	<script src="../js/myNeed/baseapply.js"></script>
 	<script src="../js/myNeed/base_maintain.js"></script>
 	<script src="../js/kg.js"></script>
+    <script>
+                laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
+                laydate({
+                   elem: '#validdastart'
+                });
+                laydate({
+                    elem: '#validdaend'
+                 });
+                laydate({
+                    elem: '#adddate'
+                 });
+    </script>
+	<script>
 
+    jQuery(document).ready(function () {
+
+        $(".rating-kv").rating();
+
+    });
+
+</script>
 </body>
 </html>

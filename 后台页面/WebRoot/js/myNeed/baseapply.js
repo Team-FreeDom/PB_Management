@@ -232,6 +232,13 @@ $(document).on("click", "#submitForm", function() {
 			});
 		 return;
 	}
+	if(basetype==""){
+		 bootbox.alert({
+				message : "请选择基地类型",
+				size : 'small'
+			});
+		 return;
+	}
 	if(baseaddress==""){
 		bootbox.alert({
 			message : "请填写通信地址",

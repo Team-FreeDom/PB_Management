@@ -22,6 +22,10 @@
 #majormain{
 	display:none;
 }
+.setTag{
+	color: #F70004;
+	font-size:20px;
+}
 .majorchoose{
 	margin-right:10px;
 }
@@ -32,3 +36,4 @@
 #textContent{
   pointer-events:none;
 }
+

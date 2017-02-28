@@ -19,7 +19,9 @@ table tbody tr td{
 #Applychart{
 	position:absolute !important;
 	top:187px;
-	left:19%;	
+	left:19%;
+	width: 80%;
+	display: none;	
 }
 #modalcontent{
 	margin-top: 20%;
@@ -48,10 +50,7 @@ table tbody tr td{
 	cursor:pointer;
 	font-size:18px;
 	color:#24354a;}
-#Applychart{
-	width: 1080px;
-	display: none;
-}
+
 .inputWidth{
 	width: 60px;
 }
@@ -80,8 +79,30 @@ table tbody tr td{
 	color:#F90409;
 	text-decoration: underline;
 }
+#table{
+	width:100%;
+}
+#table tr{
+	line-height: 30px;
+}
+#table tbody td{
+	padding:0px 3px;
+}
+#table input{
+	line-height: 23px !important;
+}
+#table select{
+	line-height: 23px !important;
+}
+.spanstyle{
+	font-size: 10px;
+	line-height: 15px;
+}
+.starColor{
+	color: #F70004;
+}
 .setTag{
-	color:#3071a9;
+	color: #F70004;
 	font-size:20px;
 }
 

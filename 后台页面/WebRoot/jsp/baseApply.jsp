@@ -167,7 +167,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="index.do"><i class=" icon-home"></i>首页</a></li>
+							<li><a href="baseApply.jsp"><i class=" icon-home"></i>基地申报</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
@@ -193,7 +193,7 @@
 								<form action="getRequestBaseInfo.do" method="post" id="myForm" enctype="multipart/form-data"
 								 class="form-horizontal" role="form">
 									<div class="form-group">
-										<label class="col-md-3 control-label fontDire">基地名称</label>
+										<label class="col-md-3 control-label fontDire">基地名称<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="basename" name="name"
 												placeholder="例:浏阳基地"/>
@@ -202,7 +202,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">申报部门类型</label>
+										<label class="col-md-3 control-label">申报部门类型<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<label class="radio-inline"> <input type="radio"
 												name="deptRadio" id="deptRadio" value="1" 
@@ -215,7 +215,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">申报部门</label>
+										<label class="col-md-3 control-label">申报部门<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<select class="form-control" id="deptty" name="applyid" >
 												<option id="applyDept" value="" >请选择</option>
@@ -224,7 +224,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">基地类型</label>
+										<label class="col-md-3 control-label">基地类型<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<select class="form-control" id="basetype0" name="typeid">
 												<option id="basetype" value="">请选择</option>
@@ -272,7 +272,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">通信地址</label>
+										<label class="col-md-3 control-label">通信地址<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="baseaddress" name="land_addres"
 												placeholder="">
@@ -280,7 +280,7 @@
 									</div>
 									
 									<div class="form-group">
-										<label class="col-md-3 control-label">法定责任人</label>
+										<label class="col-md-3 control-label">法定责任人<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="lawPerson" name="lawPerson"
 												placeholder="">
@@ -288,7 +288,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">联系人姓名</label>
+										<label class="col-md-3 control-label">联系人姓名<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="personName" name="username"
 												placeholder="">
@@ -296,7 +296,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">联系人电话</label>
+										<label class="col-md-3 control-label">联系人电话<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="personTel" name="phone"
 												placeholder="">

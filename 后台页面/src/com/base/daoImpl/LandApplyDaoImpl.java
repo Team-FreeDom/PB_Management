@@ -432,5 +432,30 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		}
 		
 	}
+	
+	public long[] getRepairAndPracCount(){
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		long[] value=new long[2];
+			try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{CALL baseweb.count_numbers(?,?)}");
+			
+			sp.execute();
+			long value1=sp.getLong(1);
+			long value2=sp.getLong(2);
+			value[0]=value1;
+			value[1]=value2;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+			return value;
+	}
 
 }

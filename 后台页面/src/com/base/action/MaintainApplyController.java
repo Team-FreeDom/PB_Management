@@ -251,6 +251,21 @@ public class MaintainApplyController
 		return "redirect:Repairmanage.jsp";
 	}
 	
+	@RequestMapping("/getThoseYear.do")
+	public String getThoseYear(HttpServletRequest request,HttpServletResponse response, ModelMap map)
+	{
+		List<String> list=applyservice.getThoseYear();
+		JSONObject getObj = new JSONObject();
+    	getObj.put("list", list);    	
+    	response.setContentType("text/html;charset=UTF-8");
+    	try {
+    		response.getWriter().print(getObj.toString());
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+		return null;
+	}
 	
 	//导出基地维修记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
 	@RequestMapping("/exportmaintainapply.do")
@@ -261,7 +276,10 @@ public class MaintainApplyController
 		int years=-1;
 		if(date!=null&&!date.equals("")){
 			years=Integer.valueOf(date);
-		}			
+		}	
+		if(bname.equals("-1")){
+			bname=null;
+		}
 		List<MaintainApplys> list=new ArrayList<MaintainApplys>();
 		list=applyservice.export_maintainapply(bname, years);
 		if (CollectionUtils.isNotEmpty(list)) {         
