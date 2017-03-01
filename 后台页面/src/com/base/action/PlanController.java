@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +26,7 @@ import com.base.po.UserInfo;
 import com.base.service.PlanService;
 import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
+import com.base.utils.WeekTransformToTime;
 
 @Controller("planController")
 @RequestMapping("/jsp")
@@ -33,7 +35,37 @@ public class PlanController {
     private PlanService planservice;
     @Autowired
     private baseApplyService baseapplyservice;
-
+   
+  
+    //检测学年学期和数据条数
+    @RequestMapping("/Checkinfo.do")
+    public String Checkinfo(HttpServletRequest request,
+	    HttpServletResponse response) {
+	String information=null;
+	String userid = CookieUtils.getUserid(request);
+	ServletContext application = request.getServletContext();
+	application.setAttribute("2016-2017-1", "2017-02-21");
+	application.setAttribute("2017-2018-2", "2018-04-21");
+	String semester=WeekTransformToTime.getThisSemester(application);
+	if(semester==null){
+	    information="对不起此时间段没有数据";
+	}
+	int record=planservice.checkinfo(userid,semester);
+	if(record==0&&semester!=null){
+	    information="对不起管理员还没有导入此学年学期的数据";
+	}
+	System.out.println(record+"几条数据");
+	JSONObject getObj = new JSONObject();
+	getObj.put("msg", information);
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
     // 显示用户所属学院的所有实习计划
     @RequestMapping("/displayThisCollegePlan.do")
     public String displayThisCollegePlan(HttpServletRequest request,
@@ -45,6 +77,12 @@ public class PlanController {
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
+	ServletContext application = request.getServletContext();
+	application.setAttribute("2016-2017-1", "2017-02-21");
+	application.setAttribute("2017-2018-2", "2017-04-21");
+	//ServletContext application1=request.getAttribute(WeekTransformToTime.getLatestStartTime(application));
+	//获取学年学期
+	String semester=WeekTransformToTime.getThisSemester(application);
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -60,10 +98,9 @@ public class PlanController {
 	List<AllPlan> list = new ArrayList<AllPlan>();
 	PlanList pl = null;
 	pl = planservice.getThisCollegePlan(userid, pageindex, size, order,
-		orderDir, searchValue);
+		orderDir, searchValue,semester);
 	list = pl.getData();
 	recordsTotal = pl.getRecordsTotal();
-
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", recordsTotal);
