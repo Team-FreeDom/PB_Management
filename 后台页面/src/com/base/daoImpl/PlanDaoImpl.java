@@ -32,7 +32,7 @@ public class PlanDaoImpl implements PlanDao {
     // 获取该用户所在学院的实习计划
     @Override
     public PlanList getThisCollegePlan(String userid, int pageindex, int size,
-	    String columnName, String orderDir, String searchValue) {
+	    String columnName, String orderDir, String searchValue,String semester) {
 	List<AllPlan> list = new ArrayList<AllPlan>();
 	int recordsTotal = 0;
 	Connection conn = null;
@@ -42,16 +42,17 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?)}");
+		    .prepareCall("{call baseweb.query_teachercoursearrange(?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, userid);
 	    sp.setInt(2, pageindex);
 	    sp.setInt(3, size);
 	    sp.setString(4, columnName);
 	    sp.setString(5, orderDir);
 	    sp.setString(6, searchValue);
-	    sp.registerOutParameter(7, java.sql.Types.INTEGER);
+	    sp.setString(7, semester);
+	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
-	    recordsTotal = sp.getInt(7);
+	    recordsTotal = sp.getInt(8);
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		AllPlan ch = new AllPlan();
@@ -274,6 +275,31 @@ public class PlanDaoImpl implements PlanDao {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
 
+    }
+    //检测学年学期和数据条数
+    @Override
+    public int checkinfo(String userid, String semester) {
+	int record=0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call query_teachercoursearrangecount(?,?,?)}");
+	    sp.setString(1, userid);
+	    sp.setString(2, semester);
+	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.execute();
+	    record = sp.getInt(3);
+	    rs = sp.getResultSet();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return record;
     }
 
 }

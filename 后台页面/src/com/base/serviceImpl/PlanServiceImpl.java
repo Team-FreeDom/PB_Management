@@ -21,7 +21,7 @@ public class PlanServiceImpl implements PlanService {
     // 获取该用户所在学院的实习计划
     @Override
     public PlanList getThisCollegePlan(String userid, int pageindex, int size,
-	    int order, String orderDir, String searchValue) {
+	    int order, String orderDir, String searchValue,String semester) {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
@@ -41,7 +41,7 @@ public class PlanServiceImpl implements PlanService {
 	    columnName = "tname";
 	}
 	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
-		columnName, orderDir, searchValue);
+		columnName, orderDir, searchValue,semester);
 	return list;
     }
 
@@ -91,6 +91,12 @@ public class PlanServiceImpl implements PlanService {
     public void alterRecord(String plandata) {
 	plandao.alterRecord(plandata);
 
+    }
+    //检测学年学期和数据条数
+    @Override
+    public int checkinfo(String userid, String semester) {
+	int record=plandao.checkinfo(userid, semester);
+	return record;
     }
 
 }

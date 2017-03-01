@@ -18,7 +18,7 @@ public interface PlanService {
      */
     public PlanList getThisCollegePlan( String userid,
 	    int pageindex, int size, int order, String orderDir,
-	    String searchValue);
+	    String searchValue,String semester);
 
     /*
      * 1.参数：id,整型,代表班级安排记录的主键值 2.返回值： 无返回值 3.函数功能：删除单条班级安排记录
@@ -58,5 +58,12 @@ public interface PlanService {
      * @param plandata
      */
     public void alterRecord(String plandata);
+    /**
+     * 
+     * @param userid 用户id
+     * @param semester 学年学期
+     * @return 记录数
+     */
+    public int checkinfo(String userid,String semester);
 
 }

@@ -16,7 +16,7 @@ public interface PlanDao {
      * 3.函数功能：获取该用户所在学院的实习计划
      */
     public PlanList getThisCollegePlan(String userid, int pageindex, int size,
-	    String columnName, String orderDir, String searchValue);
+	    String columnName, String orderDir, String searchValue,String semester);
 
     /*
      * 1.参数：str1,整型，为课程表id str3,字符串型，为插入 班级安排_课程表 的多条记录所构成的字符串 2.返回值： 无返回值
@@ -60,4 +60,11 @@ public interface PlanDao {
      * @param plandata
      */
     public void alterRecord(String plandata);
+    /**
+     * 
+     * @param userid 用户id
+     * @param semester 学年学期
+     * @return 记录数
+     */
+    public int checkinfo(String userid,String semester);
 }
