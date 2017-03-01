@@ -297,9 +297,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                 </tr>
                                                                 
                                                                 <tr>
-                                                                	<td colspan="3" style="text-align:center">
+                                                                	<td colspan="3" class="text-center">
+                                                                	
                                                                     	<button type="reset" class="btn btn-primary" >重置</button>
                                     									<button type="button" class="btn btn-primary" id="finish">完成</button>
+                                    									
                                                                     </td>
                                                                 </tr>
                                                             </table>

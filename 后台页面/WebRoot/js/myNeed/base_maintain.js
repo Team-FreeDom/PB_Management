@@ -95,11 +95,15 @@ $(document)
 														var str2 = "";
 														for (var i = 0; i < data; i++) {
 															str1 = str1
-																	+ "<span class='icon-star star-flag' name='color' id='color' value="i+1"></span>";
+																	+ "<span class='icon-star star-flag' name='color' id='color' value='"
+																	+(i+1)
+																	+"'></span>";
 														}
 														for (var i = 0; i < 5 - data; i++) {
 															str2 = str2
-																	+ "<span class='icon-star-empty star-flag' name='nocolor' id='nocolor' value="date+1+i"></span>";															
+																	+ "<span class='icon-star-empty star-flag' name='nocolor' id='nocolor' value='"
+																	+(data+i+1)
+																	+"'></span>";															
 														}
 														return str1 + str2;
 
@@ -214,6 +218,7 @@ $(document)
 					 * 1.获得导出的申报部门 2.获得导出的基地类型
 					 * 
 					 */
+					
 					$.ajax({
 						url : 'getManyinfo.do',
 						async : true,
@@ -221,6 +226,7 @@ $(document)
 						dataType : "json",
 						cache : false,
 						success : function(data) {
+							
 							for (var i = 0; i < data[0].length; i++) {
 								$("#daodept")
 										.after(
@@ -259,11 +265,12 @@ $(document)
 							alert("请求异常");
 						}
 					});
-
+					
 					// star星级点击的实时改变
 					$(document).on("click", "#color", function() {
+						
 						var starNum=$(this).attr('value');
-						$(".star-flag").each(function(){
+						$("#starget .star-flag").each(function(){
 							if($(this).attr('value')>starNum){
 								$(this).removeClass("icon-star");
 								$(this).addClass("icon-star-empty");
@@ -273,8 +280,9 @@ $(document)
 					});
 
 					$(document).on("click", "#nocolor", function() {
+						
 						var starNum=$(this).attr('value');
-						$(".star-flag").each(function(){
+						$("#starget .star-flag").each(function(){
 							$(this).removeClass("icon-star-empty");
 							$(this).addClass("icon-star");
 							$(this).prop("id", "color");
@@ -286,13 +294,13 @@ $(document)
 					});
 					
 					$(document).on("click","#delateStar",function(){
-						$(".star-flag").each(function(){
+						$("#starget .star-flag").each(function(){
 							
 								$(this).removeClass("icon-star");
 								$(this).addClass("icon-star-empty");
 								$(this).prop("id", "nocolor");
 							
-						});				   
+						});		   
 					});
 
 					// 点击删除按钮,判断是否已选择
@@ -344,6 +352,7 @@ $(document)
 					// 点击修改图标，填充修改模态框中的内容
 					$(document).on("click", "#updateDetail", function() {						
 						var index = $(this).attr("value");
+						
 						$("#baseid").val('#'+obj[index].id);
 						$("#basenamed").val(obj[index].name);
 						$("#basetyped").val(obj[index].type);
@@ -366,7 +375,6 @@ $(document)
 						$("#setdated").val(obj[index].buildtime);
 						$("#adddate").val(obj[index].endtime);						
 						$("#starget").html("<span id='delateStar' class='icon-remove-sign'></span>"+$(this).closest('tr').find('td:eq(9)').html());
-						$("#input-21e").val("1");
 						$("#personDuty").val(obj[index].resperson);
 						
 						$("#edit").modal('show');
