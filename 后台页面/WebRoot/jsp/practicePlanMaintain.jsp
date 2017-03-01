@@ -461,7 +461,7 @@
 
 					<tr>
 						<td>带队老师</td>
-						<td colspan="3"><input class="noborder text-center flag"
+						<td colspan="4"><input class="noborder text-center flag"
 							readonly id="leaderTeacher" type="text" value="李林"></td>
 						<td>指导教师</td>
 						<td colspan="4"><input readonly
@@ -469,7 +469,7 @@
 					</tr>
 					<tr>
 						<td>实验员姓名</td>
-						<td colspan="8"><input class="noborder text-center flag"
+						<td colspan="9"><input class="noborder text-center flag"
 							readonly id="testername" type="text"></td>
 					</tr>
 

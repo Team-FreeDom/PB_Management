@@ -101,6 +101,9 @@ table tbody tr td{
 .starColor{
 	color: #F70004;
 }
+.padding{
+	margin-left: 5% !important;
+}
 .setTag{
 	color: #F70004;
 	font-size:20px;
