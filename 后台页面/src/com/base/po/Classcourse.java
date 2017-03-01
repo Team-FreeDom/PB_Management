@@ -13,14 +13,14 @@ public class Classcourse {
     private String telephone;// 联系人电话
     private String aim;// 目的
     private String expense;// 经费
-    private int course;// 对应课程表的主键
+    private String course;// 对应课程表的主键
     private String guideTeacher;// 指导老师
     private String assistant;// 实验员
     private String remark;// 备注
     public Classcourse(int id, int week, String starttime, String endtime,
 	    String content, String source, String site, String category,
 	    String form, String telephone, String aim, String expense,
-	    int course, String guideTeacher, String assistant, String remark) {
+	    String course, String guideTeacher, String assistant, String remark) {
 	super();
 	this.id = id;
 	this.week = week;
@@ -114,10 +114,10 @@ public class Classcourse {
     public void setExpense(String expense) {
         this.expense = expense;
     }
-    public int getCourse() {
+    public String getCourse() {
         return course;
     }
-    public void setCourse(int course) {
+    public void setCourse(String course) {
         this.course = course;
     }
     public String getGuideTeacher() {

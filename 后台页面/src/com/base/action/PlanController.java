@@ -41,7 +41,7 @@ public class PlanController {
     @RequestMapping("/Checkinfo.do")
     public String Checkinfo(HttpServletRequest request,
 	    HttpServletResponse response) {
-	String information=null;
+	String information="0";
 	String userid = CookieUtils.getUserid(request);
 	ServletContext application = request.getServletContext();
 	application.setAttribute("2016-2017-1", "2017-02-21");
