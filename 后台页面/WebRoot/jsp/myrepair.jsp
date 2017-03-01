@@ -286,7 +286,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                             	<form id="SearchForm">
                                                             	<table class="table"> 
                                                             	<tr>
-                                                                	<td colspan="3"  style="text-align:center;">                                                                   维修状态 ：
+                                                                	<td style="text-align:center;">                                                                   维修状态 ：
                                                                     <select id="status">
                                                                       <option value="-1">显示全部</option>  
                                                                        <option value="3">维修完成</option>                                                                
@@ -297,9 +297,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                 </tr>
                                                                 
                                                                 <tr>
-                                                                	<td colspan="3" class="text-center">
+                                                                	<td align="center">
                                                                 	
-                                                                    	<button type="reset" class="btn btn-primary" >重置</button>
+                                                                    	<button type="reset" class="btn btn-primary"  style="margin-left:25%">重置</button>
                                     									<button type="button" class="btn btn-primary" id="finish">完成</button>
                                     									
                                                                     </td>
