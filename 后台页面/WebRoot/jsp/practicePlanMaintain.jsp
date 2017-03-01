@@ -723,10 +723,10 @@
 								<td><input type="text"  id="semsYear_0"
 									class="form-control" disabled></td>		
 								<td>课程代码<span class="setTag">*</span></td>
-								<td><input type="text" value=""
+								<td><input type="text" value="" disabled
 									id="cid_0" class="form-control">
 								</td>
-								
+								<td hidden id="index"></td>
 							</tr>
 							<tr>
 								<td>课程名称<span class="setTag">*</span></td>
@@ -760,18 +760,20 @@
 								<td><input type="text" value="" 
 									id="tname_0" class="form-control"></td>
 								<td>教师职工号<span class="setTag">*</span></td>
-								<td><input type="text" value=""  id="tid_0"
+								<td><input type="text" value=""  id="tid_0" disabled
 									class="form-control"></td>
 							</tr>
 							<tr>								
 								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text"  id="mid_0"
+								<td><input type="text"  id="mid_0" disabled
 									class="form-control"></td>								
 								</td>	
-									<td>起始周次<span class="setTag">*</span></td>
-								<td><input type="text"  id="week_0"
+								<td>起始周次<span class="setTag">*</span></td>
+								<td><input type="text"  id="week_0" disabled
 									class="form-control"></td>
 													
+							</tr>
+							<tr>
 							</tr>	
 							<tr>
 								<td>人数</td>

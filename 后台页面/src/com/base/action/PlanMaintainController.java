@@ -377,7 +377,7 @@ public class PlanMaintainController {
 		ServletContext application=request.getServletContext();
 		if(application==null){
 			List<StartDate> list=planMaintainService.getStartDate();
-			WeekTransformToTime.getLatestStartTime(application,list);
+			WeekTransformToTime.getLatestStartTime(application, list);
 		}else{
 		    application.setAttribute(semesterfile, timeDi);//将该学期的开学时间存储
 		}
@@ -577,5 +577,27 @@ public class PlanMaintainController {
 		return null;
 	}
 
+	// 修改课程安排表(单条)李彩页面功能
+    @RequestMapping("/alterOneRecord.do")
+    public String alterRecord(HttpServletRequest request,
+	    HttpServletResponse response) {
+	// 获取需要修改打包的数据
+    int id=Integer.valueOf(request.getParameter("id"));
+	String plandata = request.getParameter("str");
+	//plandata='"'+plandata+'"';
+	System.out.println("id: "+id+"; plandata: "+plandata);
+	planMaintainService.alterRecord(id,plandata);
+	JSONObject getObj = new JSONObject();
+	getObj.put("msg", "修改成功");
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+    
 	
 }

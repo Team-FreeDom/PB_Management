@@ -105,4 +105,11 @@ public interface PlanMaintainDao {
 	
 	//获取学年学期的开始时间
 	public List<StartDate> getStartDate();
+	
+	/**
+     * 修改课程安排表(单条)李彩页面功能
+     * 
+     * @param plandata
+     */
+    public void alterRecord(int id,String plandata);
 }
