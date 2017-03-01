@@ -7,6 +7,20 @@ var str = null;
 var writeName="";
 var showName="";
 var teacherString=[];
+var flag=false;
+$.ajax({
+	url : 'Checkinfo.do',
+	type : 'post',
+	dataType : 'json',
+success : function(msg){
+	bootbox.alert({
+		message : msg.msg,
+		size : 'small'
+	});
+	flag=true;
+}
+});
+if(flag){
 $(document).ready(function() {
 	
 	 table=$("#practiceapplytable").DataTable({
@@ -804,7 +818,7 @@ $("#save").click(function(){//弹出框的保存
 });
 
 } );
-
+}
 	
 	
 

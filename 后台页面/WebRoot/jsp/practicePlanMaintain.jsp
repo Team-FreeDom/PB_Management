@@ -461,7 +461,7 @@
 
 					<tr>
 						<td>带队老师</td>
-						<td colspan="3"><input class="noborder text-center flag"
+						<td colspan="4"><input class="noborder text-center flag"
 							readonly id="leaderTeacher" type="text" value="李林"></td>
 						<td>指导教师</td>
 						<td colspan="4"><input readonly
@@ -469,7 +469,7 @@
 					</tr>
 					<tr>
 						<td>实验员姓名</td>
-						<td colspan="8"><input class="noborder text-center flag"
+						<td colspan="9"><input class="noborder text-center flag"
 							readonly id="testername" type="text"></td>
 					</tr>
 
@@ -723,10 +723,10 @@
 								<td><input type="text"  id="semsYear_0"
 									class="form-control" disabled></td>		
 								<td>课程代码<span class="setTag">*</span></td>
-								<td><input type="text" value=""
+								<td><input type="text" value="" disabled
 									id="cid_0" class="form-control">
 								</td>
-								
+								<td hidden id="index"></td>
 							</tr>
 							<tr>
 								<td>课程名称<span class="setTag">*</span></td>
@@ -760,18 +760,20 @@
 								<td><input type="text" value="" 
 									id="tname_0" class="form-control"></td>
 								<td>教师职工号<span class="setTag">*</span></td>
-								<td><input type="text" value=""  id="tid_0"
+								<td><input type="text" value=""  id="tid_0" disabled
 									class="form-control"></td>
 							</tr>
 							<tr>								
 								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text"  id="mid_0"
+								<td><input type="text"  id="mid_0" disabled
 									class="form-control"></td>								
 								</td>	
-									<td>起始周次<span class="setTag">*</span></td>
-								<td><input type="text"  id="week_0"
+								<td>起始周次<span class="setTag">*</span></td>
+								<td><input type="text"  id="week_0" disabled
 									class="form-control"></td>
 													
+							</tr>
+							<tr>
 							</tr>	
 							<tr>
 								<td>人数</td>

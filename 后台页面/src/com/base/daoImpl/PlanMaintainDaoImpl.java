@@ -492,4 +492,27 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		
 		
 	}
+	
+	 // 修改课程安排表(单条)李彩页面功能
+    @Override
+    public void alterRecord(int id,String plandata) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.`alter_coursearrange`(?,?)}");
+	    sp.setInt(1, id);
+	    sp.setString(2, plandata);
+	    sp.execute();
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+
+    }
+
 }

@@ -163,5 +163,10 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		return list;
 	}
 	
+	// 修改课程安排表(单条)李彩页面功能
+    @Override
+    public void alterRecord(int id,String plandata) {
+    	planMaintainDao.alterRecord(id,plandata);
 
+    }
 }
