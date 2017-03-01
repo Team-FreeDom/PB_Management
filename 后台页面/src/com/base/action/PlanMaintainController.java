@@ -449,7 +449,7 @@ public class PlanMaintainController {
 								
 							}else if (j == 15) {								
 								if(value.length()!=0){
-									week=Integer.valueOf(value.substring(0,value.indexOf('-')));
+									week=WeekTransformToTime.splitWeek(value);//Integer.valueOf(value.substring(0,value.indexOf('-')));
 								}
 							}else if (j == 14) {
 								
@@ -583,8 +583,7 @@ public class PlanMaintainController {
 	    HttpServletResponse response) {
 	// 获取需要修改打包的数据
     int id=Integer.valueOf(request.getParameter("id"));
-	String plandata = request.getParameter("str");
-	//plandata='"'+plandata+'"';
+	String plandata = request.getParameter("str");	
 	System.out.println("id: "+id+"; plandata: "+plandata);
 	planMaintainService.alterRecord(id,plandata);
 	JSONObject getObj = new JSONObject();

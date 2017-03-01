@@ -6,6 +6,8 @@ var str = null;
 var tidFlag=true;
 var midFlag=true;
 var cidFlag=true;
+var widFlag=true;
+var tag=[true,true,true,true];
 var userWarn=[];
 var Oneindex;
 var value=[];
@@ -60,7 +62,7 @@ $(document)
 										"serverSide" : true,
 										"bSort" : false,
 										"bFilter" : false,
-										"aLengthMenu" : [ 5, 7, 9, 12 ], // 动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"iDisplayLength" : 5, // 默认每页显示多少条记录
 										"dom" : 'ftipr<"bottom"l>',
@@ -229,7 +231,7 @@ $(document)
 									"serverSide" : true,
 									"bSort" : false,
 									"bFilter" : false,
-									"aLengthMenu" : [ 5, 7, 9, 12 ], // 动态指定分页后每页显示的记录数。
+									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 									"iDisplayLength" : 5, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
@@ -375,7 +377,7 @@ $(document)
 									"serverSide" : true,
 									"bSort" : false,
 									"bFilter" : false,
-									"aLengthMenu" : [ 5, 7, 9, 12 ], // 动态指定分页后每页显示的记录数。
+									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 									"iDisplayLength" : 5, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
@@ -494,12 +496,13 @@ $(document)
 									}
 								});
 					});
+					
 					/*学年学期的js控制---end*/
 					
 					/*增加实习计划js控制---start*/
 					$(document).on("blur", "#intid", function() {
 						var id = $(this).val();
-						if(id==""){
+						if(id==""){							
 							return;
 						}
 						$.ajax({
@@ -525,6 +528,22 @@ $(document)
 							}
 
 						});
+					});
+					
+					$(document).on("blur", "#inweek", function() {
+						var week=$("#inweek").val();
+						var dataFormat=/^([12]?[1-9]|0)-([12]?[1-9]|0)(,([12]?[1-9]|0)-([12]?[1-9]|0))*$/;
+						if(week!=""){
+						if (!dataFormat.exec(week)) {
+							bootbox.alert({
+								message : "输入不正确，请确认您的起始周格式是否正确，是否超过了正常的教学周",
+								size : 'small'
+							});
+							widFlag=false;
+						}else{
+							widFlag=true;	
+						}
+						}
 					});
 					
 					$(document).on("blur", "#inmid", function() {
@@ -555,6 +574,70 @@ $(document)
 							}
 
 						});
+					});
+					
+					$(document).on("blur", "#inweekClassify,#weekClassify_0", function() {
+						var value=$(this).val();
+						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
+						if(value!=""){
+							if (!dataFormatWeek.exec(value)) {
+								bootbox.alert({
+									message : "周学时格式不对，只能输入数字",
+									size : 'small'
+								});
+								tag[0]=false;
+							}
+						}else{
+							tag[0]=true;	
+						}
+					});
+					
+					$(document).on("blur", "#incredit,#credit_0", function() {
+						var value=$(this).val();
+						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
+						if(value!=""){
+							if (!dataFormatWeek.exec(value)) {
+								bootbox.alert({
+									message : "学分格式不对，只能输入数字",
+									size : 'small'
+								});
+								tag[1]=false;
+							}else{
+								tag[1]=true;	
+							}
+						}
+					});
+					
+					$(document).on("blur", "#incount,#count_0", function() {
+						var value=$(this).val();
+						var dataFormatWeek=/^[0-9]*$/;
+						if(value!=""){
+							if (!dataFormatWeek.exec(value)) {
+								bootbox.alert({
+									message : "人数格式不对，只能输入整数",
+									size : 'small'
+								});
+								tag[2]=false;
+							}else{
+								tag[2]=true;	
+							}
+						}
+					});
+					
+					$(document).on("blur", "#inselectedCount,#selectedCount_0", function() {
+						var value=$(this).val();
+						var dataFormatWeek=/^[0-9]*$/;
+						if(value!=""){
+							if (!dataFormatWeek.exec(value)) {
+								bootbox.alert({
+									message : "已选人数格式不对，只能输入整数",
+									size : 'small'
+								});
+								tag[3]=false;
+							}else{
+								tag[3]=true;	
+							}
+						}
 					});
 					
 					$(document).on("blur", "#incid", function() {
@@ -690,6 +773,13 @@ $(document)
 							});
 							return;
 						}
+						if(!widFlag){
+							bootbox.alert({
+								message : "输入不正确，请确认您的起始周格式是否正确，是否超过了正常的教学周",
+								size : 'small'
+							});
+							return;
+						}
 						if(mid==""){
 							bootbox.alert({
 								message : "请填写专业编号",
@@ -704,9 +794,35 @@ $(document)
 							});
 							return;
 						}
-						
-										
-						
+						if(!tag[2]){
+                        	bootbox.alert({
+								message : "人数格式不对，只能输入整数",
+								size : 'small'
+							});
+                        	return;
+						}
+                        if(!tag[3]){
+                        	bootbox.alert({
+								message : "已选人数格式不对，只能输入整数",
+								size : 'small'
+							});
+                        	return;
+                        }
+						if(!tag[0]){
+							bootbox.alert({
+								message : "周学时格式不对，只能输入数字",
+								size : 'small'
+							});
+							return;
+						}
+                        if(!tag[1]){
+                        	bootbox.alert({
+								message : "学分格式不对，只能输入数字",
+								size : 'small'
+							});
+                        	return;
+						}				
+                        
 						var str1 = "('" + insemester2 + "','" + college + "','" + cid + "',"
 						+ count + ',' + selectedCount + ",'" + composition + "','"
 						+ coursename + "'," + weekhours + ',' + credit + ",'"
@@ -714,6 +830,22 @@ $(document)
 						+ tname + "','" + week + "','" + checkMethod + "','" + mid
 						+ "','" + major_oriented + "'";
 						
+						bootbox.confirm({
+							message : "确定保存？",
+							size : 'small',
+							buttons : {
+								confirm : {
+									label : '确定',
+									className : 'btn-success'
+								},
+								cancel : {
+									label : '取消',
+									className : 'btn-danger'
+								},
+							},
+							callback : function(
+									result) {
+								if (result) {						
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
@@ -740,6 +872,8 @@ $(document)
 						});
 						
 						$("#addPraItem").modal('hide');
+								}
+							}});
 					});
 					/*增加实习计划js控制---end*/
 					
@@ -820,6 +954,23 @@ $(document)
 						+ checkMethod + "','" + mid + "','" + tid + "','"
 						+ tname + "','" + insemester2 + "','" + week+ "','" + major_oriented + "')";
 						
+						bootbox.confirm({
+							message : "确定修改？",
+							size : 'small',
+							buttons : {
+								confirm : {
+									label : '确定',
+									className : 'btn-success'
+								},
+								cancel : {
+									label : '取消',
+									className : 'btn-danger'
+								},
+							},
+							callback : function(
+									result) {
+								if (result) {	
+						
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
@@ -841,6 +992,9 @@ $(document)
 						
 						$("#updatePlanItem").modal('hide');
 						table.draw(false);
+						
+								}
+								}   });
 					});
 					/*修改实习计划js控制---end*/
 					
@@ -851,6 +1005,19 @@ $(document)
 						$("#semesterw").val('');
 						$("#oneSemesterTime").val('');						
 						$("#fileResource").val('');
+					});
+					
+					$(document).on("click","#certainimport",function(){		
+						var fileResource=$("#fileResource").val();
+						if(fileResource==""){
+							bootbox.alert({
+								message : "请选择文件",
+								size : 'small'
+							});	
+							return;
+						}
+						$("#daoruform").submit();
+						$("#import").modal('hide');
 					});
 					
 					$(document).on("change","#semesterw,#teamYearw",function(){						
@@ -1051,7 +1218,7 @@ $(document)
 															"bSort" : false,
 															"bFilter" : false,
 															"aLengthMenu" : [
-																	5, 7, 9, 12 ], // 动态指定分页后每页显示的记录数。
+																	5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"iDisplayLength" : 5, // 默认每页显示多少条记录
 															"dom" : 'ftipr<"bottom"l>',
@@ -1738,12 +1905,12 @@ $(document)
 						return false;
 					}
 					
-					Tea=$(this).find("#Tea").text();
+					Tea=$(this).find("#Tea").val();
 					if(Tea===""){
 						return false;
 					}
 					
-					tes=$(this).find("#tes").text();
+					tes=$(this).find("#tes").val();
 					if(tes===""){
 						return false;
 					}
