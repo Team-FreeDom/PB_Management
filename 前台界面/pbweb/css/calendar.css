@@ -26,7 +26,7 @@
 	font-family: Tahoma;
 	font-size: 12px;
 
-	background: #87cee0;	
+		
 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -120,6 +120,7 @@
 .ui-datepicker-next-hover span { background-position: -5px -10px; }
 
 /* Calendar "Days" */
+
 .ui-datepicker-calendar th {
 	padding-top: 15px;
 	padding-right:19px;
@@ -133,7 +134,7 @@
 
 .ui-datepicker-calendar td {
 	padding: 0 7px;
-	
+	background: #87cee0;
 	text-align: center;
 	line-height: 26px;
 }

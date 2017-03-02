@@ -26,7 +26,7 @@
 	font-family: Tahoma;
 	font-size: 12px;
 
-	background: #87cee0;	
+		
 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -127,13 +127,13 @@
 	
 	text-align: center;
 	font-weight: normal;
-	color: #a8a8a8;/*改星期的颜色*/
+	color: #a8a8a8;/*鏀规槦鏈熺殑棰滆壊*/
 	background:#065b85;
 }
 
 .ui-datepicker-calendar td {
 	padding: 0 7px;
-	
+	background: #87cee0;
 	text-align: center;
 	line-height: 26px;
 }
@@ -142,10 +142,8 @@
 	display: block;
 	width: 26px;
 	outline: none;
-
 	text-decoration: none;
-	color: #fff;/*改数字颜色*/
-	
+	color: #fff;/*鏀规暟瀛楅鑹�/
 	border: 1px solid transparent;
 }
 
