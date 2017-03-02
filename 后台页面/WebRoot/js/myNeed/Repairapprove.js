@@ -36,7 +36,7 @@ $(".ck2").click(function () {//反选
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
-				  "aLengthMenu":[5,7,9,12], //动态指定分页后每页显示的记录数。
+				  "aLengthMenu":[ 5, 10, 15, 20 ], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
 					"iDisplayLength" : 5,  //默认每页显示多少条记录
 					"bFilter": true,
@@ -148,7 +148,7 @@ $(".ck2").click(function () {//反选
             //维修中表格	  
               var repair=$('#Repairing').DataTable(
              {
-             	"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+             	"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
              	"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
              	"bSort" : true,
              	"ordering":true,
@@ -625,7 +625,7 @@ $(document).on("click","#finish",function() {
 	var userid = $("#searchname option:selected").val();
 	Approvetable=$('#Approveing').DataTable(
 		{
-		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+		"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 		"bSort" : true,
 		"serverSide" : true,
@@ -749,7 +749,7 @@ $(document).on("click","#finish2",function() {
 	var userid = $("#searchname2 option:selected").val();
 	 repair=$('#Repairing').DataTable(
 		{
-		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+		"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 		"bSort" : true,
 		"serverSide" : true,

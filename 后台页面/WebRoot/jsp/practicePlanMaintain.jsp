@@ -280,7 +280,7 @@
 	<div class="modal fade" id="import" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
-			<form action="importPlanInfo.do" method="post" id="daoruform" onsubmit="submitThis()"
+			<form action="importPlanInfo.do" method="post" id="daoruform" 
 				enctype="multipart/form-data">
 				<div class="modal-content" style="border:#3071a9 8px solid">
 					<div class="modal-header" style="background:#3071a9; color:#FFF">
@@ -300,7 +300,7 @@
 					</center>
 					<div class="modal-footer">
 						<center>
-							<button  class="btn btn-primary" id="certainimport">确定</button>
+							<button type="button" class="btn btn-primary" id="certainimport">确定</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal" id="closeimport">取消</button>
 						</center>
@@ -652,28 +652,28 @@
 								<td><input type="text" name="mid" id="inmid"
 									class="form-control"></td>								
 								</td>	
-									<td>起始周次<span class="setTag">*</span></td>
+								<td>起始周次<span class="setTag">*</span></td>
 								<td><input type="text" name="week" id="inweek"
-									class="form-control"></td>
+									class="form-control" placeholder="格式如：6-12,13-16"></td>
 													
 							</tr>	
 							<tr>
 								<td>人数</td>
 								<td><input type="text" name="count" id="incount"
-									class="form-control"></td>
+									class="form-control" placeholder="例：90"></td>
 								<td>已选人数</td>
 								<td><input type="text" name="selectedCount"
-									id="inselectedCount" class="form-control"></td>
+									id="inselectedCount" class="form-control" placeholder="例：90"></td>
 							
 							</tr>
 							
 							<tr>
 								<td>周学时</td>
 								<td><input type="text" name="weekClassify" id="inweekClassify"
-									class="form-control"></td>
+									class="form-control" placeholder="例：2"></td>
 								<td>学分</td>
 								<td><input type="text" name="credit" id="incredit"
-									class="form-control"></td>
+									class="form-control" placeholder="例：2.0"></td>
 							</tr>
 							
 							<tr>								
@@ -778,20 +778,20 @@
 							<tr>
 								<td>人数</td>
 								<td><input type="text"  id="count_0"
-									class="form-control"></td>
+									class="form-control" placeholder="例：90"></td>
 								<td>已选人数</td>
 								<td><input type="text" 
-									id="selectedCount_0" class="form-control"></td>
+									id="selectedCount_0" class="form-control" placeholder="例：90"></td>
 							
 							</tr>
 							
 							<tr>
 								<td>周学时</td>
 								<td><input type="text"  id="weekClassify_0"
-									class="form-control"></td>
+									class="form-control" placeholder="例：2.0"></td>
 								<td>学分</td>
 								<td><input type="text"  id="credit_0"
-									class="form-control"></td>
+									class="form-control" placeholder="例：2.0"></td>
 							</tr>
 							
 							<tr>								
