@@ -12,7 +12,7 @@ $(document).ready(function() {
 				"bFilter": true,
 				"ordering":true,
 				"dom": 'frtip<"bottom"l>',
-				"iDisplayLength": 5,			
+				"iDisplayLength": 10,			
 				"ajax" : {
 					"url" : "getBaseCheck.do",
 					"type" : "POST"
@@ -163,7 +163,7 @@ $(document).ready(function() {
 				"bFilter": true,
 				"ordering":true,
 				"dom": 'frtip<"bottom"l>',
-				"iDisplayLength": 5,			
+				"iDisplayLength": 10,			
 				"ajax" : {
 					"url" : "getaddCheck.do",
 					"type" : "POST"
@@ -743,7 +743,7 @@ $("#submitS").click(function() {
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
-				"iDisplayLength": 5,	
+				"iDisplayLength": 10,	
 				"bDestroy":true,
 				"processing":true,
 				"dom" : 'tipr<"bottom"l>',
@@ -901,7 +901,7 @@ $("#submitS2").click(function() {
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
-				"iDisplayLength": 5,	
+				"iDisplayLength": 10,	
 				"bDestroy":true,
 				"processing":true,
 				"dom" : 'tipr<"bottom"l>',

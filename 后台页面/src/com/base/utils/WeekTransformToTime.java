@@ -4,11 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+
+
 
 import javax.servlet.ServletContext;
+
+import org.springframework.ui.ModelMap;
 
 import com.base.contants.Contants;
 import com.base.po.StartDate;
@@ -41,10 +46,13 @@ public class WeekTransformToTime {
     // 当application为null时,将数据库的数据同步至application
     public static void getLatestStartTime(ServletContext application,
 	    List<StartDate> list) {
-
-	for (StartDate sd : list) {
-	    application.setAttribute(sd.getSemester(), sd.getStartTime());
+    	
+   HashMap<String,String> map_0=new HashMap<String, String>();	
+    	
+	for (StartDate sd : list) {	
+		map_0.put(sd.getSemester(), sd.getDates());					
 	}
+	 application.setAttribute("map_0", map_0);
     }
     
     //将获得的起始周分隔，并获得最小的周次
@@ -90,11 +98,12 @@ public class WeekTransformToTime {
 	String localsemester2 = (year - 1)+ "-" + year + "-" + "2";
 	System.out.println(localsemester2);
 	String semester = null;// 此变量存放本时间所处于的学期
-	// 判断是否有application内是否有该key值，同时获取该key值的value值
-	String semester1 = (String) application.getAttribute(localsemester1);//(第一学期) 每年的上半年所在的学期
-	//System.out.println(semester1+"hahahha");
-	String semester2 =(String) application.getAttribute(localsemester2);//(第二学期) 每年的下半年所在的学期
-	//System.out.println(semester2+"aaaaa");
+	// 判断是否有application内是否有该key值，同时获取该key值的value值	
+	if(application.getAttribute("map_0")!=null){
+	String semester1 = (String) ((HashMap<String,String>)application.getAttribute("map_0")).get(localsemester1);//(第一学期) 每年的上半年所在的学期
+    System.out.println(semester1+"hahahha");
+	String semester2 =(String) ((HashMap<String,String>)application.getAttribute("map_0")).get(localsemester2);//(第二学期) 每年的下半年所在的学期
+	System.out.println(semester2+"aaaaa");
 	if (semester1 != null) {
 	    String startTime = semester1;
 	    System.out.println(startTime);
@@ -118,6 +127,7 @@ public class WeekTransformToTime {
 		    && endtime.compareTo(localtime) > 0) {
 		semester = localsemester2;
 	    }
+	}
 	}
 	return semester;
 
