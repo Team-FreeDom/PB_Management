@@ -45,17 +45,13 @@ public class MainController {
 		//获取注册用户
 		long userCount =  mainServiceImpl.getUserCount();
 		map.addAttribute("userCount", userCount);
-		
-		//获取租赁申请
-		long applyCount =  mainServiceImpl.getApplyCount();
-		map.addAttribute("applyCount", applyCount);
+			
 		
 		//获取实习申请数目和报修申请数目
-		long[] value=mainServiceImpl.getRepairAndPracCount();
-		long repairCount=value[0];
-		long praticecount=value[1];
-		map.addAttribute("repairCount", repairCount);
-		map.addAttribute("praticecount",praticecount);
+		long[] value=mainServiceImpl.getRepairAndPracCount();		
+		map.addAttribute("repairCount", value[0]);//获取维修申请
+		map.addAttribute("praticecount",value[1]);//获取基地申请
+		map.addAttribute("applyCount", value[2]);//获取租赁申请
 		
 		//获取时间排序前5条
 		String userid = CookieUtils.getCookieUsername(request, response);
