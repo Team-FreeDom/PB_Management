@@ -501,7 +501,7 @@ $(document)
 					
 					/*增加实习计划js控制---start*/
 					$(document).on("blur", "#intid", function() {
-						var id = $(this).val();
+						var id = $(this).val().trim();
 						if(id==""){							
 							return;
 						}
@@ -521,6 +521,7 @@ $(document)
 									message : "不存在该教师,请重新填写",
 									size : 'small'
 								});
+								//$("#intid").focus($(this).val());
 								tidFlag=false;
 								}else{
 								tidFlag=true;	
@@ -531,7 +532,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#inweek", function() {
-						var week=$("#inweek").val();
+						var week=$("#inweek").val().trim();
 						var dataFormat=/^([12]?[1-9]|0)-([12]?[1-9]|0)(,([12]?[1-9]|0)-([12]?[1-9]|0))*$/;
 						if(week!=""){
 						if (!dataFormat.exec(week)) {
@@ -547,7 +548,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#inmid", function() {
-						var aid = $("#inmid").val();
+						var aid = $("#inmid").val().trim();
 						if(aid==""){
 							return;
 						}
@@ -645,7 +646,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#incid", function() {
-						var cid = $("#incid").val();
+						var cid = $("#incid").val().trim();
 						var semester=$("#insemester2").val();
 						if(cid==""){
 							return;
@@ -676,23 +677,23 @@ $(document)
 					});
 					
 					$(document).on("click", "#saveAdd", function() {// 保存一条增加的实习记录						
-						var college = $("#incollege").val();
-						var cid =$("#incid").val();
-						var count =$("#incount").val();
-						var selectedCount = $("#inselectedCount").val();
-						var composition = $("#incomposition").val();
-						var coursename = $("#incoursename").val();
-						var weekhours =$("#inweekClassify").val();// 周学时
-						var credit = $("#incredit").val();// 学分
-						var courseNature = $("#incourseNature").val();
-						var courseCategory = $("#incourseCategory").val();
-						var tid = $("#intid").val();
-						var tname = $("#intname").val();
-						var week = $("#inweek").val();// 起始周
-						var checkMethod = $("#incheckMethod").val();
-						var mid = $("#inmid").val();
-						var major_oriented =$("#inmajor_oriented").val();					
-						var insemester2=$("#insemester2").val();
+						var college = $("#incollege").val().trim();
+						var cid =$("#incid").val().trim();
+						var count =$("#incount").val().trim();
+						var selectedCount = $("#inselectedCount").val().trim();
+						var composition = $("#incomposition").val().trim();
+						var coursename = $("#incoursename").val().trim();
+						var weekhours =$("#inweekClassify").val().trim();// 周学时
+						var credit = $("#incredit").val().trim();// 学分
+						var courseNature = $("#incourseNature").val().trim();
+						var courseCategory = $("#incourseCategory").val().trim();
+						var tid = $("#intid").val().trim();
+						var tname = $("#intname").val().trim();
+						var week = $("#inweek").val().trim();// 起始周
+						var checkMethod = $("#incheckMethod").val().trim();
+						var mid = $("#inmid").val().trim();
+						var major_oriented =$("#inmajor_oriented").val().trim();					
+						var insemester2=$("#insemester2").val().trim();
 						var weekCount=week.substring(0,week.indexOf('-'));
 						if(count==""){
 							count="0";
@@ -884,24 +885,24 @@ $(document)
 					
 					/*修改实习计划js控制---start*/
 					$(document).on("click", "#saveUpdate", function() {
-						var id= $("#index").text();
-						var college = $("#college_0").val();
-						var cid =$("#cid_0").val();
-						var count =$("#count_0").val();
-						var selectedCount = $("#selectedCount_0").val();
-						var composition = $("#composition_0").val();
-						var coursename = $("#coursename_0").val();
-						var weekhours =$("#weekClassify_0").val();// 周学时
-						var credit = $("#credit_0").val();// 学分
-						var courseNature = $("#courseNature_0").val();
-						var courseCategory = $("#courseCategory_0").val();
-						var tid = $("#tid_0").val();
-						var tname = $("#tname_0").val();
-						var week = $("#week_0").val();// 起始周
-						var checkMethod = $("#checkMethod_0").val();
-						var mid = $("#mid_0").val();
-						var major_oriented =$("#major_oriented_0").val();					
-						var insemester2=$("#semsYear_0").val();						
+						var id= $("#index").text().trim();
+						var college = $("#college_0").val().trim();
+						var cid =$("#cid_0").val().trim();
+						var count =$("#count_0").val().trim();
+						var selectedCount = $("#selectedCount_0").val().trim();
+						var composition = $("#composition_0").val().trim();
+						var coursename = $("#coursename_0").val().trim();
+						var weekhours =$("#weekClassify_0").val().trim();// 周学时
+						var credit = $("#credit_0").val().trim();// 学分
+						var courseNature = $("#courseNature_0").val().trim();
+						var courseCategory = $("#courseCategory_0").val().trim();
+						var tid = $("#tid_0").val().trim();
+						var tname = $("#tname_0").val().trim();
+						var week = $("#week_0").val().trim();// 起始周
+						var checkMethod = $("#checkMethod_0").val().trim();
+						var mid = $("#mid_0").val().trim();
+						var major_oriented =$("#major_oriented_0").val().trim();					
+						var insemester2=$("#semsYear_0").val().trim();						
 						if(count==""){
 							count="0";
 						}
