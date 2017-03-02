@@ -653,8 +653,28 @@
 									class="form-control"></td>								
 								</td>	
 								<td>起始周次<span class="setTag">*</span></td>
-								<td><input type="text" name="week" id="inweek"
-									class="form-control" placeholder="格式如：6-12,13-16"></td>
+								<td id="td"><input type="text" name="week" id="inweek"
+									class="form-control" placeholder="格式如：6-12,13-16">
+									<div id="select"  hidden>
+										<form class="form-inline">
+										  <div class="form-group">
+											<label for="starNum">开始周次</label>
+											  <select type="text" id="starNum">
+											  	<option value="0" id="starNumID">请选择</option>										  	
+											  </select>
+										  </div>
+										  <div class="form-group">
+											<label for="endNum">结束周次</label>
+											<select type="text" id="endNum">
+												<option value="0" id="endNumID">请选择</option>										
+											</select>
+											<button type="button" class="btn btn-primary btn-xs" id="addWeenNum">添加</button>
+											<button type="button" class="btn btn-primary btn-xs" id="weendelate">取消</button>
+											<button type="button" class="btn btn-primary btn-xs" id="weenNum">确定</button>
+										  </div>
+										</form>
+									</div>	
+								</td>
 													
 							</tr>	
 							<tr>

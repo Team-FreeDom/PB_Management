@@ -64,7 +64,7 @@ $(document)
 										"bFilter" : false,
 										"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-										"iDisplayLength" : 5, // 默认每页显示多少条记录
+										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"dom" : 'ftipr<"bottom"l>',
 										"ordering" : true,
 										"searching" : true,
@@ -379,7 +379,7 @@ $(document)
 									"bFilter" : false,
 									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-									"iDisplayLength" : 5, // 默认每页显示多少条记录
+									"iDisplayLength" : 10, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
 									"ordering" : true,
 									"bDestroy":true,
@@ -501,7 +501,7 @@ $(document)
 					
 					/*增加实习计划js控制---start*/
 					$(document).on("blur", "#intid", function() {
-						var id = $(this).val();
+						var id = $(this).val().trim();
 						if(id==""){							
 							return;
 						}
@@ -521,6 +521,7 @@ $(document)
 									message : "不存在该教师,请重新填写",
 									size : 'small'
 								});
+								//$("#intid").focus($(this).val());
 								tidFlag=false;
 								}else{
 								tidFlag=true;	
@@ -531,7 +532,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#inweek", function() {
-						var week=$("#inweek").val();
+						var week=$("#inweek").val().trim();
 						var dataFormat=/^([12]?[1-9]|0)-([12]?[1-9]|0)(,([12]?[1-9]|0)-([12]?[1-9]|0))*$/;
 						if(week!=""){
 						if (!dataFormat.exec(week)) {
@@ -547,7 +548,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#inmid", function() {
-						var aid = $("#inmid").val();
+						var aid = $("#inmid").val().trim();
 						if(aid==""){
 							return;
 						}
@@ -578,6 +579,7 @@ $(document)
 					
 					$(document).on("blur", "#inweekClassify,#weekClassify_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -594,6 +596,7 @@ $(document)
 					
 					$(document).on("blur", "#incredit,#credit_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -610,6 +613,7 @@ $(document)
 					
 					$(document).on("blur", "#incount,#count_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -626,6 +630,7 @@ $(document)
 					
 					$(document).on("blur", "#inselectedCount,#selectedCount_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -641,7 +646,7 @@ $(document)
 					});
 					
 					$(document).on("blur", "#incid", function() {
-						var cid = $("#incid").val();
+						var cid = $("#incid").val().trim();
 						var semester=$("#insemester2").val();
 						if(cid==""){
 							return;
@@ -672,23 +677,23 @@ $(document)
 					});
 					
 					$(document).on("click", "#saveAdd", function() {// 保存一条增加的实习记录						
-						var college = $("#incollege").val();
-						var cid =$("#incid").val();
-						var count =$("#incount").val();
-						var selectedCount = $("#inselectedCount").val();
-						var composition = $("#incomposition").val();
-						var coursename = $("#incoursename").val();
-						var weekhours =$("#inweekClassify").val();// 周学时
-						var credit = $("#incredit").val();// 学分
-						var courseNature = $("#incourseNature").val();
-						var courseCategory = $("#incourseCategory").val();
-						var tid = $("#intid").val();
-						var tname = $("#intname").val();
-						var week = $("#inweek").val();// 起始周
-						var checkMethod = $("#incheckMethod").val();
-						var mid = $("#inmid").val();
-						var major_oriented =$("#inmajor_oriented").val();					
-						var insemester2=$("#insemester2").val();
+						var college = $("#incollege").val().trim();
+						var cid =$("#incid").val().trim();
+						var count =$("#incount").val().trim();
+						var selectedCount = $("#inselectedCount").val().trim();
+						var composition = $("#incomposition").val().trim();
+						var coursename = $("#incoursename").val().trim();
+						var weekhours =$("#inweekClassify").val().trim();// 周学时
+						var credit = $("#incredit").val().trim();// 学分
+						var courseNature = $("#incourseNature").val().trim();
+						var courseCategory = $("#incourseCategory").val().trim();
+						var tid = $("#intid").val().trim();
+						var tname = $("#intname").val().trim();
+						var week = $("#inweek").val().trim();// 起始周
+						var checkMethod = $("#incheckMethod").val().trim();
+						var mid = $("#inmid").val().trim();
+						var major_oriented =$("#inmajor_oriented").val().trim();					
+						var insemester2=$("#insemester2").val().trim();
 						var weekCount=week.substring(0,week.indexOf('-'));
 						if(count==""){
 							count="0";
@@ -880,24 +885,24 @@ $(document)
 					
 					/*修改实习计划js控制---start*/
 					$(document).on("click", "#saveUpdate", function() {
-						var id= $("#index").text();
-						var college = $("#college_0").val();
-						var cid =$("#cid_0").val();
-						var count =$("#count_0").val();
-						var selectedCount = $("#selectedCount_0").val();
-						var composition = $("#composition_0").val();
-						var coursename = $("#coursename_0").val();
-						var weekhours =$("#weekClassify_0").val();// 周学时
-						var credit = $("#credit_0").val();// 学分
-						var courseNature = $("#courseNature_0").val();
-						var courseCategory = $("#courseCategory_0").val();
-						var tid = $("#tid_0").val();
-						var tname = $("#tname_0").val();
-						var week = $("#week_0").val();// 起始周
-						var checkMethod = $("#checkMethod_0").val();
-						var mid = $("#mid_0").val();
-						var major_oriented =$("#major_oriented_0").val();					
-						var insemester2=$("#semsYear_0").val();						
+						var id= $("#index").text().trim();
+						var college = $("#college_0").val().trim();
+						var cid =$("#cid_0").val().trim();
+						var count =$("#count_0").val().trim();
+						var selectedCount = $("#selectedCount_0").val().trim();
+						var composition = $("#composition_0").val().trim();
+						var coursename = $("#coursename_0").val().trim();
+						var weekhours =$("#weekClassify_0").val().trim();// 周学时
+						var credit = $("#credit_0").val().trim();// 学分
+						var courseNature = $("#courseNature_0").val().trim();
+						var courseCategory = $("#courseCategory_0").val().trim();
+						var tid = $("#tid_0").val().trim();
+						var tname = $("#tname_0").val().trim();
+						var week = $("#week_0").val().trim();// 起始周
+						var checkMethod = $("#checkMethod_0").val().trim();
+						var mid = $("#mid_0").val().trim();
+						var major_oriented =$("#major_oriented_0").val().trim();					
+						var insemester2=$("#semsYear_0").val().trim();						
 						if(count==""){
 							count="0";
 						}
@@ -1220,7 +1225,7 @@ $(document)
 															"aLengthMenu" : [
 																	5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"iDisplayLength" : 5, // 默认每页显示多少条记录
+															"iDisplayLength" : 10, // 默认每页显示多少条记录
 															"dom" : 'ftipr<"bottom"l>',
 															"bDestroy" : true,
 															"ordering" : true,
@@ -1492,7 +1497,7 @@ $(document)
 					 +'<td><input id="phone" type="text" class="flag"></td>'
 					 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 					 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-					 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
+					 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 					 +'</tr></tbody>';
 				
 				
@@ -2183,6 +2188,120 @@ $(document)
 													});
 										}
 									});
+					
+					var weekNumber=0;
+					$("#inweek").focus(function(){
+						if(weekNumber==0){
+							for(var x=0;x<12;x++){
+								
+								$("#starNumID").after("<option value='"+(12-x)+"'>"+(12-x)+"</option>");
+								$("#endNumID").after("<option value='"+(12-x)+"'>"+(12-x)+"</option>");
+								weekNumber++;
+							}
+						}
+						$("#inweek").val("");
+						$("#select").show();
+						
+					});
+					var starToweek="";
+					var endToweek="";
+					var weekStr="";
+					var cerrentStr="";
+					$("#starNum").change(function(){
+						var certenNum=$(this).val();					
+						if(endToweek!=""&&certenNum>=endToweek){
+							
+								bootbox.alert({
+									message : "起始周次格式不对",
+									size : 'small'
+								});
+								$("#starNum").val(starToweek);
+								return;
+							
+						}
+						starToweek=$(this).val();
+						cerrentStr=starToweek+'-'+endToweek;
+						
+						//$("#inweek").val(weekStr);
+					});
+					$("#endNum").focus(function(){
+						if(starToweek===""){
+							bootbox.alert({
+								message : "请先选择开始周次",
+								size : 'small'
+							});
+							
+							return;
+						}
+					});
+					$("#endNum").change(function(){
+						var certenNum=$(this).val();
+						if(starToweek>=certenNum){
+							bootbox.alert({
+								message : "起始周次格式不对",
+								size : 'small'
+							});
+							$("#endNum").val(endToweek);
+							return;
+						}
+						endToweek=$(this).val();
+						cerrentStr=starToweek+'-'+endToweek;
+						//$("#inweek").val(weekStr);
+					});
+					$("#addWeenNum").click(function(){
+						if($("#endNum").val()=="0"||$("#endNum").val()==""){
+							bootbox.alert({
+								message : "请将周次填写完整再添加",
+								size : 'small'
+							});
+							return;
+						}
+						weekStr=weekStr+cerrentStr;
+						weekStr=weekStr+',';
+						$("#inweek").val(weekStr);
+						$("#endNum").val('0');
+						$("#starNum").val('0');
+						starToweek="";
+						endToweek="";
+						cerrentStr="";
+					});
+					$("#weenNum").click(function(){
+						
+						if($("#endNum").val()=="0"||$("#endNum").val()==""){
+							bootbox.alert({
+								message : "请将周次填写完整",
+								size : 'small'
+							});
+							return;
+						}
+						weekStr=weekStr+cerrentStr;
+						if(weekStr.charAt(weekStr.length-1)==","){
+							
+							bootbox.alert({
+								message : "请将添加的周次填写完整",
+								size : 'small'
+							});
+							return;
+						}
+						$("#inweek").val(weekStr);
+						$("#select").hide();
+						$("#endNum").val('0');
+						$("#starNum").val('0');
+						cerrentStr="";
+						weekStr="";
+						starToweek="";
+						endToweek="";
+					});
+					$("#weendelate").click(function(){
+						$("#select").hide();
+						$("#endNum").val('0');
+						$("#starNum").val('0');					
+						cerrentStr="";
+						weekStr="";
+						starToweek="";
+						endToweek="";
+					});
+					
 
 				});
 

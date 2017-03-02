@@ -19,7 +19,7 @@ $(document).ready(function() {
 		 "bFilter": true,
 		 "ordering":true,
 		  "dom": 'frtip<"bottom"l>',
-		 "iDisplayLength": 5,	
+		 "iDisplayLength": 10,	
        "language": {
 			"lengthMenu": "每页 _MENU_ 条记录",
            "zeroRecords": "没有找到记录",
@@ -219,7 +219,7 @@ $(document).ready(function() {
 						 +'<td><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
+						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 						 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
