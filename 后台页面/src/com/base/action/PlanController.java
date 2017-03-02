@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ServletContextAware;
 
 import com.base.po.AllPlan;
 import com.base.po.ApplyDept;
@@ -22,7 +23,9 @@ import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.StartDate;
 import com.base.po.UserInfo;
+import com.base.service.PlanMaintainService;
 import com.base.service.PlanService;
 import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
@@ -30,22 +33,31 @@ import com.base.utils.WeekTransformToTime;
 
 @Controller("planController")
 @RequestMapping("/jsp")
-public class PlanController {
+public class PlanController implements ServletContextAware{
     @Autowired
     private PlanService planservice;
     @Autowired
     private baseApplyService baseapplyservice;
-   
+    @Autowired
+	private PlanMaintainService planMaintainService;
+    private ServletContext application;  
+    @Override  
+    public void setServletContext(ServletContext arg0) {  
+        this.application = arg0;  
+    }  
   
     //检测学年学期和数据条数
     @RequestMapping("/Checkinfo.do")
     public String Checkinfo(HttpServletRequest request,
 	    HttpServletResponse response) {
 	String information="0";
-	String userid = CookieUtils.getUserid(request);
-	ServletContext application = request.getServletContext();
-	application.setAttribute("2016-2017-1", "2017-02-21");
-	application.setAttribute("2017-2018-2", "2018-04-21");
+	String userid = CookieUtils.getUserid(request);	
+	
+	if(application.getAttribute("map_0")==null){
+		List<StartDate> list1=planMaintainService.getStartDate();
+		WeekTransformToTime.getLatestStartTime(application, list1);
+		System.out.println("haha,plancontroller为空呢");
+	}
 	String semester=WeekTransformToTime.getThisSemester(application);
 	if(semester==null){
 	    information="对不起此时间段没有数据";
@@ -77,10 +89,7 @@ public class PlanController {
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
-	ServletContext application = request.getServletContext();
-	application.setAttribute("2016-2017-1", "2017-02-21");
-	application.setAttribute("2017-2018-2", "2017-04-21");
-	//ServletContext application1=request.getAttribute(WeekTransformToTime.getLatestStartTime(application));
+	
 	//获取学年学期
 	String semester=WeekTransformToTime.getThisSemester(application);
 	// 获取当前页面的传输几条记录

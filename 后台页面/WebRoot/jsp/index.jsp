@@ -253,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<!--<a href="message.html">-->
 								<table class="table" width="100%">
                                     <tr style=" border-color:#FFF">
-                                        <td style="font-size:50%">基地申请</td>
+                                        <td style="font-size:50%">实习申请</td>
                                         <td rowspan="2"><span class="icon-list-alt" style="background:#63ADDC;"></span></td>
                                     </tr>
                                     <tr>

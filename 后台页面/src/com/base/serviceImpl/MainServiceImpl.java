@@ -34,8 +34,8 @@ public class MainServiceImpl {
 		return applyCount;
 	}
 
-	public long[] getRepairAndPracCount(){
-		long[] value=landApplyDaoImpl.getRepairAndPracCount();
+	public long[] getRepairAndPracCount(String semester){
+		long[] value=landApplyDaoImpl.getRepairAndPracCount(semester);
 		return value;
 	}
 }

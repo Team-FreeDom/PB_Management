@@ -11,10 +11,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +26,14 @@ import javax.ws.rs.core.Application;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -48,7 +53,7 @@ import com.base.utils.WeekTransformToTime;
 
 @Controller("planMaintainController")
 @RequestMapping("/jsp")
-public class PlanMaintainController {
+public class PlanMaintainController implements ServletContextAware{
 
 	@Autowired
 	private PlanMaintainService planMaintainService;
@@ -57,6 +62,12 @@ public class PlanMaintainController {
 	@Autowired
 	private baseApplyService baseapplyservice;
 
+	 private ServletContext application;  
+	    @Override  
+	    public void setServletContext(ServletContext arg0) {  
+	        this.application = arg0;  
+	    }  
+	    
 	// 显示实习计划数据
 	@RequestMapping("/displayPlanInfo.do")
 	public String displayPlanInfo(HttpServletRequest request,
@@ -374,13 +385,16 @@ public class PlanMaintainController {
 		String timeDi=request.getParameter("timeDi");
 		
 		planMaintainService.addStartDate(semesterfile, timeDi);//将特定学期的数据更新至数据库
-		ServletContext application=request.getServletContext();
-		if(application==null){
-			List<StartDate> list=planMaintainService.getStartDate();
-			WeekTransformToTime.getLatestStartTime(application, list);
-		}else{
-		    application.setAttribute(semesterfile, timeDi);//将该学期的开学时间存储
+		HashMap<String,String> map_0=null;		
+		if(application.getAttribute("map_0")==null){
+			List<StartDate> list1=planMaintainService.getStartDate();
+			WeekTransformToTime.getLatestStartTime(application, list1);
+		}else{	
+			map_0=(HashMap<String, String>) application.getAttribute("map_0");
+			map_0.put(semesterfile, timeDi);
+		    application.setAttribute("map_0", map_0);//将该学期的开学时间存储
 		}
+		
 		
 		
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
@@ -597,6 +611,8 @@ public class PlanMaintainController {
 	}
 	return null;
     }
+
+	
     
 	
 }

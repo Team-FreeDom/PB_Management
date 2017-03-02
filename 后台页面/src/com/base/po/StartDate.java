@@ -12,7 +12,7 @@ public class StartDate {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;//序号
 	private String semester;
-	private String startTime;
+	private String dates;
 	public int getId() {
 		return id;
 	}
@@ -25,11 +25,12 @@ public class StartDate {
 	public void setSemester(String semester) {
 		this.semester = semester;
 	}
-	public String getStartTime() {
-		return startTime;
+	
+	public String getDates() {
+		return dates;
 	}
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
+	public void setDates(String dates) {
+		this.dates = dates;
 	}
 	public StartDate() {
 		super();
