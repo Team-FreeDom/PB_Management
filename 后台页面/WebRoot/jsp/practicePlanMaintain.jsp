@@ -654,7 +654,7 @@
 								</td>	
 								<td>起始周次<span class="setTag">*</span></td>
 								<td id="td"><input type="text" name="week" id="inweek"
-									class="form-control" placeholder="格式如：6-12,13-16">
+									class="form-control" placeholder="请点击添加起始周" readonly>
 									<div id="select"  hidden  style="padding:0 10px">
 										<form class="form-inline">
 										  <div class="form-group">
@@ -670,8 +670,8 @@
 											</select>
 											<div>
 											<button type="button" class="btn btn-primary btn-xs" id="addWeenNum">添加</button>
-											<button type="button" class="btn btn-primary btn-xs" id="weendelate">取消</button>
-											<button type="button" class="btn btn-primary btn-xs" id="weenNum">确定</button>
+											<button type="button" class="btn btn-primary btn-xs" id="weendelate">清空</button>
+											<button type="button" class="btn btn-primary btn-xs" id="closeNum">关闭</button>
 											</div>
 										  </div>
 										</form>

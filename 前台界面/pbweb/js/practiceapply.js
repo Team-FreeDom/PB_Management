@@ -141,43 +141,41 @@ $(document).ready(function() {
 	//显示实习申请表
 	var tbodyStyle='<tbody class="tbodyID"><tr>'
 							+'<td>序号</td>'
-							+'<td>周次</td>'
-							+'<td>开始时间</td>'
-							+'<td>结束时间</td>'
-							+'<td>实习内容</td>'
-							+'<td>实习基地来源</td>'
-							+'<td>实习地点</td>'
+							+'<td>周次<span class="starColor">*</span></td>'
+							+'<td>开始时间<span class="starColor">*</span></td>'
+							+'<td>结束时间<span class="starColor">*</span></td>'
+							+'<td>实习内容<span class="starColor">*</span></td>'
+							+'<td>实习基地来源<span class="starColor">*</span></td>'
+							+'<td>实习地点<span class="starColor">*</span></td>'
+							+'<td>实习类别<span class="starColor">*</span></td>'
 							+'<td>备注</td>'
-							+'<td>实习类别</td>'
+							+'<td>操作</td>'
 						 +'</tr>'
 						 +'<tr>'
 						 +'<td rowspan="3"><sapn class="mark"></span></td>'
-						 +'<td><input id="weekend" type="text" class="inputWidth flag"></td>'
-						 +'<td><input id="startweek" type="text" class="inputWidth flag"></td>'
-						 +'<td><input id="endweek" type="text" class="inputWidth flag"></td>'
+						 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
+						 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
+						 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
 						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
 						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
-						 +'<td><input id="remark" type="text" class="flag"></td>'
 						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+						 +'<td><input id="remark" type="text" class="flag"></td>'
+						 +'<td rowspan="3"><span class="deleteID" id="">删除</span></td>'
 						 +'</tr>'
 						 +'<tr>'
-						 +'<td>实习形式</td>'
-						 +'<td colspan="2">实习基地联系人/电话</td>'
-						 +'<td>目的</td>'
-						 +'<td>实习经费预算</td>'
-						 +'<td>指导老师</td>'
-						 +'<td>实验员</td>'
-						 +'<td>操作</td>'
+						 +'<td>实习形式<span class="starColor">*</span></td>'
+						 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
+						 +'<td>目的<span class="starColor">*</span></td>'
+						 +'<td>实习经费预算<span class="starColor">*</span></td>'
+						 +'<td colspan="4">指导老师/实验员<span class="starColor">*</span></td>'
 						 +'</tr>'
 						 +'<tr>'
 						 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-						 +'<td colspan="2"><input id="phone" type="text" class="flag"></td>'
+						 +'<td><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td><input id="guideTeacher" type="text" value="" class="adviser2 inputWidth flag"></td>'
-						 +'<td><button type="button" class="btn btn-primary choice" value="">选择</button></td>'
-						 +'<td><span class="deleteID" id="">删除</span></td>'
+						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" readonly class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" readonly class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 						 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
@@ -189,7 +187,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").after(tbodyStyle);
 	$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find("#weekend").val('1');
-				$("#table tbody:last-child").find("#startweek").val('1');
+				$("#table tbody:last-child").find("#startweek").val('2013-01-08');
 				$("#table tbody:last-child").find("#endweek").val('3');
 				$("#table tbody:last-child").find("#content").val('data[i].content');
 				$("#table tbody:last-child").find("#baseFrom").val('校内基地');
@@ -200,8 +198,8 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#aim").val('');
 				$("#table tbody:last-child").find("#budget").val('data[i].expense');
 				$("#table tbody:last-child").find("#guideTeacher").val('data[i].guideTeacher');
-				
-				
+				$("#table tbody:last-child").find("#Tea").val('data[i].guideTeacher');
+				$("#table tbody:last-child").find("#tes").val('data[i].assistant');
 				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
 					$("#table tbody:last-child").find("#schoolBase").show();
 					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
@@ -365,7 +363,7 @@ $.ajax({
 	
 
 
-	
+/*	
 $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
 	showName=$("#adviser").val();
@@ -381,15 +379,19 @@ $(document).on("change",".adviser2",function(e){//填写指导老师姓名
 	
 	$("#adviser").val(showName);
 
-});
+});*/
 	
 $("#delateTester").click(function(){
 	$("#tester").val("");
+});
+$("#delatename").click(function(){
+	$("#leadteachername").val("");
 });
 //选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
 var obj2;
 $(document).on("change","#selectCollege",function(){
 	var college=$("#selectCollege").val();
+	$("#selectTname option:gt(0)").remove();
 	$.ajax({
 	url:" ",
 	type:"POST",
@@ -403,22 +405,62 @@ $(document).on("change","#selectCollege",function(){
 			$("#schoolBaseID").after(
 			"<option class='rest' value="+data[i].teacherName+">"+ data[i].teacherName + "</option>"
 			);
+			$("#schoolBaseID2").after(
+			"<option class='rest' value="+data[i].teacherName+">"+ data[i].teacherName + "</option>"
+			);
 		}
 	}
 });
 });
-var selectNum;
 
-var value3=[];
+var selectNum;	
+$(document).on("click",".choice2",function(){//点击选择弹出 
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectteacher").modal('show');
+	$("#selectTname").val("");
+	$("#leadteachername").val(teacherString[selectNum]);
+	$("#selectCollege").val("");
+});
+
+$(document).on("change","#selectTname2",function(e){//将指导老师姓名显示在界面中
+	var teststring=$("#leadteachername").val();
+	var testvalue=teststring.split(" ");
+	testvalue.push(e.target.value);	
+	teststring=testvalue.join(" ");
+	$("#leadteachername").val(teststring);
+	
+	//var abc=$('.mark:contains(selectNum)').closest("tbody").find("#Tea").html();
+	//alert(abc);
+});
+
+$(document).on("click","#finished2",function(){//点击确定之后讲指导老师姓名在表格中显示出来
+	var tester=$("#leadteachername").val();
+	if(tester===""){
+		teacherString[selectNum]="无";
+	}else{
+		teacherString[selectNum]=tester;
+	}
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===selectNum){
+			$(this).find('#Tea').val(tester);
+		}
+	});
+	var str=teacherString.join(',');
+	$("#adviser").val(str);
+	
+	
+});	
+	
 $(document).on("click",".choice",function(){//点击选择弹出 
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectname").modal('show');
-	$("#selectTname").val("");
+	$("#selectTname2").val("");
 	$("#tester").val(value[selectNum]);
 	$("#selectCollege").val("");
 });
 	
-$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中
 	var teststring=$("#tester").val();
 	var testvalue=teststring.split(" ");
 	//alert(testvalue.length);
@@ -428,6 +470,7 @@ $(document).on("change","#selectTname",function(e){//将实验员姓名显示在
 	teststring=testvalue.join(" ");
 	$("#tester").val(teststring);
 	
+	//$(this).closest("tbody").find("#tes").html(teststring);
 	/*$.each(obj2,function(index,item){
 		if(item.teacherName===e.target.value){
 			if($.inArray(item.teacherID,value3)===-1){
@@ -458,7 +501,12 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	}else{
 		value[selectNum]=tester;
 	}
-	
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===selectNum){
+			$(this).find('#tes').val(tester);
+		}
+	});
 	var str=value.join(',');
 	$("#testername").val(str);
 });
@@ -479,7 +527,7 @@ $(document).on("click","#closemodal",function(){
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
 	var tbNum=$("#table").children('tbody').length;
-	$("#table tbody:last-child").find(".mark").html(tbNum-1);
+	$("#table tbody:last-child").find(".mark").html(tbNum-2);
 	
 	$.ajax({
 	URL:"",
@@ -507,7 +555,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-	alert(judget);
+	//alert(judget);
 	if(judget!==""){
 		$.ajax({
 			url:"",
@@ -549,7 +597,7 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 		
 		value.splice(rowNum,1);
 		var value2=value.join(",");
-		alert(value2);
+		//alert(value2);
 		$("#testername").val(value2);
 	}
 	$(this).closest("tbody").remove();
@@ -559,15 +607,129 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 $("#save").click(function(){//弹出框的保存
 	var x=0;
 	var y=0;
+	var week="";        var startweek="";
+	var endweek="";     var content="";
+    var category="";
+	var practiceClass="";     var phone="";
+	var aim="";     var Tea="";
+	var tes="";
+	//alert("yes");
 	$(".tbodyID").each(function(){
 		y++;
+		//alert("yes");
+		week=$(this).find("#weekend").val();
+		if(week===""){
+			return false;
+		}
+				
+		startweek=$(this).find("#startweek").val();
+		
+		if(startweek===""){
+			return false;
+		}
+		
+		endweek=$(this).find("#endweek").val();
+		if(endweek===""){
+			return false;
+		}
+		
+		content=$(this).find("#content").val();
+		if(week===""){
+			return false;
+		}
+		
 		var sSite=$(this).find("#schoolBase").val();
 		var oSite=$(this).find("#outBase").val();
 		if(sSite===""&&oSite===""){
 			x++;
 			return false;
 		}
+		
+		category=$(this).find("#category").val();
+		if(category===""){
+			return false;
+		}
+		
+		practiceClass=$(this).find("#practiceClass").val();
+		if(practiceClass===""){
+			return false;
+		}
+		
+		phone=$(this).find("#phone").val();
+		if(phone===""){
+			return false;
+		}
+		
+		aim=$(this).find("#aim").val();
+		if(aim===""){
+			return false;
+		}
+		
+		Tea=$(this).find("#Tea").text();
+		if(Tea===""){
+			return false;
+		}
+		
+		tes=$(this).find("#tes").text();
+		if(tes===""){
+			return false;
+		}
 	});
+	
+	if(week===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习周次",
+			size : 'small'
+		});
+		return;
+		}
+	if(startweek===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的开始时间",
+			size : 'small'
+		});
+		return;
+		}
+	if(endweek===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的结束时间",
+			size : 'small'
+		});
+		return;
+		}
+	
+	var start=startweek.split("-");
+	var end=endweek.split("-");
+	var time=0;
+	if((end[0]-start[0])<0){
+		time++;
+	}else{
+		if(end[0]===start[0]){
+			if((end[1]-start[1])<0){
+				time++;
+			}else{
+				if(end[1]===start[1]){
+				   if((end[2]-start[2]<0)){
+					   time++;
+				   }
+				   }
+			}
+		}
+	}
+	if(time!==0){
+		bootbox.alert({
+			message : "第"+y+"条记录的结束时间有错误",
+			size : 'small'
+		});
+		return;
+	}
+	if(content===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习内容",
+			size : 'small'
+		});
+		return;
+		}
 	if(x!==0){
 		bootbox.alert({
 			message : "请填写第"+y+"条记录的实习地点",
@@ -575,6 +737,50 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 	}
+	
+	if(category===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习类别",
+			size : 'small'
+		});
+		return;
+		}
+	if(practiceClass===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习形式",
+			size : 'small'
+		});
+		return;
+		}
+	if(phone===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的联系电话",
+			size : 'small'
+		});
+		return;
+		}
+	if(aim===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实习目的",
+			size : 'small'
+		});
+		return;
+		}
+	if(Tea===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的指导老师",
+			size : 'small'
+		});
+		return;
+		}
+	if(tes===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的实验员",
+			size : 'small'
+		});
+		return;
+		}
+	
 	bootbox.confirm({
 			message: "确定保存？",
 			size: 'small',
@@ -599,11 +805,11 @@ $("#save").click(function(){//弹出框的保存
 						if(y!==0){
 							str=str+",(";
 						}
-						var b=$(this).find(".adviser2").val();
+						//var b=$(this).find(".adviser2").val();
 						//alert(b);
 						var c=$(this).find(".mark").html()-1;
 						//alert(c);
-						str=str+"'"+b+"'"+",'"+value[c]+"'";
+						str=str+"'"+teacherString[c]+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){
