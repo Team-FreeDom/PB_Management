@@ -108,8 +108,19 @@ table tbody tr td{
 	color: #F70004;
 	font-size:20px;
 }
-
-
+.input-group-addon{
+	color: #fff;
+	background-color: #3071a9 !important;
+}
+#td	{
+		position: relative;
+	}
+	#select{
+		position:absolute;
+		top:40px;
+		left: 9px;
+		background-color: #F7F7F7;
+	}
 
 
 

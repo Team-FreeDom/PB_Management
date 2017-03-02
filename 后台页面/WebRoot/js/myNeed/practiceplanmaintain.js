@@ -64,7 +64,7 @@ $(document)
 										"bFilter" : false,
 										"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-										"iDisplayLength" : 5, // 默认每页显示多少条记录
+										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"dom" : 'ftipr<"bottom"l>',
 										"ordering" : true,
 										"searching" : true,
@@ -379,7 +379,7 @@ $(document)
 									"bFilter" : false,
 									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-									"iDisplayLength" : 5, // 默认每页显示多少条记录
+									"iDisplayLength" : 10, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
 									"ordering" : true,
 									"bDestroy":true,
@@ -578,6 +578,7 @@ $(document)
 					
 					$(document).on("blur", "#inweekClassify,#weekClassify_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -594,6 +595,7 @@ $(document)
 					
 					$(document).on("blur", "#incredit,#credit_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -610,6 +612,7 @@ $(document)
 					
 					$(document).on("blur", "#incount,#count_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -626,6 +629,7 @@ $(document)
 					
 					$(document).on("blur", "#inselectedCount,#selectedCount_0", function() {
 						var value=$(this).val();
+						value=value.trim();
 						var dataFormatWeek=/^[0-9]*$/;
 						if(value!=""){
 							if (!dataFormatWeek.exec(value)) {
@@ -1220,7 +1224,7 @@ $(document)
 															"aLengthMenu" : [
 																	5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-															"iDisplayLength" : 5, // 默认每页显示多少条记录
+															"iDisplayLength" : 10, // 默认每页显示多少条记录
 															"dom" : 'ftipr<"bottom"l>',
 															"bDestroy" : true,
 															"ordering" : true,
@@ -1492,7 +1496,7 @@ $(document)
 					 +'<td><input id="phone" type="text" class="flag"></td>'
 					 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 					 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-					 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
+					 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 					 +'</tr></tbody>';
 				
 				
@@ -2183,6 +2187,120 @@ $(document)
 													});
 										}
 									});
+					
+					var weekNumber=0;
+					$("#inweek").focus(function(){
+						if(weekNumber==0){
+							for(var x=0;x<12;x++){
+								
+								$("#starNumID").after("<option value='"+(12-x)+"'>"+(12-x)+"</option>");
+								$("#endNumID").after("<option value='"+(12-x)+"'>"+(12-x)+"</option>");
+								weekNumber++;
+							}
+						}
+						$("#inweek").val("");
+						$("#select").show();
+						
+					});
+					var starToweek="";
+					var endToweek="";
+					var weekStr="";
+					var cerrentStr="";
+					$("#starNum").change(function(){
+						var certenNum=$(this).val();					
+						if(endToweek!=""&&certenNum>=endToweek){
+							
+								bootbox.alert({
+									message : "起始周次格式不对",
+									size : 'small'
+								});
+								$("#starNum").val(starToweek);
+								return;
+							
+						}
+						starToweek=$(this).val();
+						cerrentStr=starToweek+'-'+endToweek;
+						
+						//$("#inweek").val(weekStr);
+					});
+					$("#endNum").focus(function(){
+						if(starToweek===""){
+							bootbox.alert({
+								message : "请先选择开始周次",
+								size : 'small'
+							});
+							
+							return;
+						}
+					});
+					$("#endNum").change(function(){
+						var certenNum=$(this).val();
+						if(starToweek>=certenNum){
+							bootbox.alert({
+								message : "起始周次格式不对",
+								size : 'small'
+							});
+							$("#endNum").val(endToweek);
+							return;
+						}
+						endToweek=$(this).val();
+						cerrentStr=starToweek+'-'+endToweek;
+						//$("#inweek").val(weekStr);
+					});
+					$("#addWeenNum").click(function(){
+						if($("#endNum").val()=="0"||$("#endNum").val()==""){
+							bootbox.alert({
+								message : "请将周次填写完整再添加",
+								size : 'small'
+							});
+							return;
+						}
+						weekStr=weekStr+cerrentStr;
+						weekStr=weekStr+',';
+						$("#inweek").val(weekStr);
+						$("#endNum").val('0');
+						$("#starNum").val('0');
+						starToweek="";
+						endToweek="";
+						cerrentStr="";
+					});
+					$("#weenNum").click(function(){
+						
+						if($("#endNum").val()=="0"||$("#endNum").val()==""){
+							bootbox.alert({
+								message : "请将周次填写完整",
+								size : 'small'
+							});
+							return;
+						}
+						weekStr=weekStr+cerrentStr;
+						if(weekStr.charAt(weekStr.length-1)==","){
+							
+							bootbox.alert({
+								message : "请将添加的周次填写完整",
+								size : 'small'
+							});
+							return;
+						}
+						$("#inweek").val(weekStr);
+						$("#select").hide();
+						$("#endNum").val('0');
+						$("#starNum").val('0');
+						cerrentStr="";
+						weekStr="";
+						starToweek="";
+						endToweek="";
+					});
+					$("#weendelate").click(function(){
+						$("#select").hide();
+						$("#endNum").val('0');
+						$("#starNum").val('0');					
+						cerrentStr="";
+						weekStr="";
+						starToweek="";
+						endToweek="";
+					});
+					
 
 				});
 
