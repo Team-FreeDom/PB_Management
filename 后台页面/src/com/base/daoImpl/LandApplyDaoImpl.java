@@ -433,7 +433,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
-	public long[] getRepairAndPracCount(){
+	public long[] getRepairAndPracCount(String semester){
 		Connection conn = null;
 		CallableStatement sp = null;
 		ResultSet rs = null;
@@ -442,12 +442,12 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.count_numbers(?,?,?)}");
-			
+					.prepareCall("{CALL baseweb.count_numbers(?,?,?,?)}");
+			sp.setString(1, semester);
 			sp.execute();
-			long value1=sp.getLong(1);
-			long value2=sp.getLong(2);
-			long value3=sp.getLong(3);
+			long value1=sp.getLong(2);
+			long value2=sp.getLong(3);
+			long value3=sp.getLong(4);
 			value[0]=value1;
 			value[1]=value2;
 			value[2]=value3;
