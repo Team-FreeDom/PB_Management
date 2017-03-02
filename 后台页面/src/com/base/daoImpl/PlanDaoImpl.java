@@ -222,7 +222,7 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setTelephone(rs.getString("telephone"));
 		ch.setAim(rs.getString("aim"));
 		ch.setExpense(rs.getString("expense"));
-		ch.setCourse(rs.getInt("course"));
+		ch.setCourse(rs.getString("course"));
 		ch.setGuideTeacher(rs.getString("guideTeacher"));
 		ch.setAssistant(rs.getString("assistant"));
 		ch.setRemark(rs.getString("remark"));
