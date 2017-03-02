@@ -1426,6 +1426,8 @@ $(document)
 						$("#Applychart").hide();
 						$(".tbodyID").remove();
 						calendar.hide();
+						teacherString=[];
+						value=[];
 
 					});
 
