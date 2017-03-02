@@ -126,4 +126,8 @@ table tbody tr td{
 	color:#F90409;
 	text-decoration: underline;
 }
+.input-group-addon{
+	color: #fff;
+	background-color: #3071a9 !important;
+}
 
