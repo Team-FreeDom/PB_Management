@@ -75,7 +75,10 @@ public interface PlanMaintainService {
 	 * 1.参数：semester,字符串，为学年学期;str,字符串，为课程表记录的插入语句 2.返回值：无参
 	 * 3.函数功能：删除原来学年学期的记录，并且执行插入语句
 	 */
-	public void deleteAndAdd(String semester, String str);
+	public void delete_0(String semester);
+	
+	//导入实习数据sql
+	public void add_0(String str);
 
 	// 根据学年获取学期
 	public List<String> getSem(String semester);

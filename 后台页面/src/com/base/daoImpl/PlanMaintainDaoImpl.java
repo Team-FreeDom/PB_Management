@@ -227,13 +227,13 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			{
 				pc = new PracticeCollection();
 
-				pc.setComposition("班级组成:"+rs.getString("composition"));
+				pc.setComposition(rs.getString("composition"));
 				pc.setCountPeople("学习人数:"+rs.getString("count"));
-				pc.setCourseId("课程代码:"+rs.getString("cid"));
-				pc.setCourseName("课程名称:"+rs.getString("coursename"));
+				pc.setCourseId(rs.getString("cid"));
+				pc.setCourseName(rs.getString("coursename"));
 				pc.setCredit("学分:"+rs.getString("credit"));
-				pc.setDepartment("单位:"+rs.getString("department"));
-				pc.setMajor_oriented("面向专业:"+rs.getString("major_oriented"));
+				pc.setDepartment(rs.getString("department"));
+				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));
 				
 				List<Classcourse> lis = new ArrayList<Classcourse>();
@@ -459,7 +459,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public void deleteAndAdd(String semester, String str) {
+	public void delete_0(String semester) {
 
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -468,9 +468,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{ call baseweb.`add_coursearrange`(?,?)}");
-			sp.setString(1, semester);
-			sp.setString(2, str);
+					.prepareCall("{ CALL baseweb.`delete_coursearranges`(?)}");
+			sp.setString(1, semester);			
 			sp.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -621,6 +620,27 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			SqlConnectionUtils.free(conn, sp, rs);
 		}
 
+	}
+
+	@Override
+	public void add_0(String str) {
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{ CALL baseweb.`add_coursearrange`(?)}");
+			sp.setString(1, str);			
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		
 	}
 
 }
