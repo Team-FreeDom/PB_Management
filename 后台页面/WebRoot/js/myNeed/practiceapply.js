@@ -419,9 +419,9 @@ var selectNum;
 $(document).on("click",".choice2",function(){//点击选择弹出 
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectteacher").modal('show');
-	$("#selectTname").val("");
+	$("#selectCollege2").val("");
 	$("#leadteachername").val(teacherString[selectNum]);
-	$("#selectCollege").val("");
+	$("#selectTname2").val("");
 });
 
 $(document).on("change","#selectTname2",function(e){//将指导老师姓名显示在界面中
@@ -746,7 +746,6 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
-	alert(Tea);
 	if(Tea===""){
 		bootbox.alert({
 			message : "请选择第"+y+"条记录的指导老师",
