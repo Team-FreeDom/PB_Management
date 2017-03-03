@@ -43,6 +43,7 @@ import com.base.po.ApplyDept;
 import com.base.po.BaseCheckList;
 import com.base.po.ExportBase;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StartDate;
 import com.base.service.PlanMaintainService;
 import com.base.service.baseApplyService;
@@ -131,8 +132,8 @@ public class PlanMaintainController implements ServletContextAware{
         if(college.equals("-1")){
         	college=null;
         }
-		List<AllPlan> list = planMaintainService
-				.getPlanTable(daoYear,daoSemester, college);
+        List<PracticeCollection> list = planMaintainService
+				.getPlanTable_0(daoYear,daoSemester, college);
 
 		if (CollectionUtils.isNotEmpty(list)) {
 			/*String path = request.getSession().getServletContext()

@@ -589,8 +589,9 @@ $(document)
 								});
 								tag[0]=false;
 							}
-						}else{
-							tag[0]=true;	
+							else{
+								tag[0]=true;	
+							}
 						}
 					});
 					
@@ -1425,6 +1426,7 @@ $(document)
 
 						$("#Applychart").hide();
 						$(".tbodyID").remove();
+						calendar.hide();
 
 					});
 
@@ -2190,7 +2192,7 @@ $(document)
 									});
 					
 					var weekNumber=0;
-					$("#inweek").focus(function(){
+					$("#inweek").click(function(){
 						if(weekNumber==0){
 							for(var x=0;x<12;x++){
 								
@@ -2199,7 +2201,7 @@ $(document)
 								weekNumber++;
 							}
 						}
-						$("#inweek").val("");
+						
 						$("#select").show();
 						
 					});
@@ -2208,11 +2210,12 @@ $(document)
 					var weekStr="";
 					var cerrentStr="";
 					$("#starNum").change(function(){
-						var certenNum=$(this).val();					
-						if(endToweek!=""&&certenNum>=endToweek){
+						var certenNum=$(this).val();
+						
+						if(endToweek!=""&&certenNum-endToweek>=0){
 							
 								bootbox.alert({
-									message : "起始周次格式不对",
+									message : "开始周次不能大于等于结束周次",
 									size : 'small'
 								});
 								$("#starNum").val(starToweek);
@@ -2222,7 +2225,7 @@ $(document)
 						starToweek=$(this).val();
 						cerrentStr=starToweek+'-'+endToweek;
 						
-						//$("#inweek").val(weekStr);
+						
 					});
 					$("#endNum").focus(function(){
 						if(starToweek===""){
@@ -2236,9 +2239,10 @@ $(document)
 					});
 					$("#endNum").change(function(){
 						var certenNum=$(this).val();
-						if(starToweek>=certenNum){
+						
+						if(starToweek-certenNum>=0){
 							bootbox.alert({
-								message : "起始周次格式不对",
+								message : "结束周次不能小于开始周次",
 								size : 'small'
 							});
 							$("#endNum").val(endToweek);
@@ -2246,8 +2250,8 @@ $(document)
 						}
 						endToweek=$(this).val();
 						cerrentStr=starToweek+'-'+endToweek;
-						//$("#inweek").val(weekStr);
 					});
+					var addNum=0;
 					$("#addWeenNum").click(function(){
 						if($("#endNum").val()=="0"||$("#endNum").val()==""){
 							bootbox.alert({
@@ -2256,46 +2260,35 @@ $(document)
 							});
 							return;
 						}
-						weekStr=weekStr+cerrentStr;
-						weekStr=weekStr+',';
+						
+						if(addNum==0){
+							weekStr=weekStr+cerrentStr;
+						}else{
+							weekStr=weekStr+','+cerrentStr;
+						}
+						
 						$("#inweek").val(weekStr);
 						$("#endNum").val('0');
 						$("#starNum").val('0');
 						starToweek="";
 						endToweek="";
 						cerrentStr="";
+						addNum=1;
+						/*
+						weekStr=weekStr+',';					
+						*/
 					});
-					$("#weenNum").click(function(){
-						
-						if($("#endNum").val()=="0"||$("#endNum").val()==""){
-							bootbox.alert({
-								message : "请将周次填写完整",
-								size : 'small'
-							});
-							return;
-						}
-						weekStr=weekStr+cerrentStr;
-						if(weekStr.charAt(weekStr.length-1)==","){
-							
-							bootbox.alert({
-								message : "请将添加的周次填写完整",
-								size : 'small'
-							});
-							return;
-						}
-						$("#inweek").val(weekStr);
+					$("#closeNum").click(function(){
 						$("#select").hide();
 						$("#endNum").val('0');
 						$("#starNum").val('0');
-						cerrentStr="";
-						weekStr="";
-						starToweek="";
-						endToweek="";
+						
 					});
 					$("#weendelate").click(function(){
-						$("#select").hide();
+						$("#inweek").val("");
 						$("#endNum").val('0');
-						$("#starNum").val('0');					
+						$("#starNum").val('0');
+						addNum=0
 						cerrentStr="";
 						weekStr="";
 						starToweek="";

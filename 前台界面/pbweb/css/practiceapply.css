@@ -17,12 +17,18 @@ table tbody tr td{
 	text-align:center;
 	cursor: pointer;
 }
+
 #Applychart{
 	position:absolute !important;
 	top:187px;
-	left:19%;	
+	left:19%;
+	width: 80%;
+	display: none;
 }
 #modalcontent{
+	margin-top: 20%;
+}
+#modalcontent2{
 	margin-top: 20%;
 }
 .noborder{
@@ -49,12 +55,9 @@ table tbody tr td{
 	cursor:pointer;
 	font-size:18px;
 	color:#24354a;}
-#Applychart{
-	width: 1080px;
-	display: none;
-}
+
 .inputWidth{
-	width: 60px;
+	width: 80px;
 }
 #Leaderteacher{
 	width: 100%;
@@ -85,5 +88,46 @@ table tbody tr td{
 	text-decoration: underline;
 	cursor: pointer;
 }
-
+#delatename{
+	color: #F5060A;
+	text-decoration: underline;
+	cursor: pointer;
+}
+/*input[type=date] {
+     line-height: 20px !important; 
+}*/
+#table{
+	width:100%;
+}
+#table tr{
+	line-height: 30px;
+}
+#table tbody td{
+	padding:0px 3px;
+}
+#table input{
+	line-height: 23px !important;
+}
+#table select{
+	line-height: 23px !important;
+	width: 100%;
+}
+.spanstyle{
+	font-size: 10px;
+	line-height: 15px;
+}
+.starColor{
+	color: #F70004;
+}
+.padding{
+	margin-left: 15px !important;
+}
+.deleteID{
+	color:#F90409;
+	text-decoration: underline;
+}
+.input-group-addon{
+	color: #fff;
+	background-color: #3071a9 !important;
+}
 
