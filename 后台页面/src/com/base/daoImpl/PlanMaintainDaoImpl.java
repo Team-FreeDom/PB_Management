@@ -459,7 +459,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public void deleteAndAdd(String semester, String str) {
+	public void delete_0(String semester) {
 
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -468,9 +468,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{ call baseweb.`add_coursearrange`(?,?)}");
-			sp.setString(1, semester);
-			sp.setString(2, str);
+					.prepareCall("{ CALL baseweb.`delete_coursearranges`(?)}");
+			sp.setString(1, semester);			
 			sp.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -621,6 +620,27 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			SqlConnectionUtils.free(conn, sp, rs);
 		}
 
+	}
+
+	@Override
+	public void add_0(String str) {
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{ CALL baseweb.`add_coursearrange`(?)}");
+			sp.setString(1, str);			
+			sp.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		
 	}
 
 }

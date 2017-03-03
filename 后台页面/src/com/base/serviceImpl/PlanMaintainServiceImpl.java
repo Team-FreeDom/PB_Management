@@ -129,9 +129,15 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	}
 
 	@Override
-	public void deleteAndAdd(String semester, String str) {
+	public void delete_0(String semester) {
 		
-		planMaintainDao.deleteAndAdd(semester, str);
+		planMaintainDao.delete_0(semester);
+	}
+	
+	@Override
+	public void add_0(String str) {
+		
+		planMaintainDao.add_0(str);
 	}
 
 	@Override
