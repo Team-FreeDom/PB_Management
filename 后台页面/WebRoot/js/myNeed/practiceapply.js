@@ -503,7 +503,8 @@ $(document).on("click","#closemodal",function(){
 	$("#Applychart").hide();
 	$(".tbodyID").remove();
 	calendar.hide();
-	
+	teacherString=[];
+	value=[];
 });
 
 
