@@ -227,13 +227,13 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			{
 				pc = new PracticeCollection();
 
-				pc.setComposition("班级组成:"+rs.getString("composition"));
+				pc.setComposition(rs.getString("composition"));
 				pc.setCountPeople("学习人数:"+rs.getString("count"));
-				pc.setCourseId("课程代码:"+rs.getString("cid"));
-				pc.setCourseName("课程名称:"+rs.getString("coursename"));
+				pc.setCourseId(rs.getString("cid"));
+				pc.setCourseName(rs.getString("coursename"));
 				pc.setCredit("学分:"+rs.getString("credit"));
-				pc.setDepartment("单位:"+rs.getString("department"));
-				pc.setMajor_oriented("面向专业:"+rs.getString("major_oriented"));
+				pc.setDepartment(rs.getString("department"));
+				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));
 				
 				List<Classcourse> lis = new ArrayList<Classcourse>();

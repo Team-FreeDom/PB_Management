@@ -441,38 +441,42 @@ public class PlanMaintainController implements ServletContextAware{
 					String resultStr = "";
 					// 循环每一个sheet中的每一行
 					List<String> row = list.get(i);
-					// System.out.println(row.size());
-					System.out.println("row size is " + row.size());
+					
 					// 遍历列
 					if (row != null && row.size() > 0) {
 						String value = null;
 						String termYear=null;
 						int week=0;
 						for (int j = 0; j < row.size(); j++) {
+							
 							value = row.get(j);
-							if (j == 6) {
+							if (j == 7) {
 								if(value.length()==0){
 									value="0";
 								}else{
 									value = value.substring(1);
 								}
 							
-							} else if (j == 7) {
+							} else if (j == 8) {
 								if(value.length()==0){
 									value="0";
 								}
 								
-							}else if (j == 15) {								
+							}else if (j == 16) {								
 								if(value.length()!=0){
 									week=WeekTransformToTime.splitWeek(value);//Integer.valueOf(value.substring(0,value.indexOf('-')));
 								}
-							}else if (j == 14) {
+								//System.out.println("16:"+value);
+							}else if (j == 15) {
 								
 								value = semesterfile;
 								termYear=value;
+							}else if(j>16&&j<=25||j==0||j>26&&j<=44){							
+								continue;
 							}
+							System.out.println(j+":"+value);
 							resultStr = resultStr + '"' + value + '"' + ',';
-
+                            
 						}
 						
 						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(timeDi, week);
