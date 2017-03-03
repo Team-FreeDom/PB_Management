@@ -15,11 +15,14 @@ import jxl.write.WriteException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +30,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.base.po.AllPlan;
+import com.base.po.Classcourse;
 import com.base.po.ExportBase;
 import com.base.po.LandApply_view;
 import com.base.po.MaintainApplys;
 import com.base.po.Prabaseinfo;
 import com.base.po.Manger;
+import com.base.po.PracticeCollection;
 import com.base.po.RentMaintain;
 import com.base.po.UserInfo;
 
@@ -1128,11 +1133,11 @@ public class ExcelReport{
 	 * 
 	 * @see com.base.service.ExcelReportService#systemUsersPreserveReport()
 	 */
-	public void exportPracticePlanInfo(List<AllPlan> list,String fileName) {
+	public void exportPracticePlanInfo(List<PracticeCollection> list,String fileName) {
 		// 列头信息
-		/*"序号", "课程代码", "课程名称,"人数", "已选人数", "教学班组成", "开课学院", "周学时",
-		"学分", "课程性质","课程类别",  "所属专业","面向专业","教师职工号","教师名称","学期","起止周","考核方式","专业代码","面向专业"*/
-          String[] col_title = { "序号", "课程代码", "课程名称", "人数",  "已选人数", "教学班组成", "开课学院", "周学时", "学分", "课程性质","课程类别",  "专业代码","面向专业","教师职工号","教师名称","学期","起止周","考核方式"};// 18
+		/*"序号", "周次", "开始时间","结束时间", "实习内容", "实习基地来源", "实习地点", "实习类别",
+		"实习形式", "实习联系人姓名/电话","目的",  "经费预算","指导老师","实验员","备注"*/
+          String[] col_title = { "序号", "周次", "开始时间","结束时间", "实习内容", "实习基地来源", "实习地点", "实习类别","实习形式", "实习联系人姓名/电话","目的",  "经费预算","指导老师","实验员","备注"};// 18
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();// 创建一个Excel文档对象
 		Sheet sheet = workbook.createSheet();// 在上面的文档中创建Excel表单
@@ -1140,13 +1145,18 @@ public class ExcelReport{
 		sheet.setColumnWidth(0, 1500);
 		sheet.setColumnWidth(1, 3000);
 		sheet.setColumnWidth(2, 3000);
-		sheet.setColumnWidth(3, 2500);
-		sheet.setColumnWidth(4, 4000);
-		sheet.setColumnWidth(5, 2500);
-		sheet.setColumnWidth(6, 2500);
-		sheet.setColumnWidth(7, 5500);
-		sheet.setColumnWidth(8, 4000);
-		
+		sheet.setColumnWidth(3, 3000);
+		sheet.setColumnWidth(4, 5000);
+		sheet.setColumnWidth(5, 3000);
+		sheet.setColumnWidth(6, 3000);
+		sheet.setColumnWidth(7, 2500);
+		sheet.setColumnWidth(8, 2500);
+		sheet.setColumnWidth(9, 3000);
+		sheet.setColumnWidth(10,5000);
+		sheet.setColumnWidth(11,2500);
+		sheet.setColumnWidth(12,3000);
+		sheet.setColumnWidth(13,3000);
+		sheet.setColumnWidth(14,5000);
 		
 		// * 设置样式
 		 
@@ -1188,6 +1198,19 @@ public class ExcelReport{
 		cs1.setBorderTop(XSSFCellStyle.BORDER_THIN);
 		cs1.setWrapText(true);// 设置宽度自适应
 		cs1.setFont(font1);
+		
+		//设置说明行的边框
+		XSSFCellStyle cs0 = workbook.createCellStyle();
+		cs0.setAlignment(XSSFCellStyle.ALIGN_LEFT);// 设置字体水平居左
+		cs0.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);// 设置字体垂直居中
+		// 依次设置底、左、右、上边框
+		cs0.setBorderBottom(XSSFCellStyle.BORDER_THIN);		
+		cs0.setBorderTop(XSSFCellStyle.BORDER_THIN);
+		cs0.setWrapText(true);// 设置宽度自适应
+		cs0.setFont(font2);
+        cs0.setFillForegroundColor(IndexedColors.GOLD.getIndex());	//设置单元格前景色
+        cs0.setFillPattern(CellStyle.SOLID_FOREGROUND);//设置单元格填充样式，SOLID_FOREGROUND纯色使用前景颜色填充
+		
 		// 设置正文居中样式
 		XSSFCellStyle cs2 = workbook.createCellStyle();
 		cs2.setAlignment(XSSFCellStyle.ALIGN_CENTER);// 设置字体水平居中
@@ -1200,7 +1223,7 @@ public class ExcelReport{
 		cs2.setWrapText(true);// 设置宽度自适应
 		cs2.setFont(font2);
 		// 合并列 （第一行，最后一行，第一列，最后一列）
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));// 合并列-标题
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 14));// 合并列-标题
 		
 		// * 插入数据操作
 		 
@@ -1218,107 +1241,169 @@ public class ExcelReport{
 			cell_line.setCellValue(col_title[i]);
 			cell_line.setCellStyle(cs1);
 		}
-		/*// 三排之后
 		
-		 * !!!!!!李彩注意这里是需要土地租赁的数据list的类名和方法名，然后后面还有每条数据中获取单个数值的方法!!!!!!!!!!!!!!!!
-		 * !!!!!!
-		 
-		// 用户ID，以后要从后台获取的！！！！*/		
-		 //* 遍历list中取得的数据
-		 
+		int line=1;
 		for (int i = 0; i < list.size(); i++) {
-			AllPlan line_data = list.get(i);// 取得list集合中一条数据
-			int line = i + 2;// 多少行
-			Row row_line = sheet.createRow(line);// 创建第line行
-			// 第一列序号自动增加1
+			PracticeCollection pc = list.get(i);// 取得list集合中一条数据
+			List<Classcourse> lc=pc.getData();	
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 1, 2));
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 3, 4));
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 5, 6));
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 7, 8));
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 9, 10));
+			sheet.addMergedRegion(new CellRangeAddress(line+1,line+1, 13, 14));
+			
+			Row row_line = sheet.createRow(++line);// 创建第line行
+			
+			// 第一列空
 			Cell cell0 = row_line.createCell(0);
-			cell0.setCellValue(i + 1);
-			cell0.setCellStyle(cs2);
-			// String[] col_title = { "序号","员工编号","身份属性","姓名","性别","员工类型",
-			// "出生日期","身份证号码","联系电话","部门","原工作单位",
-			// "来校工作时间","参加工作时间","用工形式","户口性质","密码"};//16
-			// 第二列课程代码
-			Cell cell1 = row_line.createCell(1);
-			// !!!!!!!!!!下面这行代码的line_data.getStartTime()方法获取的值是要对应上面表格顺序的哈李彩，
-			// !!!!!!!!!!!然后后面每列都是同此更改!!!!!!!!!!!!!!!
-			cell1.setCellValue(line_data.getCid());
-			cell1.setCellStyle(cs2);
-			// 第三列课程名称
-			Cell cell2 = row_line.createCell(2);
-			cell2.setCellValue(line_data.getCoursename());
-			cell2.setCellStyle(cs2);
-			// 第四列人数
+			cell0.setCellValue("");
+			cell0.setCellStyle(cs0);			
+		
+			//第二列 课程代码
+			Cell cell1 = row_line.createCell(1);			
+			cell1.setCellValue(pc.getCourseId());			
+			cell1.setCellStyle(cs0);
+			
+			Cell cell2 = row_line.createCell(2);			
+			cell2.setCellValue(pc.getCourseId());			
+			cell2.setCellStyle(cs0);
+			// 第三列 单位
 			Cell cell3 = row_line.createCell(3);
-			cell3.setCellValue(line_data.getCount());
-			cell3.setCellStyle(cs2);
-			// 第五列已选人数
+			cell3.setCellValue(pc.getDepartment());
+			cell3.setCellStyle(cs0);
+			
 			Cell cell4 = row_line.createCell(4);
-			cell4.setCellValue(line_data.getSelectedCount());
-			cell4.setCellStyle(cs2);
-			// 第六列教学班组成
+			cell4.setCellValue(pc.getDepartment());
+			cell4.setCellStyle(cs0);
+			
+			// 第四列  课程名称
 			Cell cell5 = row_line.createCell(5);
-			cell5.setCellValue(line_data.getComposition());
-			cell5.setCellStyle(cs2);
-			// 第七列开课学院
+			cell5.setCellValue(pc.getCourseName());
+			cell5.setCellStyle(cs0);
+			
 			Cell cell6 = row_line.createCell(6);
-			cell6.setCellValue(line_data.getCollege());
-			cell6.setCellStyle(cs2);
-			// 第八列周学时
+			cell6.setCellValue(pc.getDepartment());
+			cell6.setCellStyle(cs0);
+			
+			// 第五列 面向专业
 			Cell cell7 = row_line.createCell(7);
-			cell7.setCellValue(line_data.getWeekClassify());
-			cell7.setCellStyle(cs2);
-			// 第九列学分
+			cell7.setCellValue(pc.getMajor_oriented());
+			cell7.setCellStyle(cs0);
+			
 			Cell cell8 = row_line.createCell(8);
-			cell8.setCellValue(line_data.getCredit());
-			cell8.setCellStyle(cs2);
-								
-			// 第十列课程性质
+			cell8.setCellValue(pc.getDepartment());
+			cell8.setCellStyle(cs0);
+			
+			// 第六列教学班组成
 			Cell cell9 = row_line.createCell(9);
-			cell9.setCellValue(line_data.getCourseNature());
-			cell9.setCellStyle(cs2);
+			cell9.setCellValue(pc.getComposition());
+			cell9.setCellStyle(cs0);
 			
-			// 第十一列课程类别
 			Cell cell10 = row_line.createCell(10);
-			cell10.setCellValue(line_data.getCourseCategory());
-			cell10.setCellStyle(cs2);
-
-			// 第十二列专业代码
+			cell10.setCellValue(pc.getDepartment());
+			cell10.setCellStyle(cs0);
+			
+			// 第七列 学分
 			Cell cell11 = row_line.createCell(11);
-			cell11.setCellValue(line_data.getMid());
-			cell11.setCellStyle(cs2);
-
-			// 第十三列面向专业
+			cell11.setCellValue(pc.getCredit());
+			cell11.setCellStyle(cs0);
+			
+			// 第八列 学习人数
 			Cell cell12 = row_line.createCell(12);
-			cell12.setCellValue(line_data.getMajor_oriented());
-			cell12.setCellStyle(cs2);
-
-			// 第十四列教师职工号
-			Cell cell13 = row_line.createCell(13);
-			cell13.setCellValue(line_data.getTid());
-			cell13.setCellStyle(cs2);
-
-			// 第十五列教师名称
+			cell12.setCellValue(pc.getCountPeople());
+			cell12.setCellStyle(cs0);
+			
+			// 第九列 周数
+			Cell cell13= row_line.createCell(13);
+			cell13.setCellValue(pc.getWeekCount());
+			cell13.setCellStyle(cs0);
+			
 			Cell cell14 = row_line.createCell(14);
-			cell14.setCellValue(line_data.getTname());
-			cell14.setCellStyle(cs2);
-
-			// 第十六列学期
-			Cell cell15 = row_line.createCell(15);
-			cell15.setCellValue(line_data.getSemester());
-			cell15.setCellStyle(cs2);
-
-			// 第十七列起止周
-			Cell cell16 = row_line.createCell(16);
-			cell16.setCellValue(line_data.getWeek());
-			cell16.setCellStyle(cs2);
+			cell14.setCellValue(pc.getDepartment());
+			cell14.setCellStyle(cs0);
 			
-			// 第十八列考核方式
-			Cell cell17 = row_line.createCell(17);
-			cell17.setCellValue(line_data.getCheckMethod());
-			cell17.setCellStyle(cs2);
-			
-
+			System.out.println("size:"+lc.size());
+			int j=0;
+			for(Classcourse cc:lc){
+				System.out.println("外键:"+cc.getCourse());
+				Row rowLine = sheet.createRow(++line);// 创建第line行	
+				System.out.println("line:"+line);
+				//第一列序号
+				Cell cell_0 = rowLine.createCell(0);
+				cell_0.setCellValue(++j);
+				cell_0.setCellStyle(cs2);
 				
+				// 第二列 周次
+				Cell cell_1 = rowLine.createCell(1);
+				cell_1.setCellValue(cc.getWeek());
+				cell_1.setCellStyle(cs2);
+				
+				// 第三列 开始时间
+				Cell cell_2 = rowLine.createCell(2);
+				cell_2.setCellValue(cc.getStarttime());
+				cell_2.setCellStyle(cs2);
+				
+				// 第四列 结束时间
+				Cell cell_3 = rowLine.createCell(3);
+				cell_3.setCellValue(cc.getEndtime());
+				cell_3.setCellStyle(cs2);
+				
+				// 第五列 实习内容
+				Cell cell_4= rowLine.createCell(4);
+				cell_4.setCellValue(cc.getContent());
+				cell_4.setCellStyle(cs2);
+				
+				// 第六列 实习基地来源
+				Cell cell_5 = rowLine.createCell(5);
+				cell_5.setCellValue(cc.getSource());
+				cell_5.setCellStyle(cs2);
+				
+				// 第七列 实习地点
+				Cell cell_6 = rowLine.createCell(6);
+				cell_6.setCellValue(cc.getSite());
+				cell_6.setCellStyle(cs2);
+				
+				// 第八列 实习类别
+				Cell cell_7 = rowLine.createCell(7);
+				cell_7.setCellValue(cc.getCategory());
+				cell_7.setCellStyle(cs2);
+				
+				// 第九列 实习形式
+				Cell cell_8 = rowLine.createCell(8);
+				cell_8.setCellValue(cc.getForm());
+				cell_8.setCellStyle(cs2);
+				
+				// 第十列 实习基地联系人/电话
+				Cell cell_9 = rowLine.createCell(9);
+				cell_9.setCellValue(cc.getTelephone());
+				cell_9.setCellStyle(cs2);
+				
+				// 第十一列 目的
+				Cell cell_10 = rowLine.createCell(10);
+				cell_10.setCellValue(cc.getAim());
+				cell_10.setCellStyle(cs2);
+				
+				// 第十二列 实习经费预算
+				Cell cell_11 = rowLine.createCell(11);
+				cell_11.setCellValue(cc.getExpense());
+				cell_11.setCellStyle(cs2);
+				
+				// 第十三列 指导老师
+				Cell cell_12 = rowLine.createCell(12);
+				cell_12.setCellValue(cc.getGuideTeacher());
+				cell_12.setCellStyle(cs2);
+				
+				// 第十四列 实验员
+				Cell cell_13 = rowLine.createCell(13);
+				cell_13.setCellValue(cc.getAssistant());
+				cell_13.setCellStyle(cs2);
+				
+				// 第十五列 备注
+				Cell cell_14 = rowLine.createCell(14);
+				cell_14.setCellValue(cc.getRemark());
+				cell_14.setCellStyle(cs2);
+			}				
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!

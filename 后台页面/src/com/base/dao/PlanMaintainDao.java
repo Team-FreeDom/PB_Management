@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.base.po.AllPlan;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StartDate;
 
 public interface PlanMaintainDao {
@@ -112,4 +113,8 @@ public interface PlanMaintainDao {
      * @param plandata
      */
     public void alterRecord(int id,String plandata);
+    
+    //获得实习申请数据
+    public List<PracticeCollection> getPlanTable_0(String year, int semester,
+			String college);
 }
