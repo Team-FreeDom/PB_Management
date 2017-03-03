@@ -91,7 +91,7 @@ tbody tr td span{
 #add{
 	position:absolute !important;
 	top:150px;
-	left:400px;
+	left:40%;
 	width:600px;
 	height:600px;
 	display:none;

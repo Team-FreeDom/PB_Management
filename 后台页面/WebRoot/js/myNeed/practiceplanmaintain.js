@@ -2249,7 +2249,12 @@ $(document)
 								message : "结束周次不能小于开始周次",
 								size : 'small'
 							});
-							$("#endNum").val(endToweek);
+							if(endToweek!=""){
+								$("#endNum").val(endToweek);
+							}else{
+								$("#endNum").val("0");
+							}
+							
 							return;
 						}
 						endToweek=$(this).val();

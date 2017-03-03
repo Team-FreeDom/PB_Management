@@ -234,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--弹出框-->
 								<div class="modal-content" id="Applychart" style="border:#3071a9 8px solid;">
                                   <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                    <button type="button" class="close" id="closemodal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <div id="closemodal" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
                                     <h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
                                   </div>
                                   
@@ -307,9 +307,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<form action="" method="post" id="">
 							<div class="modal-content" id="modalcontent" style="border:#3071a9 8px solid;width: 450px">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<h4 class="modal-title text-center">请选择实验员</h4>
 								</div>
 
 								<center>
@@ -360,9 +359,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="modal-dialog">
 							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<h4 class="modal-title text-center">请选择指导老师</h4>
 								</div>
 
 								<center>
