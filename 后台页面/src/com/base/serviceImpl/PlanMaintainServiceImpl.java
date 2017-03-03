@@ -16,6 +16,7 @@ import com.base.dao.PlanMaintainDao;
 import com.base.po.AllPlan;
 import com.base.po.BaseCheckList;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StartDate;
 import com.base.service.PlanMaintainService;
 
@@ -169,4 +170,11 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
     	planMaintainDao.alterRecord(id,plandata);
 
     }
+
+	@Override
+	public List<PracticeCollection> getPlanTable_0(String year, int semester,
+			String college) {
+		List<PracticeCollection> list=planMaintainDao.getPlanTable_0(year, semester, college);
+		return list;
+	}
 }

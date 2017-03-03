@@ -589,8 +589,9 @@ $(document)
 								});
 								tag[0]=false;
 							}
-						}else{
-							tag[0]=true;	
+							else{
+								tag[0]=true;	
+							}
 						}
 					});
 					
