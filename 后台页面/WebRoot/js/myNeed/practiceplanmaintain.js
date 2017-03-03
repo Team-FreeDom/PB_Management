@@ -1704,9 +1704,10 @@ $(document)
 			$(document).on("click",".choice2",function(){//点击选择弹出 
 				selectNum=$(this).closest("tbody").find(".mark").html()-1;
 				$("#Selectteacher").modal('show');
-				$("#selectTname").val("");
+				$("#selectCollege2").val("");
 				$("#leadteachername").val(teacherString[selectNum]);
-				$("#selectCollege").val("");
+				$("#selectTname2").val("");
+				$("#selectTname2 option:gt(0)").remove();
 			});
 
 			$(document).on("change","#selectTname2",function(e){//将指导老师姓名显示在界面中
@@ -1746,6 +1747,7 @@ $(document)
 				$("#selectTname").val("");
 				$("#tester").val(value[selectNum]);
 				$("#selectCollege").val("");
+				$("#selectTname option:gt(0)").remove();
 			});
 				
 			$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
@@ -2214,7 +2216,7 @@ $(document)
 					$("#starNum").change(function(){
 						var certenNum=$(this).val();
 						
-						if(endToweek!=""&&certenNum-endToweek>=0){
+						if(endToweek!=""&&certenNum-endToweek>0){
 							
 								bootbox.alert({
 									message : "开始周次不能大于等于结束周次",
@@ -2242,7 +2244,7 @@ $(document)
 					$("#endNum").change(function(){
 						var certenNum=$(this).val();
 						
-						if(starToweek-certenNum>=0){
+						if(starToweek-certenNum>0){
 							bootbox.alert({
 								message : "结束周次不能小于开始周次",
 								size : 'small'
