@@ -620,5 +620,10 @@ a, a:link, a:visited, a:hover, a:active {
 	overflow: visible !important;
 }
 }
+.close{
+	color:red !important;
+	font-size: 2em;
+}
+
 
 
