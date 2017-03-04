@@ -604,11 +604,15 @@ $(document)
 																			var str2 = "";
 																			for (var i = 0; i < data; i++) {
 																				str1 = str1
-																						+ "<span class='icon-star' name='color' id='color'></span>";
+																						+ "<span class='icon-star star-flag' name='color' id='color' value='"
+																						+(i+1)
+																						+"'></span>";
 																			}
 																			for (var i = 0; i < 5 - data; i++) {
 																				str2 = str2
-																						+ "<span class='icon-star-empty' name='nocolor' id='nocolor'></span>";															
+																						+ "<span class='icon-star-empty star-flag' name='nocolor' id='nocolor' value='"
+																						+(data+i+1)
+																						+"'></span>";															
 																			}
 																			return str1 + str2;
 
