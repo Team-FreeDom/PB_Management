@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +47,8 @@ public class BaseApplyController {
     //获得用户输入的数据
     @RequestMapping("/getRequestBaseInfo.do")
     public String getRequestBaseInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {	
+	    HttpServletResponse response, ModelMap map) {
+	System.out.println("===================");
 	Cookie[] cookies = request.getCookies();// 获得所有cookie对象
 	for (Cookie co : cookies) {
 	    if (co.getName().equals("username")) {
@@ -163,12 +165,30 @@ public class BaseApplyController {
 		map.addAttribute("basename", name);
 		//String infostr="";
 		String infostr=JSONArray.fromObject(map).toString();
-		System.out.println(infostr+"封装的信息格式");
-		System.out.println(str1 + "是否正确");
+		/*System.out.println(infostr+"封装的信息格式");
+		System.out.println(str1 + "是否正确");*/
 		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
+		request.setAttribute("index", 1);
+		response.setContentType("text/html;charset=UTF-8");
+		/*try {
+		    request.getRequestDispatcher("baseApply.jsp").forward(request, response);
+		} catch (ServletException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}*/
+		/*try {
+		    response.getWriter().print();
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}*/		
 	    }
 	}
-	return "redirect:index.jsp";
+	//return "redirect:index.jsp";
+	return "baseApply";
 
     }
     //获取学院和基地类型
