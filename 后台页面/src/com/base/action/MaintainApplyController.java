@@ -73,8 +73,9 @@ public class MaintainApplyController {
 	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
-	    path = request.getSession().getServletContext()
-		    .getRealPath("/maintainfile/");
+	    /*path = request.getSession().getServletContext()
+		    .getRealPath("/maintainfile/");*/
+	    path = ExcelReport.getWebRootUrl(request,"/maintainfile/");
 	    // 得到上传的文件的文件名
 	    String fileName = mFile.getOriginalFilename();
 	    String fileType = fileName.substring(fileName.lastIndexOf("."));
@@ -94,7 +95,7 @@ public class MaintainApplyController {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
-	    path += "\\" + filename;
+	    path +=filename;
 	    // 文件流写到服务器端
 	    try {
 		FileOutputStream outputStream = new FileOutputStream(path);
@@ -202,8 +203,9 @@ public class MaintainApplyController {
 	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
-	    path = request.getSession().getServletContext()
-		    .getRealPath("/maintainfile/");
+		path = ExcelReport.getWebRootUrl(request,"/maintainfile/");
+	   /* path = request.getSession().getServletContext()
+		    .getRealPath("/maintainfile/");*/
 	    // 得到上传的文件的文件名
 	    String fileName = mFile.getOriginalFilename();
 	    String fileType = fileName.substring(fileName.lastIndexOf("."));
@@ -223,7 +225,7 @@ public class MaintainApplyController {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	    }
-	    path += "\\" + filename;
+	    path +=filename;
 	    // 文件流写到服务器端
 	    try {
 		FileOutputStream outputStream = new FileOutputStream(path);
@@ -287,9 +289,9 @@ public class MaintainApplyController {
 	List<MaintainApplys> list = new ArrayList<MaintainApplys>();
 	list = applyservice.export_maintainapply(bname, years);
 	if (CollectionUtils.isNotEmpty(list)) {
-	    String path = request.getSession().getServletContext()
-		    .getRealPath("/upload/");
-	    /* String path = ExcelReport.getWebRootUrl(request,"/upload/"); */
+	    /*String path = request.getSession().getServletContext()
+		    .getRealPath("/upload/");*/
+	    String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 	    String fullFileName = path + "/BaseRepairInfo.xlsx";
 	    ExcelReport export = new ExcelReport();
 	    export.exportBaseRepairInfo(list, fullFileName);
