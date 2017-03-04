@@ -737,7 +737,28 @@ $(document)
 									});
 
 				});
-
+//限制导入的文件不能为空
+$("#certainimport").click(function(){
+	var fireStr=$("#fileResource").val();
+	if($("#fileResource").val()===""){
+		bootbox.alert({
+			message : "导入的文件不能为空",
+			size : 'small'
+		});
+		return;
+	}
+	var fireL=fireStr.lastIndexOf(".");
+	fireStr=fireStr.substring(fireL);
+	if(fireStr!=".xls"&&fireStr!=".xlsx"){
+		bootbox.alert({
+			message : "请导入Excel格式文档",
+			size : 'small'
+		});
+		$("#fileResource").val("");
+		return;
+	}
+	$("#daoruform").submit();
+});
 // //全选反选
 $("#ck1").on("click", function() {
 	if ($(this).prop("checked") == true) {

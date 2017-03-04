@@ -1015,11 +1015,22 @@ $(document)
 					
 					$(document).on("click","#certainimport",function(){		
 						var fileResource=$("#fileResource").val();
-						if(fileResource==""){
+						if($("#fileResource").val()==""){
 							bootbox.alert({
 								message : "请选择文件",
 								size : 'small'
-							});	
+							});
+							
+							return;
+						}
+						var fireL=fileResource.lastIndexOf(".");
+						fileResource=fileResource.substring(fireL);
+						if(fileResource!=".xls"&&fileResource!=".xlsx"){
+							bootbox.alert({
+								message : "请导入Excel格式文档",
+								size : 'small'
+							});
+							$("#fileResource").val("");
 							return;
 						}
 						$("#daoruform").submit();

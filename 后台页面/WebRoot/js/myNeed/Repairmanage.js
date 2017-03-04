@@ -221,6 +221,7 @@ $("#ZJ").click(function(){
 		$("#Abudget").val("");
 		$("#Aaddress").val("");
 		$("#Areason").val("");
+		$("#file").val("");
 })					
 //增加操作
 $("#save").click(function(){
@@ -271,6 +272,25 @@ $("#save").click(function(){
 				size : 'small'
 				});	
 				return;
+		}
+		var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
+		var value=$("#Abudget").val();
+		value=value.trim();
+			if (!dataFormatWeek.exec(value)) {
+				bootbox.alert({
+					message : "预算金额的格式不对，只能输入数字",
+					size : 'small'
+				});
+				return;
+			}
+		var value2=$("#ActualMoney").val();
+		value2=value2.trim();
+		if (!dataFormatWeek.exec(value2)) {
+			bootbox.alert({
+				message : "实际金额的格式不对，只能输入数字",
+				size : 'small'
+			});
+			return;
 		}
 		$("#applyaddform").submit();
 					

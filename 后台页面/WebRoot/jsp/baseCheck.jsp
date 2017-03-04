@@ -598,7 +598,7 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
-	<script src="../js/Calendar.js"></script> 
+	
 	<script src="../js/myNeed/basecheck.js"></script>
     <script src="../js/kg.js"></script>	
     
