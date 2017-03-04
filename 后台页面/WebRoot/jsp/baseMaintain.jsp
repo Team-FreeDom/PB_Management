@@ -300,10 +300,7 @@
 							enctype="multipart/form-data">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal"
-										id="closeimport">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h5 class="modal-title" id="myModalLabel">请选择要导入的文件</h5>
 								</div>
 
@@ -334,8 +331,7 @@
 							<!-- modal-sm 小的  modal-lg 大的 -->
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h6 class="modal-title" id="myModalLabel"></h6>
 								</div>
 								<div class="modal-body" style="text-align: left;">
@@ -364,9 +360,9 @@
 				<div class="modal-dialog">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" data-dismiss="modal" id="cleark">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
+							
+							<div id="cleark" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+							
 							<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
 						</div>
 						<div class="modal-body table-responsive">
@@ -469,9 +465,9 @@
 				<div class="modal-dialog">
 					<div class="modal-content" style="border:#416793 8px solid">
 						<div class="modal-header">
-							<button type="button" class="close closeit" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span>
-							</button>
+							
+							<div class="glyphicon glyphicon-remove closeModal  closeit" data-dismiss="modal" ></div>
+							
 
 						</div>
 						<div class="modal-body">
@@ -514,10 +510,9 @@
 				<div class="modal-dialog" style="width:400px;height:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid;">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" id="daoclose"
-								data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
+			
+							<div id="daoclose" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+							
 							<h4 class="modal-title" id="myModalLabel">请选择导出的基地</h4>
 						</div>
 						<form action="exportThisInfo.do" method="post">
@@ -571,10 +566,9 @@
 			<div id="add">				
 					<div style="border:#3071a9 8px solid;background:#fff;overflow-x:hidden;">
 						<div>
-							<button type="button" class="close" id="closebas">
-								
-								<span aria-hidden="true" style="font-size:20px;">&times;</span>
-							</button>
+			
+							<div id="closebas" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" style="font-size:24px;color:red;"></div>
+							
 							<h4 class="text-center" id="myModalLabel">增加基地</h4>
 						</div>
 						<div class="table-responsive">

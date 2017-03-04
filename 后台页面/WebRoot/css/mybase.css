@@ -24,8 +24,11 @@ table tbody tr td{
 	text-align:left;
 	padding-left:13%;
 	}
-#table2 span{
+#mybasetable2 span{
 	cursor:pointer;}
+#mybasetable1 tbody tr td button{
+	float:left;
+	margin-left:10px;}
 .modal{
 	margin-top:5%;}
 .bottom{
