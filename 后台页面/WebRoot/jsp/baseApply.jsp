@@ -193,6 +193,7 @@
 								<form action="getRequestBaseInfo.do" method="post" id="myForm" enctype="multipart/form-data"
 								 class="form-horizontal" role="form">
 									<div class="form-group">
+									         <input type="hidden" value="<%=request.getAttribute("index")%>" id="baseapply"/>
 										<label class="col-md-3 control-label fontDire">基地名称<span class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="basename" name="name"
@@ -395,5 +396,16 @@
 	<script src="../dist/jquery.cokie.min.js"></script>	
 	<script src="../js/myNeed/baseapply.js"></script>
 	<script src="../js/kg.js"></script>
+	<script type="text/javascript">
+	var index = document.getElementById('baseapply').value;
+	if(index==1){
+		bootbox.alert({
+	        message: "提交成功",
+	        size: 'small'
+	    });
+	}
+	
+	</script>
 </body>
+
 </html>

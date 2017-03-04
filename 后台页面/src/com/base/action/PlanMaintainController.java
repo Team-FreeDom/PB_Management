@@ -138,7 +138,7 @@ public class PlanMaintainController implements ServletContextAware{
 		if (CollectionUtils.isNotEmpty(list)) {
 			/*String path = request.getSession().getServletContext()
 					.getRealPath("/upload/");*/
-			 String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
+			String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 			String fullFileName = path + "/PracticePlanInfo.xlsx";
 			ExcelReport export = new ExcelReport();
 			export.exportPracticePlanInfo(list, fullFileName);
@@ -403,8 +403,9 @@ public class PlanMaintainController implements ServletContextAware{
 		// 得到上传的文件
 		MultipartFile mFile = multipartRequest.getFile("fileResource");
 		// 得到上传服务器的路径
-		String path = request.getSession().getServletContext()
-				.getRealPath("/upload/");
+		/*String path = request.getSession().getServletContext()
+				.getRealPath("/upload/");*/
+		String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 		// 得到上传的文件的文件名
 		String fileName = mFile.getOriginalFilename();
 		String filename = "";

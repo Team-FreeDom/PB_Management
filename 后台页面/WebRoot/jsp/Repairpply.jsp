@@ -197,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 	<form action="insertmaintain.do" method="post" class="form-horizontal" enctype="multipart/form-data" role="form" id="applyform">
                                     
                                       <div class="form-group">
+                                       <input type="hidden" value="<%=request.getAttribute("index")%>" id="repair"/>
                                         <label for="inputEmail3" class="col-sm-2 control-label">项目名称<span class="setTag">*</span></label>
                                         <div class="col-sm-8">
                                           <input class="form-control" id="projectname" name="projectname" placeholder="">
@@ -283,6 +284,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../js/bootbox.min.js"></script>
     <script src="../js/myNeed/Repairpply.js"></script>
     <script src="../js/kg.js"></script>
+    <script type="text/javascript">
+    var index = document.getElementById('repair').value;
+	if(index==1){
+		bootbox.alert({
+	        message: "提交成功",
+	        size: 'small'
+	    });
+	}
+    
+    
+    
+    </script>
     
   </body>
 </html>
