@@ -247,7 +247,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <form action="upInfo.do" method="post" role="form" id="userform" enctype="multipart/form-data">
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
                                         <h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
                                       </div>
                                       <div class="modal-body table-responsive">
@@ -334,9 +334,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														id="daoruform" enctype="multipart/form-data">
 												<div class="modal-content" style="border:#3071a9 8px solid">
 													<div class="modal-header" style="background:#3071a9; color:#FFF">
-														<button type="button" class="close" data-dismiss="modal">
-															<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-														</button>
+														<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 														<h4 class="modal-title" id="myModalLabel">请选择要导入的文件</h4>
 													</div>
 
@@ -367,9 +365,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 														id="daochuform" enctype="multipart/form-data">
 												<div class="modal-content" style="border:#3071a9 8px solid">
 													<div class="modal-header" style="background:#3071a9; color:#FFF">
-														<button type="button" class="close" data-dismiss="modal">
-															<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-														</button>
+														<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 														<h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
 													</div>
 
@@ -397,7 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                  <form action="addInfo.do" method="post" role="form" id="adduserform" name="adduserform" enctype="multipart/form-data">
                                     <div class="modal-content" style="border:#3071a9 8px solid">
                                       <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
                                         <h4 class="modal-title text-center" id="myModalLabel">增加人员信息</h4>
                                       </div>
                                       <div class="modal-body table-responsive">
