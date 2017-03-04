@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -210,6 +211,7 @@
 															<form>
 																<table class="table">
 																	<tr>
+																	<td hidden id="tag_0">${tag}</td>
 																		<td>基地类型 <select name="status" id="shaiType"
 																			style="width:150px;margin-top:0px;">
 																				<option value="-1" id="shaiTypeh" selected>显示全部</option>

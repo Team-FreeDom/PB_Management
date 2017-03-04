@@ -384,6 +384,7 @@ public class PlanMaintainController implements ServletContextAware{
 			HttpServletResponse response,ModelMap map) throws IOException {
 		String semesterfile=request.getParameter("semesterfile");
 		String timeDi=request.getParameter("timeDi");
+		boolean flag=true;
 		
 		planMaintainService.addStartDate(semesterfile, timeDi);//将特定学期的数据更新至数据库
 		HashMap<String,String> map_0=null;		
@@ -421,6 +422,7 @@ public class PlanMaintainController implements ServletContextAware{
 			outputStream.write(b, 0, length);
 
 			filename = path; // 这是文件在服务器的绝对路径
+			try{
 			// 遍历文件中的数据：下面的list为读出的数据
 			Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
 			List<List<String>> list = InputExcelServiceImpl.getPlanExcelRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
@@ -428,6 +430,7 @@ public class PlanMaintainController implements ServletContextAware{
 			// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 
 			if (CollectionUtils.isNotEmpty(list)) {
+							
 				
 				planMaintainService.delete_0(semesterfile);
 				// 实现批量插入
@@ -504,19 +507,30 @@ public class PlanMaintainController implements ServletContextAware{
 				}
 				
 			}
-
 			wb.close();
 			outputStream.close();
 			inputStream.close();
 			tempFile.delete(); // 删除临时文件
+			}catch(Exception e){
+				flag=false;
+				e.printStackTrace();
+			}		
 
 		}
-		int tag=semesterfile.lastIndexOf('-');
-		String teamYear=semesterfile.substring(0,tag);
-		String sem=semesterfile.substring(tag+1);
-		System.out.println(teamYear+"-  ha  "+sem);
+		String teamYear=null;
+		String sem=null;
+		if(!flag){
+			teamYear="";
+			sem="";
+		}else{
+			int tag=semesterfile.lastIndexOf('-');
+			teamYear=semesterfile.substring(0,tag);
+			sem=semesterfile.substring(tag+1);		
+		}
+		
 		map.addAttribute("teamYear", teamYear);
 		map.addAttribute("sem", sem);
+		map.addAttribute("tag", flag);
 		return "practicePlanMaintain";
 	}
 
