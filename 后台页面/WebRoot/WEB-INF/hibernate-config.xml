@@ -25,8 +25,8 @@ http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		<property name="username" value="root"></property>
 		<property name="password" value="511409licai"></property>	 -->	
 		
-		<!-- <property name="url" value="jdbc:mysql://10.8.6.183:3306/baseweb"></property> -->
-		<property name="url" value="jdbc:mysql://localhost:3306/baseweb"></property>
+		<property name="url" value="jdbc:mysql://10.8.6.183:3306/baseweb"></property>
+		<!-- <property name="url" value="jdbc:mysql://localhost:3306/baseweb"></property> -->
 		<property name="username" value="root"></property>
 		<property name="password" value="mysql@123"></property>
 		

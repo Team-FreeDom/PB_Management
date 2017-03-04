@@ -311,7 +311,7 @@
 								</center>
 								<div class="modal-footer">
 									<center>
-										<button type="submit" class="btn btn-primary"
+										<button type="button" class="btn btn-primary"
 											id="certainimport">确定</button>
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal" id="closeimport">取消</button>

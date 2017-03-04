@@ -353,7 +353,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </tr>
                                                     <tr>
                                                     	<td>申请材料 ： </td>
-                                                    	<td><input type="file" class="file" name="file"/></td>
+                                                    	<td><input type="file" class="file" name="file" id="file"/></td>
                                                     </tr>
                                                 </table>
                                                 </form>

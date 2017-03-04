@@ -358,7 +358,7 @@ $(document).ready(function() {
 					$("#baseid").val('#'+object[index].bid);					
 					
 					
-					if(object[index].material_path=="null"){			
+					if(object[index].material_path=="null"||object[index].material_path==""){			
 						$("#resourcetr").prop("hidden",true); 
 					}else{		
 						$("#resourcetr").prop("hidden",false); 
