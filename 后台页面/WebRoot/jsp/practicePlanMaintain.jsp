@@ -213,6 +213,7 @@
 									</select></td>
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
+									<td hidden id="ta3">${tag}</td>
 									<td colspan="6">
 									  <button class="btn btn-primary" id="daoru" data-toggle="modal"
 											data-target="#writeWeekTime">导入</button>
@@ -292,7 +293,7 @@
 						<div class="modal-body" id="exportxsl" style="height:60px;">
 							<input type="file" id="fileResource" name="fileResource">
 							<input hidden type="text" name="semesterfile" id="semesterfile" />
-							<input hidden type="text" name="timeDi" id="timeDi" />
+							<input hidden type="text" name="timeDi" id="timeDi" />							
 						</div>
 					</center>
 					<div class="modal-footer">
@@ -323,7 +324,7 @@
 						<div class="modal-body" id="weekTime" style="height:200px;">
 						  <div>
 							<span>学年：</span><select class="form-control" name="teamYearw" style="width:150px;"
-									id="teamYearw" value={}>
+									id="teamYearw" >
 									<option value="" id="AteamYearw">请选择学年</option>
 								  </select>
 							学期：<select class="form-control" name="semesterw" style="width:150px;"

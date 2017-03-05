@@ -18,6 +18,13 @@ $(document)
 		.ready(
 				function() {
 					
+					if($("#ta3").text()=="false"){
+						bootbox.alert({
+							message : "您导入的Excel文件格式有错,请重新选择",
+							size : 'small'
+						});
+					}
+					
 					// 获取学院，学期
 					$.ajax({
 						type : 'POST',

@@ -3,6 +3,13 @@ var obj = [];
 $(document)
 		.ready(
 				function() {
+					if($("#tag_0").text()=="false"){
+						bootbox.alert({
+							message : "您导入的Excel文件格式有错,请重新选择",
+							size : 'small'
+						});
+					}
+					
 					// 分页表格
 					var page = $('#baseMaintain')
 							.DataTable(
