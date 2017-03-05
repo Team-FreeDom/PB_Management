@@ -310,7 +310,7 @@ $(document).on("click", "#checkdetale", function() {
 	$("#Eaddress").val(obj[index].address);
 	$("#Ereason").val(obj[index].reason);
 	var file=obj[index].file;
-	if(file=="null"||file==""){
+	if(file=="null"||file==""||file==null){
 		$("#resourcetr").prop("hidden",true);
 	}else{
 		$("#resourcetr").prop("hidden",false);

@@ -253,8 +253,9 @@ $(document).on("click", "#scan", function() {
 					$("#address").val(object[index].address);
 					$("#reason").val(object[index].reason);
 					$("#actualmoney").val(object[index].actualmoney);
-					$("#linkaddress").prop("href",object[index].file);	
-					if(object[index].file=="null"||object[index].file==""){			
+					$("#linkaddress").prop("href",object[index].file);
+					var objfile='"'+object[index].file+'"';
+					if(objfile=="null"||object[index].file==""||object[index].file==null){			
 						$("#resourcetr1").prop("hidden",true); 
 					}else{		
 						$("#resourcetr1").prop("hidden",false); 
@@ -274,11 +275,11 @@ $(document).on("click", "#cancel", function() {
 							size: 'small',
 			        	    buttons: {
 		        	    	confirm: {
-			        	            label: 'Yes',
+			        	            label: '确定',
 			        	            className: 'btn-success'
 			        	        },
 			        	        cancel: {
-			        	            label: 'No',
+			        	            label: '取消',
 			        	            className: 'btn-danger'
 			        	        },
 			        	    },
