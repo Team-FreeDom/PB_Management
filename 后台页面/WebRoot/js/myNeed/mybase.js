@@ -358,7 +358,7 @@ $(document).ready(function() {
 					$("#baseid").val('#'+object[index].bid);					
 					
 					
-					if(object[index].material_path=="null"||object[index].material_path==""){			
+					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
 						$("#resourcetr").prop("hidden",true); 
 					}else{		
 						$("#resourcetr").prop("hidden",false); 
@@ -415,7 +415,7 @@ $(document).ready(function() {
 					}										
 					
 					
-					if(object[index].material_path=="null"||object[index].material_path==""){			
+					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
 						$("#resourcetrt").prop("hidden",true); 
 					}else{		
 						$("#resourcetrt").prop("hidden",false); 
