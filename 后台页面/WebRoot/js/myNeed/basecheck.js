@@ -732,7 +732,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#validdate").val(obj[index].validdate);
 	$("#major_oriented").html(obj[index].mmajor);
 	$("#linkAddress").html(obj[index].land_address);	
-	if(obj[index].material_path=="null"||obj[index].material_path==""){			
+	if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 

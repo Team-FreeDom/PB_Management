@@ -373,7 +373,7 @@ $(document)
 						$("#linkAddressd").html(obj[index].land_address);
 						$("#resourced").prop("href", obj[index].material_path);
 						
-						if(obj[index].material_path=="null"||obj[index].material_path==""){			
+						if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
 							$("#resourcetr").prop("hidden",true); 
 						}else{		
 							$("#resourcetr").prop("hidden",false); 
