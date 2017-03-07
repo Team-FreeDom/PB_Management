@@ -1034,7 +1034,8 @@ $(document)
 					$("#daoru").click(function(){
 						$("#teamYearw").val('');
 						$("#semesterw").val('');
-						$("#oneSemesterTime").val('');						
+						$("#oneSemesterTime").val('');	
+						$("#weekTi").css("display","none");
 						$("#fileResource").val('');
 					});
 					
