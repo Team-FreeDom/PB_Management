@@ -10,7 +10,10 @@ $(function () {
 					async : true,
 					cache : false,
 					error : function(request) {
-						alert("请求异常");
+						bootbox.alert({
+							message : "请求异常",
+							size : 'small'
+						});
 						},
 					success : function(data) {
 							var i = 0;

@@ -297,7 +297,10 @@ $(document).on("click", "#cancel", function() {
 								  		async : false,
 								  		cache : false,
 								  		error : function(request) {
-								  			alert("error");
+								  			bootbox.alert({
+								  				message : "撤回失败",
+								  				size : 'small'
+								  			});								  		
 								  		},
 								  		success : function(msg) {
 								  			bootbox.alert({

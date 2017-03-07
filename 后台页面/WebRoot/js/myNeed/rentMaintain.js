@@ -135,7 +135,10 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
 						},
 						success : function(data) {
 							
@@ -191,7 +194,10 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
 						},
 						success : function(data) {
 							var i = 0;
@@ -225,7 +231,10 @@ function theEdit(obj) {
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 

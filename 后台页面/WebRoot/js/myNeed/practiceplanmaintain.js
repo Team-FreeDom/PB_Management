@@ -33,7 +33,10 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
 						},
 						success : function(data) {          
 				          
@@ -520,7 +523,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -567,7 +573,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -667,7 +676,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag=="1"){
@@ -867,7 +879,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "保存失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag){
@@ -992,7 +1007,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "修改失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								
@@ -1118,7 +1136,10 @@ $(document)
 								async : false,
 								cache : false,
 								error : function(request) {
-									alert("error");
+									bootbox.alert({
+										message : "请求异常",
+										size : 'small'
+									});
 								},
 								success : function(data) {
 																	
@@ -1160,7 +1181,10 @@ $(document)
  								async : false,
  								cache : false,
  								error : function(request) {
- 									alert("error");
+ 									bootbox.alert({
+ 										message : "请求异常",
+ 										size : 'small'
+ 									});
  								},
  								success : function(data) {
  																	
@@ -1627,7 +1651,10 @@ $(document)
 				async : false,
 				cache : false,
 				error : function(request) {
-					alert("error");
+					bootbox.alert({
+						message : "请求异常",
+						size : 'small'
+					});
 				},
 				success : function(data){
 					for(var i=0;i<data.length;i++){//获取学院下拉框
@@ -2350,7 +2377,10 @@ function semeUp(sel,flag){
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {  
 		 if(flag==0){
@@ -2393,7 +2423,10 @@ $.ajax({
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 			$(".removeCollege").remove();							

@@ -124,7 +124,7 @@ $(document).ready(function() {
  			cache : false,
  			error : function(request) {
  				bootbox.alert({
-         			  message: "error",
+         			  message: "请求异常",
          			  size: 'small'
          		  });
  			},
@@ -412,7 +412,7 @@ function getInfo(){
 			cache : false,
 			error : function(request) {
 				bootbox.alert({
-     			  message: "error",
+     			  message: "请求异常",
      			  size: 'small'
      		  });
 			},
