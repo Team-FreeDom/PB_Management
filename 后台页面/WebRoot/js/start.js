@@ -127,14 +127,22 @@ $(document).ready(function() {
 
     $("#end-btn").click(function() {
 
-        bootbox.confirm({
-            size: "small",
-            message: "确定结束本次租赁工作吗?",
-            callback: function(result) {
-                if (result == false) {
-                    return false;
-                } else {
-                    $.ajax({ //以文本方式提交申请,command=1表示结束土地租赁工作，清空土地租赁申请表，清空消息表
+    	bootbox.confirm({
+			message: "确定结束本次租赁工作吗？",
+			size: 'small',
+			buttons: {
+				confirm: {
+					label: '确定',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: '取消',
+					className: 'btn-danger'
+				},
+			},			
+			callback: function (result) {
+				if (result) {
+					$.ajax({ //以文本方式提交申请,command=1表示结束土地租赁工作，清空土地租赁申请表，清空消息表
                         type: 'POST',
                         dataType: 'text',
                         data: {
@@ -156,8 +164,8 @@ $(document).ready(function() {
                             } //success
                     });
                 }
-            }
-        });
+			}
+	});
 
     });
 });

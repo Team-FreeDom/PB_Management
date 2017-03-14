@@ -31,6 +31,7 @@ import com.base.po.ApplyDept;
 import com.base.po.Major;
 import com.base.po.basetype;
 import com.base.service.baseApplyService;
+import com.base.utils.ExcelReport;
 
 /**
  * 基地申请
@@ -86,8 +87,9 @@ public class BaseApplyController {
 		MultipartFile mFile = multipartRequest.getFile("material_path");// 申请材料保存地址		
 		if (!mFile.isEmpty()) {
 		    // 得到上传服务器的路径
-		    path = request.getSession().getServletContext()
-			    .getRealPath("/material/");
+		   /* path = request.getSession().getServletContext()
+			    .getRealPath("/material/");*/
+		   path = ExcelReport.getWebRootUrl(request,"/material/");
 		    // 得到上传的文件的文件名
 		    String fileName = mFile.getOriginalFilename();
 		    System.out.println(fileName);
@@ -109,7 +111,7 @@ public class BaseApplyController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
-		    path += "\\" + filename;
+		    path +=filename;
 		    // 文件流写到服务器端
 		    try {
 			FileOutputStream outputStream = new FileOutputStream(
@@ -164,27 +166,11 @@ public class BaseApplyController {
 		map.addAttribute("userid", userid);
 		map.addAttribute("basename", name);
 		//String infostr="";
-		String infostr=JSONArray.fromObject(map).toString();
-		/*System.out.println(infostr+"封装的信息格式");
-		System.out.println(str1 + "是否正确");*/
+		String infostr=JSONArray.fromObject(map).toString();		
 		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
 		request.setAttribute("index", 1);
 		response.setContentType("text/html;charset=UTF-8");
-		/*try {
-		    request.getRequestDispatcher("baseApply.jsp").forward(request, response);
-		} catch (ServletException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}*/
-		/*try {
-		    response.getWriter().print();
-		} catch (IOException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}*/		
+		
 	    }
 	}
 	//return "redirect:index.jsp";

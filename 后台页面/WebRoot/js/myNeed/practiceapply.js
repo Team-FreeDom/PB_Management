@@ -256,7 +256,10 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 						"mid":obj[Oneindex].mid
 					},
 					error : function(request) {
-						alert("error");
+						bootbox.alert({
+							message : "请求异常",
+							size : 'small'
+						});
 					},
 					success : function(data){
 						
@@ -325,7 +328,10 @@ $.ajax({
 	async : false,
 	cache : false,
 	error : function(request) {
-		alert("error");
+		bootbox.alert({
+			message : "请求异常",
+			size : 'small'
+		});
 	},
 	success : function(data){
 		for(var i=0;i<data.length;i++){//获取学院下拉框
@@ -824,7 +830,10 @@ $("#save").click(function(){//弹出框的保存
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "保存失败",
+								size : 'small'
+							});
 						},
 						data:{
 							"courseID":obj[Oneindex].id,							

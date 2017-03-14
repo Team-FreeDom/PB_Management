@@ -3,6 +3,13 @@ var obj = [];
 $(document)
 		.ready(
 				function() {
+					if($("#tag_0").text()=="false"){
+						bootbox.alert({
+							message : "您导入的Excel文件格式有错,请重新选择",
+							size : 'small'
+						});
+					}
+					
 					// 分页表格
 					var page = $('#baseMaintain')
 							.DataTable(
@@ -366,7 +373,7 @@ $(document)
 						$("#linkAddressd").html(obj[index].land_address);
 						$("#resourced").prop("href", obj[index].material_path);
 						
-						if(obj[index].material_path=="null"||obj[index].material_path==""){			
+						if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
 							$("#resourcetr").prop("hidden",true); 
 						}else{		
 							$("#resourcetr").prop("hidden",false); 
@@ -604,11 +611,15 @@ $(document)
 																			var str2 = "";
 																			for (var i = 0; i < data; i++) {
 																				str1 = str1
-																						+ "<span class='icon-star' name='color' id='color'></span>";
+																						+ "<span class='icon-star star-flag' name='color' id='color' value='"
+																						+(i+1)
+																						+"'></span>";
 																			}
 																			for (var i = 0; i < 5 - data; i++) {
 																				str2 = str2
-																						+ "<span class='icon-star-empty' name='nocolor' id='nocolor'></span>";															
+																						+ "<span class='icon-star-empty star-flag' name='nocolor' id='nocolor' value='"
+																						+(data+i+1)
+																						+"'></span>";															
 																			}
 																			return str1 + str2;
 
@@ -733,7 +744,28 @@ $(document)
 									});
 
 				});
-
+//限制导入的文件不能为空
+$("#certainimport").click(function(){
+	var fireStr=$("#fileResource").val();
+	if($("#fileResource").val()===""){
+		bootbox.alert({
+			message : "导入的文件不能为空",
+			size : 'small'
+		});
+		return;
+	}
+	var fireL=fireStr.lastIndexOf(".");
+	fireStr=fireStr.substring(fireL);
+	if(fireStr!=".xls"&&fireStr!=".xlsx"){
+		bootbox.alert({
+			message : "请导入Excel格式文档",
+			size : 'small'
+		});
+		$("#fileResource").val("");
+		return;
+	}
+	$("#daoruform").submit();
+});
 // //全选反选
 $("#ck1").on("click", function() {
 	if ($(this).prop("checked") == true) {

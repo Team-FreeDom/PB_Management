@@ -262,7 +262,10 @@ $(document).ready(function() {
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+						        message: "请求异常",
+						        size: 'small'
+						    });
 						},
 						success : function(data) {
 							
@@ -449,7 +452,10 @@ $(document).ready(function() {
 									async : false,
 									cache : false,
 									error : function(request) {
-										alert("error");
+										bootbox.alert({
+									        message: "请求异常",
+									        size: 'small'
+									    });
 									},
 									success : function(data) {
 
@@ -512,7 +518,10 @@ $(document).ready(function() {
 							async : false,
 							cache : false,
 							error : function(request) {
-								
+								bootbox.alert({
+							        message: "请求失败",
+							        size: 'small'
+							    });
 							},
 							success : function(data) {
 								
@@ -567,7 +576,10 @@ $(document).ready(function() {
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+							        message: "请求失败",
+							        size: 'small'
+							    });
 							},
 							success : function(data) {
 
@@ -654,7 +666,10 @@ $(document).ready(function() {
 
 							},
 							error : function(data) {
-								alert("请求异常");
+								bootbox.alert({
+							        message: "请求异常",
+							        size: 'small'
+							    });
 							}
 						});
 					});
@@ -689,12 +704,18 @@ $(document).ready(function() {
 								if (data[0].flag) {
 									window.location.reload();
 								} else {
-									alert("删除失败");
+									bootbox.alert({
+								        message: "删除失败",
+								        size: 'small'
+								    });
 								}
 
 							},
 							error : function(data) {
-								alert("请求异常");
+								bootbox.alert({
+							        message: "请求异常",
+							        size: 'small'
+							    });
 							}
 						});
 					});
@@ -729,12 +750,18 @@ $(document).ready(function() {
 								if (data[0].flag) {
 									window.location.reload();
 								} else {
-									alert("提交失败");
+									bootbox.alert({
+								        message: "提交失败",
+								        size: 'small'
+								    });
 								}
 
 							},
 							error : function(data) {
-								alert("请求异常");
+								bootbox.alert({
+							        message: "请求异常",
+							        size: 'small'
+							    });
 							}
 						});
 					});

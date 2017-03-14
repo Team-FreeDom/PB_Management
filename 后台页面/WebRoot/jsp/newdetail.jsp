@@ -320,6 +320,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <![endif]-->
                                                         <script src="../js/jquery.min.js"></script>
                                                         <script src="../js/bootstrap.min.js"></script>
+                                                        <script src="../js/bootbox.min.js"></script>
                                                         <script src="../dist/jquery.cokie.min.js"></script>
                                                         <script src="../js/kg.js"></script>
 

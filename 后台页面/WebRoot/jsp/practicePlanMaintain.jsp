@@ -213,6 +213,7 @@
 									</select></td>
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
+									<td hidden id="ta3">${tag}</td>
 									<td colspan="6">
 									  <button class="btn btn-primary" id="daoru" data-toggle="modal"
 											data-target="#writeWeekTime">导入</button>
@@ -284,10 +285,7 @@
 				enctype="multipart/form-data">
 				<div class="modal-content" style="border:#3071a9 8px solid">
 					<div class="modal-header" style="background:#3071a9; color:#FFF">
-						<button type="button" class="close" data-dismiss="modal"
-							id="closeimport">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
+						<div id="closeimport" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 						<h5 class="modal-title" id="myModalLabel">请选择要导入的文件</h5>
 					</div>
 
@@ -295,7 +293,7 @@
 						<div class="modal-body" id="exportxsl" style="height:60px;">
 							<input type="file" id="fileResource" name="fileResource">
 							<input hidden type="text" name="semesterfile" id="semesterfile" />
-							<input hidden type="text" name="timeDi" id="timeDi" />
+							<input hidden type="text" name="timeDi" id="timeDi" />							
 						</div>
 					</center>
 					<div class="modal-footer">
@@ -317,17 +315,16 @@
 			
 				<div class="modal-content" style="border:#3071a9 8px solid;width:300px;">
 					<div class="modal-header" style="background:#3071a9; color:#FFF">
-						<button type="button" class="close" data-dismiss="modal"
-							id="closeWriteWeekTime">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
+			
+							<div id="closeWriteWeekTime" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+						
 						<h5 class="modal-title" id="myModalLabel">请先填写下述消息：</h5>
 					</div>	
 					  <center>				
 						<div class="modal-body" id="weekTime" style="height:200px;">
 						  <div>
 							<span>学年：</span><select class="form-control" name="teamYearw" style="width:150px;"
-									id="teamYearw" value={}>
+									id="teamYearw" >
 									<option value="" id="AteamYearw">请选择学年</option>
 								  </select>
 							学期：<select class="form-control" name="semesterw" style="width:150px;"
@@ -361,10 +358,8 @@
 		<div class="modal-dialog" style="width:400px;height:600px;">
 			<div class="modal-content" style="border:#3071a9 8px solid;">
 				<div class="modal-header" style="background:#3071a9; color:#FFF">
-					<button type="button" class="close" id="daoclose"
-						data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-					</button>
+				
+					<div id="daoclose" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 					<h4 class="modal-title" id="myModalLabel"></h4>
 				</div>
 				<form action="exportPlanInfo.do" method="post" id="daochuForm">
@@ -420,9 +415,7 @@
 	<div class="modal-content" id="Applychart"
 		style="border:#3071a9 8px solid;">
 		<div class="modal-header" style="background:#3071a9; color:#FFF">
-			<button type="button" class="close" id="closemodal">
-				<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-			</button>
+			<div id="closemodal" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 			<h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
 		</div>
 
@@ -493,14 +486,11 @@
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<form action="" method="post" id="">
-				<div class="modal-content" id="modalcontent"
-					style="border:#3071a9 8px solid;width: 450px">
+				<div class="modal-content" id="modalcontent" style="border:#3071a9 8px solid;width: 450px">
 					<div class="modal-header" style="background:#3071a9; color:#FFF">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
+						<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+						<h4 class="modal-title text-center">请选择实验员</h4>
 					</div>
-
 					<center>
 						<div class="modal-body">
 							<div class="row" style="margin-bottom: 30px;">
@@ -547,11 +537,10 @@
 					<div class="modal-dialog">
 							<div class="modal-content" id="modalcontent2" style="border:#3071a9 8px solid;width: 450px">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<h4 class="modal-title text-center">请选择指导老师</h4>
 								</div>
-
+								
 								<center>
 									<div class="modal-body">
 										<div class="row" style="margin-bottom: 30px;">
@@ -593,10 +582,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" style="border:#3071a9 8px solid;">
 				<div class="modal-header" style="background:#3071a9; color:#FFF">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 					<h4 class="modal-title text-center">增加实习计划</h4>
 				</div>
 				<div class="modal-body">
@@ -731,10 +717,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" style="border:#3071a9 8px solid;">
 				<div class="modal-header" style="background:#3071a9; color:#FFF">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 					<h4 class="modal-title text-center">修改实习计划</h4>
 				</div>
 				<div class="modal-body">

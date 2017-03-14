@@ -344,8 +344,60 @@ $(document).ready(function() {
 	 
 	//同意申请
 	// //////////状态值1： 2： 3： 4： 。。。。。。。
-	$('#confirmDate').click(function() {		
-		              				
+	$('#confirmDate').click(function() {
+		var timeNum=0;var endNum=0;
+		var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
+		              	$(".endtimeflag").each(function(){
+		              		timeNum++;
+		              		var endtimeStr=$(this).val();
+		              		if(!endtimeStr.match(reg)){
+		              			endNum++;
+		              			return false;
+		              		}
+		              	});	
+		              	if(endNum!=0){
+		              		bootbox.alert({
+								message : "第"+timeNum+"条截止日期的格式不对（如：2017-01-01）",
+								size : 'small'
+							});
+		              		return;
+		              	}
+		              	var timeflag=0; var timeflag2=0; 
+		              	$("#increase1 tr").each(function(){
+		              		timeflag2++;
+		              		var start=$(this).find(".starttimeflag").val().split("-");
+		              		var end=$(this).find(".endtimeflag").val().split("-");
+		              		if((end[0]-start[0])<0){
+								timeflag++;
+							}else{
+								if(end[0]===start[0]){
+									if((end[1]-start[1])<0){
+										timeflag++;
+									}else{
+										if(end[1]===start[1]){
+										   if((end[2]-start[2]<0)){
+											   timeflag++;
+										   }
+										   }
+									}
+								}
+							}
+		              		if(timeflag!=0){
+		              			return false;
+		              		}
+		              	});
+						
+						
+						if(timeflag!==0){
+							bootbox.alert({
+								message : "第"+timeflag2+"条的截止日期不能小于创建日期",
+								size : 'small'
+							});
+							return;
+						}
+		              	
+		              	
+		              	
 						var i=0;
 						var recordstr='';
 						var recorddigit='(';
@@ -477,21 +529,8 @@ $(".icon-filter").on("click", function() {
 
 
 
-
-
-
-$(document).on("click", "#close", function() {	
-	$("#increase2").html("");
-	
-});
-
-$(document).on("click", "#close1", function() {	
-	$("#increase1").html("");
-	
-});
-
 $(document).on("click", "#refuse", function() {	
-	
+	$("#increase2").html("");
 	var chk_value =[];
 	$('input[name="idname"]:checked').each(function(){
 	chk_value.push($(this).val());
@@ -592,7 +631,7 @@ $('#certainAdd').click(function() {
 });
 
 $(document).on("click", "#confirm", function() {	
-	
+	$("#increase1").html("");
 	var chk_value =[];
 	$('input[name="idname"]:checked').each(function(){
 	chk_value.push($(this).val());
@@ -614,7 +653,7 @@ $(document).on("click", "#confirm", function() {
 		 var date1 = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
 		 var date2= (now.getFullYear()+1)+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
 		 $("#increase1").append('<tr><td><input type="checkbox" name="checkedIncrease1" class='+obj[index].id+' checked hidden value="'+userid+'"></td><td><input type="checkbox" hidden value="'+obj[index].bid+'"></td><td>基地名称：</td><td><input class="form-control" type="text" value="'+obj[index].name+'" disabled/></td>'+
-				 '<td>创建日期:</td><td><input class="form-control" id="buildtime" value="'+date1+'" disabled></td><td>截止日期:</td><td><input class="form-control" onClick="new Calendar().show(this)" id="endtime" value="'+date2+'"></td></tr>');
+				 '<td>创建日期:</td><td><input class="form-control starttimeflag" id="buildtime" value="'+date1+'" disabled></td><td>截止日期:</td><td><input class="form-control endtimeflag" id="endtime" value="'+date2+'"></td></tr>');
 	 });
 	 
 	$("#applyConfirm").modal('show');
@@ -693,7 +732,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#validdate").val(obj[index].validdate);
 	$("#major_oriented").html(obj[index].mmajor);
 	$("#linkAddress").html(obj[index].land_address);	
-	if(obj[index].material_path=="null"||obj[index].material_path==""){			
+	if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 
@@ -721,7 +760,7 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#linkAddress2").html(obj2[index].land_address);
 	$("#Createdate2").val(obj2[index].buildtime);
 	$("#validdate2").val(obj2[index].endtime);
-	if(obj2[index].material_path=="null"||obj2[index].material_path==""){			
+	if(obj2[index].material_path=="null"||obj2[index].material_path==""||obj2[index].material_path==null){			
 		$("#resourcetr2").prop("hidden",true); 
 	}else{		
 		$("#resourcetr2").prop("hidden",false); 

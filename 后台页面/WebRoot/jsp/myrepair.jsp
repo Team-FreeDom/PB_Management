@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
                                             <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
                                             <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
@@ -219,7 +219,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               <div class="modal-dialog" style="width:800px;">
                                 <div class="modal-content" id="modal-content" style="border:#3071a9 8px solid">
                                   <div class="modal-header" style="background:#3071a9; color:#FFF">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                   <div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
                                     <h4 class="modal-title text-center" id="myModalLabel">详情查看</h4>
                                   </div>
                                   <div class="modal-body table-responsive">

@@ -290,11 +290,13 @@ public class BaseMaintenanceController {
     			// 寰楀埌涓婁紶鐨勬枃浠�
     			MultipartFile mFile = multipartRequest.getFile("fileResource");
     			// 寰楀埌涓婁紶鏈嶅姟鍣ㄧ殑璺緞
-    			String path = request.getSession().getServletContext()
-    					.getRealPath("/upload/");
+    			String path = ExcelReport.getWebRootUrl(request,"/upload/");
+    			/*String path = request.getSession().getServletContext()
+    					.getRealPath("/upload/");*/
     			// 寰楀埌涓婁紶鐨勬枃浠剁殑鏂囦欢鍚�
     			String fileName = mFile.getOriginalFilename();
     			String filename = "";
+    			boolean flag=true;
     			if (!fileName.isEmpty()) {
     				filename = new Date().getTime() + "$" + fileName;
     				InputStream inputStream = mFile.getInputStream();
@@ -308,6 +310,7 @@ public class BaseMaintenanceController {
     				
     				filename = path;   //杩欐槸鏂囦欢鍦ㄦ湇鍔″櫒鐨勭粷瀵硅矾寰�
     				//閬嶅巻鏂囦欢涓殑鏁版嵁锛氫笅闈㈢殑list涓鸿鍑虹殑鏁版嵁
+    				try{
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
     				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				
@@ -328,8 +331,8 @@ public class BaseMaintenanceController {
     					List<String> row = list.get(i);    					
     					
     					// 閬嶅巻鍒�
-    					if (row != null && row.size() > 0) {
-    						String bid=String.valueOf(new Date().getTime());
+    					if (row != null && row.size() > 0) {    						
+    						String bid=String.valueOf(new Date().getTime()+i);
     						resultStr="'"+bid+"',";
     						resultStr2="'"+bid+"',";
     						for (int j = 0; j < row.size(); j++) { 
@@ -361,9 +364,14 @@ public class BaseMaintenanceController {
     				outputStream.close();
     				inputStream.close();
     				tempFile.delete(); //鍒犻櫎涓存椂鏂囦欢
+    				}catch(Exception e){
+    					flag=false;
+    					e.printStackTrace();
+    				}	
     				
     			}
-    			return "redirect:baseMaintain.jsp";   	
+    			map.addAttribute("tag", flag);
+    			return "baseMaintain";   	
     }
     
     //获得用户输入的数据
@@ -407,8 +415,7 @@ public class BaseMaintenanceController {
     		MultipartFile mFile = multipartRequest.getFile("material_path");// 申请材料保存地址    		
     		if (!mFile.isEmpty()) {
     		    // 得到上传服务器的路径
-    		    path = request.getSession().getServletContext()
-    			    .getRealPath("/material/");
+    			path = ExcelReport.getWebRootUrl(request,"/material/");
     		    // 得到上传的文件的文件名
     		    String fileName = mFile.getOriginalFilename();
     		    System.out.println(fileName);
@@ -430,7 +437,7 @@ public class BaseMaintenanceController {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		    }
-    		    path += "\\" + filename;
+    		    path += filename;
     		    // 文件流写到服务器端
     		    try {
     			FileOutputStream outputStream = new FileOutputStream(

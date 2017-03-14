@@ -214,9 +214,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情及修改</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -293,8 +291,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h4 class="modal-title" id="myModalLabel"></h4>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -325,8 +322,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -357,8 +353,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -385,9 +380,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">缴费中详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -470,9 +463,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁修改</h4>
 								</div>
 								<form action="updateContent.do" method="post"
@@ -638,10 +629,11 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal"
-										onclick="closeScan2()">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									
+										
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" onclick="closeScan2()"></div>
+										
+									
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -719,11 +711,12 @@
 <script src="../js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/myNeed/myRent.js"></script>
 <script src="../js/SyearE.js"></script>
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>
+ <script src="../js/myNeed/myRent.js"></script>
 <script src="../js/kg.js"></script>
 </html>

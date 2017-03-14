@@ -301,9 +301,7 @@
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal">
-											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-										</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -443,9 +441,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">

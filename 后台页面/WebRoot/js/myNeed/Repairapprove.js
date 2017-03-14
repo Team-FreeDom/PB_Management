@@ -289,7 +289,7 @@ $(document).on("click", "#scanDetail", function() {
 	$("#budget").val(obj[index].money);
 	$("#address").val(obj[index].address);
 	$("#reason").val(obj[index].reason);
-	if(obj[index].file=="null"||obj[index].file==""){			
+	if(obj[index].file=="null"||obj[index].file==""||obj[index].file==null){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 
@@ -311,7 +311,7 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#budget").val(obj2[index].money);
 	$("#address").val(obj2[index].address);
 	$("#reason").val(obj2[index].reason);
-	if(obj2[index].file=="null"||obj2[index].file==""){			
+	if(obj2[index].file=="null"||obj2[index].file==""||obj2[index].file==null){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 
@@ -487,8 +487,28 @@ $(document).on("click", "#scanDetail2", function() {
 				  });
 			  
 			  //维修完成
-			  $(document).on("click","#storeInfo",function(){	
-				  
+			  $(document).on("click","#storeInfo",function(){
+				  var moneyNum=0;
+				  var finishNum=0;
+				  $(".actualAmount").each(function(){
+					  finishNum++;
+					  var value=$(this).val();
+					  value=value.trim();
+					  var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
+						if(value!=""){
+							if (!dataFormatWeek.exec(value)) {
+								moneyNum++;
+								return false;
+							} 
+						}
+				  });
+				  if(moneyNum!=0){
+					  bootbox.alert({
+							message : "第"+finishNum+"条的实际金额格式不对，只能输入数字",
+							size : 'small'
+						});
+					  return;
+				  }
 				  flag=0;
 					$("#Repairing input[name='idname2']").each(function () {
 							if($(this).prop("checked")==true){
@@ -508,11 +528,11 @@ $(document).on("click", "#scanDetail2", function() {
 							size: 'small',
 							buttons: {
 								confirm: {
-									label: 'Yes',
+									label: '确定',
 									className: 'btn-success'
 								},
 								cancel: {
-									label: 'No',
+									label: '取消',
 									className: 'btn-danger'
 								},
 							},
@@ -611,7 +631,7 @@ $("#finished").click(function (){
 			index=$(this).val();
 			$("#finishtable").append('<tr class="Rtr"><td><input type="checkbox" name="checkRefuse" class='+obj2[index].id+' checked hidden value="'+obj2[index].userid+'"></td><td>基地名称：</td><td><input type="text" value="'+obj2[index].basename+'" class="form-control" disabled></td>'
 			+'<td>申请人: </td><td><input type="text" class="form-control"  value="'+obj2[index].username+'" disabled></td>'
-			+'<td>实际金额: </td><td><input class="form-control"/></td>'+'</tr>');
+			+'<td>实际金额: </td><td><input class="form-contro actualAmount"/></td>'+'</tr>');
 		});
 		$("#myfinishedModal").modal('show');
 });

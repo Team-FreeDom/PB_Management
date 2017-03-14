@@ -358,7 +358,7 @@ $(document).ready(function() {
 					$("#baseid").val('#'+object[index].bid);					
 					
 					
-					if(object[index].material_path=="null"){			
+					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
 						$("#resourcetr").prop("hidden",true); 
 					}else{		
 						$("#resourcetr").prop("hidden",false); 
@@ -415,7 +415,7 @@ $(document).ready(function() {
 					}										
 					
 					
-					if(object[index].material_path=="null"||object[index].material_path==""){			
+					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
 						$("#resourcetrt").prop("hidden",true); 
 					}else{		
 						$("#resourcetrt").prop("hidden",false); 
@@ -469,7 +469,10 @@ $(document).ready(function() {
 							page2.draw(false);
 						},
 						error : function(data) {
-							alert("请求异常");
+							bootbox.alert({
+						        message: "请求异常",
+						        size: 'small'
+						    });
 						}
 					});
 				});
@@ -492,7 +495,10 @@ $(document).ready(function() {
 				  		async : false,
 				  		cache : false,
 				  		error : function(request) {
-				  			alert("error");
+				  			bootbox.alert({
+				  		        message: "撤回失败",
+				  		        size: 'small'
+				  		    });
 				  		},
 				  		success : function(msg) {
 				  			$("#cancelOneModal").modal('hide');	

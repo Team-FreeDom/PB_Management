@@ -18,6 +18,13 @@ $(document)
 		.ready(
 				function() {
 					
+					if($("#ta3").text()=="false"){
+						bootbox.alert({
+							message : "您导入的Excel文件格式有错,请重新选择",
+							size : 'small'
+						});
+					}
+					
 					// 获取学院，学期
 					$.ajax({
 						type : 'POST',
@@ -26,7 +33,10 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
 						},
 						success : function(data) {          
 				          
@@ -513,7 +523,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -560,7 +573,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -660,7 +676,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag=="1"){
@@ -860,7 +879,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "保存失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag){
@@ -985,7 +1007,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "修改失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								
@@ -1009,17 +1034,29 @@ $(document)
 					$("#daoru").click(function(){
 						$("#teamYearw").val('');
 						$("#semesterw").val('');
-						$("#oneSemesterTime").val('');						
+						$("#oneSemesterTime").val('');	
+						$("#weekTi").css("display","none");
 						$("#fileResource").val('');
 					});
 					
 					$(document).on("click","#certainimport",function(){		
 						var fileResource=$("#fileResource").val();
-						if(fileResource==""){
+						if($("#fileResource").val()==""){
 							bootbox.alert({
 								message : "请选择文件",
 								size : 'small'
-							});	
+							});
+							
+							return;
+						}
+						var fireL=fileResource.lastIndexOf(".");
+						fileResource=fileResource.substring(fireL);
+						if(fileResource!=".xls"&&fileResource!=".xlsx"){
+							bootbox.alert({
+								message : "请导入Excel格式文档",
+								size : 'small'
+							});
+							$("#fileResource").val("");
 							return;
 						}
 						$("#daoruform").submit();
@@ -1100,7 +1137,10 @@ $(document)
 								async : false,
 								cache : false,
 								error : function(request) {
-									alert("error");
+									bootbox.alert({
+										message : "请求异常",
+										size : 'small'
+									});
 								},
 								success : function(data) {
 																	
@@ -1142,7 +1182,10 @@ $(document)
  								async : false,
  								cache : false,
  								error : function(request) {
- 									alert("error");
+ 									bootbox.alert({
+ 										message : "请求异常",
+ 										size : 'small'
+ 									});
  								},
  								success : function(data) {
  																	
@@ -1609,7 +1652,10 @@ $(document)
 				async : false,
 				cache : false,
 				error : function(request) {
-					alert("error");
+					bootbox.alert({
+						message : "请求异常",
+						size : 'small'
+					});
 				},
 				success : function(data){
 					for(var i=0;i<data.length;i++){//获取学院下拉框
@@ -2249,7 +2295,12 @@ $(document)
 								message : "结束周次不能小于开始周次",
 								size : 'small'
 							});
-							$("#endNum").val(endToweek);
+							if(endToweek!=""){
+								$("#endNum").val(endToweek);
+							}else{
+								$("#endNum").val("0");
+							}
+							
 							return;
 						}
 						endToweek=$(this).val();
@@ -2327,7 +2378,10 @@ function semeUp(sel,flag){
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {  
 		 if(flag==0){
@@ -2370,7 +2424,10 @@ $.ajax({
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 			$(".removeCollege").remove();							

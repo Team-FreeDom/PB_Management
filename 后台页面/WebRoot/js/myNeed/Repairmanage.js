@@ -124,7 +124,7 @@ $(document).ready(function() {
  			cache : false,
  			error : function(request) {
  				bootbox.alert({
-         			  message: "error",
+         			  message: "请求异常",
          			  size: 'small'
          		  });
  			},
@@ -221,6 +221,7 @@ $("#ZJ").click(function(){
 		$("#Abudget").val("");
 		$("#Aaddress").val("");
 		$("#Areason").val("");
+		$("#file").val("");
 })					
 //增加操作
 $("#save").click(function(){
@@ -272,6 +273,25 @@ $("#save").click(function(){
 				});	
 				return;
 		}
+		var dataFormatWeek=/^[0-9]+\.?[0-9]*$/;
+		var value=$("#Abudget").val();
+		value=value.trim();
+			if (!dataFormatWeek.exec(value)) {
+				bootbox.alert({
+					message : "预算金额的格式不对，只能输入数字",
+					size : 'small'
+				});
+				return;
+			}
+		var value2=$("#ActualMoney").val();
+		value2=value2.trim();
+		if (!dataFormatWeek.exec(value2)) {
+			bootbox.alert({
+				message : "实际金额的格式不对，只能输入数字",
+				size : 'small'
+			});
+			return;
+		}
 		$("#applyaddform").submit();
 					
 })
@@ -290,7 +310,7 @@ $(document).on("click", "#checkdetale", function() {
 	$("#Eaddress").val(obj[index].address);
 	$("#Ereason").val(obj[index].reason);
 	var file=obj[index].file;
-	if(file=="null"||file==""){
+	if(file=="null"||file==""||file==null){
 		$("#resourcetr").prop("hidden",true);
 	}else{
 		$("#resourcetr").prop("hidden",false);
@@ -392,7 +412,7 @@ function getInfo(){
 			cache : false,
 			error : function(request) {
 				bootbox.alert({
-     			  message: "error",
+     			  message: "请求异常",
      			  size: 'small'
      		  });
 			},

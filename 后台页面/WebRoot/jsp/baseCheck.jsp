@@ -127,7 +127,7 @@
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
                                             <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="repairManage.jsp"><span class="text"> 报修信息维护</span></a></li>
+                                            <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
                                             <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
                                              <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
@@ -357,9 +357,7 @@
 				<div class="modal-dialog modal-sm" style="width:850px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" id="close1" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
+							<div id="close1" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">同意申请</h5>
 							
 						</div>
@@ -383,9 +381,7 @@
 				<div class="modal-dialog modal-sm" style="width:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" id="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
+							<div id="close" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">拒绝申请</h5>
 							
 						</div>
@@ -410,9 +406,7 @@
 				<div class="modal-dialog modal-sm" style="width:600px;">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<button type="button" class="close" id="close" data-dismiss="modal">
-								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-							</button>
+							<div id="close" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 							<h5 class="modal-title" id="myModalLabel" style="text-align:left;">续期申请拒绝</h5>
 							
 						</div>
@@ -437,9 +431,7 @@
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal">
-											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-										</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h4 class="modal-title text-center" id="myModalLabel">基地申请详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -512,9 +504,7 @@
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal">
-											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-										</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h4 class="modal-title text-center" id="myModalLabel">续期申请详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -608,7 +598,7 @@
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
-	<script src="../js/Calendar.js"></script> 
+	
 	<script src="../js/myNeed/basecheck.js"></script>
     <script src="../js/kg.js"></script>	
     
