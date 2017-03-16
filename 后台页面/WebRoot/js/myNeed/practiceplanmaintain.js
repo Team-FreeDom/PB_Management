@@ -18,6 +18,8 @@ $(document)
 		.ready(
 				function() {
 					
+					$('[data-toggle="tooltip"]').tooltip();
+					
 					if($("#ta3").text()=="false"){
 						bootbox.alert({
 							message : "您导入的Excel文件格式有错,请重新选择",
@@ -33,7 +35,10 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							alert("error");
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
 						},
 						success : function(data) {          
 				          
@@ -520,7 +525,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -567,7 +575,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(!data.flag){
@@ -667,7 +678,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag=="1"){
@@ -867,7 +881,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "保存失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								if(data.flag){
@@ -992,7 +1009,10 @@ $(document)
 							async : false,
 							cache : false,
 							error : function(request) {
-								alert("error");
+								bootbox.alert({
+									message : "修改失败",
+									size : 'small'
+								});
 							},
 							success : function(data) {
 								
@@ -1016,7 +1036,8 @@ $(document)
 					$("#daoru").click(function(){
 						$("#teamYearw").val('');
 						$("#semesterw").val('');
-						$("#oneSemesterTime").val('');						
+						$("#oneSemesterTime").val('');	
+						$("#weekTi").css("display","none");
 						$("#fileResource").val('');
 					});
 					
@@ -1118,7 +1139,10 @@ $(document)
 								async : false,
 								cache : false,
 								error : function(request) {
-									alert("error");
+									bootbox.alert({
+										message : "请求异常",
+										size : 'small'
+									});
 								},
 								success : function(data) {
 																	
@@ -1160,7 +1184,10 @@ $(document)
  								async : false,
  								cache : false,
  								error : function(request) {
- 									alert("error");
+ 									bootbox.alert({
+ 										message : "请求异常",
+ 										size : 'small'
+ 									});
  								},
  								success : function(data) {
  																	
@@ -1502,7 +1529,7 @@ $(document)
 					 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
 					 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 					 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-					 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
+					 +'<td id="practicePlace"><select id="schoolBase" hidden style="width:150px;"><option id="schoolBaseID" value="">请选择</option></select><select id="outBase" hidden style="width:150px;"><option id="outBaseId" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
 					 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 					 +'<td><input id="remark" type="text" class="flag"></td>'
 					 +'<td rowspan="3"><span class="deleteID" id="">删除</span></td>'
@@ -1517,7 +1544,7 @@ $(document)
 					 +'<tr>'
 					 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 					 +'<td><input id="phone" type="text" class="flag"></td>'
-					 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
+					 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
 					 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
 					 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 					 +'</tr></tbody>';
@@ -1566,12 +1593,18 @@ $(document)
 									
 									for(var j=0;j<data[0].length;j++){//获取校内基地的实习地点下拉框
 										$("#table tbody:last-child").find("#schoolBaseID").after(
-										"<option class='rest' value="+data[0][j].bname+">"+ data[0][j].bname + "</option>"
+										"<option class='rest' value="+data[0][j]+">"+ data[0][j] + "</option>"
+										);
+									}
+									for(var j=0;j<data[2].length;j++){//获取校外基地的实习地点下拉框
+										$("#table tbody:last-child").find("#outBaseId").after(
+										"<option class='rest' value="+data[2][j]+">"+ data[2][j]+ "</option>"
 										);
 									}
 									for(j=0;j<data[1].length;j++){//获取实习目的下拉框
 										$("#table tbody:last-child").find("#aimID").after(
-										"<option class='rest' id="+data[1][j].id+" value="+data[1][j].aim+">"+ data[1][j].aim + "</option>"
+												"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
+
 										);
 									}
 								}
@@ -1627,7 +1660,10 @@ $(document)
 				async : false,
 				cache : false,
 				error : function(request) {
-					alert("error");
+					bootbox.alert({
+						message : "请求异常",
+						size : 'small'
+					});
 				},
 				success : function(data){
 					for(var i=0;i<data.length;i++){//获取学院下拉框
@@ -1650,25 +1686,31 @@ $(document)
 				if(e.target.value==='校内基地'){
 					$(this).parent().next().children(":first").show();
 					$(this).parent().next().children(":first").addClass("flag");
-					//$("#schoolBase").show();
-					$(this).parent().next().children(":last").hide();
-					$(this).parent().next().children(":last").val("");
-					$(this).parent().next().children(":last").removeClass("flag");
+					$(this).parent().next().children("select:last").hide();
+					$(this).parent().next().children("select:last").val("");
+					$(this).parent().next().children("select:last").removeClass("flag");
+					$(this).parent().next().find("a").hide();
 				}
 				if(e.target.value==='校外基地'){
-					$(this).parent().next().children(":last").show();
-					$(this).parent().next().children(":last").addClass("flag");
+					var length=$(this).parent().next().find("#outBase option").length;
+					if(length>1){
+						$(this).parent().next().find("a").hide();
+						$(this).parent().next().children("select:last").show();
+						$(this).parent().next().children("select:last").addClass("flag");
+					}else{
+						$(this).parent().next().children("select:last").hide();
+						$(this).parent().next().children("select:last").val("");
+						$(this).parent().next().children("select:last").removeClass("flag");
+						$(this).parent().next().find("a").show();			
+					}		
 					$(this).parent().next().children(":first").hide();
 					$(this).parent().next().children(":first").val("");
 					$(this).parent().next().children(":first").removeClass("flag");
 				}
-				if(e.target.value===''){
-					$(this).parent().next().children(":last").hide();
-					$(this).parent().next().children(":first").hide();
-					$(this).parent().next().children(":last").val("");
-					$(this).parent().next().children(":first").val("");
-					$(this).parent().next().children(":first").removeClass("flag");
-					$(this).parent().next().children(":last").removeClass("flag");
+				if(e.target.value===''){					
+					$(this).parent().next().children("select").hide();
+					$(this).parent().next().children("select").val("");
+					$(this).parent().next().find("a").hide();
 				}
 			});	
 
@@ -1814,12 +1856,17 @@ $(document)
 				success : function(data){
 					for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
 						$("#table tbody:last-child").find("#schoolBaseID").after(
-						"<option class='rest' value='"+data[0][i].bname+"'>"+ data[0][i].bname + "</option>"
+						"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
+						);
+					}
+					for(var i=0;i<data[2].length;i++){//获取校外基地的实习地点下拉框
+						$("#table tbody:last-child").find("#outBaseId").after(
+						"<option class='rest' value="+data[2][i]+">"+ data[2][i]+ "</option>"
 						);
 					}
 					for(i=0;i<data[1].length;i++){//获取实习目的下拉框
 						$("#table tbody:last-child").find("#aimID").after(
-						"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+">"+ data[1][i].aim + "</option>"
+						"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
 
 						);
 					}
@@ -2350,7 +2397,10 @@ function semeUp(sel,flag){
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {  
 		 if(flag==0){
@@ -2393,7 +2443,10 @@ $.ajax({
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 			$(".removeCollege").remove();							

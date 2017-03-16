@@ -760,7 +760,7 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#linkAddress2").html(obj2[index].land_address);
 	$("#Createdate2").val(obj2[index].buildtime);
 	$("#validdate2").val(obj2[index].endtime);
-	if(obj2[index].material_path=="null"||obj2[index].material_path==""){			
+	if(obj2[index].material_path=="null"||obj2[index].material_path==""||obj2[index].material_path==null){			
 		$("#resourcetr2").prop("hidden",true); 
 	}else{		
 		$("#resourcetr2").prop("hidden",false); 

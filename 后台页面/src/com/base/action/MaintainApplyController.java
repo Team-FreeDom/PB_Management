@@ -57,6 +57,22 @@ public class MaintainApplyController {
 
 	return null;
     }
+    
+ // 校内基地名查询
+    @RequestMapping("/baseNeiName.do")
+    public String baseNeiName(HttpServletRequest request, ModelMap map,
+	    HttpServletResponse response) {
+	List list = applyservice.find_basenamenei();
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    JSONArray json = JSONArray.fromObject(list);
+	    response.getWriter().print(json.toString());
+	} catch (Exception e) {
+	    System.out.println(e);
+	}
+
+	return null;
+    }
 
     // 提交维修申请
     @RequestMapping("/insertmaintain.do")

@@ -311,7 +311,7 @@ $(document).on("click", "#scanDetail2", function() {
 	$("#budget").val(obj2[index].money);
 	$("#address").val(obj2[index].address);
 	$("#reason").val(obj2[index].reason);
-	if(obj2[index].file=="null"||obj2[index].file==""){			
+	if(obj2[index].file=="null"||obj2[index].file==""||obj2[index].file==null){			
 		$("#resourcetr").prop("hidden",true); 
 	}else{		
 		$("#resourcetr").prop("hidden",false); 

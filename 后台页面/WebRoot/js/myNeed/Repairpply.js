@@ -6,18 +6,21 @@ $(function () {
 		$.ajax({
 					type : 'POST',
 					dataType : 'json',
-					url : 'basename.do',
+					url : 'baseNeiName.do',
 					async : true,
 					cache : false,
 					error : function(request) {
-						alert("请求异常");
+						bootbox.alert({
+							message : "请求异常",
+							size : 'small'
+						});
 						},
 					success : function(data) {
 							var i = 0;
-							for ( var item in data[0]) {
+							for ( var item in data) {
 								$("#baselistid").after(
-									"<option value="+data[0][i].id+">"
-											+ data[0][i].name + "</option>");
+									"<option value="+data[i].id+">"
+											+ data[i].name + "</option>");
 								i++;
 									}
 					

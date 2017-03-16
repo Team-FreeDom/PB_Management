@@ -711,11 +711,12 @@
 <script src="../js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/myNeed/myRent.js"></script>
-<script src="../js/SyearE.js"></script>
+<!-- <script src="../js/SyearE.js"></script> -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>
+ <script src="../js/myNeed/myRent.js"></script>
 <script src="../js/kg.js"></script>
 </html>

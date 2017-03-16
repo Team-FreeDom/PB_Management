@@ -13,7 +13,10 @@ $(document).ready(function() {
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 			
@@ -54,7 +57,10 @@ $(document).on("change", "#deptRadio", function() {
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {			
 			for ( var i=0;i<data.length;i++) {
@@ -83,7 +89,10 @@ $(document).on("blur", "#basename", function() {
 				async : false,
 				cache : false,
 				error : function(request) {
-					alert("error");
+					bootbox.alert({
+						message : "请求异常",
+						size : 'small'
+					});
 				},
 				success : function(data) {					
 					if(data=="false"){						
@@ -117,7 +126,10 @@ $(document).on("change", "#deptSelectOne", function() {
 		async : false,
 		cache : false,
 		error : function(request) {
-			alert("error");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
 		},
 		success : function(data) {
 			var tag;

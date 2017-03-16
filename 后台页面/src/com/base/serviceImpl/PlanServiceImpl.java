@@ -99,4 +99,10 @@ public class PlanServiceImpl implements PlanService {
 	return record;
     }
 
+	@Override
+	public List<String> getOutBase(int tag) {
+		List<String> list=plandao.getOutBase(tag);
+		return list;
+	}
+
 }

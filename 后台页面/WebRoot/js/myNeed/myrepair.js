@@ -254,8 +254,8 @@ $(document).on("click", "#scan", function() {
 					$("#reason").val(object[index].reason);
 					$("#actualmoney").val(object[index].actualmoney);
 					$("#linkaddress").prop("href",object[index].file);
-					var objfile='"'+object[index].file+'"';
-					if(objfile=="null"||object[index].file==""||object[index].file==null){			
+					//var objfile='"'+object[index].file+'"';
+					if(object[index].file=="null"||object[index].file==""||object[index].file==null){			
 						$("#resourcetr1").prop("hidden",true); 
 					}else{		
 						$("#resourcetr1").prop("hidden",false); 
@@ -297,7 +297,10 @@ $(document).on("click", "#cancel", function() {
 								  		async : false,
 								  		cache : false,
 								  		error : function(request) {
-								  			alert("error");
+								  			bootbox.alert({
+								  				message : "撤回失败",
+								  				size : 'small'
+								  			});								  		
 								  		},
 								  		success : function(msg) {
 								  			bootbox.alert({

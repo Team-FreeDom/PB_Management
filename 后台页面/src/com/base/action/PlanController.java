@@ -169,13 +169,15 @@ public class PlanController implements ServletContextAware{
 	return null;
     }
 
-    // 功能:1.专业所对应的培训目的(通过参数课程代码)2.获取学院3.获取基地类型
+    // 功能:1.专业所对应的培训目的(通过参数课程代码)2.获取校内基地集合以及校外基地集合 3.获取基地类型
     @SuppressWarnings("rawtypes")
     @RequestMapping("/getPlanAim.do")
     public String getPlanAim(HttpServletRequest request,
 	    HttpServletResponse response) {
-	// 获取基地集合
-	List<BaseInfo> list1 = planservice.getBaseInfo();
+	// 获取校内基地集合
+    List<String> list1 = planservice.getOutBase(0);
+	//获取校外基地集合
+	List<String> list2 = planservice.getOutBase(1);
 	// 获取课程代码
 	String cid = request.getParameter("mid");
 	// System.out.println("目的:" + cid);
@@ -183,8 +185,9 @@ public class PlanController implements ServletContextAware{
 	List<Majoraim> list3 = planservice.getPlanAim(cid);
 	try {
 	    List list4 = new ArrayList();
-	    list4.add(list1);
+	    list4.add(list1);	   
 	    list4.add(list3);
+	    list4.add(list2);
 	    JSONArray json = JSONArray.fromObject(list4);
 	    response.setContentType("text/html;charset=UTF-8");
 	    response.getWriter().print(json.toString());
