@@ -46,7 +46,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -66,7 +66,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -126,7 +126,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// å›æ»šäº‹åŠ¡ï¼Œæ’¤æ¶ˆæŸ¥è¯¢è¯­å¥
 			}
 			System.out.println(e);
 		}finally{
@@ -205,10 +205,10 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 		sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landinfos(?)}");
 		sp.setInt(1,bid);		
-		sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-		rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+		sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+		rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			
-		while(rs.next())    //±éÀú½á¹û¼¯£¬¸³Öµ¸ølist
+		while(rs.next())    //éå†ç»“æœé›†ï¼Œèµ‹å€¼ç»™list
 		{
 			rc=new RentCollection();
 			
@@ -269,8 +269,8 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.landrentinfos(?)}");
 			sp.setInt(1,bid);		
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 			
 			while(rs.next())
 			{
@@ -338,9 +338,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			sp.setString(2,lidList);
 			sp.setString(3, str);
 			sp.registerOutParameter(4,java.sql.Types.INTEGER);
-			sp.execute();   //Ö´ĞĞ´æ´¢¹ı³Ì
+			sp.execute();   //æ‰§è¡Œå­˜å‚¨è¿‡ç¨‹
 			flag=sp.getInt(4);
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			rs=sp.getResultSet();  //è·å¾—ç»“æœé›†
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -431,6 +431,33 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			SqlConnectionUtils.free(conn, sp, null);
 		}
 		
+	}
+	
+	public long[] getRepairAndPracCount(String semester){
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		long[] value=new long[3];
+			try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn
+					.prepareCall("{CALL baseweb.count_numbers(?,?,?,?)}");
+			sp.setString(1, semester);
+			sp.execute();
+			long value1=sp.getLong(2);
+			long value2=sp.getLong(3);
+			long value3=sp.getLong(4);
+			value[0]=value1;
+			value[1]=value2;
+			value[2]=value3;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, null);
+		}
+			return value;
 	}
 
 }

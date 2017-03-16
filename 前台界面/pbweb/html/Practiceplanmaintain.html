@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8">
+    <title>实习计划维护</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/practiceplanmaintain.css">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="navbar" role="navigation">
+      <div class="container-fluid container-nav">
+          <!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
+          <ul class="nav navbar-nav navbar-actions navbar-left">
+              <li class="visible-md visible-lg"><a href="index.html#"><i class="icon-th-large"></i></a></li>
+              <li class="visible-xs visible-sm"><a href="index.html#"><i class="icon-align-justify"></i></a></li>
+          </ul>
+      
+          <span class="teachCenterTitle">基地管理系统</span>
+          <!-- Navbar Left -->
+    
+          <!-- Navbar Right -->
+          <div class="navbar-right">
+              <!-- Notifications -->
+              <ul class="notifications" avalonctrl="subNotificationsController">
+                  <li class="hidden-sm hidden-xs">
+                      <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+                          <i class="icon-envelope"><span class="badge dw-position">4</span></i>
+                              <!--ms-if-->
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-header" style="text-align: center;">
+                          <strong>未读消息列表</strong>
+                          </li>    
+                          <li class="dropdown-menu-footer text-center">
+                              <a href="../teach/notifications.html">更多消息</a>
+                          </li>
+                      </ul>
+    
+                  </li>
+                  <li>
+                      <a href="#outModal" class="dropdown-toggle notification-icon" data-toggle="modal">
+                          <i class="icon-remove"></i>
+                      </a>
+                  </li>
+              </ul>
+    
+              <!-- End Notifications -->
+          </div>
+          <!-- End Navbar Right -->
+      </div>
+    </div>
+
+
+
+	<div class="container-fluid content">
+    	<div class="row">
+        	
+        	<div class="sidebar">
+					<div class="sidebar-collapse">
+						<!-- Sidebar Header Logo-->
+						<div class="sidebar-header ">
+							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
+						</div>
+						
+						<!-- Sidebar Menu-->
+						<div class="sidebar-menu" style="height: 384px;">
+							<nav id="menu" class="nav-main" role="navigation">
+								<ul class="nav nav-sidebar">
+									<div class="panel-body text-center">
+										<div class="bk-avatar">
+											<a href="#"><img class="img-circle bk-img-60" alt="" src="../image/psu.jpg"></a>
+											<!--ms-if-->
+										</div>
+										<div class="bk-padding-top-10">
+											<i class="icon-circle text-success"></i> 
+											<small>罗旭</small>
+											<!--ms-if-->
+										</div>
+									</div>
+									<div class="divider2"></div>
+									
+									
+									<li class="menuItem">
+										<a href="index.html">
+											<i class="icon-home" aria-hidden="true"></i><span>主界面</span>
+										</a>
+									</li>
+									
+									 <li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+										</a>
+										<ul class="nav nav-children">
+											<li><a href="myrent.html"><span class="text">我的租赁</span></a></li>
+											<li><a href="mypractice.html"><span class="text">我的实习</span></a></li>
+											<li><a href="#"><span class="text">我的报修</span></a></li>
+											<li><a href="mybase.html"><span class="text">我的基地</span></a></li>
+										</ul>
+									</li>
+
+									<li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+										</a>
+										<ul class="nav nav-children">
+                                            <li><a href="fieldrent-approve.html"><span class="text">租赁审批</span></a></li>
+                                            <li><a href="practice-approve"><span class="text">实习审批</span></a></li>
+                                            <li><a href="base-approve"><span class="text">基地审批</span></a></li>
+                                            <li><a href="#"><span class="text">基地审批</span></a></li>
+
+										</ul>
+									</li>
+
+										<li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+										</a>
+										<ul class="nav nav-children">
+                                        	<li><a href="#"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li><a href="#"><span class="text"> 土地布局设置</span></a></li>
+                                        	<li><a href="base_maintain.html"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="fieldrent_maintain.html"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li><a href="practicemaintain.html"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="usermaintain.html"><span class="text"> 系统用户维护</span></a></li>
+                                            <li><a href="system_power.html"><span class="text"> 系统权限设置</span></a></li> 
+										</ul>
+									</li>
+									 <li class="menuItem nav-parent">
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
+										</a>
+										<ul class="nav nav-children">
+											<li><a href="#"><span class="text">租赁统计</span></a></li>
+											<li><a href="#"><span class="text">实习分析</span></a></li>
+											<li><a href="#"><span class="text">实习基地统计</span></a></li>
+										</ul>
+									</li>									
+									
+								</ul>
+							</nav>
+						</div>
+						<!-- End Sidebar Menu-->
+					</div>
+					<!-- Sidebar Footer-->
+					<div class="sidebar-footer">
+						<div class="copyright text-center">
+							<div>湖南农业大学版权所有 </div>
+						</div>
+					</div>
+					<!-- End Sidebar Footer-->
+				</div>   <!-- End Sidebar--> 
+		        
+                
+			<div class="main " style="min-height: 584px;">
+					<!-- 当前地址导航 -->
+					<div class="page-header">
+						<div class="pull-left">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">
+                            	<li><a>位置</a></li>
+								<li><a href="index.html"><i class=" icon-home"></i>实习计划维护</a></li>
+							</ol>
+						</div>
+						<div class="pull-right">
+							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+								<li><a href="index.html"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="index.html"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="index.html"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="index.html"><i class="icon-home"></i>报修申请</a></li>
+							</ol>
+						</div>
+					</div>
+					<!-- 主面板内容 -->
+					<div class="row form">
+						
+						
+
+						<div class="col-lg-12 form-group">
+
+							<table id="practiceplanmaintain" class="hover" cellspacing="0" width="100%">
+                                    <thead>
+                                    	<tr bgcolor="#ECF1F5">
+                                          <td colspan="2">
+                                          	<select id="termYear" class="form-control"><option value="" id="termYearID">请选择学年</option></select>
+                                          </td>
+                                          <td colspan="2"> 
+                                          	<select name="" id="term" class="form-control">
+                                          		<option value="">请选择学期</option>
+                                          		<option value="">第一学期</option>
+                                          		<option value="">第二学期</option>
+                                          	</select>
+                                          </td>
+                                           <td colspan="14" id="colspan">
+                                           	<button class="btn btn-warning">检测数据完整性</button>
+                                           	<button class="btn btn-primary">导出</button>
+                                           	<button class="btn btn-primary">导入</button>
+                                           	<button class="btn btn-danger" id="delete">删除</button>
+                                           	<button class="btn btn-success" id="add">增加</button>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                            <th><input type="checkbox" id="ck1"></th>
+                                            <th>学年学期</th>
+                                            <th>课程代码</th>
+                                            <th>课程名称</th>
+                                            <th>人数</th>
+                                            <th>已选人数</th>
+                                            <th>教学班组成</th>
+                                            <th>开课学院</th>
+                                            <th>周学时</th>
+                                            <th>学分</th>
+                                            <th>课程性质</th>
+                                            <th>课程类别</th>
+                                            <th>教师职工号</th>
+                                            <th>教师姓名</th>
+                                            
+                                            <th>起始周</th>
+                                            <th hidden>单位</th>
+                                            <th hidden>面向专业</th>
+                                            <th hidden>实习周数</th>
+                                            <th hidden>带队老师</th>
+                                            <th>考核</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox" name="allcheckbox" id="0"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
+                                            <td>26</td>
+                                            <td>12</td>
+                                            <td>农学隆平15</td>
+                                            <td>农学院</td>
+                                            <td>+2</td>
+                                            <td>1</td>
+                                            <td>必修</td>
+                                            <td>实践课</td>
+                                            <td>124007</td>
+                                            <td>李林</td>
+                                            <td>20-21</td>
+                                            <td>考核</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="allcheckbox" id="1"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
+                                            <td>26</td>
+                                            <td>12</td>
+                                            <td>农学隆平15</td>
+                                            <td>农学院</td>
+                                            <td>+2</td>
+                                            <td>1</td>
+                                            <td>必修</td>
+                                            <td>实践课</td>
+                                            <td>124007</td>
+                                            <td>李林</td>
+                                            <td>20-21</td>
+                                            <td>考核</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="allcheckbox" id="2"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
+                                            <td>26</td>
+                                            <td>12</td>
+                                            <td>农学隆平15</td>
+                                            <td>农学院</td>
+                                            <td>+2</td>
+                                            <td>1</td>
+                                            <td>必修</td>
+                                            <td>实践课</td>
+                                            <td>124007</td>
+                                            <td>李林</td>
+                                            <td>20-21</td>
+                                            <td>考核</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="allcheckbox" id="3"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
+                                            <td>26</td>
+                                            <td>12</td>
+                                            <td>农学隆平15</td>
+                                            <td>农学院</td>
+                                            <td>+2</td>
+                                            <td>1</td>
+                                            <td>必修</td>
+                                            <td>实践课</td>
+                                            <td>124007</td>
+                                            <td>李林</td>
+                                            <td>20-21</td>
+                                            <td>考核</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" name="allcheckbox" id="4"></td>
+                                            <td>(2016-2017-2)-B372J13900-1240071-1</td>
+                                            <td>B372J13900</td>
+                                            <td>农学实践（3）</td>
+                                            <td>26</td>
+                                            <td>12</td>
+                                            <td>农学隆平15</td>
+                                            <td>农学院</td>
+                                            <td>+2</td>
+                                            <td>1</td>
+                                            <td>必修</td>
+                                            <td>实践课</td>
+                                            <td>124007</td>
+                                            <td>李林</td>
+                                            <td>20-21</td>
+                                            <td>考核</td>
+                                        </tr>
+                                    </tbody>
+                                  </table>
+
+						</div>
+						
+						
+					</div>
+				</div><!-- End Sidebar-->                 
+                
+                             
+                              
+                    
+            
+        </div><!--row end-->
+    </div>
+	<div class="clearfix"></div>
+	<!--弹出框-->
+								<div class="modal-content" id="Applychart" style="border:#3071a9 8px solid;">
+                                  <div class="modal-header" style="background:#3071a9; color:#FFF">
+                                    <button type="button" class="close" id="closemodal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
+                                  </div>
+                                  
+                                  <div class="modal-body table-responsive">
+                                  	<form class="form-horizontal" role="form" id="PraForm">
+                                        
+                                          <table>
+                                          	<tr>
+                                            	<td>
+                                                    单位：<input readonly type="text" class="noborder" id="division" value="农学院">
+                                                </td>
+                                                <td>
+                                                    课程名称：<input readonly type="text"  id="classname" value="农学实践(3)">
+                                                </td>
+                                                <td>
+                                                	面向专业：<input readonly type="text" class="noborder" id="major" value="农学">
+                                                </td>
+                                                <td>
+                                                	班级：<input readonly type="text" class="noborder" id="class" value="15信工1">
+                                                </td>
+                                                <td>
+                                                	学分：<input readonly type="text" id="grade" value="4">
+                                                </td>
+                                                <td>
+                                                	学习人数：<input readonly type="text" id="number" value="26">
+                                                </td>
+                                                <td>
+                                                	实习周数：<input readonly type="text" id="weeks" value="12">
+                                                </td>
+                                            </tr>
+                                          </table>
+                                        
+                                         <br>
+                                          <button type="button" class="btn btn-primary" id="addTbody">添加</button>
+                                          <button type="button" class="btn btn-success" id="save">保存</button>
+<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
+-->                                          <table class="table table-bordered"  id="table">
+                                          	
+												<tr>
+													<td>带队老师</td>
+													<td colspan="3"><input class="noborder text-center flag" readonly id="leaderTeacher" type="text" value="李林"></td>
+													<td>指导教师</td>
+													<td colspan="4"><input readonly class="noborder text-center flag" id="adviser" value="" type="text"></td>
+												</tr>
+												<tr>
+													<td>实验员姓名</td>
+													<td colspan="8"><input class="noborder text-center flag" readonly id="testername" value="" type="text">
+													</td>
+												</tr>
+                                         	
+                                          	<tbody class="tbodyID">
+												<tr>
+													<td>序号</td>
+													<td>周次</td>
+													<td>开始时间</td>
+													<td>结束时间</td>
+													<td>实习内容</td>
+													<td>实习基地来源</td>
+													<td>实习地点</td>
+													<td>实习类别</td>
+													<td>备注</td>
+												</tr>
+												<tr>
+													<td rowspan="3"><sapn class="mark">1</span></td>
+													<td><input id="weekend" type="text" class="inputWidth flag"></td>
+													<td><input id="startweek" type="text" class="inputWidth flag"></td>
+													<td><input id="endweek" type="text" class="inputWidth flag"></td>
+													<td><input id="content" type="text" class="inputWidth flag"></td>
+													<td>
+														<select name="" id="baseFrom" class="flag">
+															<option value="">请选择</option>
+															<option value="校内基地">校内基地</option>
+															<option value="校外基地">校外基地</option>
+														</select>
+													</td>
+													<td id="practicePlace">
+														<select id="schoolBase" hidden class="flag">
+															<option id="schoolBaseID" value="">请选择</option>
+														</select>
+														<input id="outBase" type="text" class="inputWidth flag" hidden>
+													</td>
+													<td>
+														<select name="" id="category" class="flag">
+															<option value="">请选择</option>
+															<option value="生产实习">生产实习</option>
+															<option value="教学实习">教学实习</option>
+															<option value="毕业实习">毕业实习</option>
+															<option value="综合实习">综合实习</option>
+														</select>
+													</td>
+													<td><input id="remark" type="text" class="flag"></td>
+												</tr>
+												<tr>
+													<td>实习形式</td>
+													<td colspan="2">实习基地联系人/电话</td>
+													<td>目的</td>
+													<td>实习经费预算</td>
+													<td>指导老师</td>
+													<td>实验员</td>
+													<td>操作</td>
+												</tr>
+												<tr>
+													<td>
+														<select name="" id="practiceClass" class="flag">
+															<option value="">请选择</option>
+															<option value="集中">集中</option>
+															<option value="分散">分散</option>
+														</select>
+													</td>
+													<td colspan="2"><input id="phone" type="text" class="flag"></td>
+													<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>
+													<td><input id="budget" type="text" class="inputWidth flag"></td>
+													<td><input type="text" value="" class="adviser2 inputWidth flag"></td>
+													<td><button type="button" value="" class="btn btn-primary choice" id="choice">选择</button></td>
+													<td><span class="deleteID" id="">删除</span></td>
+												</tr>
+                                          	</tbody>
+                                          </table>
+                                        </form>
+                                  	
+                                  </div>
+                                </div>  
+                                
+        <!--弹出框选择--> 
+        <div class="modal fade" id="Selectname" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<form action="" method="post" id="">
+							<div class="modal-content" id="modalcontent" style="border:#3071a9 8px solid;width: 450px">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
+								</div>
+
+								<center>
+									<div class="modal-body">
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-12 form-inline">
+												<lable>实验员:</lable>
+												<input id="tester" type="text" class="form-control exeWidth" value="">
+											</div>
+										</div>
+										<div class="row" style="margin-bottom: 30px;">
+											<div class="col-sm-6">
+												<select name="" id="selectCollege" class="form-control">
+													<option value="" id="collegeID">请选择学院</option>
+													<option value="test1">test1</option>
+													<option value="test2">test2</option>
+													<option value="test3">test3</option>
+												</select>
+											</div>
+											<div class="col-sm-6">
+												<select name="" id="selectTname" class="form-control">
+													<option value="" id="teacherNmaeID">请选择老师</option>
+													<option value="赵勇">赵勇</option>
+													<option value="李彩">李彩</option>
+													<option value="宋超">宋超</option>
+												</select>
+											</div>
+										</div>
+											
+											
+										
+									</div>
+								</center>
+								<div class="modal-footer">
+									<center>
+										<button type="button" class="btn btn-primary" data-dismiss="modal" id="finished">确定</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" id="">取消</button>
+									</center>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+<!--增加按钮弹出框-->
+<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border:#3071a9 8px solid;">
+      <div class="modal-header" style="background:#3071a9; color:#FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center">增加实习计划</h4>
+      </div>
+      <div class="modal-body">
+       <form action="" id="addForm">
+        <table class="table">
+           <tr>
+                <td>教师姓名</td>
+                <td><input type="text" value="" id="AteacherName" class="form-control"></td>
+                <td>教师编号</td>
+                <td><input type="text" value="" id="AteacherID" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>开课学院</td>
+                <td><input type="text" value="" id="Acollege" class="form-control"></td>
+                <td>班级组成</td>
+                <td><input type="text" value="" id="Aclass" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>课程名称</td>
+                <td><input type="text" value="" id="AcourceName" class="form-control"></td>
+                <td>课程性质</td>
+                <td>
+                    <select class="form-control" name="" id="AcourceProperty">
+                         <option value="">请选择</option>
+                         <option value="必修">必修</option>
+                         <option value="选修">选修</option>
+                    </select>
+                </td>
+           </tr>
+           <tr>
+                <td>课程类别</td>
+                <td>
+                    <select class="form-control" name="" id="AcourceClass">
+                         <option value="">请选择</option>
+                         <option value="必修">必修</option>
+                         <option value="选修">选修</option>
+                    </select>
+                </td>
+                <td>起始周次</td>
+                <td><input type="text" value="" id="Aweek" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>周学时</td>
+                <td><input type="text" value="" id="AWperiod" class="form-control"></td>
+                <td>学时</td>
+                <td><input type="text" value="" id="Aperiod" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>人数</td>
+                <td><input type="text" value="" id="Anumber" class="form-control"></td>
+                <td>已选人数</td>
+                <td><input type="text" value="" id="AselectedNum" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>考核</td>
+                <td><input type="text" value="" id="Atest" class="form-control"></td>
+                <td>专业编号</td>
+                <td><input type="text" value="" id="AmajoyID" class="form-control"></td>
+           </tr>
+           <tr>
+                <td>面向专业</td>
+                <td><input type="text" value="" id="" class="form-control"></td>
+                <td>所属专业</td>
+                <td><input type="text" value="" id="Amajoy" class="form-control"></td>
+           </tr>
+       </table>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="saveAdd">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+      
+    </div>
+  </div>
+</div>                        
+                                                              
+                                                                                                                    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery.min.js"></script>
+    <!--datatable javascript-->
+	<script src="../js/jquery.dataTables.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootbox.min.js"></script>
+    <script src="../js/practiceplanmaintain.js"></script>
+    <script src="../js/kg.js"></script>
+    
+  </body>
+</html>

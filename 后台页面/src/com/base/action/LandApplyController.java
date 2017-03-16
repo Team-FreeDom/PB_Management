@@ -46,7 +46,7 @@ import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
-//ÉêÇëÄ£¿éµÄ¿ØÖÆ²ã
+//ç”³è¯·æ¨¡å—çš„æ§åˆ¶å±‚
 @Controller("landApplyController")
 @RequestMapping("/jsp")
 public class LandApplyController {
@@ -54,7 +54,7 @@ public class LandApplyController {
 	@Autowired
 	private LandApplyServiceImpl landApplyServiceImpl;
 
-	// »ùµØ²éÑ¯
+	// åŸºåœ°æŸ¥è¯¢
 		@RequestMapping("/baseInfo.do")
 		public String selectBase(HttpServletRequest request, ModelMap map,
 				HttpServletResponse response) {
@@ -74,7 +74,7 @@ public class LandApplyController {
 			return null;
 		}
 	
-	// »ùµØ+²¿ÃÅ²éÑ¯
+	// åŸºåœ°+éƒ¨é—¨æŸ¥è¯¢
 	@RequestMapping("/getBase_deptInfo.do")
 	public String selectBase_deptInfo(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -109,7 +109,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	// Ìøµ½¾ßÌå×âÁŞÒ³Ãæ
+	// è·³åˆ°å…·ä½“ç§Ÿèµé¡µé¢
 	@RequestMapping("/mainRent.do")
 	public String mainRent(HttpServletRequest request, ModelMap map,
 			HttpServletResponse response) {
@@ -175,7 +175,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	// ×âÁŞÉêÇëÊ±£¬»ñÈ¡ÍÁµØ²¼¾Ö+ÍÁµØ»ù±¾ĞÅÏ¢+ÍÁµØÏÖ×âÁŞÇé¿ö+ÍÁµØ×âÁŞÀúÊ·
+	// ç§Ÿèµç”³è¯·æ—¶ï¼Œè·å–åœŸåœ°å¸ƒå±€+åœŸåœ°åŸºæœ¬ä¿¡æ¯+åœŸåœ°ç°ç§Ÿèµæƒ…å†µ+åœŸåœ°ç§Ÿèµå†å²
 	@RequestMapping("/getRentCollection.do")
 	public String getRentCollection(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -197,7 +197,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	// ×âÁŞÉêÇëÊ±£¬Ìá½»×âÁŞÉêÇë
+	// ç§Ÿèµç”³è¯·æ—¶ï¼Œæäº¤ç§Ÿèµç”³è¯·
 	@RequestMapping("/submitLandApply.do")
 	public String submitLandApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -227,7 +227,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	// »ñÈ¡ÓÃ»§¸öÈËµÄÉêÇë¼ÇÂ¼
+	// è·å–ç”¨æˆ·ä¸ªäººçš„ç”³è¯·è®°å½•
 	@RequestMapping("/selfApply.do")
 	public String selfApply(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -237,10 +237,10 @@ public class LandApplyController {
 		
 		int length=Integer.valueOf(request.getParameter("length"));
 		int start=Integer.valueOf(request.getParameter("start"));
-		int draw=Integer.valueOf(request.getParameter("draw"));  //´Ó¿Í»§¶Ë»ñµÃlength(Ã¿Ò³3³¤¶È)£¬start()ÆğÊ¼Ò³Êı£¬draw¼ÆÊıÆ÷
+		int draw=Integer.valueOf(request.getParameter("draw"));  //ä»å®¢æˆ·ç«¯è·å¾—length(æ¯é¡µ3é•¿åº¦)ï¼Œstart()èµ·å§‹é¡µæ•°ï¼Œdrawè®¡æ•°å™¨
 		
 		
-		int page=start/length+1; //µ±Ç°Ò³Êı
+		int page=start/length+1; //å½“å‰é¡µæ•°
 		
 	    String applicantId = CookieUtils.getUserid(request);	
 		
@@ -322,7 +322,7 @@ public class LandApplyController {
 	@RequestMapping("/myRentdetail.do")
 	public String myRentdetail(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		//System.out.println(request.getParameter("À´µ½myRentdetail.do"));
+		//System.out.println(request.getParameter("æ¥åˆ°myRentdetail.do"));
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 
 		List<LandApply_view> list = null;
@@ -369,9 +369,9 @@ public class LandApplyController {
 		
 		int length=Integer.valueOf(request.getParameter("length"));
 		int start=Integer.valueOf(request.getParameter("start"));
-		int draw=Integer.valueOf(request.getParameter("draw"));  //´Ó¿Í»§¶Ë»ñµÃlength(Ã¿Ò³3³¤¶È)£¬start()ÆğÊ¼Ò³Êı£¬draw¼ÆÊıÆ÷
+		int draw=Integer.valueOf(request.getParameter("draw"));  //ä»å®¢æˆ·ç«¯è·å¾—length(æ¯é¡µ3é•¿åº¦)ï¼Œstart()èµ·å§‹é¡µæ•°ï¼Œdrawè®¡æ•°å™¨
 			
-		int page=start/length+1; //µ±Ç°Ò³Êı		
+		int page=start/length+1; //å½“å‰é¡µæ•°		
 		String applicantId = CookieUtils.getUserid(request);
 		
 		ApplyList al = landApplyServiceImpl.myRentFont1(applicantId,page,length);		
@@ -468,36 +468,36 @@ public class LandApplyController {
 		String fileName = null;
 		int flag=Integer.valueOf(request.getParameter("flag"));
 		if(flag==1){
-			fileName="½ÌÑ§¿ÆÑĞÓÃµØĞ­Òé.pdf";
+			fileName="æ•™å­¦ç§‘ç ”ç”¨åœ°åè®®.pdf";
 		}else if(flag==2){
-			fileName="ÍÁµØÓĞ³¥Ê¹ÓÃĞ­Òé.docx";
+			fileName="åœŸåœ°æœ‰å¿ä½¿ç”¨åè®®.docx";
 		}	
 		
 		String filename = fileName.substring(0, fileName.lastIndexOf('.'));
 		String filetype=fileName.substring(fileName.lastIndexOf("."));
 		// System.out.println(filename);
 
-		// ÎÄ¼şÏÂÔØ
+		// æ–‡ä»¶ä¸‹è½½
 		response.setContentType(request.getServletContext().getMimeType(
 				filename));
 
-		// ¶ÁÈ¡Ä¿±êÎÄ¼ş£¬Í¨¹ıresponse½«Ä¿±êÎÄ¼şĞ´µ½¿Í»§¶Ë
-		// »ñÈ¡Ä¿±êÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
+		// è¯»å–ç›®æ ‡æ–‡ä»¶ï¼Œé€šè¿‡responseå°†ç›®æ ‡æ–‡ä»¶å†™åˆ°å®¢æˆ·ç«¯
+		// è·å–ç›®æ ‡æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
 		/*String fullFileName = request.getServletContext().getRealPath(
 				"file/" + fileName);*/
 		String fullFileName = ExcelReport.getWebRootUrl(request,"/upload/")+ fileName;
 		
-		// ÉèÖÃContent-Disposition
+		// è®¾ç½®Content-Disposition
 		/*response.setHeader("Content-Disposition", "attachment;filename="
 				+ fileName);*/
 		
 		response.setHeader("Content-Disposition", "attachment;filename="
 				+ new String(filename.getBytes(), "iso-8859-1") + filetype);
-		// ¶ÁÈ¡ÎÄ¼ş
+		// è¯»å–æ–‡ä»¶
 		InputStream in = new FileInputStream(fullFileName);
 		OutputStream out = response.getOutputStream();
 
-		// Ğ´ÎÄ¼ş
+		// å†™æ–‡ä»¶
 		int b;
 		while ((b = in.read()) != -1) {
 			out.write(b);
@@ -512,7 +512,7 @@ public class LandApplyController {
 	@RequestMapping("/unionSelect.do")
 	public String unionSelect(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
-		System.out.println("µ÷ÓÃÁËÂğ");
+		System.out.println("è°ƒç”¨äº†å—");
 		String applicantId = "201440509";
 
 		String bname = request.getParameter("bname");
@@ -520,7 +520,7 @@ public class LandApplyController {
 		String endTime = request.getParameter("endTime");
 		String lid = request.getParameter("lid");
 
-		System.out.println("ÎÒµÃµ½µÄlidÊÇ£º" + lid);
+		System.out.println("æˆ‘å¾—åˆ°çš„lidæ˜¯ï¼š" + lid);
 
 		String desc = request.getParameter("desc");
 
@@ -554,15 +554,15 @@ public class LandApplyController {
 
 		System.out.println(lid + "  " + dept + "  " + planting + "  " + la_id);
 
-		// ÉÏ´«ÎÄ¼ş£¨Í¼Æ¬£©£¬½«ÎÄ¼ş´æÈë·şÎñÆ÷Ö¸¶¨Â·¾¶ÏÂ£¬²¢»ñµÃÎÄ¼şµÄÏà¶ÔÂ·¾¶
+		// ä¸Šä¼ æ–‡ä»¶ï¼ˆå›¾ç‰‡ï¼‰ï¼Œå°†æ–‡ä»¶å­˜å…¥æœåŠ¡å™¨æŒ‡å®šè·¯å¾„ä¸‹ï¼Œå¹¶è·å¾—æ–‡ä»¶çš„ç›¸å¯¹è·¯å¾„
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		// µÃµ½ÉÏ´«µÄÎÄ¼ş
+		// å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶
 		MultipartFile mFile = multipartRequest.getFile("fileResource");
-		// µÃµ½ÉÏ´«·şÎñÆ÷µÄÂ·¾¶
+		// å¾—åˆ°ä¸Šä¼ æœåŠ¡å™¨çš„è·¯å¾„
 		String path = request.getSession().getServletContext()
 				.getRealPath("/infor/");
-		// µÃµ½ÉÏ´«µÄÎÄ¼şµÄÎÄ¼şÃû
+		// å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶çš„æ–‡ä»¶å
 		String fileName = mFile.getOriginalFilename();
 		System.out.println(fileName);
 
@@ -572,7 +572,7 @@ public class LandApplyController {
 			byte[] b = new byte[1048576];
 			int length = inputStream.read(b);
 			path += "\\" + filename;
-			// ÎÄ¼şÁ÷Ğ´µ½·şÎñÆ÷¶Ë
+			// æ–‡ä»¶æµå†™åˆ°æœåŠ¡å™¨ç«¯
 			FileOutputStream outputStream = new FileOutputStream(path);
 			outputStream.write(b, 0, length);
 			inputStream.close();
@@ -659,15 +659,15 @@ public class LandApplyController {
 	public String uploading(HttpServletRequest request,HttpServletResponse response, ModelMap map) 
 	{
 		System.out.println("hello");	
-		//ÉÏ´«ÎÄ¼ş£¨Í¼Æ¬£©£¬½«ÎÄ¼ş´æÈë·şÎñÆ÷Ö¸¶¨Â·¾¶ÏÂ£¬²¢»ñµÃÎÄ¼şµÄÏà¶ÔÂ·¾¶
+		//ä¸Šä¼ æ–‡ä»¶ï¼ˆå›¾ç‰‡ï¼‰ï¼Œå°†æ–‡ä»¶å­˜å…¥æœåŠ¡å™¨æŒ‡å®šè·¯å¾„ä¸‹ï¼Œå¹¶è·å¾—æ–‡ä»¶çš„ç›¸å¯¹è·¯å¾„
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		// µÃµ½ÉÏ´«µÄÎÄ¼ş
-		MultipartFile mFile = multipartRequest.getFile("imgfile");   //ÓĞÎÊÌâ		
+		// å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶
+		MultipartFile mFile = multipartRequest.getFile("imgfile");   //æœ‰é—®é¢˜		
 		String filename = "";
 		if (!mFile.isEmpty()){
-			// µÃµ½ÉÏ´«·şÎñÆ÷µÄÂ·¾¶			
+			// å¾—åˆ°ä¸Šä¼ æœåŠ¡å™¨çš„è·¯å¾„			
 			String path = ExcelReport.getWebRootUrl(request,"/landImage/");
-			// µÃµ½ÉÏ´«µÄÎÄ¼şµÄÎÄ¼şÃû
+			// å¾—åˆ°ä¸Šä¼ çš„æ–‡ä»¶çš„æ–‡ä»¶å
 			String fileName = mFile.getOriginalFilename();
 			String fileType = fileName.substring(fileName.lastIndexOf("."));
 			filename = new Date().getTime() + fileType;			
@@ -677,7 +677,7 @@ public class LandApplyController {
 				byte[] b = new byte[1048576];
 				int length = inputStream.read(b);
 				path += "/" + filename;
-				// ÎÄ¼şÁ÷Ğ´µ½·şÎñÆ÷¶Ë
+				// æ–‡ä»¶æµå†™åˆ°æœåŠ¡å™¨ç«¯
 				FileOutputStream outputStream = new FileOutputStream(path);
 				outputStream.write(b, 0, length);
 				inputStream.close();
@@ -713,16 +713,16 @@ public class LandApplyController {
 		String layoutStr = "";
 		String landinfoStr = "";       
 		if (tag == 0) {
-			System.out.println("Çå¿Õ");
+			System.out.println("æ¸…ç©º");
 		    landApplyServiceImpl.delLayout_info(bid,path1);
 		} else {
-			System.out.println("¸üĞÂ£ºcontroller²ã");
+			System.out.println("æ›´æ–°ï¼šcontrollerå±‚");
 			JSONArray obj = JSONArray.fromObject(str);
 			for (int i = 0; i < obj.size(); i++) {
 
 				JSONObject temp = obj.getJSONObject(i);		
 				
-				landinfoStr += "('" + temp.getString("id") + "',"  //Æ´×°ÍÁµØĞÅÏ¢
+				landinfoStr += "('" + temp.getString("id") + "',"  //æ‹¼è£…åœŸåœ°ä¿¡æ¯
 						+ temp.getInt("bid") + ","
 						+ Integer.valueOf(temp.getString("Afford")) + ","
 						+ temp.getInt("buildingArea") + ","
@@ -732,7 +732,7 @@ public class LandApplyController {
 						+ temp.getString("college") +"','"
 						+ temp.getString("img")+"'";
 
-				layoutStr += "(" + temp.getInt("bid") + ","    //Æ´×°ÍÁµØ²¼¾ÖĞÅÏ¢
+				layoutStr += "(" + temp.getInt("bid") + ","    //æ‹¼è£…åœŸåœ°å¸ƒå±€ä¿¡æ¯
 						+ temp.getInt("height") + "," + temp.getInt("width")
 						+ "," + temp.getInt("x") + "," + temp.getInt("y")
 						+ ",'" + temp.getString("id") + "'";
@@ -760,7 +760,7 @@ public class LandApplyController {
 
 	}
 
-	//ĞŞ¸Ä»ò¸üĞÂ×âÁŞ¿ªÊ¼Ê±¼ä
+	//ä¿®æ”¹æˆ–æ›´æ–°ç§Ÿèµå¼€å§‹æ—¶é—´
 	@RequestMapping("/updateLandApplyDate.do")
 	public String updateLandApplyDate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -771,7 +771,7 @@ public class LandApplyController {
 		String rentetime = request.getParameter("rentetime");
 		
 				
-		Startplan sp =new Startplan("zl","ÍÁµØ×âÁŞ",planstime,planetime,rentstime,rentetime);		
+		Startplan sp =new Startplan("zl","åœŸåœ°ç§Ÿèµ",planstime,planetime,rentstime,rentetime);		
 		landApplyServiceImpl.updateLandApplyDate(sp);
 		
 		JSONObject getObj = new JSONObject();
@@ -788,7 +788,7 @@ public class LandApplyController {
 	}
 	
 	
-	//»ñÈ¡×âÁŞ¿ªÊ¼Ê±¼ä
+	//è·å–ç§Ÿèµå¼€å§‹æ—¶é—´
 	@RequestMapping("/getLandApplyDate.do")
 	public String getLandApplyDate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {

@@ -17,17 +17,17 @@ public class CookieUtils {
 			HttpServletResponse response) {
 
 		Cookie cookie = new Cookie(name, value);
-		cookie.setMaxAge(60 * 60 * 24); // ÓĞĞ§Ê±¼äÎª1Ìì
+		cookie.setMaxAge(60 * 60 * 24); // æœ‰æ•ˆæ—¶é—´ä¸º1å¤©
 		cookie.setPath("/BaseWeb/");
 		response.addCookie(cookie);
 	}
 
       public static String getUserid(HttpServletRequest request)
 	  {
-		Cookie[] cookies = request.getCookies();//»ñµÃËùÓĞcookie¶ÔÏó		
+		Cookie[] cookies = request.getCookies();//è·å¾—æ‰€æœ‰cookieå¯¹è±¡		
 		String userid=null;
-		for (Cookie co : cookies) {   //±éÀúcookieÊı×é
-			if (co.getName().equals("username")) {  //ÅĞ¶Ï´ËcookieµÄkeyÖµÊÇ·ñÊÇusername
+		for (Cookie co : cookies) {   //éå†cookieæ•°ç»„
+			if (co.getName().equals("username")) {  //åˆ¤æ–­æ­¤cookieçš„keyå€¼æ˜¯å¦æ˜¯username
 				userid=co.getValue();
 			}
 		}
@@ -91,40 +91,40 @@ public class CookieUtils {
 		return "";
 	}
 	
-	// ÅĞ¶ÏÓÃ»§ÊÇ·ñµÇÂ¼
-	// Çé¿öÒ»£ºÎ´µÇÂ¼£¬·µ»ØµÇÂ¼½çÃæ
-	// Çé¿ö¶ş£ºµÇÂ¼³É¹¦£¬µ«Î´ÏìÓ¦Ê±¼ä³¬¹ıÁË10·ÖÖÓ£¬ĞèÒªÖØĞÂµÇÂ¼
-	// Çé¿öÈı£ºµÇÂ¼³É¹¦£¬ÏìÓ¦Ê±¼äÒ²Î´³¬¹ıÁË10·ÖÖÓ£¬ÔòÖØĞÂ¸üĞÂµÇÂ¼Ê±¼ä
+	// åˆ¤æ–­ç”¨æˆ·æ˜¯å¦ç™»å½•
+	// æƒ…å†µä¸€ï¼šæœªç™»å½•ï¼Œè¿”å›ç™»å½•ç•Œé¢
+	// æƒ…å†µäºŒï¼šç™»å½•æˆåŠŸï¼Œä½†æœªå“åº”æ—¶é—´è¶…è¿‡äº†10åˆ†é’Ÿï¼Œéœ€è¦é‡æ–°ç™»å½•
+	// æƒ…å†µä¸‰ï¼šç™»å½•æˆåŠŸï¼Œå“åº”æ—¶é—´ä¹Ÿæœªè¶…è¿‡äº†10åˆ†é’Ÿï¼Œåˆ™é‡æ–°æ›´æ–°ç™»å½•æ—¶é—´
 	public static boolean checkLogin(HttpServletRequest request,
 			HttpServletResponse response, Cookie[] cookies) {
 		// Cookie[] cookies=request.getCookies();
 		boolean flag = false;
 		for (Cookie co : cookies) {
-			if (co.getName().equalsIgnoreCase("username"))// ÅĞ¶ÏÊÇ·ñµÇÂ¼£¬Èç¹ûµÇÂ¼³É¹¦¾Í»áÓĞcookie×Ö¶Îusername
+			if (co.getName().equalsIgnoreCase("username"))// åˆ¤æ–­æ˜¯å¦ç™»å½•ï¼Œå¦‚æœç™»å½•æˆåŠŸå°±ä¼šæœ‰cookieå­—æ®µusername
 			{
 				flag = true;
 				break;
 			}
 		}
 		// System.out.print(flag);
-		if (!flag) // Èç¹ûÃ»ÓĞµÇÂ¼£¬ÔòÖ±½Ó·µ»Ø
+		if (!flag) // å¦‚æœæ²¡æœ‰ç™»å½•ï¼Œåˆ™ç›´æ¥è¿”å›
 			return flag;
-		else { // Èç¹ûµÇÂ¼³É¹¦£¬ÔòÅĞ¶ÏÎ´ÏìÓ¦Ê±¼äÊÇ·ñ³¬¹ıÁË10·ÖÖÓ
+		else { // å¦‚æœç™»å½•æˆåŠŸï¼Œåˆ™åˆ¤æ–­æœªå“åº”æ—¶é—´æ˜¯å¦è¶…è¿‡äº†10åˆ†é’Ÿ
 			for (Cookie co : cookies) {
-				if (co.getName().equalsIgnoreCase("logintime"))// ÅĞ¶ÏÎ´ÏìÓ¦Ê±¼ä³¬¹ıÁË10·ÖÖÓ
+				if (co.getName().equalsIgnoreCase("logintime"))// åˆ¤æ–­æœªå“åº”æ—¶é—´è¶…è¿‡äº†10åˆ†é’Ÿ
 				{
-					// ´óÊıÖµ×Ö·û´®²»ÄÜ×ª»¯ÎªInteger
+					// å¤§æ•°å€¼å­—ç¬¦ä¸²ä¸èƒ½è½¬åŒ–ä¸ºInteger
 					BigInteger loginTime = new BigInteger(co.getValue());
 					long currentTime = new Date().getTime();
 					long subTime = currentTime - loginTime.longValue();
 					// System.out.println(loginTime);
 					// System.out.println(currentTime);
 					// System.out.println(subTime / (1000*60));
-					if (subTime / (1000 * 60) >= 10) {
+					if (subTime / (1000 * 60 * 60 * 24) >= 1) { //æœªå“åº”æ—¶é—´æ˜¯å¦è¶…è¿‡ä¸€å¤©
 						flag = false;
-						// System.out.print("³¬¹ıÊ±¼ä");
-					} else {// Î´³¬¹ıÁË10·ÖÖÓ,Ôò¸üĞÂÊ±¼ä
-						co.setMaxAge(60 * 60 * 10);
+						// System.out.print("è¶…è¿‡æ—¶é—´");
+					} else {// æœªè¶…è¿‡äº†10åˆ†é’Ÿ,åˆ™æ›´æ–°æ—¶é—´
+						co.setMaxAge(60 * 60 * 24);
 						co.setPath("/BaseWeb/");
 						co.setValue(String.valueOf(currentTime));
 						response.addCookie(co);

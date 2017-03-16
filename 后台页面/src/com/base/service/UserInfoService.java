@@ -11,78 +11,78 @@ import com.base.po.UserInfo;
 public interface UserInfoService {
 	
 	 /*
-	   ²ÎÊıËµÃ÷£ºid,×Ö·û´®Êı×é£¬±íÊ¾ÓÃ»§±àºÅµÄÊı×é
-	   ·µ»ØÖµ£º  ÎŞ·µ»ØÖµ
-	   º¯Êı¹¦ÄÜ£ºÉ¾³ıÒ»¸ö»ò¶à¸öÓÃ»§ĞÅÏ¢
+	   å‚æ•°è¯´æ˜ï¼šid,å­—ç¬¦ä¸²æ•°ç»„ï¼Œè¡¨ç¤ºç”¨æˆ·ç¼–å·çš„æ•°ç»„
+	   è¿”å›å€¼ï¼š  æ— è¿”å›å€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šåˆ é™¤ä¸€ä¸ªæˆ–å¤šä¸ªç”¨æˆ·ä¿¡æ¯
 	 */
      public void delUser(String[] delid);
   
      /*
-	   ²ÎÊıËµÃ÷£ºui,´ú±íÓÃ»§¼ÇÂ¼¶ÔÏóUserInfo
-	   ·µ»ØÖµ£º  ÎŞ·µ»ØÖµ
-	   º¯Êı¹¦ÄÜ£ºÔö¼ÓÒ»ÌõÓÃ»§ĞÅÏ¢
+	   å‚æ•°è¯´æ˜ï¼šui,ä»£è¡¨ç”¨æˆ·è®°å½•å¯¹è±¡UserInfo
+	   è¿”å›å€¼ï¼š  æ— è¿”å›å€¼
+	   å‡½æ•°åŠŸèƒ½ï¼šå¢åŠ ä¸€æ¡ç”¨æˆ·ä¿¡æ¯
 	 */
     public void doUser(UserInfo ui);
 
      /*
-             ²ÎÊıËµÃ÷£ºui,´ú±íÓÃ»§¼ÇÂ¼¶ÔÏóUserInfo
-            ·µ»ØÖµ£º  ÎŞ·µ»ØÖµ
-            º¯Êı¹¦ÄÜ£º¸üĞÂÓÃ»§ĞÅÏ¢
+             å‚æ•°è¯´æ˜ï¼šui,ä»£è¡¨ç”¨æˆ·è®°å½•å¯¹è±¡UserInfo
+            è¿”å›å€¼ï¼š  æ— è¿”å›å€¼
+            å‡½æ•°åŠŸèƒ½ï¼šæ›´æ–°ç”¨æˆ·ä¿¡æ¯
     */
      public void updateUser(UserInfo ui);
 
     /*
-            ²ÎÊıËµÃ÷£ºÎŞ²Î
-           ·µ»ØÖµ£º  List<UserInfo>£¬ÓÃ»§ĞÅÏ¢¼ÇÂ¼UserInfo¶ÔÏóµÄ¼¯ºÏ
-          º¯Êı¹¦ÄÜ£ºÏÔÊ¾ËùÓĞµÄÓÃ»§ĞÅÏ¢
+            å‚æ•°è¯´æ˜ï¼šæ— å‚
+           è¿”å›å€¼ï¼š  List<UserInfo>ï¼Œç”¨æˆ·ä¿¡æ¯è®°å½•UserInfoå¯¹è±¡çš„é›†åˆ
+          å‡½æ•°åŠŸèƒ½ï¼šæ˜¾ç¤ºæ‰€æœ‰çš„ç”¨æˆ·ä¿¡æ¯
       */
     public List<UserInfo> getUserInfos();
     
-    /* ²ÎÊıËµÃ÷£ºuserright,ÕûĞÍ£¬´ú±íÓÃ»§µÄÈ¨ÏŞÖµ
-                sex,×Ö·û´®£¬ÎªĞÔ±ğ
-                id£¬ÕûĞÍ£¬ÎªÔ±¹¤±àºÅ
-               ·µ»ØÖµ£º  List<UserInfo>£¬ÓÃ»§ĞÅÏ¢¼ÇÂ¼UserInfo¶ÔÏóµÄ¼¯ºÏ
-               º¯Êı¹¦ÄÜ£º¸ù¾İÌõ¼şÏÔÊ¾ËùÓĞµÄÓÃ»§ĞÅÏ¢
-                 ×¢£º         3¸ö²ÎÊıÊÇÁªºÏ²éÑ¯£¬µ«ÕâÈı¸ö²ÎÊıÒ²¿ÉÄÜ´æÔÚÃ»ÓĞÖµµÄÇé¿ö
-	                     Òò´ËÔÚ´ËĞèÒª½øĞĞÅĞ¶Ï²ÎÊıÊÇ·ñÓĞÖµ£¬¸ù¾İ½á¹ûµ÷ÓÃdao²ãµÄ·½·¨
-	                     ÔÚ´Ë¹æ¶¨£¬´ÓÉÏ²ã´«À´µÄuserrightºÍidÖµÈôÎª0£¬Ôò´ú±í´ËÁ½²ÎÊıÎŞÖµ
+    /* å‚æ•°è¯´æ˜ï¼šuserright,æ•´å‹ï¼Œä»£è¡¨ç”¨æˆ·çš„æƒé™å€¼
+                sex,å­—ç¬¦ä¸²ï¼Œä¸ºæ€§åˆ«
+                idï¼Œæ•´å‹ï¼Œä¸ºå‘˜å·¥ç¼–å·
+               è¿”å›å€¼ï¼š  List<UserInfo>ï¼Œç”¨æˆ·ä¿¡æ¯è®°å½•UserInfoå¯¹è±¡çš„é›†åˆ
+               å‡½æ•°åŠŸèƒ½ï¼šæ ¹æ®æ¡ä»¶æ˜¾ç¤ºæ‰€æœ‰çš„ç”¨æˆ·ä¿¡æ¯
+                 æ³¨ï¼š         3ä¸ªå‚æ•°æ˜¯è”åˆæŸ¥è¯¢ï¼Œä½†è¿™ä¸‰ä¸ªå‚æ•°ä¹Ÿå¯èƒ½å­˜åœ¨æ²¡æœ‰å€¼çš„æƒ…å†µ
+	                     å› æ­¤åœ¨æ­¤éœ€è¦è¿›è¡Œåˆ¤æ–­å‚æ•°æ˜¯å¦æœ‰å€¼ï¼Œæ ¹æ®ç»“æœè°ƒç”¨daoå±‚çš„æ–¹æ³•
+	                     åœ¨æ­¤è§„å®šï¼Œä»ä¸Šå±‚ä¼ æ¥çš„userrightå’Œidå€¼è‹¥ä¸º0ï¼Œåˆ™ä»£è¡¨æ­¤ä¸¤å‚æ•°æ— å€¼
     */
    
     public List<UserInfo> getUserInfos(int userright,String sex,int id);
     /**
-     * ĞŞ¸Ä¸öÈËĞÅÏ¢
+     * ä¿®æ”¹ä¸ªäººä¿¡æ¯
      * @param userinfo
      */
     public void update(String id,String name,String telephone,String password,String img);
     /**
-     * »ñÈ¡¸öÈËĞÅÏ¢
-     * @param id ÓÃ»§id
-     * @return ÓÃ»§ĞÅÏ¢
+     * è·å–ä¸ªäººä¿¡æ¯
+     * @param id ç”¨æˆ·id
+     * @return ç”¨æˆ·ä¿¡æ¯
      */
     public List<UserInfo> getInfoPerson(String id);
     /**
      * 
-     * @param pageindex µ±Ç°Ò³Êı
-     * @param size      µ±Ç°ÏÔÊ¾¼¸Ìõ¼ÇÂ¼
+     * @param pageindex å½“å‰é¡µæ•°
+     * @param size      å½“å‰æ˜¾ç¤ºå‡ æ¡è®°å½•
      * @return
      * @throws SQLException
      */
     public MangerList manger(int pageindex,int size,String searchValue);
     /**
      * 
-     * @param id ÓÃ»§id
-     * @return ÓÃ»§»ù±¾ĞÅÏ¢
+     * @param id ç”¨æˆ·id
+     * @return ç”¨æˆ·åŸºæœ¬ä¿¡æ¯
      * @throws SQLException
      */
     public List<Manger> Mangerdetail(String id);
     /**
-     * É¾³ıÈËÔ±»ù±¾ĞÅÏ¢
-     * @param str ÎªÈËÔ±idµÄ×Ö·û´®
+     * åˆ é™¤äººå‘˜åŸºæœ¬ä¿¡æ¯
+     * @param str ä¸ºäººå‘˜idçš„å­—ç¬¦ä¸²
      * @throws SQLException
      */
     public void deleteInfo(String str);
     /**
-     * ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+     * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
      * @param id
      * @param name
      * @param sex
@@ -96,17 +96,17 @@ public interface UserInfoService {
      */
     public void upInfo(String id,String name,String sex,String birthdate,String category,String attritube,String dept,String telephone,String idcard,String password);
   /**
-   * ²¿ÃÅ¼¯ºÏ
+   * éƒ¨é—¨é›†åˆ
    * @return
   */
     public List<ApplyDept> getDepts();
     /**
-     * AdminÖĞÈËÔ±ÊôĞÔ¼¯ºÏ
+     * Adminä¸­äººå‘˜å±æ€§é›†åˆ
      * @return
      */
     public List<Admin> getAttritube();
     /**
-     * Ôö¼ÓÓÃ»§
+     * å¢åŠ ç”¨æˆ·
      * @param id
      * @param name
      * @param sex
@@ -120,12 +120,12 @@ public interface UserInfoService {
      */
     public int addInfo(String id,String name,String sex,String birthdate,String category,String attritube,String dept,String telephone,String idcard,String password);
      /**
-      * µ¼³öÈËÔ±ĞÅÏ¢
+      * å¯¼å‡ºäººå‘˜ä¿¡æ¯
       * @return
       */
      public List<Manger> exportPersonInfo(String dept);
      /**
-      * É¸Ñ¡userInfoÖĞµÄ²¿ÃÅ
+      * ç­›é€‰userInfoä¸­çš„éƒ¨é—¨
       * @return
       */
      public List<UserInfo> userdept();

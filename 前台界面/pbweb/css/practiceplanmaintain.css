@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+table thead > tr> td{
+	font-size:16px;
+	background: -moz-linear-gradient(top, #e7eef3 0%, #cedee8 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7eef3), color-stop(100%,#cedee8));
+    background: -webkit-linear-gradient(top, #000000 0%,#cedee8 100%);
+    background: -o-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
+	}
+
+table thead tr th{
+	text-align:center;
+}
+table tbody tr td{
+	text-align:center;
+	cursor: pointer;
+}
+#Applychart{
+	position:absolute !important;
+	top:187px;
+	left:19%;	
+}
+#modalcontent{
+	margin-top: 20%;
+}
+.noborder{
+	border: none;
+	width: 80px;
+}
+#classname{
+	border: none;
+	width: 100px;
+}
+#grade{
+	border: none;
+	width: 40px;
+}
+#number{
+	border: none;
+	width: 40px;
+}
+#weeks{
+	border: none;
+	width: 40px;
+}
+#practiceapplytable span{
+	cursor:pointer;
+	font-size:18px;
+	color:#24354a;}
+#Applychart{
+	width: 1080px;
+	display: none;
+}
+.inputWidth{
+	width: 60px;
+}
+#Leaderteacher{
+	width: 100%;
+}
+#adviser{
+	width: 100%;
+}
+#testername{
+	width: 80%;
+	float: left;
+}
+.buttonWidth{
+	margin-left: 5px;
+}
+.exeWidth{
+	width: 80% !important;
+}
+.bottom{
+	margin-top:10px;
+	}
+.dataTables_length{
+	margin-left:5%;}
+.deleteID{
+	color:#F90409;
+	text-decoration: underline;
+}
+#colspan button{
+	float: right;
+	margin-right: 10px;
+}
+#addForm table tr td{
+	border: none;
+}
+

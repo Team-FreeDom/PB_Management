@@ -30,7 +30,7 @@ import com.base.serviceImpl.LandApplyServiceImpl;
 import com.base.serviceImpl.LandRentServiceImpl;
 import com.base.utils.ExcelReport;
 
-//Ê¹ÓÃÄ£¿éµÄ¿ØÖÆ²ã
+//ä½¿ç”¨æ¨¡å—çš„æ§åˆ¶å±‚
 @Controller("landRentController")
 @RequestMapping("/jsp")
 public class LandRentController<E> {
@@ -40,23 +40,23 @@ public class LandRentController<E> {
     @Autowired
     private LandApplyServiceImpl landApplyServiceImpl;
 	
-	// ÍÁµØ×âÁŞ¼ÇÂ¼
+	// åœŸåœ°ç§Ÿèµè®°å½•
 	@RequestMapping("/landRentInfo.do")
 	public String selectBase(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("Õ¹Ê¾ÍÁµØ×âÁŞĞÅÏ¢");
+		System.out.println("å±•ç¤ºåœŸåœ°ç§Ÿèµä¿¡æ¯");
 
 		
 		int length=Integer.valueOf(request.getParameter("length"));
 		int start=Integer.valueOf(request.getParameter("start"));
-		int draw=Integer.valueOf(request.getParameter("draw"));  //´Ó¿Í»§¶Ë»ñµÃlength(Ã¿Ò³3³¤¶È)£¬start()ÆğÊ¼Ò³Êı£¬draw¼ÆÊıÆ÷
+		int draw=Integer.valueOf(request.getParameter("draw"));  //ä»å®¢æˆ·ç«¯è·å¾—length(æ¯é¡µ3é•¿åº¦)ï¼Œstart()èµ·å§‹é¡µæ•°ï¼Œdrawè®¡æ•°å™¨
 		
 		/*int length=8;
 		int start=0;
 		int draw=1;*/
 		
 		System.out.println(length+"   "+start+" "+draw);
-		int page=start/length+1; //µ±Ç°Ò³Êı
+		int page=start/length+1; //å½“å‰é¡µæ•°
 		
 		RentList str = landRentServiceImpl.getLandRentInfos(null,
 				null, null, page,length);
@@ -109,13 +109,13 @@ public class LandRentController<E> {
 		String dept = request.getParameter("deptSh");		
 		String planting = request.getParameter("contentSh");
 		
-		System.out.println(bname+" "+dept+" "+planting+"Ò³Êı"+request.getParameter("length"));
+		System.out.println(bname+" "+dept+" "+planting+"é¡µæ•°"+request.getParameter("length"));
 		
 		
 		int length=Integer.valueOf(request.getParameter("length"));
 		int start=Integer.valueOf(request.getParameter("start"));
-		int draw=Integer.valueOf(request.getParameter("draw"));  //´Ó¿Í»§¶Ë»ñµÃlength(Ã¿Ò³3³¤¶È)£¬start()ÆğÊ¼Ò³Êı£¬draw¼ÆÊıÆ÷
-		int page=start/length+1; //µ±Ç°Ò³Êı
+		int draw=Integer.valueOf(request.getParameter("draw"));  //ä»å®¢æˆ·ç«¯è·å¾—length(æ¯é¡µ3é•¿åº¦)ï¼Œstart()èµ·å§‹é¡µæ•°ï¼Œdrawè®¡æ•°å™¨
+		int page=start/length+1; //å½“å‰é¡µæ•°
 		
        
         
@@ -196,14 +196,14 @@ public class LandRentController<E> {
 		
 		
 		
-		String filename = "ºşÄÏÅ©Òµ´óÑ§ÍÁµØ×âÁŞĞÅÏ¢±í";
+		String filename = "æ¹–å—å†œä¸šå¤§å­¦åœŸåœ°ç§Ÿèµä¿¡æ¯è¡¨";
 		
 		//String fullFileName = "E://landRentPreserveReport.xlsx";
 		String path = request.getSession().getServletContext()
 				.getRealPath("/upload/");
 		String fullFileName = path + "/landRentPreserveReport.xlsx";
 		er.landRentPreserveReport(list,fullFileName);
-		// ÏÔÊ¾ÖĞÎÄÎÄ¼şÃû
+		// æ˜¾ç¤ºä¸­æ–‡æ–‡ä»¶å
 		response.setContentType("application/octet-stream;charset=utf-8");
 		try {
 			response.setHeader("Content-Disposition", "attachment;filename="
@@ -212,10 +212,10 @@ public class LandRentController<E> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		// ¶ÁÈ¡ÎÄ¼ş
+		// è¯»å–æ–‡ä»¶
 		InputStream in = new FileInputStream(fullFileName);
 		OutputStream out = response.getOutputStream();
-		// Ğ´ÎÄ¼ş
+		// å†™æ–‡ä»¶
 		int b;
 		while ((b = in.read()) != -1) {
 			out.write(b);
@@ -254,7 +254,7 @@ public class LandRentController<E> {
 	public String landManageAdd(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws Exception {	
 		
-		System.out.println("»¶Ó­À´µ½Ôö¼ÓµÄ");
+		System.out.println("æ¬¢è¿æ¥åˆ°å¢åŠ çš„");
 		String lid=request.getParameter("addLid");
 		String userid=request.getParameter("addUserid");
 		int dept=Integer.valueOf(request.getParameter("addDept"));

@@ -13,7 +13,7 @@ $("#certainExport").click(function(){
  			cache : false,
  			error : function(request) {
  				bootbox.alert({
-         			  message: "error",
+         			  message: "请求异常",
          			  size: 'small'
          		  });
  			},
@@ -195,7 +195,7 @@ $("#addOne").click(function(){
  			cache : false,
  			error : function(request) {
  				bootbox.alert({
-         			  message: "error",
+         			  message: "请求异常",
          			  size: 'small'
          		  });
  			},
@@ -376,7 +376,7 @@ $("#addOne").click(function(){
 					cache : false,
 					error : function(request) {
 						bootbox.alert({
-		           			  message: "error",
+		           			  message: "加载失败",
 		           			  size: 'small'
 		           		  });
 					},
@@ -396,6 +396,7 @@ $("#addOne").click(function(){
 				});
 
 	}
+	
     $("#ck1").on("click", function () {
 		if ($(this).prop("checked") === true) {
 			$("#manageusertable input[name='idname']").prop("checked", true);

@@ -10,9 +10,9 @@ import javax.persistence.Id;
 public final class Admin {
 
 	@Id
-	private long id;//È¨ÏŞ±íid
-	private String name;//ÓÃ»§ÀàĞÍËµÃ÷
-	private int upow; //ÓÃ»§È¨ÏŞÖµ
+	private long id;//æƒé™è¡¨id
+	private String name;//ç”¨æˆ·ç±»å‹è¯´æ˜
+	private int upow; //ç”¨æˆ·æƒé™å€¼
 	
 	public long getId() {
 		return id;

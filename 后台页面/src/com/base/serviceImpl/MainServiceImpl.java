@@ -26,7 +26,7 @@ public class MainServiceImpl {
 	
 	public long getApplyCount()
 	{
-		Calendar c = Calendar.getInstance();//可以对每个时间域单独修改
+		Calendar c = Calendar.getInstance();//锟斤拷锟皆讹拷每锟斤拷时锟斤拷锟津单讹拷锟睫革拷
     	int year = c.get(Calendar.YEAR);     	
     	String date=String.valueOf(year);
     	
@@ -34,4 +34,8 @@ public class MainServiceImpl {
 		return applyCount;
 	}
 
+	public long[] getRepairAndPracCount(String semester){
+		long[] value=landApplyDaoImpl.getRepairAndPracCount(semester);
+		return value;
+	}
 }

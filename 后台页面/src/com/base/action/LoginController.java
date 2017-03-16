@@ -34,7 +34,7 @@ public class LoginController {
 	private UserInfoServiceImpl userInfoServiceImpl;
 	
 	
-	//ÓÃ»§µ¥µãµÇÂ¼¿ØÖÆ
+	//ç”¨æˆ·å•ç‚¹ç™»å½•æ§åˆ¶
 	@RequestMapping("/login.do")
 	public String login(HttpServletRequest request,HttpServletResponse response,HttpSession session)
 	{
@@ -44,7 +44,7 @@ public class LoginController {
 		String authCode = request.getParameter("authCode");
 		//System.out.println(userid+"  "+pwd);	
 		
-		//ÅĞ¶ÏÑéÖ¤Âë
+		//åˆ¤æ–­éªŒè¯ç 
 		String strCode = (String) session.getAttribute("strCode");
 		if(!authCode.equals(strCode)){
 			
@@ -52,7 +52,7 @@ public class LoginController {
 		}
 		
 		
-		//ÅĞ¶ÏµÇÂ¼ÊÇ·ñ³É¹¦
+		//åˆ¤æ–­ç™»å½•æ˜¯å¦æˆåŠŸ
 		long adminValue=userInfoServiceImpl.login(userid, pwd);
 		
 		if(adminValue!=-1)
@@ -87,7 +87,7 @@ public class LoginController {
 	}
 	
 	
-	//ÓÃ»§µ¥µãµÇÂ¼¿ØÖÆ
+	//ç”¨æˆ·å•ç‚¹ç™»å½•æ§åˆ¶
 	@RequestMapping("/loginout.do")
 	public String loginOut(HttpServletRequest request,HttpServletResponse response)
 	{
@@ -103,21 +103,21 @@ public class LoginController {
         int width = 63;
         int height = 37;
         Random random = new Random();
-        //ÉèÖÃresponseÍ·ĞÅÏ¢
-        //½ûÖ¹»º´æ
+        //è®¾ç½®responseå¤´ä¿¡æ¯
+        //ç¦æ­¢ç¼“å­˜
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
 
-        //Éú³É»º³åÇøimageÀà
+        //ç”Ÿæˆç¼“å†²åŒºimageç±»
         BufferedImage image = new BufferedImage(width, height, 1);
-        //²úÉúimageÀàµÄGraphicsÓÃÓÚ»æÖÆ²Ù×÷
+        //äº§ç”Ÿimageç±»çš„Graphicsç”¨äºç»˜åˆ¶æ“ä½œ
         Graphics g = image.getGraphics();
-        //GraphicsÀàµÄÑùÊ½
+        //Graphicsç±»çš„æ ·å¼
         g.setColor(this.getRandColor(200, 250));
         g.setFont(new Font("Times New Roman",0,28));
         g.fillRect(0, 0, width, height);
-        //»æÖÆ¸ÉÈÅÏß
+        //ç»˜åˆ¶å¹²æ‰°çº¿
         for(int i=0;i<40;i++){
             g.setColor(this.getRandColor(130, 200));
             int x = random.nextInt(width);
@@ -127,7 +127,7 @@ public class LoginController {
             g.drawLine(x, y, x + x1, y + y1);
         }
 
-        //»æÖÆ×Ö·û
+        //ç»˜åˆ¶å­—ç¬¦
         String strCode = "";
         for(int i=0;i<4;i++){
             String rand = String.valueOf(random.nextInt(10));
@@ -135,7 +135,7 @@ public class LoginController {
             g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));
             g.drawString(rand, 13*i+6, 28);
         }
-        //½«×Ö·û±£´æµ½sessionÖĞÓÃÓÚÇ°¶ËµÄÑéÖ¤
+        //å°†å­—ç¬¦ä¿å­˜åˆ°sessionä¸­ç”¨äºå‰ç«¯çš„éªŒè¯
         session.setAttribute("strCode", strCode);
         g.dispose();
 
@@ -144,7 +144,7 @@ public class LoginController {
 
     }
 	
-	//´´½¨ÑÕÉ«
+	//åˆ›å»ºé¢œè‰²
     Color getRandColor(int fc,int bc){
         Random random = new Random();
         if(fc>255)

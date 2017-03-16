@@ -59,3 +59,43 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
+#daochu table tr td{
+	width:150px;
+	text-align:center;
+	height:50px;
+}
+#daochu table tr td select{
+	width:190px;
+}
+#thistable tr td{
+	pointer-events:none;
+}
+
+#updateDetail{
+	pointer-events:auto;
+}
+#checkHa{
+	pointer-events:auto;
+}
+.icon-star{
+	color:#D8B500;
+	font-size:16px;
+}
+.icon-star-empty{
+	color:#D8B500;
+	font-size:16px;
+}
+.icon-remove-sign{
+	font-size:16px;
+}
+#add{
+	position:absolute !important;
+	top:150px;
+	left:40%;
+	width:600px;
+	height:600px;
+	display:none;
+	scroll:no;
+	
+}
+

@@ -109,9 +109,9 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a href="#"><span class="text">我的实习</span></a></li>
-										<li><a href="#"><span class="text">我的报修</span></a></li>
-										<li><a href="#"><span class="text">我的基地</span></a></li>
+										
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
+										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -119,9 +119,9 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										<li><a href="#"><span class="text">实习审批</span></a></li>
-										<li><a href="#"><span class="text">基地审批</span></a></li>
-										<li><a href="#"><span class="text">维修审批</span></a></li>
+										
+										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
 									</ul></li>
 
@@ -132,8 +132,9 @@
                                         	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
                                         	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
                                             <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="#"><span class="text"> 实习计划维护</span></a></li>
+                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+                                            <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
                                             <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
                                             <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
@@ -174,10 +175,10 @@
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-							<li><a><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a><i class="icon-user"></i>实习申请</a></li>
-							<li><a><i class="icon-home"></i>报修申请</a></li>
+							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -213,9 +214,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情及修改</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -292,8 +291,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h4 class="modal-title" id="myModalLabel"></h4>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -324,8 +322,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -356,8 +353,7 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">&times;</button>
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -384,9 +380,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">缴费中详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -469,9 +463,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁修改</h4>
 								</div>
 								<form action="updateContent.do" method="post"
@@ -637,10 +629,11 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<button type="button" class="close" data-dismiss="modal"
-										onclick="closeScan2()">
-										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-									</button>
+									
+										
+										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" onclick="closeScan2()"></div>
+										
+									
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -718,11 +711,12 @@
 <script src="../js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/myNeed/myRent.js"></script>
-<script src="../js/SyearE.js"></script>
+<!-- <script src="../js/SyearE.js"></script> -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
+<script src="../js/bootbox.min.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>
+ <script src="../js/myNeed/myRent.js"></script>
 <script src="../js/kg.js"></script>
 </html>

@@ -33,7 +33,7 @@ public class checkLoginFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String url = request.getServletPath();
-		// ÉèÖÃ²»ĞèÒª¹ıÂËµÄÒ³Ãæ
+		// è®¾ç½®ä¸éœ€è¦è¿‡æ»¤çš„é¡µé¢
 		if (url.endsWith("login.do")) {
 			
 			arg2.doFilter(arg0, arg1);
@@ -55,14 +55,14 @@ public class checkLoginFilter implements Filter {
       
 		boolean flag = CookieUtils.checkLogin(request, response,cookies);
 		
-		if (!flag) { // Èç¹ûÃ»ÓĞµÇÂ¼»òÕßµÇÂ¼ºó³¬¹ıÊ§Ğ§Ê±¼ä¶¼Ìø×ªµ½µÇÂ¼Ò³Ãæ
+		if (!flag) { // å¦‚æœæ²¡æœ‰ç™»å½•æˆ–è€…ç™»å½•åè¶…è¿‡å¤±æ•ˆæ—¶é—´éƒ½è·³è½¬åˆ°ç™»å½•é¡µé¢
 			
 			response.sendRedirect("/BaseWeb/login_soft.html");
 			return;
 		}
 		
-		//·ÃÎÊÈ¨ÏŞ¿ØÖÆ
-		//»ñÈ¡admin.propertiesÖĞµÄÈ¨ÏŞÖµ£¬È»ºóÓÃ»§È¨ÏŞ×ö
+		//è®¿é—®æƒé™æ§åˆ¶
+		//è·å–admin.propertiesä¸­çš„æƒé™å€¼ï¼Œç„¶åç”¨æˆ·æƒé™åš
 	    Properties prop = new Properties();
 	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
@@ -74,19 +74,19 @@ public class checkLoginFilter implements Filter {
 			{
 	    		if(co.getName().equalsIgnoreCase("adminValue"))
 				{
-	    		  //´óÊıÖµ×Ö·û´®²»ÄÜ×ª»¯ÎªInteger
+	    		  //å¤§æ•°å€¼å­—ç¬¦ä¸²ä¸èƒ½è½¬åŒ–ä¸ºInteger
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
 				  //System.out.println(a);
 				  
-				  if((a & adminValue)==0){ //Èç¹ûÃ»ÓĞ·ÃÎÊÈ¨ÏŞÔò·µ»Ø
+				  if((a & adminValue)==0){ //å¦‚æœæ²¡æœ‰è®¿é—®æƒé™åˆ™è¿”å›
 					  response.setContentType("text/html;charset=UTF-8");
 					  PrintWriter out=response.getWriter();
 					  out.println("<HTML><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> <BODY>");
 					  out.println("<script language='javascript'>");
-					  out.println("alert('ÄãÃ»ÓĞ·ÃÎÊÈ¨ÏŞ£¡');");//¿ÉÒÔ²»Ğ´
-					  out.println("window.history.back();");//·µ»Ø
+					  out.println("alert('ä½ æ²¡æœ‰è®¿é—®æƒé™ï¼');");//å¯ä»¥ä¸å†™
+					  out.println("window.history.back();");//è¿”å›
 					  out.println("</script>");
 					  out.println("</body> </html>"); 
 					  return;

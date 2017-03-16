@@ -11,9 +11,9 @@ public class ApplyDept {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int aid;//部门id
-	private String dept;//部门名称
-	private int type;//标识位，表明是学院，还是其他部门
+	private int aid;//閮ㄩ棬id
+	private String dept;//閮ㄩ棬鍚嶇О
+	private int type;//鏍囪瘑浣嶏紝琛ㄦ槑鏄闄紝杩樻槸鍏朵粬閮ㄩ棬
 	
 	public int getAid() {
 		return aid;

@@ -139,18 +139,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                     <span class="text">我的租赁</span>
                                                                                                 </a>
                                                                                             </li>
+                                                                                           
                                                                                             <li>
-                                                                                                <a href="#">
-                                                                                                    <span class="text">我的实习</span>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <a href="#">
+                                                                                                <a href="myrepair.jsp">
                                                                                                     <span class="text">我的报修</span>
                                                                                                 </a>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="myBase.jsp">
                                                                                                     <span class="text">我的基地</span>
                                                                                                 </a>
                                                                                             </li>
@@ -168,19 +164,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                     <span class="text">租赁审批</span>
                                                                                                 </a>
                                                                                             </li>
+                                                                                           
                                                                                             <li>
-                                                                                                <a href="#">
-                                                                                                    <span class="text">实习审批</span>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <a href="#">
-                                                                                                    <span class="text">维修审批</span>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <a href="#">
+                                                                                                <a href="baseCheck.jsp">
                                                                                                     <span class="text">基地审批</span>
+                                                                                                </a>
+                                                                                            </li>
+                                                                                            <li>
+                                                                                                <a href="repairApprove.jsp">
+                                                                                                    <span class="text">维修审批</span>
                                                                                                 </a>
                                                                                             </li>
                                                                                         </ul>
@@ -211,13 +203,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                 </a>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="baseMaintain.jsp">
                                                                                                     <span class="text">
                                                                                                         实习基地维护</span>
                                                                                                 </a>
+                                                                                                <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
                                                                                             </li>
                                                                                             <li>
-                                                                                                <a href="#">
+                                                                                                <a href="practicePlanMaintain.jsp">
                                                                                                     <span class="text">
                                                                                                         实习计划维护</span>
                                                                                                 </a>
@@ -293,22 +286,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                         </div>
                                                                         <div class="pull-right">
                                                                             <ol class="breadcrumb visible-sm visible-md visible-lg wz">
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <i class=" icon-building"></i>基地申报</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="field-rent.jsp">
-                                                                                        <i class="icon-legal"></i>土地租赁</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <i class="icon-user"></i>实习申请</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <i class="icon-home"></i>报修申请</a>
-                                                                                </li>
+                                                                                <li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
                                                                             </ol>
                                                                         </div>
                                                                     </div>
@@ -339,6 +320,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <![endif]-->
                                                         <script src="../js/jquery.min.js"></script>
                                                         <script src="../js/bootstrap.min.js"></script>
+                                                        <script src="../js/bootbox.min.js"></script>
                                                         <script src="../dist/jquery.cokie.min.js"></script>
                                                         <script src="../js/kg.js"></script>
 

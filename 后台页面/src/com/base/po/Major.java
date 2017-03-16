@@ -11,13 +11,13 @@ public class Major {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int mid;
+	private String mid;
 	private String mname;
 	private int cid;
-	public int getMid() {
+	public String getMid() {
 		return mid;
 	}
-	public void setMid(int mid) {
+	public void setMid(String mid) {
 		this.mid = mid;
 	}
 	public String getMname() {

@@ -699,3 +699,7 @@ padding: 50px 40px;
 #jumpTo{
   width: 40px;
 }
+.closeModal{
+	float:right;
+	cursor:pointer;
+}

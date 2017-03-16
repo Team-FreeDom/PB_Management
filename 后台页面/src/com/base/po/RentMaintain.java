@@ -5,19 +5,19 @@ public class RentMaintain {
 	private String landname;
 	private String aptplanting;
 	private int landArea;
-	private int times;// 租用此数
-	private String deptName;// 申报部门名称
+	private int times;// 绉熺敤姝ゆ暟
+	private String deptName;// 鐢虫姤閮ㄩ棬鍚嶇О
 	private String name;
 	private String bname;
 	private int lr_id;
-	private String chargeDate;// 交费日期
+	private String chargeDate;// 浜よ垂鏃ユ湡
 	private String startTime;
 	private String endTime;
 	private String lid;
-	private String planting;// 种植内容
-	private int rentMoney;// 费用
+	private String planting;// 绉嶆鍐呭
+	private int rentMoney;// 璐圭敤
 	private String userid;
-	private int applydept;// 申报部门id
+	private int applydept;// 鐢虫姤閮ㄩ棬id
 
 	public String getStartTime() {
 		return startTime;
