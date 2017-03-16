@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="divider2"></div>
 								<li class="menuItem"><a href="index.do"> <i
-										class="icon-home" aria-hidden="true"></i><span>主界面</span>
+										class="icon-home" aria-hidden="true" data-placement='top' data-toggle='tooltip' title='hah'></i><span>主界面</span>
 								</a></li>
 
 								<li class="menuItem nav-parent"><a> <i
@@ -170,8 +170,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="practiapply.jsp"><i class=" icon-home"></i>实习申请</a></li>
-						</ol>
+							<li><a href="practiapply.jsp"><i class=" icon-home"></i>实习申请</a></li>							
+						</ol>							
+					</div>
+					<div style="float:left!important;width:400px;">
+					  <ol class="breadcrumb visible-sm visible-md visible-lg wz">
+					    <li><a class="modeClass" href="#"><i class=" icon-book"></i>集中实习在线课堂</a></li>
+					   </ol>
 					</div>
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
@@ -402,11 +407,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                                     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
     <!--datatable javascript-->
+     <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
+   
      <script src="../js/bootbox.min.js"></script>
     <script src="../dist/jquery.cokie.min.js"></script>
     <script src="../js/Calendar.js"></script> 

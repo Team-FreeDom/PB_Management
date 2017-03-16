@@ -93,4 +93,10 @@ public class MaintainApplyServiceImpl implements MaintainApplyService
 		return list;
 		
 	}
+
+@Override
+public List<Map<String, String>> find_basenamenei() {
+	List<Map<String,String>> list=maintainapplydao.find_basenamenei();	
+	return list;
+}
 }

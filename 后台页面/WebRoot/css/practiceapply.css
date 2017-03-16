@@ -130,4 +130,14 @@ table tbody tr td{
 	color: #fff;
 	background-color: #3071a9 !important;
 }
+.modeClass{
+	text-align:right;
+}
+/* .tooltip-inner{
+	max-width:200px;
+	border-radius:4px;
+	text-align:center;
+	background-color:#a4bccd;
+	color:#fff;
+} */
 
