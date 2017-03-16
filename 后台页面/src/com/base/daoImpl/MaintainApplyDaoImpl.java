@@ -65,6 +65,40 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao
 	}
 	
 	@Override
+	//查询所有的除了校外基地的基地列表	
+	public List<Map<String,String>> find_basenamenei()
+	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		List<Map<String,String>> list =new ArrayList<Map<String,String>>();
+		HashMap<String,String> map=null;
+		try
+		{
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionfactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`select_base`()}");
+			sp.execute();
+			rs=sp.getResultSet();
+			while(rs.next())
+			{
+				map=new HashMap<String, String>();
+				map.put("id",rs.getString("id"));
+				map.put("name",rs.getString("name"));
+				list.add(map);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}
+	
+	@Override
 	//查询维修完成的基地列表	
 	public List<Map<String,String>> find_basenameFinish()
 	{

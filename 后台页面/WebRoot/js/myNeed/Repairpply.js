@@ -6,7 +6,7 @@ $(function () {
 		$.ajax({
 					type : 'POST',
 					dataType : 'json',
-					url : 'basename.do',
+					url : 'baseNeiName.do',
 					async : true,
 					cache : false,
 					error : function(request) {
@@ -17,10 +17,10 @@ $(function () {
 						},
 					success : function(data) {
 							var i = 0;
-							for ( var item in data[0]) {
+							for ( var item in data) {
 								$("#baselistid").after(
-									"<option value="+data[0][i].id+">"
-											+ data[0][i].name + "</option>");
+									"<option value="+data[i].id+">"
+											+ data[i].name + "</option>");
 								i++;
 									}
 					

@@ -120,11 +120,11 @@ public class CookieUtils {
 					// System.out.println(loginTime);
 					// System.out.println(currentTime);
 					// System.out.println(subTime / (1000*60));
-					if (subTime / (1000 * 60) >= 10) {
+					if (subTime / (1000 * 60 * 60 * 24) >= 1) { //未响应时间是否超过一天
 						flag = false;
 						// System.out.print("超过时间");
 					} else {// 未超过了10分钟,则更新时间
-						co.setMaxAge(60 * 60 * 10);
+						co.setMaxAge(60 * 60 * 24);
 						co.setPath("/BaseWeb/");
 						co.setValue(String.valueOf(currentTime));
 						response.addCookie(co);

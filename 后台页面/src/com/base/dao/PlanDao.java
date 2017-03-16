@@ -67,4 +67,7 @@ public interface PlanDao {
      * @return 记录数
      */
     public int checkinfo(String userid,String semester);
+    
+    //获得校外基地集合
+    public List<String> getOutBase(int tag);
 }
