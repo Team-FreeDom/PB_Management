@@ -71,6 +71,9 @@ public class MessageUtils {
 	}else if(i==19){//管理员提交维修申请
 		
 		 str="报修申请提交";
+	}else if(i==20){//管理员提交维修申请
+		
+		 str="逾期恢复成功";//逾期恢复
 	}
 
 	return str;
@@ -137,6 +140,9 @@ public class MessageUtils {
 	}else if(i==19){
 		
 		content = bname + "您的报修申请已提交成功";
+	}else if(i==20){
+		
+		content = bname + "您的逾期恢复已经成功";
 	}
 
 	return content;
