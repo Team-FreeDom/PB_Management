@@ -20,6 +20,7 @@ $(document).ready(function() {
             var planetime = data.planetime;
             var rentstime = data.rentstime;
             var rentetime = data.rentetime;
+            var limitday=data.limitday;
             if (planstime == '') {
                 $("#start").show();
                 $("#set").hide();
@@ -30,6 +31,7 @@ $(document).ready(function() {
                 $('#demo2').val(planetime);
                 $('#demo3').val(rentstime);
                 $('#demo4').val(rentetime);
+                $('#day').val(limitday);
             }
 
         }
@@ -40,6 +42,7 @@ $(document).ready(function() {
         $('#demo2').val('');
         $('#demo3').val('');
         $('#demo4').val('');
+        $('#day').val('');
         $("#start").hide();
         $("#set").show();
     });
@@ -56,6 +59,7 @@ $(document).ready(function() {
         var planetime = $("#demo2").val();
         var rentstime = $("#demo3").val();
         var rentetime = $("#demo4").val();
+        var limitday=$('#day').val();
         if (planstime == "") {
             bootbox.alert({
                 message: "请选择申请开始时间!",
@@ -74,6 +78,11 @@ $(document).ready(function() {
         } else if (rentetime == "") {
             bootbox.alert({
                 message: "请选择租赁结束时间!",
+                size: 'small'
+            });
+        }else if (limitday == "") {
+            bootbox.alert({
+                message: "请填写交费限制天数!",
                 size: 'small'
             });
         } else {
@@ -99,7 +108,8 @@ $(document).ready(function() {
                 	planstime:planstime,
                 	planetime:planetime,
                 	rentstime:rentstime,
-                	rentetime:rentetime
+                	rentetime:rentetime,
+                	limitday:limitday
                 },
                 url: 'updateLandApplyDate.do', //修改此处
                 async: false,

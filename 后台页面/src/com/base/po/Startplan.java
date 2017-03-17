@@ -14,6 +14,25 @@ public class Startplan {
 	private String apply_end;
 	private String rent_start;
 	private String rent_end;
+	private Long limitday;
+	
+	public Startplan(String id, String work, String apply_start,
+			String apply_end, String rent_start, String rent_end, Long limitday) {
+		super();
+		this.id = id;
+		this.work = work;
+		this.apply_start = apply_start;
+		this.apply_end = apply_end;
+		this.rent_start = rent_start;
+		this.rent_end = rent_end;
+		this.limitday = limitday;
+	}
+	public Long getLimitday() {
+		return limitday;
+	}
+	public void setLimitday(Long limitday) {
+		this.limitday = limitday;
+	}
 	public String getId() {
 		return id;
 	}

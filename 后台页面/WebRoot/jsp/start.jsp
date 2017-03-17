@@ -226,6 +226,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                 <input class="form-control laydate-icon" id="demo4" value="">
                                                             </div>
                                                         </div>
+                                                         <div class="form-group form-group-lg">
+                                                            <label for="inputPassword" class="col-sm-2 col-sm-offset-1 control-label">交费限制期限</label>
+                                                            <div class="col-sm-3">
+                                                                <input class="form-control" id="day" value="" placeholder="单位/天"/>
+                                                            </div>                                                            
+                                                        </div>
 
                                                         <div class="form-group form-group-lg">
                                                             <button type="button" class="btn btn-primary" id="save">保存</button>
