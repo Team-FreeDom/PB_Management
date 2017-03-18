@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,17 +87,38 @@ public class LandApplyController {
 		Startplan sp=landApplyServiceImpl.getStartPlan("zl");
 		String rents="";
 		String rente="";
-		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date=null;
+		String str=dateFormat.format(Calendar.getInstance().getTime());
+		int tag=0;
 		if(sp!=null){
-		rents= sp.getRent_start();
-		rente=sp.getRent_end();
-				
+		rents= sp.getApply_start();
+		rente=sp.getApply_end();				
 		}
+		int number1=0;
+		int number2=0;
+		
+		try {
+			date=dateFormat.parse(str);
+			number1 = date.compareTo(dateFormat.parse(rents));
+			number2=date.compareTo(dateFormat.parse(rente));			
+			if(number1>=0&&number2<=0){
+				tag=2;
+			}else{
+				tag=1;
+			}
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		JSONObject getObj = new JSONObject();
 		getObj.put("base",list1);
 		getObj.put("xy",list2);
 		getObj.put("stime",rents);
 		getObj.put("etime",rente);
+		getObj.put("tag", tag);
 		
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -770,8 +794,8 @@ public class LandApplyController {
 		String rentstime = request.getParameter("rentstime");
 		String rentetime = request.getParameter("rentetime");
 		
-				
-		Startplan sp =new Startplan("zl","土地租赁",planstime,planetime,rentstime,rentetime);		
+		Long limitday=Long.valueOf(request.getParameter("limitday"));		
+		Startplan sp =new Startplan("zl","土地租赁",planstime,planetime,rentstime,rentetime,limitday);		
 		landApplyServiceImpl.updateLandApplyDate(sp);
 		
 		JSONObject getObj = new JSONObject();
@@ -796,6 +820,7 @@ public class LandApplyController {
 		String plane="";
 		String rents="";
 		String rente="";
+		String limitday="";
 		Startplan sp = landApplyServiceImpl.getStartPlan("zl");
 		
 		if(sp!=null){
@@ -803,12 +828,14 @@ public class LandApplyController {
 		plane=sp.getApply_end();
 		rents=sp.getRent_start();
 		rente=sp.getRent_end();
+		limitday=String.valueOf(sp.getLimitday());
 		}
 		JSONObject getObj = new JSONObject();
 		getObj.put("planstime",plans);
 		getObj.put("planetime",plane);
 		getObj.put("rentstime",rents);
 		getObj.put("rentetime",rente);
+		getObj.put("limitday",limitday);
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			response.getWriter().print(getObj.toString());

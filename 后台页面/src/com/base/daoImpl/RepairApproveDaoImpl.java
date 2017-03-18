@@ -72,7 +72,7 @@ public class RepairApproveDaoImpl implements RepairApproveDao{
 			System.out.println(pageIndex+" "+size+"  "+orderColumn+"  "+orderDir+"  "+searchValue+"  "+status+"  "+userid+"  "+baseid);
 			sp.registerOutParameter(9, java.sql.Types.INTEGER);			
 			sp.execute();
-			System.out.println("haha,weixiu2");
+			//System.out.println("haha,weixiu2");
 			recordsTotal = sp.getInt(9);
 			rs = sp.getResultSet();
 			while (rs.next())

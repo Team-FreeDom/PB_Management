@@ -25,6 +25,12 @@ public interface checkService {
 	 * @throws SQLException
 	 */
 	public void refuseapply(String recordStr,String infoStr);
+	/**
+	 * 逾期恢复
+	 * @param recordStr
+	 * @param infoStr
+	 */
+	public void overduerecovery(String recordStr,String infoStr);
 
     /*
      * 详情查看table1(tableCheck)

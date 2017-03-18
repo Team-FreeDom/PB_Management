@@ -190,6 +190,8 @@
 										role="tab" data-toggle="tab" id="NoCheck">未审核</a></li>
 									<li role="presentation"><a href="#profile" role="tab"
 										data-toggle="tab" id="PayM">交费中</a></li>
+									<li role="presentation" ><a href="#overdue"
+										role="tab" data-toggle="tab" id="overdue1">逾期</a></li>
 								</ul>
 							</div>
 						</div>
@@ -221,12 +223,12 @@
 																	<table class="table">
 																		<tr>
 																			<td>基地名： <select name="bname" id="basenameid">
-																					<option value="" id="selectallbase">显示全部</option>
+																					<option value="" id="selectallbase" class="aa">显示全部</option>
 																					<!--  <option value="">耘园科教综合基地</option>
                                                                       <option value="">西南角农学基地</option>	 -->
 																			</select>  
 																			</td>
-																			<td>申请人: <select name="username" id="usernameid">
+																			<td>申请人: <select name="username" id="usernameid" class="bb">
 																					<option value="" id="applicantId">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
@@ -236,7 +238,7 @@
 
 																		</tr>
                                                                         <tr>
-                                                                          <td colspan="2">学院: <select name="dept" id="dept">
+                                                                          <td colspan="2">学院: <select name="dept" id="dept" class="cc">
 																					<option value="" id="selectdept">显示全部</option>
 																					<!--  <option value="">信息科学技术学院</option>
                                                                           <option value="">动科院</option>	 -->
@@ -301,7 +303,9 @@
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<button type="button" class="close" data-dismiss="modal">
+											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+										</button>
 										<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -368,20 +372,20 @@
 																	<table class="table">
 																		<tr>
 																			<td>基地名： <select name="bname2" id="basenameid2">
-																					<option value="" id="selectallbase2">显示全部</option>
+																					<option value="" id="selectallbase2" class="aa">显示全部</option>
 																					<!--  <option value="">耘园科教综合基地</option>
                                                                       <option value="">西南角农学基地</option>	 -->
 																			</select>  
 																			</td>
 																			<td>申请人: <select name="username2"
 																				id="usernameid2">
-																					<option value="" id="applicantId2">显示全部</option>
+																					<option value="" id="applicantId2" class="bb">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>
 																			</td>
 																			<td>学院: <select name="dept2" id="dept2">
-																					<option value="" id="selectdept2">显示全部</option>
+																					<option value="" id="selectdept2" class="cc">显示全部</option>
 																					<!--  <option value="">信息科学技术学院</option>
                                                                           <option value="">动科院</option>	 -->
 																			</select>  
@@ -435,13 +439,116 @@
 								</table>
 							</form>
 						</div>
+						
+						
+							<div role="tabpanel" class="tab-pane" id="overdue">
+								<form action="" method="post" enctype="multipart/form-data"
+								name="formCheck" id="formCheck">
+								<!-- onSubmit="return check1()" -->
+								<table id="tabledue" class="hover" cellspacing="0"
+									width="100%">
+									<thead>
+										<tr bgcolor="#ECF1F5">
+											<td colspan="3"><!-- 排序<span
+												class="glyphicon glyphicon-sort-by-attributes"></span> <select
+												name="" id="">
+													<option value="">默认</option>
+													<option value="">租用次数降次</option>
+													<option value="">租用次数</option>
+											</select>  -->
+											</td>
+											<td colspan="5">
+												<ul class="dropdown_show">
+													<li><span class="icon-filter">筛选</span>
+														<ul class="hide_ul" style="display:none">
+															<li>
+																<form>
+																	<table class="table">
+																		<tr>
+																			<td>基地名： <select name="bname" id="basenameid3" class="aa">
+																					<option value="" id="selectallbase3">显示全部</option>
+																					<!--  <option value="">耘园科教综合基地</option>
+                                                                      <option value="">西南角农学基地</option>	 -->
+																			</select>  
+																			</td>
+																			<td>申请人: <select name="username" id="usernameid3" class="bb">
+																					<option value="" id="applicantId3">显示全部</option>
+																					<!--  <option value="">李彩</option>
+                                                                      <option value="">彭心雨</option>	 -->
+																			</select>
+																			</td>
+
+
+																		</tr>
+                                                                        <tr>
+                                                                          <td colspan="2">学院: <select name="dept" id="dept3" class="cc">
+																					<option value="" id="selectdept3">显示全部</option>
+																					<!--  <option value="">信息科学技术学院</option>
+                                                                          <option value="">动科院</option>	 -->
+																			</select>  
+																			</td>
+                                                                        </tr>
+																		<tr>
+																			<td colspan="3">
+																				<button type="reset" class="btn btn-primary">重置</button>
+																				<button id="finishdue" type="button"
+																					class="btn btn-primary">完成</button>
+																			</td>
+
+																		</tr>
+																	</table>
+																</form>
+															</li>
+														</ul></li>
+												</ul>
+											</td>
+											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+										</tr>
+										<tr style="background:#eeeff4">
+
+											<th>序号</th>
+											<th>开始日期</th>
+											<th>结束日期	</th>
+											<th>基地名</th>
+											<th>土地编号</th>
+											<th>土地名称</th>
+											<th>申请人</th>
+											<th>申报部门</th>
+											<th>已租用次数</th>
+											<th>种植内容	</th>
+
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+									</tbody>
+									<thead>
+										<tr>
+											<td colspan="2"><label><input type="checkbox"
+													name="0" id="ck3" />全选</label></td>
+											<td colspan="8">
+												<button type="button" class="btn btn-primary" id="overdueOne"
+													name="overdueOne">恢复期限</button>
+												
+											</td>
+										</tr>
+									</thead>
+								</table>
+							</form>
+							</div>
+						
+						
 					</div>
 					<div class="modal fade" id="scan2" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -500,7 +607,6 @@
 		<script src="../js/respond.min.js"></script>
 	<![endif]-->
 	<script src="../js/jquery.min.js"></script>
-
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
