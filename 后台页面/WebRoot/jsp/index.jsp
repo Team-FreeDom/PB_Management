@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-String path = request.getContextPath();
+String path = request.getContextPath(); 
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
@@ -103,22 +103,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 										</a>
 										<ul class="nav nav-children">
-											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-											
+											<li ><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>						
 											<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 											<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+											<li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
 										</ul>
 									</li>
 
-									<li class="menuItem nav-parent">
+									<li class="menuItem nav-parent" ${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+                                            <li ${visitRight[0]==0?"style='display:none;'":" "}><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
                                            
-                                            <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                            <li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+                                            <li ${visitRight[2]==0?"style='display:none;'":" "}><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+                                            <li ${visitRight[1]==0?"style='display:none;'":" "}><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
                                             
 										</ul>
 									</li>
@@ -128,15 +128,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
 										<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+                                        	<li ${visitRight[3]==0?"style='display:none;'":" "}><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li ${visitRight[4]==0?"style='display:none;'":" "}><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                            <li ${visitRight[6]==0?"style='display:none;'":" "}><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li ${visitRight[5]==0?"style='display:none;'":" "}><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+                                            <li ${visitRight[11]==0?"style='display:none;'":" "}><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+                                            <li ${visitRight[7]==0?"style='display:none;'":" "}><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
+                                            <li ${visitRight[10]==0?"style='display:none;'":" "}><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
+                                            <li ${visitRight[8]==0?"style='display:none;'":" "}><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li ${visitRight[9]==0?"style='display:none;'":" "}><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
 									 <li class="menuItem nav-parent">
@@ -176,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="pull-right">
 							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+								<li><a href="baseApply.jsp" ><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
