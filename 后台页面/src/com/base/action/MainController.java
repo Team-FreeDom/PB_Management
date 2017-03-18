@@ -99,14 +99,17 @@ public class MainController implements ServletContextAware{
 		int adminValue=0;
 		Cookie[] cookies = request.getCookies();
 		for(Cookie co:cookies){
-			if(co.getName().equalsIgnoreCase("username")){
+			if(co.getName().equalsIgnoreCase("adminValue")){
 				adminValue=Integer.valueOf(co.getValue());
 			}
 		}
 		for(int i=0;i<pagename.length;i++){
-			System.out.println(pagename.length+"--------------");
-			System.out.println((Integer.valueOf(prop.getProperty(pagename[i]))&adminValue)+"====");
-			pageValue[i]=Integer.parseInt(prop.getProperty(pagename[i]))&adminValue;
+			//System.out.println(pagename.length+"--------------");
+			//System.out.println((Integer.valueOf(prop.getProperty(pagename[i]))+"页面值");
+			System.out.println(adminValue);
+			//long adminValue = adminValueTemp.longValue();
+			  long a = (long)Math.pow(2,Integer.valueOf(prop.getProperty(pagename[i])));
+			pageValue[i]=(int) (a&adminValue);
 		}
 		session.setAttribute("visitRight", pageValue);
 		
