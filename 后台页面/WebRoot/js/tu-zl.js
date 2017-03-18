@@ -29,13 +29,23 @@ $(function() {
             var array2 = data.xy;
             var stime = data.stime;
             var etime = data.etime;
-            if (stime == '' || etime == '') {
+            var tag=data.tag;
+           // if (stime == '' || etime == '') {
+            if (tag==0) {
                 bootbox.alert({
                     message: "土地租赁尚未开放，请等候通知",
                     size: 'small'
                 });
                 return false;
             }
+            if(tag==1){
+            	bootbox.alert({
+                    message: "目前不属于租赁时间段",
+                    size: 'small'
+                });
+                return false;
+            }           
+            
             $('#stime').val(stime);
             $('#etime').val(etime);
             for (var item in array1) {
