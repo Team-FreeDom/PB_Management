@@ -105,9 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a>
 										<ul class="nav nav-children">
 											<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-											
 											<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 											<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+											<li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
 										</ul>
 									</li>
 
@@ -116,8 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 										</a>
 										<ul class="nav nav-children">
-                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                           
+                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>                                   
                                             <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
                                             <li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 

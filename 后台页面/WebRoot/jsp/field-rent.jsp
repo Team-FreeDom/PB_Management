@@ -131,6 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                     <span class="text">我的基地</span>
                                                                                                 </a>
                                                                                             </li>
+                                                                                            <li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
                                                                                         </ul>
                                                                                     </li>
 

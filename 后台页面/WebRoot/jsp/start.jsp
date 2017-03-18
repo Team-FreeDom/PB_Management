@@ -107,10 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
                                                 </a>
                                                 <ul class="nav nav-children">
-                                                    <li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-                                                   
+                                                    <li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>                            
                                                     <li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
                                                     <li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+                                                    <li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
                                                 </ul>
                                             </li>
 
