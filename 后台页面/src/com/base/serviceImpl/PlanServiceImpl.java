@@ -105,4 +105,10 @@ public class PlanServiceImpl implements PlanService {
 		return list;
 	}
 
+	@Override
+	public List<String> getProperBase(String typename) {
+		List<String> list=plandao.getProperBase(typename);
+		return list;
+	}
+
 }
