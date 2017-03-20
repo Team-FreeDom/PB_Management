@@ -328,4 +328,30 @@ public class PlanDaoImpl implements PlanDao {
 		return list;
 	}
 
+	@Override
+	public List<String> getProperBase(String typename) {
+		List<String> list = new ArrayList<String>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.`find_basenames`(?)}");	
+		    sp.setString(1, typename);
+		    sp.execute();
+		    rs = sp.getResultSet();
+		    while (rs.next()) {				
+			list.add(rs.getString("name"));
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	}
+
 }

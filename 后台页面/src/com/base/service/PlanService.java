@@ -68,4 +68,7 @@ public interface PlanService {
 
     //获得校外基地集合
     public List<String> getOutBase(int tag);
+    
+    //根据基地类型名获得基地名称
+    public List<String> getProperBase(String typename);
 }

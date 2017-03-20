@@ -67,7 +67,8 @@ public class AdminController {
 			System.out.println(userid);
 			long adminValue = adminManageServiceImpl.getAdminValue(userid);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
-					
+			request.getSession().setAttribute("visitRight", adminValue);
+		
 			return null;
 		}
 	

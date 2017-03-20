@@ -1528,8 +1528,8 @@ $(document)
 					 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
 					 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
 					 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
-					 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-					 +'<td id="practicePlace"><select id="schoolBase" hidden style="width:150px;"><option id="schoolBaseID" value="">请选择</option></select><select id="outBase" hidden style="width:150px;"><option id="outBaseId" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
+					 +'<td><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
+					 +'<td id="practicePlace"><select id="schoolBase" class="flag" style="width:150px;display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
 					 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 					 +'<td><input id="remark" type="text" class="flag"></td>'
 					 +'<td rowspan="3"><span class="deleteID" id="">删除</span></td>'
@@ -1580,33 +1580,40 @@ $(document)
 							$.ajax({
 								type : 'POST',
 								dataType : 'json',		
-								url : 'getPlanAim.do',  
+								url : 'getBasenameOfType.do',  
 								async : false,
 								cache : false,
 								data:{
-									"mid":obj[Oneindex].mid
+									"mid":obj[Oneindex].mid,
+									"typename":data[i].source
 								},
 								error : function(request) {
-									alert("error");
+									bootbox.alert({
+										message : "请求异常",
+										size : 'small'
+									});
 								},
-								success : function(data){
+								success : function(date){
 									
-									for(var j=0;j<data[0].length;j++){//获取校内基地的实习地点下拉框
+									for(var i=0;i<date[0].length;i++){//获取基地类型
+										$("#table tbody:last-child").find("#baseForm").after(
+										"<option class='rest' value="+date[0][i].name+">"+ date[0][i].name+ "</option>"
+										);
+									}
+									for(var j=0;j<date[1].length;j++){//获取基地名字
 										$("#table tbody:last-child").find("#schoolBaseID").after(
-										"<option class='rest' value="+data[0][j]+">"+ data[0][j] + "</option>"
+										"<option class='rest' value="+date[1][j]+">"+ date[1][j] + "</option>"
 										);
 									}
-									for(var j=0;j<data[2].length;j++){//获取校外基地的实习地点下拉框
-										$("#table tbody:last-child").find("#outBaseId").after(
-										"<option class='rest' value="+data[2][j]+">"+ data[2][j]+ "</option>"
-										);
-									}
-									for(j=0;j<data[1].length;j++){//获取实习目的下拉框
+									
+									for(i=0;i<date[2].length;i++){//获取实习目的下拉框
 										$("#table tbody:last-child").find("#aimID").after(
-												"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
+												"<option class='rest' id="+date[2][i].id+" value="+date[2][i].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][i].aim+"'>"+ (date[2][i].aim.length>20?date[2][i].aim.substring(0,20)+"...":date[2][i].aim )+ "</option>"
 
 										);
 									}
+									
+									
 								}
 							});
 							$("#table tbody:last-child").find(".mark").html(i+1);
@@ -1621,21 +1628,15 @@ $(document)
 							
 							$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 							$("#table tbody:last-child").find("#aim").val(data[i].aim);
-							$("#table tbody:last-child").find("#budget").val(data[i].expense);
+							$("#table tbody:last-child").find("#budget").val(data[i].expense);				
 							$("#table tbody:last-child").find("#Tea").val("老师:"+data[i].guideTeacher);
 							$("#table tbody:last-child").find("#tes").val("实验员:"+data[i].assistant);
-							if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
-								$("#table tbody:last-child").find("#schoolBase").show();
-								$("#table tbody:last-child").find("#schoolBase").addClass("flag");
-								$("#table tbody:last-child").find("#schoolBase").val(data[i].site);
-								
-
-							}
-							if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
-								$("#table tbody:last-child").find("#outBase").show();
-								$("#table tbody:last-child").find("#outBase").addClass("flag");
-								$("#table tbody:last-child").find("#outBase").val(data[i].site);
-							}
+							
+							$("#table tbody:last-child").find("#schoolBase").show();
+							$("#table tbody:last-child").find("#schoolBase").addClass("flag");
+							$("#table tbody:last-child").find("#schoolBase").val(data[i].site);	
+							
+							
 							$("#table tbody:last-child").find(".deleteID").attr("id",data[i].id);
 							if(i!==data.length-1){
 								teachername=teachername+data[i].guideTeacher+",";
@@ -1683,34 +1684,44 @@ $(document)
 				
 				//实习基地来源改变，对应的实习基地改变
 			$(document).on("change","#baseFrom",function(e){
-				if(e.target.value==='校内基地'){
-					$(this).parent().next().children(":first").show();
-					$(this).parent().next().children(":first").addClass("flag");
-					$(this).parent().next().children("select:last").hide();
-					$(this).parent().next().children("select:last").val("");
-					$(this).parent().next().children("select:last").removeClass("flag");
-					$(this).parent().next().find("a").hide();
-				}
-				if(e.target.value==='校外基地'){
-					var length=$(this).parent().next().find("#outBase option").length;
-					if(length>1){
-						$(this).parent().next().find("a").hide();
-						$(this).parent().next().children("select:last").show();
-						$(this).parent().next().children("select:last").addClass("flag");
-					}else{
-						$(this).parent().next().children("select:last").hide();
-						$(this).parent().next().children("select:last").val("");
-						$(this).parent().next().children("select:last").removeClass("flag");
-						$(this).parent().next().find("a").show();			
-					}		
-					$(this).parent().next().children(":first").hide();
-					$(this).parent().next().children(":first").val("");
-					$(this).parent().next().children(":first").removeClass("flag");
-				}
-				if(e.target.value===''){					
-					$(this).parent().next().children("select").hide();
-					$(this).parent().next().children("select").val("");
-					$(this).parent().next().find("a").hide();
+				var type=e.target.value;
+				var selectObj=$(this).parent().next().children("select");
+				var aObj=$(this).parent().next().children("a");
+				selectObj.hide();
+				selectObj.val("");
+				selectObj.find("option:gt(0)").remove();
+				aObj.css("display","none");
+				
+				if(type!=''){	
+					$.ajax({
+						type : 'POST',
+						dataType : 'json',	
+						data:{"typename":type},
+						url : 'getBasenameOneOfType.do',  
+						async : false,
+						cache : false,
+						error : function(request) {
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
+						},
+						success : function(data){
+							if(data.length==0){
+								aObj.css("display","block");
+								return;
+							}else{
+								
+							for(var j=0;j<data.length;j++){//获取基地名字
+								selectObj.find("#schoolBaseID").after(
+								"<option class='rest' value="+data[j]+">"+ data[j] + "</option>"
+								);
+							}
+							selectObj.show();
+							
+							}
+						}
+					});
 				}
 			});	
 
@@ -1854,20 +1865,15 @@ $(document)
 						"mid":obj[Oneindex].mid
 					},
 				success : function(data){
-					for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
-						$("#table tbody:last-child").find("#schoolBaseID").after(
-						"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
-						);
-					}
-					for(var i=0;i<data[2].length;i++){//获取校外基地的实习地点下拉框
-						$("#table tbody:last-child").find("#outBaseId").after(
-						"<option class='rest' value="+data[2][i]+">"+ data[2][i]+ "</option>"
-						);
-					}
-					for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+					for(i=0;i<data[0].length;i++){//获取实习目的下拉框
 						$("#table tbody:last-child").find("#aimID").after(
-						"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
+						"<option class='rest' id="+data[0][i].id+" value="+data[0][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[0][i].aim+"'>"+ (data[0][i].aim.length>20?data[0][i].aim.substring(0,20)+"...":data[0][i].aim )+ "</option>"
 
+						);
+					}
+					for(var i=0;i<data[1].length;i++){//获取基地类型
+						$("#table tbody:last-child").find("#baseForm").after(
+						"<option class='rest' value="+data[1][i].name+">"+ data[1][i].name+ "</option>"
 						);
 					}
 				}
@@ -1954,9 +1960,8 @@ $(document)
 						return false;
 					}
 					
-					var sSite=$(this).find("#schoolBase").val();
-					var oSite=$(this).find("#outBase").val();
-					if(sSite===""&&oSite===""){
+					var sSite=$(this).find("#schoolBase").val();					
+					if(sSite===""){
 						x++;
 						return false;
 					}
