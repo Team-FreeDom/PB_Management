@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
 import org.springframework.stereotype.Repository;
 
+import com.base.dao.CheckViewDao;
 import com.base.po.BaseInfo;
 import com.base.po.CheckList;
 import com.base.po.CheckView;
@@ -27,11 +28,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 
 @Repository("checkViewDao")
-public class CheckViewDaoImpl {
-    // Connection conn = null;
-    // CallableStatement sp = null;
-    // CallableStatement sp = null;
-    // ResultSet rs = null;//ResultSet rs = null;
+public class CheckViewDaoImpl implements CheckViewDao{
+ 
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -80,34 +78,15 @@ public class CheckViewDaoImpl {
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
-	/*
-	 * for(int i=0;i<list.size();i++){
-	 * System.out.println(list.get(i).getName()); }
-	 */
-
 	return list;
     }
 
-    // 查询部门
-    /*
-     * @SuppressWarnings("unchecked") public List<UserInfo> getDept() throws
-     * SQLException { List<UserInfo> list=new ArrayList(); try{
-     * conn=(Connection)
-     * SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
-     * sp=(CallableStatement) conn.prepareCall("{call baseweb.find_dept()}");
-     * sp.execute(); ResultSet rs=sp.getResultSet(); while(rs.next()){ UserInfo
-     * rc=new UserInfo(); rc.setDept(rs.getString("depart")); list.add(rc); }
-     * }catch (SQLException e) { // TODO Auto-generated catch block
-     * e.printStackTrace(); }finally{
-     * 
-     * SqlConnectionUtils.free(conn, sp, rs);
-     * 
-     * } return list; }
-     */
+   
     // 数据库分页
+    @Override
     public CheckList getLandApply(int id, int pageindex, int size,
 	    String basename, String username, String usercollage,
-	    String columnName, String orderDir) throws SQLException {
+	    String columnName, String orderDir){
 
 	List<CheckView> list = new ArrayList<CheckView>();
 	int recordsTotal = 0;
@@ -149,7 +128,7 @@ public class CheckViewDaoImpl {
 		ch.setLandname(rs.getString("landname"));
 		list.add(ch);
 	    }
-	} catch (SQLException e) {
+	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
@@ -163,7 +142,8 @@ public class CheckViewDaoImpl {
     }
 
     // 查看详情
-    public List<CheckView> detail(int la_id) throws SQLException {
+    @Override
+    public List<CheckView> detail(int la_id){
 	List<CheckView> list = new ArrayList<CheckView>();
 	Connection conn = null;
 	CallableStatement sp = null;
@@ -194,7 +174,7 @@ public class CheckViewDaoImpl {
 		ch.setLandname(rs.getString("landname"));
 		list.add(ch);
 	    }
-	} catch (SQLException e) {
+	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
@@ -205,7 +185,7 @@ public class CheckViewDaoImpl {
     }
 
     // 同意和拒绝申请
-    public void getLandApplys(int flag, String la_id) throws SQLException {
+    public void getLandApplys(int flag, String la_id){
 	Connection conn = null;
 	CallableStatement sp = null;
 
@@ -217,7 +197,7 @@ public class CheckViewDaoImpl {
 	    sp.setInt(1, flag);
 	    sp.setString(2, la_id);
 	    sp.execute();
-	} catch (SQLException e) {
+	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
@@ -250,6 +230,7 @@ public class CheckViewDaoImpl {
     }
 
     // 更改状态(参数1：拒绝的申请记录id;参数2：发送消息)
+    @Override
     public void updateStatus(String recordStr, int status) {
 
 	System.out.println("更改");
@@ -286,6 +267,7 @@ public class CheckViewDaoImpl {
 
     }
 
+    @Override
     public void insertMessage(String sql) {
 	System.out.println("insert---start");
 
@@ -304,6 +286,7 @@ public class CheckViewDaoImpl {
     }
 
     // 将土地状态为2的改为1，status1为转变后，status2为转变前
+    @Override
     public void changeSolid(String landstr, int status1, int status2) {
 
 	System.out.println("改变啦");
@@ -325,6 +308,7 @@ public class CheckViewDaoImpl {
     }
 
     // 确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
+    @Override
     public void payForSuccess(String recordStr, int status) {
 
 	Session session = sessionFactory.openSession();
@@ -344,6 +328,7 @@ public class CheckViewDaoImpl {
     }
 
     // 同意申请，将审核状态的变为锁定状态，同时给锁定状态的发送通知
+    @Override
     public void lockInfo(String landstr) {
 
 	Session session = sessionFactory.openSession();
@@ -360,6 +345,7 @@ public class CheckViewDaoImpl {
     }
 
     // 取消交费，将锁定状态的变为审核状态，发送通知
+    @Override
     public void releaseInfo(String landstr) {
 
 	Session session = sessionFactory.openSession();
@@ -375,7 +361,8 @@ public class CheckViewDaoImpl {
 
     }
 
-    // 取消交费，将锁定状态的变为审核状态，发送通知
+    // 确认交费，将锁定状态的变为同类竞争，发送通知
+    @Override
     public void confirmInfo(String landstr) {
 
 	Session session = sessionFactory.openSession();
@@ -392,6 +379,7 @@ public class CheckViewDaoImpl {
     }
 
     // 同意申请，将审核中的记录变为交费中，判断土地编号是否有相同的，返回flag值
+    @Override
     public int agreeInfo(String recordStr, int status) {
 
 	int tag = 0;
@@ -424,6 +412,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批未审核的申请人
+    @Override
     public List<Map<String, String>> getCheckApplicant() {
 
 	Connection conn = null;
@@ -463,6 +452,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批未交费的申请人
+    @Override
     public List<Map<String, String>> getPayApplicant() {
 
 	Connection conn = null;
@@ -502,6 +492,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批逾期的申请人
+    @Override
     public List<Map<String, String>> getoverdueApplicant() {
 
 	Connection conn = null;
@@ -541,6 +532,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批未审核的部门
+    @Override
     public List<Map<String, String>> getCheckDept() {
 
 	Connection conn = null;
@@ -580,6 +572,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批未交费的部门
+    @Override
     public List<Map<String, String>> getPayDept() {
 
 	Connection conn = null;
@@ -619,6 +612,7 @@ public class CheckViewDaoImpl {
     }
 
     // 租赁审批逾期的部门
+    @Override
     public List<Map<String, String>> getoverdueDept() {
 
 	Connection conn = null;
@@ -657,6 +651,7 @@ public class CheckViewDaoImpl {
     }
 
     // 逾期恢复
+    @Override
     public void overduerecovery(String recordStr) {
 	Session session = sessionFactory.openSession();
 	try {

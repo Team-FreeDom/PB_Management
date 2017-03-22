@@ -437,18 +437,18 @@
 											<tr>
 												<td>1</td>
 												<td id="upload1">教学科研用地协议</td>
-												<td><a href="exportFile.do?flag=1"
+												<td><a href="#"
 													style="color:#009">点击下载</a></td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td id="upload1">土地有偿使用协议</td>
-												<td><a href="exportFile.do?flag=2"
+												<td><a href="#"
 													style="color:#009">点击下载</a></td>
 											</tr>
 										</table>
 										<span style="color:#F00">交费截止日期：</span><input type="text"
-											id="closingdate">
+											id="closingdate" readonly>
 									</center>
 
 								</div>

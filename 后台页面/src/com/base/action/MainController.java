@@ -103,11 +103,7 @@ public class MainController implements ServletContextAware{
 				adminValue=Integer.valueOf(co.getValue());
 			}
 		}
-		for(int i=0;i<pagename.length;i++){
-			//System.out.println(pagename.length+"--------------");
-			//System.out.println((Integer.valueOf(prop.getProperty(pagename[i]))+"页面值");
-			System.out.println(adminValue);
-			//long adminValue = adminValueTemp.longValue();
+		for(int i=0;i<pagename.length;i++){			
 			  long a = (long)Math.pow(2,Integer.valueOf(prop.getProperty(pagename[i])));
 			pageValue[i]=(int) (a&adminValue);
 		}

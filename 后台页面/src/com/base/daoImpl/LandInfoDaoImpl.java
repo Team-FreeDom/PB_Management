@@ -42,7 +42,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ñ£¬³ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½
 			}
 			System.out.println(e);
 		}finally{
@@ -125,29 +125,8 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			System.out.println(e);
 		}finally{
 			session.close();
-		}
-		// System.out.println(bid+list.get(0).getAfford());
+		}		
 		return list;
-	}
-	
-	public void deleteInfo(LandInfo li) {
-		Session session=sessionFactory.openSession();		
-		Transaction tx=null;
-		
-		try {
-			 tx=session.beginTransaction();	    	
-	    	 session.delete(li);
-	    	 tx.commit();
-	    	
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
-			}
-			System.out.println(e);
-		}finally{
-			session.close();
-		}
-
 	}
 	
 	public void doInfo(LandInfo li) {
@@ -161,7 +140,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ñ£¬³ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½
 			}
 			System.out.println(e);
 		}finally{
@@ -181,8 +160,8 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`findresource`(?)}");
 			sp.setInt(1, bid);
-			sp.execute();   //Ö´ÐÐ´æ´¢¹ý³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½
+			rs=sp.getResultSet();  //ï¿½ï¿½Ã½ï¿½ï¿½
 			while(rs.next())
 			{
 				String str=rs.getString("img");
@@ -204,11 +183,11 @@ public class LandInfoDaoImpl implements LandInfoDao {
 
 	}
 
-	
+	@Override
 	public void delLayout_info(int bid)
 	{
 		Session session=sessionFactory.openSession();		
-		//hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
+		//hibernateï¿½ï¿½ï¿½Ã´æ´¢ï¿½ï¿½ï¿½(ï¿½Þ·ï¿½ï¿½Ø²ï¿½ï¿½ï¿½)
 		SQLQuery sqlQuery =session.createSQLQuery("{call baseweb.`delete_land`(?)}");
 		sqlQuery.setInteger(0, bid);		
 		sqlQuery.executeUpdate();
@@ -218,7 +197,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	public void doLayout_info(String landinfoStr,String layoutStr)
 	{
 		Session session=sessionFactory.openSession();		
-		//hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
+		//hibernateï¿½ï¿½ï¿½Ã´æ´¢ï¿½ï¿½ï¿½(ï¿½Þ·ï¿½ï¿½Ø²ï¿½ï¿½ï¿½)
 		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_land(?,?)}");
 		sqlQuery.setString(0, landinfoStr);	
 		sqlQuery.setString(1, layoutStr);	

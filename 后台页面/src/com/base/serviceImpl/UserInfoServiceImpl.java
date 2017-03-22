@@ -22,38 +22,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoDao userInfodao;
 
-	@Override
-	public void delUser(String[] delid) {
-
-		for (String id : delid) {
-			userInfoDaoImpl.delUser(Integer.valueOf(id));
-		}
-	}
+	
 
 	public long login(String id, String pwd) {
 		return userInfoDaoImpl.login(id, pwd);
-	}
-
-	@Override
-	public void doUser(UserInfo ui) {
-
-		userInfoDaoImpl.doUser(ui);
-
-	}
-
-	@Override
-	public void updateUser(UserInfo ui) {
-
-		userInfoDaoImpl.updateUser(ui);
-
-	}
-
-	@Override
-	public List<UserInfo> getUserInfos() {
-
-		List<UserInfo> list = userInfoDaoImpl.getUserInfos();
-		return list;
-
 	}
 
 	@Override

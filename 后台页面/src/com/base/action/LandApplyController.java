@@ -146,18 +146,6 @@ public class LandApplyController {
 
 	}
 
-
-	@RequestMapping("/getLayout.do")
-	public String getLayout(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) throws IOException {
-		int bid = Integer.valueOf(request.getParameter("bid"));
-		List<LandLayout> layout = landApplyServiceImpl.getLandLayout(bid);
-		JSONArray json = JSONArray.fromObject(layout);
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print(json.toString());
-		return null;
-	}
-
 	// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
 	@RequestMapping("/getRentCollection.do")
 	public String getRentCollection(HttpServletRequest request,

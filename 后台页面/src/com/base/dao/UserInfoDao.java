@@ -11,20 +11,6 @@ import com.base.po.UserInfo;
 
 
 public interface UserInfoDao {
-	
-	 /*
-	   参数说明：id,整型，表示用户编号
-	   返回值：  无返回值
-	   函数功能：从用户信息表中删除一条信息
-	 */
-     public void delUser(int id);
-     
-     /*
-	   参数说明：ui,代表用户记录对象UserInfo
-	   返回值：  无返回值
-	   函数功能：向用户信息表中增加一条信息
-	 */
-   public void doUser(UserInfo ui);
    
      /*
            参数说明：ui,代表用户记录对象UserInfo
@@ -114,74 +100,60 @@ public interface UserInfoDao {
    
      
     
-     /**
-	     * 用户管理
-	     * @param pageindex 当前页数
-	     * @param size      当前显示几条记录
-	     * @return
-	     * @throws SQLException
-	     */
+  /* 参数： pageindex,为页码;size,为每页条数 ;searchValue,为模糊查询值 
+          返回值： MangerList，包括了用户信息记录和记录条数
+          函数功能：获取用户信息记录     
+  */
   public MangerList manger(int pageindex, int size,String searchValue);
-  /**
-   * 
-   * @param id 用户id
-   * @return 用户基本信息
-   * @throws SQLException
-   */
+  
+  /* 参数： id,为用户编号
+         返回值： List<Manger>，Manger对象的集合
+         函数功能：获取用户信息详情
+  */
   public List<Manger> Mangerdetail(String id) ;
-  /**
-   * 删除人员基本信息
-   * @param str 为人员id的字符串
-   * @throws SQLException
-   */
+  
+  /* 参数： str,为多个用户编号的封装
+         返回值：无返回值
+        函数功能：删除多个用户信息记录
+  */
   public void deleteInfo(String str) ;
-  /**
-   * 修改用户信息
-   * @param id
-   * @param name
-   * @param sex
-   * @param birthdate
-   * @param category
-   * @param attritube
-   * @param telephone
-   * @param idcard
-   * @param password
-  * @return 
-   * @throws SQLException
-   */
+  
+  /*
+      参数说明：id,为用户编号;name,为用户名称;sex,为用户性别;birthdate,为用户生日日期;category,用工类型...	            
+      返回值：    无返回值
+      函数功能：修改用户信息
+ */	
   public void upInfo(String id, String name, String sex, String birthdate,
 			String category, String attritube,String dept, String telephone, String idcard,
 			String password);
-  /**
-	   * 部门集合
-	   * @return
-	  */
+  
+  /*
+       参数说明：无参数
+      返回值：    List<ApplyDept>，为ApplyDept对象的集合
+      函数功能：获取用户信息所存在部门
+  */
   public List<ApplyDept> getDepts();
-  /**
-	     * Admin中人员属性集合
-	     * @return
-	     */
+  
+  /*
+       参数说明：无参数
+       返回值：    List<Admin>，为Admin对象的集合
+       函数功能：获取Admin中人员属性集合
+  */
   public List<Admin> getAttritube();
-  /**
-   * 增加人员
-   * @param id
-   * @param name
-   * @param sex
-   * @param birthdate
-   * @param category
-   * @param attritube
-   * @param dept
-   * @param telephone
-   * @param idcard
-   * @param password
-   */
+  
+   /*
+	   参数说明：各参数分别为用户表中的字段
+	   返回值：    int型，成功返回1
+	   函数功能：增加用户信息
+	*/
   public int addInfo(String id, String name, String sex,
 				String birthdate, String category, String attritube,
 				String dept, String telephone, String idcard, String password);
-   /**
-    * 导出人员信息
-    * @param dept
-    * @return
+  
+    /*
+           参数说明：dept,为部门
+           返回值：    List<Manger>，Manger对象的集合
+           函数功能：获得导出的用户信息记录
     */
     public List<Manger> exportPersonInfo(String dept);
 
