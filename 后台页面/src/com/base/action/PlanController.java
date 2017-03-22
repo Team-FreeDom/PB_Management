@@ -32,6 +32,7 @@ import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.WeekTransformToTime;
 
+//实习申请的控制层
 @Controller("planController")
 @RequestMapping("/jsp")
 public class PlanController implements ServletContextAware{
@@ -227,6 +228,7 @@ public class PlanController implements ServletContextAware{
     	return null;
     }
     
+    //根据基地类型获取基地名字
     @RequestMapping("/getBasenameOneOfType.do")
     public String getBasenameOneOfType(HttpServletRequest request,
     	    HttpServletResponse response) {

@@ -7,6 +7,7 @@ import com.base.po.PlanList;
 import com.base.po.PracticeCollection;
 import com.base.po.StartDate;
 
+//实习计划管理的数据交互层
 public interface PlanMaintainDao {
 
 	/*
@@ -37,8 +38,7 @@ public interface PlanMaintainDao {
 	 3.函数功能：获取未完善的记录
 	 */
 	public PlanList checkIsSave(String semester,int status,int pageindex,int size,String order,String orderDir,String searchValue);
-	
-	
+		
 	/*
 	 1.参数：recordstr,字符串型，为多个记录编号整合所构成的字符串
 	 2.返回值：无返回值
@@ -91,33 +91,57 @@ public interface PlanMaintainDao {
 	/*
 	 1.参数：semester,字符串，为学年学期;str,字符串，为课程表记录的插入语句
 	 2.返回值：无参
-	 3.函数功能：删除原来学年学期的记录，并且执行插入语句
+	 3.函数功能：删除原来学年学期的记录
 	 */
 	public void delete_0(String semester);
 	
-	//导入实习数据sql
+	/*
+	 1.参数：str,字符串型，为实习计划记录的封装
+	 2.返回值：无返回值
+	 3.函数功能： 插入实习计划
+	 */
 	public void add_0(String str);
 
-	//根据学年获取学期
+	/*
+	 1.参数：学年
+	 2.返回值：List<String>，为学期的集合
+	 3.函数功能： 根据学年获取学期
+	 */
 	public List<String> getSem(String semester);
 	
-	//根据学年,学期获取学院
+	/*
+	 1.参数：year,字符串型，为学年;semester,字符串型，为学期
+	 2.返回值：List<String>，为学院的集合
+	 3.函数功能： 根据学年学期获取学院
+	 */
 	public List<String> getCollegehh(String year,int semester);
 	
-	//根据学年,学期获取学院
+	/*
+	 1.参数：semester,字符串型，为学期学年;startTime,字符串型,为该学期的第一周时间
+	 2.返回值：无返回值
+	 3.函数功能： 插入该学年学期的第一周时间
+	 */
 	public void addStartDate(String semester,String startTime );
 	
-	//获取学年学期的开始时间
+	/*
+	 1.参数：无参数
+	 2.返回值：无返回值
+	 3.函数功能： 获取各学年学期的开始时间
+	 */
 	public List<StartDate> getStartDate();
 	
-	/**
-     * 修改课程安排表(单条)李彩页面功能
-     * 
-     * @param plandata
-     */
+   /*
+    1.参数：plandata，为实习申请信息
+    2.返回值： 无返回值
+    3.函数功能：修改课程安排表
+   */
     public void alterRecord(int id,String plandata);
     
-    //获得实习申请数据
+    /*
+	 1.参数：year,字符串型,为学年;semester,字符串型，为学期;college,字符串型，为学院
+	 2.返回值：List<PracticeCollection>，为PracticeCollection对象的集合
+	 3.函数功能： 获取导出的信息
+	 */
     public List<PracticeCollection> getPlanTable_0(String year, int semester,
 			String college);
 }
