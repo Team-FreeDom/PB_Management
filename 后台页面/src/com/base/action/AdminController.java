@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -67,7 +70,25 @@ public class AdminController {
 			System.out.println(userid);
 			long adminValue = adminManageServiceImpl.getAdminValue(userid);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);
-					
+			
+			//更改页面的权限值
+			Properties prop = new Properties();
+			try {
+				prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			String pagename[]={"rent-approve.jsp","repairApprove.jsp","baseCheck.jsp","notification.do","land_modle.jsp","baseMaintain.jsp","fieldRent_maintain.jsp","practicePlanMaintain.jsp","mangeruser.jsp","system_power.jsp","start.jsp","Repairmanage.jsp"};
+			int pageValue[]=new int[pagename.length];
+			HttpSession session=request.getSession();				
+			for(int i=0;i<pagename.length;i++){			
+				  long a = (long)Math.pow(2,Integer.valueOf(prop.getProperty(pagename[i])));
+				pageValue[i]=(int) (a&adminValue);
+			}
+			session.setAttribute("visitRight", pageValue);
+		
 			return null;
 		}
 	

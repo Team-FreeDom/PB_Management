@@ -16,7 +16,6 @@ import com.base.daoImpl.CheckViewDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
 import com.base.daoImpl.LandApply_viewDaoImpl;
 import com.base.daoImpl.LandInfoDaoImpl;
-import com.base.daoImpl.LandLayoutDaoImpl;
 import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
 import com.base.daoImpl.TemperateSaveDaoImpl;
@@ -44,8 +43,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	private LandApplyDaoImpl landApplyDaoImpl;
 	@Autowired
 	private BaseInfoDaoImpl baseInfoDaoImpl;
-	@Autowired
-	private LandLayoutDaoImpl landLayoutDaoImpl;
+
 	@Autowired
 	private LandInfoDaoImpl landInfoDaoImpl;
 	@Autowired
@@ -61,7 +59,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     @Autowired
     private CheckViewDaoImpl checkViewDaoImpl;
 	
-	//1.´ú±íÍÁµØ  2.´ú±íĞ£ÄÚ  3.´ú±íĞ£Íâ    
+	//è·å¾—åŸºåœ°åœŸåœ°è¡¨é‡Œçš„åŸºåœ°ä¿¡æ¯
 	@Override
 	public List<BaseInfo> getBaseInfos() {
 		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos();
@@ -85,13 +83,6 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 		return list;
 	}
 
-	@Override
-	public List<LandLayout> getLandLayout(int bid) {
-		List<LandLayout> list=landLayoutDaoImpl.getLayout(bid);
-		return list;
-	}
-	
-	
 
     public List<Land_base> getLand_baseView(String lid) {
 		
@@ -115,7 +106,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
          
 	}
 
-	//²éÑ¯ÓÃ»§¸öÈËËùÓĞµÄÉêÇë¼ÇÂ¼
+	//ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 	@Override
 	public List<LandApply> getUserApplys(String applicantId) {
 		List<LandApply> list=landApplyDaoImpl.getUserApplys(applicantId);
@@ -130,11 +121,11 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 
 	@Override
 	public int getSpareValue(String lid) {
-		// ±£Áô
+		// ï¿½ï¿½ï¿½ï¿½
 		return 0;
 	}
 
-	//7.Ê§Ğ§(ÓÃ»§×ÔĞĞÈ¡Ïû)
+	//7.Ê§Ğ§(ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½)
 	@Override
 	public void cancelApply(int la_id) {
 		LandApply la=landApplyDaoImpl.getapply(la_id);
@@ -143,9 +134,9 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 
 	}
 	
-	//»ñµÃÓÃ»§µÄÉêÇëÀúÊ·
+	//ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
 	/*
-	 * bname,startTime,endTime,statusÎªÉ¸Ñ¡Ìõ¼ş£¬¹æ¶¨´«Èë´æ´¢¹ı³ÌµÄÕûĞÍ²ÎÊı£¬ÈôÃ»ÓĞ£¬Ôò´«-1
+	 * bname,startTime,endTime,statusÎªÉ¸Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ£ï¿½ï¿½ï¿½-1
 	 * */
 	public ApplyList getselfApply(String applicantId,String bname,String status,int page,int length)
 	{
@@ -171,7 +162,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}
 	
 	
-	//»ñÈ¡ÓÃ»§²»Í¬×´Ì¬µÄÉêÇë¼ÇÂ¼
+	//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Í¬×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 	public List<LandApply_view> getselfApply(String applicantId,int status)
 	{
 		List<LandApply_view> list=landApply_viewDaoImpl.getapplys(applicantId, status);
@@ -196,22 +187,22 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     
     public void myFameCancel1(int la_id,String info_str,int tag)
     {
-    	 //»ñµÃ²åÈëµÄÏûÏ¢Óï¾ä
+    	 //ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
   	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
   	  
     	LandApply la=landApplyDaoImpl.getapply(la_id);   	
-    	//½«´Ë¼ÇÂ¼µÄ×´Ì¬¸ÄÎªÊ§Ğ§11
+    	//ï¿½ï¿½ï¿½Ë¼ï¿½Â¼ï¿½ï¿½×´Ì¬ï¿½ï¿½ÎªÊ§Ğ§11
         la.setStatus(11);        
-        //¸üĞÂ´Ë¼ÇÂ¼
+        //ï¿½ï¿½ï¿½Â´Ë¼ï¿½Â¼
         landApplyDaoImpl.updateLandApply(la);
         
-        //ÏòÏûÏ¢±íÖĞ²åÈëÊı¾İ
+        //ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ğ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         checkViewDaoImpl.insertMessage(insertStr);
         String landstr=la.getLid();
         landstr='('+landstr+')';
         if(tag==1){
         	
-        	//°ÑÏàÍ¬ÍÁµØµÄ×´Ì¬ÎªËø¶¨µÄÍÁµØ×´Ì¬±äÎªÉóºËÖĞ
+        	//ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Øµï¿½×´Ì¬Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½
     		checkViewDaoImpl.releaseInfo(landstr);
         }
         
@@ -325,7 +316,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
    }
    
   
-// ×âÁŞÉêÇëÊ±£¬»ñÈ¡ÍÁµØ²¼¾Ö+ÍÁµØ»ù±¾ĞÅÏ¢+ÍÁµØÏÖ×âÁŞÇé¿ö+ÍÁµØ×âÁŞÀúÊ·
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Ï¢+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
    public List<RentCollection> getRentCollection(int bid)
    {
 	   List<RentCollection> list=landApplyDaoImpl.getRentCollection(bid);
@@ -333,19 +324,20 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
   
-   //Ìá½»×âÁŞÉêÇë
+   //ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    public int submitLandApply(String userid,String lidList,String str,String info_str)
    {
 	  	 		
-	  //Ìá½»ÉêÇë 
+	  //ï¿½á½»ï¿½ï¿½ï¿½ï¿½ 
 	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
 	   
 	   if(flag==1){
 		   
-	   //»ñµÃ²åÈëµÄÏûÏ¢Óï¾ä
+	   //ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
+		   
 		  String insertStr=MessageUtils.getInsertStr(info_str,1);	
 		  
-	 //ÏòÏûÏ¢±íÖĞ²åÈëĞÅÏ¢ 
+	 //ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ğ²ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ 
 		  checkViewDaoImpl.insertMessage(insertStr);
 	   }
 	   

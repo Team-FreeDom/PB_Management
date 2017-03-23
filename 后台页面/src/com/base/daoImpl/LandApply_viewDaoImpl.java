@@ -26,11 +26,6 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("landapply_viewDao")
 public class LandApply_viewDaoImpl {
 	
-
-	/*Connection conn = null;
-	CallableStatement sp = null;
-	ResultSet rs = null;*/
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	

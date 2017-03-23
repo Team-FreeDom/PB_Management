@@ -52,7 +52,7 @@ public class PersonalManageController {
 	@Autowired
 	private AdminManageServiceImpl adminManageServiceImpl;
 
-	// 用户管理人员信息
+	// 获取用户管理人员信息
 	@RequestMapping("/manger.do")
 	public String manger(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {

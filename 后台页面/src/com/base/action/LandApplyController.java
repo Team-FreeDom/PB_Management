@@ -133,42 +133,6 @@ public class LandApplyController {
 		return null;
 	}
 
-	// 跳到具体租赁页面
-	@RequestMapping("/mainRent.do")
-	public String mainRent(HttpServletRequest request, ModelMap map,
-			HttpServletResponse response) {
-
-		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
-
-		map.addAttribute("base", base);
-		return "mainRent";
-
-	}
-
-	@RequestMapping("/getContent.do")
-	public String getContent(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) throws IOException {
-
-		int bid = Integer.valueOf(request.getParameter("base"));
-		String plant = request.getParameter("planting");
-
-		if (!plant.equals("-1")) {
-			System.out.println(plant);
-			List<String> str = landApplyServiceImpl.getLandLayout(bid, plant);
-			map.addAttribute("str", str);
-			map.addAttribute("flag2", plant);
-		}
-		List<BaseInfo> base = landApplyServiceImpl.getBaseInfos();
-		List<Land_Planting> planting = landApplyServiceImpl.getPlanting(bid);
-		List<LandLayout> layout = landApplyServiceImpl.getLandLayout(bid);
-		List<Land_base> landInfo = landApplyServiceImpl.getLand_base(bid);
-		map.addAttribute("landInfo", landInfo);
-		map.addAttribute("base", base);
-		map.addAttribute("planting", planting);
-		map.addAttribute("layout", layout);
-		map.addAttribute("flag1", bid);
-		return "mainRent";
-	}
 
 	@RequestMapping("/getInfo.do")
 	public String getInfo(HttpServletRequest request,
@@ -180,23 +144,6 @@ public class LandApplyController {
 		response.getWriter().print(json.toString());
 		return null;
 
-	}
-
-	@RequestMapping("/getPlanting.do")
-	public String getPlanting(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) throws IOException {
-		return null;
-	}
-
-	@RequestMapping("/getLayout.do")
-	public String getLayout(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) throws IOException {
-		int bid = Integer.valueOf(request.getParameter("bid"));
-		List<LandLayout> layout = landApplyServiceImpl.getLandLayout(bid);
-		JSONArray json = JSONArray.fromObject(layout);
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print(json.toString());
-		return null;
 	}
 
 	// 租赁申请时，获取土地布局+土地基本信息+土地现租赁情况+土地租赁历史
@@ -287,66 +234,12 @@ public class LandApplyController {
 		}
 
 		return null;
-	}
-
-	@RequestMapping("/mySelfandStateApply1.do")
-	public String mySelfandStateApply1(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
-		String applicantId = "201440509";
-		List<LandApply_view> list = null;
-		String str = request.getParameter("status");
-		int status;
-		if (str == null) {
-			status = 2;
-		} else {
-			status = Integer.valueOf(str);
-		}
-		list = landApplyServiceImpl.getselfApply(applicantId, status);
-
-		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
-
-		response.setContentType("text/html;charset=UTF-8");
-
-		try {
-			response.getWriter().print(getObj.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
-
-	}
-
-	@RequestMapping("/mySelfandStateApply2.do")
-	public String mySelfandStateApply2(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
-		String applicantId = "201440509";
-		List<LandApply_view> list = null;
-		int status = 1;
-
-		list = landApplyServiceImpl.getselfApply(applicantId, status);
-
-		JSONObject getObj = new JSONObject();
-		getObj.put("data", list);
-
-		response.setContentType("text/html;charset=UTF-8");
-
-		try {
-			response.getWriter().print(getObj.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-
-	}
+	}	
 
 	@RequestMapping("/myRentdetail.do")
 	public String myRentdetail(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		//System.out.println(request.getParameter("来到myRentdetail.do"));
+		
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 
 		List<LandApply_view> list = null;
@@ -387,6 +280,7 @@ public class LandApplyController {
 
 	}
 
+	//获取用户当年的土地租赁（除了通过，不通过，失效）
 	@RequestMapping("/myRentFont.do")
 	public String myRentFont(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
@@ -533,7 +427,7 @@ public class LandApplyController {
 		return null;
 	}
 
-	@RequestMapping("/unionSelect.do")
+	/*@RequestMapping("/unionSelect.do")
 	public String unionSelect(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws IOException {
 		System.out.println("调用了吗");
@@ -564,7 +458,7 @@ public class LandApplyController {
 		}
 		return null;
 
-	}
+	}*/
 
 	@RequestMapping("/updateContent.do")
 	public String updateContent(HttpServletRequest request,

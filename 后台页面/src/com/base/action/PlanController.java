@@ -25,12 +25,14 @@ import com.base.po.Majoraim;
 import com.base.po.PlanList;
 import com.base.po.StartDate;
 import com.base.po.UserInfo;
+import com.base.po.basetype;
 import com.base.service.PlanMaintainService;
 import com.base.service.PlanService;
 import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.WeekTransformToTime;
 
+//实习申请的控制层
 @Controller("planController")
 @RequestMapping("/jsp")
 public class PlanController implements ServletContextAware{
@@ -169,23 +171,21 @@ public class PlanController implements ServletContextAware{
 	return null;
     }
 
-    // 功能:1.专业所对应的培训目的(通过参数课程代码)2.获取校内基地集合以及校外基地集合 3.获取基地类型
+    // 功能:1.专业所对应的培训目的(通过参数课程代码)2.获取基地类型
     @SuppressWarnings("rawtypes")
     @RequestMapping("/getPlanAim.do")
     public String getPlanAim(HttpServletRequest request,
 	    HttpServletResponse response) {
-	// 获取校内基地集合
-    List<String> list1 = planservice.getOutBase(0);
-	//获取校外基地集合
-	List<String> list2 = planservice.getOutBase(1);
+	
+    // 获取基地类型
+    List<basetype> list2 = baseapplyservice.getBasetype();
 	// 获取课程代码
 	String cid = request.getParameter("mid");
-	// System.out.println("目的:" + cid);
+	
 	// 获取获取专业所对应的培训目的
 	List<Majoraim> list3 = planservice.getPlanAim(cid);
 	try {
-	    List list4 = new ArrayList();
-	    list4.add(list1);	   
+	    List list4 = new ArrayList();	    
 	    list4.add(list3);
 	    list4.add(list2);
 	    JSONArray json = JSONArray.fromObject(list4);
@@ -196,6 +196,55 @@ public class PlanController implements ServletContextAware{
 	    e.printStackTrace();
 	}
 	return null;
+    }
+    
+    //1.专业所对应的培训目的(通过参数课程代码)2.获取基地类型3.通过基地类型名称获取基地名字
+    @RequestMapping("/getBasenameOfType.do")
+    public String getBasenameOfType(HttpServletRequest request,
+    	    HttpServletResponse response) {
+    	
+    	String typename=request.getParameter("typename");    	
+    	 // 获取基地类型
+        List<basetype> list1 = baseapplyservice.getBasetype();
+       //根据基地类型获取基地名字
+    	List<String> list2 = planservice.getProperBase(typename);
+    	// 获取课程代码
+    	String cid = request.getParameter("mid");
+    	
+    	// 获取获取专业所对应的培训目的
+    	List<Majoraim> list3 = planservice.getPlanAim(cid);
+    	try {
+    		 List list4 = new ArrayList();	    
+    		 list4.add(list1);
+    		 list4.add(list2);
+    		 list4.add(list3);
+    	    JSONArray json = JSONArray.fromObject(list4);
+    	    response.setContentType("text/html;charset=UTF-8");
+    	    response.getWriter().print(json.toString());
+    	} catch (IOException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    //根据基地类型获取基地名字
+    @RequestMapping("/getBasenameOneOfType.do")
+    public String getBasenameOneOfType(HttpServletRequest request,
+    	    HttpServletResponse response) {
+    String typename=request.getParameter("typename");  	
+   
+      //根据基地类型获取基地名字
+   	List<String> list= planservice.getProperBase(typename);
+   	try {   		
+   	    JSONArray json = JSONArray.fromObject(list);
+   	    response.setContentType("text/html;charset=UTF-8");
+   	    response.getWriter().print(json.toString());
+   	} catch (IOException e) {
+   	    // TODO Auto-generated catch block
+   	    e.printStackTrace();
+   	}
+   	return null;
     }
 
     // 获取所有学院
