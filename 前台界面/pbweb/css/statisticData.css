@@ -33,12 +33,9 @@ table tbody tr td{
 }
 .noborder{
 	border: none;
-	width: 80px;
+	width: 120px;
 }
-#classname{
-	border: none;
-	width: 100px;
-}
+
 #grade{
 	border: none;
 	width: 40px;
@@ -152,4 +149,6 @@ table tbody tr td{
 #dropdown_show li span{
 	cursor:pointer;
 	}
-
+#baseFrom{
+	width: 86px;
+}
