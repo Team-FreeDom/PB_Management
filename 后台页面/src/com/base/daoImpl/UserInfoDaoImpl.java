@@ -34,27 +34,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
-	public void delUser(int id) {
-		Session session = sessionFactory.openSession();
-		String hql = "from userinfo where id=?";
-		Transaction tx = null;
-
-		try {
-			tx = session.beginTransaction();
-			session.delete(id);
-			tx.commit();
-
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
-		} finally {
-			session.close();
-		}
-
-	}
 
 	public boolean login1(String id, String pwd) {
 		Session session = sessionFactory.openSession();
@@ -100,27 +79,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			SqlConnectionUtils.free(conn, sp, null);
 		}
 		return adminValue;
-	}
-
-	@Override
-	public void doUser(UserInfo ui) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-
-		try {
-			tx = session.beginTransaction();
-			session.save(ui);
-			tx.commit();
-
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
-		} finally {
-			session.close();
-		}
-
 	}
 
 	@Override

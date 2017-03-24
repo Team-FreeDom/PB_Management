@@ -66,9 +66,7 @@ public class checkLoginFilter implements Filter {
 	    Properties prop = new Properties();
 	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
-	    String urlAdminValue= prop.getProperty(requestPage);
-	    //System.out.println(requestPage);
-	    //System.out.println(urlAdminValue);
+	    String urlAdminValue= prop.getProperty(requestPage);	  
 	    if(urlAdminValue!=null){
 	    	for(Cookie co:cookies)
 			{
@@ -78,7 +76,7 @@ public class checkLoginFilter implements Filter {
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
-				  //System.out.println(a);
+				  System.out.println("a:"+a);
 				  
 				  if((a & adminValue)==0){ //如果没有访问权限则返回
 					  response.setContentType("text/html;charset=UTF-8");

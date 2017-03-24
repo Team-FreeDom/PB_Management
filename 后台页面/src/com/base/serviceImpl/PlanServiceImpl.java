@@ -80,12 +80,6 @@ public class PlanServiceImpl implements PlanService {
 	return list;
     }
 
-    @Override
-    public List<BaseInfo> getBaseInfo() {
-	List<BaseInfo> list = plandao.getBaseInfo();
-	return list;
-    }
-
     // 修改课程安排表(单条)李彩页面功能
     @Override
     public void alterRecord(String plandata) {
@@ -99,11 +93,6 @@ public class PlanServiceImpl implements PlanService {
 	return record;
     }
 
-	@Override
-	public List<String> getOutBase(int tag) {
-		List<String> list=plandao.getOutBase(tag);
-		return list;
-	}
 
 	@Override
 	public List<String> getProperBase(String typename) {

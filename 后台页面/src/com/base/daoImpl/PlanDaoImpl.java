@@ -236,25 +236,7 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	return list;
     }
-
-    // 获取基地集合
-    @Override
-    public List<BaseInfo> getBaseInfo() {
-	Session session = sessionFactory.openSession();
-	String hql = "from BaseInfo";
-	List<BaseInfo> list = null;
-
-	try {
-	    Query query = session.createQuery(hql);
-	    list = query.list();
-
-	} catch (Exception e) {
-	    System.out.println(e);
-	} finally {
-	    session.close();
-	}
-	return list;
-    }
+ 
 
     // 修改课程安排表(单条)李彩页面功能
     @Override
@@ -301,33 +283,7 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	return record;
     }
-
-	@Override
-	public List<String> getOutBase(int tag) {
-		List<String> list = new ArrayList<String>();
-		Connection conn = null;
-		CallableStatement sp = null;
-		ResultSet rs = null;
-		try {
-		    conn = (Connection) SessionFactoryUtils.getDataSource(
-			    sessionFactory).getConnection();
-		    sp = (CallableStatement) conn
-			    .prepareCall("{CALL baseweb.`query_basename`(?)}");	
-		    sp.setInt(1, tag);
-		    sp.execute();
-		    rs = sp.getResultSet();
-		    while (rs.next()) {				
-			list.add(rs.getString("basename"));
-		    }
-		} catch (SQLException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} finally {
-		    SqlConnectionUtils.free(conn, sp, rs);
-		}
-		return list;
-	}
-
+    
 	@Override
 	public List<String> getProperBase(String typename) {
 		List<String> list = new ArrayList<String>();

@@ -29,8 +29,6 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("landApplyDao")
 public class LandApplyDaoImpl implements LandApplyDao {
 
-	
-	
 	@Autowired
 	private SessionFactory sessionFactory;	
 	
@@ -55,25 +53,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 
 	}
 	
-	public void delLandApply(LandApply la) {
-		Session session=sessionFactory.openSession();		
-		Transaction tx=null;
-		
-		try {
-			 tx=session.beginTransaction();
-	    	 session.delete(la);
-	    	 tx.commit();
-	    	
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
-		}finally{
-			session.close();
-		}
-
-	}
 	
 	public LandApply getapply(int la_id)
 	{
@@ -135,18 +114,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 
 	@Override
-	public void updateStatus(int la_id, int status) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateStatus(int lid, int formerStatus, int status) {
-		
-
-	}
-
-	@Override
 	public List<LandApply> getUserApplys(String applicantId) {
 		Session session=sessionFactory.openSession();		
 		String hql="from LandApply where applicantId=?";
@@ -183,13 +150,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		}
 		return list;
 	}
-
-	@Override
-	public void updateOthers(int la_id, int lid) {
-		// TODO Auto-generated method stub
-
-	}
 	
+	//根据基地编号bid获取土地布局+土地信息+土地租赁历史
+	@Override
 	public List<RentCollection> getRentCollection(int bid)
 	{	
 		
@@ -254,7 +217,8 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 	
 	
-	
+	//获得土地租赁历史
+	@Override
 	public List<RentAdd> getRentAdd(int bid)
 	{
 		
@@ -324,6 +288,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		return applyCount;
 	}
 	
+	@Override
 	public int submitApply(String userid,String lidList,String str)
 	{
 		Connection conn = null;
@@ -393,6 +358,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public Startplan getStartPlan(String id) {
 		
 		Session session = sessionFactory.openSession();
@@ -412,6 +378,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public void endAllRent(){
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -433,6 +400,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public long[] getRepairAndPracCount(String semester){
 		Connection conn = null;
 		CallableStatement sp = null;
