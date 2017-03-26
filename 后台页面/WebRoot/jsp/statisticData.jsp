@@ -158,7 +158,7 @@
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
 										<li><a href="#"><span class="text">实习基地统计</span></a></li>
 									</ul></li>
 
@@ -184,7 +184,7 @@
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
 							<li><a>位置 :</a></li>
-							<li><a href="practiapply.jsp"><i class=" icon-home"></i>数据统计</a></li>
+							<li><a href="statisticData.jsp"><i class=" icon-home"></i>实习分析</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
