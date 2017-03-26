@@ -402,7 +402,7 @@
 				</div>
 				<div class="row form">
 
-					<div id="mainEchart"  style="width: 700px;height:400px;" class="col-lg-12 form-group text-center">
+					<div id="mainEchart"  style="width: 700px;height:400px;float:right;" class="col-lg-12 form-group text-center">
 
 
 					</div>
