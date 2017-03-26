@@ -28,6 +28,7 @@ import com.base.service.BaseCheckService;
  * @author 梦醒何处
  * 
  */
+//实习基地申请审核控制层
 @Controller("BaseCheckController")
 @RequestMapping("/jsp")
 public class BaseCheckController {
@@ -43,6 +44,8 @@ public class BaseCheckController {
      * @param map
      * @return
      */
+    
+    //获取申请中的实习基地申请记录
     @RequestMapping("/getBaseCheck.do")   
     public String getBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -82,6 +85,7 @@ public class BaseCheckController {
 	return null;
     }
     
+   //获取续期中的实习基地申请记录
     @RequestMapping("/getaddCheck.do")   
     public String getaddCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -121,7 +125,7 @@ public class BaseCheckController {
 	return null;
     }
 
-    // 获取刷选部门
+    // 获取刷选的部门
     @RequestMapping("/getApplyDept.do")
     public String getApplyDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -185,7 +189,7 @@ public class BaseCheckController {
 	return null;
     }
 
-    // 拒绝申请
+    // 拒绝实习基地申请
     @RequestMapping("/BaserefuseApply.do")
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -232,7 +236,7 @@ public class BaseCheckController {
 	return null;
     }
 
-    // 同意申请(并且发送消息给用户)
+    // 同意实习基地申请
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {    	
@@ -256,6 +260,7 @@ public class BaseCheckController {
 	return null;
     }
     
+    //同意续期申请
     @RequestMapping("/addAgreeApply.do")
     public String addagreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {

@@ -20,7 +20,6 @@ import com.base.dao.StatisticDataDao;
 import com.base.po.AllPlan;
 import com.base.po.PlanList;
 import com.base.po.StatisticData;
-import com.base.po.StatisticDataList;
 import com.base.po.basetype;
 import com.base.utils.SqlConnectionUtils;
 
@@ -104,8 +103,7 @@ public class StatisticDataDaoImpl implements StatisticDataDao {
 	    sp.execute();
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
-		basetype ba=new basetype(rs.getString("source"));
-		
+		basetype ba=new basetype(rs.getString("source"));		
 		list.add(ba);
 	    }
 	} catch (SQLException e) {

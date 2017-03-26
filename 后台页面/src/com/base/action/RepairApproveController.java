@@ -19,14 +19,15 @@ import com.base.po.MaintainList;
 import com.base.po.MaintenanceList;
 import com.base.service.RepairApproveService;
 
+//报修申请审核控制层
 @Controller("repairApproveController")
-@RequestMapping("/jsp")   //״̬������Ϊ13��ά��Ϊ14
+@RequestMapping("/jsp")  
 public class RepairApproveController {
 	
 	@Autowired
 	private RepairApproveService repairApproveService;
 	
-	//�������еı�����Ϣ
+	//获取审核中的报修申请记录
 	   @RequestMapping("/getNoRepair.do")
 	    public String getNoRepair(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -34,11 +35,10 @@ public class RepairApproveController {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//�к�
-		    String orderDir = request.getParameter("order[0][dir]");//���򷽷�
-		    String searchValue = request.getParameter("search[value]");
-		
-			// ��õ�ǰҳ��
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));
+		    String orderDir = request.getParameter("order[0][dir]");
+		    String searchValue = request.getParameter("search[value]");	
+			
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -60,18 +60,18 @@ public class RepairApproveController {
 		 	   
 	   }
 	   
-   //������ͬ���ı�����Ϣ
+   //获取维修中的报修申请记录
 	   @RequestMapping("/getAgreeRepair.do")
 	    public String getAgreeRepair(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//�к�
-		    String orderDir = request.getParameter("order[0][dir]");//���򷽷�
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));
+		    String orderDir = request.getParameter("order[0][dir]");
 		    String searchValue = request.getParameter("search[value]");
 		
-			// ��õ�ǰҳ��
+			// 
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -93,7 +93,7 @@ public class RepairApproveController {
 	   }	   
 	 
 	   
-	 //���ɸѡ�������еı�����Ϣ
+	 //根据刷选条件获取审核中的报修申请记录
 	   @RequestMapping("/getChooseRepair1.do")
 	    public String getChooseRepair1(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -101,14 +101,13 @@ public class RepairApproveController {
 		   Integer size = Integer.parseInt(request.getParameter("length"));		
 			Integer startIndex = Integer.parseInt(request.getParameter("start"));
 			Integer draw = Integer.parseInt(request.getParameter("draw"));	
-			int order = Integer.valueOf(request.getParameter("order[0][column]"));//�к�
-		    String orderDir = request.getParameter("order[0][dir]");//���򷽷�
+			int order = Integer.valueOf(request.getParameter("order[0][column]"));
+		    String orderDir = request.getParameter("order[0][dir]");
 		    String searchValue = request.getParameter("search[value]");
 		   
 		    String baseid = request.getParameter("baseid");
-		    String username = request.getParameter("userid");
-		    
-			// ��õ�ǰҳ��
+		    String username = request.getParameter("userid");		    
+			
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -129,7 +128,7 @@ public class RepairApproveController {
 			return null;	   
 	   }
 	   
-	 //���ɸѡ������ͬ��ı�����Ϣ
+	 //根据刷选条件获取维修中的报修申请记录
 	   @RequestMapping("/getChooseRepair2.do")
 	    public String getChooseRepair2(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -143,7 +142,7 @@ public class RepairApproveController {
 		    String baseid = request.getParameter("baseid");
 		    String username = request.getParameter("userid");
 		    
-			// ��õ�ǰҳ��
+			
 			Integer pageindex = (startIndex / size + 1);
 			
 			MaintainList str=null;		
@@ -164,7 +163,7 @@ public class RepairApproveController {
 			return null;		   
 	   }
 	   
-	   //����걨�˺ͻ�����
+	   //获取基地名称和申报人集合
 	   @RequestMapping("/getInfoApply.do")
 	    public String getInfoApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -182,7 +181,7 @@ public class RepairApproveController {
 			return null;		   	   
 	   } 	  
 	   
-	   //�ܾ�����
+	   //拒绝报修申请
 	   @RequestMapping("/refuseRepairApply.do")
 	    public String refuseRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -203,7 +202,7 @@ public class RepairApproveController {
 			return null;		   
 	   }
 	   
-	   //ͬ������
+	   //ͬ同意报修申请
 	   @RequestMapping("/agreeRepairApply.do")
 	    public String agreeRepairApply(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {
@@ -225,7 +224,7 @@ public class RepairApproveController {
 			return null;	   
 	   }
 	   
-	   //ά�����
+	   //维修完成
 	   @RequestMapping("/repairFinish.do")
 	    public String repairFinish(HttpServletRequest request,
 		    HttpServletResponse response, ModelMap map) {

@@ -3,7 +3,13 @@
 var obj=[];
 var teachername="";
 var testername="";
+var data_echart=[];
+var option;
+var myChart;
 $(document).ready(function() {
+	
+	//基于准备好的dom，初始化echarts实例
+	myChart = echarts.init(document.getElementById('mainEchart'));
 	
 	 var table=$("#statistictable").DataTable({
 		   "aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
@@ -490,6 +496,12 @@ $(document).on("click","#closemodal",function(){
 							}
 			         }*/
 				});
+	//启动Echart
+	 setTimeout(function () { 
+		 setEchartOption();  
+	    }, 200);
+	  
+
 	
 	$("#finish").click(function(){//第一个筛选框点击完成触发的事件
 		var baseCategory=$("#baseCategory").val();
@@ -800,12 +812,69 @@ $(document).on("click","#closemodal",function(){
 				         }*/
 					});
 		$('.hide_ul2').toggle();
+		//刷新Echart
+		setTimeout(function () { 
+			 setEchartOption();  
+		    }, 200);
 	});		
 	
 	
 } );
 
+function getEchartData(){
+	data_echart=[];
+	var object_data=$("#statistictable2 tbody tr:first-child").find('td');	
+	object_data.each(function(){
+		data_echart.push(Number($(this).text()));
+	});
+	
+}
 
+function setEchartOption(){
+	/*--Echart-start--*/	
+	// 指定图表的配置项和数据
+   getEchartData();  //给data_echart重新赋值
+   option = {
+        title: {
+            text: '基地利用率'
+        },
+        tooltip: {},
+        legend: {
+            data:['数目']
+        },
+        toolbox:{
+			show:true,//是否显示工具栏组件
+			showTitle:true,//是否在鼠标 hover 的时候显示每个工具 icon 的标题
+			feature: {                                 
+                 magicType: {type: ['line', 'bar']},//切换类型                 
+                 saveAsImage: {
+					 type:'png'
+					 } //存储为图片
+    }
+			},
+        xAxis: {
+            data: ['基地类型','基地名字','学院','专业','老师','班级','经费','老师']  // 
+        },
+        yAxis: {},
+        series: [{
+            name: '数目',
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    color: '#3b6290'
+                         },
+                emphasis:{
+                    color: '#a4bccd'
+                         }
+                       },
+                    	data: data_echart
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    /*--Echart-end--*/
+}
 	
 	
 
