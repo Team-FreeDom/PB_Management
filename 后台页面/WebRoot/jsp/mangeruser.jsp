@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a>
 										<ul class="nav nav-children">
 											<li><a href="#"><span class="text">租赁统计</span></a></li>
-											<li><a href="#"><span class="text">实习分析</span></a></li>
+											<li ${visitRight[12]==0?"style='display:none;'":" "}><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
 											<li><a href="#"><span class="text">实习基地统计</span></a></li>
 										</ul>
 									</li>

@@ -36,6 +36,7 @@ import com.base.service.MaintainApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
+//报修申请控制层
 @Controller("MaintainApplyController")
 @RequestMapping("/jsp")
 public class MaintainApplyController {
@@ -58,7 +59,7 @@ public class MaintainApplyController {
 	return null;
     }
     
- // 校内基地名查询
+   // 校内基地名查询(包括土地基地和校内基地)
     @RequestMapping("/baseNeiName.do")
     public String baseNeiName(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
@@ -150,7 +151,7 @@ public class MaintainApplyController {
 	return "Repairpply";
     }
 
-    // 维修管理界面，把所有信息传到（前台当前页面记录数，当前页数，排序列，排序顺序，模糊查询的字符串,返回总记录数）
+    // 获取维修信息
     @RequestMapping("/query_maintainapply.do")
     public String query_maintainapply(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
@@ -187,7 +188,7 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 删除维修基地申请记录，传的值为维修记录id的集合
+    // 删除维修信息记录
     @RequestMapping("/delmaintainapply.do")
     public String delmaintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -205,7 +206,7 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 增加维修基地记录（已完成的维修）
+    // 增加维修信息记录
     @RequestMapping("/addmaintainapply.do")
     public String add_maintainhistory(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -273,6 +274,7 @@ public class MaintainApplyController {
 	return "redirect:Repairmanage.jsp";
     }
 
+    //获取年份
     @RequestMapping("/getThoseYear.do")
     public String getThoseYear(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -289,7 +291,7 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 导出基地维修记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
+    // 导出维修信息记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
     @RequestMapping("/exportmaintainapply.do")
     public String export_maintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {

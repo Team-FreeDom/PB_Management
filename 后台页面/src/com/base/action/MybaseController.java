@@ -24,6 +24,7 @@ import com.base.service.MyBaseInfoService;
  * @author 梦醒何处
  * 
  */
+//我的实习申请控制层
 @Controller("MybaseController")
 @RequestMapping("/jsp")
 public class MybaseController {
@@ -31,7 +32,7 @@ public class MybaseController {
     @Autowired
     private MyBaseInfoService mybaseinfoservice;
 
-    // 页面一
+    // 获取用户的当前阶段的实习基地申请
     @RequestMapping("/MybaseInfo.do")
     public String MybaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -94,7 +95,7 @@ public class MybaseController {
 
     }
 
-    // 页面二
+    // 获取用户的所有实习基地申请
     @RequestMapping("/MybaseInfo2.do")
     public String MybaseInfo2(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -150,7 +151,7 @@ public class MybaseController {
 	return null;
     }
 
-    // 撤回
+    // 实习基地申请撤回
     @RequestMapping("/recall.do")
     public String recall(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -174,7 +175,7 @@ public class MybaseController {
 
     }
     
-    //修改续期
+    //实习基地续期
     @RequestMapping("/updateMyBaseDate.do")
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -196,7 +197,7 @@ public class MybaseController {
     	return null;    	
     }
 
-    // 刷选(根据状态值刷选)
+    // 实习记录刷选(根据状态值刷选)
     @RequestMapping("/getStatus.do")
     public String getStatus(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {

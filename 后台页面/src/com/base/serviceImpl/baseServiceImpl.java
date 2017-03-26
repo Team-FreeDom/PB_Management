@@ -25,6 +25,7 @@ public class baseServiceImpl implements baseApplyService {
      *            基地类型
      * @return
      */
+    @Override
     public List<ApplyDept> getDept(int type) {
 	List<ApplyDept> list = baseapplydao.getDept(type);
 	return list;
@@ -35,6 +36,7 @@ public class baseServiceImpl implements baseApplyService {
      * 
      * @return
      */
+    @Override
     public List<basetype> getBasetype() {
 	List<basetype> list = baseapplydao.getBasetype();
 	return list;
@@ -47,6 +49,7 @@ public class baseServiceImpl implements baseApplyService {
      *            学院id
      * @return
      */
+    @Override
     public List<Major> getMajor(int aid) {
 	List<Major> list = baseapplydao.getMajor(aid);
 	return list;

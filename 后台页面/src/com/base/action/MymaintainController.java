@@ -17,13 +17,14 @@ import com.base.po.MymaintainList;
 import com.base.service.MymaintainService;
 import com.base.utils.CookieUtils;
 
+//我的报修控制层
 @Controller("MymaintainController")
 @RequestMapping("/jsp")
 public class MymaintainController {
     @Autowired
     private MymaintainService mymaintainservice;
 
-    // 页面一
+    // 获取该用户当年的报修申请记录
     @RequestMapping("/Mymaintain.do")
     public String Mymaintain(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -63,7 +64,7 @@ public class MymaintainController {
 	return null;
     }
 
-    // 页面二
+    // 获取该用户所有的报修申请记录
     @RequestMapping("/Mymaintain2.do")
     public String Mymaintain2(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -101,7 +102,7 @@ public class MymaintainController {
 	return null;
     }
 
-    // 筛选（根据状态值）
+    // 根据状态值筛选，获取报修信息记录
     @RequestMapping("/screen.do")
     public String screen(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -148,7 +149,8 @@ public class MymaintainController {
 	}
 	return null;
     }
-    // 撤回
+    
+    // 撤回申请
     @RequestMapping("/recallmymaint.do")
     public String recallmymaint(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
