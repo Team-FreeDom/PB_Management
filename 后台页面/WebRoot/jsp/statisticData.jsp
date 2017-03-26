@@ -399,7 +399,7 @@
 
 
 				</div>
-				<div class="row form" style="padding-left:20%;">
+				<div class="row form" style="padding-left:20%; margin-top:8%">
 
 					<div id="mainEchart"  style="width:700px;height:500px; "class="col-lg-12 form-group text-center">
 
@@ -542,12 +542,6 @@
 	<script src="../js/echarts.js"></script>
 	<script src="../js/myNeed/statisticData.js"></script>
 	<script src="../js/kg.js"></script>
-	<script type="text/javascript">
-		$(function() {
 
-			$('.date_picker').date_input();
-
-		})
-	</script>
 </body>
 </html>
