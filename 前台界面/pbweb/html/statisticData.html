@@ -196,7 +196,7 @@
                                     <thead>
                                        <tr bgcolor="#ECF1F5">
                                             <td colspan="18">
-                                            	<ul id="dropdown_show">
+                                            	<ul class="dropdown_show">
                                                 	<li><span class="icon-filter" id="screen">筛选</span>
                                                     	<ul class="hide_ul" style="display:none;">
                                                         	<li style="background:#d6dfe9;padding-left: 50px; padding-top: 10px;">
@@ -323,24 +323,24 @@
                                     <thead>
                                        <tr bgcolor="#ECF1F5">
                                             <td colspan="8">
-                                            	<ul id="dropdown_show">
+                                            	<ul class="dropdown_show">
                                                 	<li><span class="icon-filter" id="screen2">筛选</span>
                                                     	<ul class="hide_ul2" style="display:none;">
                                                         	<li style="background:#d6dfe9;padding-left: 50px; padding-top: 10px;">
                                                            		<div class="row">
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            				基地类型：
                                                                     <select  name="" id="baseCategory2">
                                                                       <option value="0" id="baseCategory2ID">请选择</option>
                                                                     </select> 
                                                            			</div>
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            				基地名字：
                                                                     <select  name="" id="baseName2">
                                                                       <option value="0" id="baseName2ID">请选择</option>
                                                                     </select>
                                                            			</div>
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            				年　　级：
                                                                     <select  name="" id="gradeClass2">
                                                                       <option value="0" id="gradeClass2Id">请选择</option>
@@ -348,34 +348,37 @@
                                                            			</div>
                                                            		</div>
                                                            		<div class="row" style="padding-top: 10px;">
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            			学　　院：
                                                            			<select  name="" id="college2">
                                                                       <option value="0" id="college2ID">请选择</option>
                                                                     </select>
                                                            			</div>
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            			专　　业：
 																	<select  name="" id="major2">
                                                                       <option value="0" id="major2ID">请选择</option>
                                                                     </select>
                                                           			</div>
-                                                           			<div class="col-md-4">
+                                                           			<div class="col-md-3">
                                                            			班　　级：
                                                            			<select  name="" id="className2">
                                                                       <option value="0" id="className2ID">请选择</option>
                                                                     </select>
 																	</div>
-                                                           		</div>
-                                                               	<div class="row" style="padding-top: 10px;">
-                                                               		<div class="col-md-12">
+                                                          		<div class="col-md-3">
                                                                			老　　师：
-                                                               		<select  name="" id="teacherName">
-                                                                      <option value="0" id="teacherNameID">请选择</option>
-                                                                    </select>
+                                                               		<input type="text" id="teacherName">
+                                                                      
+                                                                    <button type="button" class="btn btn-xs btn-success" >选择</button>
                                                                		</div>
+                                                               		
+                                                           		</div>
+                                                              	
+                                                               	<div class="row" style="padding-top: 10px;">
+                                                               		
                                                                	</div>
-                                                                	<div class="row" style="padding-top: 10px;">
+                                                                	<div class="row" style="padding-top: 10px;padding-bottom: 10px;">
                                                                     	<div class="col-md-4 col-md-offset-4">
                                                                     		<button type="reset" class="btn btn-primary" >重置</button>
                                     									<button type="button" id="finish2" class="btn btn-primary">完成</button>

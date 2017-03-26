@@ -118,6 +118,7 @@ $(document).ready(function() {
 									"mData" : "id",//考核
 									"orderable" : false,
 									"sDefaultContent" : "",
+									"visible":false,
 									"render" : function(data,type,row){
 										obj.push(row);
 										return '<span id='+(obj.length-1)+'></span>';
@@ -627,6 +628,7 @@ $(document).on("click","#closemodal",function(){
 										"mData" : "id",//考核
 										"orderable" : false,
 										"sDefaultContent" : "",
+										"visible":false,
 										"render" : function(data,type,row){
 											obj.push(row);
 											return '<span id='+(obj.length-1)+'></span>';
