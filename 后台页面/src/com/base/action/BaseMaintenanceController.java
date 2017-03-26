@@ -47,6 +47,7 @@ import com.base.utils.ExcelReport;
  * 
  *
  */
+//实习基地管理控制层
 @Controller("baseMaintenance")
 @RequestMapping("/jsp")
 public class BaseMaintenanceController {
@@ -58,27 +59,27 @@ public class BaseMaintenanceController {
     @Autowired
 	private AdminManageServiceImpl adminManageServiceImpl;
 
-    
+    //获取实习基地数据信息
     @RequestMapping("/sendBaseinfo.do")
     public String sendBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){	
-	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�      
+	
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	
-	// 鏁版嵁璧峰浣嶇疆
+	
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));	
-	int order = Integer.valueOf(request.getParameter("order[0][column]"));//鎺掑簭鐨勫垪鍙� 
-    String orderDir = request.getParameter("order[0][dir]");//鎺掑簭鐨勯『搴廰sc or desc 
+	int order = Integer.valueOf(request.getParameter("order[0][column]"));
+    String orderDir = request.getParameter("order[0][dir]");
     String searchValue = request.getParameter("search[value]");
 	if (searchValue.equals("")) {
 		searchValue = null;
 	}
-	// 閫氳繃璁＄畻姹傚嚭褰撳墠椤甸潰涓虹鍑犻〉
+	
 	Integer pageindex = (startIndex / size + 1);
 	
 	MaintenanceList str=null;
-	/*姝ゅ鍐檚tr鎺ュ彈鐨勬柟娉曞锛歴tr = userinfoservice.manger(pageindex, size);*/
+	
 	str=maintenanceservice.maintenance(pageindex, size,order,orderDir,searchValue);	
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
@@ -96,7 +97,7 @@ public class BaseMaintenanceController {
 	return null;	
     }
     
-    //鍒犻櫎鍩哄湴淇℃伅
+    //删除实习基地(批量)
     @RequestMapping("/delBaseinfo.do")
     public String delBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -118,7 +119,7 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
-    //鑾峰緱鍩哄湴绫诲瀷鍜岀敵鎶ラ儴闂�
+    //获取部门和基地类型等基本信息
     @RequestMapping("/getManyinfo.do")
     public String getManyinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -140,6 +141,7 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
+    //获取实习记录中所存在的部门
     @RequestMapping("/getExistDept.do")
     public String getExistDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -157,6 +159,7 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
+    //根据刷选条件获取实习基地数据信息
     @RequestMapping("/getshaiBaseinfo.do")
     public String getshaiBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -165,18 +168,18 @@ public class BaseMaintenanceController {
     	int dept=Integer.valueOf(request.getParameter("dept"));
     	int star=Integer.valueOf(request.getParameter("star"));
     	
-    	// 鑾峰彇褰撳墠椤甸潰鐨勪紶杈撳嚑鏉¤褰�
+    	
     	int size = Integer.parseInt(request.getParameter("length"));    	
-    	// 鏁版嵁璧峰浣嶇疆
+    	
     	int startIndex = Integer.parseInt(request.getParameter("start"));
     	int draw = Integer.parseInt(request.getParameter("draw"));
-    	int order = Integer.valueOf(request.getParameter("order[0][column]"));//鎺掑簭鐨勫垪鍙� 
-        String orderDir = request.getParameter("order[0][dir]");//鎺掑簭鐨勯『搴廰sc or desc 
+    	int order = Integer.valueOf(request.getParameter("order[0][column]"));
+        String orderDir = request.getParameter("order[0][dir]");
         String searchValue = request.getParameter("search[value]");
     	if (searchValue.equals("")) {
     		searchValue = null;
     	}
-    	// 閫氳繃璁＄畻姹傚嚭褰撳墠椤甸潰涓虹鍑犻〉
+    	
     	int pageindex = (startIndex / size + 1);
     	
     	MaintenanceList str=maintenanceservice.getshaiBaseInfo(basetype,dept,star,pageindex, size,order,orderDir,searchValue);
@@ -197,7 +200,7 @@ public class BaseMaintenanceController {
     	return null;	
     }
     
-    //淇敼鍩哄湴淇℃伅
+    //修改实习基地信息
     @RequestMapping("/updateBaseInfo.do")
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -220,6 +223,7 @@ public class BaseMaintenanceController {
     	return null;    	
     }
     
+    //导出实习基地信息
     @RequestMapping("/exportThisInfo.do")   
     public String exportThisInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
@@ -239,7 +243,7 @@ public class BaseMaintenanceController {
 			export.exportBaseInfo(list, fullFileName);
 			String filename = "基地信息表.xlsx";			
 
-			// 鏄剧ず涓枃鏂囦欢鍚�
+		
 			response.setContentType("application/octet-stream;charset=UTF-8");
 			try {
 				response.setContentType("application/octet-stream");  
@@ -256,7 +260,7 @@ public class BaseMaintenanceController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// 璇诲彇鏂囦欢
+			//
 			InputStream in=null;
 			OutputStream out = null;
 			try {
@@ -281,56 +285,54 @@ public class BaseMaintenanceController {
     	return "baseMaintain";  	
 }
     
+    //批量导入实习基地信息
     @RequestMapping("/importBaseExcel.do")   
     public String importBaseInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) throws IOException{
+	    HttpServletResponse response, ModelMap map){
     	
-    	// 涓婁紶鏂囦欢锛堝浘鐗囷級锛屽皢鏂囦欢瀛樺叆鏈嶅姟鍣ㄦ寚瀹氳矾寰勪笅锛屽苟鑾峰緱鏂囦欢鐨勭浉瀵硅矾寰�
+    
     			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-    			// 寰楀埌涓婁紶鐨勬枃浠�
+    			
     			MultipartFile mFile = multipartRequest.getFile("fileResource");
-    			// 寰楀埌涓婁紶鏈嶅姟鍣ㄧ殑璺緞
+    			
     			String path = ExcelReport.getWebRootUrl(request,"/upload/");
     			/*String path = request.getSession().getServletContext()
     					.getRealPath("/upload/");*/
-    			// 寰楀埌涓婁紶鐨勬枃浠剁殑鏂囦欢鍚�
+    			//
     			String fileName = mFile.getOriginalFilename();
     			String filename = "";
     			boolean flag=true;
+    			try{
     			if (!fileName.isEmpty()) {
     				filename = new Date().getTime() + "$" + fileName;
     				InputStream inputStream = mFile.getInputStream();
     				byte[] b = new byte[1048576];
     				int length = inputStream.read(b);
     				path += "\\" + filename;
-    				// 鏂囦欢娴佸啓鍒版湇鍔″櫒绔�
+    				
     				File tempFile = new File(path);
     				FileOutputStream outputStream = new FileOutputStream(tempFile);
     				outputStream.write(b, 0, length);
     				
-    				filename = path;   //杩欐槸鏂囦欢鍦ㄦ湇鍔″櫒鐨勭粷瀵硅矾寰�
-    				//閬嶅巻鏂囦欢涓殑鏁版嵁锛氫笅闈㈢殑list涓鸿鍑虹殑鏁版嵁
-    				try{
+    				filename = path;     				
+    				
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
     				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				
-    				if(CollectionUtils.isNotEmpty(list)){
-    				//瀹炵幇鎵归噺鎻掑叆
+    				if(CollectionUtils.isNotEmpty(list)){    				
     				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,type,applydp,land_address,"
     						+ "undertake) values";
     				String prefix2="INSERT IGNORE INTO baseweb.basemajor(pid,maid) values";
     						
     				
     				 StringBuffer suffix = new StringBuffer(); 
-    				 StringBuffer suffix2 = new StringBuffer(); 
-    				// 閬嶅巻琛岋紙涓嬮潰褰搃涓�鏃跺彲鐪嬪埌鍒楀ご鍚嶏級
+    				 StringBuffer suffix2 = new StringBuffer();     				
     				for (int i = 1; i < list.size(); i++) {
     					String resultStr = "";
-    					String resultStr2 = "";
-    					// 寰幆姣忎竴涓猻heet涓殑姣忎竴琛�
+    					String resultStr2 = "";    					
     					List<String> row = list.get(i);    					
     					
-    					// 閬嶅巻鍒�
+    					
     					if (row != null && row.size() > 0) {    						
     						String bid=String.valueOf(new Date().getTime()+i);
     						resultStr="'"+bid+"',";
@@ -350,7 +352,7 @@ public class BaseMaintenanceController {
     								
     					}
     				}
-    				// 鏋勫缓瀹屾暣sql  
+    				//
     	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),name=values(name),type=values(type),applydp=values(applydp)" +
     	            		",land_address=values(land_address),undertake=values(undertake)";  
     	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";     	
@@ -363,18 +365,19 @@ public class BaseMaintenanceController {
     				wb.close();
     				outputStream.close();
     				inputStream.close();
-    				tempFile.delete(); //鍒犻櫎涓存椂鏂囦欢
+    				tempFile.delete(); //
+    			}
     				}catch(Exception e){
     					flag=false;
     					e.printStackTrace();
     				}	
     				
-    			}
+    			
     			map.addAttribute("tag", flag);
     			return "baseMaintain";   	
     }
     
-    //获得用户输入的数据
+    //增加实习基地记录
     @RequestMapping("/increaseBaseInfo.do")
     public String increaseBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {

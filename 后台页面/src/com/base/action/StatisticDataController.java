@@ -20,7 +20,6 @@ import org.springframework.web.context.ServletContextAware;
 import com.base.po.AllPlan;
 import com.base.po.PlanList;
 import com.base.po.StatisticData;
-import com.base.po.StatisticDataList;
 import com.base.po.basetype;
 import com.base.service.StatisticDataService;
 import com.base.utils.CookieUtils;

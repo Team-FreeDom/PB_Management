@@ -6,49 +6,68 @@ import java.util.Map;
 import com.base.po.BaseCheck;
 import com.base.po.BaseCheckList;
 
-public interface BaseCheckDao {
+//实习基地审核逻辑层
+public interface BaseCheckDao {    
     
-    
-    /**
-     * 
-     * @param applydpid 申请部门id
-     * @param pageindex 当前页数
-     * @param size      当前记录数
-     * @param columnName     排序列
-     * @param orderDir  排序顺序
-     * @return 基地审核信息
-     */
+	/*
+	  参数说明：applydpid,整型，为申请部门编号; pageindex,为当前页数;size,为每页的条数; order,排序列;
+            orderDir,为排序的顺序; searchValue,为模糊查询的值.       
+	 返回值：    BaseCheckList,该对象包括实习基地申请数据记录+记录条数
+	 函数功能： 获取实习基地申请数据
+	  */
     public BaseCheckList getBaseCheck(int applydpid,int pageindex,int size, String columnName, String orderDir,String searchValue);
-    /**
-     * 
-     * @return 获取部门集合（部门id和具体部门）
-     */
+   
+    /*
+	  参数说明：无参数值       
+	 返回值：    List<Map<String,String>>,为Map<String,String>对象的集合
+	 函数功能：获取部门集合
+	  */
     public List<Map<String,String>> getDept(int tag);
-    /**
-     * 拒绝申请
-     * @param str 封装的id表示哪几条数据
-     * @param status 变为申请失败状态（12）
-     */
+    
+    /*
+	  参数说明：recordstr，字符串型，为实习基地申请记录编号的封装;infoStr,字符串型，为要发送的消息
+	 返回值：    无返回值
+	 函数功能：申请记录的状态值变为申请失败状态12
+	  */
     public void refuseapply(String recordstr);
-    /**
-     * 同意申请
-     * @param str 封装的id表示哪几条数据
-     * @param recordstr 封装的信息记录id和申请年限
-     */
+    
+    /*
+	  参数说明：str,字符串型，为('实习基地编号','建立时间','结束时间')的封装;
+	          infoStr,字符串型，为要发送的消息
+	          recordstr，字符串型，为实习基地申请记录编号的封装    
+	 返回值：    无返回值
+	 函数功能：申请记录的状态值变为申请成功状态6,
+	  */
     public void agreeApply(String str,String recordstr);
     
-    /**封装消息的方法
-     * 发送消息
-     * @param sql 插入封装好的sql语句
-     */
+    /*
+	  参数说明：sql,为消息的封装  
+	 返回值：   无返回值
+	 函数功能：插入消息
+	 */
     public void insertMessage(String sql);
     
+    /*
+	  参数说明：applydpid,整型，为申请部门编号; pageindex,为当前页数;size,为每页的条数; order,排序列;
+          orderDir,为排序的顺序; searchValue,为模糊查询的值.       
+	 返回值：    BaseCheckList,该对象包括续期申请数据记录+记录条数
+	 函数功能： 获取续期申请数据
+	  */
     public BaseCheckList getaddCheck(int applydpid, int pageindex,int size,
    	     String columnName, String orderDir,String searchValue);
     
+    /*
+	  参数说明：recordstr，字符串型，为实习基地申请记录编号的封装;infoStr,字符串型，为要发送的消息    
+	 返回值：    无返回值
+	 函数功能：同意续期申请，申请记录的状态值变为申请成功状态6,
+	  */
     public void addDateApply(String recordstr);
     
-    public void refuseDateApply(String recordstr);
-    
+    /*
+	  参数说明：recordstr，字符串型，为实习基地申请记录编号的封装;infoStr,字符串型，为要发送的消息    
+	 返回值：    无返回值
+	 函数功能：拒绝续期申请，申请记录的状态值变为到期已失效状态17
+	 */
+    public void refuseDateApply(String recordstr);    
     
 }

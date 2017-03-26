@@ -39,13 +39,14 @@ import com.base.utils.ExcelReport;
  * @author 梦醒何处
  * 
  */
+//实习申请控制层
 @Controller("BaseApplyController")
 @RequestMapping("/jsp")
 public class BaseApplyController {
     @Autowired
     private baseApplyService baseapplyservice;
     
-    //获得用户输入的数据
+    //提交用户的实习基地申请
     @RequestMapping("/getRequestBaseInfo.do")
     public String getRequestBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -177,6 +178,7 @@ public class BaseApplyController {
 	return "baseApply";
 
     }
+    
     //获取学院和基地类型
     @RequestMapping("/BaseApplyAllInfo.do")
     public String BaseApplyInfo(HttpServletRequest request,
@@ -201,7 +203,8 @@ public class BaseApplyController {
 
 	return null;
     }
-    //获取部门
+    
+    //根据部门类型获取部门
     @RequestMapping("/getBaseSingleDept.do")
     public String getBaseSingleDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -221,7 +224,8 @@ public class BaseApplyController {
 
 	return null;
     }
-    //根据学院id获取专业
+    
+    //根据学院编号获取专业
     @RequestMapping("/getMajor.do")
     public String getMajor(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -238,6 +242,7 @@ public class BaseApplyController {
 	}
 	return null;
     }
+    
     //检测用户输入的基地名称是否存在
     @RequestMapping("/CheckName.do")
     public String CheckName(HttpServletRequest request,
