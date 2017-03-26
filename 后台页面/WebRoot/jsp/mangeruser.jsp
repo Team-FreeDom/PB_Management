@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</ul>
 									</li>
 
-										<li class="menuItem nav-parent">
+										<li class="menuItem nav-parent opened nav-expanded" ${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>
@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <li ${visitRight[9]==0?"style='display:none;'":" "}><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 										</ul>
 									</li>
-									 <li class="menuItem nav-parent">
+									 <li class="menuItem nav-parent" ${visitRight[12]==0?"style='display:none;'":" "}>
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 										</a>

@@ -153,7 +153,7 @@
 											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 									</ul>
 								</li>
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent opened nav-expanded" ${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
@@ -281,8 +281,7 @@
 									<th>起始周</th>
 									<th hidden>专业编号</th>
 									<th hidden>面向专业</th>
-									<th>考核</th>
-									<th hidden>编号</th>
+									<th>考核</th>									
 								</tr>
 							</thead>
 							<tbody>
@@ -400,9 +399,9 @@
 
 
 				</div>
-				<div class="row form">
+				<div class="row form" style="padding-left:20%;">
 
-					<div id="mainEchart"  style="width: 700px;height:400px;float:right;" class="col-lg-12 form-group text-center">
+					<div id="mainEchart"  style="width:700px;height:500px; "class="col-lg-12 form-group text-center">
 
 
 					</div>

@@ -115,20 +115,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</ul>
 									</li>
 
-                                            <li class="menuItem nav-parent">
-                                                <a>
-                                                    <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
-                                                </a>
-                                                <ul class="nav nav-children">
-                                                    <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                                   
-                                                     <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                                    <li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
-                                                   
-                                                </ul>
-                                            </li>
+                                            <li class="menuItem nav-parent" ${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+										<a>
+											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+										</a>
+										<ul class="nav nav-children">
+                                            <li ${visitRight[0]==0?"style='display:none;'":" "}><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
+                                           
+                                            <li ${visitRight[2]==0?"style='display:none;'":" "}><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+                                            <li ${visitRight[1]==0?"style='display:none;'":" "}><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+                                            
+										</ul>
+									</li>
 
-                                      <li class="menuItem nav-parent">
+                                      <li class="menuItem nav-parent opened nav-expanded">
 										<a>
 											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 										</a>

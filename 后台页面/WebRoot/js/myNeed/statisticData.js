@@ -113,18 +113,11 @@ $(document).ready(function() {
 					   				"mData" : "checkMethod",//考核
 					   				"orderable" : false,
 					   				"sDefaultContent" : "",
-					   			},
-								{
-									"mData" : "id",//考核
-									"orderable" : false,
-									"sDefaultContent" : "",
-									"visible":false,
-									"render" : function(data,type,row){
+					   				"render" : function(data,type,row){
 										obj.push(row);
-										return '<span id='+(obj.length-1)+'></span>';
+										return '<span id='+(obj.length-1)+'>'+data+'</span>';
 									}
-								}
-						
+					   			}
 					],
 			        "language": {
 						"lengthMenu": "每页 _MENU_ 条记录",
@@ -623,17 +616,11 @@ $(document).on("click","#closemodal",function(){
 						   				"mData" : "checkMethod",//考核
 						   				"orderable" : false,
 						   				"sDefaultContent" : "",
-						   			},
-									{
-										"mData" : "id",//考核
-										"orderable" : false,
-										"sDefaultContent" : "",
-										"visible":false,
-										"render" : function(data,type,row){
+						   				"render" : function(data,type,row){
 											obj.push(row);
-											return '<span id='+(obj.length-1)+'></span>';
+											return '<span id='+(obj.length-1)+'>'+data+'</span>';
 										}
-									}
+						   			}
 							
 						],
 				        "language": {
