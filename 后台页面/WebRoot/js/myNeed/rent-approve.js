@@ -236,8 +236,25 @@ $(document)
 											size : 'small'
 										});
 									 return;
-								  }							 												
-								 var record_str = '(';// //申请记录id格(1,2,3,4,5)
+								  }
+								 
+								 bootbox.confirm({
+										message: "确定恢复？",
+										size: 'small',
+										buttons: {
+											confirm: {
+												label: '确定',
+												className: 'btn-success'
+											},
+											cancel: {
+												label: '取消',
+												className: 'btn-danger'
+											},
+										},			
+										callback: function (result) {
+											if(result){
+												
+												var record_str = '(';// //申请记录id格(1,2,3,4,5)
 									var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 									var jsonback = '';/*
 														 * json对象格式{
@@ -338,6 +355,12 @@ $(document)
 										duepage.draw(false);
 									}
 								});
+												
+											}
+										}
+								});
+								 
+								 
 							});
 					// //全选反选
 					$("#ck1").on(
@@ -406,8 +429,22 @@ $(document)
 												});
 											 return;
 										  }
-										
-										var record_str = '(';// //申请记录id格(1,2,3,4,5)
+										 bootbox.confirm({
+												message: "确定拒绝申请？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var record_str = '(';// //申请记录id格(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var jsonback = '';/*
 															 * json对象格式{
@@ -507,6 +544,12 @@ $(document)
 												Spage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+										
 
 									});
 
@@ -528,139 +571,159 @@ $(document)
 												});
 											 return;
 										  }
-										 
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
-										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
-										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
-										var jsonback = '';/*
-															 * json对象格式{
-															 * landstr:'("1","2","3","4","5")',
-															 * recordstr:'(1,2,3,4,5)',
-															 * infostr:[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}] }
-															 */
-										var i = 0;
-										var userid;// //表中缺少此字段，需要补充
-										$(
-												"input[type='checkbox'][name='idname']:checked")
-												.each(
-														function() {
-															userid = $(this)
-																	.data("id");
-															if (i != 0) {
-																record_str = record_str
-																		+ ','
-																		+ $(
-																				this)
-																				.val();
-																landid_str = landid_str
-																		+ ','
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text();
-																info_str = info_str
-																		+ ',{userid:"'
-																		+ userid
-																		+ '",msg:"'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(3)')
-																				.text()
-																		+ '#'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text()
-																		+ '"}'
-															} else {
-																record_str = record_str
-																		+ $(
-																				this)
-																				.val();
-																landid_str = landid_str
-																		+ ''
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text();
-																info_str = info_str
-																		+ '{userid:"'
-																		+ userid
-																		+ '",msg:"'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(3)')
-																				.text()
-																		+ '#'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text()
-																		+ '"}'
+										 bootbox.confirm({
+												message: "确定同意申请？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+														var record_str = '(';// //申请记录id格式(1,2,3,4,5)
+														var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
+														var jsonback = '';/*
+																			 * json对象格式{
+																			 * landstr:'("1","2","3","4","5")',
+																			 * recordstr:'(1,2,3,4,5)',
+																			 * infostr:[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}] }
+																			 */
+														var i = 0;
+														var userid;// //表中缺少此字段，需要补充
+														$(
+																"input[type='checkbox'][name='idname']:checked")
+																.each(
+																		function() {
+																			userid = $(this)
+																					.data("id");
+																			if (i != 0) {
+																				record_str = record_str
+																						+ ','
+																						+ $(
+																								this)
+																								.val();
+																				landid_str = landid_str
+																						+ ','
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text();
+																				info_str = info_str
+																						+ ',{userid:"'
+																						+ userid
+																						+ '",msg:"'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(3)')
+																								.text()
+																						+ '#'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text()
+																						+ '"}'
+																			} else {
+																				record_str = record_str
+																						+ $(
+																								this)
+																								.val();
+																				landid_str = landid_str
+																						+ ''
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text();
+																				info_str = info_str
+																						+ '{userid:"'
+																						+ userid
+																						+ '",msg:"'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(3)')
+																								.text()
+																						+ '#'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text()
+																						+ '"}'
+																			}
+																			i++;
+																		});
+														landid_str = landid_str + ')';
+														record_str = record_str + ')';
+														info_str = info_str + ']';
+
+														$.ajax({
+															url : 'agreeApply.do',
+															type : 'post',
+															dataType : 'json',
+															data : {
+																"recordstr" : record_str,
+																"infostr" : info_str,
+																"landstr" : landid_str
+															},
+															success : function(msg) {
+																
+				                                              var tag=msg.tag;
+																if(tag==1){												
+																bootbox.alert({
+																	message : msg.str,
+																	size : 'small'
+																});
+																
+																}else if(tag==0){
+																	
+																	bootbox.alert({
+																		message : "不允许同一块土地多人申请成功，请检查",
+																		size : 'small'
+																	});
+																}
+																$("#basenameid option:gt(0)").remove();
+																$("#usernameid option:gt(0)").remove();
+																$("#dept option:gt(0)").remove();
+																$("#basenameid2 option:gt(0)").remove();
+																$("#usernameid2 option:gt(0)").remove();
+																$("#dept2 option:gt(0)").remove();
+																$("#basenameid3 option:gt(0)").remove();
+																$("#usernameid3 option:gt(0)").remove();
+																$("#dept3 option:gt(0)").remove();													
+																Brush();
+																Spage.draw(false);
+
 															}
-															i++;
 														});
-										landid_str = landid_str + ')';
-										record_str = record_str + ')';
-										info_str = info_str + ']';
-
-										$.ajax({
-											url : 'agreeApply.do',
-											type : 'post',
-											dataType : 'json',
-											data : {
-												"recordstr" : record_str,
-												"infostr" : info_str,
-												"landstr" : landid_str
-											},
-											success : function(msg) {
-												
-                                              var tag=msg.tag;
-												if(tag==1){												
-												bootbox.alert({
-													message : msg.str,
-													size : 'small'
-												});
-												
-												}else if(tag==0){
-													
-													bootbox.alert({
-														message : "不允许同一块土地多人申请成功，请检查",
-														size : 'small'
-													});
+														
+														
+													}
 												}
-												$("#basenameid option:gt(0)").remove();
-												$("#usernameid option:gt(0)").remove();
-												$("#dept option:gt(0)").remove();
-												$("#basenameid2 option:gt(0)").remove();
-												$("#usernameid2 option:gt(0)").remove();
-												$("#dept2 option:gt(0)").remove();
-												$("#basenameid3 option:gt(0)").remove();
-												$("#usernameid3 option:gt(0)").remove();
-												$("#dept3 option:gt(0)").remove();													
-												Brush();
-												Spage.draw(false);
-
-											}
 										});
+										
 									});
 					// ///////////////////////////参照上面方法，修改‘取消交费’和'确认交费'/////////////////////////////////////////////
 					// 取消交费
@@ -681,8 +744,23 @@ $(document)
 												});
 											 return;
 										  }
-
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+										 
+										 bootbox.confirm({
+												message: "确定取消交费？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var i = 0;
@@ -798,6 +876,13 @@ $(document)
 												repage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+
+										
 									});
 
 					// 确认交费
@@ -818,8 +903,23 @@ $(document)
 												});
 											 return;
 										  }
-
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+										 
+										 bootbox.confirm({
+												message: "确定确认交费？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var i = 0;
@@ -935,6 +1035,13 @@ $(document)
 												repage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+
+										
 									});
 					// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					

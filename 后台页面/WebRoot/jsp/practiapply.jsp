@@ -241,28 +241,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <div class="modal-body table-responsive">
                                   	<form class="form-horizontal" role="form" id="PraForm">
                                         
-                                          <table>
+                                          <table class="table" id="showtable">
                                           	<tr>
                                             	<td>
-                                                    单位：<input readonly type="text" class="noborder" id="division" value="">
+                                                   	 单位：<input readonly type="text" class="noborder" id="division" value="">
                                                 </td>
                                                 <td>
-                                                    课程名称：<input readonly type="text"  id="classname" value="农学实践(3)">
+                                                                                                                                                            课程名称：<input readonly type="text"  id="classname" value="" class="noborder">
                                                 </td>
-                                                <td>
+                                                
+                                                <td colspan="2">
+                                                	班级：<input readonly type="text" class="noborder" id="class" value="">
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                            	<td>
                                                 	面向专业：<input readonly type="text" class="noborder" id="major" value="">
                                                 </td>
                                                 <td>
-                                                	班级：<input readonly type="text" class="noborder" id="class" value="">
+                                                	学分：<input readonly type="text" id="grade" value="4" class="noborder">
                                                 </td>
                                                 <td>
-                                                	学分：<input readonly type="text" id="grade" value="4">
+                                                	学习人数：<input readonly type="text" id="number" value="26" class="noborder">
                                                 </td>
                                                 <td>
-                                                	学习人数：<input readonly type="text" id="number" value="26">
-                                                </td>
-                                                <td>
-                                                	实习周数：<input readonly type="text" id="weeks" value="12">
+                                                	实习周数：<input readonly type="text" id="weeks" value="12" class="noborder">
                                                 </td>
                                             </tr>
                                           </table>
@@ -274,14 +278,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 -->                                          <table class="table-bordered"  id="table">
                                           	
 												<tr>
-													<td>带队老师</td>
-													<td colspan="4"><input class="noborder text-center flag" readonly id="leaderTeacher" type="text" value="李林"></td>
+													<td colspan="2">带队老师</td>
+													<td colspan="3"><input class="noborder text-center flag" readonly id="leaderTeacher" type="text" value="李林"></td>
 													<td>指导教师</td>
 													<td colspan="4"><input readonly class="noborder text-center flag" id="adviser" value="" type="text"></td>
 												</tr>
 												<tr>
-													<td>实验员姓名</td>
-													<td colspan="9"><input class="noborder text-center flag" readonly id="testername" value="" type="text">
+													<td colspan="2">实验员姓名</td>
+													<td colspan="8"><input class="noborder text-center flag" readonly id="testername" value="" type="text">
 													</td>
 												</tr>
                                          	
