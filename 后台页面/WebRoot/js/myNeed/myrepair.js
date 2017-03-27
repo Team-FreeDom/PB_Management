@@ -408,7 +408,7 @@ $(document).on("click", "#finish", function() {
 				"sWidth" : "6%",
 				"render":function(data,type, row){
 							obj2.push(row);
-								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'"></span>';
+								return data='<span class="icon-search" id="scan" value="'+(obj2.length-1)+'$2"></span>';
 																
 				}
 			}
