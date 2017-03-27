@@ -407,7 +407,7 @@ function getInfo(){
     $.ajax({
 			type : 'POST',
 			dataType : 'json',
-			url : 'basename.do',
+			url : 'baseNeiName.do',
 			async : false,
 			cache : false,
 			error : function(request) {
@@ -421,14 +421,7 @@ function getInfo(){
 									$("#AbasenameID").after(
 				 							"<option class='rest' value="+data[0][i].id+">"
 				 									+data[0][i].name+"</option>");
-											
-
-				 }
-				 for (var i=0;i<data[1].length;i++) { 					
-					
-									$("#SbasenameID").after(
-										"<option class='rest' value="+data[1][i].name+">"
-												+data[1][i].name+"</option>");
+			
 
  }
 			}
