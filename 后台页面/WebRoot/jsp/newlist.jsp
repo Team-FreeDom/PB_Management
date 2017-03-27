@@ -124,47 +124,35 @@
 										</a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent" ${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i> <span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="rent-approve.jsp"> <span class="text">租赁审批</span>
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a href="rent-approve.jsp"> <span class="text">租赁审批</span>
 										</a></li>
 										
-										<li><a href="baseCheck.jsp"> <span class="text">基地审批</span>
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a href="baseCheck.jsp"> <span class="text">基地审批</span>
 										</a></li>
-										<li><a href="repairApprove.jsp"> <span class="text">维修审批</span>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a href="repairApprove.jsp"> <span class="text">维修审批</span>
 										</a></li>
 										
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
+								<li class="menuItem nav-parent" ${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i> <span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="notification.do"> <span class="text">
-													发布通知公告</span>
-										</a></li>
-										<li><a href="land_modle.jsp"> <span class="text">
-													土地布局设置</span>
-										</a></li>
-										<li><a href="fieldRent_maintain.jsp"> <span
-												class="text"> 土地租赁维护</span>
-										</a></li>
-										<li><a href="baseMaintain.jsp"> <span class="text"> 实习基地维护</span>
-										</a></li>
-										<li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-										<li><a href="practicePlanMaintain.jsp"> <span class="text"> 实习计划维护</span>
-										</a></li>
-										 <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-										<li><a href="mangeruser.jsp"> <span class="text">
-													系统用户维护</span>
-										</a></li>
-										<li><a href="system_power.jsp"> <span class="text">
-													系统权限设置</span>
-										</a></li>
-									</ul></li>
-								<li class="menuItem nav-parent"><a> <i
+                                        	<li ${visitRight[3]==0?"style='display:none;'":" "}><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+                                        	<li ${visitRight[4]==0?"style='display:none;'":" "}><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+                                            <li ${visitRight[6]==0?"style='display:none;'":" "}><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
+                                            <li ${visitRight[5]==0?"style='display:none;'":" "}><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+                                            <li ${visitRight[11]==0?"style='display:none;'":" "}><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+                                            <li ${visitRight[7]==0?"style='display:none;'":" "}><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
+                                            <li ${visitRight[10]==0?"style='display:none;'":" "}><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
+                                            <li ${visitRight[8]==0?"style='display:none;'":" "}><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+                                            <li ${visitRight[9]==0?"style='display:none;'":" "}><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+										</ul></li>
+								<li class="menuItem nav-parent" ${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i> <span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
