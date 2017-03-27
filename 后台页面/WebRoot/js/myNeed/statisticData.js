@@ -673,7 +673,6 @@ $(document).on("click","#closemodal",function(){
 	});*/
 	$(document).on("change","#selectCollege",function(){
 		var college=$("#selectCollege").val();
-		alert(college);
 		$("#selectTeacher option:gt(0)").remove();
 		$.ajax({
 			url : 'getCollege_Teacher.do',
