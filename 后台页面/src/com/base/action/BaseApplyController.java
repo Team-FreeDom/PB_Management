@@ -145,7 +145,9 @@ public class BaseApplyController {
 		StringBuffer sb = new StringBuffer();
 		if (majorid == null) {
 		    sb.append("(");
+		    sb.append("'");
 		    sb.append(Baseid);
+		    sb.append("'");
 		    sb.append(",");
 		    sb.append("-1");
 		    sb.append("),");
@@ -155,9 +157,13 @@ public class BaseApplyController {
 		    for (String string : majorid) {
 			System.out.println(string);
 			sb.append("(");
+			sb.append("'");
 			sb.append(Baseid);
+			sb.append("'");
 			sb.append(",");
+			sb.append("'");
 			sb.append(string);
+			sb.append("'");
 			sb.append("),");
 		    }
 		    sb.deleteCharAt(sb.length() - 1);

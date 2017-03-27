@@ -97,8 +97,8 @@ public class baseApplyDaoImpl implements baseApplyDao {
     }
     /**
      * 插入用户基地申请信息
-     * @param str1 基地名称id 申报部门id 基地类型id等的string字符串
-     * @param str2 (基地id,专业id)
+     * @param str1 (基地id,专业id)
+     * @param str2 基地名称id 申报部门id 基地类型id等的string字符串
      */
     @Override
     public void getRequestBaseInfo(String str1, String str2) {
