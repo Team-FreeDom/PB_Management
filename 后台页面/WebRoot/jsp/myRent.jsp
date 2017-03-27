@@ -646,7 +646,7 @@
 											<td>基地名 ：</td>
 											<td><input type="text" id="bname" readonly="readonly"></td>
 											<td>租赁人 ：</td>
-											<td><input type="text" id="name"></td>
+											<td><input type="text" id="name" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<td>土地名称 ：</td>

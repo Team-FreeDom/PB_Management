@@ -210,15 +210,8 @@
 									width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
+											
+											<td colspan="8">
 												<ul class="dropdown_show">
 													<li><span class="icon-filter">筛选</span>
 														<ul class="hide_ul" style="display:none">
@@ -359,15 +352,8 @@
 								<table id="tablePay" class="hover" cellspacing="0" width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
+											
+											<td colspan="8">
 												<ul class="dropdown_show">
 													<li><span class="icon-filter">筛选</span>
 														<ul class="hide_ul" style="display:none;">
@@ -453,15 +439,8 @@
 									width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
+											
+											<td colspan="8">
 												<ul class="dropdown_show">
 													<li><span class="icon-filter">筛选</span>
 														<ul class="hide_ul" style="display:none">
