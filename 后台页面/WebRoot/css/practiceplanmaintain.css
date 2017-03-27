@@ -16,6 +16,10 @@ table tbody tr td{
 	text-align:center;
 	cursor: pointer;
 }
+#showtable tr td{
+	border: none;
+	text-align:left;
+}
 #Applychart{
 	position:absolute !important;
 	top:187px;
@@ -27,24 +31,20 @@ table tbody tr td{
 	margin-top: 20%;
 }
 .noborder{
-	border: none;
-	width: 80px;
+	border: none !important;
+	
 }
 #classname{
 	border: none;
-	width: 100px;
 }
 #grade{
 	border: none;
-	width: 40px;
 }
 #number{
 	border: none;
-	width: 40px;
 }
 #weeks{
 	border: none;
-	width: 40px;
 }
 #practiceapplytable span{
 	cursor:pointer;
@@ -102,7 +102,10 @@ table tbody tr td{
 	color: #F70004;
 }
 .padding{
-	margin-left: 4% !important;
+	margin-left: 15px !important;
+}
+#class{
+	width:90%;
 }
 .setTag{
 	color: #F70004;

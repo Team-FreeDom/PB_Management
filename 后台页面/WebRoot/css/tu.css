@@ -13,3 +13,7 @@
 	max-height:250px;
 	_height:expression(this.height >250 ? "250px" : this.height);
 }
+.modalHeight{
+	height:400px;
+	overflow-y:scroll;
+}
