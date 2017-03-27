@@ -295,7 +295,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                       <option value="-1">显示全部</option>  
                                                                        <option value="3">维修完成</option>                                                                
                                                                       <option value="2">申请失败</option>
-                                                                     
+                                                                     <option value="4">失效</option>
                                                                     </select>  
                                                                     </td>
                                                                 </tr>

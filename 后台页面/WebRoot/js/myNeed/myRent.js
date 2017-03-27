@@ -790,8 +790,6 @@ $(document).ready(function() {
 
 					function recovery() {
 						document.getElementById("bnameUnion").value = "";						
-						document.getElementById("startTimeUnion").value = "";
-						document.getElementById("endTimeUnion").value = "";
 						document.getElementById("descUnion").value = "-1";
 					}
 					

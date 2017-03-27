@@ -190,7 +190,7 @@
 				<div class="row form">
 
 					<div class="col-lg-12">
-						<div class=" col-md-offset-1 col-md-10">
+						
 							<table id="table1" class="cell-border" cellspacing="0"
 								width="100%">
 								<thead>
@@ -209,7 +209,7 @@
 
 								</tbody>
 							</table>
-						</div>
+						
 					</div>
 
 					<!--弹出框-->
@@ -555,7 +555,7 @@
 
 
 					<div class="col-lg-12 form-group">
-						<div class=" col-md-offset-1 col-md-10">
+						
 							<table id="table2" class="cell-border" cellspacing="0"
 								width="100%">
 								<thead>
@@ -625,7 +625,7 @@
 
 								</tbody>
 							</table>
-						</div>
+						
 					</div>
 					<!--弹出框2-->
 					<div class="modal fade" id="scan" tabindex="-1" role="dialog"
