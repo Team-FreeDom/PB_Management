@@ -340,6 +340,7 @@ $(function() {
             }).bind(this);
 
             $(document).on("click", "#sum_app", function() {
+            	$("#modalHeight").removeClass("modalHeight");
                 var i = 1;
                 var str = '';
                 var id = -1;
@@ -372,6 +373,9 @@ $(function() {
                         i++;
                     } //end if
                 }); //end each
+                if(i>6){
+                	$("#modalHeight").addClass("modalHeight");
+                }
                 if (str == '') {
                     $('#sub_land_apply').attr('disabled', "true");
                     return false;

@@ -1938,6 +1938,7 @@ $(document)
 				var practiceClass="";     var phone="";
 				var aim="";     var Tea="";
 				var tes="";
+				var reg=/^[1-9][0-9]*$/;
 				$(".tbodyID").each(function(){
 					y++;
 					week=$(this).find("#weekend").val();
@@ -2004,6 +2005,13 @@ $(document)
 					});
 					return;
 					}
+				if(!week.match(reg)){
+					bootbox.alert({
+						message : "第"+y+"条记录的实习周次只能为数字",
+						size : 'small'
+					});
+					return;
+				}
 				if(startweek===""){
 					bootbox.alert({
 						message : "请填写第"+y+"条记录的开始时间",

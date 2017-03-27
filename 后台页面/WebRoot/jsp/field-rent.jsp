@@ -405,7 +405,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                                         </button>
                                                                                                         <h3 class="modal-title text-center" id="myModalLabel">土地租赁申请工单</h3>
                                                                                                     </div>
-                                                                                                    <div class="modal-body">
+                                                                                                    <div class="modal-body" id="modalHeight">
                                                                                                         <form class="form-inline" role="form" id='land_lease_table'></form>
 
                                                                                                         <div class="text-center" style="margin-top:20px;">
