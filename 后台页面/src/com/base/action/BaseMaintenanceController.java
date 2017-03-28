@@ -227,16 +227,15 @@ public class BaseMaintenanceController {
     @RequestMapping("/exportThisInfo.do")   
     public String exportThisInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map){
-    	
+    	System.out.println("basetype: "+request.getParameter("basetype"));
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
     	int dept=Integer.valueOf(request.getParameter("applydept"));
     	int star=Integer.valueOf(request.getParameter("star"));
-    	System.out.println(basetype+"  "+dept+"  "+star);
+    	System.out.println("zhege "+basetype+"  "+dept+"  "+star);
     	List<ExportBase> list=maintenanceservice.getExportBaseInfo(basetype,dept,star);
     	
     	if (CollectionUtils.isNotEmpty(list)) {         
-		/*	String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");*/
+			
 			String path = ExcelReport.getWebRootUrl(request,"/upload/");
 			String fullFileName = path + "/BaseInfo.xlsx";
 			ExcelReport export = new ExcelReport();
