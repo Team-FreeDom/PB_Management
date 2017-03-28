@@ -3,15 +3,15 @@ package com.base.po;
 public class ExportBase {
 
 	private String id;
-    private String name;//»ùµØÃû³Æ
-    private String type;//»ùµØÀàĞÍ
-    private String landarea;//»ùµØÃæ»ı
-    private String constructionarea;//½¨ÖşÃæ»ı
-    private int undertake;//¿É³Ğµ£ÈËÊı
-    private String applydp;//ÔºÏµÃû³Æ
-    private int deptId;//ÔºÏµ±àºÅ
-    private String land_address;//ÊµÏ°»ùµØµØÖ·   
-    private String facemajor;//ÃæÏò×¨Òµ
+    private String name;//åŸºåœ°åç§°
+    private String type;//åŸºåœ°ç±»å‹
+    private String landarea;//åœŸåœ°é¢ç§¯
+    private String constructionarea;//å»ºç­‘é¢ç§¯
+    private int undertake;//å¯æ‰¿æ‹…äººæ•°
+    private String applydp;//éƒ¨é—¨åç§°
+    private int deptId;//éƒ¨é—¨ç¼–å·
+    private String land_address;//åœ°å€
+    private String facemajor;//é¢å‘ä¸“ä¸š
 	public String getId() {
 		return id;
 	}

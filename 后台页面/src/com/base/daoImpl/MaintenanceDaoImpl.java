@@ -239,9 +239,10 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 				mt.setLandarea(rs.getString("landarea"));
 				mt.setConstructionarea(rs.getString("constructionarea"));
 				mt.setUndertake(rs.getInt("undertake"));
-				mt.setApplydp(rs.getString("applydp"));
+				mt.setApplydp(rs.getString("dept"));
+				mt.setDeptId(rs.getInt("applydp"));
 				mt.setLand_address(rs.getString("land_address"));
-				mt.setFacemajor(rs.getString("mname"));// 闂傚牄鍨归幃婊勭▔閹捐尙鐟�
+				mt.setFacemajor(rs.getString("mname"));// 
 				list.add(mt);
 			}
 		} catch (SQLException e) {

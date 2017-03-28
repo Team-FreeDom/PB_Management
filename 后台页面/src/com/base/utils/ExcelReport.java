@@ -798,7 +798,7 @@ public class ExcelReport {
 			cell2.setCellStyle(cs2);
 			// 第四列基地类型
 			Cell cell3 = row_line.createCell(3);
-			cell3.setCellValue(line_data.getApplydp());
+			cell3.setCellValue(line_data.getType());
 			cell3.setCellStyle(cs2);
 			// 第五列院系编号
 			Cell cell4 = row_line.createCell(4);

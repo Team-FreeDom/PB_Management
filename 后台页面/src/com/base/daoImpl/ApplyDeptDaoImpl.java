@@ -20,11 +20,12 @@ public class ApplyDeptDaoImpl {
 	public List<ApplyDept> getDepts()
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from ApplyDept";
+		String hql="from ApplyDept where dept!=?";
 		List<ApplyDept> list=null;
 		
 	    try {
-	    	 Query query=session.createQuery(hql);	    	    	
+	    	 Query query=session.createQuery(hql);
+	    	 query.setString(0, "''");
 	    	 list=query.list();
 			
 		} catch (Exception e) {
