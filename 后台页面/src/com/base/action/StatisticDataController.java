@@ -229,6 +229,7 @@ public class StatisticDataController implements ServletContextAware {
 	}
 	String teacherName=request.getParameter("teacherName");
 	if(teacherName.equals("全部")||teacherName==""){
+	    System.out.println(teacherName+"彩别彩别");
 	    teacherName=null;
 	}
 	List<StatisticData> list = new ArrayList<StatisticData>();
