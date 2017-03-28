@@ -228,24 +228,24 @@
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	年 级： <select name="" id="gradeClass">
+																	年 　　级： <select name="" id="gradeClass">
 																		<option value="" id="gradeClassId" selected="selected">全部</option>
 																	</select>
 																</div>
 															</div>
 															<div class="row" style="padding-top: 10px;">
 																<div class="col-md-4">
-																	学 院： <select name="" id="college">
+																	学　　 院： <select name="" id="college">
 																		<option value="" id="collegeID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	专 业： <select name="" id="major">
+																	专　　 业： <select name="" id="major">
 																		<option value="" id="majorID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	班 级： <select name="" id="className">
+																	班　　 级： <select name="" id="className">
 																		<option value="" id="classNameID" selected="selected">全部</option>
 																	</select>
 																</div>
@@ -332,24 +332,24 @@
 																</select>
 															</div>
 															<div class="col-md-4">
-																年 级： <select name="" id="gradeClass2">
+																年　　 级： <select name="" id="gradeClass2">
 																	<option value="" id="gradeClass2Id">全部</option>
 																</select>
 															</div>
 														</div>
 														<div class="row" style="padding-top: 10px;">
 															<div class="col-md-4">
-																学 院： <select name="" id="college2">
+																学　　 院： <select name="" id="college2">
 																	<option value="" id="college2ID">全部</option>
 																</select>
 															</div>
 															<div class="col-md-4">
-																专 业： <select name="" id="major2">
+																专　　 业： <select name="" id="major2">
 																	<option value="" id="major2ID">全部</option>
 																</select>
 															</div>
 															<div class="col-md-4">
-																班 级： <select name="" id="className2">
+																班　　级： <select name="" id="className2">
 																	<option value="" id="className2ID">全部</option>
 																</select>
 															</div>
@@ -358,7 +358,7 @@
 															<div class="col-md-12">
 																<form class="form-inline">
 																	<div class="form-group">
-																		<label for="exampleInputName2">老 师：</label> <input
+																		<label for="exampleInputName2">老 　　师：</label> <input
 																			type="text" class="form-control" id="teacherName"
 																			value="全部">
 																	</div>
