@@ -118,9 +118,8 @@ public class MymaintainController {
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
 	// 获取状态值 失败2；成功：1 维修完成：3       正常情况 失败：12 维修中：14 维修完成：15
-	Integer status = Integer.parseInt(request.getParameter("status"));
-	System.out.println(status + "这个状态值是多少aaaa");
-	if (status == 2) {
+	Integer status = Integer.parseInt(request.getParameter("status"));	
+	/*if (status == 2) {
 	    status = 12;
 	} else if (status == 1) {
 	    status = 14;
@@ -128,8 +127,7 @@ public class MymaintainController {
 	    status = 15;
 	} else {
 	    status = -2;
-	}
-	System.out.println(status + "这个状态值是多少");
+	}	*/
 	MymaintainList str = null;
 	str = mymaintainservice.Mymaintain2(pageindex, size, order, orderDir,
 		-1, status, userid);

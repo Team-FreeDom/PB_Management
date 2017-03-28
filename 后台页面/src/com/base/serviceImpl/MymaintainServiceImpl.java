@@ -30,14 +30,12 @@ public class MymaintainServiceImpl implements MymaintainService {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
-	} else if (order == 2) {
+	} else if (order == 1) {
 	    columnName = "basename";
-	} else if (order == 3) {
+	} else if (order == 2) {
 	    columnName = "username";
-	} else if (order == 4) {
+	} else if (order == 3) {
 	    columnName = "apply_time";
-	} else if (order == 5) {
-	    columnName = "money";
 	}
 	MymaintainList list = mymaintaindao.Mymaintain(pageindex, size,
 		columnName, orderDir, year, status, userid);

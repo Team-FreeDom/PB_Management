@@ -386,7 +386,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <form role="form" class="form-horizontal" action="exportmaintainapply.do" method="post" onsubmit="return daoBaseThis();">                                                  
                                             <div class="modal-body" id="daochu" style="height:120px;">
                                             
-                                            	
+                                            	<div class="form-group">
+                                                  	<label for="inputEmail3" class="col-sm-4 control-label">报修年份</label>
+                                                  	<div class="col-sm-8">
+                                                  	 <select class="form-control" name="year" id="year">
+                                                    	<option id="yearId" value="-1" selected>全部</option>                                                        
+                                                    </select>                                                    
+                                                    </div>
+                                                  </div>
+                                               
                                                   <div class="form-group">
                                                    	 <label for="inputEmail3" class="col-sm-4 control-label">基地列表</label>
                                                    	 <div class="col-sm-8">
@@ -396,15 +404,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     </div>
                                                   </div>
                                                   
-                                                  <div class="form-group">
-                                                  	<label for="inputEmail3" class="col-sm-4 control-label">报修年份</label>
-                                                  	<div class="col-sm-8">
-                                                  	 <select class="form-control" name="year" id="year">
-                                                    	<option id="yearId" value="-1" selected>全部</option>                                                        
-                                                    </select>                                                    
-                                                    </div>
-                                                  </div>
-                                               
+                                                  
                                             
                                             </div>
                                             <div class="modal-footer">

@@ -5,10 +5,10 @@ $(document)
 					$('#fieldrent_maintain')
 							.DataTable(
 									{
-										"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 4, // 默认每页显示多少条记录
+										"iDisplayLength" : 5, // 默认每页显示多少条记录
 										"bPaginate": true, //翻页功能
 										"searching":false,//禁用搜索
 										"bServerSide" : true,
@@ -281,10 +281,10 @@ $(document).delegate('#submitS', 'click', function() {
 	$('#fieldrent_maintain')
 	.DataTable(
 			{
-				"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
-				"iDisplayLength" : 8, // 默认每页显示多少条记录
+				"iDisplayLength" : 5, // 默认每页显示多少条记录
 				"bPaginate": true, //翻页功能
 				"bDestroy":true,
 				"processing": true,
@@ -492,9 +492,29 @@ function deleteInfo()
 				size : 'small'
 			});
 	  }else{
+		  bootbox.confirm({
+				message: "是否确认删除？",
+				size: 'small',
+				buttons: {
+					confirm: {
+						label: '确定',
+						className: 'btn-success'
+					},
+					cancel: {
+						label: '取消',
+						className: 'btn-danger'
+					},
+				},			
+				callback: function (result) {
+					if(result){
+						
+						document.getElementById("lead").style.display = 'none';
+						$("#deleteInfo").submit();
+						
+					}
+				}
+		});
 		  
-		  document.getElementById("lead").style.display = 'none';
-		  $("#deleteInfo").submit();
 	  }	
 	
 
@@ -587,7 +607,17 @@ function recovery() {
 
 
 // 全选，反选按钮 
-
+$("#ck1").on(
+		"click",
+		function() {
+			if ($(this).prop("checked") === true) {
+				$("#fieldrent_maintain input[name='idname']").prop(
+						"checked", true);
+			} else {
+				$("#fieldrent_maintain input[name='idname']").prop(
+						"checked", false);
+			}
+		});
 allCkBox2(); 
 function allCkBox2(id){
 var tableBox = document.getElementById(id||"fieldrent_maintain"),

@@ -261,7 +261,7 @@
 
 									</tr>
 									<tr style="background:#eeeff4" width="100%">
-										<th><label><input type="checkbox" name="0"
+										<th><label><input type="checkbox" name="0" id="ck1"
 												class="ck-all" /></label></th>
 										<th>开始日期</th>
 										<th>结束日期</th>

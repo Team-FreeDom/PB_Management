@@ -41,28 +41,28 @@ $(function () {
 			var strmoney=/^[0-9]*$/.test(budget);
 			if(projectname==""){
 				bootbox.alert({
-					message : "请输入项目名称",
+					message : "请填写项目名称",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(name==""){
 				bootbox.alert({
-					message : "请输入您的姓名",
+					message : "请填写报修人",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(address==""){
 				bootbox.alert({
-					message : "请输入地址",
+					message : "请填写具体位置",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(budget==""){
 				bootbox.alert({
-					message : "请输入预算金额",
+					message : "请填写预算金额",
 					size : 'small'
 					});	
 				return 0;

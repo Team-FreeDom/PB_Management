@@ -48,7 +48,12 @@ public interface MaintainApplyDao {
 	 */
 	public List<MaintainApplys> export_maintainapply(String bname,int years);
 	
-	public List<Map<String,String>> find_basenameFinish();
+	/*
+	   参数说明：years,字符串型，为年份
+	   返回值：   List，存放基地列表
+	   函数功能：获取维修管理记录里存在的基地列表
+	 */
+	public List find_basenameFinish(String year);
 
 	/*
 	   参数说明：无参数值

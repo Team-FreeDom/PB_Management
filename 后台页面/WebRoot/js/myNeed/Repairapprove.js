@@ -134,7 +134,7 @@ $(".ck2").click(function () {//反选
                         "zeroRecords": "没有找到记录",
                         "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
                         "infoEmpty": "无记录",
-						"sSearch": "查询：",
+						"sSearch": "模糊查询：",
                         "infoFiltered": "(从 _MAX_ 条记录过滤)",
 						"oPaginate": {
 						   "sFirst": "首页",
@@ -245,7 +245,7 @@ $(".ck2").click(function () {//反选
                             "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
                             "infoEmpty": "无记录",
                             "infoFiltered": "(从 _MAX_ 条记录过滤)",
-             			   "sSearch": "查询：",
+             			   "sSearch": "模糊查询：",
              			   "oPaginate": {
              					"sFirst": "首页",
              					"sPrevious": " 上一页 ",
@@ -651,9 +651,10 @@ $(document).on("click","#finish",function() {
 		"serverSide" : true,
 		"iDisplayLength": 5,// //默认每页显示多少条记录
 		"bDestroy" : true,
+		"bFilter": true,
 		"ordering":true,
 		"filter":true,
-		"dom" : 'tipr<"bottom"l>',
+		"dom" : 'ftipr<"bottom"l>',
 		"ajax" : {
 			"data" : {
 				"baseid" : baseid,
@@ -776,8 +777,9 @@ $(document).on("click","#finish2",function() {
 		"iDisplayLength": 5,// //默认每页显示多少条记录
 		"bDestroy" : true,
 		"ordering":true,
+		"bFilter": true,
 		"filter":true,
-		"dom" : 'tipr<"bottom"l>',
+		"dom" : 'ftipr<"bottom"l>',
 		"ajax" : {
 			"data" : {
 				"baseid" : baseid,

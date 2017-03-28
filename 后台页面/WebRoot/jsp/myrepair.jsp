@@ -292,10 +292,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                             	<tr>
                                                                 	<td style="text-align:center;">                                                                   维修状态 ：
                                                                     <select id="status">
-                                                                      <option value="-1">显示全部</option>  
-                                                                       <option value="3">维修完成</option>                                                                
-                                                                      <option value="2">申请失败</option>
-                                                                     <option value="4">失效</option>
+                                                                      <option value="-2">显示全部</option>  
+                                                                       <option value="15">维修完成</option>                                                                
+                                                                       <option value="12">申请失败</option>
+                                                                       <option value="11">失效</option>
                                                                     </select>  
                                                                     </td>
                                                                 </tr>
