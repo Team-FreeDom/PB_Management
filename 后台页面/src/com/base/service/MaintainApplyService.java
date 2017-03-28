@@ -15,8 +15,12 @@ import com.base.po.MaintainList;
 //报修申请逻辑层
 public interface MaintainApplyService {
 
-		
-	public List find_basename();
+	/*
+	   参数说明：years,字符串型，为年份
+	   返回值：   List，存放基地列表
+	   函数功能：获取维修管理记录里存在的基地列表
+	 */	
+	public List find_basename(String year);
 	
 	/*
 	   参数说明：str，为报修申请信息的封装;infostr，字符串型，为要发送的信息

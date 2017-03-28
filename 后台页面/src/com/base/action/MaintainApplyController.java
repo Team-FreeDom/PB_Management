@@ -47,7 +47,11 @@ public class MaintainApplyController {
     @RequestMapping("/basename.do")
     public String find_basename(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
-	List list = applyservice.find_basename();
+    String year = request.getParameter("year"); 
+    if(year.equals("-1")){
+    	year=null;
+    }
+	List list = applyservice.find_basename(year);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    JSONArray json = JSONArray.fromObject(list);
@@ -165,6 +169,7 @@ public class MaintainApplyController {
 	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
 								// desc
 	String searchValue = request.getParameter("search[value]");
+	System.out.println("search[value]:"+searchValue);
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
@@ -278,7 +283,11 @@ public class MaintainApplyController {
     @RequestMapping("/getThoseYear.do")
     public String getThoseYear(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	List<String> list = applyservice.getThoseYear();
+    List list=new ArrayList();
+	List<String> list1 = applyservice.getThoseYear();
+	List list2 = applyservice.find_basename(null);
+	list.add(list1);
+	list.add(list2);
 	JSONObject getObj = new JSONObject();
 	getObj.put("list", list);
 	response.setContentType("text/html;charset=UTF-8");

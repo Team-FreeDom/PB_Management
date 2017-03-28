@@ -114,38 +114,33 @@ $(document).ready(function() {
 					   }
                     }
 					  });
+              
+              //基地列表
+              $.ajax({
+  				type : 'POST',
+  				dataType : 'json',
+  				url : 'baseNeiName.do',
+  				async : false,
+  				cache : false,
+  				error : function(request) {
+  					bootbox.alert({
+  	     			  message: "请求异常",
+  	     			  size: 'small'
+  	     		  });
+  				},
+  				success : function(data) {
+  					 for (var i=0;i<data.length;i++) { 					
+  										$("#AbasenameID").after(
+  										"<option value="+data[i].id+">"
+  												+ data[i].name + "</option>");
+  								
+  				
+
+  	 }
+  				}
+  			}); 
 					  
-	  //获取基地列表
-        $.ajax({
- 			type : 'POST',
- 			dataType : 'json',
- 			url : 'basename.do',
- 			async : false,
- 			cache : false,
- 			error : function(request) {
- 				bootbox.alert({
-         			  message: "请求异常",
-         			  size: 'small'
-         		  });
- 			},
- 			success : function(data) {
- 				 for (var i=0;i<data[0].length;i++) { 					
- 									$("#AbasenameID").after(
- 				 							"<option class='rest' value="+data[0][i].id+">"
- 				 									+data[0][i].name+"</option>");
-												
-
- 				 }
- 				 for (var i=0;i<data[1].length;i++) { 					
-						
-										$("#SbasenameID").after(
-											"<option class='rest' value="+data[1][i].name+">"
-													+data[1][i].name+"</option>");
-
-	 }
- 			}
- 		}); 
-		
+	 
 					//删除操作	 
 					var flag=0;
 					$('#delete').click(function() {
@@ -221,7 +216,9 @@ $("#ZJ").click(function(){
 		$("#Abudget").val("");
 		$("#Aaddress").val("");
 		$("#Areason").val("");
-		$("#file").val("");
+		$("#file").val("");	
+		
+
 })					
 //增加操作
 $("#save").click(function(){
@@ -241,7 +238,7 @@ $("#save").click(function(){
 		}					
 		else if($("#Aname").val()==""){
 				bootbox.alert({
-				message : "请填写申报人姓名",
+				message : "请填写报修人",
 				size : 'small'
 				});	
 				return;
@@ -387,43 +384,61 @@ $("#import").click(function (){//每次点击导出是清空数据
 		type : 'post',
 		dataType : 'json',		
 		success : function(data) {
-			$(".removeThis").remove();
-			 for (var i=0;i<data.list.length;i++) {
-			$("#yearId").after("<option class='removeThis' value='"+data.list[i]+"'>"+data.list[i]+"</option>");
+			$("#year option:gt(0)").remove();
+			$("#Sbasename option:gt(0)").remove();
+			for (var i=0;i<data.list[0].length;i++) {
+			   $("#yearId").after("<option value='"+data.list[0][i]+"'>"+data.list[0][i]+"</option>");
 			 }
+			 for (var i=0;i<data.list[1].length;i++) { 					
+					$("#SbasenameID").after(
+					"<option value="+data.list[1][i]+">"
+							+ data.list[1][i] + "</option>");
+			
+
+
+                }
 		}
 	});
+	
 	});	
-					 					 					
-});
 
 $("#export").click(function(){
 	$("#exportmodal").modal('hide');
 });
 
-function getInfo(){
-	$(".rest").remove();
-	 //获取基地列表
-    $.ajax({
-			type : 'POST',
-			dataType : 'json',
-			url : 'baseNeiName.do',
-			async : false,
-			cache : false,
-			error : function(request) {
-				bootbox.alert({
-     			  message: "请求异常",
-     			  size: 'small'
-     		  });
-			},
-			success : function(data) {
-				 for (var i=0;i<data[0].length;i++) { 					
-									$("#AbasenameID").after(
-				 							"<option class='rest' value="+data[0][i].id+">"
-				 									+data[0][i].name+"</option>");
-			
+$("#year").change(function(){
+	
+	var year=$("#year").val();
+	
+	$("#Sbasename").find("option:gt(0)").remove();
+		$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				url : 'basename.do',
+				data:{"year":year},
+				async : false,
+				cache : false,
+				error : function(request) {
+					bootbox.alert({
+	     			  message: "请求异常",
+	     			  size: 'small'
+	     		  });
+				},
+				success : function(data) {
+					 for (var i=0;i<data.length;i++) { 					
+										$("#SbasenameID").after(
+										"<option value="+data[i]+">"
+												+ data[i] + "</option>");
+								
+				
 
- }
-			}
-		}); 
-}
+	         }
+				}
+			}); 
+	
+});
+					 					 					
+});
+
+
+
