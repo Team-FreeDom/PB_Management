@@ -782,10 +782,11 @@ $("#submitS").click(function() {
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
+				"bFilter": true,
 				"iDisplayLength": 10,	
 				"bDestroy":true,
 				"processing":true,
-				"dom" : 'tipr<"bottom"l>',
+				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
 					"url" : "getXUBaseCheck.do",
 					"type" : "POST",
@@ -942,8 +943,9 @@ $("#submitS2").click(function() {
 				"serverSide" : true,
 				"iDisplayLength": 10,	
 				"bDestroy":true,
+				"bFilter": true,
 				"processing":true,
-				"dom" : 'tipr<"bottom"l>',
+				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
 					"url" : "getXUBaseCheck.do",
 					"type" : "POST",
