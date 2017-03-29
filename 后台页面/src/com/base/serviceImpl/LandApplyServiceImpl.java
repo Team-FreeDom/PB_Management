@@ -187,22 +187,22 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     
     public void myFameCancel1(int la_id,String info_str,int tag)
     {
-    	 //��ò������Ϣ���
+    	
   	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
   	  
     	LandApply la=landApplyDaoImpl.getapply(la_id);   	
-    	//���˼�¼��״̬��ΪʧЧ11
+    	
         la.setStatus(11);        
-        //���´˼�¼
+        //
         landApplyDaoImpl.updateLandApply(la);
         
-        //����Ϣ���в������
+        //
         checkViewDaoImpl.insertMessage(insertStr);
         String landstr=la.getLid();
         landstr='('+landstr+')';
         if(tag==1){
         	
-        	//����ͬ���ص�״̬Ϊ�������״̬��Ϊ�����
+        	//
     		checkViewDaoImpl.releaseInfo(landstr);
         }
         
