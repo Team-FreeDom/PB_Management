@@ -303,6 +303,7 @@ $("#screen").on("click", function () {
 $("#screen2").on("click", function () {
 	$('.hide_ul2').toggle();
 	$('.hide_ul2 select').val("");
+	$("#teacherName").val("全部");
 });
 $(document).on("change","#baseCategory2",function(){//第二个筛选的联动
 			   $("#baseName2 option:gt(0)").remove();

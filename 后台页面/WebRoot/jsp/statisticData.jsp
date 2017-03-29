@@ -358,7 +358,7 @@
 															<div class="col-md-12">
 																<form class="form-inline">
 																	<div class="form-group">
-																		<label for="exampleInputName2">老 　　师：</label> <input
+																		<label for="teacherName">老 　　师：</label> <input
 																			type="text" class="form-control" id="teacherName"
 																			value="全部">
 																	</div>

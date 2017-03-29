@@ -685,7 +685,7 @@ $(document).ready(function() {
             } );
 
 $(".icon-filter").on("click", function () {
-	$("#status").val("-1");
+	$("#status").val("-2");
 	$('#hide_ul').toggle();
 });
 
