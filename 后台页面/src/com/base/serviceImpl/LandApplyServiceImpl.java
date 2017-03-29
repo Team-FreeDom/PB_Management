@@ -185,27 +185,35 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
     }   
   
     
-    public void myFameCancel1(int la_id,String info_str,int tag)
+    public int myFameCancel1(int la_id,String info_str,int tag)
     {
-    	
-  	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
-  	  
-    	LandApply la=landApplyDaoImpl.getapply(la_id);   	
-    	
-        la.setStatus(11);        
-        //
-        landApplyDaoImpl.updateLandApply(la);
+    	int flag=0;
+    	String str=null;
+    	String landstr=null;
+    	LandApply la=null;
+    	//获取消息sql语句
+  	    String insertStr=MessageUtils.getInsertStr(info_str,7);  	   
+  	    if(tag==0){  	    	
+  	    	 //获取编号为la_id的记录且状态为锁定或待审核
+  	    	la=landApplyDaoImpl.getapply(la_id,2,4); 
+  	    }else if(tag==1){  	    
+  	    	 //获取编号为la_id的记录且状态为待交费
+  	    	la=landApplyDaoImpl.getapply(la_id,1,1); 
+  	    }
+  	   
+    	if(la!=null){
+    		la.setStatus(11); 
+    		landApplyDaoImpl.updateLandApply(la);
+    		checkViewDaoImpl.insertMessage(insertStr);
+    		if(tag==1){
+    			 landstr=la.getLid();
+    		     landstr='('+landstr+')';            	
+        		checkViewDaoImpl.releaseInfo(landstr);
+            }
+    		flag=1;
+    	}      
         
-        //
-        checkViewDaoImpl.insertMessage(insertStr);
-        String landstr=la.getLid();
-        landstr='('+landstr+')';
-        if(tag==1){
-        	
-        	//
-    		checkViewDaoImpl.releaseInfo(landstr);
-        }
-        
+        return flag;
     }
     
     public void myFrameSubmit(int la_id){

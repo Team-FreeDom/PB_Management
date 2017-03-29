@@ -526,10 +526,19 @@ $(document)
 											},
 											success : function(msg) {
 												// ////////将所有的alert替换成以下/////////////////////////////////////////////////////////////////////////////////////统一风格/////////////////////////////
+											if(msg.str==0){
 												bootbox.alert({
-													message : msg.str,
+													message : "拒绝失败，请刷新页面",
 													size : 'small'
 												});
+												return;
+											}else if(msg.str==1){
+												bootbox.alert({
+													message : "拒绝成功",
+													size : 'small'
+												});
+											}
+												
 												
 												$("#basenameid option:gt(0)").remove();
 												$("#usernameid option:gt(0)").remove();
@@ -555,7 +564,7 @@ $(document)
 
 					// 同意申请
 					// //////////状态值1： 2： 3： 4： 。。。。。。。
-					$('#agreeOne')							.click(
+					$('#agreeOne').click(
 									function() {
 										
 										var chk_value =[];
@@ -693,16 +702,22 @@ $(document)
 				                                              var tag=msg.tag;
 																if(tag==1){												
 																bootbox.alert({
-																	message : msg.str,
+																	message : "同意成功",
 																	size : 'small'
-																});
-																
+																});																
 																}else if(tag==0){
 																	
 																	bootbox.alert({
 																		message : "不允许同一块土地多人申请成功，请检查",
 																		size : 'small'
 																	});
+																	return;
+																}else if(tag==2){
+																	bootbox.alert({
+																		message : "同意失败，请刷新页面",
+																		size : 'small'
+																	});
+																	return;
 																}
 																$("#basenameid option:gt(0)").remove();
 																$("#usernameid option:gt(0)").remove();
@@ -857,11 +872,19 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-											
+												
+											if(msg.str==0){
 												bootbox.alert({
-													message :  msg.str,
+													message :  "取消失败,请刷选页面",
 													size : 'small'
 												});
+												return;
+											}else if(msg.str==1){
+												bootbox.alert({
+													message :  "取消成功",
+													size : 'small'
+												});
+											}												
 												
 												$("#basenameid option:gt(0)").remove();
 												$("#usernameid option:gt(0)").remove();
@@ -1016,11 +1039,18 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-												
-												bootbox.alert({
-													message :  msg.str,
-													size : 'small'
-												});
+												if(msg.str==0){
+													bootbox.alert({
+														message :  "确认失败，请刷新页面",
+														size : 'small'
+													});
+													return;
+												}else if(msg.str==1){
+													bootbox.alert({
+														message :  "确认成功",
+														size : 'small'
+													});
+												}												
 												
 												$("#basenameid option:gt(0)").remove();
 												$("#usernameid option:gt(0)").remove();

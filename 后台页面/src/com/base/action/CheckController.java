@@ -236,9 +236,7 @@ public class CheckController {
 
 	int tag = checkservice.agreeApply(landstr, recordstr, infostr);
 
-	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
-
+	JSONObject getObj = new JSONObject();	
 	getObj.put("tag", tag);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -257,10 +255,10 @@ public class CheckController {
 	String recordstr = request.getParameter("recordstr");
 	String infostr = request.getParameter("infostr");
 
-	checkservice.refuseapply(recordstr, infostr);
+	int flag=checkservice.refuseapply(recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
+	getObj.put("str", flag);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -281,10 +279,10 @@ public class CheckController {
 	String infostr = request.getParameter("infostr");
 	String landstr = request.getParameter("landstr");
 
-	checkservice.confirmPayFor(landstr, recordstr, infostr);
+	int flag=checkservice.confirmPayFor(landstr, recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
+	getObj.put("str", flag);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -305,10 +303,10 @@ public class CheckController {
 	String infostr = request.getParameter("infostr");
 	String landstr = request.getParameter("landstr");
 
-	checkservice.cancelPayFor(landstr, recordstr, infostr);
+	int flag=checkservice.cancelPayFor(landstr, recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
+	getObj.put("str", flag);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {

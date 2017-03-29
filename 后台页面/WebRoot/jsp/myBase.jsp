@@ -452,9 +452,9 @@
 														<form>
 															<table class="table">
 																<tr>
-																	<td>最终状态 <select name="status" id="status"
-																		style="width:150px;margin-top:0px;">
-																			<option value="-2" selected>显示全部</option>
+																	<td style="text-align:center">最终状态 
+																	<select name="status" id="status">
+																			<option value="-2">显示全部</option>
 																			<option value="6">申请成功</option>
 																			<option value="12">申请失败</option>
 																			<option value="17">过期失效</option>
@@ -463,7 +463,7 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td colspan="2" style="text-align:center">
+																	<td style="text-align:center">
 																		<button type="reset" class="btn btn-primary">重置</button>
 																		<button type="button" class="btn btn-primary"
 																			id="finish">完成</button>
