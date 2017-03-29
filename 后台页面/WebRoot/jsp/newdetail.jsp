@@ -231,7 +231,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                                                     <a>位置 :</a>
                                                                                 </li>
                                                                                 <li>
-                                                                                    <a href="newdetail.jsp">
+                                                                                    <a href="#">
                                                                                         <i class=" icon-home"></i>新闻详情</a>
                                                                                 </li>
                                                                             </ol>
