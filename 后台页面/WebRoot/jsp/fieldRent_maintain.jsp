@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/fieldrent_maintain.css">
+<link rel="stylesheet" href="../css/calendar.css" media="screen">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -351,9 +352,9 @@
 
 											<tr>
 												<td>使用年限 :</td>
-												<td><input type="text" name="startTime" id="startTime"></td>
+												<td><input type="text" name="startTime" id="startTime" class="laydate-icon"></td>
 												<td>-----------</td>
-												<td><input type="text" name="endTime" id="endTime"></td>
+												<td><input type="text" name="endTime" id="endTime" class="laydate-icon"></td>
 											</tr>
 										</table>
 									</div>
@@ -476,8 +477,19 @@
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/bootbox.min.js"></script>
+<script type="text/javascript" src="../js/laydate.js"></script>
 <script src="../js/myNeed/rentMaintain.js"></script>
  <script src="../dist/jquery.cokie.min.js"></script>
 <script src="../js/kg.js"></script>
+<script>
+                laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
+                laydate({
+                   elem: '#startTime'
+                })
+                laydate({
+                    elem: '#endTime'
+                });
+                
+                </script>
 
 </html>

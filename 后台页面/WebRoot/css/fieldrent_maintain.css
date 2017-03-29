@@ -3,7 +3,7 @@
 #daochu select{
 	width:100%;}
 .modal-body table tr td select{
-	width:100%;}
+	width:140px;}
 table thead > tr> td{
 	
 	font-size:16px;
@@ -59,3 +59,6 @@ tbody tr td span{
 #topPlugin{
 	margin-top:10px;
 	}
+#laydate_ys{
+	width:125px;
+}
