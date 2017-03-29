@@ -128,10 +128,10 @@ $(document)
 
 									});
 
-					$.ajax({ // 获得申报部门
+					$.ajax({ // 获得所有部门，存在的部门，基地列表，种植内容
 						type : 'POST',
 						dataType : 'json',
-						url : 'getExistRentInfo.do',
+						url : 'getExistRentInfo.do',						
 						async : false,
 						cache : false,
 						error : function(request) {
@@ -140,79 +140,52 @@ $(document)
 								size : 'small'
 							});
 						},
-						success : function(data) {
-							
+						success : function(data) {						
 							
 							var i = 0;							
-							for ( var item in data[0]) {
+							for ( var item in data[0]) {								
+								$("#baseS").after(
+										"<option value=" + data[0][i].bname + ">"
+												+ data[0][i].bname + "</option>");												
 								
-								//所有的部门
-								$("#deptD").after(
-										"<option value=" + data[0][i].aid + ">"
-												+ data[0][i].dept + "</option>");
-								
-								/*$("#addDepth").after(
-										"<option value=" + data[i].aid + ">"
-												+ data[i].dept + "</option>");*/
 								i++;
-							}
+							}			
+
 							
 							//租赁历史表中存在的部门
 							i=0;
 							for ( var item in data[1]) {
-
 								$("#deptS").after(
 										"<option value=" + data[1][i].dept + ">"
 												+ data[1][i].dept + "</option>");
 								
 								$("#deptE").after(
 										"<option value=" + data[1][i].dept + ">"
-												+ data[1][i].dept + "</option>");
-								
+												+ data[1][i].dept + "</option>");								
 								i++;
 							}
 							
 							i=0;
-							for ( var item in data[2]) {
-								
+							for ( var item in data[2]) {								
 								$("#contentShh").after(
 										"<option value=" + data[2][i] + ">"
 												+ data[2][i]+ "</option>");
 								
-								i++;
-								
+								i++;								
+							}
+							i=0;
+							for ( var item in data[3]) {							
+
+								//所有的部门
+								$("#deptD").after(
+										"<option value=" + data[3][i].aid + ">"
+												+ data[3][i].dept + "</option>");	
+								i++;								
 							}
 
 						}
 
-					});
-
-					$.ajax({ // 获得基地列表
-						type : 'POST',
-						dataType : 'json',
-						url : 'baseInfo.do',
-						async : false,
-						cache : false,
-						error : function(request) {
-							bootbox.alert({
-								message : "请求异常",
-								size : 'small'
-							});
-						},
-						success : function(data) {
-							var i = 0;
-							for ( var item in data) {
-                           
-								$("#baseS").after(
-										"<option value=" + data[i].bname + ">"
-												+ data[i].bname + "</option>");
-
-								i++;
-							}
-
-						}
-
-					});
+					});				
 
 				});
 
@@ -413,8 +386,6 @@ $(document).delegate('#submitS', 'click', function() {
 				}
 
 			});
-	recovery();
-
 });
 
 /* 土地租赁记录筛选-------end */
@@ -477,6 +448,9 @@ $(document).delegate('#add', 'click', function() {
 });
 /*土地租赁记录增加---end*/
 
+$("#daolead").click(function(){
+	$("#exportDept").val('');
+});
 
 function deleteInfo()
 {
@@ -579,6 +553,10 @@ function checkA()
 }
 
 function showsubmenu() {
+	
+	document.getElementById("baseSh").value = "";
+	document.getElementById("deptSh").value = "";	
+	document.getElementById("contentSh").value = "";
 	var submenu = document.getElementById("hide_ul");
 	if (submenu.style.display == 'none') {
 		submenu.style.display = 'block';
@@ -586,24 +564,13 @@ function showsubmenu() {
 		submenu.style.display = 'none';
 		recovery();
 	}
-
 }
+
 function hidesubmenu() {
 	var submenu = document.getElementById("hide_ul");
 	submenu.style.display = 'none';
 	
 }
-
-function recovery() {
-
-	document.getElementById("baseSh").value = "";
-	document.getElementById("deptSh").value = "";
-	document.getElementById("lidSh").value = "";
-	document.getElementById("contentSh").value = "";
-	
-}
-
-
 
 
 // 全选，反选按钮 

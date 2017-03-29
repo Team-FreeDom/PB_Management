@@ -23,6 +23,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.base.po.ApplyDept;
+import com.base.po.BaseInfo;
 import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
@@ -143,16 +144,23 @@ public class LandRentController<E> {
 	
 	@RequestMapping("/getExistRentInfo.do")
 	public String getExistRentInfo(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) {
-		
-		List<ApplyDept> depts=landApplyServiceImpl.getDepts();
+			HttpServletResponse response, ModelMap map) {	
+
+		//获取存在的部门
 		List<ApplyDept> existDept=landRentServiceImpl.getExistRentInfo();
+		//获取存在的种植内容
 		List<String> existplant=landRentServiceImpl.getExistPlant();
-		
+		//获取基地列表
+		List<BaseInfo> allBaseList = landApplyServiceImpl.getBaseInfos();
+		//获取所有的部门
+		List<ApplyDept> allDeptlist=landApplyServiceImpl.getDepts();
 		List list=new ArrayList<E>();
-		list.add(depts);
+		
+		list.add(allBaseList);		
 		list.add(existDept);
-		list.add(existplant);
+		list.add(existplant);		
+		list.add(allDeptlist);
+				
 		
 		JSONArray json = JSONArray.fromObject(list);
 		response.setContentType("text/html;charset=UTF-8");
@@ -175,7 +183,7 @@ public class LandRentController<E> {
 		String[] check=request.getParameterValues("idname");		
 		landRentServiceImpl.deleteRentInfo(check);
 		
-	   return "fieldRent_maintain";
+	   return "redirect:fieldRent_maintain.jsp";
 	}
 	
 	

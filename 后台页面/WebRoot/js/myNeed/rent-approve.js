@@ -564,7 +564,7 @@ $(document)
 
 					// 同意申请
 					// //////////状态值1： 2： 3： 4： 。。。。。。。
-					$('#agreeOne')							.click(
+					$('#agreeOne').click(
 									function() {
 										
 										var chk_value =[];
@@ -702,7 +702,7 @@ $(document)
 				                                              var tag=msg.tag;
 																if(tag==1){												
 																bootbox.alert({
-																	message : msg.str,
+																	message : "同意成功",
 																	size : 'small'
 																});																
 																}else if(tag==0){
@@ -711,6 +711,7 @@ $(document)
 																		message : "不允许同一块土地多人申请成功，请检查",
 																		size : 'small'
 																	});
+																	return;
 																}else if(tag==2){
 																	bootbox.alert({
 																		message : "同意失败，请刷新页面",
