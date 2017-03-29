@@ -54,30 +54,27 @@ public class CheckServiceImpl<E> implements checkService {
 
     // 拒绝申请
     @Override
-    public void refuseapply(String recordStr, String infoStr) {
+    public int refuseapply(String recordStr, String infoStr) {
 	// 获得插入的消息语句
-	String insertStr = MessageUtils.getInsertStr(infoStr, 3);
-	System.out.println(insertStr);
+	String insertStr = MessageUtils.getInsertStr(infoStr, 3);	
 
 	// 将特定编号的土地记录状态改为同类竞争
-	checkViewDaoImpl.updateStatus(recordStr, 5);
-
-	// 向消息表中插入信息
-	checkViewDaoImpl.insertMessage(insertStr);
+	int flag=checkViewDaoImpl.updateStatus(recordStr, 5);
+    if(flag==1){
+    	// 向消息表中插入信息
+    	checkViewDaoImpl.insertMessage(insertStr);
+    }	
+	return flag;
     }
 
+    //同意申请
     @Override
     public int agreeApply(String landstr, String recordstr, String infostr) {
-	System.out.println("agreeApply---start");
+	
 	// 获得插入的消息语句
-	String insertStr = MessageUtils.getInsertStr(infostr, 2);
-	System.out.println(insertStr);
-
-	// 把审核中的改为待缴费
-	// checkViewDaoImpl.updateStatusP(recordstr, 1);
-
+	String insertStr = MessageUtils.getInsertStr(infostr, 2);	
 	int tag = checkViewDaoImpl.agreeInfo(recordstr, 1);
-	System.out.println(tag + "  hello");
+	
 	if (tag == 1) {
 	    // 把相同土地的其他申请置为锁定
 	    checkViewDaoImpl.lockInfo(landstr);
@@ -88,38 +85,41 @@ public class CheckServiceImpl<E> implements checkService {
 	return tag;
     }
 
-    public void cancelPayFor(String landstr, String recordstr, String infostr) {
+    public int cancelPayFor(String landstr, String recordstr, String infostr) {
 
 	// 获得插入的消息语句
 	String insertStr = MessageUtils.getInsertStr(infostr, 5);
 
 	// 把特定记录的状态改为未交费
-	checkViewDaoImpl.updateStatus(recordstr, 10);
+	int flag=checkViewDaoImpl.updateStatus(recordstr, 10);
+	
+    if(flag==1){
+    	// 把相同土地的状态为锁定的土地状态变为审核中
+    	checkViewDaoImpl.releaseInfo(landstr);
 
-	// 把相同土地的状态为锁定的土地状态变为审核中
-	checkViewDaoImpl.releaseInfo(landstr);
-
-	// 向消息表中插入信息
-	checkViewDaoImpl.insertMessage(insertStr);
-
+    	// 向消息表中插入信息
+    	checkViewDaoImpl.insertMessage(insertStr);
+    }
+	
+      return flag;
     }
 
     // 确认交费
     @Override
-    public void confirmPayFor(String landstr, String recordstr, String infostr) {
+    public int confirmPayFor(String landstr, String recordstr, String infostr) {
 
 	// 获得插入的消息语句
 	String insertStr = MessageUtils.getInsertStr(infostr, 6);
 
 	// 把特定记录的状态改为申请成功，并将记录插入土地租赁历史表中
-	checkViewDaoImpl.payForSuccess(recordstr, 6);
-
-	// 把相同土地的状态为锁定的土地状态变为同类竞争
-	checkViewDaoImpl.confirmInfo(landstr);
-
-	// 向消息表中插入信息
-	checkViewDaoImpl.insertMessage(insertStr);
-
+	int flag=checkViewDaoImpl.payForSuccess(recordstr, 6);
+    if(flag==1){
+    	// 把相同土地的状态为锁定的土地状态变为同类竞争
+    	checkViewDaoImpl.confirmInfo(landstr);
+    	// 向消息表中插入信息
+    	checkViewDaoImpl.insertMessage(insertStr);
+    }
+	 return flag;
     }
 
     // 详情查看

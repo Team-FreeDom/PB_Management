@@ -73,6 +73,27 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		return la;
 	}
 	
+	public LandApply getapply(int la_id,int tag1,int tag2)
+	{
+		Session session=sessionFactory.openSession();		
+		String hql="from LandApply where la_id=? and status in (?,?)";
+		LandApply la=null;
+		
+	    try {
+	    	 Query query=session.createQuery(hql);
+	    	 query.setInteger(0, la_id);
+	    	 query.setInteger(1, tag1);	
+	    	 query.setInteger(2, tag2);
+	    	 la=(LandApply) query.uniqueResult();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return la;
+	}
+	
 	public List<LandApply> getUserApplys(String lid,int status)
 	{
 		Session session=sessionFactory.openSession();		

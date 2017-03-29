@@ -231,24 +231,35 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 更改状态(参数1：拒绝的申请记录id;参数2：发送消息)
     @Override
-    public void updateStatus(String recordStr, int status) {
+    public int updateStatus(String recordStr, int status) {
 
-	System.out.println("更改");
-	System.out.println(recordStr + "   " + status);
-	Session session = sessionFactory.openSession();
-	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.`state_trans`(?,?)}");
-	    sqlQuery.setString(0, recordStr);
-	    sqlQuery.setInteger(1, status);
-	    sqlQuery.executeUpdate();
-	} finally {
-	    session.close();
-	}
+    	int tag = 0;
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;
+    	Session session = sessionFactory.openSession();
 
-	System.out.println("更改完毕");
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.`state_trans`(?,?,?)}");
+    	    sp.setString(1, recordStr);
+    	    sp.setInt(2, status);
+    	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+    	    sp.execute();
 
+    	    tag = sp.getInt(3);
+
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, null);
+    	}
+
+    	return tag;    
     }
 
     public void updateStatusP(String recordStr, int status) {
@@ -309,22 +320,35 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
     @Override
-    public void payForSuccess(String recordStr, int status) {
-
+    public int payForSuccess(String recordStr, int status) {
+    	
+	int tag = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
 	Session session = sessionFactory.openSession();
+
 	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{call baseweb.state_success(?,?)}");
-	    sqlQuery.setString(0, recordStr);
-	    sqlQuery.setInteger(1, status);
-	    sqlQuery.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.state_success(?,?,?)}");
+	    sp.setString(1, recordStr);
+	    sp.setInt(2, status);
+	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.execute();
+
+	    tag = sp.getInt(3);
+
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
 
-	System.out.println("更改完毕");
-
+	return tag;   
     }
 
     // 同意申请，将审核状态的变为锁定状态，同时给锁定状态的发送通知

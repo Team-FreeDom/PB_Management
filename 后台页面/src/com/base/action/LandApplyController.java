@@ -318,14 +318,12 @@ public class LandApplyController {
 		
 		int la_id = Integer.valueOf(request.getParameter("la_id"));
 		String info_str=request.getParameter("info_str");
-		int tag = Integer.valueOf(request.getParameter("flag"));
+		int tag = Integer.valueOf(request.getParameter("flag"));		
 		
-		boolean flag = false;
 		try {
 
-			landApplyServiceImpl.myFameCancel1(la_id,info_str,tag);
+			int flag=landApplyServiceImpl.myFameCancel1(la_id,info_str,tag);		
 			
-			flag = true;
 			String str = "[{\"flag\":" + flag+"}]";
 			JSONArray json = JSONArray.fromObject(str);
 

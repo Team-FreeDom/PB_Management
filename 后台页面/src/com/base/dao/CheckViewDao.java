@@ -31,7 +31,7 @@ public interface CheckViewDao {
 	   返回值：  无返回值
 	   函数功能：更改特定记录的状态值
 	 */
-	 public void updateStatus(String recordStr, int status);
+	 public int updateStatus(String recordStr, int status);
 	 
 	 /*
 	   参数说明：sql,为插入的消息的sql语句
@@ -52,7 +52,7 @@ public interface CheckViewDao {
 	   返回值：  无返回值
 	   函数功能：确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
 	 */
-	 public void payForSuccess(String recordStr, int status);
+	 public int payForSuccess(String recordStr, int status);
 	 
 	 /*
 	   参数说明：landstr,为土地编号的封装
