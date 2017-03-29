@@ -4,7 +4,7 @@ $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
@@ -155,7 +155,7 @@ $(document).ready(function() {
 	
 	var Spage2 = $('#basecheck2').DataTable(
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30  ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
@@ -777,7 +777,7 @@ $("#submitS").click(function() {
 	obj=[];	
 	$('#basecheck').DataTable( //getXUBaseCheck.do
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
@@ -936,7 +936,7 @@ $("#submitS2").click(function() {
 	obj2=[];	
 	$('#basecheck2').DataTable( //getXUBaseCheck.do
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,

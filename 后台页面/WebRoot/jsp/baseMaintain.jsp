@@ -82,7 +82,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="#" target="_blank"><img
+						<a href="index.do"><img
 							src="../image/manage-logo.png" alt=""></a>
 					</div>
 
@@ -252,7 +252,7 @@
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#import">导入</button>
-											<button type="button" class="btn btn-primary"
+											<button type="button" class="btn btn-primary" id="exportButton"
 												data-toggle="modal" data-target="#export">导出</button></td>
 									</tr>
 									<tr>

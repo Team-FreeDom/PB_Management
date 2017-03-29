@@ -4,9 +4,9 @@ $(document).ready(function() {
 					$('#table1').dataTable({
 										"bSort" : false,
 										"bFilter" : false,
-										"aLengthMenu" : [ 2, 4, 5, 8, 10 ], //动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
 										"lengthChange" : true, //是否启用改变每页显示多少条数据的控件										
-										"iDisplayLength" : 8,  //默认每页显示多少条记录
+										"iDisplayLength" : 5,  //默认每页显示多少条记录
 										"bDestroy":true,
 										"bPaginate": true, //翻页功能									
 										"bServerSide" : true,
@@ -146,12 +146,11 @@ $(document).ready(function() {
 									});
 					
 					$('#table2').DataTable({
-						"aLengthMenu" : [ 2, 4, 6, 8,
-											10 ], //动态指定分页后每页显示的记录数。
+						"aLengthMenu" : [ 5, 10, 20, 30 ], //动态指定分页后每页显示的记录数。
 									"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 									"searching":false,//禁用搜索
 									"bSort" : false,									
-									"iDisplayLength" : 4, //默认每页显示多少条记录
+									"iDisplayLength" : 5, //默认每页显示多少条记录
 									"bPaginate": true, //翻页功能									
 									"bServerSide" : true,
 									"dom" : 'ftipr<"bottom"l>',
@@ -317,19 +316,17 @@ $(document).ready(function() {
 
 					function unionSelect() {
 
-						var bnameUnion = document.getElementById("bnameUnion").value;						
-						/*var startTimeUnion = document.getElementById("startTimeUnion").value;
-						var endTimeUnion = document.getElementById("endTimeUnion").value;*/
+						var bnameUnion = document.getElementById("bnameUnion").value;				
 						var descUnion = document.getElementById("descUnion").value;
 
 						$('#table2')
 								.DataTable(
 										{
-											"aLengthMenu" : [ 2, 4, 6, 8, 10 ], //动态指定分页后每页显示的记录数。
+											"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
 											"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 											"searching":false,//禁用搜索
 											"bSort" : false,
-											"iDisplayLength" : 4, //默认每页显示多少条记录
+											"iDisplayLength" : 5, //默认每页显示多少条记录
 											"bPaginate": true, //翻页功能									
 											"bServerSide" : true,
 											"bDestroy" : true,

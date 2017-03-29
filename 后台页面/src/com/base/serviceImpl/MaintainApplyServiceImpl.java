@@ -25,14 +25,10 @@ public class MaintainApplyServiceImpl implements MaintainApplyService
 	 private BaseCheckDao basecheckdao;
 
 	@Override
-	//查询所有的基地列表
-	public List find_basename()
-	{
-		List<Map<String,String>> list1=maintainapplydao.find_basename();
-		List<Map<String,String>> list2=maintainapplydao.find_basenameFinish();
-		List list=new ArrayList();
-		list.add(list1);
-		list.add(list2);
+	//根据年份查询基地列表
+	public List find_basename(String year)
+	{		
+		List list=maintainapplydao.find_basenameFinish(year);		
 		return list;
 	}
 	

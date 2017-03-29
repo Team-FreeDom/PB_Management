@@ -18,7 +18,7 @@ $(document)
 										"processing" : true,
 										"serverSide" : true,
 										"bSort" : false,
-										"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"ordering":true,
@@ -226,52 +226,7 @@ $(document)
 					 * 
 					 */
 					
-					$.ajax({
-						url : 'getManyinfo.do',
-						async : true,
-						type : "POST",
-						dataType : "json",
-						cache : false,
-						success : function(data) {
-							
-							for (var i = 0; i < data[0].length; i++) {
-								$("#daodept")
-										.after(
-												"<option class='rest' value="
-														+ data[0][i].aid + ">"
-														+ data[0][i].dept
-														+ "</option>");
-								$("#shaiDepth")
-										.after(
-												"<option class='rest' value="
-														+ data[0][i].aid
-														+ " class='dee'>"
-														+ data[0][i].dept
-														+ "</option>");
-
-							}
-
-							for (var i = 0; i < data[1].length; i++) {
-								$("#daobase")
-										.after(
-												"<option value="
-														+ data[1][i].id + ">"
-														+ data[1][i].name
-														+ "</option>");
-								$("#shaiTypeh")
-										.after(
-												"<option value="
-														+ data[1][i].id + ">"
-														+ data[1][i].name
-														+ "</option>");
-
-							}
-
-						},
-						error : function(data) {
-							alert("请求异常");
-						}
-					});
+					
 					
 					// star星级点击的实时改变
 					$(document).on("click", "#color", function() {
@@ -328,13 +283,7 @@ $(document)
 
 					});
 
-					$(document).on("click", "#daoclose", function() {
-						$("#daobaseh").val("-1");
-						$("#daodepth").val("-1");
-						$("#daostarh").val("-1");
-
-					});
-
+					
 					$("#closeimport").click(function() {
 
 						$("#fileResource").val("");
@@ -424,8 +373,7 @@ $(document)
 											dataType : "json",
 											cache : false,
 											success : function(data) {
-												$("#deleteOneModal").modal('hide');
-												getExitDept();
+												$("#deleteOneModal").modal('hide');											
 												page.draw(false);
 											},
 											error : function(data) {
@@ -436,8 +384,52 @@ $(document)
 
 					// 确认导出
 					$("#confirmButton").click(function() {
-					$("#export").modal('hide');
-                    $("#daoclose").click();
+					  $("#export").modal('hide');                      
+					});
+					
+					$("#exportButton").click(function() {
+					   //将导出列表下的option去除
+					    $("#daobaseh option:gt(0)").remove();
+					    $("#daodepth option:gt(0)").remove();
+					   //选项恢复初始值
+						$("#daobaseh").val("-1");
+						$("#daodepth").val("-1");
+						$("#daostarh").val("-1");
+						
+						$.ajax({
+							url : 'getManyinfo.do',
+							async : true,
+							type : "POST",
+							dataType : "json",
+							cache : false,
+							success : function(data) {
+								for (var i = 0; i < data[0].length; i++) {				
+									$("#daodept")
+											.after(
+													"<option class='rest' value="
+															+ data[0][i].aid
+															+ " class='dee'>"
+															+ data[0][i].dept
+															+ "</option>");
+
+								}
+
+								for (var i = 0; i < data[1].length; i++) {				
+									$("#daobase")
+											.after(
+													"<option value="
+															+ data[1][i].id + ">"
+															+ data[1][i].name
+															+ "</option>");
+
+								}
+
+							},
+							error : function(data) {
+								alert("请求异常");
+							}
+						});
+
 					});
 					
 					//确认修改
@@ -450,15 +442,7 @@ $(document)
 						});						
 						var star=i;
 						var adddate=$("#adddate").val();
-						/*var matchstr=/^[0-9]*$/;
-						if(!matchstr.test(adddate)){
-							bootbox.alert({
-								message : "填写的续期必须为数字",
-								size : 'small'
-							});
-							return;
-						}
-						*/
+						
 						$.ajax({
 							data : {
 								"baseid" : baseid,
@@ -524,7 +508,7 @@ $(document)
 															"serverSide" : true,
 															"bSort" : false,
 															"bDestroy" : true,
-															"aLengthMenu" :[ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+															"aLengthMenu" :[ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"iDisplayLength" : 10, // 默认每页显示多少条记录
 															"ordering":true,
@@ -739,7 +723,7 @@ $(document)
 															}
 														});
 
-										$(".icon-filter").click();
+										$('#hide_ul').toggle();
 
 									});
 
@@ -776,45 +760,47 @@ $("#ck1").on("click", function() {
 });
 
 $(".icon-filter").on("click", function() {
-	recovery();
-	$('#hide_ul').toggle();
-});
-
-function recovery() {
+	//将刷选内的option选项去除
+	$("#shaiType option:gt(0)").remove();
+	$("#shaiDept option:gt(0)").remove();
+	//将刷选的各值恢复成初始值
 	$("#shaiType").val("-1");
 	$("#shaiDept").val("-1");
 	$("#starLink").val("-1");
-
-}
-
-function getExitDept(){
-	$(".rest").remove();
 	$.ajax({
-		url : 'getExistDept.do',
+		url : 'getManyinfo.do',
 		async : true,
 		type : "POST",
 		dataType : "json",
 		cache : false,
 		success : function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$("#daodept")
-						.after(
-								"<option value="
-										+ data[i].aid + ">"
-										+ data[i].dept
-										+ "</option>");
+			
+			for (var i = 0; i < data[0].length; i++) {				
 				$("#shaiDepth")
 						.after(
-								"<option value="
-										+ data[i].aid
+								"<option class='rest' value="
+										+ data[0][i].aid
 										+ " class='dee'>"
-										+ data[i].dept
+										+ data[0][i].dept
 										+ "</option>");
 
 			}
-			},
+
+			for (var i = 0; i < data[1].length; i++) {				
+				$("#shaiTypeh")
+						.after(
+								"<option value="
+										+ data[1][i].id + ">"
+										+ data[1][i].name
+										+ "</option>");
+
+			}
+
+		},
 		error : function(data) {
 			alert("请求异常");
 		}
 	});
-}
+	$('#hide_ul').toggle();
+});
+

@@ -78,7 +78,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="#" target="_blank"><img
+						<a href="index.do" ><img
 							src="../image/manage-logo.png" alt=""></a>
 					</div>
 
@@ -302,11 +302,11 @@
 										<h5>您确定要撤销吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!--
+										
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">取消
                     </button>
-                     -->
+                    
 										<button type="button" class="btn btn-primary"
 											id="cancelSubmit">确认</button>
 									</div>

@@ -74,7 +74,7 @@ $(document)
 										"serverSide" : true,
 										"bSort" : false,
 										"bFilter" : false,
-										"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"dom" : 'ftipr<"bottom"l>',
@@ -243,7 +243,7 @@ $(document)
 									"serverSide" : true,
 									"bSort" : false,
 									"bFilter" : false,
-									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+									"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 									"iDisplayLength" : 5, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
@@ -389,7 +389,7 @@ $(document)
 									"serverSide" : true,
 									"bSort" : false,
 									"bFilter" : false,
-									"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+									"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 									"iDisplayLength" : 10, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
@@ -1268,8 +1268,7 @@ $(document)
 															"serverSide" : true,
 															"bSort" : false,
 															"bFilter" : false,
-															"aLengthMenu" : [
-																	5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+															"aLengthMenu" : [5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"iDisplayLength" : 10, // 默认每页显示多少条记录
 															"dom" : 'ftipr<"bottom"l>',

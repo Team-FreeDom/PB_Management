@@ -21,7 +21,7 @@ $(document)
 								"bSort" : true,
 								"ordering":true,
 								"serverSide" : true,
-								"iDisplayLength": 5,
+								"iDisplayLength": 10,
 								//"TotalRecords" : [ 10 ],
 								"dom" : 'tipr<"bottom"l>',
 								"bDestroy" : true,
@@ -128,7 +128,7 @@ $(document)
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 								"bSort" : true,
 								"serverSide" : true,
-								"iDisplayLength": 5,
+								"iDisplayLength": 10,
 								"dom" : 'tipr<"bottom"l>',
 								"bDestroy" : true,
 								"ajax" : {
@@ -1236,7 +1236,7 @@ $(document)
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 								"bSort" : true,
 								"serverSide" : true,
-								"iDisplayLength": 5,
+								"iDisplayLength": 10,
 								"dom" : 'tipr<"bottom"l>',
 								"bDestroy" : true,
 								"ajax" : {
@@ -1348,7 +1348,7 @@ $(document)
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"bSort" : true,
 															"serverSide" : true,
-															"iDisplayLength": 5,
+															"iDisplayLength": 10,
 															// //默认每页显示多少条记录
 															"bDestroy" : true,
 															"dom" : 'tipr<"bottom"l>',
@@ -1488,7 +1488,7 @@ $(document)
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"bSort" : true,
 															"serverSide" : true,
-															"iDisplayLength": 5,
+															"iDisplayLength": 10,
 															"bDestroy" : true,
 															"dom" : 'tipr<"bottom"l>',
 
@@ -1626,7 +1626,7 @@ $(document)
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"bSort" : true,
 															"serverSide" : true,
-															"iDisplayLength": 5,
+															"iDisplayLength": 10,
 															"bDestroy" : true,
 															"dom" : 'tipr<"bottom"l>',
 
