@@ -33,16 +33,16 @@ public interface RepairApproveDao {
 	
 	/*
 	  参数说明：recordstr,字符串型,为报修申请记录的编号;status,整型，为状态值
-	 返回值：    无返回值为status值
+	 返回值：    flag0或1代表是否可以同意报修申请
 	  */
-	public void changeStatus(String recordstr,int status);
+	public int changeStatus(String recordstr,int status);
 	
 	/*
 	  参数说明：refusestr,字符串型,为报修申请记录的编号
-	 返回值：    无返回值
+	 返回值：    flag0或1代表是否可以拒绝报修申请
 	 函数功能： 拒绝申请
 	  */
-	public void refuseApply(String refusestr);
+	public int refuseApply(String recorddigit,String refusestr);
 	
 	/*
 	  参数说明：storestr,字符串型,为报修申请记录的编号

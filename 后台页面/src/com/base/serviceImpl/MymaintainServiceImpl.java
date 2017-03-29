@@ -44,13 +44,18 @@ public class MymaintainServiceImpl implements MymaintainService {
 
     // 撤回
     @Override
-    public void recallmymaint(String id, String infostr) {
-	// 获得插入的消息语句
-	String insertStr = MessageUtils.getinfoMs(infostr, 11);
-	System.out.println(insertStr + "到底是什么信息");
-	mymaintaindao.recallmymaint(id);
-	// 向消息表中插入信息
-	mymaintaindao.insertMessage(insertStr);
+    public int recallmymaint(String id, String infostr) {
+	
+	int flag = mymaintaindao.recallmymaint(id);
+	if (flag == 1) {
+	    // 获得插入的消息语句
+	    String insertStr = MessageUtils.getinfoMs(infostr, 11);
+	    System.out.println(insertStr + "到底是什么信息");
+	    // 向消息表中插入信息
+	    mymaintaindao.insertMessage(insertStr);
+	}
+	return flag;
+
     }
 
 }

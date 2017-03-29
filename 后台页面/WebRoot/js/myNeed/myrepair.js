@@ -302,13 +302,22 @@ $(document).on("click", "#cancel", function() {
 								  				size : 'small'
 								  			});								  		
 								  		},
-								  		success : function(msg) {
-								  			bootbox.alert({
-								  				message : msg,
+								  		success : function(msg) {								  	
+								  			if(msg==0){
+								  				bootbox.alert({
+								  				message :"撤回失败请刷新页面",
 								  				size : 'small'
 								  			});
+								  			}else{
+								  				bootbox.alert({
+									  				message :"撤回成功",
+									  				size : 'small'
+									  			});
 								  			page1.draw(false);
 								  			page2.draw(false);
+								  			}
+								  			
+								  			
 								  		}
 								  	});										
 								}
