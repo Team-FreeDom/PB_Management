@@ -304,7 +304,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.renewalfail(?,?)}");
+		    .prepareCall("{CALL baseweb.renewalfail(?,?,?)}");
 	    sp.setString(1, recorddigit);
 	    sp.setString(2, recordstr);
 	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
