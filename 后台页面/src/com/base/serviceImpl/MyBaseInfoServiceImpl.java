@@ -21,9 +21,8 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
     // 页面一
     public MyBaseList MybaseInfo(int pageindex, int size, String columnName,
 	    String orderDir, int year, int status, String userid) {
-	System.out.println(pageindex+"pageindex");
-	    
-	   
+	System.out.println(pageindex + "pageindex");
+
 	MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 		orderDir, year, status, userid);
 	return list;
@@ -45,32 +44,36 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 	} else if (order == 15) {
 	    columnName = "descp";
 	}
-	
-	     
-	   
-	    System.out.println(userid+"userid");
+
+	System.out.println(userid + "userid");
 	MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 		orderDir, year, status, userid);
 	return list;
     }
-   //撤回
+
+    // 撤回
     @Override
-    public void recall(String id, String infostr) {
-	// 获得插入的消息语句
-	String insertStr = MessageUtils.getinfoMs(infostr,10);
-	System.out.println(insertStr + "到底是什么信息");
+    public int recall(String id, String infostr) {
 	// 撤回（str:字符串id；11：失效的状态值）
-	String recordstr="("+id+","+"null"+","+"11"+")";
-	System.out.println(recordstr+"包装成什么样");
-	basecheckdao.refuseapply(recordstr);
-	// 向消息表中插入信息
-	mybaseinfodao.insertMessage(insertStr);
+	String recordstr = "(" + id + "," + "null" + "," + "17" + ")";
+	String strid = "(" + id + ")";
+	System.out.println(recordstr + "包装成什么样");
+	System.out.println(strid + recordstr + "数据格式");
+	int flag = basecheckdao.refuseapply(strid, recordstr);
+	if (flag == 1) {
+	    // 获得插入的消息语句
+	    String insertStr = MessageUtils.getinfoMs(infostr, 10);
+	    System.out.println(insertStr + "到底是什么信息");
+	    // 向消息表中插入信息
+	    mybaseinfodao.insertMessage(insertStr);
+	}
+	return flag;
     }
 
-	@Override
-	public void updateDate(int id, String adddate) {
-		
-		mybaseinfodao.updateDate(id,adddate);
-	}
+    @Override
+    public void updateDate(int id, String adddate) {
+
+	mybaseinfodao.updateDate(id, adddate);
+    }
 
 }

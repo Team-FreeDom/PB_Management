@@ -433,17 +433,30 @@ $(document).ready(function() {
 	                    $.ajax({
 							url : 'BasereAgreeApply.do',
 							type : 'post',
-							dataType : 'json',
+							//dataType : 'json',
 							data : {
 								"recordstr" : recordstr,								
 								"infostr" : infostr,
 								"recorddigit":recorddigit
 							},
-							success : function(msg) {						
+							success : function(msg) {															
+								if(msg==0){
+									bootbox.alert({
+										message : "同意失败请刷新页面",
+										size : 'small'
+									});
+									$("#applyConfirm").modal('hide');
+								}else{
+									bootbox.alert({
+										message : "同意申请成功",
+										size : 'small'
+									});
 								$("#valideDate").val("10");
 								$("#applyConfirm").modal('hide');
 								getDept();
 								Spage.draw(false);
+								}
+								
 								}
 							
 						});	                    
@@ -455,7 +468,8 @@ $('#certain').click(function() {
 
 			var i=0;
 			var recordstr='';
-			var infostr="[";			
+			var infostr="[";
+			var recorddigit='(';
 			var userid;
 			var basename;
 			var reason;
@@ -466,16 +480,19 @@ $('#certain').click(function() {
 				if(i!=0){
 					recordstr=recordstr+",("+this.className+",'"+reason+"',12)";
 					infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+					recorddigit=recorddigit+','+this.className;
 					
 				}else{
 					recordstr=recordstr+"("+this.className+",'"+reason+"',12)";
 					infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+					recorddigit=recorddigit+this.className;
 				}					
 								
 					i++;
 				});		
         
-         infostr=infostr+']';         
+         infostr=infostr+']';  
+         recorddigit=recorddigit+')';  
          $.ajax({
 				url : 'BaserefuseApply.do',
 				type : 'post',
@@ -484,12 +501,26 @@ $('#certain').click(function() {
 					"recordstr" : recordstr,
 					"infostr" : infostr,
 					"reason":reason,
+					"recorddigit":recorddigit,
 				},
-				success : function(msg) {						
+				success : function(msg) {
+					if(msg==0){
+						bootbox.alert({
+							message : "拒绝申请失败请刷新页面",
+							size : 'small'
+						});
+						$("#reason").val("");
+					$("#reasonConfirm").modal('hide');
+					}else{
+						bootbox.alert({
+							message : "拒绝申请成功",
+							size : 'small'
+						});
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
 					getDept();
 					Spage.draw(false);
+					}					
 					}
 				
 			});
@@ -588,7 +619,8 @@ $('#certainAdd').click(function() {
 
 	var i=0;
 	var recordstr='';
-	var infostr="[";			
+	var infostr="[";
+	var recorddigit='(';
 	var userid;
 	var basename;
 	var reason;
@@ -599,30 +631,47 @@ $('#certainAdd').click(function() {
 		if(i!=0){
 			recordstr=recordstr+",("+this.className+",'"+reason+"',17)";
 			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+			recorddigit=recorddigit+','+this.className;
 			
 		}else{
 			recordstr=recordstr+"("+this.className+",'"+reason+"',17)";
 			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+			recorddigit=recorddigit+this.className;
 		}					
 						
 			i++;
 		});		
 
- infostr=infostr+']';         
+ infostr=infostr+']'; 
+ recorddigit=recorddigit+')';  
  $.ajax({
-		url : 'BaserefuseApply.do',
+		url : 'refuseAddApply.do',
 		type : 'post',
 		dataType : 'json',
 		data : {
+			"recorddigit":recorddigit,
 			"recordstr" : recordstr,
 			"infostr" : infostr,
 			"reason":reason,
 		},
-		success : function(msg) {						
-			$("#reasonAdd").val("");
-			$("#addDateConfirm").modal('hide');
-			getDept();
-			Spage2.draw(false);
+		success : function(msg) {	
+			if(msg==0){
+				bootbox.alert({
+					message : "拒绝续期失败请刷新页面",
+					size : 'small'
+				});
+				$("#addDateConfirm").modal('hide');
+			}else{
+				bootbox.alert({
+					message : "拒绝续期成功",
+					size : 'small'
+				});
+				$("#reasonAdd").val("");
+				$("#addDateConfirm").modal('hide');
+				getDept();
+				Spage2.draw(false);
+			}
+			
 			}
 		
 	});
@@ -701,16 +750,23 @@ $(document).on("click", "#confirm2", function() {
 			dataType : 'json',
 			data : {
 				"recordstr" : agreestr,
-				"infostr":infostr
+				"infostr":infostr,
 			},
 			success : function(msg) {
-				bootbox.alert({
-					message : msg.str,
-					size : 'small'
-				});
-				getDept();
-				Spage2.draw(false);
-				Spage1.draw(false);
+				if(msg==0){
+					bootbox.alert({
+						message : "同意续期失败请刷新页面",
+						size : 'small'
+					});
+				}else{
+					bootbox.alert({
+						message : "同意续期成功",
+						size : 'small'
+					});
+					getDept();
+					Spage2.draw(false);
+					Spage1.draw(false);
+				}								
 			}	
 });
 });

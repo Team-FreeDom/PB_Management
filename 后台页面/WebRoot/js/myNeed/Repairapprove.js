@@ -358,6 +358,7 @@ $(document).on("click", "#scanDetail2", function() {
 								if(result){
 									var i=0;
 									var agreestr = '(';//同意记录的格式(1,2,3,4,5)
+									var recorddigit='(';
 									var keyid;
 									var infostr="[";
 									var userid;
@@ -369,31 +370,41 @@ $(document).on("click", "#scanDetail2", function() {
 															if (i != 0) {
 																agreestr = agreestr+ ','+ $(this).val();
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+','+this.className;
 															}
 															else{
 																agreestr = agreestr+ $(this).val();
 																infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+this.className;
 																}
 															i++;
 														});
 										agreestr = agreestr + ')';
-										infostr=infostr+']';										
+										infostr=infostr+']';
+										 recorddigit=recorddigit+')'; 
 										$.ajax({
 											url : 'agreeRepairApply.do',
 											type : 'post',
 											dataType : 'json',
 											data : {
 												"agreestr" : agreestr,
-												"infostr":infostr
+												"infostr":infostr,
 											},
-											success : function(msg) {
-												bootbox.alert({
-													message : msg.str,
-													size : 'small'
-												});
+											success : function(msg) {											
+												if(msg==0){
+													bootbox.alert({
+														message : "同意申请失败请刷新页面",
+														size : 'small'
+													});
+												}else{
+													bootbox.alert({
+														message : "同意申请成功",
+														size : 'small'
+													});
 												getInfoApply();
 												Approvetable.draw(false);
 												repair.draw(false);
+												}																								
 											}
 										});//end
 
@@ -438,7 +449,8 @@ $(document).on("click", "#scanDetail2", function() {
 							callback: function (result) {
 								if(result){
 									var i=0;
-									var recordstr = '';//同意记录的格式(1,2,3,4,5)									
+									var recordstr = '';//同意记录的格式(1,2,3,4,5)
+									var recorddigit='(';
 									var infostr="[";
 									var userid;
 									var basename;
@@ -450,31 +462,44 @@ $(document).on("click", "#scanDetail2", function() {
 															if (i != 0) {
 																recordstr=recordstr+",("+this.className+",12,'"+refuseReason+"')";
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+','+this.className;
 															}
 															else{
 																recordstr=recordstr+"("+this.className+",12,'"+refuseReason+"')";
 																infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+this.className;
 																}
 															i++;
 														});									    
-										infostr=infostr+']';										
+										infostr=infostr+']';	
+										recorddigit=recorddigit+')';  
 										$.ajax({
 											url : 'refuseRepairApply.do',
 											type : 'post',
 											dataType : 'json',
 											data : {
+												"recorddigit":recorddigit,
 												"recordstr" :recordstr,
-												"infostr":infostr
+												"infostr":infostr,
 											},
-											success : function(msg) {
-												bootbox.alert({
-													message : msg.str,
+											success : function(msg) {											
+												if(msg==0){
+													bootbox.alert({
+														message : "拒绝失败请刷新页面",
+														size : 'small'
+													});
+													$("#refuseModal").modal('hide');
+												}else{
+													bootbox.alert({
+													message : "拒绝报修成功",
 													size : 'small'
 												});
-												$("#refuseModal").modal('hide');
-												getInfoApply();
-												Approvetable.draw(false);
-												repair.draw(false);
+													$("#refuseModal").modal('hide');
+													getInfoApply();
+													Approvetable.draw(false);
+													repair.draw(false);
+												}
+																								
 											}
 										});//end
 

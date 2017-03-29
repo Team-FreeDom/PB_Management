@@ -86,8 +86,10 @@ public class MymaintainDaoImpl implements MymaintainDao {
 	ck.setData(list);
 	return ck;
     }
+    //撤回功能
     @Override
-    public void recallmymaint(String id) {
+    public int recallmymaint(String id) {
+	int flag=0;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -95,15 +97,18 @@ public class MymaintainDaoImpl implements MymaintainDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.rollback_maintainapply(?)}");
-	    sp.setString(1, id);	   
-	    sp.execute();    
+		    .prepareCall("{call baseweb.rollback_maintainapply(?,?)}");
+	    sp.setString(1, id);
+	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(2);   
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return flag;
 	
     }
     /**
