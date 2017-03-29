@@ -199,8 +199,7 @@ public class BaseCheckController {
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	System.out.println(infostr + "消息是什么");
-	// 获取拒绝理由
-	// String reason=request.getParameter("reason");
+	// 获取拒绝理由	
 	basecheckservice.refuseapply(recordstr, infostr);
 	JSONObject getObj = new JSONObject();
 	getObj.put("str", "此操作处理失败");

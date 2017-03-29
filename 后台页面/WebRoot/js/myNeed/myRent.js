@@ -1,7 +1,9 @@
+var table1=null;
+var table2=null;
 $(document).ready(function() {
 	
 	
-					$('#table1').dataTable({
+					table1=$('#table1').DataTable({
 										"bSort" : false,
 										"bFilter" : false,
 										"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
@@ -145,7 +147,7 @@ $(document).ready(function() {
 
 									});
 					
-					$('#table2').DataTable({
+					table2=$('#table2').DataTable({
 						"aLengthMenu" : [ 5, 10, 20, 30 ], //动态指定分页后每页显示的记录数。
 									"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 									"searching":false,//禁用搜索
@@ -319,8 +321,7 @@ $(document).ready(function() {
 						var bnameUnion = document.getElementById("bnameUnion").value;				
 						var descUnion = document.getElementById("descUnion").value;
 
-						$('#table2')
-								.DataTable(
+						table2=$('#table2').DataTable(
 										{
 											"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
 											"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
@@ -655,10 +656,18 @@ $(document).ready(function() {
 							cache : false,
 							success : function(data) {
 																
-								if (data[0].flag) {
-									window.location.reload();
-								} else {
-									alert("撤销失败");
+								if (data[0].flag=="1"||data[0].flag==1) {
+									bootbox.alert({
+								        message: "撤销成功",
+								        size: 'small'
+								    });
+									table1.draw(false);
+									table2.draw(false);
+								} else if(data[0].flag=="0"||data[0].flag==0){
+									bootbox.alert({
+								        message: "撤销失败,请刷新页面",
+								        size: 'small'
+								    });
 								}
 
 							},
