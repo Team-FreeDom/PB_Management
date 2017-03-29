@@ -210,7 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th hidden>专业编号</th>
                                             <th hidden>面向专业</th>                                          
                                             <th>考核</th>
-                                            <th hidden>编号</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tbody>

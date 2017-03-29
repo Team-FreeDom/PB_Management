@@ -22,7 +22,7 @@ table tbody tr td{
 	text-align:left;
 }
 #Applychart{
-	position:absolute !important;
+	position:fixed !important;
 	top:187px;
 	left:19%;
 	width: 80%;
@@ -145,4 +145,9 @@ table tbody tr td{
 	background-color:#a4bccd;
 	color:#fff;
 } */
+.spanstly{
+	color: #777 !important;
+    font-family: '微软雅黑' !important;
+    font-size: 14px !important;
+}
 

@@ -21,7 +21,7 @@ table tbody tr td{
 	text-align:left;
 }
 #Applychart{
-	position:absolute !important;
+	position:fixed !important;
 	top:187px;
 	left:19%;
 	width: 80%;
