@@ -16,17 +16,17 @@ public interface RepairApproveService {
 	
 	/*
 	  参数说明：refusestr，为保修申请记录的编号的封装;infostr，字符串型，为要发送的信息    
-	 返回值：    无返回值
+	 返回值：    flag0或1代表是否可以拒绝报修申请
 	 函数功能： 拒绝保修申请
 	  */
-	public void refuseRepairApply(String refusestr,String infostr);
+	public int refuseRepairApply(String recorddigit,String refusestr,String infostr);
 	
 	/*
 	  参数说明：agreestr，为保修申请记录的编号的封装;infostr，字符串型，为要发送的信息    
-	 返回值：    无返回值
-	 函数功能：同意保修申请
+	 返回值：   flag0或1代表是否可以同意报修申请
+	 函数功能：同意报修申请
 	  */
-	public void agreeRepairApply(String agreestr,String infostr);
+	public int agreeRepairApply(String agreestr,String infostr);
 	
 	/*
 	  参数说明：无参数值

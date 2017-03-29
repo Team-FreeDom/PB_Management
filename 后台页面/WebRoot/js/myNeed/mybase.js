@@ -455,7 +455,7 @@ $(document).ready(function() {
 					$.ajax({
 						data : {
 							"id" : id,							
-							"adddate" : adddate							
+							"adddate" : adddate,						
 						},
 						url : 'updateMyBaseDate.do',
 						async : true,
@@ -500,14 +500,23 @@ $(document).ready(function() {
 				  		        size: 'small'
 				  		    });
 				  		},
-				  		success : function(msg) {
+				  		success : function(msg) {			  			
+				  			if(msg==0){
+				  				$("#cancelOneModal").modal('hide');
+				  				bootbox.alert({
+					  				message : "撤回失败请刷新页面",
+					  				size : 'small'
+					  			});	
+				  			}else{
 				  			$("#cancelOneModal").modal('hide');	
 				  			bootbox.alert({
-				  				message : msg,
+				  				message :"撤回成功",
 				  				size : 'small'
-				  			});				  			
+				  			});	
 				  			page1.draw(false);
 				  			page2.draw(false);
+				  			}				  						  			
+				  			
 				  		}
 
 				  	});

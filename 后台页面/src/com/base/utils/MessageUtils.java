@@ -82,67 +82,67 @@ public class MessageUtils {
     public static String getContent(int i, String bname) {
 
 	String content = "";
-
+        bname=bname.equals("")?"":"\""+bname+"\"";
 	if (i == 1) { // 用户租赁提交
 
-	    content = '"'+bname + "\"  租赁申请提交成功";
+	    content = bname+"  租赁申请提交成功";
 
 	} else if (i == 2) { // 管理员点击"同意申请"
 
-	    content = '"'+bname + "\"  审核通过";
+	    content = bname+"  审核通过";
 
 	} else if (i == 3) { // 管理员点击"拒绝申请"
 
-	    content = '"'+bname + "\"  管理员退回你的申请";
+	    content = bname+"  管理员退回你的申请";
 
 	} else if (i == 4) { // 交费过期
 
-	    content = '"'+bname + "\"  缴费过期";
+	    content = bname+"  缴费过期";
 
 	} else if (i == 5) {// 管理员点击"取消交费"
 
-	    content = '"'+bname + "\"  被管理员退回";
+	    content = bname+"  被管理员退回";
 
 	} else if (i == 6) { // 管理员点击"交费成功"
 
-	    content = '"'+bname + "\"  土地租赁成功";
+	    content = bname+"  土地租赁成功";
 
 	} else if (i == 7) {
-	    content = '"'+bname + "\"  土地租赁申请已撤回";
+	    content = bname+"  土地租赁申请已撤回";
 	}else if(i==8){
-	    content = '"'+bname + "\"  管理员拒绝您的申请";
+	    content = bname+"  管理员拒绝您的申请";
 	}else if(i==9){
-	    content = '"'+bname + "\"  管理员同意您的申请";
+	    content = bname+"  管理员同意您的申请";
 	}else if (i==10){
-	    content = '"'+bname + "\"  基地申请已撤回";
+	    content = bname+"  基地申请已撤回";
 	}else if (i==11){
-	    content = '"'+bname + "\"  项目报修申请已撤回";
+	    content = bname+"  项目报修申请已撤回";
 	}else if (i==12){
 		
-	    content = '"'+bname + "\"  报修申请已同意";
+	    content = bname+"  报修申请已同意";
 	}else if (i==13){
 		
-	    content = '"'+bname + "\"  管理员拒绝您的报修申请，可以在我的报修下查看拒绝原因";
+	    content = bname+"  管理员拒绝您的报修申请，可以在我的报修下查看拒绝原因";
 	}else if (i==14){
 		
-	    content = '"'+bname + "\"  维修工作已完成";
+	    content = bname+"  维修工作已完成";
 	}else if (i==15){
 		
-	    content = '"'+bname + "\"  您申请的基地已经提交成功";
+	    content = bname+"  您申请的基地已经提交成功";
 	}else if (i==16){
 		
-	    content = '"'+bname + "\"  您的基地续期申请已经被管理员同意";
+	    content = bname+"  您的基地续期申请已经被管理员同意";
 	}else if(i==17){//管理员点击续期失败
 		
-		content = '"'+bname + "\"  您的基地续期申请被管理员，可在我的基地下查看拒绝原因";
+		content = bname+"  您的基地续期申请被管理员，可在我的基地下查看拒绝原因";
 	}else if(i==18){
-		content = '"'+bname + "\"  您的基地续期申请已成功撤回";
+		content = bname+"  您的基地续期申请已成功撤回";
 	}else if(i==19){
 		
-		content = '"'+bname + "\"  您的报修申请已提交成功";
+		content = bname+"  您的报修申请已提交成功";
 	}else if(i==20){
 		
-		content = '"'+bname + "\"  您的逾期恢复已经成功";
+		content = bname+" 您的逾期恢复已经成功";
 	}
 
 	return content;

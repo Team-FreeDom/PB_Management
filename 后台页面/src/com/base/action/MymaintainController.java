@@ -117,17 +117,12 @@ public class MymaintainController {
 								// // or desc
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
-	// 获取状态值 失败2；成功：1 维修完成：3       正常情况 失败：12 维修中：14 维修完成：15
-	Integer status = Integer.parseInt(request.getParameter("status"));	
-	/*if (status == 2) {
-	    status = 12;
-	} else if (status == 1) {
-	    status = 14;
-	} else if (status == 3) {
-	    status = 15;
-	} else {
-	    status = -2;
-	}	*/
+	// 获取状态值 失败2；成功：1 维修完成：3 正常情况 失败：12 维修中：14 维修完成：15
+	Integer status = Integer.parseInt(request.getParameter("status"));
+	/*
+	 * if (status == 2) { status = 12; } else if (status == 1) { status =
+	 * 14; } else if (status == 3) { status = 15; } else { status = -2; }
+	 */
 	MymaintainList str = null;
 	str = mymaintainservice.Mymaintain2(pageindex, size, order, orderDir,
 		-1, status, userid);
@@ -147,7 +142,7 @@ public class MymaintainController {
 	}
 	return null;
     }
-    
+
     // 撤回申请
     @RequestMapping("/recallmymaint.do")
     public String recallmymaint(HttpServletRequest request,
@@ -158,12 +153,11 @@ public class MymaintainController {
 	System.out.println(id);
 	// 获取撤回信息
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr+"什么信息");
-	mymaintainservice.recallmymaint(id, infostr);
-	JSONObject getObj = new JSONObject();
+	System.out.println(infostr + "什么信息");
+	int flag=mymaintainservice.recallmymaint(id, infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print("成功撤回");
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

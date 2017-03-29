@@ -28,8 +28,8 @@ public interface MymaintainService {
     
     /*
 	 参数说明：id,为报修申请记录的编号;infostr，字符串型，为要发送的信息                
-	 返回值：    无返回值
+	 返回值：    flag0或1代表是否可以撤回
 	 函数功能： 撤回报修申请
 	  */
-    public void recallmymaint(String id,String infostr);  
+    public int recallmymaint(String id,String infostr);  
 }

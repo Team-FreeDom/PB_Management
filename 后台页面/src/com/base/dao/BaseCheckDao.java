@@ -26,19 +26,19 @@ public interface BaseCheckDao {
     
     /*
 	  参数说明：recordstr，字符串型，为实习基地申请记录编号的封装;infoStr,字符串型，为要发送的消息
-	 返回值：    无返回值
+	 返回值：   返回0或1代表是否可以拒绝申请
 	 函数功能：申请记录的状态值变为申请失败状态12
 	  */
-    public void refuseapply(String recordstr);
+    public int refuseapply(String recorddigit,String recordstr);
     
     /*
 	  参数说明：str,字符串型，为('实习基地编号','建立时间','结束时间')的封装;
 	          infoStr,字符串型，为要发送的消息
 	          recordstr，字符串型，为实习基地申请记录编号的封装    
-	 返回值：    无返回值
+	 返回值：   返回0或1代表是否可以同意申请
 	 函数功能：申请记录的状态值变为申请成功状态6,
 	  */
-    public void agreeApply(String str,String recordstr);
+    public int agreeApply(String str,String recordstr);
     
     /*
 	  参数说明：sql,为消息的封装  
@@ -61,13 +61,13 @@ public interface BaseCheckDao {
 	 返回值：    无返回值
 	 函数功能：同意续期申请，申请记录的状态值变为申请成功状态6,
 	  */
-    public void addDateApply(String recordstr);
+    public int addDateApply(String recordstr);
     
     /*
 	  参数说明：recordstr，字符串型，为实习基地申请记录编号的封装;infoStr,字符串型，为要发送的消息    
 	 返回值：    无返回值
 	 函数功能：拒绝续期申请，申请记录的状态值变为到期已失效状态17
 	 */
-    public void refuseDateApply(String recordstr);    
+    public int refuseDateApply(String recorddigit,String recordstr);    
     
 }

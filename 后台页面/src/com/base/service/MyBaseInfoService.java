@@ -31,7 +31,7 @@ public interface MyBaseInfoService {
 	 返回值：   无返回值
 	 函数功能：撤回实习基地申请
 	*/
-   public void recall(String id,String infostr);  
+   public int recall(String id,String infostr);  
    
    /*
 	  参数说明：id,为实习申请记录的编号

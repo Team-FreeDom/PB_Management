@@ -28,7 +28,7 @@ import com.base.service.BaseCheckService;
  * @author 梦醒何处
  * 
  */
-//实习基地申请审核控制层
+// 实习基地申请审核控制层
 @Controller("BaseCheckController")
 @RequestMapping("/jsp")
 public class BaseCheckController {
@@ -44,9 +44,9 @@ public class BaseCheckController {
      * @param map
      * @return
      */
-    
-    //获取申请中的实习基地申请记录
-    @RequestMapping("/getBaseCheck.do")   
+
+    // 获取申请中的实习基地申请记录
+    @RequestMapping("/getBaseCheck.do")
     public String getBaseCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 获取申请部门id
@@ -77,16 +77,16 @@ public class BaseCheckController {
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {
-	   response.getWriter().print(getObj.toString());
+	    response.getWriter().print(getObj.toString());
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return null;
     }
-    
-   //获取续期中的实习基地申请记录
-    @RequestMapping("/getaddCheck.do")   
+
+    // 获取续期中的实习基地申请记录
+    @RequestMapping("/getaddCheck.do")
     public String getaddCheck(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 获取申请部门id
@@ -117,7 +117,7 @@ public class BaseCheckController {
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {
-	   response.getWriter().print(getObj.toString());
+	    response.getWriter().print(getObj.toString());
 	} catch (Exception e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -129,8 +129,8 @@ public class BaseCheckController {
     @RequestMapping("/getApplyDept.do")
     public String getApplyDept(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-    	
-	List list =basecheckservice.getDept();		
+
+	List list = basecheckservice.getDept();
 	response.setContentType("text/html;charset=UTF-8");
 	JSONArray json = JSONArray.fromObject(list);
 	try {
@@ -198,36 +198,40 @@ public class BaseCheckController {
 	System.out.println(recordstr + "看看是什么");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr + "消息是什么");
-	// 获取拒绝理由	
-	basecheckservice.refuseapply(recordstr, infostr);
-	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此操作处理失败");
+	// 获取基地打包id
+	String recorddigit = request.getParameter("recorddigit");
+	System.out.println(recorddigit + "计算机计算机");
+	// 获取拒绝理由
+	// String reason=request.getParameter("reason");
+	int flag = basecheckservice
+		.refuseapply(recorddigit, recordstr, infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print(getObj.toString());
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return null;
     }
-    
- // 拒绝续期申请
+
+    // 拒绝续期申请
     @RequestMapping("/refuseAddApply.do")
     public String refuseAddApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");	
+	String recordstr = request.getParameter("recordstr");
+	System.out.println(recordstr + "lililili");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println("controller->infostr:"+infostr);
-	basecheckservice.refuseDateApply(recordstr, infostr);
-	JSONObject getObj = new JSONObject();
-	getObj.put("str", "成功拒绝申请");
+	System.out.println("controller->infostr:" + infostr);
+	// 获取基地打包id
+	String recorddigit = request.getParameter("recorddigit");
+	int flag = basecheckservice.refuseDateApply(recorddigit, recordstr,
+		infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print(getObj.toString());
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -238,44 +242,42 @@ public class BaseCheckController {
     // 同意实习基地申请
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {    	
+	    HttpServletResponse response, ModelMap map) {
 	// 封装的记录id和申请年限
-	String recordstr = request.getParameter("recordstr");	
+	String recordstr = request.getParameter("recordstr");
+	System.out.println(recordstr + "songspng");
 	// 获取前台json消息数据
-	String infostr = request.getParameter("infostr");	
+	String infostr = request.getParameter("infostr");
+	System.out.println(infostr + "panpan");
 	// 获取单选id
-
-	String recorddigit = request.getParameter("recorddigit");	
-	basecheckservice.agreeApply(recorddigit, infostr, recordstr);
-	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
+	String recorddigit = request.getParameter("recorddigit");
+	System.out.println(recorddigit + "lilili");
+	int flag = basecheckservice.agreeApply(recorddigit, infostr, recordstr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print(getObj.toString());
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
 	return null;
     }
-    
-    //同意续期申请
+
+    // 同意续期申请
     @RequestMapping("/addAgreeApply.do")
     public String addagreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-    
+	System.out.println("hahahahahha");
 	// 封装的记录id
-	String recordstr = request.getParameter("recordstr");	
+	String recordstr = request.getParameter("recordstr");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	// 获取单选id		
-	System.out.println("controller->infostr:"+infostr);
-	basecheckservice.addDateApply(infostr, recordstr);
-	JSONObject getObj = new JSONObject();
-	getObj.put("str", "此申请处理成功");
+	// 获取单选id
+	System.out.println("controller->infostr:" + infostr);
+	int flag = basecheckservice.addDateApply(infostr, recordstr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print(getObj.toString());
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
