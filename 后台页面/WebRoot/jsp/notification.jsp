@@ -72,7 +72,7 @@
 					<div class="sidebar-collapse">
 						<!-- Sidebar Header Logo-->
 						<div class="sidebar-header ">
-							<a href="#" target="_blank"><img src="../image/manage-logo.png" alt=""></a>
+							<a href="index.do" ><img src="../image/manage-logo.png" alt=""></a>
 						</div>
 
 						<!-- Sidebar Menu-->

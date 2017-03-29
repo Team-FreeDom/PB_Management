@@ -8,7 +8,7 @@ $(document)
 										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 5, // 默认每页显示多少条记录
+										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"bPaginate": true, //翻页功能
 										"searching":false,//禁用搜索
 										"bServerSide" : true,
@@ -284,7 +284,7 @@ $(document).delegate('#submitS', 'click', function() {
 				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
-				"iDisplayLength" : 5, // 默认每页显示多少条记录
+				"iDisplayLength" : 10, // 默认每页显示多少条记录
 				"bPaginate": true, //翻页功能
 				"bDestroy":true,
 				"processing": true,

@@ -61,6 +61,7 @@ $("#addOne").click(function(){
 				"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
 				"serverSide": true,
+				"iDisplayLength" : 10,
 				"bFilter": true,
 				"dom": 'frtip<"bottom"l>',
 	             "bDestroy":true,
