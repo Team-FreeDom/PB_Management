@@ -255,7 +255,7 @@
 										<td colspan="2">
 											<button type="button" class="btn btn-danger"
 												onClick="deleteInfo()">删除</button>
-											<button type="button" class="btn btn-primary"
+											<button type="button" class="btn btn-primary" id="daolead"
 												data-toggle="modal" data-target="#lead">导出</button>
 										</td>
 

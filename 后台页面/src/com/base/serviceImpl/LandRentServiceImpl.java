@@ -76,8 +76,7 @@ public class LandRentServiceImpl implements LandRentService {
 				str+=st+",";
 			}
 			i++;
-		}
-		System.out.println(str);
+		}		
 		try {
 			landRentInfoDaoImpl.deleteRentInfo(str);
 		} catch (Exception e) {
