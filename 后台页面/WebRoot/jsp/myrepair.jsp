@@ -258,8 +258,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <td>具体地址 ： </td>
                                                     <td><input id="address" type="text" class="form-control" value="" disabled></td>
                                                 </tr>
-                                                <tr>
-                                                	<td>保修原因 ： </td>
+                                                <tr id="lastButOne">
+                                                	<td>报修原因 ： </td>
                                                     <td><textarea id="reason" class="form-control" disabled></textarea></td>
                                                 </tr>
                                             </table>

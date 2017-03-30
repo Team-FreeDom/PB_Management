@@ -25,19 +25,19 @@ public class PlanServiceImpl implements PlanService {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
-	} else if (order == 4) {
+	} else if (order == 3) {
 	    columnName = "count";
-	} else if (order == 5) {
+	} else if (order == 4) {
 	    columnName = "selectedCount";
-	} else if (order == 7) {
+	} else if (order == 6) {
 	    columnName = "college";
-	} else if (order == 8) {
+	} else if (order == 7) {
 	    columnName = "weekClassify";
-	} else if (order == 9) {
+	} else if (order == 8) {
 	    columnName = "credit";
-	} else if (order == 12) {
+	} else if (order == 11) {
 	    columnName = "tid";
-	} else if (order == 13) {
+	} else if (order == 12) {
 	    columnName = "tname";
 	}
 	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
