@@ -262,10 +262,10 @@ $(document).on("click", "#scan", function() {
 						$("#linkaddress").prop("href",object[index].file);	
 					}
 					
-					$("#reason").html('');
+					$("#reason_0").html('');
 					$("#hideReason").prop("hidden",true);
 					if(status==12){
-						$("#reason").html(object[index].refuse);
+						$("#reason_0").html(object[index].refuse);
 						$("#hideReason").prop("hidden",false);
 					}
 					

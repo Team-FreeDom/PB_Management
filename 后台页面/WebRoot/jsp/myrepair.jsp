@@ -264,8 +264,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </tr>
                                                 <tr hidden id="hideReason">
 													<td>拒绝理由 ：</td>
-													<td style="text-align:left;"><div id="reason"
-															style="border:#ccc 1px solid;height:80px;"></div></td>
+													<td style="text-align:left;"><textarea id="reason_0"
+															style="border:#ccc 1px solid;height:80px;" disabled></textarea></td>
 
 												</tr>
 
