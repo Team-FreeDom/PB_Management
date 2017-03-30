@@ -630,12 +630,12 @@ $('#certainAdd').click(function() {
 		reason=$(this).closest('tr').find('td:eq(4) textarea').val();
 		if(i!=0){
 			recordstr=recordstr+",("+this.className+",'"+reason+"',17)";
-			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
 			recorddigit=recorddigit+','+this.className;
 			
 		}else{
 			recordstr=recordstr+"("+this.className+",'"+reason+"',17)";
-			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
 			recorddigit=recorddigit+this.className;
 		}					
 						
@@ -987,7 +987,7 @@ $("#submitS").click(function() {
 	
 	});
 
-$("#submitS2").click(function() {	
+$("#submitS2").click(function() {
 	var dept=$('#deptSh2').children('option:selected').val();	
 	obj2=[];	
 	$('#basecheck2').DataTable( //getXUBaseCheck.do
@@ -1003,7 +1003,7 @@ $("#submitS2").click(function() {
 				"processing":true,
 				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
-					"url" : "getXUBaseCheck.do",
+					"url" : "getBushaddCheck.do",
 					"type" : "POST",
 					"data":{"dept":dept}
 				},

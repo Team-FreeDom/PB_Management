@@ -32,8 +32,7 @@ $(document)
 								},
 								"aoColumns" : [ // [{la_id:1},{startime:"2016-11-15"},{endtime:"2017-11-15"},{basename:"长安基地1号"},{li:"土地编号"},{username:"申请人"},{usercollage:"信息科学技术学院"},{time:"租用次数"},{plant:"种植内容"}]
 								{
-									"mData" : "la_id",
-									
+									"mData" : "la_id",									
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "2%",
@@ -1365,12 +1364,9 @@ $(document)
 									"#finish",
 									function() {
 
-										var basenameid = document
-												.getElementById("basenameid").value;
-										var deptid = document
-												.getElementById("dept").value;
-										var usernameid = document
-												.getElementById("usernameid").value;
+										var basenameid = $("#basenameid").val();
+										var deptid = $("#dept").val();
+										var usernameid = $("#usernameid").val();
 										$('#tableCheck')
 												.DataTable(
 														{
@@ -1492,7 +1488,7 @@ $(document)
 															}
 														});
 										$('.hide_ul').toggle();
-										//document.getElementById("hide_ul").style.display = "none";
+										
 										recovery();
 
 										
@@ -1505,12 +1501,9 @@ $(document)
 									"#finishPay",
 									function() {
 
-										var basenameid = document
-												.getElementById("basenameid2").value;
-										var deptid = document
-												.getElementById("dept2").value;
-										var usernameid = document
-												.getElementById("usernameid2").value;
+										var basenameid = $("#basenameid2").val();
+										var deptid = $("#dept2").val();
+										var usernameid = $("#usernameid2").val();
 										$('#tablePay')
 												.DataTable(
 														{
@@ -1643,12 +1636,9 @@ $(document)
 									"#finishdue",
 									function() {
 
-										var basenameid = document
-												.getElementById("basenameid3").value;
-										var deptid = document
-												.getElementById("dept3").value;
-										var usernameid = document
-												.getElementById("usernameid3").value;
+										var basenameid = $("#basenameid3").val();
+										var deptid = $("#dept3").val();
+										var usernameid = $("#usernameid3").value;
 										$('#tabledue')
 												.DataTable(
 														{

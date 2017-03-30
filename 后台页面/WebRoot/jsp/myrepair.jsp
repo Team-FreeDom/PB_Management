@@ -262,6 +262,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 	<td>报修原因 ： </td>
                                                     <td><textarea id="reason" class="form-control" disabled></textarea></td>
                                                 </tr>
+                                                <tr hidden id="hideReason">
+													<td>拒绝理由 ：</td>
+													<td style="text-align:left;"><div id="reason"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+
                                             </table>
                                     	</div>
                                     </div>

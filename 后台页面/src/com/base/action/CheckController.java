@@ -377,6 +377,7 @@ public class CheckController {
     public String Select(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) throws IOException {
 	Integer flag = Integer.valueOf(request.getParameter("flag"));
+	System.out.println("刷选的flag:"+flag);
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -392,19 +393,20 @@ public class CheckController {
 	Integer pageindex = (startIndex / size + 1);
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
 	String basename = request.getParameter("basename");
-	if (basename == "") {
+	if (basename.equals("")) {
 	    basename = null;
 	}
 	String username = request.getParameter("username");
 
-	if (username == "") {
+	if (username.equals("")) {
 	    username = null;
 	}
 	String usercollage = request.getParameter("usercollage");
 
-	if (usercollage == "") {
+	if (usercollage.equals("")) {
 	    usercollage = null;
 	}
+	
 	CheckList list = new CheckList();
 	try {
 	    list = checkservice.getInfo(flag, pageindex, size, basename,
@@ -418,6 +420,7 @@ public class CheckController {
 	getObj.put("recordsFiltered", list.getRecordsTotal());
 	getObj.put("recordsTotal", list.getRecordsTotal());
 	getObj.put("data", list.getData());
+	System.out.println("数据条数:"+list.getRecordsTotal());
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());
@@ -447,16 +450,16 @@ public class CheckController {
 	Integer pageindex = (startIndex / size + 1);
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
 	String basename = request.getParameter("basename");
-	if (basename == "") {
+	if (basename.equals("")) {
 	    basename = null;
 	}
 	String username = request.getParameter("username");
-	if (username == "") {
+	if (username.equals("")) {
 	    username = null;
 	}
 	String usercollage = request.getParameter("usercollage");
 
-	if (usercollage == "") {
+	if (usercollage.equals("")) {
 	    usercollage = null;
 	}
 	CheckList list = new CheckList();

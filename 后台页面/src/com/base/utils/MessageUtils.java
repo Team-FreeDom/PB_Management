@@ -134,7 +134,7 @@ public class MessageUtils {
 	    content = bname+"  您的基地续期申请已经被管理员同意";
 	}else if(i==17){//管理员点击续期失败
 		
-		content = bname+"  您的基地续期申请被管理员，可在我的基地下查看拒绝原因";
+		content = bname+"  您的基地续期申请被管理员拒绝";
 	}else if(i==18){
 		content = bname+"  您的基地续期申请已成功撤回";
 	}else if(i==19){
@@ -182,6 +182,7 @@ public class MessageUtils {
 	System.out.println(insertStr);
 	return insertStr;
     }
+    
     public static String getinfoMs(String infoStr, int tag){   	
     	
 	String insertStr = "";
@@ -211,6 +212,35 @@ public class MessageUtils {
 	
     }
 
+    public static String getinfoMs_baseRefuse(String infoStr, int tag){   	
+    	
+    	String insertStr = "";
+    	Date d=new Date();
+    	SimpleDateFormat d1=new SimpleDateFormat("yyyy-MM-dd");
+    	String date=d1.format(d);
+    	JSONArray object= JSONArray.fromObject(infoStr);
+    	String basename="";
+    	for (int i = 0; i <object.size(); i++) {
+    	    JSONObject temp= object.getJSONObject(i);
+    	    basename= temp.getString("basename");
+    	    insertStr = insertStr + "('" + MessageUtils.getTitle(tag) + "','"
+    		    + MessageUtils.getContent(tag,basename) + "    拒绝原因:"+temp.getString("reason")+"','" + date
+    		    + "'," + 0 + ",'" + temp.getString("userid") + "'";
+    	    if (i == object.size() - 1) {
+    		insertStr += ")";
+    	    } else {
+    		insertStr += "),";
+    	    }	    
+    	    System.out.println(MessageUtils.getTitle(tag));
+        	System.out.println(MessageUtils.getContent(tag,basename));    	
+    	}
+    	insertStr = "insert into baseweb.message(title,content,time,isRead,userid) values"
+    		+ insertStr;
+    	System.out.println(insertStr);
+    	return insertStr;
+    	
+        }
+    
     /**
      * 计算显示当前分页的起始页
      * 

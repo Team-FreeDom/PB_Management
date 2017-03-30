@@ -125,6 +125,52 @@ public class BaseCheckController {
 	return null;
     }
 
+    // 获取续期中的实习基地申请记录（刷选）
+    @RequestMapping("/getBushaddCheck.do")
+    public String getBushaddCheck(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+	// 获取申请部门id
+	String Str = request.getParameter("dept");
+	Integer applydpid;
+	if (Str.equals("")) {
+	    applydpid = -1;
+	} else {
+	    applydpid = Integer.parseInt(Str);
+	}
+	// 获取用户过滤框里的字符
+	String searchValue = request.getParameter("search[value]");
+	if (searchValue.equals("")) {
+	    searchValue = null;
+	}
+	// 获取当前页面的传输几条记录
+	Integer size = Integer.parseInt(request.getParameter("length"));
+	// 数据起始位置
+	Integer startIndex = Integer.parseInt(request.getParameter("start"));
+	Integer draw = Integer.parseInt(request.getParameter("draw"));
+	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
+	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
+								// // desc
+	// 通过计算求出当前页面为第几页
+	Integer pageindex = (startIndex / size + 1);
+	BaseCheckList str = null;
+	str = basecheckservice.getaddCheck(applydpid, pageindex, size, order,
+		orderDir, searchValue);
+	JSONObject getObj = new JSONObject();
+	getObj.put("draw", draw);
+	getObj.put("recordsFiltered", str.getRecordsTotal());
+	getObj.put("recordsTotal", str.getRecordsTotal());
+	getObj.put("data", str.getData());
+	response.setContentType("text/html;charset=UTF-8");
+
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return null;
+    }
+
     // 获取刷选的部门
     @RequestMapping("/getApplyDept.do")
     public String getApplyDept(HttpServletRequest request,
@@ -194,13 +240,11 @@ public class BaseCheckController {
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "看看是什么");
+	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	// 获取基地打包id
-	String recorddigit = request.getParameter("recorddigit");
-	System.out.println(recorddigit + "计算机计算机");
+	String recorddigit = request.getParameter("recorddigit");	
 	// 获取拒绝理由
 	// String reason=request.getParameter("reason");
 	int flag = basecheckservice
@@ -220,8 +264,7 @@ public class BaseCheckController {
     public String refuseAddApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "lililili");
+	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	System.out.println("controller->infostr:" + infostr);

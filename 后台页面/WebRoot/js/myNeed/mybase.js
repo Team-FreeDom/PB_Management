@@ -337,7 +337,8 @@ $(document).ready(function() {
 						object=obj2;
 					}
 						
-					var statusid=object[index].statusid;	
+					var statusid=object[index].statusid;		
+					
 					
 					$("#basename").val(object[index].name);
 					$("#basetype").val(object[index].type);
@@ -365,6 +366,8 @@ $(document).ready(function() {
 						$("#resource").prop("href",object[index].material_path);
 					}
 					
+					$("#reason").html('');
+					$("#hideReason").prop("hidden",true);
 					
 					if(statusid==6||statusid==18){
 						$("#setdate").val(object[index].buildtime);
@@ -489,7 +492,8 @@ $(document).ready(function() {
 				  		//dataType : 'json',
 				  		data:{
 				  			"id":id,
-				  			"infostr":info_str
+				  			"infostr":info_str,
+				  			"tag":obj1[index].statusid
 				  		},
 				  		url : 'recall.do',   //
 				  		async : false,
@@ -500,15 +504,14 @@ $(document).ready(function() {
 				  		        size: 'small'
 				  		    });
 				  		},
-				  		success : function(msg) {			  			
-				  			if(msg==0){
-				  				$("#cancelOneModal").modal('hide');
+				  		success : function(msg) {
+				  			$("#cancelOneModal").modal('hide');
+				  			if(msg==0){				  				
 				  				bootbox.alert({
-					  				message : "撤回失败请刷新页面",
+					  				message : "撤回失败,请刷新页面",
 					  				size : 'small'
 					  			});	
-				  			}else{
-				  			$("#cancelOneModal").modal('hide');	
+				  			}else{				  			
 				  			bootbox.alert({
 				  				message :"撤回成功",
 				  				size : 'small'

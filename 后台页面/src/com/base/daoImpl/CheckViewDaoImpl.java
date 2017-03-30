@@ -105,7 +105,7 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    sp.setString(5, username);
 	    sp.setString(6, usercollage);
 	    sp.setString(7, columnName);
-	    sp.setString(8, orderDir);
+	    sp.setString(8, orderDir);	    
 	    sp.registerOutParameter(9, java.sql.Types.INTEGER);
 	    sp.execute();
 	    recordsTotal = sp.getInt(9);

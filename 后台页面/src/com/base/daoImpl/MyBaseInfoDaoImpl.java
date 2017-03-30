@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
-
 import org.springframework.stereotype.Repository;
 
 import com.base.dao.MyBaseInfoDao;
@@ -127,6 +126,34 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	} finally {
 	    session.close();
 	}
+    }
+    
+    @Override
+    public int changeThisStatus(String id,int status1,int status2){
+    	
+    	int flag = 0;
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;    	
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.`judge_baseapply`(?,?,?,?)}");
+    	    sp.setString(1, id);
+    	    sp.setInt(2, status1);
+    	    sp.setInt(3, status2);
+    	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
+    	    sp.execute();
+    	    flag = sp.getInt(4);
+    	    
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, rs);
+    	}
+    	return flag;
     }
 
 }
