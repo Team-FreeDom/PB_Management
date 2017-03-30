@@ -154,8 +154,8 @@ $(document).ready(function() {
 						 +'<tr>'
 						 +'<td rowspan="3"><sapn class="mark"></span></td>'
 						 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
-						 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
-						 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
+						 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
+						 +'<td><input id="endweek"  readonly="readonly" class="flag endweek"></td>'
 						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
 						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
@@ -412,7 +412,91 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+var timeArray=0;
+$(document).on("focus","#startweek",function(){
+	timeArray=$(this).closest("tbody").find(".mark").html()-1;
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$("#Stime").val($(this).val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$("#Etime").val($(this).val());
+			return false;
+		}
+		p++;
+	});
+	
+	$("#time").modal('show');
+});
+$(document).on("focus","#endweek",function(){
+	timeArray=$(this).closest("tbody").find(".mark").html()-1;
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$("#Stime").val($(this).val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$("#Etime").val($(this).val());
+			return false;
+		}
+		p++;
+	});
+	$("#time").modal('show');
+});
+	
+$(document).on("click","#finishTime",function(){
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$(this).val($("#Stime").val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$(this).val($("#Etime").val());
+			return false;
+		}
+		p++;
+	});
+	$("#time").modal('hide');
+});	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 var selectNum;	
 $(document).on("click",".choice2",function(){//点击选择弹出 
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
