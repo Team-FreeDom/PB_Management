@@ -414,7 +414,7 @@
 			<h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
 		</div>
 
-		<div class="modal-body table-responsive">
+		<div class="modal-body table-responsive" id="modalbody">
 			<form class="form-horizontal" role="form" id="PraForm">
 
 				<table class="table" id="showtable">
@@ -446,12 +446,9 @@
                                                 </td>
                                             </tr>
                                           </table>
-
-				<br>
 				<button type="button" class="btn btn-primary" id="addTbody">添加</button>
 				<button type="button" class="btn btn-success" id="save">保存</button>
-				<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
--->
+				
 				<table class="table-bordered" id="table">
 
 					<tr>
@@ -713,6 +710,40 @@
 		</div>
 	</div>
 
+<div class="modal fade" id="time" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">请选择开始和结束时间</h4>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+		  <div class="form-group">
+			<label for="Stime" class="col-md-offset-2 col-md-2 control-label">开始时间</label>
+			<div class="col-md-6">
+			  <input type="text" class="form-control laydate-icon" id="Stime">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="Etime" class="col-md-offset-2 col-md-2 control-label">结束时间</label>
+			<div class="col-md-6">
+			  <input type="text" class="form-control laydate-icon" id="Etime">
+			</div>
+		  </div>
+
+		</form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="finishTime">确定</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
    <!-- 修改按钮弹出框-->
 	<div class="modal fade" id="updatePlanItem" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
@@ -838,7 +869,6 @@
 	<script src="../js/bootbox.min.js"></script>
 	<script type="text/javascript" src="../js/laydate.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
-	<script src="../js/Calendar.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
 	<script src="../js/kg.js"></script>
     <script>
@@ -849,6 +879,12 @@
                 laydate({
                     elem: '#twoSemesterTime'
                 });
+                laydate({
+                    elem: '#Stime'
+                 })
+                 laydate({
+                     elem: '#Etime'
+                 });
               
                 </script>
 </body>

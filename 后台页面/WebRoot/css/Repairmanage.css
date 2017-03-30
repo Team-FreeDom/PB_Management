@@ -46,5 +46,8 @@ table thead > tr> th{
 	color: #F70004;
 	font-size:20px;
 }
+.laydate_yms {
+	width:123px !important;
+}
 
 

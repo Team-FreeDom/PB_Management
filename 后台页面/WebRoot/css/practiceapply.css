@@ -157,6 +157,14 @@ table tbody tr td{
 	width:123px !important;
 }
 
+#Stime{
+	height:35px;
+}
+#Etime{
+	height:35px;
+}	
+
+
 	.modalbody{
 	height:412px;
 	overflow-y:auto;
