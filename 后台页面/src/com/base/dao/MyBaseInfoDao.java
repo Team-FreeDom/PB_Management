@@ -29,4 +29,6 @@ public interface MyBaseInfoDao {
 	 函数功能：续期
 	*/
     public void updateDate(int id, String adddate);
+    
+    public int changeThisStatus(String id,int status1,int status2);
 }

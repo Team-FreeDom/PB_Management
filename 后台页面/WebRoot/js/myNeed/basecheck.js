@@ -987,7 +987,7 @@ $("#submitS").click(function() {
 	
 	});
 
-$("#submitS2").click(function() {	
+$("#submitS2").click(function() {
 	var dept=$('#deptSh2').children('option:selected').val();	
 	obj2=[];	
 	$('#basecheck2').DataTable( //getXUBaseCheck.do
@@ -1003,7 +1003,7 @@ $("#submitS2").click(function() {
 				"processing":true,
 				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
-					"url" : "getXUBaseCheck.do",
+					"url" : "getBushaddCheck.do",
 					"type" : "POST",
 					"data":{"dept":dept}
 				},
