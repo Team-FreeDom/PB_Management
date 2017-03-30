@@ -365,29 +365,29 @@ public class StatisticDataDaoImpl implements StatisticDataDao {
 		sp.registerOutParameter(16, java.sql.Types.INTEGER);
 		sp.execute();
 		typenum = sp.getInt(9);
-		System.out.println(typenum+"宋超");
+		
 		namenum = sp.getInt(10);
-		System.out.println(namenum+"宋超宋超");
+		
 		collegenum = sp.getInt(11);
-		System.out.println(collegenum+"宋超宋超宋超");
+		
 		majornum = sp.getInt(12);
-		System.out.println(majornum+"宋超宋超宋超宋超");
+		
 		teachernum = sp.getInt(13);
-		System.out.println(teachernum+"宋超宋超宋超宋超宋超");
+		
 		classnum = sp.getInt(14);
-		System.out.println(classnum+"宋超宋超宋超宋超宋超宋超");
+		
 		expensenum = sp.getInt(15);
-		System.out.println(expensenum+"宋超宋超宋超宋超宋超宋超宋超");
+		
 		personnum = sp.getInt(16);
-		System.out.println(personnum+"宋超宋超宋超宋超宋超宋超宋超宋超");
+		
 		rs = sp.getResultSet();
 		st.setTypenum(typenum);
-		System.out.println(st.getTypenum()+"才别");
+		
 		st.setNamenum(namenum);
 		st.setCollegenum(collegenum);
 		st.setMajornum(majornum);		
 		st.setTeachernum(teachernum);
-		System.out.println(st.getTeachernum()+"=====cai");
+		
 		st.setClassnum(classnum);
 		st.setExpensenum(expensenum);
 		st.setPersonnum(personnum);
