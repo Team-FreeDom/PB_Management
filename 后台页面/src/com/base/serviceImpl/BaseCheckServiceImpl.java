@@ -154,7 +154,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	int flag = basecheckdao.refuseDateApply(recorddigit,recordstr);
 	if (flag == 1) {
 	    // 获得插入的消息语句
-	    String insertStr = MessageUtils.getinfoMs(infostr, 17);
+	    String insertStr = MessageUtils.getinfoMs_baseRefuse(infostr, 17);
 	    // 向消息表中插入信息
 	    basecheckdao.insertMessage(insertStr);
 	}

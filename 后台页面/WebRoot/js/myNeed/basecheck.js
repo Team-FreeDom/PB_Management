@@ -630,12 +630,12 @@ $('#certainAdd').click(function() {
 		reason=$(this).closest('tr').find('td:eq(4) textarea').val();
 		if(i!=0){
 			recordstr=recordstr+",("+this.className+",'"+reason+"',17)";
-			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
 			recorddigit=recorddigit+','+this.className;
 			
 		}else{
 			recordstr=recordstr+"("+this.className+",'"+reason+"',17)";
-			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
 			recorddigit=recorddigit+this.className;
 		}					
 						
