@@ -244,6 +244,7 @@ $(document).on("click", "#scan", function() {
 					}else{
 						object=obj2;
 					}
+					var status=object[index].status;	
 					$("#projectname").val(object[index].pro_name);
 					$("#basename").val(object[index].basename);
 					$("#name").val(object[index].username);
@@ -260,6 +261,14 @@ $(document).on("click", "#scan", function() {
 						$("#resourcetr1").prop("hidden",false); 
 						$("#linkaddress").prop("href",object[index].file);	
 					}
+					
+					$("#reason").html('');
+					$("#hideReason").prop("hidden",true);
+					if(status==12){
+						$("#reason").html(object[index].refuse);
+						$("#hideReason").prop("hidden",false);
+					}
+					
 					$("#Checkdetail").modal('show');					
 				});
 

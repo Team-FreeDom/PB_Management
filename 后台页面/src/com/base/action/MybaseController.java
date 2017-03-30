@@ -155,14 +155,14 @@ public class MybaseController {
     @RequestMapping("/recall.do")
     public String recall(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println(" 进去撤回ahhahah");
+	
 	// 获取撤回哪条记录id
-	String id = request.getParameter("id");
-	System.out.println(id);
+	String id = request.getParameter("id");	
 	// 获取撤回信息
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr);
-	int flag=mybaseinfoservice.recall(id, infostr);
+	System.out.println("tag: "+request.getParameter("tag"));
+	int tag = Integer.valueOf(request.getParameter("tag"));
+	int flag=mybaseinfoservice.recall(id, infostr,tag);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(flag);

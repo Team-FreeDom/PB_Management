@@ -72,6 +72,7 @@ public class MymaintainDaoImpl implements MymaintainDao {
 		ch.setStatus(rs.getInt("status"));
 		ch.setDescp(rs.getString("descp"));
 		ch.setActualmoney(rs.getDouble("actualmoney"));
+		ch.setRefuse(rs.getString("refuse"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

@@ -1492,7 +1492,7 @@ $(document)
 															}
 														});
 										$('.hide_ul').toggle();
-										//document.getElementById("hide_ul").style.display = "none";
+										
 										recovery();
 
 										

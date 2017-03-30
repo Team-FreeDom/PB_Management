@@ -28,10 +28,11 @@ public interface MyBaseInfoService {
    /*
 	  参数说明：id,为实习申请记录的编号
               infoStr,字符串型，为要发送的消息   
+              tag,为标识，2代表待审核，18代表续期中
 	 返回值：   无返回值
 	 函数功能：撤回实习基地申请
 	*/
-   public int recall(String id,String infostr);  
+   public int recall(String id,String infostr,int tag);  
    
    /*
 	  参数说明：id,为实习申请记录的编号
