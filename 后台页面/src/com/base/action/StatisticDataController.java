@@ -44,17 +44,18 @@ public class StatisticDataController implements ServletContextAware {
 	    HttpServletResponse response) {
 	// 获取用户登录的id
 	// String userid = CookieUtils.getUserid(request);
-	System.out.println("哈哈哈哈哈======");
+	// System.out.println("哈哈哈哈哈======");
 	// 获取学年学期
-	 String semester = WeekTransformToTime.getThisSemester(application);
+	String semester = WeekTransformToTime.getThisSemester(application);
 	// System.out.println(semester + "ccccccc");
-	
-	  if(semester==""){ semester=null; }
-	 
+
+	if (semester.equals("")) {
+	    semester = null;
+	}
 
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
-	System.out.println(size + "lialiaiaiaiaia");
+	// System.out.println(size + "lialiaiaiaiaia");
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -94,37 +95,32 @@ public class StatisticDataController implements ServletContextAware {
 	    HttpServletResponse response) {
 	// 获取用户登录的id
 	// String userid = CookieUtils.getUserid(request);
-	System.out.println("菜菜菜菜哈哈哈哈哈======");
-	// 获取学年学期
-	 String semester = WeekTransformToTime.getThisSemester(application);
-	// System.out.println(semester + "ccccccc");
-	
-	 if(semester==""){ semester=null; }
-	 
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
 	String basetype = request.getParameter("baseCategory");// 获取基地类型
-	System.out.println(basetype + "panpan");
-	if (basetype == "" ) {
-	    System.out.println("李彩李彩李彩彩");
+	if (basetype.equals("")) {
 	    basetype = null;
 	}
 	String basename = request.getParameter("baseName");// 获取基地名字
-	if (basename == "" ) {
+	if (basename.equals("")) {
 	    basename = null;
 	}
 	String grade = request.getParameter("gradeClass");// 获取年级
-	if (grade == "" ) {
+	if (grade.equals("")) {
 	    grade = null;
 	}
 	String college = request.getParameter("college");// 获取学院
-	if (college == "" ) {
+	if (college.equals("")) {
 	    college = null;
 	}
 	String major = request.getParameter("major");// 获取专业
-	if (major == "" ) {
+	if (major.equals("")) {
 	    major = null;
 	}
 	String class1 = request.getParameter("className");// 获取班级
-	if (class1 == "" ) {
+	if (class1.equals("")) {
 	    class1 = null;
 	}
 	// 获取当前页面的传输几条记录
@@ -170,7 +166,9 @@ public class StatisticDataController implements ServletContextAware {
 	System.out.println("七进来了");
 	// 获取学年学期
 	String semester = WeekTransformToTime.getThisSemester(application);
-	if(semester==""){ semester=null; }
+	if (semester.equals("")) {
+	    semester = null;
+	}
 	List list = new ArrayList();
 
 	StatisticData st = new StatisticData();
@@ -189,57 +187,53 @@ public class StatisticDataController implements ServletContextAware {
 	}
 	return null;
     }
-   // 基地利用率刷选(数据统计)
+
+    // 基地利用率刷选(数据统计)
     @RequestMapping("/BaseUseRatioBrush.do")
     public String BaseUseRatioBrush(HttpServletRequest request,
 	    HttpServletResponse response) {
-	System.out.println("七进来了");
 	// 获取学年学期
-	 String semester = WeekTransformToTime.getThisSemester(application);
-	 if(semester==""){
-	     semester=null;
-	 }
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
 	String basetype = request.getParameter("baseCategory2");// 获取基地类型
-	System.out.println(basetype + "6666666");
-	if (basetype == "" ) {
-	    System.out.println("qqq李彩李彩李彩彩");
+	if (basetype.equals("")) {
 	    basetype = null;
-	    System.out.println(basetype+"panpan");
 	}
 	String basename = request.getParameter("baseName2");// 获取基地名字
-	System.out.println(basename+"liiiiii");
-	if (basename == "" ) {
+	if (basename.equals("")) {
 	    basename = null;
 	}
 	String grade = request.getParameter("gradeClass2");// 获取年级
-	if (grade == "" ) {
+	if (grade.equals("")) {
 	    grade = null;
 	}
 	String college = request.getParameter("college2");// 获取学院
-	if (college == "") {
+	if (college.equals("")) {
 	    college = null;
 	}
 	String major = request.getParameter("major2");// 获取专业
-	if (major == "" ) {
+	if (major.equals("")) {
 	    major = null;
 	}
 	String class1 = request.getParameter("className2");// 获取班级
-	if (class1 == "" ) {
+	if (class1.equals("")) {
 	    class1 = null;
 	}
-	String teacherName=request.getParameter("teacherName");
-	if(teacherName.equals("全部")||teacherName==""){
-	    System.out.println(teacherName+"彩别彩别");
-	    teacherName=null;
+	String teacherName = request.getParameter("teacherName");
+	if (teacherName.equals("全部") || teacherName.equals("")) {
+	    teacherName = null;
 	}
 	List<StatisticData> list = new ArrayList<StatisticData>();
 
 	StatisticData st = new StatisticData();
-	System.out.println(basetype+"  "+basename+"  "+grade+"  "+college+"  "+major+"  "+class1+"  "+teacherName+"  "+"彭心雨");
-	st = statisticDataservice.BaseUseRatioBrush(semester,basetype,basename,grade,college,major,class1,teacherName);
-	System.out.println(st.getTeachernum()+"=====cai");
+	// System.out.println(basetype+"  "+basename+"  "+grade+"  "+college+"  "+major+"  "+class1+"  "+teacherName+"  "+"彭心雨");
+	st = statisticDataservice.BaseUseRatioBrush(semester, basetype,
+		basename, grade, college, major, class1, teacherName);
+	System.out.println(st.getTeachernum() + "=====cai");
 	list.add(st);
-	//System.out.println(st.getTypenum() + "李彩彩彩");
+	// System.out.println(st.getTypenum() + "李彩彩彩");
 	JSONObject getObj = new JSONObject();
 	getObj.put("data", list);
 	response.setContentType("text/html;charset=UTF-8");
@@ -258,11 +252,11 @@ public class StatisticDataController implements ServletContextAware {
     public String getDept(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取学年学期
-	
-	  String semester = WeekTransformToTime.getThisSemester(application);
-	  System.out.println(semester + "aaaaaaaa"); if (semester=="") {
-	  semester=null; }
-	 
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
+
 	List list = statisticDataservice.getDept(semester);
 	JSONArray json = JSONArray.fromObject(list);
 	response.setContentType("text/html;charset=UTF-8");
@@ -280,15 +274,18 @@ public class StatisticDataController implements ServletContextAware {
     public String statisticgetName(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取学年学期
-	
-	  String semester = WeekTransformToTime.getThisSemester(application);
-	  System.out.println(semester + "aaaaaaaa"); if (semester=="") {
-	  semester=null; }
-	 
+
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
+
 	String basename = request.getParameter("baseCategory");
-	System.out.println(basename + "李彩李彩李彩");
-	List<Map<String, String>> list = statisticDataservice.getName(
-		semester, basename);
+	if (basename.equals("")) {
+	    basename = null;
+	}
+	List<Map<String, String>> list = statisticDataservice.getName(semester,
+		basename);
 	for (int i = 0; i < list.size(); i++) {
 	    System.out.println(list.get(i).get("site") + "====");
 	}
@@ -302,20 +299,24 @@ public class StatisticDataController implements ServletContextAware {
 	}
 	return null;
     }
+
     // 得到基地名字(第二个刷选)
     @RequestMapping("/statisticgetName2.do")
     public String statisticgetName2(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取学年学期
-	
-	  String semester = WeekTransformToTime.getThisSemester(application);
-	 System.out.println(semester + "aaaaaaaa"); if (semester=="") {
-	  semester=null; }
-	 
+
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
+
 	String basename = request.getParameter("baseCategory2");
-	System.out.println(basename + "李彩李彩李彩");
-	List<Map<String, String>> list = statisticDataservice.getName(
-		semester, basename);
+	if (basename.equals("")) {
+	    basename = null;
+	}
+	List<Map<String, String>> list = statisticDataservice.getName(semester,
+		basename);
 	for (int i = 0; i < list.size(); i++) {
 	    System.out.println(list.get(i).get("site") + "====");
 	}
@@ -335,13 +336,17 @@ public class StatisticDataController implements ServletContextAware {
     public String statisticgetmajor(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取学年学期
-	
-	  String semester = WeekTransformToTime.getThisSemester(application);
-	  System.out.println(semester + "aaaaaaaa"); if (semester=="") {
-	  semester=null; }
-	 
+
+	String semester = WeekTransformToTime.getThisSemester(application);	
+	if (semester.equals("")) {
+	    semester = null;
+	}
+
 	String college = request.getParameter("college");
-	System.out.println(college + "专业专业");
+	if (college.equals("")) {
+	    college = null;
+	}
+	// System.out.println(college + "专业专业");
 	List<Map<String, String>> list = statisticDataservice.getMajor(
 		semester, college);
 	for (int i = 0; i < list.size(); i++) {
@@ -357,18 +362,23 @@ public class StatisticDataController implements ServletContextAware {
 	}
 	return null;
     }
- // 得到专业(第二个刷选)
+
+    // 得到专业(第二个刷选)
     @RequestMapping("/statisticgetmajor2.do")
     public String statisticgetmajor2(HttpServletRequest request,
 	    HttpServletResponse response) {
 	// 获取学年学期
-	
-	  String semester = WeekTransformToTime.getThisSemester(application);
-	  System.out.println(semester + "aaaaaaaa"); if (semester=="") {
-	  semester=null; }
-	 
+
+	String semester = WeekTransformToTime.getThisSemester(application);
+	if (semester.equals("")) {
+	    semester = null;
+	}
+
 	String college = request.getParameter("college2");
-	System.out.println(college + "专业专业");
+	if (college.equals("")) {
+	    college = null;
+	}
+	// System.out.println(college + "专业专业");
 	List<Map<String, String>> list = statisticDataservice.getMajor(
 		semester, college);
 	for (int i = 0; i < list.size(); i++) {
