@@ -319,4 +319,28 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	}
 	return flag;
     }
+  //管理员点击同意申请检查基地是否同名字
+    @Override
+    public int checkBaseName(String recorddigit) {
+	int flag = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL  baseweb.check_prabaseinfo(?,?)}");
+	    sp.setString(1, recorddigit);	   
+	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(2);	    
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return flag;
+    }
 }
