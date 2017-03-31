@@ -31,14 +31,16 @@ $(function () {
 		
 	/*########*/
 	 	$(document).on("click", "#Submit", function() {
-			
+	 		
 			var projectname=$("#projectname").val();
 			var name=$("#name").val();
 			var address=$("#address").val();
 			var budget=$("#budget").val();
+			budget=budget.trim();
 			var baselist=$("#baselist").val();
 			var reason=$("#reason").val();
 			var strmoney=/^[0-9]*$/.test(budget);
+			var money=budget.substring(1,0);
 			if(projectname==""){
 				bootbox.alert({
 					message : "请填写项目名称",
@@ -70,6 +72,13 @@ $(function () {
 			else if(strmoney==false){
 				bootbox.alert({
 					message : "预算金额只能为数字",
+					size : 'small'
+					});	
+				return 0;
+				}
+			else if(budget.length>1&&money==0){
+				bootbox.alert({
+					message : "请填写正确的预算金额格式，第一个数字不能为零",
 					size : 'small'
 					});	
 				return 0;
