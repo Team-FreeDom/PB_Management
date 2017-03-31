@@ -415,9 +415,10 @@ $(document).delegate('#certainExport', 'click', function() {
 
 /*土地租赁记录修改---start*/
 $(document).delegate('#definite', 'click', function() {
-	
+	var reg=/^\d+(\.\d+)?$/;
 	var dept=$("#deptLaLa").val();
 	var planCareer=$("#planCareer").val();
+	var money=$("#expense").val();
 	if(dept==""){
 		 bootbox.alert({
 				message : "请选择申报学院",
@@ -432,7 +433,13 @@ $(document).delegate('#definite', 'click', function() {
 			});
 		 return;
 	}
-		
+	if(!money.match(reg)){
+		bootbox.alert({
+			message : "输入的金额只能为整数或小数",
+			size : 'small'
+		});
+	 return;
+	}	
 	$("#landManageUpdate").submit();
 	
 });

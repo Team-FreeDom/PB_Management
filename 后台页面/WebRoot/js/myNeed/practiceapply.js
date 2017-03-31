@@ -699,6 +699,7 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
+	week=week.trim();
 	if(!week.match(reg)){
 		bootbox.alert({
 			message : "第"+y+"条记录的实习周次只能为数字",

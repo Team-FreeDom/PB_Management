@@ -1,5 +1,7 @@
 // JavaScript Document
-var obj=[];			
+var obj=[];
+var flag1=true;
+var flag2=true;
 $(document).ready(function() {
 				//分页表格 
               var applytable =$('#Repairmanage').DataTable(
@@ -289,6 +291,20 @@ $("#save").click(function(){
 			});
 			return;
 		}
+		if(!flag1){
+			bootbox.alert({
+				message : "请上传正确的文件格式",
+				size : 'small'
+			});
+			return;
+		}
+		if(!flag2){
+			bootbox.alert({
+				message : "上传的文件文件太大",
+				size : 'small'
+			});
+			return;
+		}
 		$("#applyaddform").submit();
 					
 })
@@ -343,9 +359,9 @@ $('.file').change(function() {
     var size = file_size / 1024;
     var extStart = filepath.lastIndexOf(".");
     var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-    if (ext != ".RAR" && ext != ".Z") {
+    if (ext != ".RAR" && ext != ".ZIP") {
         bootbox.alert({
-            message: "上传资料仅限于rar压缩包格式ʽ",
+            message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
         flag1=false;
