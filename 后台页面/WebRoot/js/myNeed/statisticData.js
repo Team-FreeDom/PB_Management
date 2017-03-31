@@ -365,7 +365,10 @@ $(document).on("change","#college2",function(){
 
 			});
 });
-	
+//导出功能
+$("#export").click(function(){
+	$("#exportForm").submit();
+});
 /*生成年级开始*/
 var myDate=new Date();
 var dateYear=myDate.getFullYear();
