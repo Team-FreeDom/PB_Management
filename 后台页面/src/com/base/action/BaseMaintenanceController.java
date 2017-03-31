@@ -407,6 +407,7 @@ public class BaseMaintenanceController {
     		String phone = request.getParameter("phone");// 联系人电话  	
     		String starttime = request.getParameter("start_time");// 创建时间
     		String endtime = request.getParameter("end_time");//截止时间
+    		System.out.println(starttime+"   ,   "+endtime);
     		String lawPerson = request.getParameter("personDuty");
     		// 申请材料保存地址
     		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
@@ -461,7 +462,7 @@ public class BaseMaintenanceController {
     			+ landarea + "," + constructionarea + "," + undertake
     			+ "," + applyid + ",'" + land_address + "','"
     			+ username + "','" + phone + "','" + filename + "','"
-    			+ userid +"','"+starttime + "',"+endtime+",'"+lawPerson+"')";
+    			+ userid +"','"+starttime + "','"+endtime+"','"+lawPerson+"')";
     		
 
     		/*------参数1-----------*/
@@ -477,13 +478,12 @@ public class BaseMaintenanceController {
     		    sb.deleteCharAt(sb.length() - 1);
     		    str1 = sb.toString();
     		} else {
-    		    for (String string : majorid) {
-    			System.out.println(string);
-    			sb.append("(");
+    		    for (String string : majorid) {    		
+    			sb.append("('");
     			sb.append(Baseid);
-    			sb.append(",");
+    			sb.append("','");
     			sb.append(string);
-    			sb.append("),");
+    			sb.append("'),");
     		    }
     		    sb.deleteCharAt(sb.length() - 1);
     		    str1 = sb.toString();

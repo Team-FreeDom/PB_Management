@@ -266,6 +266,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 					.prepareCall("{call baseweb.add_base(?,?)}");
 			sp.setString(1, str1);
 			sp.setString(2, str2);
+			System.out.println("str1:"+str1+";  str2:"+str2);
 			sp.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
