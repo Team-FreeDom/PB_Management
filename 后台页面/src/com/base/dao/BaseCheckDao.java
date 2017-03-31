@@ -68,6 +68,13 @@ public interface BaseCheckDao {
 	 返回值：    无返回值
 	 函数功能：拒绝续期申请，申请记录的状态值变为到期已失效状态17
 	 */
-    public int refuseDateApply(String recorddigit,String recordstr);    
+    public int refuseDateApply(String recorddigit,String recordstr);
+
+    /**
+     * 当管理员点击同意时检查基地表里是否有相同的基地名字
+     * @param recorddigit 包装的记录id
+     * @return flag0不存在1存在
+     */
+    public int checkBaseName(String recorddigit);    
     
 }

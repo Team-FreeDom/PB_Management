@@ -240,11 +240,11 @@ public class BaseCheckController {
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");	
+	String recordstr = request.getParameter("recordstr");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	// 获取基地打包id
-	String recorddigit = request.getParameter("recorddigit");	
+	String recorddigit = request.getParameter("recorddigit");
 	// 获取拒绝理由
 	// String reason=request.getParameter("reason");
 	int flag = basecheckservice
@@ -264,7 +264,7 @@ public class BaseCheckController {
     public String refuseAddApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");	
+	String recordstr = request.getParameter("recordstr");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	System.out.println("controller->infostr:" + infostr);
@@ -286,23 +286,40 @@ public class BaseCheckController {
     @RequestMapping("/BasereAgreeApply.do")
     public String agreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	// 封装的记录id和申请年限
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "songspng");
-	// 获取前台json消息数据
-	String infostr = request.getParameter("infostr");
-	System.out.println(infostr + "panpan");
-	// 获取单选id
-	String recorddigit = request.getParameter("recorddigit");
-	System.out.println(recorddigit + "lilili");
-	int flag = basecheckservice.agreeApply(recorddigit, infostr, recordstr);
-	response.setContentType("text/html;charset=UTF-8");
-	try {
-	    response.getWriter().print(flag);
-	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	int index = Integer.parseInt(request.getParameter("index"));
+	System.out.println(index + "李彩缺根弦");
+	if (index == 0) {
+	    // 封装的记录id和申请年限
+	    String recordstr = request.getParameter("recordstr");
+	    System.out.println(recordstr + "songspng");
+	    // 获取前台json消息数据
+	    String infostr = request.getParameter("infostr");
+	    System.out.println(infostr + "panpan");
+	    // 获取单选id
+	    String recorddigit = request.getParameter("recorddigit");
+	    System.out.println(recorddigit + "lilili");
+	    int flag = basecheckservice.agreeApply(recorddigit, infostr,
+		    recordstr);
+	    response.setContentType("text/html;charset=UTF-8");
+	    try {
+		response.getWriter().print(flag);
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	} else {
+	    // 获取单选id
+	    String recorddigit = request.getParameter("recorddigit");
+	    int flag = basecheckservice.checkBaseName(recorddigit);	 
+	    response.setContentType("text/html;charset=UTF-8");
+	    try {
+		response.getWriter().print(flag);
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
 	}
+
 	return null;
     }
 
