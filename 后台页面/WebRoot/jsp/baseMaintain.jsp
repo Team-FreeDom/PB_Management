@@ -728,20 +728,20 @@
 								<label class="col-md-3 control-label">创建日期</label>
 								<div class="col-md-6">
 									<input type="text" id="validdastart" name="start_time"
-										class="start_time laydate-icon" placeholder="" name="validda">
+										class="start_time laydate-icon" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label">截止日期</label>
 								<div class="col-md-6">
 									<input type="text" id="validdaend" name="end_time"
-										class="end_time laydate-icon" placeholder="" name="validda">
+										class="end_time laydate-icon" placeholder="">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<div class="col-sm-offset-8 col-sm-4">
-									<button id="submitForm" type="button" class="btn btn-primary">确定</button>
+									<button id="submitForm_0" type="button" class="btn btn-primary">确定</button>
 								</div>
 							</div>
 
