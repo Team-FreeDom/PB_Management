@@ -7,7 +7,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -67,7 +68,7 @@
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a> </li>
+					</a></li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon" data-toggle="modal">
 							<i class="icon-remove"></i>
@@ -87,8 +88,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="index.do" ><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -117,50 +117,69 @@
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>									
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
-										<li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent" ${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
-										<a>
-											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
-										</a>
-										<ul class="nav nav-children">
-                                            <li ${visitRight[0]==0?"style='display:none;'":" "}><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                           
-                                            <li ${visitRight[2]==0?"style='display:none;'":" "}><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                            <li ${visitRight[1]==0?"style='display:none;'":" "}><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
-                                            
-										</ul>
-									</li>
+								<li class="menuItem nav-parent"
+									${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+								</a>
+									<ul class="nav nav-children">
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a
+											href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 
-										<li class="menuItem nav-parent opened nav-expanded" ${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
-										<a>
-											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
-										</a>
-										<ul class="nav nav-children">
-                                        	<li ${visitRight[3]==0?"style='display:none;'":" "}><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li ${visitRight[4]==0?"style='display:none;'":" "}><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li ${visitRight[6]==0?"style='display:none;'":" "}><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li ${visitRight[5]==0?"style='display:none;'":" "}><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li ${visitRight[11]==0?"style='display:none;'":" "}><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li ${visitRight[7]==0?"style='display:none;'":" "}><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                            <li ${visitRight[10]==0?"style='display:none;'":" "}><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li ${visitRight[8]==0?"style='display:none;'":" "}><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li ${visitRight[9]==0?"style='display:none;'":" "}><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul>
-									</li>
-								<li class="menuItem nav-parent" ${visitRight[12]==0?"style='display:none;'":" "}><a> <i
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a
+											href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a
+											href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+
+									</ul>
+								</li>
+
+								<li class="menuItem nav-parent opened nav-expanded"
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+								</a>
+									<ul class="nav nav-children">
+										<li ${visitRight[3]==0?"style='display:none;'":" "}><a
+											href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+										<li ${visitRight[4]==0?"style='display:none;'":" "}><a
+											href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+										<li ${visitRight[6]==0?"style='display:none;'":" "}><a
+											href="fieldRent_maintain.jsp"><span class="text">
+													土地租赁维护</span></a></li>
+										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
+											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
+											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
+											href="practicePlanMaintain.jsp"><span class="text">
+													实习计划维护</span></a></li>
+										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
+										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
+											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
+											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li ${visitRight[12]==0?"style='display:none;'":" "}><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
-									</ul></li>
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
 
+									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -186,14 +205,7 @@
 							<li><a href="land_modle.jsp"><i class=" icon-home"></i>土地布局设置</a></li>
 						</ol>
 					</div>
-					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
-						</ol>
-					</div>
+
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row">
@@ -222,22 +234,22 @@
 						</div>
 
 					</div>
-					<div class="col-md-4">
-
-					</div>
+					<div class="col-md-4"></div>
 				</div>
 				<!-- 土地布局 -->
 				<div class="row">
 					<div class="col-md-4">
-					<div class="btn-group" style="padding:0px 0px 5px 20px;">
-						<a  class="btn btn-default" id="girdin"><span class="glyphicon glyphicon-zoom-in"></span></a>
-						<a  class="btn btn-default" id="girdout"><span class="glyphicon glyphicon-zoom-out"></span></a>
+						<div class="btn-group" style="padding:0px 0px 5px 20px;">
+							<a class="btn btn-default" id="girdin"><span
+								class="glyphicon glyphicon-zoom-in"></span></a> <a
+								class="btn btn-default" id="girdout"><span
+								class="glyphicon glyphicon-zoom-out"></span></a>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<p class="lead text-center bg-primary">土地信息设置区</p>
-				</div>
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<p class="lead text-center bg-primary">土地信息设置区</p>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8" style="max-width:1500px;overflow-x:scroll;">
@@ -270,7 +282,7 @@
 										<select class="form-control input-sm" id="tudi_aptCollege"
 											name="tudi_aptCollage">
 											<option value="" id="tudi_scollegeh">请选择</option>
-											<option value="0" >生物科学技术学院</option>
+											<option value="0">生物科学技术学院</option>
 											<option value="1">资源环境学院</option>
 											<option value="2">动物科学技术学院</option>
 											<option value="3">农学院</option>
@@ -312,21 +324,26 @@
 								</div>
 
 								<div class="form-group">
-								   <div class="col-sm-9">
-									 <label for="inputname" class="control-label" style="float:left;">土地效果图：</label>
-									 <label style="float:right;" for="file" ><a href="#" id='upimg' style="color:#5cb85c;text-decoration:underline;">上传图片</a>	</label>
-								  </div>
-								</div>
-								<div class="form-group">
-								   <div class="col-sm-9">
-									 <input hidden="hidden" type="file" name="imgfile" id="imgfile" style="position:absolute;clip:rect(0 0 0 0);" >
+									<div class="col-sm-9">
+										<label for="inputname" class="control-label"
+											style="float:left;">土地效果图：</label> <label
+											style="float:right;" for="file"><a href="#"
+											id='upimg' style="color:#5cb85c;text-decoration:underline;">上传图片</a>
+										</label>
 									</div>
 								</div>
 								<div class="form-group">
-									 <div class="col-sm-9" id="preview" data-toggle="modal" data-target="#myModal">
-									    <a href="#" >
-										 <img id="imghead" class="bk-img-60 specialOne"  border=0 src="" alt=" ">
-										 </a>
+									<div class="col-sm-9">
+										<input hidden="hidden" type="file" name="imgfile" id="imgfile"
+											style="position:absolute;clip:rect(0 0 0 0);">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-9" id="preview" data-toggle="modal"
+										data-target="#myModal">
+										<a href="#"> <img id="imghead"
+											class="bk-img-60 specialOne" border=0 src="" alt=" ">
+										</a>
 									</div>
 								</div>
 								<div class="form-group">
@@ -349,25 +366,28 @@
 	<!--row end-->
 	</div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog"  style="width:750px;height:700px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">土地效果图</h4>
-      </div>
-      <div class="modal-body">
-       <center>
-        <img src="" id="belowImg" class="special"/>
-       </center>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width:750px;height:700px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">土地效果图</h4>
+				</div>
+				<div class="modal-body">
+					<center>
+						<img src="" id="belowImg" class="special" />
+					</center>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="clearfix"></div>
 
