@@ -1,33 +1,36 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-    <meta charset="UTF-8">
-    <title>报修申请</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=9">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+<meta charset="UTF-8">
+<title>报修申请</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="renderer" content="webkit">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/Repairpply.css">
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/Repairpply.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
+</head>
+<body>
 	<div class="navbar" role="navigation">
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
@@ -45,12 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs">
-					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
-                              <!--ms-if-->
-                      </a>
-						<!-- <ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
+						class="dropdown-toggle notification-icon"> <i
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a> <!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>
@@ -79,8 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="index.do" ><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -89,8 +89,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
-											id="imageMain" src=""></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -105,54 +105,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>										
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
+										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
-										<li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent" ${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
-										<a>
-											<i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
-										</a>
-										<ul class="nav nav-children">
-                                            <li ${visitRight[0]==0?"style='display:none;'":" "}><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                           
-                                            <li ${visitRight[2]==0?"style='display:none;'":" "}><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                            <li ${visitRight[1]==0?"style='display:none;'":" "}><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
-                                            
-										</ul>
-									</li>
+								<li class="menuItem nav-parent"
+									${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+								</a>
+									<ul class="nav nav-children">
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a
+											href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 
-										<li class="menuItem nav-parent" ${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
-										<a>
-											<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
-										</a>
-										<ul class="nav nav-children">
-                                        	<li ${visitRight[3]==0?"style='display:none;'":" "}><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li ${visitRight[4]==0?"style='display:none;'":" "}><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li ${visitRight[6]==0?"style='display:none;'":" "}><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li ${visitRight[5]==0?"style='display:none;'":" "}><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li ${visitRight[11]==0?"style='display:none;'":" "}><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li ${visitRight[7]==0?"style='display:none;'":" "}><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                            <li ${visitRight[10]==0?"style='display:none;'":" "}><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li ${visitRight[8]==0?"style='display:none;'":" "}><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li ${visitRight[9]==0?"style='display:none;'":" "}><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul>
-									</li>
-								<li class="menuItem nav-parent" ${visitRight[12]==0?"style='display:none;'":" "}><a> <i
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a
+											href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a
+											href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+
+									</ul>
+								</li>
+
+								<li class="menuItem nav-parent"
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+								</a>
+									<ul class="nav nav-children">
+										<li ${visitRight[3]==0?"style='display:none;'":" "}><a
+											href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+										<li ${visitRight[4]==0?"style='display:none;'":" "}><a
+											href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+										<li ${visitRight[6]==0?"style='display:none;'":" "}><a
+											href="fieldRent_maintain.jsp"><span class="text">
+													土地租赁维护</span></a></li>
+										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
+											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
+											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
+											href="practicePlanMaintain.jsp"><span class="text">
+													实习计划维护</span></a></li>
+										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
+										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
+											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
+											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li ${visitRight[12]==0?"style='display:none;'":" "}><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
-									</ul></li>
 
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+
+									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -167,139 +187,145 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- End Sidebar Footer-->
 			</div>
 			<!-- End Sidebar-->
-		        
-                
+
+
 			<div class="main " style="min-height: 584px;">
-					<!-- 当前地址导航 -->
-					<div class="page-header">
-						<div class="pull-left">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">
-                            	<li><a>位置</a></li>
-								<li><a href="Repairpply.jsp"><i class=" icon-home"></i>报修申请</a></li>
-							</ol>
-						</div>
-						<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
-							</ol>
-						</div>
+				<!-- 当前地址导航 -->
+				<div class="page-header">
+					<div class="pull-left">
+						<ol class="breadcrumb visible-sm visible-md visible-lg">
+							<li><a>位置</a></li>
+							<li><a href="Repairpply.jsp"><i class=" icon-home"></i>报修申请</a></li>
+						</ol>
 					</div>
-					<!-- 主面板内容 -->
-					<div class="row form">
 
-						<div class="col-lg-12">
+				</div>
+				<!-- 主面板内容 -->
+				<div class="row form">
 
-							<div class=" col-md-offset-2 col-md-8 bordor-style">
-								<div class="row text-center interval padding-style">
-                                	<p>报修申请表</p>
-                                </div>
-                                <div class="row padding-style">
-                                
-                                	<form action="insertmaintain.do" method="post" class="form-horizontal" enctype="multipart/form-data" role="form" id="applyform">
-                                    
-                                      <div class="form-group">
-                                       <input type="hidden" value="<%=request.getAttribute("index")%>" id="repair"/>
-                                        <label for="inputEmail3" class="col-sm-2 control-label">项目名称<span class="setTag">*</span></label>
-                                        <div class="col-sm-8">
-                                          <input class="form-control" id="projectname" name="projectname" placeholder="">
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                      	<label for="inputPassword3" class="col-sm-2 control-label">报修人<span class="setTag">*</span></label>
-                                        <div class="col-sm-5">
-                                          <input class="form-control" id="name" name="name" value="">
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">具体位置<span class="setTag">*</span></label>
-                                        <div class="col-sm-8">
-                                         <input class="form-control" id="address" name="address" placeholder="">
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">预算金额<span class="setTag">*</span></label>
-                                        <div class="col-sm-5">
-                                          <input class="form-control" id="budget" name="budget" placeholder="">
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">基地列表<span class="setTag">*</span></label>
-                                        <div class="col-sm-5">
-                                          <select class="form-control" id="baselist" name="baselist">
-                                          	<option id="baselistid">请选择</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">原因说明<span class="setTag">*</span></label>
-                                        <div class="col-sm-8">
-                                          <textarea class="form-control" rows="3" id="reason" name="reason"></textarea>
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        
-                                        <label for="inputPassword3" class="col-sm-2 control-label">申请材料</label>
-                                        <div class="col-sm-8">
-                                          <input type="file"  id="applyfile" name="applyfile" placeholder="">
-                                        </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <div class="col-sm-offset-8 col-sm-4">
-                                          <button type="button" class="btn btn-primary" id="Submit">提交</button>
-                                        </div>
-                                      </div>
-                                      
-                                     
-                                    </form>
-                                    
-                                </div>
-                                
+					<div class="col-lg-12">
+
+						<div class=" col-md-offset-2 col-md-8 bordor-style">
+							<div class="row text-center interval padding-style">
+								<p>报修申请表</p>
 							</div>
-							
+							<div class="row padding-style">
+
+								<form action="insertmaintain.do" method="post"
+									class="form-horizontal" enctype="multipart/form-data"
+									role="form" id="applyform">
+
+									<div class="form-group">
+										<input type="hidden"
+											value="<%=request.getAttribute("index")%>" id="repair" /> <label
+											for="inputEmail3" class="col-sm-2 control-label">项目名称<span
+											class="setTag">*</span></label>
+										<div class="col-sm-8">
+											<input class="form-control" id="projectname"
+												name="projectname" placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-2 control-label">报修人<span
+											class="setTag">*</span></label>
+										<div class="col-sm-5">
+											<input class="form-control" id="name" name="name" value="">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-2 control-label">具体位置<span
+											class="setTag">*</span></label>
+										<div class="col-sm-8">
+											<input class="form-control" id="address" name="address"
+												placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-2 control-label">预算金额<span
+											class="setTag">*</span></label>
+										<div class="col-sm-5">
+											<input class="form-control" id="budget" name="budget"
+												placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-2 control-label">基地列表<span
+											class="setTag">*</span></label>
+										<div class="col-sm-5">
+											<select class="form-control" id="baselist" name="baselist">
+												<option id="baselistid">请选择</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="inputPassword3" class="col-sm-2 control-label">原因说明<span
+											class="setTag">*</span></label>
+										<div class="col-sm-8">
+											<textarea class="form-control" rows="3" id="reason"
+												name="reason"></textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+
+										<label for="inputPassword3" class="col-sm-2 control-label">申请材料</label>
+										<div class="col-sm-8">
+											<input type="file" id="applyfile" name="applyfile"
+												placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-offset-8 col-sm-4">
+											<button type="button" class="btn btn-primary" id="Submit">提交</button>
+										</div>
+									</div>
+
+
+								</form>
+
+							</div>
+
 						</div>
 
-						
-
 					</div>
-				</div><!-- End Sidebar-->                 
-                
-                    
-            
-        </div><!--row end-->
-    </div>
+
+
+
+				</div>
+			</div>
+			<!-- End Sidebar-->
+
+
+
+		</div>
+		<!--row end-->
+	</div>
 	<div class="clearfix"></div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../js/jquery.min.js"></script>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="../js/jquery.min.js"></script>
 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../dist/jquery.cokie.min.js"></script>
-    <script src="../js/bootbox.min.js"></script>
-    <script src="../js/myNeed/Repairpply.js"></script>
-    <script src="../js/kg.js"></script>
-    <script type="text/javascript">
-    var index = document.getElementById('repair').value;
-	if(index==1){
-		bootbox.alert({
-	        message: "提交成功",
-	        size: 'small'
-	    });
-	}
-    
-    
-    
-    </script>
-    
-  </body>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../dist/jquery.cokie.min.js"></script>
+	<script src="../js/bootbox.min.js"></script>
+	<script src="../js/myNeed/Repairpply.js"></script>
+	<script src="../js/kg.js"></script>
+	<script type="text/javascript">
+		var index = document.getElementById('repair').value;
+		if (index == 1) {
+			bootbox.alert({
+				message : "提交成功",
+				size : 'small'
+			});
+		}
+	</script>
+
+</body>
 </html>

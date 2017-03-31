@@ -231,7 +231,7 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 更改状态(参数1：拒绝的申请记录id;参数2：发送消息)
     @Override
-    public int updateStatus(String recordStr, int status) {
+    public int updateStatus(String recordStr, int status1,int status2) {
 
     	int tag = 0;
     	Connection conn = null;
@@ -243,13 +243,14 @@ public class CheckViewDaoImpl implements CheckViewDao{
     	    conn = (Connection) SessionFactoryUtils.getDataSource(
     		    sessionFactory).getConnection();
     	    sp = (CallableStatement) conn
-    		    .prepareCall("{CALL baseweb.`state_trans`(?,?,?)}");
+    		    .prepareCall("{CALL baseweb.`state_trans`(?,?,?,?)}");
     	    sp.setString(1, recordStr);
-    	    sp.setInt(2, status);
-    	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+    	    sp.setInt(2, status1);
+    	    sp.setInt(3, status2);
+    	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
     	    sp.execute();
 
-    	    tag = sp.getInt(3);
+    	    tag = sp.getInt(4);
 
     	} catch (SQLException e) {
     	    // TODO Auto-generated catch block

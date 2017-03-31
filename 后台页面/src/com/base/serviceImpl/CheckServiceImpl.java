@@ -59,7 +59,7 @@ public class CheckServiceImpl<E> implements checkService {
 	String insertStr = MessageUtils.getInsertStr(infoStr, 3);	
 
 	// 将特定编号的土地记录状态改为同类竞争
-	int flag=checkViewDaoImpl.updateStatus(recordStr, 5);
+	int flag=checkViewDaoImpl.updateStatus(recordStr,2,5);
     if(flag==1){
     	// 向消息表中插入信息
     	checkViewDaoImpl.insertMessage(insertStr);
@@ -91,7 +91,7 @@ public class CheckServiceImpl<E> implements checkService {
 	String insertStr = MessageUtils.getInsertStr(infostr, 5);
 
 	// 把特定记录的状态改为未交费
-	int flag=checkViewDaoImpl.updateStatus(recordstr, 10);
+	int flag=checkViewDaoImpl.updateStatus(recordstr, 1,10);
 	
     if(flag==1){
     	// 把相同土地的状态为锁定的土地状态变为审核中
