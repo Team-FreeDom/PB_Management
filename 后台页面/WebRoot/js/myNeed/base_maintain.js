@@ -289,12 +289,7 @@ $(document)
 						$("#fileResource").val("");
 					});
 					
-					$(document).on("click", "#ZJ", function() {	
-						var now= new Date();
-						var date1 = now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
-						 var date2= (now.getFullYear()+1)+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate();
-						 $(".start_time").val(date1);
-						 $(".end_time").val(date2);
+					$(document).on("click", "#ZJ", function() {							
 						$("#add").css("display","block");
 					});
 					
@@ -434,6 +429,41 @@ $(document)
 					
 					//确认修改
 					$("#saverun").click(function() {
+						var setdated=$("#setdated").val();
+						var adddate=$("#adddate").val();
+						if(adddate==""){
+							bootbox.alert({
+								message : "请填写截止日期",
+								size : 'small'
+							});
+							return;
+						}
+						var start=setdated.split("-");
+						var end=adddate.split("-");
+						var time=0;
+						if((end[0]-start[0])<0){
+							time++;
+						}else{
+							if(end[0]===start[0]){
+								if((end[1]-start[1])<0){
+									time++;
+								}else{
+									if(end[1]===start[1]){
+									   if((end[2]-start[2]<0)){
+										   time++;
+									   }
+									   }
+								}
+							}
+						}
+						if(time!==0){
+							bootbox.alert({
+								message : "截止日期超过创建日期,请更改",
+								size : 'small'
+							});
+							return;
+						}
+						
 						var baseid=$("#baseid").val();
 						baseid=baseid.substring(1);
 						var i=0;
@@ -441,7 +471,7 @@ $(document)
 							i++;
 						});						
 						var star=i;
-						var adddate=$("#adddate").val();
+						
 						
 						$.ajax({
 							data : {
@@ -460,7 +490,10 @@ $(document)
 								page.draw(false);
 							},
 							error : function(data) {
-								alert("请求异常");
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
 							}
 						});
 						
@@ -486,6 +519,130 @@ $(document)
 					
 					$(document).on("click", "#cleark", function() {	
 						$("#adddate").val("");
+					});
+					
+					//增加框的js控制
+					$(document).on("click", "#submitForm_0", function() {
+						var basename=$("#basename").val();
+						var deptty=$("#deptty").val();
+						var basetype=$("#basetype0").val();
+						var baseaddress=$("#baseaddress").val();
+						var personName=$("#personName").val();
+						var personTel=$("#personTel").val();
+						var lawperson=$("#lawPerson").val();
+						var validdastart=$("#validdastart").val();
+						var validdaend=$("#validdaend").val();
+						if(!tag){		
+							 bootbox.alert({
+									message : "该基地名称已存在，请重新输入",
+									size : 'small'
+								});
+							 return;
+						}	
+						if(basename==""){
+							 bootbox.alert({
+									message : "请填写基地名称",
+									size : 'small'
+								});
+							 return;
+						}
+						if(deptty==""){
+							 bootbox.alert({
+									message : "请选择申报部门",
+									size : 'small'
+								});
+							 return;
+						}
+						if(basetype==""){
+							 bootbox.alert({
+									message : "请选择基地类型",
+									size : 'small'
+								});
+							 return;
+						}
+						if(baseaddress==""){
+							bootbox.alert({
+								message : "请填写通信地址",
+								size : 'small'
+							});
+						 return;		
+						}
+						if(lawperson==""){
+							bootbox.alert({
+								message : "请填写法定责任人",
+								size : 'small'
+							});
+						 return;	
+						}
+						if(personName==""){
+							bootbox.alert({
+								message : "请填写联系人姓名",
+								size : 'small'
+							});
+						 return;	
+						}
+						if(personTel==""){
+							bootbox.alert({
+								message : "请填写联系人电话",
+								size : 'small'
+							});
+						 return;	
+						}
+						
+						if(!flag1){
+							 bootbox.alert({
+						            message: "上传资料仅限于rar,zip压缩包格式",
+						            size: 'small'
+						        });
+							 return;
+						}
+						if(!flag2){
+							bootbox.alert({
+					            message: "上传资料大小不能大于10M",
+					            size: 'small'
+					        });
+							return;
+						}
+						if(validdastart==""){
+							 bootbox.alert({
+									message : "请填写创建日期",
+									size : 'small'
+								});
+							 return;
+						}
+						if(validdaend==""){
+							 bootbox.alert({
+									message : "请填写截止日期",
+									size : 'small'
+								});
+							 return;
+						}
+						var start=validdastart.split("-");
+						var end=validdaend.split("-");
+						var time=0;
+						if((end[0]-start[0])<0){
+							time++;
+						}else{
+							if(end[0]===start[0]){
+								if((end[1]-start[1])<0){
+									time++;
+								}else{
+									if(end[1]===start[1]){
+									   if((end[2]-start[2]<0)){
+										   time++;
+									   }
+									   }
+								}
+							}
+						}
+						if(time!==0){
+							bootbox.alert({
+								message : "截止日期超过创建日期,请更改",
+								size : 'small'
+							});
+							return;
+						}
+						$("#myForm").submit();
 					});
 
 					$("#finishshai").click(function() {
