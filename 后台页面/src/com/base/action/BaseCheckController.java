@@ -240,13 +240,11 @@ public class BaseCheckController {
     public String refuseApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "看看是什么");
+	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	// 获取基地打包id
-	String recorddigit = request.getParameter("recorddigit");
-	System.out.println(recorddigit + "计算机计算机");
+	String recorddigit = request.getParameter("recorddigit");	
 	// 获取拒绝理由
 	// String reason=request.getParameter("reason");
 	int flag = basecheckservice
@@ -266,8 +264,7 @@ public class BaseCheckController {
     public String refuseAddApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	// 包装单选框的id信息
-	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr + "lililili");
+	String recordstr = request.getParameter("recordstr");	
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	System.out.println("controller->infostr:" + infostr);

@@ -238,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
                                   </div>
                                   
-                                  <div class="modal-body table-responsive">
+                                  <div class="modal-body table-responsive" id="modalbody">
                                   	<form class="form-horizontal" role="form" id="PraForm">
                                         
                                           <table class="table" id="showtable">
@@ -357,6 +357,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				
+<div class="modal fade" id="time" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">请选择开始和结束时间</h4>
+      </div>
+      <div class="modal-body">
+       <form class="form-horizontal">
+		  <div class="form-group">
+			<label for="Stime" class="col-md-offset-2 col-md-2 control-label">开始时间</label>
+			<div class="col-md-6">
+			  <input type="text" class="form-control laydate-icon" id="Stime">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="Etime" class="col-md-offset-2 col-md-2 control-label">结束时间</label>
+			<div class="col-md-6">
+			  <input type="text" class="form-control laydate-icon" id="Etime">
+			</div>
+		  </div>
+
+		</form> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="finishTime">确定</button>
+      </div>
+    </div>
+  </div>
+</div> 
 				
            <div class="modal fade" id="Selectteacher" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
@@ -415,9 +446,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
      <script src="../js/bootbox.min.js"></script>
     <script src="../dist/jquery.cokie.min.js"></script>
-    <script src="../js/Calendar.js"></script> 
+    <script src="../js/laydate.js"></script> 
     <script src="../js/myNeed/practiceapply.js"></script>
     <script src="../js/kg.js"></script>
+    <script>
+		!function(){
+			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库
+			laydate({elem: '#Stime'});//绑定元素
+			laydate({elem: '#Etime'});
+         }();
+	 </script>
     
   </body>
 </html>

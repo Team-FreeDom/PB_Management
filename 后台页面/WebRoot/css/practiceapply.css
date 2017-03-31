@@ -17,13 +17,16 @@ table tbody tr td{
 	text-align:center;
 	cursor: pointer;
 }
+#showtable{
+	margin-bottom:3px !important;
+}
 #showtable tr td{
 	border: none;
 	text-align:left;
 }
 #Applychart{
 	position:fixed !important;
-	top:187px;
+	top:112px;
 	left:19%;
 	width: 80%;
 	display: none;
@@ -150,4 +153,21 @@ table tbody tr td{
     font-family: '微软雅黑' !important;
     font-size: 14px !important;
 }
+.laydate_yms {
+	width:123px !important;
+}
+
+#Stime{
+	height:35px;
+}
+#Etime{
+	height:35px;
+}	
+
+
+	.modalbody{
+	height:412px;
+	overflow-y:auto;
+	}
+
 

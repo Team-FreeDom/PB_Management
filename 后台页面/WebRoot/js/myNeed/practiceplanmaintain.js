@@ -1524,8 +1524,8 @@ $(document)
 					 +'<tr>'
 					 +'<td rowspan="3"><sapn class="mark"></span></td>'
 					 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
-					 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
-					 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
+					 +'<td><input id="startweek" type="text" readonly="readonly" class="flag startweek"></td>'
+					 +'<td><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 					 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
 					 +'<td><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
 					 +'<td id="practicePlace"><select id="schoolBase" class="flag" style="width:150px;display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
@@ -1555,6 +1555,7 @@ $(document)
 					    return;
 				       }
 				Oneindex= $(this).parent('tr').find("input").attr("id");
+				$("#modalbody").removeClass("modalbody");
 				$("#division").val(obj[Oneindex].college);
 				$("#classname").val(obj[Oneindex].coursename);
 				$("#major").val(obj[Oneindex].major_oriented);
@@ -1563,7 +1564,9 @@ $(document)
 				$("#number").val(obj[Oneindex].count);
 				$("#weeks").val(obj[Oneindex].weekClassify);
 				$("#leaderTeacher").val(obj[Oneindex].tname);
-				
+				if(screen.width<=1366){
+					$("#modalbody").addClass("modalbody");
+				}
 				$.ajax({
 					url:'getplandata.do',
 					type:"POST",
@@ -2380,6 +2383,68 @@ $(document)
 						starToweek="";
 						endToweek="";
 					});
+					
+					//选择开始和结束时间
+					var timeArray=0;
+					$(document).on("focus","#startweek",function(){
+						timeArray=$(this).closest("tbody").find(".mark").html()-1;
+						var o=0,p=0;
+						$(".startweek").each(function(){
+							if(o===timeArray){
+								$("#Stime").val($(this).val());
+								return false;
+							}
+							o++;
+						});
+						$(".endweek").each(function(){
+							if(p===timeArray){
+								$("#Etime").val($(this).val());
+								return false;
+							}
+							p++;
+						});
+						
+						$("#time").modal('show');
+					});
+					$(document).on("focus","#endweek",function(){
+						timeArray=$(this).closest("tbody").find(".mark").html()-1;
+						var o=0,p=0;
+						$(".startweek").each(function(){
+							if(o===timeArray){
+								$("#Stime").val($(this).val());
+								return false;
+							}
+							o++;
+						});
+						$(".endweek").each(function(){
+							if(p===timeArray){
+								$("#Etime").val($(this).val());
+								return false;
+							}
+							p++;
+						});
+						$("#time").modal('show');
+					});
+						
+					$(document).on("click","#finishTime",function(){
+						var o=0,p=0;
+						$(".startweek").each(function(){
+							if(o===timeArray){
+								$(this).val($("#Stime").val());
+								return false;
+							}
+							o++;
+						});
+						$(".endweek").each(function(){
+							if(p===timeArray){
+								$(this).val($("#Etime").val());
+								return false;
+							}
+							p++;
+						});
+						$("#time").modal('hide');
+					});	
+
 					
 
 				});

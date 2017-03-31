@@ -16,13 +16,16 @@ table tbody tr td{
 	text-align:center;
 	cursor: pointer;
 }
+#showtable{
+	margin-bottom:3px !important;
+}
 #showtable tr td{
 	border: none;
 	text-align:left;
 }
 #Applychart{
 	position:fixed !important;
-	top:187px;
+	top:112px;
 	left:19%;
 	width: 80%;
 	display: none;	
@@ -125,6 +128,19 @@ table tbody tr td{
 		background-color: #F7F7F7;
 	}
 
+.laydate_yms {
+	width:123px !important;
+}
 
+	.modalbody{
+	height:412px;
+	overflow-y:auto;
+	}
+	#Stime{
+	height:35px;
+}
+#Etime{
+	height:35px;
+}
 
 
