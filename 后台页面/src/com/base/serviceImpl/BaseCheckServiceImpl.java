@@ -160,5 +160,11 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	}
 	return flag;
     }
+   //管理员点击同意申请检查基地是否同名字
+    @Override
+    public int checkBaseName(String recorddigit) {
+	int flag=basecheckdao.checkBaseName(recorddigit);
+	return flag;
+    }
 
 }
