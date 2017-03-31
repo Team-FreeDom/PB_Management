@@ -445,17 +445,17 @@ $(document).ready(function() {
 										message : "同意失败请刷新页面",
 										size : 'small'
 									});
-									$("#applyConfirm").modal('hide');
+									
 								}else{
 									bootbox.alert({
 										message : "同意申请成功",
 										size : 'small'
 									});
+									getDept();
+									Spage.draw(false);
+								}
 								$("#valideDate").val("10");
 								$("#applyConfirm").modal('hide');
-								getDept();
-								Spage.draw(false);
-								}
 								
 								}
 							
@@ -509,18 +509,17 @@ $('#certain').click(function() {
 							message : "拒绝申请失败请刷新页面",
 							size : 'small'
 						});
-						$("#reason").val("");
-					$("#reasonConfirm").modal('hide');
+						
 					}else{
 						bootbox.alert({
 							message : "拒绝申请成功",
 							size : 'small'
-						});
+						});		
+						getDept();
+						Spage.draw(false);
+					}											
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
-					getDept();
-					Spage.draw(false);
-					}					
 					}
 				
 			});
@@ -986,7 +985,12 @@ $("#submitS").click(function() {
 	$('.hide_ul').toggle(100);
 	
 	});
-
+$("#Baseapply").click(function() {
+	Spage.draw(true);
+});
+$("#Renewal").click(function() {
+	Spage2.draw(true);
+});
 $("#submitS2").click(function() {
 	var dept=$('#deptSh2').children('option:selected').val();	
 	obj2=[];	
@@ -1164,6 +1168,7 @@ $("#submitS2").click(function() {
 	});
 
 });
+
 
 function getDept(){
 	
