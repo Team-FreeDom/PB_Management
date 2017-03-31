@@ -27,11 +27,11 @@ public interface CheckViewDao {
 	 public List<CheckView> detail(int la_id);
 	 
 	 /*
-	   参数说明：recordStr,为土地租赁申请记录编号封装后的字符串,status,为记录所要改成的状态值
+	   参数说明：recordStr,为土地租赁申请记录编号封装后的字符串,status1,为记录所处的状态值,status2,为要变成的状态值
 	   返回值：  无返回值
 	   函数功能：更改特定记录的状态值
 	 */
-	 public int updateStatus(String recordStr, int status);
+	 public int updateStatus(String recordStr, int status1,int status2);
 	 
 	 /*
 	   参数说明：sql,为插入的消息的sql语句

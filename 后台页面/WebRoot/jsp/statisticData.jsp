@@ -75,8 +75,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="index.do" ><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -104,10 +103,13 @@
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
-										<li><a href="practiapply.jsp"><span class="text">实习申请</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
 								<li class="menuItem nav-parent"
@@ -146,22 +148,25 @@
 											href="practicePlanMaintain.jsp"><span class="text">
 													实习计划维护</span></a></li>
 										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
-											href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
 										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
 											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
 										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
 											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
 									</ul>
 								</li>
-								<li class="menuItem nav-parent opened nav-expanded" ${visitRight[12]==0?"style='display:none;'":" "}><a> <i
+								<li class="menuItem nav-parent opened nav-expanded"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li ${visitRight[12]==0?"style='display:none;'":" "}><a href="statisticData.jsp"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
-									</ul></li>
 
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+
+									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -187,14 +192,7 @@
 							<li><a href="statisticData.jsp"><i class=" icon-home"></i>实习分析</a></li>
 						</ol>
 					</div>
-					<div class="pull-right">
-						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-							<li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
-							<li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
-						</ol>
-					</div>
+
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
@@ -228,24 +226,24 @@
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	年 　　级： <select name="" id="gradeClass">
+																	年 级： <select name="" id="gradeClass">
 																		<option value="" id="gradeClassId" selected="selected">全部</option>
 																	</select>
 																</div>
 															</div>
 															<div class="row" style="padding-top: 10px;">
 																<div class="col-md-4">
-																	学　　 院： <select name="" id="college">
+																	学 院： <select name="" id="college">
 																		<option value="" id="collegeID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	专　　 业： <select name="" id="major">
+																	专 业： <select name="" id="major">
 																		<option value="" id="majorID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	班　　 级： <select name="" id="className">
+																	班 级： <select name="" id="className">
 																		<option value="" id="classNameID" selected="selected">全部</option>
 																	</select>
 																</div>
@@ -281,7 +279,7 @@
 									<th>起始周</th>
 									<th hidden>专业编号</th>
 									<th hidden>面向专业</th>
-									<th>考核</th>									
+									<th>考核</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -332,24 +330,24 @@
 																</select>
 															</div>
 															<div class="col-md-4">
-																年　　 级： <select name="" id="gradeClass2">
+																年 级： <select name="" id="gradeClass2">
 																	<option value="" id="gradeClass2Id">全部</option>
 																</select>
 															</div>
 														</div>
 														<div class="row" style="padding-top: 10px;">
 															<div class="col-md-4">
-																学　　 院： <select name="" id="college2">
+																学 院： <select name="" id="college2">
 																	<option value="" id="college2ID">全部</option>
 																</select>
 															</div>
 															<div class="col-md-4">
-																专　　 业： <select name="" id="major2">
+																专 业： <select name="" id="major2">
 																	<option value="" id="major2ID">全部</option>
 																</select>
 															</div>
 															<div class="col-md-4">
-																班　　级： <select name="" id="className2">
+																班 级： <select name="" id="className2">
 																	<option value="" id="className2ID">全部</option>
 																</select>
 															</div>
@@ -358,7 +356,7 @@
 															<div class="col-md-12">
 																<form class="form-inline">
 																	<div class="form-group">
-																		<label for="teacherName">老 　　师：</label> <input
+																		<label for="teacherName">老 师：</label> <input
 																			type="text" class="form-control" id="teacherName"
 																			value="全部">
 																	</div>
@@ -401,10 +399,8 @@
 				</div>
 				<div class="row form" style="padding-left:20%; margin-top:8%">
 
-					<div id="mainEchart"  style="width:700px;height:500px; "class="col-lg-12 form-group text-center">
-
-
-					</div>
+					<div id="mainEchart" style="width:700px;height:500px; "
+						class="col-lg-12 form-group text-center"></div>
 
 				</div>
 			</div>
