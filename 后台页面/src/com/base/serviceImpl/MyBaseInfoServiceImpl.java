@@ -36,12 +36,10 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 		if (order == 0) {
 			columnName = "id";
 		} else if (order == 1) {
-			columnName = "basename";
+			columnName = "type";
 		} else if (order == 2) {
-			columnName = "basetype";
-		} else if (order == 3) {
 			columnName = "dept";
-		} else if (order == 15) {
+		} else if (order == 16) {
 			columnName = "descp";
 		}
 
