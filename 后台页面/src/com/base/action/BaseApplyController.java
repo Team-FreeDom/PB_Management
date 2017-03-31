@@ -255,18 +255,14 @@ public class BaseApplyController {
 	    HttpServletResponse response, ModelMap map) {
 	boolean flag=false;
 	//获得用户输入的基地名称
-	String name=request.getParameter("name");
-	System.out.println(name+"什么名字");
+	String name=request.getParameter("name");	
 	//获得是否存在
-	int a=baseapplyservice.CheckName(name);
-	System.out.println(a+"到底是谁");
-	
+	int a=baseapplyservice.CheckName(name);	
 	if(a==0){
 	    flag=false;
 	}else{
 	    flag=true;
-	}
-	System.out.println(flag+"shenme");
+	}	
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	   // JSONObject json=new JSONObject();	   
