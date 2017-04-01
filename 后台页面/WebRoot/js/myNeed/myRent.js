@@ -469,7 +469,9 @@ $(document).ready(function() {
 											// alert(data[i].status);
 											if (data[i].status == 8) {
 												reason = "同类竞争";
-											} else {
+											} else if(data[i].status == 11) {
+												reason = "用户自己撤销";
+											}else{
 												reason = data[i].descp;
 											}
 											$("#bname").val(data[i].bname);
