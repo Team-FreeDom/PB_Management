@@ -195,6 +195,17 @@
 
 				</div>
 				<!-- 主面板内容 -->
+				
+				<div class="row form">
+
+					<div class="col-lg-12 form-group text-center">
+
+						<h3 style="color: #3071a9">实习申报分析</h3>
+
+					</div>
+
+				</div>
+				
 				<div class="row form">
 
 
@@ -205,13 +216,14 @@
 							width="100%">
 							<thead>
 								<tr bgcolor="#ECF1F5">
-									<td colspan="18">
+									<td><button type="button" class="btn btn-primary" id="export">导出</button></td>
+									<td colspan="17">
 										<ul id="dropdown_show">
 											<li><span class="icon-filter" id="screen">筛选</span>
 												<ul class="hide_ul" style="display:none;">
 													<li
 														style="background:#d6dfe9;padding-left: 50px; padding-top: 10px;">
-														<form>
+														<form id="exportForm">
 															<div class="row">
 																<div class="col-md-4">
 																	基地类型： <select name="" id="baseCategory">
@@ -261,6 +273,7 @@
 												</ul></li>
 										</ul>
 									</td>
+									
 								</tr>
 								<tr>
 									<th>学年学期</th>
@@ -296,7 +309,7 @@
 
 					<div class="col-lg-12 form-group text-center">
 
-						<h3 style="color: #3071a9">基地利用率表</h3>
+						<h3 style="color: #3071a9">实习申报数量统计</h3>
 
 					</div>
 
@@ -376,10 +389,11 @@
 												</ul></li>
 										</ul>
 									</td>
+									
 								</tr>
 								<tr>
 									<th>基地类型</th>
-									<th>基地名字</th>
+									<th>基地数量</th>
 									<th>学院</th>
 									<th>专业</th>
 									<th>老师</th>
