@@ -93,9 +93,12 @@ tbody tr td span{
 	top:150px;
 	left:40%;
 	width:600px;
-	height:600px;
+	
 	display:none;
 	scroll:no;
 	
+}
+.laydate_yms {
+	width:123px !important;
 }
 
