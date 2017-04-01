@@ -585,18 +585,14 @@
 	<div class="clearfix"></div>
 
 	<!--增加基地start  -->
-	<div id="add">
-		<div
-			style="border:#3071a9 8px solid;background:#fff;overflow-x:hidden;">
-			<div>
-
-				<div id="closebas" class="glyphicon glyphicon-remove closeModal"
-					data-dismiss="modal" style="font-size:24px;color:red;"></div>
-
-				<h4 class="text-center" id="myModalLabel">增加基地</h4>
-			</div>
-			<div class="table-responsive">
-				<div class="row" style="margin-right:0px;">
+	<div class="modal-content" id="add" style="border:#3071a9 8px solid;overflow-x:hidden;">
+        <div class="modal-header" style="background:#3071a9; color:#FFF">
+              <div id="closebas" class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+              <h4 class="modal-title text-center" id="myModalLabel">增加基地</h4>
+       </div>
+                                  
+        <div class="modal-body table-responsive" id="modalbody">
+             <div class="row" style="margin-right:0px;">
 					<div class="col-md-12">
 						<form action="increaseBaseInfo.do" method="post" id="myForm"
 							enctype="multipart/form-data" class="form-horizontal" role="form">
@@ -749,10 +745,25 @@
 
 						</form>
 					</div>
-				</div>
+				</div>                     	
+                                  	
+        </div>
+   </div> 
+	<!-- <div id="add">
+		<div
+			style="border:#3071a9 8px solid;background:#fff;">
+			<div>
+
+				<div id="closebas" class="glyphicon glyphicon-remove closeModal"
+					data-dismiss="modal" style="font-size:24px;color:red;"></div>
+
+				<h4 class="text-center" id="myModalLabel">增加基地</h4>
+			</div>
+			<div class="table-responsive">
+				
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!--增加基地end -->
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
