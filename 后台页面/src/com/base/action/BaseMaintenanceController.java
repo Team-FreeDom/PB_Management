@@ -230,8 +230,7 @@ public class BaseMaintenanceController {
     	System.out.println("basetype: "+request.getParameter("basetype"));
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
     	int dept=Integer.valueOf(request.getParameter("applydept"));
-    	int star=Integer.valueOf(request.getParameter("star"));
-    	System.out.println("zhege "+basetype+"  "+dept+"  "+star);
+    	int star=Integer.valueOf(request.getParameter("star"));    	
     	List<ExportBase> list=maintenanceservice.getExportBaseInfo(basetype,dept,star);
     	
     	if (CollectionUtils.isNotEmpty(list)) {         
@@ -320,7 +319,7 @@ public class BaseMaintenanceController {
     				
     				if(CollectionUtils.isNotEmpty(list)){    				
     				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,type,applydp,land_address,"
-    						+ "undertake) values";
+    						+ "undertake,buildtime,endtime) values";
     				String prefix2="INSERT IGNORE INTO baseweb.basemajor(pid,maid) values";
     						
     				
@@ -353,10 +352,10 @@ public class BaseMaintenanceController {
     				}
     				//
     	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),name=values(name),type=values(type),applydp=values(applydp)" +
-    	            		",land_address=values(land_address),undertake=values(undertake)";  
-    	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";     	
-    				System.out.println(sql);
-    				System.out.println(sql2);
+    	            		",land_address=values(land_address),undertake=values(undertake),buildtime=values(buildtime),endtime=values(endtime)";  
+    	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";   			
+    	            System.out.println("sql: "+sql);
+    	            System.out.println("sql2: "+sql2);
     	            adminManageServiceImpl.setAdminFunction(sql);
     				adminManageServiceImpl.setAdminFunction(sql2);
     				}
