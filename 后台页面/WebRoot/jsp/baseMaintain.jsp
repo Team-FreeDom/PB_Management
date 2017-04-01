@@ -554,6 +554,7 @@
 										<td><select class="form-control" id="daostarh"
 											name="star">
 												<option value="-1">全部</option>
+												<option value="0">无</option>
 												<option value="1">一星级</option>
 												<option value="2">二星级</option>
 												<option value="3">三星级</option>
