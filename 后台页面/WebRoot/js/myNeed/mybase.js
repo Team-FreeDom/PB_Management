@@ -34,20 +34,20 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "landarea",
+						"mData" : "resperson",
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					}, 
 					
 					{
-						"mData" : "constructionarea",					
+						"mData" : "username",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					},
 					{
-						"mData" : "undertake",					
+						"mData" : "phone",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
@@ -197,20 +197,20 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "landarea",
+						"mData" : "resperson",
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					}, 
 					
 					{
-						"mData" : "constructionarea",					
+						"mData" : "username",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					},
 					{
-						"mData" : "undertake",					
+						"mData" : "phone",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
@@ -563,20 +563,20 @@ $(document).ready(function() {
 										"sWidth" : "8%",
 
 									}, {
-										"mData" : "landarea",
+										"mData" : "resperson",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
 									}, 
 									
 									{
-										"mData" : "constructionarea",					
+										"mData" : "username",					
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
 									},
 									{
-										"mData" : "undertake",					
+										"mData" : "phone",					
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"

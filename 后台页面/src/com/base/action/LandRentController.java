@@ -239,19 +239,19 @@ public class LandRentController<E> {
 	public String landManageUpdate(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws Exception {	
 		
-		int expense=0;
+		Double expense=0.0;
 		String fee=request.getParameter("expense");
 		int deptSelect=Integer.valueOf(request.getParameter("deptSelect"));		
 		String planCareer=request.getParameter("planCareer");
 		if(fee!=null&&!fee.equals("")){
 			
-		 expense=Integer.valueOf(fee);	
+		 expense=Double.valueOf(fee);
 		
 		}
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
 		int lr_id=Integer.valueOf(request.getParameter("lr_id"));
-		//System.out.println(deptSelect+" "+planCareer+" "+expense+"  "+startTime+"  "+endTime+"  "+lr_id);
+		System.out.println(expense);
 		System.out.println(lr_id);
 		landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
 		
@@ -280,10 +280,10 @@ public class LandRentController<E> {
 		endTime=(endTime==""?null:endTime);
 		
 		LandRentInfo lr=null;
-		int expense;		
+		Double expense;		
 		if(fee!=null&&!fee.equals(""))
 		{
-			expense=Integer.valueOf(fee);
+			expense=Double.valueOf(fee);
 			lr=new LandRentInfo(lid,startTime,endTime,planting,userid,expense,chargeDate,dept);
 		}else{
 			lr=new LandRentInfo(lid,startTime,endTime,planting,userid,chargeDate,dept);

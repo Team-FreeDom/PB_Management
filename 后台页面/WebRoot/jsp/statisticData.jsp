@@ -223,39 +223,39 @@
 												<ul class="hide_ul" style="display:none;">
 													<li
 														style="background:#d6dfe9;padding-left: 50px; padding-top: 10px;">
-														<form id="exportForm">
+														<form action="exportStatisticForm.do" method="post" id="exportStatisticForm">
 															<div class="row">
 																<div class="col-md-4">
-																	基地类型： <select name="" id="baseCategory">
+																	基地类型： <select name="baseCategory" id="baseCategory">
 																		<option value="" id="baseCategoryID"
 																			selected="selected">全部</option>
 
 																	</select> 
 																</div>
 																<div class="col-md-4">
-																	基地名字： <select name="" id="baseName">
+																	基地名字： <select name="baseName" id="baseName">
 																		<option value="" id="baseNameID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	年 级： <select name="" id="gradeClass">
+																	年 级： <select name="gradeClass" id="gradeClass">
 																		<option value="" id="gradeClassId" selected="selected">全部</option>
 																	</select>
 																</div>
 															</div>
 															<div class="row" style="padding-top: 10px;">
 																<div class="col-md-4">
-																	学 院： <select name="" id="college">
+																	学 院： <select name="college" id="college">
 																		<option value="" id="collegeID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	专 业： <select name="" id="major">
+																	专 业： <select name="major" id="major">
 																		<option value="" id="majorID" selected="selected">全部</option>
 																	</select>
 																</div>
 																<div class="col-md-4">
-																	班 级： <select name="" id="className">
+																	班 级： <select name="className" id="className">
 																		<option value="" id="classNameID" selected="selected">全部</option>
 																	</select>
 																</div>
@@ -413,7 +413,7 @@
 				</div>
 				<div class="row form" style="padding-left:20%; margin-top:8%">
 
-					<div id="mainEchart" style="width:700px;height:500px; "
+					<div id="mainEchart" style="width:900px;height:500px; "
 						class="col-lg-12 form-group text-center"></div>
 
 				</div>

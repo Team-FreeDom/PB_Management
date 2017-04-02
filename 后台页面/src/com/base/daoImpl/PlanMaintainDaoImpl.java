@@ -244,8 +244,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 						
 					}
 					
-				}
-				//System.out.println(rs.getInt("id")+":"+lis.size());
+				}				
 				pc.setData(lis);
 				list.add(pc);
 

@@ -114,7 +114,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setLandname(rs.getString("landname"));
 				rm.setAptplanting(rs.getString("aptplanting"));
 				rm.setName(rs.getString("username"));
-				rm.setRentMoney(rs.getInt("rentmoney"));
+				rm.setRentMoney(rs.getDouble("rentmoney"));
 				rm.setChargeDate(rs.getString("chargedate"));
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
@@ -183,7 +183,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setLandname(rs.getString("landname"));
 				rm.setAptplanting(rs.getString("aptplanting"));
 				rm.setName(rs.getString("username"));
-				rm.setRentMoney(rs.getInt("rentmoney"));
+				rm.setRentMoney(rs.getDouble("rentmoney"));
 				rm.setChargeDate(rs.getString("chargedate"));
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));

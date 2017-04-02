@@ -206,9 +206,9 @@
 									<th>基地名称</th>
 									<th>基地类型</th>
 									<th>申报部门</th>
-									<th>土地面积</th>
-									<th>建筑面积</th>
-									<th>可承担人数</th>
+									<th>法定责任人</th>
+									<th>联系人</th>
+									<th>联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
@@ -502,9 +502,9 @@
 									<th>基地名称</th>
 									<th>基地类型</th>
 									<th>申报部门</th>
-									<th>土地面积</th>
-									<th>建筑面积</th>
-									<th>可承担人数</th>
+									<th>法定责任人</th>
+									<th>联系人</th>
+									<th>联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
