@@ -10,6 +10,7 @@ import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
 import com.base.service.PlanService;
 
@@ -97,6 +98,18 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public List<String> getProperBase(String typename) {
 		List<String> list=plandao.getProperBase(typename);
+		return list;
+	}
+
+	@Override
+	public List<PracticeCollection> plandata_export(String userid,
+			String finishCondition, String semester) {
+		List<PracticeCollection> list=null;
+		if(finishCondition.equals("-1")){
+			list=plandao.plandata_export_0(userid,semester);
+		}else{
+			list=plandao.plandata_export_1(userid, finishCondition, semester);
+		}
 		return list;
 	}
 

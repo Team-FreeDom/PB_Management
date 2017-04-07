@@ -17,7 +17,22 @@ public class Classcourse {
     private String guideTeacher;// 指导老师
     private String assistant;// 实验员
     private String remark;// 备注
-    public Classcourse(int id, int week, String starttime, String endtime,
+    private String major_oriented;
+    private String grade;
+    
+    public String getMajor_oriented() {
+		return major_oriented;
+	}
+	public void setMajor_oriented(String major_oriented) {
+		this.major_oriented = major_oriented;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public Classcourse(int id, int week, String starttime, String endtime,
 	    String content, String source, String site, String category,
 	    String form, String telephone, String aim, String expense,
 	    String course, String guideTeacher, String assistant, String remark) {

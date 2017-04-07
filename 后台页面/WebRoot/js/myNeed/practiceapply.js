@@ -41,6 +41,7 @@ $(document).ready(function() {
 	 $.ajax({
 			url : 'Checkinfo.do',
 			type : 'post',
+			async: false,
 			dataType : 'json',
 		success : function(msg){
 			if(msg.msg==0){				
@@ -171,7 +172,9 @@ $(document).ready(function() {
 							}
 			         }
 				});
+				$("#daoru_daochu").show();
 			}else{
+				$("#daoru_daochu").hide();
 				bootbox.alert({
 				message : msg.msg,
 				size : 'small'
@@ -179,6 +182,8 @@ $(document).ready(function() {
 			}	
 		}
 		});
+	 
+	 
 	 
 	
 	 
@@ -641,6 +646,11 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	
 
 });	
+
+//点击导出按钮复原原来的值
+$("#exportButton").click(function(){
+	$("#finishCondition").val('-1');
+});
 	
 	
 $("#save").click(function(){//弹出框的保存
@@ -895,8 +905,7 @@ $("#save").click(function(){//弹出框的保存
 							"courseID":obj[Oneindex].id,							
 							"str":str,
 						},
-						success : function(msg) {
-							//alert("hah");
+						success : function(msg) {							
 							bootbox.alert({
 								message : "保存成功",
 								size : 'small'
