@@ -1,5 +1,18 @@
+
 $("li.menuItem.nav-parent").click(function(){
-	  $(this).toggleClass("opened nav-expanded");
+	//alert($(this).hasClass("opened"));
+	if($(this).hasClass("opened")){
+		
+		$(this).removeClass("opened nav-expanded");
+	}else{
+		$("li.menuItem.nav-parent").removeClass("opened nav-expanded");
+		$(this).addClass("opened nav-expanded");
+	}
+		
+		//if(this.display=="block");
+		//alert($(this).hasClass("opened"));
+	    
+		//alert($(this).hasClass("opened"));
 	});
  $(function () {
 	 	$(document).on("click", "#msgtable tr", function() {
