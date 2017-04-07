@@ -194,6 +194,14 @@
 							<li><a href="myBase.jsp"><i class=" icon-home"></i>我的基地</a></li>
 						</ol>
 					</div>
+					<div class="pull-right">
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
+						</ol>
+					</div>
 
 				</div>
 				<!-- 主面板内容 -->
@@ -206,9 +214,9 @@
 									<th>基地名称</th>
 									<th>基地类型</th>
 									<th>申报部门</th>
-									<th>土地面积</th>
-									<th>建筑面积</th>
-									<th>可承担人数</th>
+									<th>法定责任人</th>
+									<th>联系人</th>
+									<th>联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
@@ -502,9 +510,9 @@
 									<th>基地名称</th>
 									<th>基地类型</th>
 									<th>申报部门</th>
-									<th>土地面积</th>
-									<th>建筑面积</th>
-									<th>可承担人数</th>
+									<th>法定责任人</th>
+									<th>联系人</th>
+									<th>联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>

@@ -86,7 +86,7 @@ public class LandRentServiceImpl implements LandRentService {
 	}
 	
 	//�������޼�¼�޸ĸ���
-	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
+	public void landManageUpdate(int dept,String planCareer,Double expense,String startTime,String endTime,int lr_id)
 	{
 		if(planCareer==null){
 			planCareer="";
@@ -105,7 +105,7 @@ public class LandRentServiceImpl implements LandRentService {
 		lr.setRentMoney(expense);
 		lr.setStartTime(startTime);
 		lr.setApplyDept(dept);
-		
+		System.out.println("rentMoney:"+lr.getRentMoney());
 		landRentInfoDaoImpl.updateOne(lr);
 		
 	}

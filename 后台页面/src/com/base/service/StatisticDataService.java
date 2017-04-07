@@ -3,7 +3,9 @@ package com.base.service;
 import java.util.List;
 import java.util.Map;
 
+import com.base.po.Classcourse;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StatisticData;
 import com.base.po.basetype;
 
@@ -75,4 +77,31 @@ public interface StatisticDataService {
     public StatisticData BaseUseRatioBrush(String semester, String basetype,
 	    String basename, String grade, String college, String major,
 	    String class1, String teacherName);
+    
+    /**
+     * 获取导出的整体数据
+     * @param pageindex
+     * @param size
+     * @param order
+     * @param orderDir
+     * @param string
+     * @param basetype
+     * @param basename
+     * @param grade
+     * @param college
+     * @param major
+     * @param class1
+     * @return
+     */
+    public List<PracticeCollection> getExportstatisticData(String semester,
+    	    String basetype, String basename, String college,String grade, 
+    	    String major, String class1);
+    
+    //获得本学期的各基地类型的被实习基地
+    public List<String> getstatisticCount(String semester);  
+    
+    //获得本学期的各基地类型的所有实习基地
+    public List<String> getAllStatisticCount();  
+    
+    
 }

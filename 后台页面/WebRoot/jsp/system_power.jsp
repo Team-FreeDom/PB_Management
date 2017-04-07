@@ -189,6 +189,14 @@
 							<li><a href="system_power.jsp"><i class=" icon-home"></i>系统权限设置</a></li>
 						</ol>
 					</div>
+					<div class="pull-right">
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
+						</ol>
+					</div>
 
 				</div>
 				<!-- 主面板内容 -->

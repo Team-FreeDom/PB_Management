@@ -577,48 +577,68 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-	$(this).closest("tbody").remove();
-	if(judget!==""){
-		$.ajax({
-			url:'deleteClassRecord.do',
-			type:"POST",
-			dataType:"json",
-			data:{
-				"planid":judget
+	var tbody=$(this).closest("tbody");
+	bootbox.confirm({
+		message: "是否删除？",
+		size: 'small',
+		buttons: {
+			confirm: {
+				label: '确定',
+				className: 'btn-success'
 			},
-			success : function(msg){
-				$(".mark").each(function(){
-				var htmlValue=$(this).html();
-				if(htmlValue>(rowNum+1)){
-					$(this).html(htmlValue-1);
-					}
-				});
-				teacherString.splice(rowNum,1);
-				showName=teacherString.join(",");
-				$("#adviser").val(showName);
-				value.splice(rowNum,1);
-				var value2=value.join(",");
-				$("#testername").val(value2);
-				bootbox.alert({
-					message : "删除成功",
-					size : 'small'
-				});											
+			cancel: {
+				label: '取消',
+				className: 'btn-danger'
+			},
+		},			
+		callback: function (result) { 		
+			tbody.remove();
+			if(result){			
+				if(judget!==""){
+					$.ajax({
+						url:'deleteClassRecord.do',
+						type:"POST",
+						dataType:"json",
+						data:{
+							"planid":judget
+						},
+						success : function(msg){
+							$(".mark").each(function(){
+							var htmlValue=$(this).html();
+							if(htmlValue>(rowNum+1)){
+								$(this).html(htmlValue-1);
+								}
+							});
+							teacherString.splice(rowNum,1);
+							showName=teacherString.join(",");
+							$("#adviser").val(showName);
+							value.splice(rowNum,1);
+							var value2=value.join(",");
+							$("#testername").val(value2);
+							bootbox.alert({
+								message : "删除成功",
+								size : 'small'
+							});											
+						}
+					});
+				}else{
+					$(".mark").each(function(){
+						var htmlValue=$(this).html();
+						if(htmlValue>(rowNum+1)){
+							$(this).html(htmlValue-1);
+						}
+					});
+					teacherString.splice(rowNum,1);
+					showName=teacherString.join(",");
+					$("#adviser").val(showName);
+					value.splice(rowNum,1);
+					var value2=value.join(",");
+					$("#tester").val(value2);
+				}
 			}
-		});
-	}else{
-		$(".mark").each(function(){
-			var htmlValue=$(this).html();
-			if(htmlValue>(rowNum+1)){
-				$(this).html(htmlValue-1);
-			}
-		});
-		teacherString.splice(rowNum,1);
-		showName=teacherString.join(",");
-		$("#adviser").val(showName);
-		value.splice(rowNum,1);
-		var value2=value.join(",");
-		$("#tester").val(value2);
-	}
+		}
+	});
+	
 
 });	
 	

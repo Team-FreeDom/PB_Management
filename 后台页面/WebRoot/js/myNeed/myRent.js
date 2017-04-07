@@ -32,7 +32,13 @@ $(document).ready(function() {
 													"mData" : "tenancy",
 													"orderable" : true,  // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "6%"
+													"sWidth" : "6%",
+													"render" : function(data,
+																type, row) {
+															var tenancy = row.tenancy;
+															tenancy=tenancy+"个月";
+															return data = tenancy;
+														}
 												},
 												{
 													"mData" : "bname",
@@ -463,7 +469,9 @@ $(document).ready(function() {
 											// alert(data[i].status);
 											if (data[i].status == 8) {
 												reason = "同类竞争";
-											} else {
+											} else if(data[i].status == 11) {
+												reason = "自己撤销";
+											}else{
 												reason = data[i].descp;
 											}
 											$("#bname").val(data[i].bname);

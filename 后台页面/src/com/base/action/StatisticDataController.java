@@ -1,6 +1,11 @@
 package com.base.action;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +25,12 @@ import org.springframework.web.context.ServletContextAware;
 
 import com.base.po.AllPlan;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StatisticData;
 import com.base.po.basetype;
 import com.base.service.StatisticDataService;
 import com.base.utils.CookieUtils;
+import com.base.utils.ExcelReport;
 import com.base.utils.WeekTransformToTime;
 
 @Controller("statisticData")
@@ -47,6 +55,7 @@ public class StatisticDataController implements ServletContextAware {
 	// System.out.println("哈哈哈哈哈======");
 	// 获取学年学期
 	String semester = WeekTransformToTime.getThisSemester(application);
+	System.out.println("semester:"+semester);
 	if (semester==null||semester.equals("")) {
 	    semester = null;
 	}
@@ -85,6 +94,115 @@ public class StatisticDataController implements ServletContextAware {
 	}
 	return null;
     }
+    
+    //导出数据
+    @RequestMapping("/exportStatisticForm.do")
+    public String exportStatisticForm(HttpServletRequest request,
+    	    HttpServletResponse response) {
+    	
+    	String semester = WeekTransformToTime.getThisSemester(application);
+    	if (semester.equals("")) {
+    	    semester = null;
+    	}
+    	String basetype = request.getParameter("baseCategory");// 获取基地类型
+    	if (basetype.equals("")) {
+    	    basetype = null;
+    	}
+    	String basename = request.getParameter("baseName");// 获取基地名字
+    	if (basename.equals("")) {
+    	    basename = null;
+    	}
+    	String grade = request.getParameter("gradeClass");// 获取年级
+    	if (grade.equals("")) {
+    	    grade = null;
+    	}
+    	String college = request.getParameter("college");// 获取学院
+    	if (college.equals("")) {
+    	    college = null;
+    	}
+    	String major = request.getParameter("major");// 获取专业
+    	if (major.equals("")) {
+    	    major = null;
+    	}
+    	String class1 = request.getParameter("className");// 获取班级
+    	if (class1.equals("")) {
+    	    class1 = null;
+    	}
+    	 List<PracticeCollection> list = statisticDataservice.getExportstatisticData(semester, basetype, basename, college, grade, major, class1);
+
+ 		if (CollectionUtils.isNotEmpty(list)) {			
+ 			String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
+ 			String fullFileName = path + "/statisticData.xlsx";
+ 			ExcelReport export = new ExcelReport();
+ 			export.exportPracticePlanInfo(list, fullFileName);
+ 			String filename = "湖南农业大学实习信息表.xlsx";
+
+ 			//
+ 			response.setContentType("application/octet-stream;charset=UTF-8");
+ 			try {
+ 				response.setContentType("application/octet-stream");
+ 				boolean isMSIE = ExcelReport.isMSBrowser(request);
+ 				if (isMSIE) {
+ 					filename = URLEncoder.encode(filename, "UTF-8");
+ 				} else {
+ 					filename = new String(filename.getBytes("UTF-8"),
+ 							"ISO-8859-1");
+ 				}
+ 				response.setHeader("Content-disposition",
+ 						"attachment;filename=\"" + filename + "\"");
+
+ 			} catch (UnsupportedEncodingException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 			//
+ 			InputStream in = null;
+ 			OutputStream out = null;
+ 			try {
+ 				in = new FileInputStream(fullFileName);
+ 				out = response.getOutputStream();
+ 				int b = 0;
+ 				while ((b = in.read()) != -1) {
+ 					out.write(b);
+ 				}
+ 				in.close();
+ 				out.close();
+
+ 			}catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+ 			return null;
+ 		}
+ 		return "statisticData";
+    	
+    }
+    
+    @RequestMapping("/getstatisticCount.do")
+    public String getstatisticCount(HttpServletRequest request,
+	    HttpServletResponse response) {
+    	
+    	String semester = WeekTransformToTime.getThisSemester(application);
+    	if (semester.equals("")) {
+    	    semester = null;
+    	}
+    	List<String> list1=statisticDataservice.getstatisticCount(semester);
+    	List<String> list2=statisticDataservice.getAllStatisticCount();
+    	
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("list1", list1); 
+    	getObj.put("list2", list2);
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    	    response.getWriter().print(getObj.toString());
+    	} catch (IOException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+    }  
+  
 
     // (刷选)显示所有实习计划(数据统计)
     @RequestMapping("/statisticDataBrush.do")

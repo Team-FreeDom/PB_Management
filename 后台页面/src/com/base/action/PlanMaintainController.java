@@ -136,9 +136,7 @@ public class PlanMaintainController implements ServletContextAware{
         List<PracticeCollection> list = planMaintainService
 				.getPlanTable_0(daoYear,daoSemester, college);
 
-		if (CollectionUtils.isNotEmpty(list)) {
-			/*String path = request.getSession().getServletContext()
-					.getRealPath("/upload/");*/
+		if (CollectionUtils.isNotEmpty(list)) {			
 			String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 			String fullFileName = path + "/PracticePlanInfo.xlsx";
 			ExcelReport export = new ExcelReport();
