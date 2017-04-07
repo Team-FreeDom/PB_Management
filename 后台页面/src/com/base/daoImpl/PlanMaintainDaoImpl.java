@@ -191,6 +191,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 				ch.setGuideTeacher(rs.getString("guideTeacher"));
 				ch.setAssistant(rs.getString("assistant"));
 				ch.setRemark(rs.getString("remark"));
+				ch.setGrade(rs.getString("grade"));
+	    		ch.setMajor_oriented(rs.getString("major_oriented"));
 				list.add(ch);
 			}
 		} catch (SQLException e) {

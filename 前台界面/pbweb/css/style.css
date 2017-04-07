@@ -341,7 +341,7 @@ a, a:link, a:visited, a:hover, a:active {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 270px;
-	min-height: 800px;
+	min-height: 580px !important;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
 	background-color: transparent;

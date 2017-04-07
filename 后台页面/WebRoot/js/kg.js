@@ -1,5 +1,11 @@
 $("li.menuItem.nav-parent").click(function(){
-	  $(this).toggleClass("opened nav-expanded");
+	if($(this).hasClass("opened")){
+		
+		$(this).removeClass("opened nav-expanded");
+	}else{
+		$("li.menuItem.nav-parent").removeClass("opened nav-expanded");
+		$(this).addClass("opened nav-expanded");
+	}
 	});
  $(function () {
 	 	$(document).on("click", "#msgtable tr", function() {

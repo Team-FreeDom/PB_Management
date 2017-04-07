@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
+import com.base.po.ExportClassCourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
 
 //实习申请的数据交互层
@@ -75,4 +77,27 @@ public interface PlanDao {
     3.函数功能：根据基地类型名获得基地名称
    */
     public List<String> getProperBase(String typename);
+    
+    /*
+    1.参数：userid,字符串型，为用户编号;finishCondition,字符串型,为标志值，
+            0表示获取未完善的数据，1表示获取已完善的数据;-1代表全部；semester，字符串型，为学年学期
+    2.返回值： List<ExportClassCourse>，为ExportClassCourse对象的集合
+    3.函数功能：根据条件获取用户未完善情况的数据
+   */
+    public List<PracticeCollection> plandata_export_0(String userid,String semester);
+    
+    /*
+    1.参数：userid,字符串型，为用户编号;finishCondition,字符串型,为标志值，
+            0表示获取未完善的数据，1表示获取已完善的数据;-1代表全部；semester，字符串型，为学年学期
+    2.返回值： List<ExportClassCourse>，为ExportClassCourse对象的集合
+    3.函数功能：根据条件获取用户已完善情况的数据
+   */
+    public List<PracticeCollection> plandata_export_1(String userid,String finishFunction,String semester);
+    
+    /*
+    1.参数：userid,字符串型，为用户编号;semester，字符串型，为学年学期
+    2.返回值： List<Classcourse>,为Classcourse对象的集合
+    3.函数功能：根据条件获取用户的班级安排的数据
+   */
+    public List<Classcourse> plandataClass_export(String userid,String semester);
 }
