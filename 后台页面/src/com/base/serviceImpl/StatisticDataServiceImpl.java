@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.base.dao.StatisticDataDao;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StatisticData;
 //import com.base.po.StatisticDataList;
 import com.base.po.basetype;
@@ -118,5 +119,26 @@ public class StatisticDataServiceImpl implements StatisticDataService {
 		basetype, basename, grade, college, major, class1, teacherName);
 	return st;
     }
+
+	@Override
+	public List<PracticeCollection> getExportstatisticData(String semester,
+			String basetype, String basename, String college, String grade,
+			String major, String class1) {
+		List<PracticeCollection> list=statisticDatadao.getExportstatisticData(semester, basetype, basename, college, grade, major, class1);
+		return list;
+	}
+	
+	@Override
+	public List<String> getstatisticCount(String semester){
+		
+		List<String> list=statisticDatadao.getstatisticCount(semester);
+		return list;
+	}
+
+	@Override
+	public List<String> getAllStatisticCount() {
+		List<String> list=statisticDatadao.getAllStatisticCount();
+		return list;
+	}
 
 }

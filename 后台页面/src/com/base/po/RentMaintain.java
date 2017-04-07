@@ -15,7 +15,7 @@ public class RentMaintain {
 	private String endTime;
 	private String lid;
 	private String planting;// 种植内容
-	private int rentMoney;// 费用
+	private Double rentMoney;// 费用
 	private String userid;
 	private int applydept;// 申报部门id
 
@@ -139,11 +139,11 @@ public class RentMaintain {
 		this.planting = planting;
 	}
 
-	public int getRentMoney() {
+	public Double getRentMoney() {
 		return rentMoney;
 	}
 
-	public void setRentMoney(int rentMoney) {
+	public void setRentMoney(Double rentMoney) {
 		this.rentMoney = rentMoney;
 	}
 

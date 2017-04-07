@@ -470,7 +470,7 @@ $(document).ready(function() {
 											if (data[i].status == 8) {
 												reason = "同类竞争";
 											} else if(data[i].status == 11) {
-												reason = "用户自己撤销";
+												reason = "自己撤销";
 											}else{
 												reason = data[i].descp;
 											}

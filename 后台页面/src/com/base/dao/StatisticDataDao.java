@@ -3,7 +3,9 @@ package com.base.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.base.po.Classcourse;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StatisticData;
 import com.base.po.basetype;
 
@@ -80,5 +82,51 @@ public interface StatisticDataDao {
     public StatisticData BaseUseRatioBrush(String semester, String basetype,
 	    String basename, String grade, String college, String major,
 	    String class1, String teacherName);
+    
+    /**
+     * 获取导出的整体数据
+     * @param pageindex
+     * @param size
+     * @param order
+     * @param orderDir
+     * @param string
+     * @param basetype
+     * @param basename
+     * @param grade
+     * @param college
+     * @param major
+     * @param class1
+     * @return
+     */
+    public List<PracticeCollection> getExportstatisticData(String semester,
+    	    String basetype, String basename, String college,String grade, 
+    	    String major, String class1);
+    
+    /**
+     * 获取要导出的班级安排数据
+     * @param pageindex
+     * @param size
+     * @param order
+     * @param orderDir
+     * @param string
+     * @param basetype
+     * @param basename
+     * @param grade
+     * @param college
+     * @param major
+     * @param class1
+     * @return
+     */
+    public List<Classcourse> plandata(String semester,
+    	    String basetype, String basename, String college,String grade, 
+    	    String major, String class1);
+    
+    //获得本学期的五大基地类型被实习申请的基地数目
+    public List<String> getstatisticCount(String semester);
+    
+    //获得五大基地类型的基地数目
+    public List<String> getAllStatisticCount();
+    
+    
 
 }

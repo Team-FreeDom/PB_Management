@@ -222,6 +222,10 @@ $(document).on("click", "#submitForm", function() {
 	var personName=$("#personName").val();
 	var personTel=$("#personTel").val();
 	var lawperson=$("#lawPerson").val();
+	var limit_population=$("#limit-population").val().trim();
+	var base_area=$("#base-area").val().trim();
+	var filed_area=$("#filed-area").val().trim();
+	var reg=/^\d+(\.\d+)?$/;
 	
 	if(!tag){		
 		 bootbox.alert({
@@ -251,6 +255,34 @@ $(document).on("click", "#submitForm", function() {
 			});
 		 return;
 	}
+	if(limit_population!=""){
+	if(!limit_population.match(reg)){
+		bootbox.alert({
+			message : "可承担人数只能为整数或小数",
+			size : 'small'
+		});
+	 return;
+	}
+	}
+	if(filed_area!=""){
+	if(!filed_area.match(reg)){
+		bootbox.alert({
+			message : "土地面积只能为整数或小数",
+			size : 'small'
+		});
+	 return;
+	}	
+	}
+	if(base_area!=""){
+	if(!base_area.match(reg)){
+		bootbox.alert({
+			message : "基地面积只能为整数或小数",
+			size : 'small'
+		});
+	 return;
+	}
+	}
+	
 	if(baseaddress==""){
 		bootbox.alert({
 			message : "请填写通信地址",
@@ -258,6 +290,7 @@ $(document).on("click", "#submitForm", function() {
 		});
 	 return;		
 	}
+	
 	if(lawperson==""){
 		bootbox.alert({
 			message : "请填写法定责任人",
