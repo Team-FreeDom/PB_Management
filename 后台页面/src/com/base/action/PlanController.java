@@ -162,10 +162,10 @@ public class PlanController implements ServletContextAware{
     String userid = CookieUtils.getUserid(request);
 	String finishCondition=request.getParameter("finishCondition");
 	String semester=WeekTransformToTime.getThisSemester(application);
-	List<PracticeCollection> list = planservice.plandata_export(userid, finishCondition, semester);
+	List<PracticeCollection> list = planservice.plandata_export(userid, finishCondition, semester);	
 	if (CollectionUtils.isNotEmpty(list)) {			
 		String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
-		String fullFileName = path + "/PracticeAppplyInfo.xlsx";
+		String fullFileName = path + "/PracticeApplyInfo.xlsx";
 		ExcelReport export = new ExcelReport();
 		export.exportPracticePlanInfo(list, fullFileName);
 		String filename = "湖南农业大学实习信息表.xlsx";

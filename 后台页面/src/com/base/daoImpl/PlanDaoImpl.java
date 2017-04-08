@@ -248,14 +248,14 @@ public class PlanDaoImpl implements PlanDao {
 		List<PracticeCollection> list = new ArrayList<PracticeCollection>();
 		PracticeCollection pc = null;
 		List<Classcourse> lra = plandataClass_export(userid,semester);
-
+         System.out.println("lra.length="+lra.size()+",userid="+userid+",semester="+semester);
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
-			sp = (CallableStatement) conn.prepareCall("{}");
-			sp.setString(1, userid);			
-			sp.setString(2, semester);
-			sp.setString(3, finishFunction);
+			sp = (CallableStatement) conn.prepareCall("{CALL baseweb.export_classarrange(?,?,?)}");
+			sp.setString(1, semester);	
+			sp.setString(2, userid);			
+			sp.setString(3, finishFunction);		
 			sp.execute(); // 执行存储过程
 			rs = sp.getResultSet(); // 获得结果集
 
@@ -276,10 +276,9 @@ public class PlanDaoImpl implements PlanDao {
 				int i=0;
 				for (Classcourse ra : lra) {
 					if (String.valueOf(rs.getInt("id")).equals(ra.getCourse())) {
-						lis.add(ra);
-						
+						lis.add(ra);						
 					}
-					
+					i++;
 				}				
 				pc.setData(lis);
 				list.add(pc);
@@ -308,9 +307,10 @@ public class PlanDaoImpl implements PlanDao {
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
-			sp = (CallableStatement) conn.prepareCall("{}");
-			sp.setString(1, userid);			
-			sp.setString(2, semester);			
+			sp = (CallableStatement) conn.prepareCall("{CALL baseweb.export_classarrange(?,?,?)}");
+			sp.setString(1, semester);	
+			sp.setString(2, userid);			
+			sp.setString(3, "0");		
 			sp.execute(); // 执行存储过程
 			rs = sp.getResultSet(); // 获得结果集
 
@@ -326,9 +326,8 @@ public class PlanDaoImpl implements PlanDao {
 				pc.setDepartment(rs.getString("department"));
 				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));	
-				
+				pc.setData(new ArrayList<Classcourse>());
 				list.add(pc);
-
 			}
 
 		} catch (SQLException e) {
@@ -351,12 +350,14 @@ public class PlanDaoImpl implements PlanDao {
     	    conn = (Connection) SessionFactoryUtils.getDataSource(
     		    sessionFactory).getConnection();
     	    sp = (CallableStatement) conn
-    		    .prepareCall("{}");
-    	    sp.setString(1, userid);
-    	    sp.setString(2, semester);
+    		    .prepareCall("{CALL baseweb.export_classarranges(?,?)}");    	    
+    	    sp.setString(1, semester);
+    	    sp.setString(2, userid);
     	    sp.execute();
     	    rs = sp.getResultSet();
+    	    System.out.println("hello");
     	    while (rs.next()) {
+    	    	System.out.println("rs"+1);
     		Classcourse ch = new Classcourse();
     		ch.setId(rs.getInt("id"));
     		ch.setWeek(rs.getInt("week"));

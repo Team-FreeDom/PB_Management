@@ -105,10 +105,10 @@ public class PlanServiceImpl implements PlanService {
 	public List<PracticeCollection> plandata_export(String userid,
 			String finishCondition, String semester) {
 		List<PracticeCollection> list=null;
-		if(finishCondition.equals("-1")){
-			list=plandao.plandata_export_0(userid,semester);
+		if(finishCondition.equals("0")){
+			list=plandao.plandata_export_0(userid,semester);			
 		}else{
-			list=plandao.plandata_export_1(userid, finishCondition, semester);
+			list=plandao.plandata_export_1(userid, finishCondition, semester);			
 		}
 		return list;
 	}

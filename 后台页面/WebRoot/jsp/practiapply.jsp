@@ -352,7 +352,7 @@
 						data-dismiss="modal"></div>
 					<h4 class="modal-title" id="myModalLabel"></h4>
 				</div>
-				<form action="exportPlanInfo.do" method="post" id="daochuForm">
+				<form action="getExportplandata.do" method="post" id="daochuForm">
 					<div class="modal-body" id="daochu">
 						<table>
 							<tr>
@@ -366,14 +366,14 @@
 							</tr>
 						</table>
 					</div>
-				</form>
-				<div class="modal-footer">
+					<div class="modal-footer">
 					<center>
-						<button class="btn btn-primary" id="exportConfirm">确定</button>
+						<button type="submit" name="submit" class="btn btn-primary" id="exportConfirm">确定</button>
 						<button type="button" class="btn btn-default" id="exportClose"
 							data-dismiss="modal">取消</button>
 					</center>
 				</div>
+				</form>		
 
 			</div>
 		</div>

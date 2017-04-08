@@ -184,8 +184,9 @@ $(document).ready(function() {
 		});
 	 
 	 
-	 
-	
+	$("#exportConfirm").click(function(){
+		$("#export").modal('hide');
+	});	
 	 
 	
 //显示实习申请表
