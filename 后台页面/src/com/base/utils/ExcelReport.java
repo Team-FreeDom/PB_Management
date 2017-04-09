@@ -1186,10 +1186,8 @@ public class ExcelReport {
 
 			// System.out.println("size:"+lc.size());
 			int j = 0;
-			for (Classcourse cc : lc) {
-				System.out.println("外键:" + cc.getCourse());
-				Row rowLine = sheet.createRow(++line);// 创建第line行
-				System.out.println("line:" + line);
+			for (Classcourse cc : lc) {				
+				Row rowLine = sheet.createRow(++line);// 创建第line行				
 
 				// 第一列序号
 				Cell cell_0 = rowLine.createCell(0);
@@ -1265,31 +1263,33 @@ public class ExcelReport {
 				Cell cell_14 = rowLine.createCell(14);
 				cell_14.setCellValue(cc.getRemark());
 				cell_14.setCellStyle(cs2);
-
-				// 第二列 课程代码
+				
+				// 第五列 面向专业
 				Cell cell_15 = rowLine.createCell(15);
-				cell_15.setCellValue(pc.getCourseId());
+				cell_15.setCellValue(cc.getMajor_oriented());
 				cell_15.setCellStyle(cs2);
 
-				// 第三列 单位
+				// 第六列教学班
 				Cell cell_16 = rowLine.createCell(16);
-				cell_16.setCellValue(pc.getDepartment());
+				cell_16.setCellValue(cc.getGrade());
 				cell_16.setCellStyle(cs2);
 
-				// 第四列 课程名称
+				// 第二列 课程代码
 				Cell cell_17 = rowLine.createCell(17);
-				cell_17.setCellValue(pc.getCourseName());
+				cell_17.setCellValue(pc.getCourseId());
 				cell_17.setCellStyle(cs2);
 
-				// 第五列 面向专业
+				// 第三列 单位
 				Cell cell_18 = rowLine.createCell(18);
-				cell_18.setCellValue(pc.getMajor_oriented());
+				cell_18.setCellValue(pc.getDepartment());
 				cell_18.setCellStyle(cs2);
 
-				// 第六列教学班组成
+				// 第四列 课程名称
 				Cell cell_19 = rowLine.createCell(19);
-				cell_19.setCellValue(pc.getComposition());
+				cell_19.setCellValue(pc.getCourseName());
 				cell_19.setCellStyle(cs2);
+
+			
 
 			}
 		}

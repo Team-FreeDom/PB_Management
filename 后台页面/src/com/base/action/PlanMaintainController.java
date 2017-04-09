@@ -437,7 +437,7 @@ public class PlanMaintainController implements ServletContextAware{
 						+ "college,cid,coursename,"
 						+ "weekClassify,credit,courseNature,courseCategory,"
 						+ "siteRepuire,tid,tname,"
-						+ "technicalTitle,semester,week,checkMethod,mid,major_oriented,checkTime) "
+						+ "technicalTitle,semester,week,checkMethod,checkTime) "
 						+ "values";
 
 				StringBuffer suffix = new StringBuffer();
@@ -469,9 +469,9 @@ public class PlanMaintainController implements ServletContextAware{
 								
 							}else if (j == 16) {								
 								if(value.length()!=0){
-									week=WeekTransformToTime.splitWeek(value);//Integer.valueOf(value.substring(0,value.indexOf('-')));
+									week=WeekTransformToTime.splitWeek(value);
 								}
-								//System.out.println("16:"+value);
+								
 							}else if (j == 15) {
 								
 								value = semesterfile;
@@ -479,7 +479,7 @@ public class PlanMaintainController implements ServletContextAware{
 							}else if(j>16&&j<=25||j==0||j>26&&j<=44){							
 								continue;
 							}
-							System.out.println(j+":"+value);
+							
 							resultStr = resultStr + '"' + value + '"' + ',';
                             
 						}

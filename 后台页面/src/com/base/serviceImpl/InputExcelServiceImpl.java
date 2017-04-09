@@ -159,7 +159,7 @@ public class InputExcelServiceImpl
 				}
 				//int rowSize = row.getLastCellNum();
 				//System.out.println(rowSize);
-				int rowSize = 47; //固定导入excel表格每行19列
+				int rowSize = 45; //固定导入excel表格每行19列
 				List<String> rowList = new ArrayList<String>();
 				for (int j = 0; j < rowSize; j++)
 				{

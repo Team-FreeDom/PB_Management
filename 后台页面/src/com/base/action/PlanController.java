@@ -1,6 +1,11 @@
 package com.base.action;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +29,7 @@ import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.StartDate;
 import com.base.po.UserInfo;
 import com.base.po.basetype;
@@ -30,6 +37,7 @@ import com.base.service.PlanMaintainService;
 import com.base.service.PlanService;
 import com.base.service.baseApplyService;
 import com.base.utils.CookieUtils;
+import com.base.utils.ExcelReport;
 import com.base.utils.WeekTransformToTime;
 
 //实习申请的控制层
@@ -52,25 +60,23 @@ public class PlanController implements ServletContextAware{
     @RequestMapping("/Checkinfo.do")
     public String Checkinfo(HttpServletRequest request,
 	    HttpServletResponse response) {
-	String information="0";
+	String information="0";	
 	String userid = CookieUtils.getUserid(request);	
 	
 	if(application.getAttribute("map_0")==null){
 		List<StartDate> list1=planMaintainService.getStartDate();
-		WeekTransformToTime.getLatestStartTime(application, list1);
-		System.out.println("haha,plancontroller为空呢");
+		WeekTransformToTime.getLatestStartTime(application, list1);		
 	}
 	String semester=WeekTransformToTime.getThisSemester(application);
 	if(semester==null){
-	    information="对不起此时间段没有数据";
+	    information="对不起此时间段没有数据";	    
 	}
 	int record=planservice.checkinfo(userid,semester);
 	if(record==0&&semester!=null){
-	    information="对不起管理员还没有导入此学年学期的数据";
-	}
-	System.out.println(record+"几条数据");
+	    information="对不起管理员还没有导入此学年学期的数据";	    
+	}	
 	JSONObject getObj = new JSONObject();
-	getObj.put("msg", information);
+	getObj.put("msg", information);	
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());
@@ -80,6 +86,7 @@ public class PlanController implements ServletContextAware{
 	}
 	return null;
     }
+    
     // 显示用户所属学院的所有实习计划
     @RequestMapping("/displayThisCollegePlan.do")
     public String displayThisCollegePlan(HttpServletRequest request,
@@ -147,6 +154,63 @@ public class PlanController implements ServletContextAware{
 	return null;
     }
 
+    // 获取导出的班级安排数据
+    @RequestMapping("/getExportplandata.do")
+    public String getExportplandata(HttpServletRequest request,
+	    HttpServletResponse response) {
+    // 获取用户登录的id
+    String userid = CookieUtils.getUserid(request);
+	String finishCondition=request.getParameter("finishCondition");
+	String semester=WeekTransformToTime.getThisSemester(application);
+	List<PracticeCollection> list = planservice.plandata_export(userid, finishCondition, semester);	
+	if (CollectionUtils.isNotEmpty(list)) {			
+		String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
+		String fullFileName = path + "/PracticeApplyInfo.xlsx";
+		ExcelReport export = new ExcelReport();
+		export.exportPracticePlanInfo(list, fullFileName);
+		String filename = "湖南农业大学实习信息表.xlsx";
+
+		//
+		response.setContentType("application/octet-stream;charset=UTF-8");
+		try {
+			response.setContentType("application/octet-stream");
+			boolean isMSIE = ExcelReport.isMSBrowser(request);
+			if (isMSIE) {
+				filename = URLEncoder.encode(filename, "UTF-8");
+			} else {
+				filename = new String(filename.getBytes("UTF-8"),
+						"ISO-8859-1");
+			}
+			response.setHeader("Content-disposition",
+					"attachment;filename=\"" + filename + "\"");
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//
+		InputStream in = null;
+		OutputStream out = null;
+		try {
+			in = new FileInputStream(fullFileName);
+			out = response.getOutputStream();
+			int b = 0;
+			while ((b = in.read()) != -1) {
+				out.write(b);
+			}
+			in.close();
+			out.close();
+
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	return "practiapply";
+    }
+    
+    
     // 保存对实习计划的修改
     @RequestMapping("/savePlanModify.do")
     public String savePlanModify(HttpServletRequest request,
@@ -208,7 +272,7 @@ public class PlanController implements ServletContextAware{
         List<basetype> list1 = baseapplyservice.getBasetype();
        //根据基地类型获取基地名字
     	List<String> list2 = planservice.getProperBase(typename);
-    	// 获取课程代码
+    	// 获取教师编号
     	String cid = request.getParameter("mid");
     	
     	// 获取获取专业所对应的培训目的

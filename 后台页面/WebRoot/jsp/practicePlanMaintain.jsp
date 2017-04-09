@@ -230,6 +230,8 @@
 									<td hidden id="ta2">${sem}</td>
 									<td hidden id="ta3">${tag}</td>
 									<td colspan="6">
+									   <a
+											href="../templet/PracticeMaintainInfo.rar" class="btn btn-primary">点击下载导入模板</a>
 										<button class="btn btn-primary" id="daoru" data-toggle="modal"
 											data-target="#writeWeekTime">导入</button>
 										<button class="btn btn-primary" id="chu">导出</button>

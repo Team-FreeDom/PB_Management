@@ -41,6 +41,7 @@ $(document).ready(function() {
 	 $.ajax({
 			url : 'Checkinfo.do',
 			type : 'post',
+			async: false,
 			dataType : 'json',
 		success : function(msg){
 			if(msg.msg==0){				
@@ -171,7 +172,9 @@ $(document).ready(function() {
 							}
 			         }
 				});
+				$("#daoru_daochu").show();
 			}else{
+				$("#daoru_daochu").hide();
 				bootbox.alert({
 				message : msg.msg,
 				size : 'small'
@@ -180,7 +183,10 @@ $(document).ready(function() {
 		}
 		});
 	 
-	
+	 
+	$("#exportConfirm").click(function(){
+		$("#export").modal('hide');
+	});	
 	 
 	
 //显示实习申请表
@@ -256,7 +262,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].mid,
+						"mid":obj[Oneindex].tid,
 						"typename":data[i].source
 					},
 					error : function(request) {
@@ -278,9 +284,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 							);
 						}
 						
-						for(i=0;i<date[2].length;i++){//获取实习目的下拉框
+						for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
-									"<option class='rest' id="+date[2][i].id+" value="+date[2][i].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][i].aim+"'>"+ (date[2][i].aim.length>20?date[2][i].aim.substring(0,20)+"...":date[2][i].aim )+ "</option>"
+									"<option class='rest' id="+date[2][t].id+" value="+date[2][t].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][t].aim+"'>"+ (date[2][t].aim.length>20?date[2][t].aim.substring(0,20)+"...":date[2][t].aim )+ "</option>"
 
 							);
 						}
@@ -641,6 +647,11 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	
 
 });	
+
+//点击导出按钮复原原来的值
+$("#exportButton").click(function(){
+	$("#finishCondition").val('-1');
+});
 	
 	
 $("#save").click(function(){//弹出框的保存
@@ -895,8 +906,7 @@ $("#save").click(function(){//弹出框的保存
 							"courseID":obj[Oneindex].id,							
 							"str":str,
 						},
-						success : function(msg) {
-							//alert("hah");
+						success : function(msg) {							
 							bootbox.alert({
 								message : "保存成功",
 								size : 'small'
