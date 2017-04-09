@@ -262,7 +262,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].mid,
+						"mid":obj[Oneindex].tid,
 						"typename":data[i].source
 					},
 					error : function(request) {
@@ -284,9 +284,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 							);
 						}
 						
-						for(i=0;i<date[2].length;i++){//获取实习目的下拉框
+						for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
-									"<option class='rest' id="+date[2][i].id+" value="+date[2][i].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][i].aim+"'>"+ (date[2][i].aim.length>20?date[2][i].aim.substring(0,20)+"...":date[2][i].aim )+ "</option>"
+									"<option class='rest' id="+date[2][t].id+" value="+date[2][t].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][t].aim+"'>"+ (date[2][t].aim.length>20?date[2][t].aim.substring(0,20)+"...":date[2][t].aim )+ "</option>"
 
 							);
 						}
