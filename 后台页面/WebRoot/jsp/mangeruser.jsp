@@ -241,7 +241,7 @@
 										<th>身份属性</th>
 										<th>姓名</th>
 										<th>性别</th>
-										<th>职称</th>
+										<th>员工类别</th>
 										<th>出生日期</th>
 										<th>身份证号</th>
 										<th>联系电话</th>
@@ -284,33 +284,36 @@
 							<div class="modal-body table-responsive">
 								<table class="table">
 									<tr>
-										<td>员工编号 :</td>
+										<td>员工编号 ：</td>
 										<td><input type="text" onFocus=this.blur()
 											onClick="stop()" class="form-control" id="EworkerId"
 											name="EworkerId"></td>
-										<td>姓名 :</td>
+										<td>姓名 ：</td>
 										<td><input type="text" class="form-control" id="Ename"
 											name="Ename"></td>
 									</tr>
 									<tr>
-										<td>性别 :</td>
+										<td>性别 ：</td>
 										<td id="sex-style2"><label class="radio-inline">
 												<input type="radio" name="inlineRadioOptions" id="sex"
 												value="男">男
 										</label> <label class="radio-inline"> <input type="radio"
 												name="inlineRadioOptions" id="sex" value="女">女
 										</label></td>
-										<td>出生年月 :</td>
+										<td>出生年月 ：</td>
 										<td class="input-style"><input class="laydate-icon"
 											id="demo" name="demo"></td>
 									</tr>
 									<tr>
-										<td>职称:</td>
+										<td>员工类别 ：</td>
 										<td><select class="form-control" name="Eworkerclass"
 											id="Eworkerclass">
-												<option id="EworkerclassId" value="">请选择</option>												
+												<option id="EworkerclassId" value="">请选择</option>
+												<option id="EworkerclassId" value="在职员工">在职员工</option>
+												<option id="EworkerclassId" value="教师">教师</option>
+												<option id="EworkerclassId" value="公务员">公务员</option>
 										</select></td>
-										<td>身份属性 :</td>
+										<td>身份属性 ：</td>
 										<td><select class="form-control" name="Estatus"
 											id="Estatus">
 												<option id="EstatusID" value="">请选择</option>
@@ -319,24 +322,24 @@
 									</tr>
 
 									<tr>
-										<td>部门 :</td>
+										<td>部门 ：</td>
 										<td><select class="form-control" name="Edivision"
 											id="Edivision">
 												<option id="EdivisionID" value="">请选择</option>
 										</select></td>
-										<td>联系电话 :</td>
+										<td>联系电话 ：</td>
 										<td><input type="text" class="form-control" id="Ephone"
 											name="Ephone"></td>
 									</tr>
 
 									<tr>
-										<td>身份证号 :</td>
+										<td>身份证号 ：</td>
 										<td colspan="3"><input style="width:100%;" type="text"
 											class="form-control" id="IDnumber" name="IDnumber"></td>
 									</tr>
 
 									<tr>
-										<td>密码修改 :</td>
+										<td>密码修改 ：</td>
 										<td colspan="3"><input style="width:100%;" type="text"
 											class="form-control" id="Epassword" name="Epassword"></td>
 									</tr>
@@ -435,15 +438,15 @@
 							<div class="modal-body table-responsive">
 								<table class="table">
 									<tr>
-										<td>员工编号:</td>
+										<td>员工编号</td>
 										<td><input type="text" id="workerId" name="workerId"
 											class="form-control"></td>
-										<td>姓名 :</td>
+										<td>姓名 ：</td>
 										<td><input type="text" id="name" name="name"
 											class="form-control"></td>
 									</tr>
 									<tr>
-										<td>性 别:</td>
+										<td>性 别</td>
 										<td id="sex-style"><label class="radio-inline"> <input
 												type="radio" name="inlineRadioOptions" id="sex1" class="sex"
 												value="男">男
@@ -451,19 +454,22 @@
 												name="inlineRadioOptions" id="sex2" class="sex" value="女">女
 										</label></td>
 
-										<td>出生年月:</td>
+										<td>出生年月</td>
 										<td class="input-style"><input class="laydate-icon"
 											id="demo2" name="demo2"></td>
 									</tr>
 
 
 									<tr>
-										<td>职称:</td>
+										<td>员工类别</td>
 										<td><select class="form-control" name="Awkclass"
 											id="Awkclass">
-												<option id="AworkerclassId" value="1">请选择</option>												
+												<option id="AworkerclassId" value="1">请选择</option>
+												<option id="AworkerclassId">在职员工</option>
+												<option id="AworkerclassId">教师</option>
+												<option id="AworkerclassId">公务员</option>
 										</select></td>
-										<td>身份属性:</td>
+										<td>身份属性</td>
 										<td><select class="form-control" name="Astatus"
 											id="Astatus">
 												<option id="AstatusID" value="1">请选择</option>
@@ -471,24 +477,24 @@
 									</tr>
 
 									<tr>
-										<td>部 门:</td>
+										<td>部 门</td>
 										<td><select class="form-control" name="Adivision"
 											id="Adivision">
 												<option id="AdivisionID" value="1">请选择</option>
 										</select></td>
-										<td>联系电话:</td>
+										<td>联系电话</td>
 										<td><input type="text" id="phone" name="phone"
 											class="form-control"></td>
 									</tr>
 
 									<tr>
-										<td>身份证号:</td>
+										<td>身份证号</td>
 										<td colspan="3"><input style="width:100%;" type="text"
 											id="IDnumber1" name="IDnumber1" class="form-control"></td>
 									</tr>
 
 									<tr>
-										<td>设置密码:</td>
+										<td>设置密码</td>
 										<td colspan="3"><input style="width:100%;" type="text"
 											id="password" name="password" class="form-control"></td>
 									</tr>

@@ -201,7 +201,6 @@ $("#addOne").click(function(){
          		  });
  			},
  			success : function(data) {
- 				
  				 for (var i=0;i<data[0].length;i++) {
  					$("#EstatusID").after(
  							"<option value="+data[0][i].name+">"
@@ -219,16 +218,12 @@ $("#addOne").click(function(){
  							"<option value="+data[1][i].dept+">"
  									+data[1][i].dept+"</option>");
  				}
- 				for ( var i=0;i<data[2].length;i++) {
- 					$("#EworkerclassId").after(
- 							"<option value="+data[2][i].titles+">"
- 									+data[2][i].titles+"</option>");
- 					$("#AworkerclassId").after(
- 							"<option value="+data[2][i].titles+">"
- 									+data[2][i].titles+"</option>");
- 				}
  			}
  		});
+
+
+
+
 
       //删除人员基本信息
       var flag=0;
