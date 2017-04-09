@@ -272,7 +272,7 @@ public class PlanController implements ServletContextAware{
         List<basetype> list1 = baseapplyservice.getBasetype();
        //根据基地类型获取基地名字
     	List<String> list2 = planservice.getProperBase(typename);
-    	// 获取课程代码
+    	// 获取教师编号
     	String cid = request.getParameter("mid");
     	
     	// 获取获取专业所对应的培训目的
