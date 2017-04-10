@@ -139,7 +139,7 @@ $(document).ready(function() {
 	});
 
 	//显示实习申请表
-	var tbodyStyle='<tbody class="tbodyID"><tr>'
+	var tbodyStyle='<tbody class="tbodyID"><tr style="background:#3071a9; color:#FFF">'
 							+'<td>序号</td>'
 							+'<td>周次<span class="starColor">*</span></td>'
 							+'<td>开始时间<span class="starColor">*</span></td>'
@@ -156,7 +156,7 @@ $(document).ready(function() {
 						 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
 						 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 						 +'<td><input id="endweek"  readonly="readonly" class="flag endweek"></td>'
-						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
+						 +'<td><input data-toggle="tooltip" data-placement="top" title="" id="content" type="text" class="inputWidth flag content"></td>'
 						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
 						 +'<td id="practicePlace"><select id="schoolBase" hidden><option id="schoolBaseID" value="">请选择</option></select><input id="outBase" type="text" class="inputWidth" hidden></td>'
 						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
@@ -175,7 +175,7 @@ $(document).ready(function() {
 						 +'<td><input id="phone" type="text" class="flag"></td>'
 						 +'<td><select id="aim" class="flag"><option id="aimID" value="">请选择</option></select></td>'
 						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" readonly class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" readonly class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
+						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input type="text" readonly class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon btn-info choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input type="text" readonly class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
 						 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
@@ -190,6 +190,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#startweek").val('2013-01-08');
 				$("#table tbody:last-child").find("#endweek").val('3');
 				$("#table tbody:last-child").find("#content").val('data[i].content');
+				$("#table tbody:last-child").find("#content").attr('title',i);
 				$("#table tbody:last-child").find("#baseFrom").val('校内基地');
 				$("#table tbody:last-child").find("#category").val('毕业实习');
 				$("#table tbody:last-child").find("#remark").val('data[i].remark');
@@ -320,6 +321,33 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	
 	
 /*实习申请表里面的操作*/
+var contentArray=0;	
+$(document).on("focus","#content",function(){
+	contentArray=$(this).closest("tbody").find(".mark").html()-1;
+	var p=0;
+	$(".content").each(function(){
+		if(p===contentArray){
+			$("#contentText").val($(this).val());
+			return false;
+		}
+		p++;
+	});
+	$("#contantModal").modal('show');
+});	
+	
+$(document).on("click","#finishcontant",function(){   
+	var p=0;
+	$(".content").each(function(){
+		if(p===contentArray){
+			$(this).val($("#contentText").val());
+			return false;
+		}
+		p++;
+	});
+	
+	$("#contantModal").modal('hide');
+});			
+
 	//实习基地来源改变，对应的实习基地改变
 $(document).on("change","#baseFrom",function(e){
 	//$("#practicePlace").empty();
