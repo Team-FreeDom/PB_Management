@@ -223,7 +223,7 @@
 										</td>
 										<td colspan="5"></td>
 										<td colspan="3" id="button-right"><a
-											href="../templet/PersonInfotemplet.zip"
+											href="../templet/PersonInfotemplet.rar"
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
 												data-toggle="modal" data-target="#import">

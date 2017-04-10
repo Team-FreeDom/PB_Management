@@ -235,6 +235,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
+	$("#fromweek").val(obj[Oneindex].week);
 	$("#class").val(obj[Oneindex].composition);
 	$("#grade").val(obj[Oneindex].credit);
 	$("#number").val(obj[Oneindex].count);

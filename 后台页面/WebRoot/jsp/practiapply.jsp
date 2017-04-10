@@ -212,11 +212,7 @@
 							width="100%">
 							<thead>
 								<tr>								   
-									<td colspan="17" hidden id="daoru_daochu"><a
-										href="../templet/PracticeMaintainInfo.rar"
-										class="btn btn-primary">点击下载导入模板</a>
-										<button class="btn btn-primary" id="" data-toggle="modal"
-											data-target="">导入</button>
+									<td colspan="17" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>
 									</td>
@@ -283,8 +279,12 @@
 							class="noborder">
 						</td>
 
-						<td colspan="2">班级：<input readonly type="text"
+						<td>班级：<input readonly type="text"
 							class="noborder" id="class" value="">
+						</td>
+						
+						<td>起始周：<input readonly type="text"
+							class="noborder" id="fromweek" value="">
 						</td>
 
 					</tr>

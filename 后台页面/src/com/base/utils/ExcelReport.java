@@ -485,7 +485,7 @@ public class ExcelReport {
 		 * "部门", "原工作单位", "来校工作时间", "参加工作时间", "用工形式", "户口性质", "密码"
 		 */
 		String[] col_title = { "序号", "员工编号", "身份属性", "姓名", "性别", "员工类型",
-				"出生日期", "身份证号码", "联系电话", "部门" };// 16
+				"出生日期", "身份证号码", "联系电话", "部门", "专业", "职称" };// 16
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();// 创建一个Excel文档对象
 		Sheet sheet = workbook.createSheet();// 在上面的文档中创建Excel表单
@@ -630,26 +630,17 @@ public class ExcelReport {
 			Cell cell9 = row_line.createCell(9);
 			cell9.setCellValue(line_data.getDept());
 			cell9.setCellStyle(cs2);
-			/*
-			 * // 第十一列原工作单位 Cell cell10 = row_line.createCell(10);
-			 * cell10.setCellValue(line_data.getAptPlanting());
-			 * cell10.setCellStyle(cs2); // 第十二列来校工作时间 Cell cell11 =
-			 * row_line.createCell(11);
-			 * cell11.setCellValue(line_data.getAfford());
-			 * cell11.setCellStyle(cs2); // 第十三列参加工作时间 Cell cell12 =
-			 * row_line.createCell(12);
-			 * cell12.setCellValue(line_data.getDescp());
-			 * cell12.setCellStyle(cs2); // 第十四列用工形式 Cell cell13 =
-			 * row_line.createCell(13);
-			 * cell13.setCellValue(line_data.getTenancy());
-			 * cell13.setCellStyle(cs2); // 第十五列户口性质 Cell cell14 =
-			 * row_line.createCell(14);
-			 * cell14.setCellValue(line_data.getPlanting());
-			 * cell14.setCellStyle(cs2); // 第十六列密码 Cell cell15 =
-			 * row_line.createCell(15);
-			 * cell15.setCellValue(line_data.getPlanting());
-			 * cell15.setCellStyle(cs2);
-			 */
+
+			// 第十一列专业
+			Cell cell10 = row_line.createCell(10);
+			cell10.setCellValue(line_data.getMajor());
+			cell10.setCellStyle(cs2);
+
+			// 第十二列职称
+			Cell cell11= row_line.createCell(11);
+			cell11.setCellValue(line_data.getTitles());
+			cell11.setCellStyle(cs2);
+
 		}
 		// 建立Excel文件
 		// !!!!!!!!!李彩啊~~下面的路径是将生成的文件放到服务器的路径!!!!!!!!!!!!!!!!!!!
@@ -1025,9 +1016,9 @@ public class ExcelReport {
 		 * "序号", "周次", "开始时间","结束时间", "实习内容", "实习基地来源", "实习地点", "实习类别", "实习形式",
 		 * "实习联系人姓名/电话","目的", "经费预算","指导老师","实验员","备注"
 		 */
-		String[] col_title = { "序号", "周次", "开始时间", "结束时间", "实习内容", "实习基地来源",
-				"实习地点", "实习类别", "实习形式", "实习联系人姓名/电话", "目的", "经费预算", "指导老师",
-				"实验员", "备注", "课程代码", "单位", "课程名称", "面向专业", "班级组成" };// 18
+		String[] col_title = { "序号", "课程代码", "周次", "班级", "面向专业", "开始时间",
+				"结束时间", "实习内容", "实习基地来源", "实习地点", "实习类别", "实习形式", "实习联系人姓名/电话",
+				"目的", "经费预算", "指导老师", "实验员", "备注", "课程名称", "单位" };// 18
 		@SuppressWarnings("resource")
 		XSSFWorkbook workbook = new XSSFWorkbook();// 创建一个Excel文档对象
 		Sheet sheet = workbook.createSheet();// 在上面的文档中创建Excel表单
@@ -1140,7 +1131,7 @@ public class ExcelReport {
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 3, 4));
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 5, 6));
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 7, 8));
-			
+
 			Row row_line = sheet.createRow(++line);// 创建第line行
 
 			// 第一列空
@@ -1179,117 +1170,114 @@ public class ExcelReport {
 			Cell cell7 = row_line.createCell(7);
 			cell7.setCellValue(pc.getCredit());
 			cell7.setCellStyle(cs0);
-			
+
 			Cell cell8 = row_line.createCell(8);
 			cell8.setCellValue(pc.getCredit());
 			cell8.setCellStyle(cs0);
 
-			// System.out.println("size:"+lc.size());
 			int j = 0;
-			for (Classcourse cc : lc) {				
-				Row rowLine = sheet.createRow(++line);// 创建第line行				
+			for (Classcourse cc : lc) {
+				Row rowLine = sheet.createRow(++line);// 创建第line行
 
 				// 第一列序号
 				Cell cell_0 = rowLine.createCell(0);
 				cell_0.setCellValue(++j);
 				cell_0.setCellStyle(cs2);
 
-				// 第二列 周次
+				// 第二列 课程代码
 				Cell cell_1 = rowLine.createCell(1);
-				cell_1.setCellValue(cc.getWeek());
+				cell_1.setCellValue(pc.getCourseId());
 				cell_1.setCellStyle(cs2);
 
-				// 第三列 开始时间
+				// 第二列 周次
 				Cell cell_2 = rowLine.createCell(2);
-				cell_2.setCellValue(cc.getStarttime());
+				cell_2.setCellValue(cc.getWeek());
 				cell_2.setCellStyle(cs2);
 
-				// 第四列 结束时间
+				// 第六列教学班
 				Cell cell_3 = rowLine.createCell(3);
-				cell_3.setCellValue(cc.getEndtime());
+				cell_3.setCellValue(cc.getGrade());
 				cell_3.setCellStyle(cs2);
 
-				// 第五列 实习内容
+				// 第五列 面向专业
 				Cell cell_4 = rowLine.createCell(4);
-				cell_4.setCellValue(cc.getContent());
+				cell_4.setCellValue(cc.getMajor_oriented());
 				cell_4.setCellStyle(cs2);
 
-				// 第六列 实习基地来源
+				// 第三列 开始时间
 				Cell cell_5 = rowLine.createCell(5);
-				cell_5.setCellValue(cc.getSource());
+				cell_5.setCellValue(cc.getStarttime());
 				cell_5.setCellStyle(cs2);
 
-				// 第七列 实习地点
+				// 第四列 结束时间
 				Cell cell_6 = rowLine.createCell(6);
-				cell_6.setCellValue(cc.getSite());
+				cell_6.setCellValue(cc.getEndtime());
 				cell_6.setCellStyle(cs2);
 
-				// 第八列 实习类别
+				// 第五列 实习内容
 				Cell cell_7 = rowLine.createCell(7);
-				cell_7.setCellValue(cc.getCategory());
+				cell_7.setCellValue(cc.getContent());
 				cell_7.setCellStyle(cs2);
 
-				// 第九列 实习形式
+				// 第六列 实习基地来源
 				Cell cell_8 = rowLine.createCell(8);
-				cell_8.setCellValue(cc.getForm());
+				cell_8.setCellValue(cc.getSource());
 				cell_8.setCellStyle(cs2);
 
-				// 第十列 实习基地联系人/电话
+				// 第七列 实习地点
 				Cell cell_9 = rowLine.createCell(9);
-				cell_9.setCellValue(cc.getTelephone());
+				cell_9.setCellValue(cc.getSite());
 				cell_9.setCellStyle(cs2);
 
-				// 第十一列 目的
+				// 第八列 实习类别
 				Cell cell_10 = rowLine.createCell(10);
-				cell_10.setCellValue(cc.getAim());
+				cell_10.setCellValue(cc.getCategory());
 				cell_10.setCellStyle(cs2);
 
-				// 第十二列 实习经费预算
+				// 第九列 实习形式
 				Cell cell_11 = rowLine.createCell(11);
-				cell_11.setCellValue(cc.getExpense());
+				cell_11.setCellValue(cc.getForm());
 				cell_11.setCellStyle(cs2);
 
-				// 第十三列 指导老师
+				// 第十列 实习基地联系人/电话
 				Cell cell_12 = rowLine.createCell(12);
-				cell_12.setCellValue(cc.getGuideTeacher());
+				cell_12.setCellValue(cc.getTelephone());
 				cell_12.setCellStyle(cs2);
 
-				// 第十四列 实验员
+				// 第十一列 目的
 				Cell cell_13 = rowLine.createCell(13);
-				cell_13.setCellValue(cc.getAssistant());
+				cell_13.setCellValue(cc.getAim());
 				cell_13.setCellStyle(cs2);
 
-				// 第十五列 备注
+				// 第十二列 实习经费预算
 				Cell cell_14 = rowLine.createCell(14);
-				cell_14.setCellValue(cc.getRemark());
+				cell_14.setCellValue(cc.getExpense());
 				cell_14.setCellStyle(cs2);
-				
-				// 第五列 面向专业
+
+				// 第十三列 指导老师
 				Cell cell_15 = rowLine.createCell(15);
-				cell_15.setCellValue(cc.getMajor_oriented());
+				cell_15.setCellValue(cc.getGuideTeacher());
 				cell_15.setCellStyle(cs2);
 
-				// 第六列教学班
+				// 第十四列 实验员
 				Cell cell_16 = rowLine.createCell(16);
-				cell_16.setCellValue(cc.getGrade());
+				cell_16.setCellValue(cc.getAssistant());
 				cell_16.setCellStyle(cs2);
 
-				// 第二列 课程代码
+				// 第十五列 备注
 				Cell cell_17 = rowLine.createCell(17);
-				cell_17.setCellValue(pc.getCourseId());
+				cell_17.setCellValue(cc.getRemark());
 				cell_17.setCellStyle(cs2);
 
-				// 第三列 单位
+				// 第四列 课程名称
 				Cell cell_18 = rowLine.createCell(18);
-				cell_18.setCellValue(pc.getDepartment());
+				cell_18.setCellValue(pc.getCourseName());
 				cell_18.setCellStyle(cs2);
 
-				// 第四列 课程名称
+				// 第三列 单位
 				Cell cell_19 = rowLine.createCell(19);
-				cell_19.setCellValue(pc.getCourseName());
+				cell_19.setCellValue(pc.getDepartment());
 				cell_19.setCellStyle(cs2);
-
-			
 
 			}
 		}
