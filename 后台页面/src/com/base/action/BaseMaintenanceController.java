@@ -293,10 +293,7 @@ public class BaseMaintenanceController {
     			
     			MultipartFile mFile = multipartRequest.getFile("fileResource");
     			
-    			String path = ExcelReport.getWebRootUrl(request,"/upload/");
-    			/*String path = request.getSession().getServletContext()
-    					.getRealPath("/upload/");*/
-    			//
+    			String path = ExcelReport.getWebRootUrl(request,"/upload/");    			
     			String fileName = mFile.getOriginalFilename();
     			String filename = "";
     			boolean flag=true;
@@ -317,47 +314,39 @@ public class BaseMaintenanceController {
     				Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
     				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				
-    				if(CollectionUtils.isNotEmpty(list)){    				
-    				String prefix  = "INSERT IGNORE INTO baseweb.prabaseinfo(id,name,type,applydp,land_address,"
-    						+ "undertake,buildtime,endtime) values";
-    				String prefix2="INSERT IGNORE INTO baseweb.basemajor(pid,maid) values";
-    						
+    				if(CollectionUtils.isNotEmpty(list)){   									
     				
-    				 StringBuffer suffix = new StringBuffer(); 
-    				 StringBuffer suffix2 = new StringBuffer();     				
-    				for (int i = 1; i < list.size(); i++) {
-    					String resultStr = "";
-    					String resultStr2 = "";    					
+    				String resultStr1 = "";
+					String resultStr2 = "";    
+					String resultStr3 = "(";
+					String[] str=null;
+    				for (int i = 1; i < list.size(); i++) {    										
     					List<String> row = list.get(i);    					
-    					
-    					
     					if (row != null && row.size() > 0) {    						
-    						String bid=String.valueOf(new Date().getTime()+i);
-    						resultStr="'"+bid+"',";
-    						resultStr2="'"+bid+"',";
-    						for (int j = 0; j < row.size(); j++) { 
-    							if(j==3){
-        							resultStr2 = resultStr2 + "'" + row.get(j) +"'" + ',';	//璁惧畾涓撲笟涓虹鍥涗釜鏁版嵁
+    						String bid=String.valueOf(new Date().getTime()+i);   
+    						resultStr1 = "('"+bid+"',";
+    						for (int j = 0; j < row.size(); j++) {     							
+    							if(j==0){
+    								resultStr3 = resultStr3 + "'"+row.get(j)+"',";
+    							}else if(j==3){
+    								str=row.get(j).split(",|，");
+    								for (int k = 0; k < str.length; k++) {
+        							resultStr2 = resultStr2 + "('"+bid+"','" +str[k]+"'),";	//
+    								}
         							continue;
     							}        						
-    							resultStr = resultStr + "'" + row.get(j) +"'" + ',';
-    							
-    						}    						
-    						resultStr = resultStr.substring(0, resultStr.length() - 1);
-    						resultStr2 = resultStr2.substring(0, resultStr2.length() - 1);
-    						suffix.append( "(" + resultStr + "),");
-    						suffix2.append( "(" + resultStr2 + "),");
-    								
+    							resultStr1 = resultStr1 +"'"+row.get(j) +"',";  
+    							System.out.println("row.get(j):"+row.get(j));
+    						}  					
+    						resultStr1 = resultStr1+resultStr1.substring(0,resultStr1.length()-1)+"),";
     					}
     				}
-    				//
-    	            String sql = prefix + suffix.substring(0, suffix.length() - 1) + " on duplicate key update id=values(id),name=values(name),type=values(type),applydp=values(applydp)" +
-    	            		",land_address=values(land_address),undertake=values(undertake),buildtime=values(buildtime),endtime=values(endtime)";  
-    	            String sql2 = prefix2 + suffix2.substring(0, suffix2.length() - 1) + " on duplicate key update pid=values(pid),maid=values(maid)";   			
-    	            System.out.println("sql: "+sql);
-    	            System.out.println("sql2: "+sql2);
-    	            adminManageServiceImpl.setAdminFunction(sql);
-    				adminManageServiceImpl.setAdminFunction(sql2);
+    				resultStr1=resultStr1.substring(0,resultStr1.length()-1);
+					resultStr2=resultStr2.substring(0,resultStr2.length()-1);
+					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";
+					System.out.println("resultStr1:"+resultStr1);
+					System.out.println("resultStr2:"+resultStr2);
+					System.out.println("resultStr3:"+resultStr3);
     				}
     				
     				wb.close();

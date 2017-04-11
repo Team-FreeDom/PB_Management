@@ -658,6 +658,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		ch.setTelephone(rs.getString("tel"));
 		ch.setDept(rs.getString("college"));
 		ch.setAttritube(rs.getString("attr"));
+		ch.setMajor(rs.getString("major"));
+		ch.setTitles(rs.getString("titles"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

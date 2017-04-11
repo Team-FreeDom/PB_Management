@@ -299,13 +299,7 @@ public class PersonalManageController {
 
 	    // 显示中文文件名
 	    response.setContentType("application/octet-stream;charset=UTF-8");
-	    try {
-
-		/*
-		 * response.setHeader("Content-Disposition",
-		 * "attachment;filename=" + new String(filename.getBytes(),
-		 * "iso-8859-1") + ".xlsx");
-		 */
+	    try {		
 		response.setContentType("application/octet-stream");
 		boolean isMSIE = ExcelReport.isMSBrowser(request);
 		if (isMSIE) {
@@ -388,7 +382,7 @@ public class PersonalManageController {
 			+ "arriveTime,birthdate,college,"
 			+ "contactForm,endContactTime,formerUnit,"
 			+ "hukou,startContactTime,telephone,"
-			+ "userType,workTime,workingForm) " + "values";
+			+ "userType,workTime,workingForm,majorid,titles) " + "values";
 
 		StringBuffer suffix = new StringBuffer();
 		// 遍历行（下面当i为0时可看到列头名）
@@ -403,20 +397,9 @@ public class PersonalManageController {
 			for (int j = 0; j < row.size(); j++) {
 			    resultStr = resultStr + '"' + row.get(j) + '"'
 				    + ',';
-			    // System.out.println(resultStr);
-			    // System.out.print(row.get(j) + "\t");
+			   
 			}
-			/*
-			 * resultStr = resultStr.substring(0, resultStr.length()
-			 * - 1); String insertSql =
-			 * "INSERT IGNORE INTO baseweb.userinfo(id,name,sex,ID_number,"
-			 * + "arriveTime,birthdate,college," +
-			 * "contactForm,endContactTime,formerUnit," +
-			 * "hukou,startContactTime,telephone," +
-			 * "userType,workTime,workingForm) " + "values" + "(" +
-			 * resultStr + ")"; System.out.println(insertSql);
-			 * adminManageServiceImpl.setAdminFunction(insertSql);
-			 */
+			
 			resultStr = resultStr.substring(0,
 				resultStr.length() - 1);
 			suffix.append("(" + resultStr + "),");
@@ -429,7 +412,7 @@ public class PersonalManageController {
 			+ " on duplicate key update name=values(name),sex=values(sex),ID_number=values(ID_number),arriveTime=values(arriveTime)"
 			+ ",birthdate=values(birthdate),college=values(college),contactForm=values(contactForm),endContactTime=values(endContactTime)"
 			+ ",formerUnit=values(formerUnit),hukou=values(hukou),startContactTime=values(startContactTime),telephone=values(telephone)"
-			+ ",userType=values(userType),workTime=values(workTime),workingForm=values(workingForm)";
+			+ ",userType=values(userType),workTime=values(workTime),workingForm=values(workingForm),majorid=values(majorid),titles=values(titles)";
 		// System.out.println(sql);
 		adminManageServiceImpl.setAdminFunction(sql);
 	    }
