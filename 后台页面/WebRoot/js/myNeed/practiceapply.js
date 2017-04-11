@@ -556,7 +556,7 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		async : false,
 		cache : false,
 		data:{
-			"mid":obj[Oneindex].mid
+			"mid":obj[Oneindex].tid
 		},
 	success : function(data){//
 		
