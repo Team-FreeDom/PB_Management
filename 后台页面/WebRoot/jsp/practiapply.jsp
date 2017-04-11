@@ -315,14 +315,14 @@
 						<td colspan="2">带队老师</td>
 						<td colspan="3"><input class="noborder text-center flag"
 							readonly id="leaderTeacher" type="text" value="李林"></td>
-						<td>指导教师</td>
+						<td colspan="2">指导教师</td>
 						<td colspan="4"><input readonly
 							class="noborder text-center flag" id="adviser" value=""
 							type="text"></td>
 					</tr>
 					<tr>
 						<td colspan="2">实验员姓名</td>
-						<td colspan="8"><input class="noborder text-center flag"
+						<td colspan="9"><input class="noborder text-center flag"
 							readonly id="testername" value="" type="text"></td>
 					</tr>
 
@@ -414,6 +414,64 @@
 								<div class="col-sm-6">
 									<select name="" id="selectTname" class="form-control">
 										<option value="" id="teacherNmaeID">请选择老师</option>
+										<!-- <option value="赵勇">赵勇</option>
+													<option value="李彩">李彩</option>
+													<option value="宋超">宋超</option> -->
+									</select>
+								</div>
+							</div>
+
+
+
+						</div>
+					</center>
+					<div class="modal-footer">
+						<center>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="finished">确定</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="">取消</button>
+						</center>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+<!--选择面向专业  -->
+<div class="modal fade" id="Selectmajor" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="" method="post" id="">
+				<div class="modal-content" id="modalcontent"
+					style="border:#3071a9 8px solid;width: 450px">
+					<div class="modal-header" style="background:#3071a9; color:#FFF">
+						<div class="glyphicon glyphicon-remove closeModal"
+							data-dismiss="modal"></div>
+						<h4 class="modal-title text-center">请选择面向专业</h4>
+					</div>
+
+					<center>
+						<div class="modal-body">
+							<div class="row" style="margin-bottom: 30px;">
+								<div class="col-sm-12 form-inline">
+									<lable>面向专业:</lable>
+									<input id="showmajor" type="text" class="form-control exeWidth"
+										value="">
+								</div>
+							</div>
+							<div class="row" style="margin-bottom: 30px;">
+								<div class="col-sm-6">
+									<select name="" id="majorCollege" class="form-control">
+										<option value="" id="majorcollegeID">请选择学院</option>
+										<!-- <option value="test1">信息科学技术学院</option>
+													<option value="test2">test2</option>
+													<option value="test3">test3</option> -->
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<select name="" id="majorName" class="form-control">
+										<option value="" id="majorNmaeID">请选择专业</option>
 										<!-- <option value="赵勇">赵勇</option>
 													<option value="李彩">李彩</option>
 													<option value="宋超">宋超</option> -->
