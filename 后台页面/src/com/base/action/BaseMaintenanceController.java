@@ -354,7 +354,12 @@ public class BaseMaintenanceController {
         							resultStr2 = resultStr2 + "('"+bid+"','" +str[k]+"'),";	//
     								}
         							continue;
-    							}    							
+    							}else if(j==4){ 
+    								if(row.get(j).equals("")){
+    									resultStr1 = resultStr1 + "'" + 0 +"'" + ',';   
+        								continue;
+    								}    								
+    							}
     							resultStr1 = resultStr1 + "'" + row.get(j) +"'" + ',';    							
     						}    						
     					}
