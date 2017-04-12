@@ -322,6 +322,8 @@ public class BaseMaintenanceController {
     				StringBuffer suffix = new StringBuffer();     				
 					String resultStr2 = "";    
 					String resultStr3 = "(";
+					String resultStr4 = "";
+					int showCount=0;
 					SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
 					Calendar c = Calendar.getInstance();					
 					String starttime=format0.format(c.getTime());
@@ -344,6 +346,8 @@ public class BaseMaintenanceController {
     							}
     							if(j==0){
     								resultStr3 = resultStr3 + "'"+row.get(j)+"',";
+    								resultStr4=resultStr4+row.get(j)+",";
+    								showCount++;
     							}else if(j==3){
     								str=row.get(j).split(",|，");
     								for (int k = 0; k < str.length; k++) {
@@ -363,8 +367,9 @@ public class BaseMaintenanceController {
     				}
     				
 					resultStr2=resultStr2.substring(0,resultStr2.length()-1);
-					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";					
-					tag=maintenanceservice.judge_insert_base(userid, resultStr3, suffix.substring(0,suffix.length()-1), resultStr2,list.size()-1);
+					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";	
+					resultStr4=resultStr4.substring(0,resultStr4.length()-1);
+					tag=maintenanceservice.judge_insert_base(userid, resultStr3, suffix.substring(0,suffix.length()-1), resultStr2,showCount-1,resultStr4);
     				}
     				
     				wb.close();
