@@ -364,7 +364,7 @@ public class BaseMaintenanceController {
     				
 					resultStr2=resultStr2.substring(0,resultStr2.length()-1);
 					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";					
-					tag=maintenanceservice.judge_insert_base(userid, resultStr3, suffix.substring(0,suffix.length()-1), resultStr2);
+					tag=maintenanceservice.judge_insert_base(userid, resultStr3, suffix.substring(0,suffix.length()-1), resultStr2,list.size()-1);
     				}
     				
     				wb.close();
