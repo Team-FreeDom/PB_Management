@@ -233,8 +233,8 @@ $(document).ready(function() {
 	 +'</tr>'
 	 +'<tr>'
 	 +'<td colspan="3">面向专业<span class="starColor">*</span></td>'
-	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 	 +'<td colspan="3">实验员<span class="starColor">*</span></td>'
+	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 	 +'</tr>'
 	 +'<tr>'
 	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
@@ -265,7 +265,10 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	var composition=obj[Oneindex].composition;
 	var data_composition=composition.split(',');
 	$.unique(data_composition.sort(sortNumber));
-	alert(screen.width);
+	
+	/*var tbodysize=0;
+	tbodysize=$("#table tbody").size();
+	alert(tbodysize);*/
 	if(screen.width<=1525){
 		$("#modalbody").addClass("modalbody");
 	}
@@ -603,8 +606,8 @@ $(document).on("click",".choice3",function(){//点击选择弹出面向专业的
 	
 	major_num=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectmajor").modal('show');
-	$("#showmajor").val("");
-	$("#majorName").val(majorString[major_num]);
+	$("#showmajor").val(majorString[major_num]);
+	$("#majorName").val("");
 	$("#majorCollege").val("");
 });
 
@@ -618,7 +621,7 @@ $(document).on("change","#majorName",function(e){//将专业显示在界面中
 	
 });
 	
-$(document).on("click","#finished",function(){//点击确定之后将专业在表格中显示出来
+$(document).on("click","#finished3",function(){//点击确定之后将专业在表格中显示出来
 	var showmajor=$("#showmajor").val();
 	if(showmajor===""){
 		bootbox.alert({
@@ -1007,7 +1010,7 @@ $("#save").click(function(){//弹出框的保存
 							str=str+",(";
 						}						
 						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+majorString[c]+teacherString[c]+"'"+",'"+value[c]+"'";
+						str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){

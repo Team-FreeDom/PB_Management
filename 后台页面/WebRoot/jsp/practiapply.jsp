@@ -480,7 +480,7 @@
 					<div class="modal-footer">
 						<center>
 							<button type="button" class="btn btn-primary"
-								data-dismiss="modal" id="finished">确定</button>
+								data-dismiss="modal" id="finished3">确定</button>
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal" id="">取消</button>
 						</center>
