@@ -94,8 +94,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 	@Override
 	public int judge_insert_base(String userid, String recordStr1,
-			String recordStr2, String recordStr3) {
-		int flag=maintenancedao.judge_insert_base(userid, recordStr1, recordStr2, recordStr3);
+			String recordStr2, String recordStr3,int count) {
+		int flag=maintenancedao.judge_insert_base(userid, recordStr1, recordStr2, recordStr3,count);
 		return flag;
 	}
 
