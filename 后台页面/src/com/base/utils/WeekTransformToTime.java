@@ -58,17 +58,14 @@ public class WeekTransformToTime {
     //将获得的起始周分隔，并获得最小的周次
     public static int splitWeek(String str) {
     	int value=30;
-    	String[] values=str.split("-|,|，");
-    	System.out.println("str:"+str);
+    	String[] values=str.split("-|,|，");    	
     	int weekint;
     	for(String weekStr:values){
     		weekint=Integer.valueOf(weekStr);
     		if(value>weekint){
     			value=weekint;
-    		}
-    		
-    	}
-    	//System.out.println("weekint:"+value);
+    		}    		
+    	}    	
     	return value;
     }
 

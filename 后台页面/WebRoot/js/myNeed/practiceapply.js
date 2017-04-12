@@ -7,7 +7,7 @@ var str = null;
 var writeName="";
 var showName="";
 var teacherString=[];
-
+var majorString=[];
 
 
 $(document).ready(function() {	
@@ -190,9 +190,10 @@ $(document).ready(function() {
 	 
 	
 //显示实习申请表
-	var tbodyStyle='<tbody class="tbodyID"><tr>'
+	var tbodyStyle='<tbody class="tbodyID"><tr style="background:#3071a9; color:#FFF">'
 		+'<td>序号</td>'
 		+'<td>周次<span class="starColor">*</span></td>'
+		+'<td>班级<span class="starColor">*</span></td>'
 		+'<td>开始时间<span class="starColor">*</span></td>'
 		+'<td>结束时间<span class="starColor">*</span></td>'							
 		+'<td>实习基地来源<span class="starColor">*</span></td>'
@@ -204,7 +205,8 @@ $(document).ready(function() {
 	 +'</tr>'
 	 +'<tr>'
 	 +'<td rowspan="5"><sapn class="mark"></span></td>'
-	 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
+	 +'<td><select id="weekend" type="text" class="text-center inputWidth flag"><option value="" id="weekend_option">请选择</select></td>'
+	 +'<td><select id="class_one" type="text" class="text-center inputWidth flag"><option value="" id="class_one_option">请选择</select></td>'
 	 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 	 +'<td><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 	 
@@ -219,7 +221,7 @@ $(document).ready(function() {
 	 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
 	 +'<td>目的<span class="starColor">*</span></td>'
 	 +'<td>实习经费预算</td>'
-	 +'<td colspan="5">实习内容<span class="starColor">*</span></td>'
+	 +'<td colspan="6">实习内容<span class="starColor">*</span></td>'
 	 
 	 +'</tr>'
 	 +'<tr>'
@@ -227,22 +229,23 @@ $(document).ready(function() {
 	 +'<td><input id="phone" type="text" class="flag"></td>'
 	 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
 	 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
-	 +'<td colspan="5"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
+	 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
 	 +'</tr>'
 	 +'<tr>'
-	 +'<td colspan="2">面向专业</td>'
+	 +'<td colspan="3">面向专业<span class="starColor">*</span></td>'
 	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 	 +'<td colspan="3">实验员<span class="starColor">*</span></td>'
 	 +'</tr>'
 	 +'<tr>'
-	 +'<td colspan="2"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
 	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
 	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
 	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
-	$("#modalbody").removeClass("modalbody");
+	$("#modalbody").removeClass("modalbody");	
 	Oneindex= $(this).find("span").attr("id");
+	$("#weekend option:gt(0)").remove();//移除周次select的原来的option
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
@@ -251,9 +254,23 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#grade").val(obj[Oneindex].credit);
 	$("#number").val(obj[Oneindex].count);
 	$("#weeks").val(obj[Oneindex].weekClassify);
-	$("#leaderTeacher").val(obj[Oneindex].tname);
-	if(screen.width<=1366){
+	$("#leaderTeacher").val(obj[Oneindex].tname);	
+	
+	//获得周次的数组
+	var fromweek=obj[Oneindex].week;
+	var data_week=fromweek.split(/[,-]/);
+	$.unique(data_week.sort(sortNumber));
+	
+	//获得班级的数组
+	var composition=obj[Oneindex].composition;
+	var data_composition=composition.split(',');
+	$.unique(data_composition.sort(sortNumber));
+	alert(screen.width);
+	if(screen.width<=1525){
 		$("#modalbody").addClass("modalbody");
+	}
+	if(screen.width<=1708&&screen.width>1525){
+		$("#modalbody").addClass("modalbody2");
 	}
 	$.ajax({
 		url:'getplandata.do',
@@ -265,8 +282,19 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		success:function(data){	
 			var teachername="";
 			var testername="";
+			var majorname="";
 			for(var i=0;i<data.length;i++){
 				$("#table tbody:last-child").after(tbodyStyle);
+				for(var week in data_week){
+					$("#table tbody:last-child").find("#weekend_option").after(
+							"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
+							);
+				}	
+				for(var composition_0 in data_composition){
+					$("#table tbody:last-child").find("#class_one_option").after(
+							"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
+							);
+				}	
 				$.ajax({
 					type : 'POST',
 					dataType : 'json',		
@@ -308,6 +336,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				});
 				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find("#weekend").val(data[i].week);
+				$("#table tbody:last-child").find("#class_one").val(data[i].grade);//班级
 				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
 				$("#table tbody:last-child").find("#endweek").val(data[i].endtime);
 				$("#table tbody:last-child").find("#content").val(data[i].content);
@@ -321,6 +350,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#budget").val(data[i].expense);				
 				$("#table tbody:last-child").find("#Tea").val("老师:"+data[i].guideTeacher);
 				$("#table tbody:last-child").find("#tes").val("实验员:"+data[i].assistant);
+				$("#table tbody:last-child").find("#facemajoy").val("面向专业:"+data[i].major_oriented);
 				
 				$("#table tbody:last-child").find("#schoolBase").show();
 				$("#table tbody:last-child").find("#schoolBase").addClass("flag");
@@ -331,15 +361,19 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				if(i!==data.length-1){
 					teachername=teachername+data[i].guideTeacher+",";
 					testername=testername+data[i].assistant+",";
+					majorname=majorname+data[i].major_oriented+',';
 				}else{
 					teachername=teachername+data[i].guideTeacher;
 					testername=testername+data[i].assistant;
+					majorname=majorname+data[i].major_oriented;
 				}
 				value[i]=data[i].assistant;
 				teacherString[i]=data[i].guideTeacher;
+				majorString[i]=data[i].major_oriented;
 			}
 			$("#testername").val(testername);
 			$("#adviser").val(teachername);
+			$("#major").val(majorname);
 		}
 	});
 	
@@ -364,13 +398,16 @@ $.ajax({
 			$("#collegeID2").after(
 					"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
 					);
+			$("#majorcollegeID").after(
+					"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+					);
 		}
 	}
 });
 	
 	$("#Applychart").show();
 });
-	
+
 	
 /*实习申请表里面的操作*/
 	//实习基地来源改变，对应的实习基地改变
@@ -440,6 +477,27 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
+
+$(document).on("change","#majorCollege",function(){
+	var college=$("#majorCollege").val();
+	$("#majorName option:gt(0)").remove();
+	$.ajax({
+		url : 'getCollege_Major.do',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			"college" : college,								
+		},
+	success : function(data){	
+		for(var i=0;i<data.length;i++){//获取老师名字下拉框
+			$("#majorNmaeID").after(
+			"<option class='rest' value="+data[i].major+">"+ data[i].major + "</option>"
+			);
+		}
+	}
+});
+});
+
 $(document).on("change","#selectCollege2",function(){
 	var college=$("#selectCollege2").val();
 	$("#selectTname2 option:gt(0)").remove();
@@ -540,13 +598,45 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	$("#testername").val(str);
 });
 
+var major_num;
 $(document).on("click",".choice3",function(){//点击选择弹出面向专业的弹出框
 	
-	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	major_num=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectmajor").modal('show');
 	$("#showmajor").val("");
-	//$("#tester").val(value[selectNum]);
+	$("#majorName").val(majorString[major_num]);
 	$("#majorCollege").val("");
+});
+
+$(document).on("change","#majorName",function(e){//将专业显示在界面中
+	var teststring=$("#showmajor").val();
+	var testvalue=teststring.split(" ");
+	testvalue.push(e.target.value);
+	teststring=testvalue.join(" ");
+	$("#showmajor").val(teststring);
+	
+	
+});
+	
+$(document).on("click","#finished",function(){//点击确定之后将专业在表格中显示出来
+	var showmajor=$("#showmajor").val();
+	if(showmajor===""){
+		bootbox.alert({
+			message : "面向专业不能为空",
+			size : 'small'
+		});
+		return;
+	}else{
+		majorString[major_num]=showmajor;
+	}
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===major_num){
+			$(this).find('#facemajoy').val("面向专业："+showmajor);
+		}
+	});
+	var str=majorString.join(',');
+	$("#major").val(str);
 });
 //实习表中添加一条记录
 
@@ -564,8 +654,28 @@ $(document).on("click","#closemodal",function(){
 
 
 
-$(document).on("click","#addTbody",function(){//添加一条空表的记录
+$(document).on("click","#addTbody",function(){//添加一条空表的记录	
 	$("#table tbody:last-child").after(tbodyStyle);
+	
+	var fromweek=$("#fromweek").val();
+	var data_week=fromweek.split(/[,-]/);
+	$.unique(data_week.sort(sortNumber));
+	for(var week in data_week){
+		$("#table tbody:last-child").find("#weekend_option").after(
+				"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
+				);
+	}	
+	
+	//获得班级的数组
+	var composition=$("#class").val();
+	var data_composition=composition.split(',');
+	$.unique(data_composition.sort(sortNumber));
+	for(var composition_0 in data_composition){
+		$("#table tbody:last-child").find("#class_one_option").after(
+				"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
+				);
+	}	
+	
 	var tbNum=$("#table").children('tbody').length;
 	$("#table tbody:last-child").find(".mark").html(tbNum-2);
 	$.ajax({
@@ -683,6 +793,8 @@ $("#save").click(function(){//弹出框的保存
 	var practiceClass="";     var phone="";
 	var aim="";     var Tea="";
 	var tes="";
+	var major="";
+	var class_one="";
 	var reg=/^[1-9][0-9]*$/;
 	$(".tbodyID").each(function(){
 		y++;
@@ -690,6 +802,12 @@ $("#save").click(function(){//弹出框的保存
 		if(week===""){
 			return false;
 		}
+		
+		class_one=$(this).find("#class_one").val();
+		if(class_one===""){
+			return false;
+		}
+		
 				
 		startweek=$(this).find("#startweek").val();
 		if(startweek===""){
@@ -732,6 +850,11 @@ $("#save").click(function(){//弹出框的保存
 			return false;
 		}
 		
+		major=$(this).find("#facemajoy").val();
+		if(major===""){
+			return false;
+		}
+		
 		Tea=$(this).find("#Tea").val();
 		if(Tea===""){
 			return false;
@@ -750,14 +873,15 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
-	week=week.trim();
-	if(!week.match(reg)){
+	
+	if(class_one===""){
 		bootbox.alert({
-			message : "第"+y+"条记录的实习周次只能为数字",
+			message : "请填写第"+y+"条记录的班级",
 			size : 'small'
 		});
 		return;
-	}
+		}
+	
 	if(startweek===""){
 		bootbox.alert({
 			message : "请填写第"+y+"条记录的开始时间",
@@ -840,6 +964,13 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
+	if(major===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的面向专业",
+			size : 'small'
+		});
+		return;
+		}
 	if(Tea===""){
 		bootbox.alert({
 			message : "请选择第"+y+"条记录的指导老师",
@@ -876,7 +1007,7 @@ $("#save").click(function(){//弹出框的保存
 							str=str+",(";
 						}						
 						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+teacherString[c]+"'"+",'"+value[c]+"'";
+						str=str+"'"+majorString[c]+teacherString[c]+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){
@@ -898,7 +1029,7 @@ $("#save").click(function(){//弹出框的保存
 							if(x===11){
 								str=str+","+$(this).find("option:selected").attr("id");
 							}
-							if(x===12){
+							if(x===12||x===13){
 								if($(this).val()===""){
 								str=str+','+"null";
 								}else{
@@ -1002,6 +1133,11 @@ $(document).on("click","#finishTime",function(){
 });	
 
 } );
+
+function sortNumber(a,b)
+{
+	return a<b?a:b;
+}
 
 	
 	
