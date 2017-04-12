@@ -463,18 +463,12 @@
 							<div class="row" style="margin-bottom: 30px;">
 								<div class="col-sm-6">
 									<select name="" id="majorCollege" class="form-control">
-										<option value="" id="majorcollegeID">请选择学院</option>
-										<!-- <option value="test1">信息科学技术学院</option>
-													<option value="test2">test2</option>
-													<option value="test3">test3</option> -->
+										<option value="" id="majorcollegeID">请选择学院</option>										
 									</select>
 								</div>
 								<div class="col-sm-6">
 									<select name="" id="majorName" class="form-control">
-										<option value="" id="majorNmaeID">请选择专业</option>
-										<!-- <option value="赵勇">赵勇</option>
-													<option value="李彩">李彩</option>
-													<option value="宋超">宋超</option> -->
+										<option value="" id="majorNmaeID">请选择专业</option>										
 									</select>
 								</div>
 							</div>

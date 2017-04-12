@@ -229,7 +229,8 @@
 															<form>
 																<table class="table">
 																	<tr>
-																		<td hidden id="tag_0">${tag}</td>
+																		<td hidden id="tag_0">${flag}</td>
+																		<td hidden id="tag_1">${tag}</td>
 																		<td>基地类型 <select name="status" id="shaiType"
 																			style="width:150px;margin-top:0px;">
 																				<option value="-1" id="shaiTypeh" selected>显示全部</option>
