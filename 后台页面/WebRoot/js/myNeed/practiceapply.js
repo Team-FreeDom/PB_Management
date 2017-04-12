@@ -190,44 +190,55 @@ $(document).ready(function() {
 	 
 	
 //显示实习申请表
-	 var tbodyStyle='<tbody class="tbodyID"><tr>'
-							+'<td>序号</td>'
-							+'<td>周次<span class="starColor">*</span></td>'
-							+'<td>开始时间<span class="starColor">*</span></td>'
-							+'<td>结束时间<span class="starColor">*</span></td>'
-							+'<td>实习内容<span class="starColor">*</span></td>'
-							+'<td>实习基地来源<span class="starColor">*</span></td>'
-							+'<td>实习地点<span class="starColor">*</span></td>'
-							+'<td>实习类别<span class="starColor">*</span></td>'
-							+'<td>备注</td>'
-							+'<td>操作</td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td rowspan="3"><sapn class="mark"></span></td>'
-						 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
-						 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
-						 +'<td><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
-						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
-						 +'<td><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
-						 +'<td id="practicePlace"><select id="schoolBase" class="flag" style="width:150px;display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
-						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
-						 +'<td><input id="remark" type="text" class="flag"></td>'
-						 +'<td rowspan="3"><span class="deleteID" id="">删除</span></td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td>实习形式<span class="starColor">*</span></td>'
-						 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
-						 +'<td>目的<span class="starColor">*</span></td>'
-						 +'<td>实习经费预算</td>'
-						 +'<td colspan="4">指导老师/实验员<span class="starColor">*</span></td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-						 +'<td><input id="phone" type="text" class="flag"></td>'
-						 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
-						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
-						 +'</tr></tbody>';
+	var tbodyStyle='<tbody class="tbodyID"><tr>'
+		+'<td>序号</td>'
+		+'<td>周次<span class="starColor">*</span></td>'
+		+'<td>开始时间<span class="starColor">*</span></td>'
+		+'<td>结束时间<span class="starColor">*</span></td>'							
+		+'<td>实习基地来源<span class="starColor">*</span></td>'
+		+'<td>实习地点<span class="starColor">*</span></td>'
+		+'<td>实习类别<span class="starColor">*</span></td>'
+		+'<td>实习形式<span class="starColor">*</span></td>'
+		+'<td>备注</td>'
+		+'<td>操作</td>'
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td rowspan="5"><sapn class="mark"></span></td>'
+	 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
+	 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
+	 +'<td><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
+	 
+	 +'<td><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
+	 +'<td id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
+	 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+	 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
+	 +'<td><input id="remark" type="text" class="flag"></td>'
+	 +'<td rowspan="5"><span class="deleteID" id="">删除</span></td>'
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
+	 +'<td>目的<span class="starColor">*</span></td>'
+	 +'<td>实习经费预算</td>'
+	 +'<td colspan="5">实习内容<span class="starColor">*</span></td>'
+	 
+	 +'</tr>'
+	 +'<tr>'
+	 
+	 +'<td><input id="phone" type="text" class="flag"></td>'
+	 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
+	 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
+	 +'<td colspan="5"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td colspan="2">面向专业</td>'
+	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
+	 +'<td colspan="3">实验员<span class="starColor">*</span></td>'
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td colspan="2"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
+	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
+	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#modalbody").removeClass("modalbody");
@@ -528,7 +539,15 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	var str=value.join(',');
 	$("#testername").val(str);
 });
+
+$(document).on("click",".choice3",function(){//点击选择弹出面向专业的弹出框
 	
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectmajor").modal('show');
+	$("#showmajor").val("");
+	//$("#tester").val(value[selectNum]);
+	$("#majorCollege").val("");
+});
 //实习表中添加一条记录
 
 	

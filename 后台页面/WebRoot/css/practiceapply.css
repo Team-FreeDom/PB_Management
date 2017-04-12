@@ -101,9 +101,7 @@ table tbody tr td{
 	text-decoration: underline;
 	cursor: pointer;
 }
-/*input[type=date] {
-     line-height: 20px !important; 
-}*/
+
 #table{
 	width:100%;
 }
@@ -127,9 +125,7 @@ table tbody tr td{
 .starColor{
 	color: #F70004;
 }
-.padding{
-	margin-left: 15px !important;
-}
+
 .deleteID{
 	color:#F90409;
 	text-decoration: underline;
@@ -141,13 +137,7 @@ table tbody tr td{
 .modeClass{
 	text-align:right;
 }
-/* .tooltip-inner{
-	max-width:200px;
-	border-radius:4px;
-	text-align:center;
-	background-color:#a4bccd;
-	color:#fff;
-} */
+
 .spanstly{
 	color: #777 !important;
     font-family: '微软雅黑' !important;
@@ -164,10 +154,16 @@ table tbody tr td{
 	height:35px;
 }	
 
-
-	.modalbody{
+.modalbody{
 	height:412px;
 	overflow-y:auto;
 	}
+.startweek{
+	width:100px;
+}
+.endweek{
+	width:100px;
+}
+
 
 
