@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -218,7 +219,7 @@ public class PlanController implements ServletContextAware{
 
 	// 获取课程表记录编号
 	int id = Integer.valueOf(request.getParameter("courseID"));
-	System.out.println(id + "=====haha");
+	//System.out.println(id + "=====haha");
 
 	String plandata = request.getParameter("str");
 	System.out.println(plandata + "liiiiiii");
@@ -337,6 +338,26 @@ public class PlanController implements ServletContextAware{
 	String college = request.getParameter("college");
 	// 获得userinfo表里的教师集合
 	List<UserInfo> list = planservice.getCollege_Teacher(college);
+	JSONArray json = JSONArray.fromObject(list);
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(json.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+	return null;
+    }
+    // 获取学院所对应的专业
+    @RequestMapping("/getCollege_Major.do")
+    public String getCollege_Major(HttpServletRequest request,
+	    HttpServletResponse response) {
+
+	// 获取前台传过来的学院
+	String college = request.getParameter("college");
+	// 获得userinfo表里的教师集合
+	List<Map<String, String>> list = planservice.getCollege_Major(college);
 	JSONArray json = JSONArray.fromObject(list);
 	response.setContentType("text/html;charset=UTF-8");
 	try {

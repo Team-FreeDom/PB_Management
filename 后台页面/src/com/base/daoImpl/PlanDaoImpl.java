@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -228,6 +230,7 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setGuideTeacher(rs.getString("guideTeacher"));
 		ch.setAssistant(rs.getString("assistant"));
 		ch.setRemark(rs.getString("remark"));
+		ch.setMajor_oriented(rs.getString("major_oriented"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -460,5 +463,34 @@ public class PlanDaoImpl implements PlanDao {
 		}
 		return list;
 	}
+       //通过学院获取专业
+	@Override
+	public List<Map<String, String>> getCollege_Major(String college) {
+	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		HashMap<String, String> map = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.find_major(?)}");
+		    sp.setString(1,college);
+		    sp.execute();
+		    rs = sp.getResultSet();
+		    while (rs.next()) {	
+			map = new HashMap<String, String>();
+			map.put("major", rs.getString("mname"));
+			list.add(map);
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	    }
 
-}
+	}

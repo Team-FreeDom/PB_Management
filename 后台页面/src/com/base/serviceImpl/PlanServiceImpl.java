@@ -1,6 +1,7 @@
 package com.base.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class PlanServiceImpl implements PlanService {
     // 获取该用户所在学院的实习计划
     @Override
     public PlanList getThisCollegePlan(String userid, int pageindex, int size,
-	    int order, String orderDir, String searchValue,String semester) {
+	    int order, String orderDir, String searchValue, String semester) {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
@@ -42,7 +43,7 @@ public class PlanServiceImpl implements PlanService {
 	    columnName = "tname";
 	}
 	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
-		columnName, orderDir, searchValue,semester);
+		columnName, orderDir, searchValue, semester);
 	return list;
     }
 
@@ -87,30 +88,37 @@ public class PlanServiceImpl implements PlanService {
 	plandao.alterRecord(plandata);
 
     }
-    //检测学年学期和数据条数
+
+    // 检测学年学期和数据条数
     @Override
     public int checkinfo(String userid, String semester) {
-	int record=plandao.checkinfo(userid, semester);
+	int record = plandao.checkinfo(userid, semester);
 	return record;
     }
 
+    @Override
+    public List<String> getProperBase(String typename) {
+	List<String> list = plandao.getProperBase(typename);
+	return list;
+    }
 
-	@Override
-	public List<String> getProperBase(String typename) {
-		List<String> list=plandao.getProperBase(typename);
-		return list;
+    @Override
+    public List<PracticeCollection> plandata_export(String userid,
+	    String finishCondition, String semester) {
+	List<PracticeCollection> list = null;
+	if (finishCondition.equals("0")) {
+	    list = plandao.plandata_export_0(userid, semester);
+	} else {
+	    list = plandao.plandata_export_1(userid, finishCondition, semester);
 	}
+	return list;
+    }
 
-	@Override
-	public List<PracticeCollection> plandata_export(String userid,
-			String finishCondition, String semester) {
-		List<PracticeCollection> list=null;
-		if(finishCondition.equals("0")){
-			list=plandao.plandata_export_0(userid,semester);			
-		}else{
-			list=plandao.plandata_export_1(userid, finishCondition, semester);			
-		}
-		return list;
-	}
+    // 通过学院获取专业
+    @Override
+    public List<Map<String, String>> getCollege_Major(String college) {
+	List<Map<String, String>> list=plandao.getCollege_Major(college);
+	return list;
+    }
 
 }
