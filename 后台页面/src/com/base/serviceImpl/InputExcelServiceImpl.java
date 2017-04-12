@@ -307,8 +307,7 @@ public class InputExcelServiceImpl
 			endLine = sheet.getLastRowNum() + 1;
 		}else{
 			endLine += 1;
-		}
-		//System.out.println(startLine+" "+endLine);
+		}		
 		if(endLine==1)//空表不能导入，否则报错
 			return null;
 		
@@ -324,7 +323,7 @@ public class InputExcelServiceImpl
 			}
 			//int rowSize = row.getLastCellNum();
 			//System.out.println(rowSize);
-			int rowSize = 8; //固定导入excel表格每行8列
+			int rowSize = 7; //固定导入excel表格每行8列
 			List<String> rowList = new ArrayList<String>();
 			for (int j = 0; j < rowSize; j++)
 			{

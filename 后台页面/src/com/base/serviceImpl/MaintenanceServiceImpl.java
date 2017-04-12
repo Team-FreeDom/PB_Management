@@ -91,4 +91,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		maintenancedao.increaseBaseInfo(str1, str2);
 	}
 
+
+	@Override
+	public int judge_insert_base(String userid, String recordStr1,
+			String recordStr2, String recordStr3) {
+		int flag=maintenancedao.judge_insert_base(userid, recordStr1, recordStr2, recordStr3);
+		return flag;
+	}
+
 }

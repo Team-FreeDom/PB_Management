@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,6 +41,7 @@ import com.base.service.MaintenanceService;
 import com.base.service.baseApplyService;
 import com.base.serviceImpl.AdminManageServiceImpl;
 import com.base.serviceImpl.InputExcelServiceImpl;
+import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
 /**
@@ -286,9 +288,8 @@ public class BaseMaintenanceController {
     //批量导入实习基地信息
     @RequestMapping("/importBaseExcel.do")   
     public String importBaseInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map){
-    	
-    
+	    HttpServletResponse response, ModelMap map){   	
+            
     			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
     			
     			MultipartFile mFile = multipartRequest.getFile("fileResource");
@@ -297,6 +298,8 @@ public class BaseMaintenanceController {
     			String fileName = mFile.getOriginalFilename();
     			String filename = "";
     			boolean flag=true;
+    			boolean flag_0=true;
+    			int tag=0;
     			try{
     			if (!fileName.isEmpty()) {
     				filename = new Date().getTime() + "$" + fileName;
@@ -315,17 +318,30 @@ public class BaseMaintenanceController {
     				List<List<String>> list = InputExcelServiceImpl.getExcelBaseRows(InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
     				
     				if(CollectionUtils.isNotEmpty(list)){   									
-    				
-    				String resultStr1 = "";
+    				String userid = CookieUtils.getUserid(request);
+    				StringBuffer suffix = new StringBuffer();     				
 					String resultStr2 = "";    
 					String resultStr3 = "(";
+					SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+					Calendar c = Calendar.getInstance();					
+					String starttime=format0.format(c.getTime());
+					c.add(Calendar.YEAR,1);
+					String endtime=format0.format(c.getTime());
 					String[] str=null;
-    				for (int i = 1; i < list.size(); i++) {    										
+    				for (int i = 1; i < list.size(); i++) {
+    					String resultStr1 = "";
     					List<String> row = list.get(i);    					
     					if (row != null && row.size() > 0) {    						
-    						String bid=String.valueOf(new Date().getTime()+i);   
-    						resultStr1 = "('"+bid+"',";
-    						for (int j = 0; j < row.size(); j++) {     							
+    						String bid=String.valueOf(new Date().getTime()+i);     						
+    						resultStr1="('"+bid+"',";
+    						for (int j = 0; j < row.size(); j++) {
+    							//判断必填字段是否是空数据
+    							if(j>=0&&j<=2){
+    								if(row.get(j).equals("")){
+    									flag_0=false;
+    									break;
+    								}
+    							}
     							if(j==0){
     								resultStr3 = resultStr3 + "'"+row.get(j)+"',";
     							}else if(j==3){
@@ -334,19 +350,21 @@ public class BaseMaintenanceController {
         							resultStr2 = resultStr2 + "('"+bid+"','" +str[k]+"'),";	//
     								}
         							continue;
-    							}        						
-    							resultStr1 = resultStr1 +"'"+row.get(j) +"',";  
-    							System.out.println("row.get(j):"+row.get(j));
-    						}  					
-    						resultStr1 = resultStr1+resultStr1.substring(0,resultStr1.length()-1)+"),";
+    							}    							
+    							resultStr1 = resultStr1 + "'" + row.get(j) +"'" + ',';    							
+    						}    						
+    					}
+    					if(flag_0){
+    						resultStr1=resultStr1+"'"+starttime+"','"+endtime+"')";    				
+        					suffix.append(resultStr1 + ",");    
+    					}else{
+    						flag_0=true;
     					}
     				}
-    				resultStr1=resultStr1.substring(0,resultStr1.length()-1);
+    				
 					resultStr2=resultStr2.substring(0,resultStr2.length()-1);
-					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";
-					System.out.println("resultStr1:"+resultStr1);
-					System.out.println("resultStr2:"+resultStr2);
-					System.out.println("resultStr3:"+resultStr3);
+					resultStr3=resultStr3.substring(0,resultStr3.length()-1)+")";					
+					tag=maintenanceservice.judge_insert_base(userid, resultStr3, suffix.substring(0,suffix.length()-1), resultStr2);
     				}
     				
     				wb.close();
@@ -357,10 +375,10 @@ public class BaseMaintenanceController {
     				}catch(Exception e){
     					flag=false;
     					e.printStackTrace();
-    				}	
-    				
+    				}	   				
     			
-    			map.addAttribute("tag", flag);
+    			map.addAttribute("flag", flag);
+    			map.addAttribute("tag", tag);
     			return "baseMaintain";   	
     }
     
