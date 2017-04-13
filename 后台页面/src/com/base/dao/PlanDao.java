@@ -1,6 +1,7 @@
 package com.base.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
@@ -100,4 +101,10 @@ public interface PlanDao {
     3.函数功能：根据条件获取用户的班级安排的数据
    */
     public List<Classcourse> plandataClass_export(String userid,String semester);
+    /**
+     * 通过学院获取专业
+     * @param college
+     * @return
+     */
+    public List<Map<String, String>> getCollege_Major(String college);
 }

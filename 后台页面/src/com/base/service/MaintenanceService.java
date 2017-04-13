@@ -60,6 +60,14 @@ public interface MaintenanceService {
 	 返回值：   无返回值
 	 函数功能：增加实习基地
 	 */
-    public void increaseBaseInfo(String str1,String str2);    
+    public void increaseBaseInfo(String str1,String str2); 
+    
+    /*
+	  参数说明：userid,为用户编号; recordStr1,为基地名称集合;recordStr2,为基地记录集合;recordStr3,,为基地-专业集合   
+	 返回值：   int型，值为0,代表基地名称已存在;值为1,代表基地名称重复;值为2,代表插入成功
+	 函数功能：判断是否存在基地名称，若不存在，则插入基地信息你，否则不插入
+	 */
+	public int judge_insert_base(String userid, String recordStr1,String recordStr2,String recordStr3,int count,String resultStr4);
+	
    
 }

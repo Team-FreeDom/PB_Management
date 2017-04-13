@@ -155,7 +155,11 @@ table tbody tr td{
 }	
 
 .modalbody{
-	height:412px;
+	height:432px;
+	overflow-y:auto;
+	}
+.modalbody2{
+	height:592px;
 	overflow-y:auto;
 	}
 .startweek{

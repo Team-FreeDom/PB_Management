@@ -3,12 +3,28 @@ var obj = [];
 $(document)
 		.ready(
 				function() {
-					if($("#tag_0").text()=="false"){
+					
+					var tag_0=$("#tag_0").text();
+					if(tag_0=="false"){
 						bootbox.alert({
 							message : "您导入的Excel文件格式有错,请重新选择",
 							size : 'small'
 						});
+					}else if(tag_0=="true"){
+						var tag_1=$("#tag_1").text();
+						if(tag_1=="1"){
+							bootbox.alert({
+								message : "您导入了已存在的基地名称，请重新导入",
+								size : 'small'
+							});
+						}else if(tag_1=="2"){
+							bootbox.alert({
+								message : "您导入数据中存在相同的基地名称，请重新导入",
+								size : 'small'
+							});
+						}						
 					}
+					
 					
 					// 分页表格
 					var page = $('#baseMaintain')

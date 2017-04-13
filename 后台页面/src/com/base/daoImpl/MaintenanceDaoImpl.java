@@ -278,5 +278,41 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		
 		
 	}
+	
+	//判断是否存在基地名称，若不存在，则插入基地信息你，否则不插入
+		@Override
+		public int judge_insert_base(String userid, String recordStr1,String recordStr2,String recordStr3,int count,String resultStr4) {
+			Connection conn = null;
+			CallableStatement sp = null;
+			System.out.println("record1:"+recordStr1);
+			System.out.println("record2:"+recordStr2);
+			System.out.println("record3:"+recordStr3);			
+			System.out.println("userid:"+userid);
+			System.out.println("record4:"+resultStr4);
+			System.out.println("count:"+count);
+			int flag=0;
+			try {
+				conn = (Connection) SessionFactoryUtils.getDataSource(
+						sessionFactory).getConnection();
+				sp = (CallableStatement) conn
+						.prepareCall("{call baseweb.import_prabaseinfo(?,?,?,?,?,?,?)}");
+				sp.setString(1, recordStr1);
+				sp.setString(2, recordStr2);
+				sp.setString(3, recordStr3);
+				sp.setString(4, userid);
+				sp.setInt(5, count);
+				sp.setString(6, resultStr4);
+				sp.registerOutParameter(7, java.sql.Types.INTEGER);
+				sp.execute();
+				flag=sp.getInt(7);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				SqlConnectionUtils.free(conn, sp, null);
+			}
+			System.out.println("flag:"+flag);
+			return flag;
+		}
 
 }
