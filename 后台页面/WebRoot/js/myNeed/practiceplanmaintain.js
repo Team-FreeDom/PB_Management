@@ -1557,13 +1557,16 @@ $(document)
 					 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 					 +'</tr>'
 					 +'<tr>'
-					 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
-					 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
-					 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
+					 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+					 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
+					 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
 					 +'</tr></tbody>';
 				
 				
 				 $(document).on("click", "#practiceplanmaintain tbody tr td", function() {
+					 $("#modalbody").removeClass("modalbody");	
+						$("#modalbody").removeClass("modalbody2");
+						$("#modalbody").removeClass("modalbody3");
 				     var itLength=$(this).find("input").length;
 					 if(itLength!=0){
 					    return;
@@ -1590,15 +1593,8 @@ $(document)
 				var data_composition=composition.split(',');
 				$.unique(data_composition.sort(sortNumber));
 				
-				/*var tbodysize=0;
-				tbodysize=$("#table tbody").size();
-				alert(tbodysize);*/
-				if(screen.width<=1525){
-					$("#modalbody").addClass("modalbody");
-				}
-				if(screen.width<=1708&&screen.width>1525){
-					$("#modalbody").addClass("modalbody2");
-				}
+				
+				
 				$.ajax({
 					url:'getplandata.do',
 					type:"POST",
@@ -1731,7 +1727,17 @@ $(document)
 						}
 					}
 				});
-					
+				var tbodylength=$("#table tbody").size();
+
+				if(screen.width<=1525&&tbodylength>2){
+					$("#modalbody").addClass("modalbody");
+				}
+				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+					$("#modalbody").addClass("modalbody2");
+				}
+				if(screen.width>1708&&tbodylength>3){
+					$("#modalbody").addClass("modalbody2");
+				}
 					$("#Applychart").show();
 				});
 				
