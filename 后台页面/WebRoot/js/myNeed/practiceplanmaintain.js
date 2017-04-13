@@ -1564,6 +1564,9 @@ $(document)
 				
 				
 				 $(document).on("click", "#practiceplanmaintain tbody tr td", function() {
+					 $("#modalbody").removeClass("modalbody");	
+						$("#modalbody").removeClass("modalbody2");
+						$("#modalbody").removeClass("modalbody3");
 				     var itLength=$(this).find("input").length;
 					 if(itLength!=0){
 					    return;
@@ -1590,15 +1593,8 @@ $(document)
 				var data_composition=composition.split(',');
 				$.unique(data_composition.sort(sortNumber));
 				
-				/*var tbodysize=0;
-				tbodysize=$("#table tbody").size();
-				alert(tbodysize);*/
-				if(screen.width<=1525){
-					$("#modalbody").addClass("modalbody");
-				}
-				if(screen.width<=1708&&screen.width>1525){
-					$("#modalbody").addClass("modalbody2");
-				}
+				
+				
 				$.ajax({
 					url:'getplandata.do',
 					type:"POST",
@@ -1731,7 +1727,17 @@ $(document)
 						}
 					}
 				});
-					
+				var tbodylength=$("#table tbody").size();
+
+				if(screen.width<=1525&&tbodylength>2){
+					$("#modalbody").addClass("modalbody");
+				}
+				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+					$("#modalbody").addClass("modalbody2");
+				}
+				if(screen.width>1708&&tbodylength>3){
+					$("#modalbody").addClass("modalbody2");
+				}
 					$("#Applychart").show();
 				});
 				
