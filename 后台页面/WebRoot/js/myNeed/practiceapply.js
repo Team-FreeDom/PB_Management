@@ -243,7 +243,9 @@ $(document).ready(function() {
 	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
+	alert(screen.width);
 	$("#modalbody").removeClass("modalbody");	
+	$("#modalbody").removeClass("modalbody2");
 	Oneindex= $(this).find("span").attr("id");
 	$("#weekend option:gt(0)").remove();//移除周次select的原来的option
 	$("#division").val(obj[Oneindex].college);
@@ -266,15 +268,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	var data_composition=composition.split(',');
 	$.unique(data_composition.sort(sortNumber));
 	
-	/*var tbodysize=0;
-	tbodysize=$("#table tbody").size();
-	alert(tbodysize);*/
-	if(screen.width<=1525){
-		$("#modalbody").addClass("modalbody");
-	}
-	if(screen.width<=1708&&screen.width>1525){
-		$("#modalbody").addClass("modalbody2");
-	}
+	
 	$.ajax({
 		url:'getplandata.do',
 		type:"POST",
@@ -407,7 +401,14 @@ $.ajax({
 		}
 	}
 });
-	
+var tbodylength=$("#table tbody").size();
+
+if(screen.width<=1525&&tbodylength>2){
+	$("#modalbody").addClass("modalbody");
+}
+if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
 	$("#Applychart").show();
 });
 
@@ -657,7 +658,15 @@ $(document).on("click","#closemodal",function(){
 
 
 
-$(document).on("click","#addTbody",function(){//添加一条空表的记录	
+$(document).on("click","#addTbody",function(){//添加一条空表的记录
+	var tbodylength=$("#table tbody").size();
+	if(screen.width<=1525&&tbodylength>2){
+		$("#modalbody").addClass("modalbody");
+	}
+	if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+		//alert("yes");
+		$("#modalbody").addClass("modalbody2");
+	}
 	$("#table tbody:last-child").after(tbodyStyle);
 	
 	var fromweek=$("#fromweek").val();
