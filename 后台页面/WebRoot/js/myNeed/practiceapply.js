@@ -246,6 +246,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	alert(screen.width);
 	$("#modalbody").removeClass("modalbody");	
 	$("#modalbody").removeClass("modalbody2");
+	$("#modalbody").removeClass("modalbody3");
 	Oneindex= $(this).find("span").attr("id");
 	$("#weekend option:gt(0)").remove();//移除周次select的原来的option
 	$("#division").val(obj[Oneindex].college);
@@ -407,6 +408,9 @@ if(screen.width<=1525&&tbodylength>2){
 	$("#modalbody").addClass("modalbody");
 }
 if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
+if(screen.width>1708&&tbodylength>3){
 	$("#modalbody").addClass("modalbody2");
 }
 	$("#Applychart").show();
@@ -664,8 +668,10 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		$("#modalbody").addClass("modalbody");
 	}
 	if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
-		//alert("yes");
 		$("#modalbody").addClass("modalbody2");
+	}
+	if(screen.width>1708&&tbodylength>3){
+		$("#modalbody").addClass("modalbody3");
 	}
 	$("#table tbody:last-child").after(tbodyStyle);
 	
