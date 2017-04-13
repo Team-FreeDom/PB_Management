@@ -231,6 +231,7 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setAssistant(rs.getString("assistant"));
 		ch.setRemark(rs.getString("remark"));
 		ch.setMajor_oriented(rs.getString("major_oriented"));
+		ch.setGrade(rs.getString("grade"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

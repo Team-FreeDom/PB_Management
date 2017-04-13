@@ -451,8 +451,12 @@
 							class="noborder">
 						</td>
 
-						<td colspan="2">班级：<input readonly type="text"
+						<td>班级：<input readonly type="text"
 							class="noborder" id="class" value="">
+						</td>
+						
+						<td>起始周：<input readonly type="text"
+							class="noborder" id="fromweek" value="">
 						</td>
 
 					</tr>
@@ -729,7 +733,7 @@
 							<tr>
 								<td>面向专业</td>
 								<td colspan="3"><input type="text" name="major_oriented"
-									id="inmajor_oriented" class="form-control"></td>
+									id="major" class="form-control"></td>
 
 							</tr>
 						</table>
@@ -780,7 +784,56 @@
 		</div>
 	</div>
 
+<div class="modal fade" id="Selectmajor" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="" method="post" id="">
+				<div class="modal-content" id="modalcontent"
+					style="border:#3071a9 8px solid;width: 450px">
+					<div class="modal-header" style="background:#3071a9; color:#FFF">
+						<div class="glyphicon glyphicon-remove closeModal"
+							data-dismiss="modal"></div>
+						<h4 class="modal-title text-center">请选择面向专业</h4>
+					</div>
 
+					<center>
+						<div class="modal-body">
+							<div class="row" style="margin-bottom: 30px;">
+								<div class="col-sm-12 form-inline">
+									<lable>面向专业:</lable>
+									<input id="showmajor" type="text" class="form-control exeWidth"
+										value="">
+								</div>
+							</div>
+							<div class="row" style="margin-bottom: 30px;">
+								<div class="col-sm-6">
+									<select name="" id="majorCollege" class="form-control">
+										<option value="" id="majorcollegeID">请选择学院</option>										
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<select name="" id="majorName" class="form-control">
+										<option value="" id="majorNmaeID">请选择专业</option>										
+									</select>
+								</div>
+							</div>
+
+
+
+						</div>
+					</center>
+					<div class="modal-footer">
+						<center>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="finished3">确定</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="">取消</button>
+						</center>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<!-- 修改按钮弹出框-->
 	<div class="modal fade" id="updatePlanItem" tabindex="-1" role="dialog"
