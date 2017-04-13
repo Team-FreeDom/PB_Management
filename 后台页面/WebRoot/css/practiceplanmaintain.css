@@ -96,6 +96,7 @@ table tbody tr td{
 }
 #table select{
 	line-height: 23px !important;
+	width: 100%;
 }
 .spanstyle{
 	font-size: 10px;
@@ -153,6 +154,9 @@ table tbody tr td{
 }
 .endweek{
 	width:100px;
+}
+div.Iwidth{
+	width:100% !important;
 }
 
 

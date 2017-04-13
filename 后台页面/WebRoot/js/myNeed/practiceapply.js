@@ -237,13 +237,12 @@ $(document).ready(function() {
 	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 	 +'</tr>'
 	 +'<tr>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
+	 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+	 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
+	 +'<td colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
 	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
-	alert(screen.width);
 	$("#modalbody").removeClass("modalbody");	
 	$("#modalbody").removeClass("modalbody2");
 	$("#modalbody").removeClass("modalbody3");
