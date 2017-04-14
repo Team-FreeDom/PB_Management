@@ -237,7 +237,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 				pc.setDepartment(rs.getString("department"));
 				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));
-				
+				pc.setTid(rs.getString("tid"));
+				pc.setTname(rs.getString("tname"));
 				List<Classcourse> lis = new ArrayList<Classcourse>();
 				int i=0;
 				for (Classcourse ra : lra) {

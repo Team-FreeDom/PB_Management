@@ -385,24 +385,27 @@ public class PersonalManageController {
 			+ "userType,workTime,workingForm,majorid,titles) " + "values";
 
 		StringBuffer suffix = new StringBuffer();
-		// 遍历行（下面当i为0时可看到列头名）
+		// 遍历行（下面当i为0时可看到列头名）		
 		for (int i = 1; i < list.size(); i++) {
+			boolean tag_this=true;
 		    String resultStr = "";
 		    // 循环每一个sheet中的每一行
-		    List<String> row = list.get(i);
-		    // System.out.println(row.size());
-
+		    List<String> row = list.get(i);		   
 		    // 遍历列
 		    if (row != null && row.size() > 0) {
 			for (int j = 0; j < row.size(); j++) {
+				if(row.get(0).equals("")){
+					tag_this=false;
+					break;
+				}
 			    resultStr = resultStr + '"' + row.get(j) + '"'
-				    + ',';
-			   
+				    + ',';			   
 			}
-			
+			if(tag_this){
 			resultStr = resultStr.substring(0,
 				resultStr.length() - 1);
 			suffix.append("(" + resultStr + "),");
+			}
 
 		    }
 		}

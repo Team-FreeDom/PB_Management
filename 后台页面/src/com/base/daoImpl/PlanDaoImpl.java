@@ -275,6 +275,8 @@ public class PlanDaoImpl implements PlanDao {
 				pc.setDepartment(rs.getString("department"));
 				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));
+				pc.setTid(rs.getString("tid"));
+				pc.setTname(rs.getString("tname"));
 				
 				List<Classcourse> lis = new ArrayList<Classcourse>();
 				int i=0;
@@ -330,6 +332,8 @@ public class PlanDaoImpl implements PlanDao {
 				pc.setDepartment(rs.getString("department"));
 				pc.setMajor_oriented(rs.getString("major_oriented"));
 				pc.setWeekCount("实习周数:"+rs.getString("week"));	
+				pc.setTid(rs.getString("tid"));
+				pc.setTname(rs.getString("tname"));
 				pc.setData(new ArrayList<Classcourse>());
 				list.add(pc);
 			}
