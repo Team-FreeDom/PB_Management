@@ -258,9 +258,29 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#weeks").val(obj[Oneindex].weekClassify);
 	$("#leaderTeacher").val(obj[Oneindex].tname);	
 	
+	majorString=[];//将面向专业的全局变量清空
+	teacherString=[];//将指导老师的全局变量清空
+	value=[];//将实验员的全局变量清空
+	
 	//获得周次的数组
 	var fromweek=obj[Oneindex].week;
-	var data_week=fromweek.split(/[,-]/);
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
 	$.unique(data_week.sort(sortNumber));
 	
 	//获得班级的数组
@@ -675,7 +695,23 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	$("#table tbody:last-child").after(tbodyStyle);
 	
 	var fromweek=$("#fromweek").val();
-	var data_week=fromweek.split(/[,-]/);
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
 	$.unique(data_week.sort(sortNumber));
 	for(var week in data_week){
 		$("#table tbody:last-child").find("#weekend_option").after(

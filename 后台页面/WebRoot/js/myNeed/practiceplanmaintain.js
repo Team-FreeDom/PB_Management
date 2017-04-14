@@ -92,69 +92,79 @@ $(document)
 											"mData" : "id",
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "4%"
+											//"sWidth" : "2%"
 										}, {
 											"mData" : "semester",// 学期学年
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "6%"
+											//"sWidth" : "3%"
 										}, {
 											"mData" : "cid",// 课程代码
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "6%"
+											//"sWidth" : "3%"
 										}, {
 											"mData" : "coursename",// 课程名称
 											"orderable" : false,
 											"sDefaultContent" : "",
-											"sWidth" : "6%"
+											//"sWidth" : "8%"
 										}, {
 											"mData" : "count",// 人数
 											"orderable" : true,
 											"sDefaultContent" : "",
-											"sWidth" : "6%"
+											//"sWidth" : "3%"
 										}, {
 											"mData" : "selectedCount",// 已选人数
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "3%"
 										}, {
 											"mData" : "composition",// 教学班组成
 											"orderable" : false,
 											"sDefaultContent" : "",
+											//"sWidth" : "8%"
 										}, {
 											"mData" : "college",// 开课学院
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "6%"
 										},
 
 										{
 											"mData" : "weekClassify",// 周学时
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "3%"
 										}, {
 											"mData" : "credit",// 学分
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "2%"
 										}, {
 											"mData" : "courseNature",// 课程性质
 											"orderable" : false,
 											"sDefaultContent" : "",
+											//"sWidth" : "4%"
 										}, {
 											"mData" : "courseCategory",// 课程类别
 											"orderable" : false,
 											"sDefaultContent" : "",
+											//"sWidth" : "4%"
 										}, {
 											"mData" : "tid",// 教职工号
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "4%"
 										}, {
 											"mData" : "tname",// 教师姓名
 											"orderable" : true,
 											"sDefaultContent" : "",
+											//"sWidth" : "4%"
 										}, {
 											"mData" : "week",// 起始周
 											"orderable" : false,
 											"sDefaultContent" : "",
+											//"sWidth" : "6%"
 										}, {
 											"mData" : "major_oriented",// 面向专业
 											"orderable" : false,
@@ -168,7 +178,8 @@ $(document)
 										}, {
 											"mData" : "checkMethod",// 考核
 											"orderable" : false,
-											"sDefaultContent" : ""
+											"sDefaultContent" : "",
+											//"sWidth" : "4%"
 										} ],
 										"columnDefs" : [ {
 											"orderable" : false,
@@ -1583,9 +1594,29 @@ $(document)
 				$("#weeks").val(obj[Oneindex].weekClassify);
 				$("#leaderTeacher").val(obj[Oneindex].tname);	
 				
+				majorString=[];//将面向专业的全局变量清空
+				teacherString=[];//将指导老师的全局变量清空
+				value=[];//将实验员的全局变量清空
+				
 				//获得周次的数组
 				var fromweek=obj[Oneindex].week;
-				var data_week=fromweek.split(/[,-]/);
+				var data_week_0=fromweek.split(',');
+				var data_week=[];
+				var data_week_1;				
+				var data_week_3;
+				for(var i in data_week_0){
+					data_week_1=data_week_0[i].split('-');					
+					var k=0;
+					data_week_3=data_week_1[0];
+					if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+						data_week.push(data_week_1[0]);
+					}else{
+					   while(data_week_3<data_week_1[data_week_1.length-1]){						
+						data_week_3=Number(data_week_1[0])+(k++);
+						data_week.push(data_week_3);
+					}
+					}
+				}
 				$.unique(data_week.sort(sortNumber));
 				
 				//获得班级的数组
@@ -1987,8 +2018,25 @@ $(document)
 				$("#table tbody:last-child").after(tbodyStyle);
 				var tbNum=$("#table").children('tbody').length;
 				$("#table tbody:last-child").find(".mark").html(tbNum-2);
+				
 				var fromweek=$("#fromweek").val();
-				var data_week=fromweek.split(/[,-]/);
+				var data_week_0=fromweek.split(',');
+				var data_week=[];
+				var data_week_1;				
+				var data_week_3;
+				for(var i in data_week_0){
+					data_week_1=data_week_0[i].split('-');					
+					var k=0;
+					data_week_3=data_week_1[0];
+					if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+						data_week.push(data_week_1[0]);
+					}else{
+					   while(data_week_3<data_week_1[data_week_1.length-1]){						
+						data_week_3=Number(data_week_1[0])+(k++);
+						data_week.push(data_week_3);
+					}
+					}
+				}
 				$.unique(data_week.sort(sortNumber));
 				for(var week in data_week){
 					$("#table tbody:last-child").find("#weekend_option").after(
