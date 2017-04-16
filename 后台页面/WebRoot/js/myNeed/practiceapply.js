@@ -781,8 +781,9 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 			},
 		},			
 		callback: function (result) { 		
-			tbody.remove();
-			if(result){			
+			
+			if(result){		
+				tbody.remove();
 				if(judget!==""){
 					$.ajax({
 						url:'deleteClassRecord.do',
