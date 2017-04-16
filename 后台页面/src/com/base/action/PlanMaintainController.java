@@ -49,6 +49,7 @@ import com.base.service.PlanMaintainService;
 import com.base.service.baseApplyService;
 import com.base.serviceImpl.AdminManageServiceImpl;
 import com.base.serviceImpl.InputExcelServiceImpl;
+import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 import com.base.utils.WeekTransformToTime;
 
@@ -97,12 +98,15 @@ public class PlanMaintainController implements ServletContextAware{
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
 		
+		//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+		String college = (String) request.getSession().getAttribute("college");
+		
 		int recordsTotal=0;
 		List<AllPlan> list=new ArrayList<AllPlan>();
 		if(semester!=null){		
 			PlanList pl = null;
 		    pl = planMaintainService.getPlanInfo(semester, pageindex, size, order,
-				orderDir, searchValue);
+				orderDir, searchValue,college);
 		    list=pl.getData();
 		recordsTotal=pl.getRecordsTotal();
 		}
@@ -130,7 +134,9 @@ public class PlanMaintainController implements ServletContextAware{
 		String daoYear =request.getParameter("daoYear");
 		int daoSemester=Integer.valueOf(request.getParameter("daosemster"));
 		String college = request.getParameter("college");
-        if(college.equals("-1")){
+        if(college==null){
+        	college=(String) request.getSession().getAttribute("college");
+        }else if(college.equals("-1")){
         	college=null;
         }
         List<PracticeCollection> list = planMaintainService
@@ -273,10 +279,12 @@ public class PlanMaintainController implements ServletContextAware{
 	@RequestMapping("/getPlanMaintainInfo.do")
 	public String getPlanMaintainInfo(HttpServletRequest request,
 			HttpServletResponse response) {
+		//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+		String college = (String) request.getSession().getAttribute("college");
 		// 获取所有学院
 		List<ApplyDept> list1 = baseapplyservice.getDept(1);
 		//获取学年
-		List<String> list2=planMaintainService.getSemester();
+		List<String> list2=planMaintainService.getSemester(college);
 		JSONObject getObj = new JSONObject();		
 		getObj.put("college", list1);
 		getObj.put("semester", list2);	
@@ -317,9 +325,10 @@ public class PlanMaintainController implements ServletContextAware{
 		@RequestMapping("/getReadyYear.do")
 		public String getReadyYear(HttpServletRequest request,
 				HttpServletResponse response) {
-		  
+			//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+			String college = (String) request.getSession().getAttribute("college");
 			//获取学年
-			List<String> list2=planMaintainService.getSemester();
+			List<String> list2=planMaintainService.getSemester(college);
 			JSONObject getObj = new JSONObject();	
 			
 			getObj.put("semester", list2);
@@ -338,9 +347,11 @@ public class PlanMaintainController implements ServletContextAware{
 				@RequestMapping("/getReadySem.do")
 				public String getReadySem(HttpServletRequest request,
 						HttpServletResponse response) {
+					//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+				  String college = (String) request.getSession().getAttribute("college");
 				  String year=request.getParameter("year");
 					//获取学年
-					List<String> list2=planMaintainService.getSem(year);
+					List<String> list2=planMaintainService.getSem(year,college);
 					JSONObject getObj = new JSONObject();	
 					
 					getObj.put("semNumber", list2);
@@ -566,10 +577,12 @@ public class PlanMaintainController implements ServletContextAware{
 		// // desc
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
+		//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+		  String college = (String) request.getSession().getAttribute("college");
 		PlanList pl = null;
 		int status = 0;
 		pl = planMaintainService.checkIsSave(semester, status, pageindex, size,
-				order, orderDir, searchValue);
+				order, orderDir, searchValue,college);
 
 		JSONObject getObj = new JSONObject();
 		getObj.put("draw", draw);

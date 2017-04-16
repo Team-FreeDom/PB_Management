@@ -228,12 +228,11 @@
 									</select></td>
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
-									<td hidden id="ta3">${tag}</td>
+									<td hidden id="ta3">${tag}</td>									
 									<td colspan="6">
-									   <a
-											href="../templet/PracticeMaintainInfo.rar" class="btn btn-primary">点击下载导入模板</a>
+									   <a href="../templet/PracticeMaintainInfo.rar" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
 										<button class="btn btn-primary" id="daoru" data-toggle="modal"
-											data-target="#writeWeekTime">导入</button>
+											data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
 										<button class="btn btn-primary" id="chu">导出</button>
 									</td>
 
@@ -241,9 +240,9 @@
 								<tr bgcolor="#ECF1F5">
 									<td colspan="9"></td>
 									<td colspan="9">
-										<button class="btn btn-success" id="add">增加</button>
-										<button class="btn btn-success" id="updatePlan">修改</button>
-										<button class="btn btn-danger" id="delete">删除</button>
+										<button class="btn btn-success" id="add" ${college==null?"":"style='display:none;'"}>增加</button>
+										<button class="btn btn-success" id="updatePlan" ${college==null?"":"style='display:none;'"}>修改</button>
+										<button class="btn btn-danger" id="delete" ${college==null?"":"style='display:none;'"}>删除</button>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
 										<span id="remind" class="glyphicon glyphicon-send" hidden
 										style="color:#3EAB58;padding-top:10px;font-size:20px;"></span>
@@ -403,10 +402,10 @@
 										<option value="2" class="daosem">2</option>
 								</select></td>
 							</tr>
-							<tr>
+							<tr ${college==null?"":"style='display:none;'"}>
 								<td>学院:</td>
-								<td><select class="form-control" id="daoColleget"
-									name="college" style="width:180px;margin-left:20px;">
+								<td><select class="form-control" id="daoColleget"}
+									name=${college==null?"college":""} style="width:180px;margin-left:20px;">
 										<option value="-1" id="daodept">全部</option>
 								</select></td>
 
@@ -654,7 +653,7 @@
 										<option value="理论课">理论课</option>
 								</select></td>
 								<td>开课学院<span class="setTag">*</span></td>
-								<td><select class="form-control" name="college"
+								<td><select class="form-control" name="college"}
 									id="incollege">
 										<option value="" id="Acollegeh">请选择</option>
 								</select></td>

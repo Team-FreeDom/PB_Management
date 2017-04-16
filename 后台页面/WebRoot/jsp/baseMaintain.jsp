@@ -218,7 +218,7 @@
 								<thead>
 									<tr bgcolor="#ECF1F5">
 										<td colspan="2" id="button-left">
-											<button type="button" class="btn btn-danger" id="delete">删除</button>
+											<button type="button" class="btn btn-danger" id="delete" ${college==null?"":"style='display:none;'"}>删除</button>
 											<button type="button" class="btn btn-info" id="ZJ">增加</button>
 										</td>
 										<td colspan="5">
@@ -231,12 +231,13 @@
 																	<tr>
 																		<td hidden id="tag_0">${flag}</td>
 																		<td hidden id="tag_1">${tag}</td>
+																		<td hidden id="tag_2">${college}</td>
 																		<td>基地类型 <select name="status" id="shaiType"
 																			style="width:150px;margin-top:0px;">
 																				<option value="-1" id="shaiTypeh" selected>显示全部</option>
 																		</select>  
 																		</td>
-																		<td>申报部门 <select name="status" id="shaiDept"
+																		<td ${college==null?"":"style='display:none;'"}>申报部门 <select name="status" id="shaiDept"
 																			style="width:150px;margin-top:0px;">
 																				<option value="-1" id="shaiDepth" selected>显示全部</option>
 																		</select>  
@@ -268,9 +269,9 @@
 											</ul>
 										</td>
 										<td colspan="12" id="button-right"><a
-											href="../templet/BaseInfotemplet.rar" class="btn btn-primary">点击下载导入模板</a>
+											href="../templet/BaseInfotemplet.rar" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#import">导入</button>
+												data-toggle="modal" data-target="#import" ${college==null?"":"style='display:none;'"}>导入</button>
 											<button type="button" class="btn btn-primary"
 												id="exportButton" data-toggle="modal" data-target="#export">导出</button></td>
 									</tr>
@@ -551,10 +552,10 @@
 												<option value="-1" id="daobase">全部</option>
 										</select></td>
 									</tr>
-									<tr>
+									<tr ${college==null?"":"style='display:none;'" }>
 										<td>申报部门:</td>
 										<td><select class="form-control" id="daodepth"
-											name="applydept">
+											name=${college==null?"applydept":"" }>
 												<option value="-1" id="daodept">全部</option>
 										</select></td>
 									</tr>

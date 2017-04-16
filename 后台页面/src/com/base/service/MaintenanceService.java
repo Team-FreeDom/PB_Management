@@ -16,7 +16,7 @@ public interface MaintenanceService {
 	 返回值：   MaintenanceList,该对象包括实习基地数据记录+记录条数
 	 函数功能：获取该用户实习基地数据
 	  */
-    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue);
+    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue,String college);
     
     /*
 	  参数说明：str,为实习基地记录的编号   
@@ -39,7 +39,7 @@ public interface MaintenanceService {
 	 返回值：   MaintenanceList,该对象包括实习基地数据记录+记录条数
 	 函数功能：根据条件刷选获取实习基地数据
 	  */
-    public MaintenanceList getshaiBaseInfo(int basetype,int dept,int star,int pageindex, int size,int order,String orderDir,String searchValue);
+    public MaintenanceList getshaiBaseInfo(int basetype,String dept,int star,int pageindex, int size,int order,String orderDir,String searchValue);
     
     /*
 	  参数说明：baseid，为实习基地编号;star,为星级;adddate,为续期月数 	         
@@ -53,7 +53,7 @@ public interface MaintenanceService {
 	 返回值：   List<ExportBase>，为ExportBase对象的集合
 	 函数功能：获得导出的实习基地数据
 	 */
-    public List<ExportBase> getExportBaseInfo(int basetype,int dept,int star);
+    public List<ExportBase> getExportBaseInfo(int basetype,String dept,int star);
     
     /*
 	  参数说明：str1, 字符串型，为('基地编号','专业编号')的封装;str2,字符串型，为实习基地申请的信息; 	         

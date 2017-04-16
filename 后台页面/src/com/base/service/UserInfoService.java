@@ -94,6 +94,6 @@ public interface UserInfoService {
      * 获取职称
      * @return
      */
-    public List<Map<String, String>> Title();  
-    
+    public List<Map<String, String>> Title();    
+  
 }

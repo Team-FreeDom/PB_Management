@@ -141,5 +141,11 @@ public interface UserInfoDao {
     * @return
     */
     public List<Map<String, String>> Title();
+    
+    /**
+     * 获取角色
+     * @return
+     */
+     public int getRight(String userid);
 
 }
