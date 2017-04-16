@@ -428,8 +428,7 @@ public class PlanMaintainController implements ServletContextAware{
 			// System.out.println("获得数据啦！！！！！！！！！");
 			// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 
-			if (CollectionUtils.isNotEmpty(list)) {
-							
+			if (CollectionUtils.isNotEmpty(list)) {							
 				
 				planMaintainService.delete_0(semesterfile);
 				// 实现批量插入
@@ -441,21 +440,32 @@ public class PlanMaintainController implements ServletContextAware{
 						+ "values";
 
 				StringBuffer suffix = new StringBuffer();
+				long count=0;
+				long listSize=list.size()-1;				
 				// 遍历行（下面当i为0时可看到列头名）
 				for (int i = 1; i < list.size(); i++) {
 					String resultStr = "";
+					boolean tag_this=true;
 					// 循环每一个sheet中的每一行
 					List<String> row = list.get(i);
 				
 					// 遍历列
 					if (row != null && row.size() > 0) {
+						count++;
+						
 						String value = null;
 						String termYear=null;
 						int week=0;
-						for (int j = 0; j < row.size(); j++) {
-							
-							value = row.get(j);
-							if (j == 7) {
+						for (int j = 0; j < row.size(); j++) {						
+							value = row.get(j);	
+							if(j==5){
+								if(value.equals("")){									
+									count--;
+									listSize--;
+									tag_this=false;
+									break;
+								}
+							}else if (j == 7) {
 								if(value.length()==0){
 									value="0";
 								}else{
@@ -483,27 +493,26 @@ public class PlanMaintainController implements ServletContextAware{
 							resultStr = resultStr + '"' + value + '"' + ',';
                             
 						}
-						
-						resultStr=resultStr+WeekTransformToTime.weekTransformToTime(timeDi, week);
-						suffix.append("(" + resultStr + "),");
+						if(tag_this){
+							resultStr=resultStr+WeekTransformToTime.weekTransformToTime(timeDi, week);
+							suffix.append("(" + resultStr + "),");
+						}					
 
-					}
-					if(i%800==0||i==list.size()-1){
-						
+					}					
+					if(count%800==0||count==listSize){						
 						// 构建完整sql
 						String sql = prefix
 								+ suffix.substring(0, suffix.length() - 1)
 								+ " on duplicate key update count=values(count),selectedCount=values(selectedCount),composition=values(composition),college=values(college)"
 								+ ",cid=values(cid),coursename=values(coursename),weekClassify=values(weekClassify),credit=values(credit)"
 								+ ",courseNature=values(courseNature),courseCategory=values(courseCategory),siteRepuire=values(siteRepuire),tid=values(tid)"
-								+ ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),mid=values(mid),major_oriented=values(major_oriented),checkTime=values(checkTime)";
-						
+								+ ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),checkTime=values(checkTime)";						
 						planMaintainService.add_0(sql);
 						suffix = new StringBuffer();
 						
 					}		
 					
-				}
+				}			
 				
 			}
 			wb.close();

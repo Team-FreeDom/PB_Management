@@ -637,7 +637,7 @@ public class ExcelReport {
 			cell10.setCellStyle(cs2);
 
 			// 第十二列职称
-			Cell cell11= row_line.createCell(11);
+			Cell cell11 = row_line.createCell(11);
 			cell11.setCellValue(line_data.getTitles());
 			cell11.setCellStyle(cs2);
 
@@ -1130,10 +1130,11 @@ public class ExcelReport {
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 1, 2));
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 3, 4));
 			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 5, 6));
-			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 7, 8));
-
-			Row row_line = sheet.createRow(++line);// 创建第line行
-
+			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 7, 8));			
+			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 9, 10));
+			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 11,12));
+			sheet.addMergedRegion(new CellRangeAddress(line + 1, line + 1, 13,14));
+			Row row_line = sheet.createRow(++line);// 创建第line行			
 			// 第一列空
 			Cell cell0 = row_line.createCell(0);
 			cell0.setCellValue("");
@@ -1145,35 +1146,63 @@ public class ExcelReport {
 			cell1.setCellStyle(cs0);
 
 			Cell cell2 = row_line.createCell(2);
-			cell2.setCellValue(pc.getDepartment());
+			cell2.setCellValue("");
 			cell2.setCellStyle(cs0);
+			
 
-			// 第四列 学习人数
+			// 开课学院
 			Cell cell3 = row_line.createCell(3);
-			cell3.setCellValue(pc.getCountPeople());
+			cell3.setCellValue("开课学院:" + pc.getDepartment());
 			cell3.setCellStyle(cs0);
 
 			Cell cell4 = row_line.createCell(4);
-			cell4.setCellValue(pc.getDepartment());
+			cell4.setCellValue("");
 			cell4.setCellStyle(cs0);
 
-			// 第六列 周数
+			// 教师职工号
 			Cell cell5 = row_line.createCell(5);
-			cell5.setCellValue(pc.getWeekCount());
+			cell5.setCellValue("教师职工号:" + pc.getTid());
 			cell5.setCellStyle(cs0);
 
 			Cell cell6 = row_line.createCell(6);
-			cell6.setCellValue(pc.getDepartment());
+			cell6.setCellValue("教师职工号:" + pc.getTid());
 			cell6.setCellStyle(cs0);
 
-			// 第二列 学分
+			// 教师姓名
 			Cell cell7 = row_line.createCell(7);
-			cell7.setCellValue(pc.getCredit());
+			cell7.setCellValue("教师姓名:" + pc.getTname());
 			cell7.setCellStyle(cs0);
 
 			Cell cell8 = row_line.createCell(8);
-			cell8.setCellValue(pc.getCredit());
-			cell8.setCellStyle(cs0);
+			cell8.setCellValue("");
+			cell8.setCellStyle(cs0);			
+
+			// 第四列 学习人数
+			Cell cell9 = row_line.createCell(9);
+			cell9.setCellValue(pc.getCountPeople());
+			cell9.setCellStyle(cs0);
+
+			Cell cell10 = row_line.createCell(10);
+			cell10.setCellValue("");
+			cell10.setCellStyle(cs0);
+
+			// 第六列 周数
+			Cell cell11 = row_line.createCell(11);
+			cell11.setCellValue(pc.getWeekCount());
+			cell11.setCellStyle(cs0);
+
+			Cell cell12 = row_line.createCell(12);
+			cell12.setCellValue("");
+			cell12.setCellStyle(cs0);
+
+			// 第二列 学分
+			Cell cell13 = row_line.createCell(13);
+			cell13.setCellValue(pc.getCredit());
+			cell13.setCellStyle(cs0);
+
+			Cell cell14 = row_line.createCell(14);
+			cell14.setCellValue("");
+			cell14.setCellStyle(cs0);
 
 			int j = 0;
 			for (Classcourse cc : lc) {

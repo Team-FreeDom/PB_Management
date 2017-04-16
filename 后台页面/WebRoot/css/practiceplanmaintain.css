@@ -55,7 +55,7 @@ table tbody tr td{
 	color:#24354a;}
 
 .inputWidth{
-	width: 60px;
+	width: 80px;
 }
 #Leaderteacher{
 	width: 100%;
@@ -96,6 +96,7 @@ table tbody tr td{
 }
 #table select{
 	line-height: 23px !important;
+	width: 100%;
 }
 .spanstyle{
 	font-size: 10px;
@@ -104,11 +105,9 @@ table tbody tr td{
 .starColor{
 	color: #F70004;
 }
-.padding{
-	margin-left: 15px !important;
-}
+
 #class{
-	width:90%;
+	width:82%;
 }
 .setTag{
 	color: #F70004;
@@ -132,15 +131,32 @@ table tbody tr td{
 	width:123px !important;
 }
 
-	.modalbody{
-	height:412px;
+.modalbody{
+	height:432px;
 	overflow-y:auto;
 	}
-	#Stime{
+.modalbody2{
+	height:592px;
+	overflow-y:auto;
+	}
+.modalbody3{
+	height:652px;
+	overflow-y:auto;
+	}
+#Stime{
 	height:35px;
 }
 #Etime{
 	height:35px;
+}
+.startweek{
+	width:100px;
+}
+.endweek{
+	width:100px;
+}
+div.Iwidth{
+	width:100% !important;
 }
 
 

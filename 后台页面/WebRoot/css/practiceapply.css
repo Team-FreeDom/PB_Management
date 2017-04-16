@@ -162,12 +162,22 @@ table tbody tr td{
 	height:592px;
 	overflow-y:auto;
 	}
+.modalbody3{
+	height:652px;
+	overflow-y:auto;
+	}
 .startweek{
 	width:100px;
 }
 .endweek{
 	width:100px;
 }
+div.Iwidth{
+	width:100% !important;
+}
+/* #facemajoy{
+	width:300px !important;
+} */
 
 
 

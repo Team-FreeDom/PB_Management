@@ -205,16 +205,16 @@ $(document).ready(function() {
 	 +'</tr>'
 	 +'<tr>'
 	 +'<td rowspan="5"><sapn class="mark"></span></td>'
-	 +'<td><select id="weekend" type="text" class="text-center inputWidth flag"><option value="" id="weekend_option">请选择</select></td>'
-	 +'<td><select id="class_one" type="text" class="text-center inputWidth flag"><option value="" id="class_one_option">请选择</select></td>'
-	 +'<td><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
-	 +'<td><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
+	 +'<td style="padding-top:5px"><select id="weekend" type="text" class="text-center inputWidth flag"><option value="" id="weekend_option">请选择</select></td>'
+	 +'<td style="padding-top:5px"><select id="class_one" type="text" class="text-center inputWidth flag"><option value="" id="class_one_option">请选择</select></td>'
+	 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
+	 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 	 
-	 +'<td><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
-	 +'<td id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
-	 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
-	 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-	 +'<td><input id="remark" type="text" class="flag"></td>'
+	 +'<td style="padding-top:5px"><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
+	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
+	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+	 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
+	 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
 	 +'<td rowspan="5"><span class="deleteID" id="">删除</span></td>'
 	 +'</tr>'
 	 +'<tr>'
@@ -237,13 +237,15 @@ $(document).ready(function() {
 	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
 	 +'</tr>'
 	 +'<tr>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
-	 +'<td colspan="3"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
 	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#modalbody").removeClass("modalbody");	
+	$("#modalbody").removeClass("modalbody2");
+	$("#modalbody").removeClass("modalbody3");
 	Oneindex= $(this).find("span").attr("id");
 	$("#weekend option:gt(0)").remove();//移除周次select的原来的option
 	$("#division").val(obj[Oneindex].college);
@@ -256,9 +258,29 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	$("#weeks").val(obj[Oneindex].weekClassify);
 	$("#leaderTeacher").val(obj[Oneindex].tname);	
 	
+	majorString=[];//将面向专业的全局变量清空
+	teacherString=[];//将指导老师的全局变量清空
+	value=[];//将实验员的全局变量清空
+	
 	//获得周次的数组
 	var fromweek=obj[Oneindex].week;
-	var data_week=fromweek.split(/[,-]/);
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
 	$.unique(data_week.sort(sortNumber));
 	
 	//获得班级的数组
@@ -266,15 +288,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 	var data_composition=composition.split(',');
 	$.unique(data_composition.sort(sortNumber));
 	
-	/*var tbodysize=0;
-	tbodysize=$("#table tbody").size();
-	alert(tbodysize);*/
-	if(screen.width<=1525){
-		$("#modalbody").addClass("modalbody");
-	}
-	if(screen.width<=1708&&screen.width>1525){
-		$("#modalbody").addClass("modalbody2");
-	}
+	
 	$.ajax({
 		url:'getplandata.do',
 		type:"POST",
@@ -407,7 +421,17 @@ $.ajax({
 		}
 	}
 });
-	
+var tbodylength=$("#table tbody").size();
+
+if(screen.width<=1525&&tbodylength>2){
+	$("#modalbody").addClass("modalbody");
+}
+if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
+if(screen.width>1708&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
 	$("#Applychart").show();
 });
 
@@ -657,11 +681,37 @@ $(document).on("click","#closemodal",function(){
 
 
 
-$(document).on("click","#addTbody",function(){//添加一条空表的记录	
+$(document).on("click","#addTbody",function(){//添加一条空表的记录
+	var tbodylength=$("#table tbody").size();
+	if(screen.width<=1525&&tbodylength>2){
+		$("#modalbody").addClass("modalbody");
+	}
+	if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+		$("#modalbody").addClass("modalbody2");
+	}
+	if(screen.width>1708&&tbodylength>3){
+		$("#modalbody").addClass("modalbody3");
+	}
 	$("#table tbody:last-child").after(tbodyStyle);
 	
 	var fromweek=$("#fromweek").val();
-	var data_week=fromweek.split(/[,-]/);
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
 	$.unique(data_week.sort(sortNumber));
 	for(var week in data_week){
 		$("#table tbody:last-child").find("#weekend_option").after(
