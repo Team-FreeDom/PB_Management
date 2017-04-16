@@ -12,7 +12,21 @@ public class PracticeCollection {
 	  private String credit;//学分
 	  private String countPeople;//学习人数
 	  private String weekCount;//实习周数
-	  private List<Classcourse> data;//实习申请表
+	  private String tid;//教师职工号
+	  private String tname;//教师名称
+	  public String getTid() {
+		return tid;
+	}
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+	public String getTname() {
+		return tname;
+	}
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+	private List<Classcourse> data;//实习申请表
 	public String getCourseId() {
 		return courseId;
 	}
