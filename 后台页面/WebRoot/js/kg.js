@@ -7,6 +7,7 @@ $("li.menuItem.nav-parent").click(function(){
 		$(this).addClass("opened nav-expanded");
 	}
 	});
+$(".sidebar-menu").css("min-height",screen.height/1.5);
  $(function () {
 	 	$(document).on("click", "#msgtable tr", function() {
 			bootbox.dialog({
