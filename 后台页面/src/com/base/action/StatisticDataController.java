@@ -101,7 +101,7 @@ public class StatisticDataController implements ServletContextAware {
     	    HttpServletResponse response) {
     	
     	String semester = WeekTransformToTime.getThisSemester(application);
-    	if (semester.equals("")) {
+    	if (semester==null||semester.equals("")) {
     	    semester = null;
     	}
     	String basetype = request.getParameter("baseCategory");// 获取基地类型
@@ -183,7 +183,7 @@ public class StatisticDataController implements ServletContextAware {
 	    HttpServletResponse response) {
     	
     	String semester = WeekTransformToTime.getThisSemester(application);
-    	if (semester.equals("")) {
+    	if (semester==null||semester.equals("")) {
     	    semester = null;
     	}
     	List<String> list1=statisticDataservice.getstatisticCount(semester);
