@@ -220,7 +220,7 @@
 											<option value="" id="termYearID" selected>请选择学年</option>
 									</select></td>
 
-									<td colspan="10"><select name="semester" id="semester"
+									<td colspan="8"><select name="semester" id="semester"
 										class="form-control" style="width:150px;">
 											<option value="" selected>请选择学期</option>
 											<option value="1">1</option>
@@ -229,23 +229,21 @@
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
 									<td hidden id="ta3">${tag}</td>									
-									<td colspan="6">
-									   <a href="../templet/PracticeMaintainInfo.rar" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
-										<button class="btn btn-primary" id="daoru" data-toggle="modal"
-											data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
-										<button class="btn btn-primary" id="chu">导出</button>
+									<td colspan="8">
+										<button class="btn btn-primary" id="chu">导出</button>									    
+										<button class="btn btn-primary" id="daoru" data-toggle="modal" data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
+										<a href="../templet/PracticeMaintainInfo.rar" id="LinkButton" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
 									</td>
 
 								</tr>
 								<tr bgcolor="#ECF1F5">
 									<td colspan="9"></td>
-									<td colspan="9">
-										<button class="btn btn-success" id="add" ${college==null?"":"style='display:none;'"}>增加</button>
-										<button class="btn btn-success" id="updatePlan" ${college==null?"":"style='display:none;'"}>修改</button>
+									<td colspan="9">																														
+										<span id="remind" class="glyphicon glyphicon-send"></span>
+										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>										
 										<button class="btn btn-danger" id="delete" ${college==null?"":"style='display:none;'"}>删除</button>
-										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>
-										<span id="remind" class="glyphicon glyphicon-send" hidden
-										style="color:#3EAB58;padding-top:10px;font-size:20px;"></span>
+										<button class="btn btn-success" id="updatePlan" ${college==null?"":"style='display:none;'"}>修改</button>
+										<button class="btn btn-success" id="add" ${college==null?"":"style='display:none;'"}>增加</button>										
 									</td>
 
 
