@@ -351,6 +351,26 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	}
 	return ui;
     }
+    
+    @Override
+    public int getRight(String userid) {
+    	Session session = sessionFactory.openSession();
+    	String hql = "from UserInfo where id=?";
+    	UserInfo ui = null;
+        int i=0;
+    	try {
+    	    Query query = session.createQuery(hql);
+    	    query.setString(0, userid);
+
+    	    ui = (UserInfo) query.uniqueResult();
+            i=ui.getUserRight();
+    	} catch (Exception e) {
+    	    System.out.println(e);
+    	} finally {
+    	    session.close();
+    	}
+    	return i;
+        }
 
     /**
      * 用户管理(分页)

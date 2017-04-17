@@ -418,7 +418,7 @@ $(document)
 									$("#daodept")
 											.after(
 													"<option class='rest' value="
-															+ data[0][i].aid
+															+ data[0][i].dept
 															+ " class='dee'>"
 															+ data[0][i].dept
 															+ "</option>");
@@ -666,9 +666,15 @@ $(document)
 										var basetype = $(
 												"#shaiType option:selected")
 												.val();
-										var dept = $(
-												"#shaiDept option:selected")
-												.val();
+										var dept;										
+										if($("#tag_2").text()==null||$("#tag_2").text()==""){
+											dept = $(
+											"#shaiDept option:selected")
+											.val();
+										}else{
+											dept=$("#tag_2").text();
+										}
+										
 										var star = $(
 												"#starLink option:selected")
 												.val();
@@ -952,7 +958,7 @@ $(".icon-filter").on("click", function() {
 				$("#shaiDepth")
 						.after(
 								"<option class='rest' value="
-										+ data[0][i].aid
+										+ data[0][i].dept
 										+ " class='dee'>"
 										+ data[0][i].dept
 										+ "</option>");

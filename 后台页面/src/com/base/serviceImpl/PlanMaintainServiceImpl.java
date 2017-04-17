@@ -27,7 +27,7 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	private PlanMaintainDao planMaintainDao;
 	@Override
 	public PlanList getPlanInfo(String semester, int pageindex, int size,
-			int order, String orderDir, String searchValue) {
+			int order, String orderDir, String searchValue,String college) {
 		String columnName = "";
 		if (order == 0) {
 		    columnName = "id";
@@ -46,7 +46,7 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		}else if (order == 13) {
 		    columnName = "tname";
 		}
-		PlanList list = planMaintainDao.getPlanInfo(semester, pageindex, size, columnName, orderDir, searchValue);
+		PlanList list = planMaintainDao.getPlanInfo(semester, pageindex, size, columnName, orderDir, searchValue,college);
 		return list;
 	}
 
@@ -66,7 +66,7 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 
 	@Override
 	public PlanList checkIsSave(String semester, int status, int pageindex,
-			int size, int order, String orderDir, String searchValue) {
+			int size, int order, String orderDir, String searchValue,String college) {
 		
 		String columnName = "";
 		if (order == 0) {
@@ -86,7 +86,7 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		}else if (order == 13) {
 		    columnName = "tname";
 		}
-		PlanList list = planMaintainDao.checkIsSave(semester, status, pageindex, size, columnName, orderDir, searchValue);
+		PlanList list = planMaintainDao.checkIsSave(semester, status, pageindex, size, columnName, orderDir, searchValue,college);
 		return list;
 	}
 
@@ -105,8 +105,8 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	}
 
 	@Override
-	public List<String> getSemester() {
-		List<String> list=planMaintainDao.getSemester();
+	public List<String> getSemester(String college) {
+		List<String> list=planMaintainDao.getSemester(college);
 		return list;
 	}
 
@@ -147,8 +147,8 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 	}
 
 	@Override
-	public List<String> getSem(String semester) {
-		List<String> list=planMaintainDao.getSem(semester);		
+	public List<String> getSem(String semester,String college) {
+		List<String> list=planMaintainDao.getSem(semester,college);		
 		return list;
 	}
 
