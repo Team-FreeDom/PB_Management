@@ -39,7 +39,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 
 	@Override
 	public PlanList getPlanInfo(String semester, int pageindex, int size,
-			String columnName, String orderDir, String searchValue) {
+			String columnName, String orderDir, String searchValue,String college) {
 
 		List<AllPlan> list = new ArrayList<AllPlan>();
 		int recordsTotal = 0;
@@ -50,7 +50,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{call baseweb.query_coursearrange(?,?,?,?,?,?,?)}");
+					.prepareCall("{call baseweb.query_coursearrange(?,?,?,?,?,?,?,?)}");
 			System.out.println(semester + " " + size + " " + pageindex + " "
 					+ columnName + " " + orderDir + " " + searchValue);
 			sp.setString(1, semester);
@@ -59,9 +59,10 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			sp.setString(4, columnName);
 			sp.setString(5, orderDir);
 			sp.setString(6, searchValue);
-			sp.registerOutParameter(7, java.sql.Types.INTEGER);
+			sp.setString(7, college);
+			sp.registerOutParameter(8, java.sql.Types.INTEGER);
 			sp.execute();
-			recordsTotal = sp.getInt(7);
+			recordsTotal = sp.getInt(8);
 			rs = sp.getResultSet();
 			while (rs.next()) {
 				AllPlan ap = new AllPlan();
@@ -266,7 +267,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 
 	@Override
 	public PlanList checkIsSave(String semester, int status, int pageindex,
-			int size, String columnName, String orderDir, String searchValue) {
+			int size, String columnName, String orderDir, String searchValue,String college) {
 
 		List<AllPlan> list = new ArrayList<AllPlan>();
 		int recordsTotal = 0;
@@ -277,7 +278,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{call baseweb.query_coursearranges(?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call baseweb.query_coursearranges(?,?,?,?,?,?,?,?,?)}");
 			sp.setString(1, semester);
 			sp.setInt(2, size);
 			sp.setInt(3, pageindex);
@@ -285,9 +286,10 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			sp.setString(5, orderDir);
 			sp.setString(6, searchValue);
 			sp.setInt(7, status);
-			sp.registerOutParameter(8, java.sql.Types.INTEGER);
+			sp.setString(8, college);
+			sp.registerOutParameter(9, java.sql.Types.INTEGER);
 			sp.execute();
-			recordsTotal = sp.getInt(8);
+			recordsTotal = sp.getInt(9);
 			rs = sp.getResultSet();
 			while (rs.next()) {
 				AllPlan ap = new AllPlan();
@@ -366,7 +368,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public List<String> getSemester() {
+	public List<String> getSemester(String college) {
 		List<String> list = new ArrayList<String>();
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -375,7 +377,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.query_semester()}");
+					.prepareCall("{CALL baseweb.query_semester(?)}");
+			sp.setString(1,college);
 			sp.execute();
 			rs = sp.getResultSet();
 			while (rs.next()) {
@@ -506,7 +509,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
 	@Override
-	public List<String> getSem(String semester) {
+	public List<String> getSem(String semester,String college) {
 		List<String> list = new ArrayList<String>();
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -515,8 +518,9 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL  baseweb.query_semesternumber(?)}");
+					.prepareCall("{CALL  baseweb.query_semesternumber(?,?)}");
 			sp.setString(1, semester);
+			sp.setString(2, college);
 			sp.execute();
 			rs = sp.getResultSet();
 			while (rs.next()) {

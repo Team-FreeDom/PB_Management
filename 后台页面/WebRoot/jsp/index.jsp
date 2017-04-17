@@ -258,7 +258,7 @@
 						<div class="col-md-2 col-xs-2 data_display">
 							<table class="table" id='tvb'>
 								<tr>
-									<td style="font-size:50%">注册用户</td>
+									<td style="font-size:50%"><a class=${visitRight[8]!=0?"judgetLink":"noLink"} href=${visitRight[8]!=0?"mangeruser.jsp":" "}>注册用户</a></td>
 									<td rowspan="2"><span class="icon-user"
 										style="background:#FA8562;"></span></td>
 								</tr>
@@ -272,7 +272,7 @@
 							class=" col-md-offset-1 col-xs-offset-1 col-md-2 col-xs-2 data_display">
 							<table class="table">
 								<tr>
-									<td style="font-size:50%">租赁申请</td>
+									<td style="font-size:50%"><a class=${visitRight[0]!=0?"judgetLink":"noLink"} href=${visitRight[0]!=0?"rent-approve.jsp":" "} >租赁申请</a></td>
 									<td rowspan="2"><span class="icon-th-list"
 										style="background:#ADC885;"></span></td>
 								</tr>
@@ -288,7 +288,7 @@
 							<!--<a href="message.html">-->
 							<table class="table" width="100%">
 								<tr style=" border-color:#FFF">
-									<td style="font-size:50%">实习申请</td>
+									<td style="font-size:50%"><a  class=${visitRight[7]!=0?"judgetLink":"noLink"} href=${visitRight[7]!=0?"practicePlanMaintain.jsp":" "}>实习申请</a></td>
 									<td rowspan="2"><span class="icon-list-alt"
 										style="background:#63ADDC;"></span></td>
 								</tr>
@@ -303,7 +303,7 @@
 							<!--<a href="message.html">-->
 							<table class="table">
 								<tr>
-									<td style="font-size:50%">维修申请</td>
+									<td style="font-size:50%"><a  class=${visitRight[1]!=0?"judgetLink":"noLink"} href=${visitRight[1]!=0?"repairApprove.jsp":" "}>维修申请</a></td>
 									<td rowspan="2"><span class="icon-wrench"
 										style="background:#CC82B5;"></span></td>
 								</tr>

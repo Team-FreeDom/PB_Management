@@ -42,7 +42,7 @@ public class LoginController {
 		String userid=request.getParameter("username");
 		String pwd=request.getParameter("pwd");
 		String authCode = request.getParameter("authCode");
-		//System.out.println(userid+"  "+pwd);	
+		
 		
 		//判断验证码
 		String strCode = (String) session.getAttribute("strCode");
@@ -57,22 +57,29 @@ public class LoginController {
 		
 		if(adminValue!=-1)
 		{
+			//0代表是学院负责人(教务秘书和教学基层组织负责人)，1代表是普通教师
+			int right=2;
 			CookieUtils.addCookie("username", userid, response);
 			CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);			
 			
-			
-			UserInfo ui=userInfoServiceImpl.getImage(userid);
-			//System.out.println(ui.getImg());
+			UserInfo ui=userInfoServiceImpl.getImage(userid);			
 			String src="";
 			String name="";
+			String college=null;
 			if(ui!=null)
 			{
 			  src=ui.getImg();
 			  name=ui.getName();
-			}
-			
+			  right=ui.getUserRight()!=1&&ui.getUserRight()!=3?0:1;
+			  System.out.println("right:"+right);
+			  if(right==0){				
+					college=ui.getCollege();
+				}	
+			}			
+			request.getSession().setAttribute("college", college);	
+			System.out.println("myCollege:"+request.getSession().getAttribute("college"));
 			CookieUtils.addCookie("image", src,response);
 			try {
 				CookieUtils.addCookie("name",java.net.URLEncoder.encode(name,"utf-8") ,response);

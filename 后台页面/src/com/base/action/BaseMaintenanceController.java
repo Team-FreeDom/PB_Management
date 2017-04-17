@@ -80,9 +80,12 @@ public class BaseMaintenanceController {
 	
 	Integer pageindex = (startIndex / size + 1);
 	
+	//获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+	String college = (String) request.getSession().getAttribute("college");
+	
 	MaintenanceList str=null;
 	
-	str=maintenanceservice.maintenance(pageindex, size,order,orderDir,searchValue);	
+	str=maintenanceservice.maintenance(pageindex, size,order,orderDir,searchValue,college);	
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -167,7 +170,7 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map){
     	System.out.println("筛选");
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
-    	int dept=Integer.valueOf(request.getParameter("dept"));
+    	String dept=request.getParameter("dept");
     	int star=Integer.valueOf(request.getParameter("star"));
     	
     	
@@ -231,7 +234,10 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map){
     	System.out.println("basetype: "+request.getParameter("basetype"));
     	int basetype=Integer.valueOf(request.getParameter("basetype"));
-    	int dept=Integer.valueOf(request.getParameter("applydept"));
+    	String dept=request.getParameter("applydept");
+    	if(dept==null){
+    		dept=(String) request.getSession().getAttribute("college");
+    	}
     	int star=Integer.valueOf(request.getParameter("star"));    	
     	List<ExportBase> list=maintenanceservice.getExportBaseInfo(basetype,dept,star);
     	

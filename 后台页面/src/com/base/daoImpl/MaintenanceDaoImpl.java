@@ -30,7 +30,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 
 	@Override
 	public MaintenanceList maintenance(int pageindex, int size, String order,
-			String orderDir, String searchValue) {
+			String orderDir, String searchValue,String college) {
 		MaintenanceList ma = new MaintenanceList();
 		List<Prabaseinfo> list = new ArrayList<Prabaseinfo>();
 		int recordsTotal = 0;
@@ -42,15 +42,16 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
 			sp = (CallableStatement) conn
-					.prepareCall("{CALL baseweb.`query_prabaseinfo`(?,?,?,?,?,?)}");
+					.prepareCall("{CALL baseweb.`query_prabaseinfo`(?,?,?,?,?,?,?)}");
 			sp.setInt(1, size);
 			sp.setInt(2, pageindex);
 			sp.setString(3, order);
 			sp.setString(4, orderDir);
 			sp.setString(5, searchValue);
-			sp.registerOutParameter(6, java.sql.Types.INTEGER);
+			sp.setString(6, college);
+			sp.registerOutParameter(7, java.sql.Types.INTEGER);
 			sp.execute();
-			recordsTotal = sp.getInt(6);
+			recordsTotal = sp.getInt(7);
 			rs = sp.getResultSet();
 			while (rs.next()) {
 				Prabaseinfo ch = new Prabaseinfo();
@@ -130,7 +131,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 
 	// 缁涙盯锟�
 	@Override
-	public MaintenanceList getshaiBaseInfo(int basetype, int dept, int star,
+	public MaintenanceList getshaiBaseInfo(int basetype, String dept, int star,
 			int pageindex, int size, String order, String orderDir,
 			String searchValue) {
 		MaintenanceList ma = new MaintenanceList();
@@ -150,7 +151,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 			sp.setString(4, orderDir);
 			sp.setString(5, searchValue);
 			sp.setInt(6, basetype);
-			sp.setInt(7, dept);
+			sp.setString(7, dept);
 			sp.setInt(8, star);
 
 			sp.registerOutParameter(9, java.sql.Types.INTEGER);
@@ -213,7 +214,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	}
 
 	// 閼惧嘲绶辩�鐓庡毉閻ㄥ嫭鏆熼幑锟� @Override
-	public List<ExportBase> getInfo(int basetype, int dept, int star) {
+	public List<ExportBase> getInfo(int basetype, String dept, int star) {
 
 		List<ExportBase> list = new ArrayList<ExportBase>();
 		ExportBase mt = null;
@@ -227,7 +228,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 			sp = (CallableStatement) conn
 					.prepareCall("{CALL baseweb.export_prabaseinfo(?,?,?)}");
 			sp.setInt(1, basetype);
-			sp.setInt(2, dept);
+			sp.setString(2, dept);
 			sp.setInt(3, star);
 			System.out.println("basetype:"+basetype+", dept:"+dept+", star:"+star);
 			sp.execute();

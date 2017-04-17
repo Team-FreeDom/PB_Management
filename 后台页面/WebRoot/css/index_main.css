@@ -87,3 +87,17 @@
     margin-top: 20%;
     padding: 10px 10px;
 }
+
+.noLink{
+	pointer-events: none;	
+}
+.noLink:hover{
+	color:#d9d9d9;
+	pointer-events: none;
+}
+
+.judgetLink{
+	color: #000;
+	cursor: pointer;
+
+

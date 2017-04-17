@@ -26,7 +26,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
      * 
      */
     @Override
-    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue)
+    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue,String college)
     {
     	String columnName="";
 		if(order==0||order==2){
@@ -37,7 +37,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 			columnName="star";
 		}
 		System.out.println(order+" order:");
-	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue);
+	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue,college);
 	  return list;
     }
 
@@ -56,7 +56,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 
 	@Override
-	public MaintenanceList getshaiBaseInfo(int basetype, int dept, int star,
+	public MaintenanceList getshaiBaseInfo(int basetype, String dept, int star,
 			int pageindex, int size,int order,String orderDir,String searchValue) {
 		String columnName="";
 		if(order==0||order==2){
@@ -79,7 +79,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 
 	@Override
-	public List<ExportBase> getExportBaseInfo(int basetype, int dept, int star) {
+	public List<ExportBase> getExportBaseInfo(int basetype, String dept, int star) {
 		List<ExportBase> list=maintenancedao.getInfo(basetype,dept,star);
 		return list;
 	}
