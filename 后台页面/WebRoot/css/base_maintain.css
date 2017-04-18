@@ -54,6 +54,9 @@ tbody tr td span{
 	text-align:left;}
 .modal-body tr td input{	
 	width:140px;}
+#basetyped{
+	width:140px;
+}
 .modal{
 	margin-top:5%;}
 #topPlugin{

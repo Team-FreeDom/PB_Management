@@ -70,13 +70,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		return list;
 	}
 
-   
-	@Override
-	public void updateBaseInfo(String baseid, int star, String adddate) {
-		maintenancedao.updateBaseInfo(baseid,star,adddate);
-		
-	}
-
+ 
 
 	@Override
 	public List<ExportBase> getExportBaseInfo(int basetype, String dept, int star) {
@@ -97,6 +91,16 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 			String recordStr2, String recordStr3,int count,String resultStr4) {
 		int flag=maintenancedao.judge_insert_base(userid, recordStr1, recordStr2, recordStr3,count,resultStr4);
 		return flag;
+	}
+
+
+	@Override
+	public void updateBaseInfo(String baseid, String basenamed,
+		String basetyped, String landaread, String buildingaread,
+		int undertakeCountd, String userphoned, String usernamed,
+		String personDuty, String linkAddressd, String adddate, int star) {
+	    maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star);
+	    
 	}
 
 }

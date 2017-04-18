@@ -399,37 +399,42 @@
 												<td>基地编号：</td>
 												<td><input type="text" id="baseid" disabled /></td>
 												<td>基地名称 ：</td>
-												<td><input type="text" id="basenamed" disabled></td>
+												<td><input type="text" id="basenamed" ><span id="display"
+												style="color:#f00;"> </span></td>
 											</tr>
 											<tr>
 
 												<td>基地类型 ：</td>
-												<td><input type="text" id="basetyped" disabled></td>
+												<td>
+												<select class="form-control"  id="basetyped" name="TYPE	">
+													<option id="basetype1" value="">请选择</option>
+												</select>
+												<!-- <input type="text" id="basetyped" > --></td>
 												<td>申请部门 ：</td>
 												<td><input type="text" id="dept0d" disabled></td>
 											</tr>
 											<tr>
 
 												<td>土地面积 ：</td>
-												<td><input type="text" id="landaread" disabled /></td>
+												<td><input type="text" id="landaread"  /></td>
 												<td>建筑面积 ：</td>
-												<td><input type="text" id="buildingaread" disabled></td>
+												<td><input type="text" id="buildingaread" ></td>
 											</tr>
 
 
 											<tr>
 
 												<td>可承担人数 ：</td>
-												<td><input type="text" id="undertakeCountd" disabled></td>
+												<td><input type="text" id="undertakeCountd" ></td>
 												<td>联系人姓名 ：</td>
-												<td><input type="text" id="usernamed" disabled></td>
+												<td><input type="text" id="usernamed" ></td>
 											</tr>
 											<tr>
 
 												<td>联系人电话 ：</td>
-												<td><input type="text" id="userphoned" disabled></td>
+												<td><input type="text" id="userphoned" ></td>
 												<td>法定责任人 ：</td>
-												<td><input type="text" id="personDuty" disabled></td>
+												<td><input type="text" id="personDuty" ></td>
 
 											</tr>
 											<tr id="resourcetr">
@@ -446,8 +451,10 @@
 
 											<tr>
 												<td>通信地址 ：</td>
-												<td colspan="3"><div id="linkAddressd"
-														style="border:#ccc 1px solid;height:80px;"></div></td>
+												<td colspan="3">
+												<textarea class="form-control" rows="3" id="linkAddressd"></textarea>
+												<!-- <div id="linkAddressd"
+														style="border:#ccc 1px solid;height:80px;"></div> --></td>
 
 											</tr>
 											<tr id="hidecol">
