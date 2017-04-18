@@ -168,11 +168,13 @@ public class BaseMaintenanceController {
     @RequestMapping("/getshaiBaseinfo.do")
     public String getshaiBaseinfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("筛选");
 	int basetype = Integer.valueOf(request.getParameter("basetype"));
-	String dept = request.getParameter("dept");
-	int star = Integer.valueOf(request.getParameter("star"));
 
+	String dept = request.getParameter("dept");
+	if (dept.equals("-1")) {
+	    dept = null;
+	}
+	int star = Integer.valueOf(request.getParameter("star"));
 	int size = Integer.parseInt(request.getParameter("length"));
 
 	int startIndex = Integer.parseInt(request.getParameter("start"));
@@ -180,10 +182,10 @@ public class BaseMaintenanceController {
 	int order = Integer.valueOf(request.getParameter("order[0][column]"));
 	String orderDir = request.getParameter("order[0][dir]");
 	String searchValue = request.getParameter("search[value]");
+
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
-
 	int pageindex = (startIndex / size + 1);
 
 	MaintenanceList str = maintenanceservice.getshaiBaseInfo(basetype,
