@@ -158,5 +158,46 @@ table tbody tr td{
 div.Iwidth{
 	width:100% !important;
 }
-
-
+#chu{
+	float:right;
+	margin-left:5px;
+}
+#daoru{
+	float:right;
+	margin-left:5px;
+}
+#LinkButton{
+	float:right;
+	margin-left:5px;
+}
+#checkIsSave{
+	float:right;
+	margin-left:5px;
+}
+#remind{
+	display:block;
+	float:right;
+	color:#3EAB58;
+	padding-top:10px;
+	font-size:20px;
+}
+#add{
+	display:block;
+	float:right;
+	margin-left:5px;
+}
+#delete{
+	display:block;
+	float:right;
+	margin-left:5px;
+}
+#updatePlan{
+	display:block;
+	float:right;
+	margin-left:5px;
+}
+#add{
+	display:block;
+	float:right;
+	margin-left:5px;
+}
