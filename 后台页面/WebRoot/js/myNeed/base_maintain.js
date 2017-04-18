@@ -1,5 +1,6 @@
 // JavaScript Document
 var obj = [];
+var tag1=true;
 $(document)
 		.ready(
 				function() {
@@ -24,7 +25,29 @@ $(document)
 							});
 						}						
 					}
-					
+					$.ajax({
+						type : 'POST',
+						dataType : 'json',		
+						url : 'BaseApplyAllInfo.do',  
+						async : false,
+						cache : false,
+						error : function(request) {
+							bootbox.alert({
+								message : "请求异常",
+								size : 'small'
+							});
+						},
+						success : function(data) {																				
+							for ( var i=0;i<data[1].length;i++) {				
+								$("#basetype1").after(
+										"<option value="+data[1][i].name+">"
+												+ data[1][i].name + "</option>");				
+								
+							}	
+							
+						}
+
+					});
 					
 					// 分页表格
 					var page = $('#baseMaintain')
@@ -315,10 +338,10 @@ $(document)
 						$(".colle").prop('checked',true);
 						$("#add select").val('');
 					});
-
+					var index;
 					// 点击修改图标，填充修改模态框中的内容
 					$(document).on("click", "#updateDetail", function() {						
-						var index = $(this).attr("value");
+						index = $(this).attr("value");
 						
 						$("#baseid").val('#'+obj[index].id);
 						$("#basenamed").val(obj[index].name);
@@ -330,7 +353,8 @@ $(document)
 						$("#usernamed").val(obj[index].username);
 						$("#userphoned").val(obj[index].phone);
 						$("#major_orientedd").html(obj[index].facemajor);
-						$("#linkAddressd").html(obj[index].land_address);
+						$("#major_orientedd").val(obj[index].facemajor);
+						$("#linkAddressd").html(obj[index].land_address);					
 						$("#resourced").prop("href", obj[index].material_path);
 						
 						if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
@@ -425,14 +449,15 @@ $(document)
 
 								}
 
-								for (var i = 0; i < data[1].length; i++) {				
+								for (var i = 0; i < data[1].length; i++) {
 									$("#daobase")
 											.after(
 													"<option value="
 															+ data[1][i].id + ">"
 															+ data[1][i].name
 															+ "</option>");
-
+									
+									
 								}
 
 							},
@@ -442,11 +467,94 @@ $(document)
 						});
 
 					});
-					
+					var basename="";
+					$(document).on("focus", "#basenamed", function(){						
+						 basename=obj[index].name;							
+					});
+					$(document).on("blur", "#basenamed", function() {
+						var value=$(this).val();											
+						if(value!=basename){							
+							 $.ajax({
+									type : 'POST',
+									data:{
+										"name":value
+									},
+									dataType:'text',
+									url : 'CheckName.do', 
+									async : false,
+									cache : false,
+									error : function(request) {
+										bootbox.alert({
+											message : "请求异常",
+											size : 'small'
+										});
+									},
+									success : function(data) {					
+										if(data=="false"){						
+											/*$("#display").html("");*/
+											tag1=true;
+										}else{						
+											/*$("#display").html("该基地名称已存在，请重新输入");
+											$("#basenamed")[0].focus();*/
+											/*bootbox.alert({
+												message : "该基地名称已存在,请重新输入",
+												size : 'small'
+											});*/
+											$("#basenamed")[0].focus();
+											alert("该基地名称已存在,请重新输入");
+											tag1=false;
+										}
+									}
+
+								}); 
+						}else{
+							tag1=true;
+						}
+						
+					});
 					//确认修改
 					$("#saverun").click(function() {
+						var basenamed=$("#basenamed").val();
+						
+						var basetyped=$("#basetyped").val();
+						
+						var landaread=$("#landaread").val();										
+					
+						var buildingaread=$("#buildingaread").val();
+						var undertakeCountd=$("#undertakeCountd").val();
+						if(undertakeCountd==""){
+							undertakeCountd=0;
+						}
+						var usernamed=$("#usernamed").val();
+						var userphoned=$("#userphoned").val();
+						//$("#major_orientedd").html(obj[index].facemajor);
+						var linkAddressd=$("#linkAddressd").val();
+						var personDuty=$("#personDuty").val();//法定责任人						
 						var setdated=$("#setdated").val();
+						
 						var adddate=$("#adddate").val();
+						if(!tag1){		
+							/* bootbox.alert({
+									message : "该基地名称已存在，请重新输入",
+									size : 'small'
+								});*/
+							alert("该基地名称已存在，请重新输入");
+							 return;
+						}
+						if(basenamed==""){
+							bootbox.alert({
+								message : "请填写基地名称",
+								size : 'small'
+							});
+							return;
+						}						
+						if(basetyped==""){
+							bootbox.alert({
+								message : "请填写基地类型",
+								size : 'small'
+							});
+							return;
+						}
 						if(adddate==""){
 							bootbox.alert({
 								message : "请填写截止日期",
@@ -454,6 +562,8 @@ $(document)
 							});
 							return;
 						}
+						
+						
 						var start=setdated.split("-");
 						var end=adddate.split("-");
 						var time=0;
@@ -472,13 +582,7 @@ $(document)
 								}
 							}
 						}
-						if(time!==0){
-							bootbox.alert({
-								message : "截止日期超过创建日期,请更改",
-								size : 'small'
-							});
-							return;
-						}
+						
 						
 						var baseid=$("#baseid").val();
 						baseid=baseid.substring(1);
@@ -486,14 +590,28 @@ $(document)
 						$("#starget .icon-star").each(function() {
 							i++;
 						});						
-						var star=i;
-						
-						
+						var star=i;											
+						if(time!==0){
+							bootbox.alert({
+								message : "截止日期超过创建日期,请更改",
+								size : 'small'
+							});
+							return;
+						}
 						$.ajax({
 							data : {
 								"baseid" : baseid,
 								"star" : star,
-								"adddate" : adddate
+								"adddate" : adddate,
+							    "basenamed":basenamed,								
+								"basetyped":basetyped,
+								"landaread":landaread,									
+							    "buildingaread":buildingaread,								
+								"undertakeCountd":undertakeCountd,
+								"usernamed":usernamed,
+								"userphoned":userphoned,								
+								"linkAddressd":linkAddressd,
+								"personDuty":personDuty,//法定责任人
 							},
 							url : 'updateBaseInfo.do',
 							async : true,
@@ -972,7 +1090,8 @@ $(".icon-filter").on("click", function() {
 										+ data[1][i].id + ">"
 										+ data[1][i].name
 										+ "</option>");
-
+				
+				
 			}
 
 		},
