@@ -25,6 +25,7 @@ import com.base.po.Majoraim;
 import com.base.po.PlanList;
 import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("PlanDao")
@@ -95,7 +96,9 @@ public class PlanDaoImpl implements PlanDao {
 
     // 提供保存按钮的功能
     @Override
-    public void updatePlan(int id, String plandata) {
+    public String updatePlan(int id, String plandata) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -103,16 +106,19 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_classarrangecourse(?,?)}");
+		    .prepareCall("{call baseweb.add_classarrangecourse(?,?,?)}");
 	    sp.setInt(1, id);
 	    sp.setString(2, plandata);
 	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
     }
 
     // 删除单条班级安排记录

@@ -113,7 +113,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	System.out.println("insert---end");
 
     }
-
+  //我的基地中基地续期
     @Override
     public String updateDate(int id, String adddate) {
 	int flag;
@@ -137,7 +137,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	}
 	return message;
     }
-    
+    //我的基地中基地申请撤回
     @Override
     public int changeThisStatus(String id,int status1,int status2){
     	
@@ -155,8 +155,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
     	    sp.setInt(3, status2);
     	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
     	    sp.execute();
-    	    flag = sp.getInt(4);
-    	    
+    	    flag = sp.getInt(4);   	    
     	} catch (SQLException e) {
     	    // TODO Auto-generated catch block
     	    e.printStackTrace();

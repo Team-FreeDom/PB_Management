@@ -219,13 +219,10 @@ public class PlanController implements ServletContextAware{
 
 	// 获取课程表记录编号
 	int id = Integer.valueOf(request.getParameter("courseID"));
-	//System.out.println(id + "=====haha");
-
 	String plandata = request.getParameter("str");
-	System.out.println(plandata + "liiiiiii");
-	planservice.savePlanModify(id, plandata);
+	String message=planservice.savePlanModify(id, plandata);
 	JSONObject getObj = new JSONObject();
-	getObj.put("msg", "此申请处理成功");
+	getObj.put("msg", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());

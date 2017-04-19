@@ -1112,10 +1112,17 @@ $("#save").click(function(){//弹出框的保存
 							"str":str,
 						},
 						success : function(msg) {							
-							bootbox.alert({
-								message : "保存成功",
-								size : 'small'
-							});
+							if(msg.msg=="success"){
+								bootbox.alert({
+									message : "操作成功",
+									size : 'small'
+								});
+							}else if(msg.msg=="fail"){
+								bootbox.alert({
+									message : "操作失败",
+									size : 'small'
+								});
+							}		
 							//$("#Applychart").hide();
 							
 						}

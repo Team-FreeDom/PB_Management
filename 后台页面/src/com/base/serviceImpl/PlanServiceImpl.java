@@ -56,9 +56,10 @@ public class PlanServiceImpl implements PlanService {
 
     // 提供保存按钮的功能
     @Override
-    public void savePlanModify(int id, String plandata) {
+    public String savePlanModify(int id, String plandata) {
 
-	plandao.updatePlan(id, plandata);
+	String message=plandao.updatePlan(id, plandata);
+	return message;
     }
 
     // 从专业培训表中获取特定专业的多个培训目的
