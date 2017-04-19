@@ -627,17 +627,15 @@ public class LandApplyController {
 		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
 	    Layout_InfoView view = null;
 		String layoutStr = "";
-		String landinfoStr = "";       
-		if (tag == 0) {
-			System.out.println("清空");
-		    landApplyServiceImpl.delLayout_info(bid,path1);
-		} else {
-			System.out.println("更新：controller层");
+		String landinfoStr = "";  
+		String flagStr="";
+		if (tag == 0) {			
+			flagStr=landApplyServiceImpl.delLayout_info(bid,path1);
+		} else {			
 			JSONArray obj = JSONArray.fromObject(str);
 			for (int i = 0; i < obj.size(); i++) {
 
-				JSONObject temp = obj.getJSONObject(i);		
-				
+				JSONObject temp = obj.getJSONObject(i);				
 				landinfoStr += "('" + temp.getString("id") + "',"  //拼装土地信息
 						+ temp.getInt("bid") + ","
 						+ Integer.valueOf(temp.getString("Afford")) + ","
@@ -663,11 +661,11 @@ public class LandApplyController {
 				}			
 
 			}
-			landApplyServiceImpl.delLayout_info(bid,path1);
-			landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr);
+			//landApplyServiceImpl.delLayout_info(bid,path1);
+			flagStr=landApplyServiceImpl.updateLayInfo(landinfoStr, layoutStr,bid);
 		}
 
-		String str1 = "[{\"flag\":" + true + "}]";
+		String str1 = "[{\"flag\":'" + flagStr+ "'}]";
 		JSONArray json = JSONArray.fromObject(str1);
 
 		response.getWriter().print(json.toString());

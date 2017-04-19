@@ -181,9 +181,9 @@ public class LandRentController<E> {
 			HttpServletResponse response, ModelMap map) {
 		  		
 		String[] check=request.getParameterValues("idname");		
-		landRentServiceImpl.deleteRentInfo(check);
-		
-	   return "redirect:fieldRent_maintain.jsp";
+		String str=landRentServiceImpl.deleteRentInfo(check);
+		map.addAttribute("str", str);
+	   return "fieldRent_maintain";
 	}
 	
 	

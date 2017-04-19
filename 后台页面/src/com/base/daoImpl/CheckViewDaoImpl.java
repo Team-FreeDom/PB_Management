@@ -405,7 +405,7 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 同意申请，将审核中的记录变为交费中，判断土地编号是否有相同的，返回flag值
     @Override
-    public int agreeInfo(String recordStr, int status) {
+    public int agreeInfo(String recordStr, int status,String landstr) {
 
 	int tag = 0;
 	Connection conn = null;
@@ -417,13 +417,17 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.agree_apply(?,?,?)}");
+		    .prepareCall("{CALL baseweb.agree_apply(?,?,?,?)}");
 	    sp.setString(1, recordStr);
 	    sp.setInt(2, status);
-	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.setString(3, landstr);
+	    System.out.println("recordStr:"+recordStr);
+	    System.out.println("status:"+status);
+	    System.out.println("landstr:"+landstr);
+	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
 	    sp.execute();
 
-	    tag = sp.getInt(3);
+	    tag = sp.getInt(4);
 
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -677,16 +681,28 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 逾期恢复
     @Override
-    public void overduerecovery(String recordStr) {
-	Session session = sessionFactory.openSession();
+    public int overduerecovery(String recordStr) {
+	
+    Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	
+	int flag=0;
 	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.renewal_costsdate(?)}");
-	    sqlQuery.setString(0, recordStr);	   
-	    sqlQuery.executeUpdate();
-	} finally {
-	    session.close();
-	}
-    }
+		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+		sp= (CallableStatement) conn.prepareCall("{CALL baseweb.renewal_costsdate(?,?)}");
+		sp.setString(1,recordStr);		
+		sp.registerOutParameter(2,java.sql.Types.INTEGER);
+		sp.execute();   //执行存储过程
+		flag=sp.getInt(2);
+		rs=sp.getResultSet();  //获得结果集
+	
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		SqlConnectionUtils.free(conn, sp, rs);			
+	}   
+	return flag;
+  }
 }

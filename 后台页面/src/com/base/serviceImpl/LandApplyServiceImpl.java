@@ -34,6 +34,7 @@ import com.base.po.Startplan;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
+import com.base.utils.BaseUtils;
 import com.base.utils.MessageUtils;
 
 @Service("landApplyService")
@@ -299,7 +300,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	   return list;
    }
    
-   public void  delLayout_info(int bid,String path)
+   public String  delLayout_info(int bid,String path)
    {
 	  /* List<String> list=new ArrayList<String>();
 	   list=landInfoDaoImpl.deletelandimg(bid);
@@ -314,13 +315,17 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 			file.delete(); 
 		   }
 	   }*/
-	   landInfoDaoImpl.delLayout_info(bid);
+	   int flag=landInfoDaoImpl.delLayout_info(bid);
+	   String str=BaseUtils.getException(flag);
+	   return str;
    }
 
    
-   public void updateLayInfo(String landinfoStr,String layoutStr)
+   public String updateLayInfo(String landinfoStr,String layoutStr,int bid)
    {
-	   landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr);
+	   int flag=landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr,bid);
+	   String str=BaseUtils.getException(flag);
+	   return str;
    }
    
   
@@ -339,7 +344,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	  //�ύ���� 
 	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
 	   
-	   if(flag==1){
+	   if(flag==200){
 		   
 	   //��ò������Ϣ���
 		   

@@ -211,10 +211,10 @@ public class CheckController {
 	System.out.println(recordstr+"ppppppp");
 	String infostr = request.getParameter("infostr");
 	System.out.println(infostr+"qqqqqqqq");
-	checkservice.overduerecovery(recordstr, infostr);
+	String str=checkservice.overduerecovery(recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", " 逾期恢复成功");
+	getObj.put("str", str);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {

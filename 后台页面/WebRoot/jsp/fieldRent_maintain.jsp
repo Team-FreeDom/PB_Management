@@ -45,7 +45,7 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
@@ -221,7 +221,7 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-
+                                        <td hidden id="deleId">${str}</td>
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
