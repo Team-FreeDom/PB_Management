@@ -28,7 +28,8 @@ table tbody tr td{
 	position:fixed !important;
 	top:112px;
 	left:19%;
-	width: 80%;
+	width: 82%;
+	margin-left:-1%;
 	display: none;
 }
 #modalcontent{
@@ -175,9 +176,13 @@ table tbody tr td{
 div.Iwidth{
 	width:100% !important;
 }
-/* #facemajoy{
-	width:300px !important;
-} */
-
-
+#practiceClass{
+	width:66px !important;
+}
+#category{
+	width:66px !important;
+}
+#practicePlace{
+	min-width:66px !important;
+}
 

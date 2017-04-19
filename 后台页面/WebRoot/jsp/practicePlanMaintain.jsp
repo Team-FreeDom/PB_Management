@@ -475,7 +475,7 @@
 				<button type="button" class="btn btn-primary" id="addTbody">添加</button>
 				<button type="button" class="btn btn-success" id="save">保存</button>
 
-				<table class="table-bordered" id="table">
+				<table id="table">
 
 					<tr>
 						<td colspan="2">带队老师</td>
