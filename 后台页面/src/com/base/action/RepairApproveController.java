@@ -229,9 +229,9 @@ public class RepairApproveController {
 	String storestr = request.getParameter("recordstr");
 	String infostr = request.getParameter("infostr");
 	String message=repairApproveService.finishRepairApply(storestr, infostr);
-	if(message=="success"){
+	if(message.equals("success")){
 	    message="操作成功";
-	}else if(message=="fail"){
+	}else if(message.equals("fail")){
 	    message="操作失败";
 	}
 	JSONObject getObj = new JSONObject();
