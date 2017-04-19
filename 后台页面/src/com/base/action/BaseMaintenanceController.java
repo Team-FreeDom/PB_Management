@@ -109,9 +109,9 @@ public class BaseMaintenanceController {
 	String str = request.getParameter("recordstr");
 
 	String message=maintenanceservice.delInfo(str);
-	if(message=="success"){
+	if(message.equals("success")){
 	    message="操作成功";
-	}else if(message=="fail"){
+	}else if(message.equals("fail")){
 	    message="操作失败";
 	}
 	JSONObject getObj = new JSONObject();

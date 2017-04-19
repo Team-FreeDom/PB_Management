@@ -199,9 +199,9 @@ public class MaintainApplyController {
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("deletstr");
 	String message=applyservice.delete_maintainapply(str);
-	if(message=="success"){
+	if(message.equals("success")){
 	    message="操作成功";
-	}else if(message=="fail"){
+	}else if(message.equals("fail")){
 	    message="操作失败";
 	}
 	JSONObject getObj = new JSONObject();

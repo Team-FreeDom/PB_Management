@@ -66,10 +66,11 @@ public class baseServiceImpl implements baseApplyService {
     @Override
     public String getRequestBaseInfo(String str1, String str2,String infostr) {
 	// 获得插入的消息语句
-        String insertStr = MessageUtils.getinfoMs(infostr, 15);
-        System.out.println(insertStr+"什么信息出来");
 	String message=baseapplydao.getRequestBaseInfo(str1, str2);
-	baseapplydao.insertMessage(insertStr);
+	if(message.equals("success")){
+	     String insertStr = MessageUtils.getinfoMs(infostr, 15);
+	     baseapplydao.insertMessage(insertStr);
+	}            		
 	return message;
 
     }

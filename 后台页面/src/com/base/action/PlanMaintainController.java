@@ -617,9 +617,9 @@ public class PlanMaintainController implements ServletContextAware {
 
 	String recordstr = request.getParameter("deletstr");
 	String message=planMaintainService.deletePlanInfo(recordstr);
-	if(message=="success"){
+	if(message.equals("success")){
 	    message="操作成功";
-	}else if(message=="fail"){
+	}else if(message.equals("fail")){
 	    message="操作失败";
 	}
 	JSONObject getObj = new JSONObject();

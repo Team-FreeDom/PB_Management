@@ -63,7 +63,7 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 			number_0 = 18;
 		}
 		// 获得插入的消息语句
-		if (flag == 1) {
+		if (flag == 200) {
 			String insertStr = MessageUtils.getinfoMs(infostr, number_0);
 			// 向消息表中插入信息
 			mybaseinfodao.insertMessage(insertStr);

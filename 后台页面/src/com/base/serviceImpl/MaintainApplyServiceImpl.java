@@ -34,10 +34,14 @@ public class MaintainApplyServiceImpl implements MaintainApplyService {
     // 插入项目维修申请
     public String insert_maintain(String str, String infostr) {
 	// 获得插入的消息语句
-	String insertStr = MessageUtils.getinfoMs(infostr, 19);
 	String message = maintainapplydao.insert_maintain(str);
+	if(message.equals("success")){
+	   String insertStr = MessageUtils.getinfoMs(infostr, 19);
+	
 	// 向消息表中插入信息
 	basecheckdao.insertMessage(insertStr);
+	}
+	
 	return message;
     }
 

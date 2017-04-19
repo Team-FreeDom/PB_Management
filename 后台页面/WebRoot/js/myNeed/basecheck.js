@@ -496,12 +496,8 @@ $(document).ready(function() {
 												$("#applyConfirm").modal('hide');								
 												}
 											
-										});	
-										getDept();
-										Spage.draw(false);
-									}
-									$("#valideDate").val("10");
-									$("#applyConfirm").modal('hide');								
+										});											
+									}																	
 									}							
 							});	  
 						}                    
