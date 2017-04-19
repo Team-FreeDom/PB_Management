@@ -321,7 +321,7 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
     @Override
-    public int payForSuccess(String recordStr, int status) {
+    public int payForSuccess(String recordStr, int status,String landstr) {
     	
 	int tag = 0;
 	Connection conn = null;
@@ -333,13 +333,14 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.state_success(?,?,?)}");
+		    .prepareCall("{call baseweb.state_success(?,?,?,?)}");
 	    sp.setString(1, recordStr);
 	    sp.setInt(2, status);
-	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.setString(3, landstr);
+	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
 	    sp.execute();
 
-	    tag = sp.getInt(3);
+	    tag = sp.getInt(4);
 
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -371,18 +372,38 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 取消交费，将锁定状态的变为审核状态，发送通知
     @Override
-    public void releaseInfo(String landstr) {
+    public int releaseInfo(String recordStr, int status1,int status2,String landstr) {
 
+	int tag = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
 	Session session = sessionFactory.openSession();
+
 	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.trans_pay(?)}");
-	    sqlQuery.setString(0, landstr);
-	    sqlQuery.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.trans_pay(?,?,?,?,?)}");
+	    sp.setString(1, recordStr);
+	    sp.setString(2, landstr);	 
+	    sp.setInt(3, status1);
+	    sp.setInt(4, status2);	   
+	    System.out.println(recordStr+"  "+status1+"   "+status2+"  "+landstr);
+	    sp.registerOutParameter(5, java.sql.Types.INTEGER);
+	    sp.execute();
+
+	    tag = sp.getInt(5);
+
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
+
+	return tag;
 
     }
 

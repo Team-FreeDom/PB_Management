@@ -885,16 +885,21 @@ $(document)
 												
 											if(msg.str==0){
 												bootbox.alert({
-													message :  "取消失败,请刷选页面",
+													message :  "操作失败,请刷选页面",
 													size : 'small'
 												});
 												return;
-											}else if(msg.str==1){
+											}else if(msg.str==200){
 												bootbox.alert({
-													message :  "取消成功",
+													message :  "操作成功",
 													size : 'small'
 												});
-											}												
+											}else if(msg.str==500){
+												bootbox.alert({
+													message :  "操作失败",
+													size : 'small'
+												});
+											}														
 												
 												$("#basenameid option:gt(0)").remove();
 												$("#usernameid option:gt(0)").remove();
@@ -1051,16 +1056,21 @@ $(document)
 											success : function(msg) {
 												if(msg.str==0){
 													bootbox.alert({
-														message :  "确认失败，请刷新页面",
+														message :  "操作失败，请刷新页面",
 														size : 'small'
 													});
 													return;
-												}else if(msg.str==1){
+												}else if(msg.str==200){
 													bootbox.alert({
-														message :  "确认成功",
+														message :  "操作成功",
 														size : 'small'
 													});
-												}												
+												}else if(msg.str==500){
+													bootbox.alert({
+														message :  "操作失败",
+														size : 'small'
+													});
+												}													
 												
 												$("#basenameid option:gt(0)").remove();
 												$("#usernameid option:gt(0)").remove();

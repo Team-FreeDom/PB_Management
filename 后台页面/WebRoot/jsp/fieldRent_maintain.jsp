@@ -221,7 +221,7 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-                                        <td hidden id="deleId">${str}</td>
+                                        <td hidden id="deleId">${str}</td>                                     
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
@@ -265,10 +265,7 @@
 											</ul>
 										</td>
 										<td colspan="4">
-											<!-- <button type="button" class="btn btn-info button_style"
-												data-toggle="modal" data-target="#myModalAdd">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button> -->
+											
 										</td>
 										<td colspan="2">
 											<button type="button" class="btn btn-danger"
@@ -303,7 +300,7 @@
 					</div>
 					<div class="modal fade" id="myModalEdit" tabindex="-1"
 						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<form action="landManageUpdate.do" method="post"
+						<form method="post"
 							id="landManageUpdate">
 							<div class="modal-dialog">
 								<div class="modal-content" style="border:#3071a9 8px solid">

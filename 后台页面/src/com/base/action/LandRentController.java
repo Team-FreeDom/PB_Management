@@ -237,7 +237,7 @@ public class LandRentController<E> {
 	
 	@RequestMapping("/landManageUpdate.do")
 	public String landManageUpdate(HttpServletRequest request,
-			HttpServletResponse response, ModelMap map) throws Exception {	
+			HttpServletResponse response, ModelMap map){	
 		
 		Double expense=0.0;
 		String fee=request.getParameter("expense");
@@ -250,12 +250,21 @@ public class LandRentController<E> {
 		}
 		String startTime=request.getParameter("startTime");
 		String endTime=request.getParameter("endTime");
-		int lr_id=Integer.valueOf(request.getParameter("lr_id"));
-		System.out.println(expense);
-		System.out.println(lr_id);
-		landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
+		int lr_id=Integer.valueOf(request.getParameter("lr_id"));		
+		String str=landRentServiceImpl.landManageUpdate(deptSelect, planCareer, expense, startTime, endTime, lr_id);	
+		JSONObject getObj = new JSONObject();
+		getObj.put("flag", str);
+		response.setContentType("text/html;charset=UTF-8");
 		
-		return "redirect:fieldRent_maintain.jsp";
+		try {
+			response.getWriter().print(getObj.toString());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;	
 	}
 	
 	

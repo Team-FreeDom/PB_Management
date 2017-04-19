@@ -52,7 +52,7 @@ public interface CheckViewDao {
 	   返回值：  无返回值
 	   函数功能：确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
 	 */
-	 public int payForSuccess(String recordStr, int status);
+	 public int payForSuccess(String recordStr, int status,String landstr);
 	 
 	 /*
 	   参数说明：landstr,为土地编号的封装
@@ -66,7 +66,7 @@ public interface CheckViewDao {
 	   返回值：  无返回值
 	   函数功能：取消交费，将锁定状态的变为审核状态，发送通知
 	 */
-	 public void releaseInfo(String landstr);
+	 public int releaseInfo(String recordStr, int status1,int status2,String landstr);
 	 
 	 /*
 	   参数说明：landstr,为土地编号的封装
