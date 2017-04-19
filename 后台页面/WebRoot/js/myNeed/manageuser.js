@@ -2,7 +2,26 @@
 $("#certainExport").click(function(){
         	 $("#lead").modal("hide");
 
-         })
+         });
+
+$("#dao").click(function(){
+	 $("#exampleInputFi").val("");
+
+});
+
+var userTag=$("#userTag").text();
+if(userTag=="success"){
+	 bootbox.alert({
+		  message: "导入成功",
+		  size: 'small'
+	  });
+}else if(userTag=="fail"){
+	 bootbox.alert({
+		  message: "导入失败",
+		  size: 'small'
+	  });
+}
+
 
         //导出功能刷选部门
         	 $.ajax({

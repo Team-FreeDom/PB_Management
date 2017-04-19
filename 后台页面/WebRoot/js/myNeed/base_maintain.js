@@ -23,7 +23,17 @@ $(document)
 								message : "您导入数据中存在相同的基地名称，请重新导入",
 								size : 'small'
 							});
-						}						
+						}else if(tag_1=="500"){
+							bootbox.alert({
+								message : "导入失败",
+								size : 'small'
+							});
+						}else if(tag_1=="200"){
+							bootbox.alert({
+								message : "导入成功",
+								size : 'small'
+							});
+						}										
 					}
 					$.ajax({
 						type : 'POST',

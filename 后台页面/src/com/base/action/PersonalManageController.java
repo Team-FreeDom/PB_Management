@@ -357,6 +357,7 @@ public class PersonalManageController {
 	// 得到上传的文件的文件名
 	String fileName = mFile.getOriginalFilename();
 	String filename = "";
+	String flag="success";
 	if (!fileName.isEmpty()) {
 	    filename = new Date().getTime() + "$" + fileName;
 	    InputStream inputStream = mFile.getInputStream();
@@ -417,7 +418,7 @@ public class PersonalManageController {
 			+ ",formerUnit=values(formerUnit),hukou=values(hukou),startContactTime=values(startContactTime),telephone=values(telephone)"
 			+ ",userType=values(userType),workTime=values(workTime),workingForm=values(workingForm),majorid=values(majorid),titles=values(titles)";
 		// System.out.println(sql);
-		adminManageServiceImpl.setAdminFunction(sql);
+		flag=adminManageServiceImpl.setAdminFunction(sql);
 	    }
 
 	    wb.close();
@@ -426,7 +427,8 @@ public class PersonalManageController {
 	    tempFile.delete(); // 删除临时文件
 
 	}
-	return "redirect:mangeruser.jsp";
+	map.addAttribute("flag", flag);
+	return "mangeruser";
     }
 
     // 筛选userInfo中的部门

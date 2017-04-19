@@ -319,13 +319,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
     public int judge_insert_base(String userid, String recordStr1,
 	    String recordStr2, String recordStr3, int count, String resultStr4) {
 	Connection conn = null;
-	CallableStatement sp = null;
-	System.out.println("record1:" + recordStr1);
-	System.out.println("record2:" + recordStr2);
-	System.out.println("record3:" + recordStr3);
-	System.out.println("userid:" + userid);
-	System.out.println("record4:" + resultStr4);
-	System.out.println("count:" + count);
+	CallableStatement sp = null;	
 	int flag = 0;
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
