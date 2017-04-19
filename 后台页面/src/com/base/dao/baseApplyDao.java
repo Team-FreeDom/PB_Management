@@ -36,7 +36,7 @@ public interface baseApplyDao {
 	 返回值：    无返回值
 	 函数功能：插入实习基地申请
 	 */
-    public void getRequestBaseInfo(String str1,String str2);
+    public String getRequestBaseInfo(String str1,String str2);
     
     /*
 	  参数说明：name,为实习基地的名称   

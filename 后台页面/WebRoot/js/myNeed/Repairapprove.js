@@ -396,15 +396,20 @@ $(document).on("click", "#scanDetail2", function() {
 														message : "同意申请失败请刷新页面",
 														size : 'small'
 													});
-												}else{
+												}else if(msg==200){
 													bootbox.alert({
-														message : "同意申请成功",
+														message : "操作成功",
 														size : 'small'
 													});
 												getInfoApply();
 												Approvetable.draw(false);
 												repair.draw(false);
-												}																								
+												}else if(msg==500){
+													bootbox.alert({
+														message : "操作失败",
+														size : 'small'
+													});
+												}																							
 											}
 										});//end
 
@@ -489,15 +494,21 @@ $(document).on("click", "#scanDetail2", function() {
 														size : 'small'
 													});
 													$("#refuseModal").modal('hide');
-												}else{
+												}else if(msg==200){
 													bootbox.alert({
-													message : "拒绝报修成功",
+													message : "操作成功",
 													size : 'small'
 												});
 													$("#refuseModal").modal('hide');
 													getInfoApply();
 													Approvetable.draw(false);
 													repair.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message : "操作失败",
+														size : 'small'
+													});
+													$("#refuseModal").modal('hide');
 												}
 																								
 											}

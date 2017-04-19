@@ -174,9 +174,15 @@ public class BaseApplyController {
 		map.addAttribute("basename", name);
 		//String infostr="";
 		String infostr=JSONArray.fromObject(map).toString();		
-		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
-		request.setAttribute("index", 1);
+		String message=baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
+		request.setAttribute("index", message);
 		response.setContentType("text/html;charset=UTF-8");
+		/*try {
+		    response.getWriter().print(message);
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}*/
 		
 	    }
 	}

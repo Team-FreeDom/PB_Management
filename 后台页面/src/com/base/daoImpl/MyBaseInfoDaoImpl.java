@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.base.dao.MyBaseInfoDao;
 import com.base.po.MyBase;
 import com.base.po.MyBaseList;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("MyBaseInfoDao")
@@ -114,18 +115,27 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
     }
 
     @Override
-    public void updateDate(int id, String adddate) {
-	Session session = sessionFactory.openSession();
-
+    public String updateDate(int id, String adddate) {
+	int flag;
+	String message = null;
+	Connection conn = null;
+	CallableStatement sp = null;
 	try {
-	    SQLQuery query = session
-		    .createSQLQuery("{CALL baseweb.user_renewalbase(?,?)}");
-	    query.setInteger(0, id);
-	    query.setString(1, adddate);
-	    query.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.user_renewalbase(?,?,?)}");
+	    sp.setInt(1, id);
+	    sp.setString(2, adddate);
+	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
+	} catch (Exception e) {
+	    e.printStackTrace();
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
     }
     
     @Override
