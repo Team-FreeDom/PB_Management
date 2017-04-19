@@ -217,7 +217,9 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao {
 
     @Override
     // 增加维修基地记录（已完成的维修）
-    public void add_maintain(MaintainApply ma) {
+    public String add_maintain(MaintainApply ma) {
+	int flag;
+	String message=null;
 	Session session = sessionfactory.openSession();
 	Transaction tx = null;
 
@@ -225,15 +227,20 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao {
 	    tx = session.beginTransaction();
 	    session.save(ma);
 	    tx.commit();
+	    flag=200;
+	    message=BaseUtils.getException(flag);
 
 	} catch (Exception e) {
 	    if (tx != null) {
 		tx.rollback();//
 	    }
+	    flag=500;
+	    message=BaseUtils.getException(flag);
 	    System.out.println(e);
 	} finally {
 	    session.close();
 	}
+	return message;
     }
 
     @Override

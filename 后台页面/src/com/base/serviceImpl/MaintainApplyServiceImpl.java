@@ -73,8 +73,9 @@ public class MaintainApplyServiceImpl implements MaintainApplyService {
 
     @Override
     // 增加维修基地记录（已完成的维修）
-    public void insert_maintainhistory(MaintainApply ma) {
-	maintainapplydao.add_maintain(ma);
+    public String insert_maintainhistory(MaintainApply ma) {
+	String message=maintainapplydao.add_maintain(ma);
+	return message;
     }
 
     @Override
