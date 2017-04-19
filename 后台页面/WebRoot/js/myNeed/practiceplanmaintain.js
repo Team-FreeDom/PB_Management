@@ -26,6 +26,11 @@ $(document)
 							message : "您导入的Excel文件格式有错,请重新选择",
 							size : 'small'
 						});
+					}else if($("#ta3").text()=="true"){
+						bootbox.alert({
+							message : "导入成功",
+							size : 'small'
+						});
 					}
 					
 					// 获取学院，学期
