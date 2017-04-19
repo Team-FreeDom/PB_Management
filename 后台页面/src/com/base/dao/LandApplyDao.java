@@ -83,7 +83,11 @@ public interface LandApplyDao {
 	 */
 	public int submitApply(String userid,String lidList,String str);
 	
-	
-	
+	/*
+	  参数说明：la_id,为土地记录编号，tag,为标志值	          
+	 返回值：    int型
+	 函数功能：撤销 
+	 */
+	public int cancelIt(int la_id,int tag);
 
 }

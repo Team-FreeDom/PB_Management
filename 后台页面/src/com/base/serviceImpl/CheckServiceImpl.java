@@ -88,16 +88,12 @@ public class CheckServiceImpl<E> implements checkService {
 	String insertStr = MessageUtils.getInsertStr(infostr, 5);
 
 	// 把特定记录的状态改为未交费
-	int flag=checkViewDaoImpl.updateStatus(recordstr, 1,10);
-	
-    if(flag==1){
-    	// 把相同土地的状态为锁定的土地状态变为审核中
-    	checkViewDaoImpl.releaseInfo(landstr);
-
+	int flag=checkViewDaoImpl.releaseInfo(recordstr, 1,10,landstr);//	
+    if(flag==200){
+    	// 把相同土地的状态为锁定的土地状态变为审核中    	
     	// 向消息表中插入信息
     	checkViewDaoImpl.insertMessage(insertStr);
-    }
-	
+    }	
       return flag;
     }
 
@@ -109,10 +105,10 @@ public class CheckServiceImpl<E> implements checkService {
 	String insertStr = MessageUtils.getInsertStr(infostr, 6);
 
 	// 把特定记录的状态改为申请成功，并将记录插入土地租赁历史表中
-	int flag=checkViewDaoImpl.payForSuccess(recordstr, 6);
-    if(flag==1){
+	int flag=checkViewDaoImpl.payForSuccess(recordstr, 6,landstr);
+    if(flag==200){
     	// 把相同土地的状态为锁定的土地状态变为同类竞争
-    	checkViewDaoImpl.confirmInfo(landstr);
+    	//checkViewDaoImpl.confirmInfo(landstr);
     	// 向消息表中插入信息
     	checkViewDaoImpl.insertMessage(insertStr);
     }

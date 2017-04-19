@@ -664,9 +664,9 @@ $(document).ready(function() {
 							cache : false,
 							success : function(data) {
 																
-								if (data[0].flag=="1"||data[0].flag==1) {
+								if (data[0].flag=="200"||data[0].flag==200) {
 									bootbox.alert({
-								        message: "撤销成功",
+								        message: "操作成功",
 								        size: 'small'
 								    });
 									table1.draw(false);
@@ -674,6 +674,11 @@ $(document).ready(function() {
 								} else if(data[0].flag=="0"||data[0].flag==0){
 									bootbox.alert({
 								        message: "撤销失败,请刷新页面",
+								        size: 'small'
+								    });
+								}else if(data[0].flag=="500"||data[0].flag==500){
+									bootbox.alert({
+								        message: "撤销失败",
 								        size: 'small'
 								    });
 								}

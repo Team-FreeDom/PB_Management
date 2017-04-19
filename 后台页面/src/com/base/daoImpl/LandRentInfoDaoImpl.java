@@ -242,11 +242,11 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		return lr;
 	}
 	
-	public void updateOne(LandRentInfo lr) {
+	public int updateOne(LandRentInfo lr) {
 		Session session=sessionFactory.openSession();	
 		
 		Transaction tx=null;
-		
+		int flag=200;
 		try {
 			 tx=session.beginTransaction();
 	    	 session.update(lr);
@@ -255,11 +255,12 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
+			}	
+			flag=500;
 		}finally{
 			session.close();
 		}
+		return flag;
 	}
 
 	@Override
