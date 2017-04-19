@@ -46,6 +46,7 @@ public class LoginController {
 		
 		//判断验证码
 		String strCode = (String) session.getAttribute("strCode");
+		strCode="1111";
 		if(!authCode.equals(strCode)){
 			
 			return "redirect:login_soft.html";

@@ -21,6 +21,7 @@ import com.base.po.CheckView;
 import com.base.po.LandApply;
 import com.base.po.UserInfo;
 import com.base.service.checkService;
+import com.base.utils.BaseUtils;
 import com.base.utils.MessageUtils;
 
 @Service("checkService")
@@ -60,10 +61,10 @@ public class CheckServiceImpl<E> implements checkService {
 
 	// 将特定编号的土地记录状态改为同类竞争
 	int flag=checkViewDaoImpl.updateStatus(recordStr,2,5);
-    if(flag==1){
+    if(flag==200){
     	// 向消息表中插入信息
     	checkViewDaoImpl.insertMessage(insertStr);
-    }	
+    }   
 	return flag;
     }
 
@@ -73,15 +74,11 @@ public class CheckServiceImpl<E> implements checkService {
 	
 	// 获得插入的消息语句
 	String insertStr = MessageUtils.getInsertStr(infostr, 2);	
-	int tag = checkViewDaoImpl.agreeInfo(recordstr, 1);
-	
-	if (tag == 1) {
-	    // 把相同土地的其他申请置为锁定
-	    checkViewDaoImpl.lockInfo(landstr);
+	int tag = checkViewDaoImpl.agreeInfo(recordstr, 1,landstr);
+	if(tag==200){
 	    // 向消息表中插入信息
 	    checkViewDaoImpl.insertMessage(insertStr);
-	}
-
+	}	
 	return tag;
     }
 
@@ -224,16 +221,16 @@ public class CheckServiceImpl<E> implements checkService {
 
     // 逾期恢复
     @Override
-    public void overduerecovery(String recordStr, String infoStr) {
+    public String overduerecovery(String recordStr, String infoStr) {
 	// 获得插入的消息语句
-	String insertStr = MessageUtils.getInsertStr(infoStr, 20);
-	System.out.println(insertStr);
-
-	// 
-	checkViewDaoImpl.overduerecovery(recordStr);
-
-	// 向消息表中插入信息
-	checkViewDaoImpl.insertMessage(insertStr);
-
+	String insertStr = MessageUtils.getInsertStr(infoStr, 20);	
+	int flag=checkViewDaoImpl.overduerecovery(recordStr);
+    String str="";
+    if(flag==200){
+    	// 向消息表中插入信息
+    	checkViewDaoImpl.insertMessage(insertStr);
+    }
+       str=BaseUtils.getException(flag);
+       return str;
     }
 }

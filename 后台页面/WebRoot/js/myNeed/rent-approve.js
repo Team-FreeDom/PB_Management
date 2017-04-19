@@ -531,9 +531,14 @@ $(document)
 													size : 'small'
 												});
 												return;
-											}else if(msg.str==1){
+											}else if(msg.str==200){
 												bootbox.alert({
-													message : "拒绝成功",
+													message : "操作成功",
+													size : 'small'
+												});
+											}else if(msg.str==500){
+												bootbox.alert({
+													message : "操作失败",
 													size : 'small'
 												});
 											}
@@ -699,7 +704,7 @@ $(document)
 															success : function(msg) {
 																
 				                                              var tag=msg.tag;
-																if(tag==1){												
+																if(tag==200){												
 																bootbox.alert({
 																	message : "同意成功",
 																	size : 'small'
@@ -714,6 +719,12 @@ $(document)
 																}else if(tag==2){
 																	bootbox.alert({
 																		message : "同意失败，请刷新页面",
+																		size : 'small'
+																	});
+																	return;
+																}else if(tag==500){
+																	bootbox.alert({
+																		message : "同意失败",
 																		size : 'small'
 																	});
 																	return;

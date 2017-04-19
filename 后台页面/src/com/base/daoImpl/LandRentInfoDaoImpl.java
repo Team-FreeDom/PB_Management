@@ -137,15 +137,35 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
      	return rl;	
 	}
 	
+    @Override
+	public int deleteRentInfo(String str)
+	{		
+		int tag = 0;
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;
+    	Session session = sessionFactory.openSession();
 
-	public void deleteRentInfo(String str)
-	{
-		Session session=sessionFactory.openSession();
-		//hibernate调用存储过程(无返回参数)
-		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`delete_landrentinfo`(?)}");
-		sqlQuery.setString(0, str);		
-		sqlQuery.executeUpdate();
-		session.close();			
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.`delete_landrentinfo`(?,?)}");
+    	    sp.setString(1, str);    	  
+    	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+    	    sp.execute();
+
+    	    tag = sp.getInt(2);
+
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, null);
+    	}
+
+    	return tag;   
 		 
 	}
 	

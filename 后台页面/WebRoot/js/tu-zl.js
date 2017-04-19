@@ -250,17 +250,20 @@ $(function() {
                             var flag = data.substring(0, position);
 
 
-                            if (flag != 1) {
-
+                            if (flag == 404) {
                                 bootbox.alert({
                                     message: "请先撤回相同的土地申请",
                                     size: 'small',
                                     title: "申请失败",
                                 });
 
-                            } else {
-
-
+                            } else if(flag == 500){
+                            	 bootbox.alert({
+                                     message: "操作失败",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                            }else if(flag == 200){
                                 fill('', '', '', '', '', '', '', '');
                                 $('#field_rent tbody').html('');
                                 obj.dialog = bootbox.dialog({

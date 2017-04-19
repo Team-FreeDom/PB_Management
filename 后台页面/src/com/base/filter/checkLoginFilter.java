@@ -1,6 +1,7 @@
 package com.base.filter;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Properties;
@@ -64,7 +65,14 @@ public class checkLoginFilter implements Filter {
 		//访问权限控制
 		//获取admin.properties中的权限值，然后用户权限做
 	    Properties prop = new Properties();
-	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
+	    InputStream propInput=null;
+	    try{
+	    propInput = request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties");
+	    prop.load(propInput);
+	    }finally{
+	    	if(propInput!=null)
+	    		propInput.close();
+	    }
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
 	    String urlAdminValue= prop.getProperty(requestPage);	  
 	    if(urlAdminValue!=null){

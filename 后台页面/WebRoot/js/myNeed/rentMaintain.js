@@ -1,6 +1,19 @@
 $(document)
 		.ready(
 				function() {
+					
+					var deleId=$("#deleId").text();
+					if(deleId=="fail"){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});
+					}else if(deleId=="success"){
+						bootbox.alert({
+							message : "操作成功",
+							size : 'small'
+						});
+					}
 
 					$('#fieldrent_maintain')
 							.DataTable(

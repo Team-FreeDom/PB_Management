@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandInfoDao;
 import com.base.po.BaseInfo;
+import com.base.po.ExportBase;
 import com.base.po.LandInfo;
 import com.base.po.Land_base;
 import com.base.utils.SqlConnectionUtils;
@@ -184,25 +185,54 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	}
 
 	@Override
-	public void delLayout_info(int bid)
-	{
-		Session session=sessionFactory.openSession();		
-		//hibernate���ô洢���(�޷��ز���)
-		SQLQuery sqlQuery =session.createSQLQuery("{call baseweb.`delete_land`(?)}");
-		sqlQuery.setInteger(0, bid);		
-		sqlQuery.executeUpdate();
-		session.close();		
+	public int delLayout_info(int bid)
+	{		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		int flag=0;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{call baseweb.`delete_land`(?,?)}");
+		    sp.setInt(1, bid);	   
+		    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+		    sp.execute();
+		    flag = sp.getInt(2);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
 	}
 	
-	public void doLayout_info(String landinfoStr,String layoutStr)
-	{
-		Session session=sessionFactory.openSession();		
-		//hibernate���ô洢���(�޷��ز���)
-		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_land(?,?)}");
-		sqlQuery.setString(0, landinfoStr);	
-		sqlQuery.setString(1, layoutStr);	
-		sqlQuery.executeUpdate();
-		session.close();		
+	public int doLayout_info(String landinfoStr,String layoutStr,int bid)
+	{		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		int flag=0;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.insert_land(?,?,?,?)}");
+		    sp.setString(1, landinfoStr);
+		    sp.setString(2, layoutStr);
+		    sp.setInt(3,bid);
+		    sp.registerOutParameter(4, java.sql.Types.INTEGER);
+		    sp.execute();
+		    flag = sp.getInt(4);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
 	}
 
 }
