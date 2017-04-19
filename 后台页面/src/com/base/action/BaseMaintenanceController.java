@@ -108,9 +108,14 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("recordstr");
 
-	maintenanceservice.delInfo(str);
+	String message=maintenanceservice.delInfo(str);
+	if(message=="success"){
+	    message="操作成功";
+	}else if(message=="fail"){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 
 	response.setContentType("text/html;charset=UTF-8");
 
@@ -248,9 +253,14 @@ public class BaseMaintenanceController {
 	
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	if(message=="success"){
+	    message="操作成功";
+	}else if(message=="fail"){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 
 	response.setContentType("text/html;charset=UTF-8");
 
@@ -563,9 +573,14 @@ public class BaseMaintenanceController {
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		}
-		maintenanceservice.increaseBaseInfo(str1, str2);
+		String message=maintenanceservice.increaseBaseInfo(str1, str2);
+		System.out.println(message+"两次爱才");
+		request.setAttribute("index", message);
+		String str=(String) request.getAttribute("index");
+		System.out.println(str+"我是attritube");
+		response.setContentType("text/html;charset=UTF-8");
 	    }
 	}
-	return "redirect:baseMaintain.jsp";
+	return "baseMaintain";
     }
 }

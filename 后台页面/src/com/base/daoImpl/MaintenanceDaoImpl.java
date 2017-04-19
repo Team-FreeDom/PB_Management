@@ -20,6 +20,7 @@ import com.base.po.ApplyDept;
 import com.base.po.ExportBase;
 import com.base.po.Prabaseinfo;
 import com.base.po.MaintenanceList;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("MaintenanceDao")
@@ -84,17 +85,30 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	ma.setData(list);
 	return ma;
     }
-
+  //实习基地维护中删除
     @Override
-    public void delInfo(String str) {
-	// TODO Auto-generated method stub
-	Session session = sessionFactory.openSession();
-	// hibernate閻犲鍟伴弫銈囷拷濡搫浜堕弶鈺佹川閳伙拷闁哄啰濮剧换鎴﹀炊閻愭彃妫橀柡渚婃嫹
-	SQLQuery sqlQuery = session
-		.createSQLQuery("{call baseweb.`delete_prabaseinfo`(?)}");
-	sqlQuery.setString(0, str);
-	sqlQuery.executeUpdate();
-	session.close();
+    public String delInfo(String str) {
+	int flag;
+	String message=null;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.`delete_prabaseinfo`(?,?)}");
+	    sp.setString(1, str);
+	    sp.execute();
+	    flag=sp.getInt(2);
+	    message=BaseUtils.getException(flag);
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return message;
 
     }
 
@@ -189,19 +203,21 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	ma.setData(list);
 	return ma;
     }
-
+   //实习基地维护中修改
     @Override
-    public void updateBaseInfo(String baseid, String basenamed,
+    public String updateBaseInfo(String baseid, String basenamed,
 	    String basetyped, String landaread, String buildingaread,
 	    int undertakeCountd, String userphoned, String usernamed,
 	    String personDuty, String linkAddressd, String adddate, int star) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?)}");
+		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, baseid);
 	    sp.setString(2, basenamed);
 	    sp.setString(3, basetyped);
@@ -215,12 +231,15 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp.setString(11, adddate);
 	    sp.setInt(12, star);
 	    sp.execute();
+	    flag=sp.getInt(13);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
 
     }
 
@@ -270,24 +289,28 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 
     // 向基地信息表prabaseinfo中插入一条数据
     @Override
-    public void increaseBaseInfo(String str1, String str2) {
+    public String increaseBaseInfo(String str1, String str2) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_base(?,?)}");
+		    .prepareCall("{call baseweb.add_base(?,?,?)}");
 	    sp.setString(1, str1);
-	    sp.setString(2, str2);
-	    System.out.println("str1:" + str1 + ";  str2:" + str2);
+	    sp.setString(2, str2);	     
 	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
 
     }
 

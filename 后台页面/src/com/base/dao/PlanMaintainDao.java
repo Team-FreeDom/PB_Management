@@ -44,7 +44,7 @@ public interface PlanMaintainDao {
 	 2.返回值：无返回值
 	 3.函数功能：删除实习计划记录
 	 */
-	public void deletePlanInfo(String recordstr);
+	public String deletePlanInfo(String recordstr);
 	
 	/*
 	 1.参数：recordstr,字符串型，为课程安排表多个记录编号整合所构成的字符串
@@ -135,7 +135,7 @@ public interface PlanMaintainDao {
     2.返回值： 无返回值
     3.函数功能：修改课程安排表
    */
-    public void alterRecord(int id,String plandata);
+    public String alterRecord(int id,String plandata);
     
     /*
 	 1.参数：year,字符串型,为学年;semester,字符串型，为学期;college,字符串型，为学院

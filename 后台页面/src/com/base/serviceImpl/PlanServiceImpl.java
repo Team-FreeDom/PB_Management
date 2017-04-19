@@ -49,16 +49,16 @@ public class PlanServiceImpl implements PlanService {
 
     // 删除单条班级安排记录
     @Override
-    public void deleteClassRecord(int id) {
-	plandao.deleteClassPlan(id);
-
+    public String deleteClassRecord(int id) {
+	String message = plandao.deleteClassPlan(id);
+	return message;
     }
 
     // 提供保存按钮的功能
     @Override
     public String savePlanModify(int id, String plandata) {
 
-	String message=plandao.updatePlan(id, plandata);
+	String message = plandao.updatePlan(id, plandata);
 	return message;
     }
 
@@ -118,7 +118,7 @@ public class PlanServiceImpl implements PlanService {
     // 通过学院获取专业
     @Override
     public List<Map<String, String>> getCollege_Major(String college) {
-	List<Map<String, String>> list=plandao.getCollege_Major(college);
+	List<Map<String, String>> list = plandao.getCollege_Major(college);
 	return list;
     }
 
