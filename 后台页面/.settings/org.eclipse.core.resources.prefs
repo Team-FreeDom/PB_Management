@@ -45,6 +45,7 @@ encoding//src/com/base/serviceImpl/InputExcelServiceImpl.java=UTF-8
 encoding//src/com/base/serviceImpl/MyBaseInfoServiceImpl.java=UTF-8
 encoding//src/com/base/serviceImpl/RepairApproveServiceImpl.java=UTF-8
 encoding//src/com/base/serviceImpl/UserInfoServiceImpl.java=UTF-8
+encoding//src/com/base/utils/BaseUtils.java=UTF-8
 encoding//src/com/base/utils/ExcelReport.java=UTF-8
 encoding//src/com/base/utils/MessageUtils.java=UTF-8
 encoding/<project>=UTF-8
