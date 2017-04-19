@@ -40,6 +40,6 @@ public interface MyBaseInfoService {
 	 返回值：   无返回值
 	 函数功能：续期
 	*/
-   public void updateDate(int id,String adddate);
+   public String updateDate(int id,String adddate);
 
 }

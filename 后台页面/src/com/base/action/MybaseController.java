@@ -180,9 +180,10 @@ public class MybaseController {
 	    HttpServletResponse response, ModelMap map) {
 	int id = Integer.valueOf(request.getParameter("id"));
 	String date = request.getParameter("adddate");
-	mybaseinfoservice.updateDate(id, date);
+	String message=mybaseinfoservice.updateDate(id, date);
+	System.out.println(message+"=========");
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 
 	response.setContentType("text/html;charset=UTF-8");
 

@@ -327,9 +327,14 @@
 	<script src="../js/kg.js"></script>
 	<script type="text/javascript">
 		var index = document.getElementById('repair').value;
-		if (index == 1) {
+		if (index == "success") {
 			bootbox.alert({
-				message : "提交成功",
+				message : "操作成功",
+				size : 'small'
+			});
+		}else if(index == "fail"){
+			bootbox.alert({
+				message : "操作失败",
 				size : 'small'
 			});
 		}

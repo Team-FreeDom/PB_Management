@@ -149,8 +149,8 @@ public class MaintainApplyController {
 	map.addAttribute("userid", userid);
 	map.addAttribute("basename", "");
 	String infostr = JSONArray.fromObject(map).toString();
-	applyservice.insert_maintain(str, infostr);
-	request.setAttribute("index", 1);
+	String message=applyservice.insert_maintain(str, infostr);
+	request.setAttribute("index", message);
 	response.setContentType("text/html;charset=UTF-8");
 	return "Repairpply";
     }
@@ -198,9 +198,14 @@ public class MaintainApplyController {
     public String delmaintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("deletstr");
-	applyservice.delete_maintainapply(str);
+	String message=applyservice.delete_maintainapply(str);
+	if(message=="success"){
+	    message="操作成功";
+	}else if(message=="fail"){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "成功删除");
+	getObj.put("str", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());

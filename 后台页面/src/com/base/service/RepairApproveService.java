@@ -40,6 +40,6 @@ public interface RepairApproveService {
 	 返回值：   无返回值
 	 函数功能：维修完成
 	  */
-	public void finishRepairApply(String storestr,String infostr);
+	public String finishRepairApply(String storestr,String infostr);
 	
 }
