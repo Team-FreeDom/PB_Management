@@ -237,7 +237,7 @@
 
 								</tr>
 								<tr bgcolor="#ECF1F5">
-									<td colspan="9"></td>
+									<td colspan="9"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
 									<td colspan="9">																														
 										<span id="remind" class="glyphicon glyphicon-send"></span>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>										

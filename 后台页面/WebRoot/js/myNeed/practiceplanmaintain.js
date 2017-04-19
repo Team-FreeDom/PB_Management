@@ -1,7 +1,7 @@
 // JavaScript Document
 var obj = [];
 var flag = 0;
-var table;
+var table=null;
 var str = null;
 var tidFlag=true;
 var midFlag=true;
@@ -232,9 +232,18 @@ $(document)
 										}
 										
 									});
+					
+
+					//显示全部数据
+					$("#showAllInfo").click(function(){
+						$("#termYear").change();					
+					});
+
 
 					/*学年学期的js控制---start*/
 					$("#termYear").on("change", function() {
+						
+						obj = [];
 						var termYear = $(this).val();
 						var semester = $("#semester").val();
 						if (termYear!= "") {
@@ -248,8 +257,8 @@ $(document)
 							$("#semester").val("");
 							str=null;
 						}
-						table = $("#practiceplanmaintain")
-						.DataTable(
+						
+						table = $("#practiceplanmaintain").DataTable(
 								{
 									"processing" : true,
 									"serverSide" : true,
@@ -257,7 +266,7 @@ $(document)
 									"bFilter" : false,
 									"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 									"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
-									"iDisplayLength" : 5, // 默认每页显示多少条记录
+									"iDisplayLength" : 10, // 默认每页显示多少条记录
 									"dom" : 'ftipr<"bottom"l>',
 									"ordering" : true,
 									"bDestroy":true,
@@ -373,9 +382,9 @@ $(document)
 										}
 									}
 								});
-
+						
 					});
-
+					
 					$("#semester").on("change", function() {
 						var termYear = $("#termYear").val();
 						var semester = $(this).val();
@@ -394,6 +403,10 @@ $(document)
 						}else{
 							str=null;
 						}	
+						
+						//table.Table.Rows.Clear();
+						 
+						
 						table = $("#practiceplanmaintain")
 						.DataTable(
 								{
@@ -519,6 +532,7 @@ $(document)
 										}
 									}
 								});
+						
 					});
 					
 					/*学年学期的js控制---end*/
@@ -1041,8 +1055,7 @@ $(document)
 								}
 								}   });
 					});
-					/*修改实习计划js控制---end*/
-					
+					/*修改实习计划js控制---end*/					
 					
 					//导入文件的js控制			
 					$("#daoru").click(function(){
