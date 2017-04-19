@@ -303,13 +303,11 @@
 						</td>
 					</tr>
 				</table>
-
-				<br>
 				<button type="button" class="btn btn-primary" id="addTbody">添加</button>
 				<button type="button" class="btn btn-success" id="save">保存</button>
 				<!--                                          <button type="button" id="testexmple" class="btn btn-success">测试</button>
 -->
-				<table class="table-bordered" id="table">
+				<table id="table">
 
 					<tr>
 						<td colspan="2">带队老师</td>
@@ -579,7 +577,6 @@
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
-	<script src="../js/jquery-ui.min.js"></script>
 	<!--datatable javascript-->
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>

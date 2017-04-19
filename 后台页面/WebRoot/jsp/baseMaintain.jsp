@@ -268,12 +268,11 @@
 													</ul></li>
 											</ul>
 										</td>
-										<td colspan="12" id="button-right"><a
-											href="../templet/BaseInfotemplet.rar" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
-											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#import" ${college==null?"":"style='display:none;'"}>导入</button>
-											<button type="button" class="btn btn-primary"
-												id="exportButton" data-toggle="modal" data-target="#export">导出</button></td>
+										<td colspan="12" id="button-right">
+											<button type="button" class="btn btn-primary" id="exportButton" data-toggle="modal" data-target="#export">导出</button>											
+											<button type="button" class="btn btn-primary" id="importButton" data-toggle="modal" data-target="#import" ${college==null?"":"style='display:none;'"}>导入</button>
+											<a href="../templet/BaseInfotemplet.rar" id="LinkButton" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
+										</td>
 									</tr>
 									<tr>
 										<th></th>
