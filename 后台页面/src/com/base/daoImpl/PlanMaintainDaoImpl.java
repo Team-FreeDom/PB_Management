@@ -101,18 +101,24 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	System.out.println("recordsTotal:" + recordsTotal);
 	return pl;
     }
-
+   //实习计划维护里增加一条信息
     @Override
-    public void addPlanInfo(String str) {
-
+    public String addPlanInfo(String str) {
+	int flag;
+	String message=null;
 	Session session = sessionFactory.openSession();
 
 	try {
 	    SQLQuery sqlQuery = session.createSQLQuery(str);
 	    sqlQuery.executeUpdate();
+	    flag=200;
+	    message=BaseUtils.getException(flag);
 	} finally {
+	    flag=500;
+	    message=BaseUtils.getException(flag);
 	    session.close();
 	}
+	return message;
     }
 
     @Override

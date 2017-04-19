@@ -53,10 +53,10 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
     }
 
     @Override
-    public void addOnePlanInfo(String str) {
+    public String addOnePlanInfo(String str) {
 
-	planMaintainDao.addPlanInfo(str);
-	//return message;
+	String message=planMaintainDao.addPlanInfo(str);
+	return message;
 
     }
 

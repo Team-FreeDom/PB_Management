@@ -263,10 +263,14 @@ public class PlanMaintainController implements ServletContextAware {
 	System.out.println("checktime:" + checkTime);
 	str = "insert into baseweb.coursearrange(semester,college,cid,count,selectedCount,composition,coursename,weekClassify,credit,courseNature,courseCategory,tid,tname,"
 		+ "Week,checkMethod,mid,major_oriented,checkTime) values" + str;
-	planMaintainService.addOnePlanInfo(str);
-	
+	String message=planMaintainService.addOnePlanInfo(str);
+	if(message.equals("success")){
+	    message="操作成功";
+	}else if(message.equals("fail")){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 	response.setContentType("text/html;charset=UTF-8");
 
 	try {

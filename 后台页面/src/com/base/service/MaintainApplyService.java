@@ -49,7 +49,7 @@ public interface MaintainApplyService {
 	   返回值：   无返回值
 	   函数功能：增加报修信息记录
 	 */
-	public void insert_maintainhistory(MaintainApply ma);
+	public String insert_maintainhistory(MaintainApply ma);
 	
 	/*
 	   参数说明：bname,字符串型，为基地名称;years,int型，为年份

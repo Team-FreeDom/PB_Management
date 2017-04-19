@@ -357,7 +357,8 @@
 										role="form" id="applyaddform">
 										<table class="table" style="border:none !important;">
 											<tr>
-												<td>项目名称 ： <span class="setTag">*</span></td>
+												<td>项目名称 ： <span class="setTag">*</span><input type="hidden"
+											value="<%=request.getAttribute("index")%>" id="AddrepairInfo" /></td>
 												<td><input type="text" class="form-control"
 													id="Aprojectname" name="Aprojectname" value=""></td>
 											</tr>
@@ -485,7 +486,19 @@
 	<script type="text/javascript" src="../js/laydate.js"></script>
 	<script src="../js/myNeed/Repairmanage.js"></script>
 	<script src="../js/kg.js"></script>
-	<script>
+	<script type="text/javascript">
+	var index = document.getElementById('AddrepairInfo').value;
+	if (index == "success") {
+		bootbox.alert({
+			message : "操作成功",
+			size : 'small'
+		});
+	}else if(index == "fail"){
+		bootbox.alert({
+			message : "操作失败",
+			size : 'small'
+		});
+	}
 		laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({
 			elem : '#Atime'

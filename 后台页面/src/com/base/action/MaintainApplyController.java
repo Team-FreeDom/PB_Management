@@ -227,7 +227,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("file");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 		path = ExcelReport.getWebRootUrl(request,"/maintainfile/");
@@ -279,9 +278,10 @@ public class MaintainApplyController {
 	String address = request.getParameter("Aaddress");
 	MaintainApply ma = new MaintainApply(pronames, bids, usernames,
 		address, reasons, filename, budget, time, 15, actualMoney);
-	applyservice.insert_maintainhistory(ma);
-
-	return "redirect:Repairmanage.jsp";
+	String message=applyservice.insert_maintainhistory(ma);
+        request.setAttribute("index", message);
+        response.setContentType("text/html;charset=UTF-8");
+	return "Repairmanage";
     }
 
     //获取年份

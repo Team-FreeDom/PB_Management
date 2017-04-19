@@ -918,15 +918,20 @@ $(document)
 								});
 							},
 							success : function(data) {
-								if(data.flag){
+								if(data.flag=="操作成功"){
 								bootbox.alert({
-									message : "保存成功",
+									message : "操作成功",
 									size : 'small'
 								});
 								if($("#termYear").val()!=semester){
 								semeUp(insemester2,0);
 								}
 								table.draw(false);
+								}else if(data.flag=="操作失败"){
+									bootbox.alert({
+										message : "操作失败",
+										size : 'small'
+									});
 								}
 							}
 

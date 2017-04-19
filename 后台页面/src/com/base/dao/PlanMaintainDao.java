@@ -23,7 +23,7 @@ public interface PlanMaintainDao {
 	 2.返回值： 无返回值
 	 3.函数功能：向课程安排表中插入一条实习计划数据
 	 */
-	public void addPlanInfo(String str);
+	public String addPlanInfo(String str);
 	
 	/*
 	 1.参数：semester,字符串型,代表某一学年的某一学期，例：2016-2017-1.

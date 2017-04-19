@@ -24,7 +24,7 @@ public interface PlanMaintainService {
 	 2.返回值： 无返回值 
 	 3.函数功能：增加一条实习计划
 	 */
-	public void addOnePlanInfo(String str);
+	public String addOnePlanInfo(String str);
 
 	/*
 	 1.参数：semester,字符串型,代表某一学年的某一学期，例：2016-2017-1.
