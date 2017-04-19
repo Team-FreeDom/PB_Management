@@ -154,8 +154,7 @@ public class MybaseController {
     // 实习基地申请撤回
     @RequestMapping("/recall.do")
     public String recall(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-	
+	    HttpServletResponse response, ModelMap map) {	
 	// 获取撤回哪条记录id
 	String id = request.getParameter("id");	
 	// 获取撤回信息
@@ -181,12 +180,9 @@ public class MybaseController {
 	int id = Integer.valueOf(request.getParameter("id"));
 	String date = request.getParameter("adddate");
 	String message=mybaseinfoservice.updateDate(id, date);
-	System.out.println(message+"=========");
 	JSONObject getObj = new JSONObject();
 	getObj.put("flag", message);
-
 	response.setContentType("text/html;charset=UTF-8");
-
 	try {
 	    response.getWriter().print(getObj.toString());
 	} catch (IOException e) {

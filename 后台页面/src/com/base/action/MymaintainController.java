@@ -68,9 +68,7 @@ public class MymaintainController {
     @RequestMapping("/Mymaintain2.do")
     public String Mymaintain2(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("哈哈哈哈我进来了");
 	String userid = CookieUtils.getUserid(request);
-	System.out.println(userid + "这是哪个id");
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -85,7 +83,6 @@ public class MymaintainController {
 	MymaintainList str = null;
 	str = mymaintainservice.Mymaintain2(pageindex, size, order, orderDir,
 		-1, status, userid);
-	System.out.println(str.getRecordsTotal() + "不知道几条");
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -126,7 +123,6 @@ public class MymaintainController {
 	MymaintainList str = null;
 	str = mymaintainservice.Mymaintain2(pageindex, size, order, orderDir,
 		-1, status, userid);
-	System.out.println(str.getRecordsTotal() + "不知道几条");
 	JSONObject getObj = new JSONObject();
 	getObj.put("draw", draw);
 	getObj.put("recordsFiltered", str.getRecordsTotal());
@@ -147,13 +143,10 @@ public class MymaintainController {
     @RequestMapping("/recallmymaint.do")
     public String recallmymaint(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println(" 进去撤回");
 	// 获取撤回哪条记录id
 	String id = request.getParameter("id");
-	System.out.println(id);
 	// 获取撤回信息
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr + "什么信息");
 	int flag=mymaintainservice.recallmymaint(id, infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {

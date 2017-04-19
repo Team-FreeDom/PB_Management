@@ -30,7 +30,7 @@ public interface PlanService {
      * 1.参数：id,整型，为课程表id plandata,字符串型，为插入 班级安排_课程表 的多条记录所构成的字符串 2.返回值： 无返回值
      * 3.函数功能：完善实习计划
      */
-    public void savePlanModify(int id, String plandata);
+    public String savePlanModify(int id, String plandata);
 
     /*
      * 1.参数：majorid,字符串型，代表专业代码 2.返回值： List<major_aim>,存放专业培训表多条记录的对象集合
