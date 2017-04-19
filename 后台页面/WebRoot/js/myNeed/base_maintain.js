@@ -407,9 +407,14 @@ $(document)
 											type : "POST",
 											dataType : "json",
 											cache : false,
-											success : function(data) {
-												$("#deleteOneModal").modal('hide');											
-												page.draw(false);
+											success : function(data) {	
+												alert(data.flag);
+													bootbox.alert({
+														message : data.flag,
+														size : 'small'
+													});
+													$("#deleteOneModal").modal('hide');											
+													page.draw(false);																								
 											},
 											error : function(data) {
 												alert("请求异常");
@@ -619,6 +624,10 @@ $(document)
 							dataType : "json",
 							cache : false,
 							success : function(data) {
+								bootbox.alert({
+									message : data.flag,
+									size : 'small'
+								});
 								$("#edit").modal('hide');
 								$("#adddate").val("");
 								page.draw(false);

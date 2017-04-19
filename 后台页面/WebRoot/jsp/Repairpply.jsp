@@ -225,8 +225,8 @@
 
 									<div class="form-group">
 										<input type="hidden"
-											value="<%=request.getAttribute("index")%>" id="repair" /> <label
-											for="inputEmail3" class="col-sm-2 control-label">项目名称<span
+											value="<%=request.getAttribute("index")%>" id="repair" /> 
+											<label for="inputEmail3" class="col-sm-2 control-label">项目名称<span
 											class="setTag">*</span></label>
 										<div class="col-sm-8">
 											<input class="form-control" id="projectname"

@@ -373,9 +373,9 @@ public class PlanController implements ServletContextAware{
 	    HttpServletResponse response) {
 	// 获取每条班级安排记录的id
 	int planid = Integer.parseInt(request.getParameter("planid"));
-	planservice.deleteClassRecord(planid);
+	String message=planservice.deleteClassRecord(planid);
 	JSONObject getObj = new JSONObject();
-	getObj.put("msg", "此申请处理成功");
+	getObj.put("msg", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());

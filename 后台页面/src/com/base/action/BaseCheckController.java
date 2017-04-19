@@ -287,7 +287,6 @@ public class BaseCheckController {
     public String agreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	int index = Integer.parseInt(request.getParameter("index"));
-	System.out.println(index + "李彩缺根弦");
 	if (index == 0) {
 	    // 封装的记录id和申请年限
 	    String recordstr = request.getParameter("recordstr");

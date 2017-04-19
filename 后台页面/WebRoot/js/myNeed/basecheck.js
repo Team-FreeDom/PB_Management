@@ -479,13 +479,18 @@ $(document).ready(function() {
 														message : "同意失败请刷新页面",
 														size : 'small'
 													});													
-												}else{
+												}else if(msg==200){
 													bootbox.alert({
-														message : "同意申请成功",
+														message :  "操作成功",
 														size : 'small'
 													});
 													getDept();
 													Spage.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message :  "操作失败",
+														size : 'small'
+													});
 												}
 												$("#valideDate").val("10");
 												$("#applyConfirm").modal('hide');								
@@ -550,13 +555,18 @@ $('#certain').click(function() {
 							size : 'small'
 						});
 						
-					}else{
+					}else if(msg==200){
 						bootbox.alert({
-							message : "拒绝申请成功",
+							message : "操作成功",
 							size : 'small'
 						});		
 						getDept();
 						Spage.draw(false);
+					}else if(msg==500){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});		
 					}											
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
@@ -700,15 +710,20 @@ $('#certainAdd').click(function() {
 					size : 'small'
 				});
 				$("#addDateConfirm").modal('hide');
-			}else{
+			}else if(msg==200){
 				bootbox.alert({
-					message : "拒绝续期成功",
+					message : "操作成功",
 					size : 'small'
 				});
 				$("#reasonAdd").val("");
 				$("#addDateConfirm").modal('hide');
 				getDept();
 				Spage2.draw(false);
+			}else if(msg==500){
+				bootbox.alert({
+					message : "操作失败",
+					size : 'small'
+				});
 			}
 			
 			}
@@ -797,15 +812,20 @@ $(document).on("click", "#confirm2", function() {
 						message : "同意续期失败请刷新页面",
 						size : 'small'
 					});
-				}else{
+				}else if(msg==200){
 					bootbox.alert({
-						message : "同意续期成功",
+						message : "操作成功",
 						size : 'small'
 					});
 					getDept();
 					Spage2.draw(false);
 					Spage1.draw(false);
-				}								
+				}else if(msg==500){
+					bootbox.alert({
+						message : "操作失败",
+						size : 'small'
+					});
+				}							
 			}	
 });
 });

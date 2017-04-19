@@ -123,7 +123,9 @@ public class PlanDaoImpl implements PlanDao {
 
     // 删除单条班级安排记录
     @Override
-    public void deleteClassPlan(int id) {
+    public String deleteClassPlan(int id) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -131,15 +133,18 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.delete_classArrangecourse(?)}");
+		    .prepareCall("{call baseweb.delete_classArrangecourse(?,?)}");
 	    sp.setInt(1, id);
 	    sp.execute();
+	    flag=sp.getInt(2);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
 
     }
 

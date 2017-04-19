@@ -223,7 +223,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
-	System.out.println(recorddigit + recordstr + "李彩李彩李彩");
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
@@ -234,7 +233,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
 	    sp.execute();
 	    flag = sp.getInt(3);
-	    System.out.println(flag + "彩别彩别");
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -282,8 +280,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    sp.setString(1, recordstr);
 	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
 	    sp.execute();
-	    flag = sp.getInt(2);
-	    System.out.println(flag+"fffffffffffff");
+	    flag = sp.getInt(2);	  
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -309,8 +306,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    sp.setString(2, recordstr);
 	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
 	    sp.execute();
-	    flag = sp.getInt(3);
-	    
+	    flag = sp.getInt(3);	    
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

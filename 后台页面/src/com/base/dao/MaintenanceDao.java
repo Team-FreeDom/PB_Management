@@ -23,7 +23,7 @@ public interface MaintenanceDao {
 	 返回值： 无返回值
 	 函数功能：删除实习基地信息
 	  */
-    public void delInfo(String str);
+    public String delInfo(String str);
     
     /*
 	  参数说明：无参数
@@ -46,7 +46,7 @@ public interface MaintenanceDao {
 	 返回值：   无返回值
 	 函数功能：修改实习基地截止日期
 	 */
-    public void updateBaseInfo(String baseid,String basenamed,String basetyped,String landaread,String buildingaread,int undertakeCountd,String userphoned,String usernamed,String personDuty,String linkAddressd ,String adddate,int star);
+    public String updateBaseInfo(String baseid,String basenamed,String basetyped,String landaread,String buildingaread,int undertakeCountd,String userphoned,String usernamed,String personDuty,String linkAddressd ,String adddate,int star);
 
     /*
 	  参数说明：basetype，为实习基地类型;dept,为部门;star,为星级;        
@@ -60,7 +60,7 @@ public interface MaintenanceDao {
 	 返回值：   无返回值
 	 函数功能：增加实习基地
 	 */
-	public void increaseBaseInfo(String str1, String str2);
+	public String increaseBaseInfo(String str1, String str2);
 	
 	/*
 	  参数说明：userid,为用户编号; recordStr1,为基地名称集合;recordStr2,为基地记录集合;recordStr3,,为基地-专业集合   

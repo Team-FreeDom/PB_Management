@@ -613,6 +613,7 @@
 						<form action="increaseBaseInfo.do" method="post" id="myForm"
 							enctype="multipart/form-data" class="form-horizontal" role="form">
 							<div class="form-group">
+							<input type="hidden" value="<%=request.getAttribute("index")%>" id="BaseMainAA" /> 
 								<label class="col-md-3 control-label fontDire">基地名称<span
 									class="setTag">*</span></label>
 								<div class="col-md-6">
@@ -738,14 +739,16 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label">创建日期</label>
+								<label class="col-md-3 control-label">创建日期<span
+									class="setTag">*</span></label>
 								<div class="col-md-6">
 									<input type="text" id="validdastart" name="start_time"
 										class="start_time laydate-icon" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label">截止日期</label>
+								<label class="col-md-3 control-label">截止日期<span
+									class="setTag">*</span></label>
 								<div class="col-md-6">
 									<input type="text" id="validdaend" name="end_time"
 										class="end_time laydate-icon" placeholder="">
@@ -796,7 +799,19 @@
 	<script src="../js/myNeed/baseapply.js"></script>
 	<script src="../js/myNeed/base_maintain.js"></script>
 	<script src="../js/kg.js"></script>
-	<script>
+	<script type="text/javascript">
+		var index = document.getElementById('BaseMainAA').value;
+		if (index == "success") {
+			bootbox.alert({
+				message : "操作成功",
+				size : 'small'
+			});
+		}else if(index == "fail"){
+			bootbox.alert({
+				message : "操作失败",
+				size : 'small'
+			});
+		}
 		laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({
 			elem : '#validdastart'
@@ -807,13 +822,12 @@
 		laydate({
 			elem : '#adddate'
 		});
-	</script>
-	<script>
 		jQuery(document).ready(function() {
 
 			$(".rating-kv").rating();
 
 		});
 	</script>
+	
 </body>
 </html>
