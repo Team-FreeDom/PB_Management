@@ -52,7 +52,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 			sp = (CallableStatement) conn
 					.prepareCall("{call baseweb.query_coursearrange(?,?,?,?,?,?,?,?)}");
 			System.out.println(semester + " " + size + " " + pageindex + " "
-					+ columnName + " " + orderDir + " " + searchValue);
+					+ columnName + " " + orderDir + " " + searchValue+" "+college);
 			sp.setString(1, semester);
 			sp.setInt(2, size);
 			sp.setInt(3, pageindex);
@@ -95,6 +95,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		PlanList pl = new PlanList();
 		pl.setRecordsTotal(recordsTotal);
 		pl.setData(list);
+		System.out.println("recordsTotal:"+recordsTotal);
 		return pl;
 	}
 
