@@ -104,10 +104,8 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao {
 	    sp.setString(1, year);
 	    sp.execute();
 	    rs = sp.getResultSet();
-	    System.out.println(".........year:" + year);
 	    while (rs.next()) {
 		list.add(rs.getString("name"));
-		System.out.println("lala" + rs.getString("name"));
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -161,8 +159,6 @@ public class MaintainApplyDaoImpl implements MaintainApplyDao {
 	    sp.setString(3, str);
 	    sp.setString(4, str1);
 	    sp.setString(5, str2);
-	    System.out.println("1:" + offsets + ";  2:" + page + "; 3:" + str
-		    + "; 4:" + str1 + "; 5:" + str2);
 	    sp.registerOutParameter(6, java.sql.Types.INTEGER);
 	    sp.execute();
 	    ((MaintainList) list).setRecordsTotal(sp.getInt(6));

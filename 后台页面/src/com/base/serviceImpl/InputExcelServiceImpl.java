@@ -61,22 +61,18 @@ public class InputExcelServiceImpl
 		}else{
 			endLine += 1;
 		}
-		//System.out.println(startLine+" "+endLine);
 		if(endLine==1)//空表不能导入，否则报错
 			return null;
 		
 		
 		for (int i = startLine; i < endLine; i++) 
 		{
-			//System.out.println("导入表格没有数据 "+endLine);
 			Row row = sheet.getRow(i);
 			if (row == null) 
 			{
-				//System.out.println("该行为空，直接跳过");
 				continue;
 			}
-			//int rowSize = row.getLastCellNum();
-			//System.out.println(rowSize);
+			
 			int rowSize = 18; //固定导入excel表格每行16列
 			List<String> rowList = new ArrayList<String>();
 			for (int j = 0; j < rowSize; j++)
@@ -85,7 +81,6 @@ public class InputExcelServiceImpl
 				String temp = "";
 				if (cell == null) 
 				{
-					//System.out.println("该列为空，赋值双引号");
 					temp = "";
 				} 
 				else 
@@ -143,22 +138,18 @@ public class InputExcelServiceImpl
 			}else{
 				endLine += 1;
 			}
-			//System.out.println(startLine+" "+endLine);
 			if(endLine==1)//空表不能导入，否则报错
 				return null;
 			
 			
 			for (int i = startLine; i < endLine; i++) 
 			{
-				//System.out.println("导入表格没有数据 "+endLine);
 				Row row = sheet.getRow(i);
 				if (row == null) 
 				{
-					//System.out.println("该行为空，直接跳过");
 					continue;
 				}
-				//int rowSize = row.getLastCellNum();
-				//System.out.println(rowSize);
+				
 				int rowSize = columnCount; //固定导入excel表格每行16列
 				List<String> rowList = new ArrayList<String>();
 				for (int j = 0; j < rowSize; j++)
@@ -167,7 +158,6 @@ public class InputExcelServiceImpl
 					String temp = "";
 					if (cell == null) 
 					{
-						//System.out.println("该列为空，赋值双引号");
 						temp = "";
 					} 
 					else 
@@ -225,22 +215,18 @@ public class InputExcelServiceImpl
 			}else{
 				endLine += 1;
 			}
-			//System.out.println(startLine+" "+endLine);
 			if(endLine==1)//空表不能导入，否则报错
 				return null;
 			
 			
 			for (int i = startLine; i < endLine; i++) 
 			{
-				//System.out.println("导入表格没有数据 "+endLine);
 				Row row = sheet.getRow(i);
 				if (row == null) 
 				{
-					//System.out.println("该行为空，直接跳过");
 					continue;
 				}
-				//int rowSize = row.getLastCellNum();
-				//System.out.println(rowSize);
+				
 				int rowSize = 45; //固定导入excel表格每行19列
 				List<String> rowList = new ArrayList<String>();
 				for (int j = 0; j < rowSize; j++)
@@ -249,7 +235,6 @@ public class InputExcelServiceImpl
 					String temp = "";
 					if (cell == null) 
 					{
-						//System.out.println("该列为空，赋值双引号");
 						temp = "";
 					} 
 					else 
@@ -283,7 +268,6 @@ public class InputExcelServiceImpl
 							break;
 						}
 					}
-					//System.out.println(j+":"+temp);
 					rowList.add(temp);
 				}
 				list.add(rowList);
@@ -314,15 +298,12 @@ public class InputExcelServiceImpl
 		
 		for (int i = startLine; i < endLine; i++) 
 		{
-			//System.out.println("导入表格没有数据 "+endLine);
 			Row row = sheet.getRow(i);
 			if (row == null) 
 			{
-				//System.out.println("该行为空，直接跳过");
 				continue;
 			}
-			//int rowSize = row.getLastCellNum();
-			//System.out.println(rowSize);
+			
 			int rowSize = 7; //固定导入excel表格每行8列
 			List<String> rowList = new ArrayList<String>();
 			for (int j = 0; j < rowSize; j++)
@@ -331,7 +312,7 @@ public class InputExcelServiceImpl
 				String temp = "";
 				if (cell == null) 
 				{
-					//System.out.println("该列为空，赋值双引号");
+				
 					temp = "";
 				} 
 				else 

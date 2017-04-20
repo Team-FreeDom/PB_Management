@@ -72,7 +72,6 @@ public class StatisticDataDaoImpl implements StatisticDataDao {
 		    ch.setSemester(rs.getString("semester"));
 		    ch.setWeek(rs.getString("week"));
 		    ch.setCheckMethod(rs.getString("checkMethod"));
-		    // System.out.println(ch.getCheckMethod()+"有没有");
 		    ch.setMajor_oriented(rs.getString("major_oriented"));
 		    list.add(ch);
 		}
@@ -257,7 +256,6 @@ public class StatisticDataDaoImpl implements StatisticDataDao {
 		    ch.setSemester(rs.getString("semester"));
 		    ch.setWeek(rs.getString("week"));
 		    ch.setCheckMethod(rs.getString("checkMethod"));
-		    // System.out.println(ch.getCheckMethod()+"有没有");
 		    ch.setMajor_oriented(rs.getString("major_oriented"));
 		    list.add(ch);
 		}

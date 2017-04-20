@@ -170,7 +170,6 @@ public List<TemperateSave_View> getTemperates(int la_id) {
 			lv.setLid(rs.getString("lid"));
 			lv.setLname(rs.getString("lname"));
 			lv.setName(rs.getString("name"));
-			System.out.println("haha"+rs.getString("name"));
 			lv.setPlanting(rs.getString("planting"));
 			lv.setResource(rs.getString("resource"));			
 			lv.setStartTime(rs.getString("startTime"));

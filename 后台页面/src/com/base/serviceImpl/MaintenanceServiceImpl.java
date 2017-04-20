@@ -36,7 +36,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		}else if(order==9){
 			columnName="star";
 		}
-		System.out.println(order+" order:");
 	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue,college);
 	  return list;
     }

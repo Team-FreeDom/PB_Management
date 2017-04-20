@@ -94,7 +94,6 @@ public class PlanController implements ServletContextAware{
 	    HttpServletResponse response) {
 	// 获取用户登录的id
 	String userid = CookieUtils.getUserid(request);
-	System.out.println("能不能进来了======");
 	String searchValue = request.getParameter("search[value]");
 	if (searchValue.equals("")) {
 	    searchValue = null;

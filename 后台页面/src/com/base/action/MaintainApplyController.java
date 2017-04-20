@@ -91,7 +91,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("applyfile");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 	    /*path = request.getSession().getServletContext()
@@ -169,7 +168,6 @@ public class MaintainApplyController {
 	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
 								// desc
 	String searchValue = request.getParameter("search[value]");
-	System.out.println("search[value]:"+searchValue);
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}

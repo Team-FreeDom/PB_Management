@@ -145,7 +145,6 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 			bname = null;
 		}
 
-		System.out.println(status);
 		if (status == null) {
 			statusZ = -1;
 		} else {
@@ -271,14 +270,7 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	}
 
 	public String delLayout_info(int bid, String path) {
-		/*
-		 * List<String> list=new ArrayList<String>();
-		 * list=landInfoDaoImpl.deletelandimg(bid); for(int
-		 * i=0;i<list.size();i++) { String relativePath=list.get(i);
-		 * System.out.println(path+relativePath.substring(2));
-		 * if(relativePath!=null) { relativePath=relativePath.substring(2); File
-		 * file=new File(path+relativePath); file.delete(); } }
-		 */
+		
 		int flag = landInfoDaoImpl.delLayout_info(bid);
 		String str = BaseUtils.getException(flag);
 		return str;

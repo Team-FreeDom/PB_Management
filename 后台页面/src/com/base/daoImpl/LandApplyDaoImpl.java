@@ -285,7 +285,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		CallableStatement sp = null;
 		ResultSet rs = null;
 		
-		System.out.println(date);	
 		Long applyCount=(long) 0;		
 		
 		Session session = sessionFactory.openSession();			
@@ -304,7 +303,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		} finally {
 			session.close();
 		}
-		//System.out.println(applyCount);
 		
 		return applyCount;
 	}

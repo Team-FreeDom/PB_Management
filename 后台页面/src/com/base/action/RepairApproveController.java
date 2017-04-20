@@ -205,12 +205,9 @@ public class RepairApproveController {
     @RequestMapping("/agreeRepairApply.do")
     public String agreeRepairApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	/*String recorddigit=request.getParameter("recorddigit");
-        System.out.println(recorddigit+"浏阳河浏阳河浏阳河");*/
+	
 	String agreestr = request.getParameter("agreestr");
-	System.out.println(agreestr+"哈哈哈哈");
 	String infostr = request.getParameter("infostr");
-	System.out.println(agreestr);
 	int flag=repairApproveService.agreeRepairApply(agreestr, infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {

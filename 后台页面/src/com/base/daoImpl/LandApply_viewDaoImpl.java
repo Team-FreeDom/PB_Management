@@ -305,31 +305,26 @@ public class LandApply_viewDaoImpl {
 			}
 			
 		}
-		System.out.println(paramList.size());
 		
 		try{
 			Query query=session.createQuery(hql.toString());
 			if (paramList != null && !paramList.isEmpty()) {
 				for (int i = 0; i < paramList.size(); i++) {	
-					System.out.println("start");
 					if(((String) paramList.get(i)).matches("[1-9]*(true)?")&&i!=0)
 					{
 						if(((String) paramList.get(i)).matches("[1-9]*(true)"))
 						{
 							String str=(String) paramList.get(i);
 							str=str.substring(0, str.indexOf("true"));
-							System.out.println("我得到的lid是："+str);
 							query.setInteger(i, Integer.valueOf(str));
 							
 						}else{
 						query.setInteger(i, Integer.valueOf((String) paramList.get(i)));
 						}
 					}else{
-						System.out.println("else");
 						query.setString(i,(String) paramList.get(i));
 					}
-					System.out.println(i);
-					System.out.println("end");
+					
 				}
 			}
 			

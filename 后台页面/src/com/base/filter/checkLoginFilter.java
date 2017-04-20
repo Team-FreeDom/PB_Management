@@ -84,7 +84,6 @@ public class checkLoginFilter implements Filter {
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
-				  System.out.println("a:"+a);
 				  
 				  if((a & adminValue)==0){ //如果没有访问权限则返回
 					  response.setContentType("text/html;charset=UTF-8");

@@ -78,7 +78,6 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setSemester(rs.getString("semester"));
 		ch.setWeek(rs.getString("week"));
 		ch.setCheckMethod(rs.getString("checkMethod"));
-		// System.out.println(ch.getCheckMethod()+"有没有");
 		ch.setMajor_oriented(rs.getString("major_oriented"));
 		list.add(ch);
 	    }
@@ -196,7 +195,6 @@ public class PlanDaoImpl implements PlanDao {
 	    while (rs.next()) {
 		UserInfo ch = new UserInfo();
 		ch.setName(rs.getString("name"));
-		// System.out.println(ch.getName());
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -263,7 +261,6 @@ public class PlanDaoImpl implements PlanDao {
 		List<PracticeCollection> list = new ArrayList<PracticeCollection>();
 		PracticeCollection pc = null;
 		List<Classcourse> lra = plandataClass_export(userid,semester);
-         System.out.println("lra.length="+lra.size()+",userid="+userid+",semester="+semester);
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
@@ -374,9 +371,7 @@ public class PlanDaoImpl implements PlanDao {
     	    sp.setString(2, userid);
     	    sp.execute();
     	    rs = sp.getResultSet();
-    	    System.out.println("hello");
     	    while (rs.next()) {
-    	    	System.out.println("rs"+1);
     		Classcourse ch = new Classcourse();
     		ch.setId(rs.getInt("id"));
     		ch.setWeek(rs.getInt("week"));

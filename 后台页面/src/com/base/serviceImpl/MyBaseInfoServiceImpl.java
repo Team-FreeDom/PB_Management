@@ -21,7 +21,7 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 	// 页面一
 	public MyBaseList MybaseInfo(int pageindex, int size, String columnName,
 			String orderDir, int year, int status, String userid) {
-		System.out.println(pageindex + "pageindex");
+		
 
 		MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 				orderDir, year, status, userid);
@@ -43,7 +43,6 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 			columnName = "descp";
 		}
 
-		System.out.println(userid + "userid");
 		MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 				orderDir, year, status, userid);
 		return list;

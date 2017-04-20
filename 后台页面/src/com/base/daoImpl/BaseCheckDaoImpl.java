@@ -192,7 +192,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
-	    System.out.println(recordstr);
 	    sp = (CallableStatement) conn
 		    .prepareCall("{CALL baseweb.transstate_baseapply(?,?,?)}");
 	    sp.setString(1, recorddigit);
@@ -250,7 +249,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
      */
     @Override
     public void insertMessage(String sql) {
-	System.out.println("insert---start");
 
 	Session session = sessionFactory.openSession();
 
@@ -260,7 +258,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	} finally {
 	    session.close();
 	}
-	System.out.println("insert---end");
 
     }
 
@@ -271,7 +268,6 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
-	System.out.println(recordstr);
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();

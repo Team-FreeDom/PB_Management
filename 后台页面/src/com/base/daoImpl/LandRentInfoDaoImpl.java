@@ -220,7 +220,6 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
      			
      		}         
           
-         System.out.println("导出呀"+list);
      	return list;	
 	}
 	

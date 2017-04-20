@@ -48,9 +48,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	    sp.setString(4, orderDir);
 	    sp.setInt(5, year);
 	    sp.setInt(6, status);
-	    // System.out.println(status);
 	    sp.setString(7, userid);
-	    // System.out.println(userid);
 	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
 	    recordsTotal = sp.getInt(8);
@@ -100,7 +98,6 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
      */
     @Override
     public void insertMessage(String sql) {
-	System.out.println("insert---start");
 
 	Session session = sessionFactory.openSession();
 
@@ -110,7 +107,6 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	} finally {
 	    session.close();
 	}
-	System.out.println("insert---end");
 
     }
   //我的基地中基地续期

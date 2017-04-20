@@ -260,8 +260,6 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp.setInt(1, basetype);
 	    sp.setString(2, dept);
 	    sp.setInt(3, star);
-	    System.out.println("basetype:" + basetype + ", dept:" + dept
-		    + ", star:" + star);
 	    sp.execute();
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
@@ -341,7 +339,6 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, null);
 	}
-	System.out.println("flag:" + flag);
 	return flag;
     }
 
