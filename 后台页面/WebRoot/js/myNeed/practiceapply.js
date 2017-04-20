@@ -394,6 +394,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		}
 	});
 	
+	$("#selectCollege option:gt(0)").remove();
+	$("#selectCollege2 option:gt(0)").remove();
+	$("#majorCollege option:gt(0)").remove();	
 //获取选择的内容
 $.ajax({
 	type : 'POST',
@@ -422,11 +425,10 @@ $.ajax({
 	}
 });
 var tbodylength=$("#table tbody").size();
-
-if(screen.width<=1525&&tbodylength>2){
+if(screen.width<=1536&&tbodylength>2){
 	$("#modalbody").addClass("modalbody");
 }
-if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 	$("#modalbody").addClass("modalbody2");
 }
 if(screen.width>1708&&tbodylength>3){
@@ -683,10 +685,10 @@ $(document).on("click","#closemodal",function(){
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	var tbodylength=$("#table tbody").size();
-	if(screen.width<=1525&&tbodylength>2){
+	if(screen.width<=1536&&tbodylength>2){
 		$("#modalbody").addClass("modalbody");
 	}
-	if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+	if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 		$("#modalbody").addClass("modalbody2");
 	}
 	if(screen.width>1708&&tbodylength>3){
