@@ -248,9 +248,19 @@ $(function() {
                     success: function(data) {
                             var position = data.indexOf('$');
                             var flag = data.substring(0, position);
-
-
-                            if (flag == 404) {
+                             if(flag == 1){
+                            	 bootbox.alert({
+                                     message: "不在土地租赁申报时间段内，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if(flag == 2){
+                            	 bootbox.alert({
+                                     message: "该土地已被锁定，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if (flag == 404) {
                                 bootbox.alert({
                                     message: "请先撤回相同的土地申请",
                                     size: 'small',

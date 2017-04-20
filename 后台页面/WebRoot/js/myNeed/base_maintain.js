@@ -515,7 +515,7 @@ $(document)
 												message : "该基地名称已存在,请重新输入",
 												size : 'small'
 											});*/
-											$("#basenamed")[0].focus();
+											$("#basenamed")[0].focus();											
 											alert("该基地名称已存在,请重新输入");
 											tag1=false;
 										}
@@ -1115,7 +1115,10 @@ $(".icon-filter").on("click", function() {
 
 		},
 		error : function(data) {
-			alert("请求异常");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});		
 		}
 	});
 	$('#hide_ul').toggle();

@@ -560,7 +560,7 @@ function check()
 	$('input[name="idname"]:checked').each(function(){
 	chk_value.push($(this).val());
 	});
-	alert("提交后检测");
+	//alert("提交后检测");
 	alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);  
 
 }
