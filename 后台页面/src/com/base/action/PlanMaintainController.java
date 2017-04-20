@@ -78,8 +78,7 @@ public class PlanMaintainController implements ServletContextAware {
 	    HttpServletResponse response) {
 	// 获取学年学期
 	String semester = request.getParameter("semester");
-	System.out.println("semester:" + semester);
-	if (semester.equals("")) {
+	if (semester==null||semester.equals("")) {
 	    semester = null;
 	}
 
@@ -259,8 +258,6 @@ public class PlanMaintainController implements ServletContextAware {
 	String checkTime = WeekTransformToTime.weekTransformToTime(startTime,
 		weekCount);
 	str = str + ",'" + checkTime + "')";
-	System.out.println(semester);
-	System.out.println("checktime:" + checkTime);
 	str = "insert into baseweb.coursearrange(semester,college,cid,count,selectedCount,composition,coursename,weekClassify,credit,courseNature,courseCategory,tid,tname,"
 		+ "Week,checkMethod,mid,major_oriented,checkTime) values" + str;
 	String message=planMaintainService.addOnePlanInfo(str);
@@ -445,7 +442,6 @@ public class PlanMaintainController implements ServletContextAware {
 		List<List<String>> list = InputExcelServiceImpl
 			.getPlanExcelRows(
 				InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
-		// System.out.println("获得数据啦！！！！！！！！！");
 		// ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 
 		if (CollectionUtils.isNotEmpty(list)) {
@@ -665,7 +661,6 @@ public class PlanMaintainController implements ServletContextAware {
 	// 获取需要修改打包的数据
 	int id = Integer.valueOf(request.getParameter("id"));
 	String plandata = request.getParameter("str");
-	System.out.println("id: " + id + "; plandata: " + plandata);
 	String message=planMaintainService.alterRecord(id, plandata);
 	if(message=="success"){
 	    message="操作成功";

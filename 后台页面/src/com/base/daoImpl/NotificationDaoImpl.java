@@ -215,7 +215,6 @@ public class NotificationDaoImpl implements NotificationDao {
 				message.setTime(rs.getString("time"));
 				message.setContent(rs.getString("content"));
 				message.setIsRead(rs.getInt("isRead"));
-				// System.out.println(message.getContent());
 
 				list.add(message);
 			}

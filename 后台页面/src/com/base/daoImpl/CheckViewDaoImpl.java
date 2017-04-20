@@ -281,7 +281,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     @Override
     public void insertMessage(String sql) {
-	System.out.println("insert---start");
 
 	Session session = sessionFactory.openSession();
 
@@ -293,7 +292,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    session.close();
 	}
 
-	System.out.println("insert---end");
 
     }
 
@@ -301,8 +299,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
     @Override
     public void changeSolid(String landstr, int status1, int status2) {
 
-	System.out.println("改变啦");
-	System.out.println(landstr);
 	Session session = sessionFactory.openSession();
 	try {
 	    SQLQuery sqlQuery = session
@@ -315,7 +311,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    session.close();
 	}
 
-	System.out.println("改变完成");
 
     }
 
@@ -389,7 +384,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    sp.setString(2, landstr);	 
 	    sp.setInt(3, status1);
 	    sp.setInt(4, status2);	   
-	    System.out.println(recordStr+"  "+status1+"   "+status2+"  "+landstr);
 	    sp.registerOutParameter(5, java.sql.Types.INTEGER);
 	    sp.execute();
 
@@ -442,9 +436,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    sp.setString(1, recordStr);
 	    sp.setInt(2, status);
 	    sp.setString(3, landstr);
-	    System.out.println("recordStr:"+recordStr);
-	    System.out.println("status:"+status);
-	    System.out.println("landstr:"+landstr);
 	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
 	    sp.execute();
 

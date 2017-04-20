@@ -53,9 +53,6 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_coursearrange(?,?,?,?,?,?,?,?)}");
-	    System.out.println(semester + " " + size + " " + pageindex + " "
-		    + columnName + " " + orderDir + " " + searchValue + " "
-		    + college);
 	    sp.setString(1, semester);
 	    sp.setInt(2, size);
 	    sp.setInt(3, pageindex);
@@ -98,7 +95,6 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	PlanList pl = new PlanList();
 	pl.setRecordsTotal(recordsTotal);
 	pl.setData(list);
-	System.out.println("recordsTotal:" + recordsTotal);
 	return pl;
     }
    //实习计划维护里增加一条信息
@@ -620,7 +616,6 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	} finally {
 	    session.close();
 	}
-	// System.out.println(bid+list.get(0).getAfford());
 	return list;
 
     }

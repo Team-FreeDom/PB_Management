@@ -155,7 +155,6 @@ public class baseApplyDaoImpl implements baseApplyDao {
      */
     @Override
     public void insertMessage(String sql) {
-   	System.out.println("insert---start");
 
    	Session session = sessionFactory.openSession();
 
@@ -165,7 +164,6 @@ public class baseApplyDaoImpl implements baseApplyDao {
    	} finally {
    	    session.close();
    	}
-   	System.out.println("insert---end");
 
        }
 

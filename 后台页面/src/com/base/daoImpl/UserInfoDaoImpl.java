@@ -271,7 +271,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	} finally {
 	    session.close();
 	}
-	// System.out.println(userCount);
 	return userCount;
     }
 
@@ -530,9 +529,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	    sp.setString(4, birthdate);
 	    sp.setString(5, category);
 	    sp.setString(6, attritube);
-	    // System.out.println(attritube);
 	    sp.setString(7, dept);
-	    // System.out.println(dept);
 	    sp.setString(8, telephone);
 	    sp.setString(9, idcard);
 	    sp.setString(10, password);
@@ -627,15 +624,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	    sp.setString(8, telephone);
 	    sp.setString(9, idcard);
 	    sp.setString(10, password);
-	    /*
-	     * System.out.println(id+"1"); System.out.println(name+"2");
-	     * System.out.println(sex+"3"); System.out.println(birthdate+"4");
-	     * System.out.println(category+"5");
-	     * System.out.println(attritube+"6"); System.out.println(dept+"7");
-	     * System.out.println(telephone+"8");
-	     * System.out.println(idcard+"9");
-	     * System.out.println(password+"10");
-	     */
 	    sp.registerOutParameter(11, java.sql.Types.INTEGER);
 	    sp.execute();
 	    flag = sp.getInt(11);

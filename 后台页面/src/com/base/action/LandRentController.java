@@ -45,7 +45,6 @@ public class LandRentController<E> {
 	@RequestMapping("/landRentInfo.do")
 	public String selectBase(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("展示土地租赁信息");
 
 		
 		int length=Integer.valueOf(request.getParameter("length"));
@@ -56,7 +55,6 @@ public class LandRentController<E> {
 		int start=0;
 		int draw=1;*/
 		
-		System.out.println(length+"   "+start+" "+draw);
 		int page=start/length+1; //当前页数
 		
 		RentList str = landRentServiceImpl.getLandRentInfos(null,
@@ -110,7 +108,6 @@ public class LandRentController<E> {
 		String dept = request.getParameter("deptSh");		
 		String planting = request.getParameter("contentSh");
 		
-		System.out.println(bname+" "+dept+" "+planting+"页数"+request.getParameter("length"));
 		
 		
 		int length=Integer.valueOf(request.getParameter("length"));
@@ -192,14 +189,9 @@ public class LandRentController<E> {
 			HttpServletResponse response, ModelMap map) throws Exception {
 		
 		String dept=request.getParameter("dept");	
-		System.out.println(dept);
 		List<RentMaintain> list =landRentServiceImpl.getSingleRentInfo(null,dept);
 	   
-		/*if(list.size()==0){
-			 System.out.println("ee");
-			return null;
-		}*/
-		System.out.println("hh");
+		
 		ExcelReport er=new ExcelReport();		
 		
 		
@@ -272,7 +264,6 @@ public class LandRentController<E> {
 	public String landManageAdd(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) throws Exception {	
 		
-		System.out.println("欢迎来到增加的");
 		String lid=request.getParameter("addLid");
 		String userid=request.getParameter("addUserid");
 		int dept=Integer.valueOf(request.getParameter("addDept"));

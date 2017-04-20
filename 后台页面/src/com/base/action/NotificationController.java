@@ -49,11 +49,9 @@ public class NotificationController {
 
 		String message = request.getParameter("data");
 		String title = request.getParameter("title");
-		// System.out.println("values:"+values);
 		String insertSql = "insert into Notification(title,message) values" +
 				"(\'"+ title.trim()+ "\'," +
 				"\'"+ message.trim()+ "\')";
-	    //System.out.println(insertSql);
 	    
 		notificationServiceImpl.setNotification(insertSql);
 
@@ -76,19 +74,16 @@ public class NotificationController {
 		int itemsPerPage = 10;
 		List list = notificationServiceImpl
 				.getNotificationInfo(currentPage, String.valueOf(itemsPerPage));
-		//System.out.println("getNotification");
 		if(CollectionUtils.isNotEmpty(list)){
 			map.addAttribute("notifications", list.get(0));
 				
 			int maxItems = (Integer) list.get(1);  // 获取最大记录数
 	        int maxPage=0;
-			//System.out.println(maxItems);
 			
 			if(maxItems%itemsPerPage==0)//判断是否最大记录是每页记录的整数倍
 				maxPage = maxItems/itemsPerPage;
 			else
 				maxPage = maxItems/itemsPerPage+1;
-			//System.out.println(maxPage);
 			map.addAttribute("totalPages",maxPage);// 返回最大页数
 			
 			//下面计算分页的起始页码，最多显示10页
@@ -99,7 +94,6 @@ public class NotificationController {
 			    	 pageList.add(i);
 			
 			map.addAttribute("pageList", pageList); // 用于显示页面1,2,3,4,...效果
-			// System.out.println("messageList不为空");
 		}
 
 		return "newlist";
@@ -113,7 +107,6 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");
 		String content = request.getParameter("content");
 		String depatment = request.getParameter("depatment");
-		//System.out.println(depatment);
 	    notificationServiceImpl.addMessage("系统消息", content, depatment.trim());
 
 		return null;
@@ -139,7 +132,6 @@ public class NotificationController {
 		String userid = CookieUtils.getCookieUsername(request, response);
 		List<MessageShow> messageList = null;
 		List list = null;
-		//System.out.println(userid);
 		if (userid != "")
 			list = notificationServiceImpl.getMessageInfos(userid, currentPage,
 					String.valueOf(itemsPerPage));
@@ -166,7 +158,6 @@ public class NotificationController {
 			    	 pageList.add(i);
 			
 			map.addAttribute("pageList", pageList); // 用于显示页面1,2,3,4,...效果
-			// System.out.println("messageList不为空");
 		}
 
 		return "msgUI";
@@ -179,7 +170,6 @@ public class NotificationController {
 		response.setContentType("text/html;charset=UTF-8");
 		String userid = CookieUtils.getCookieUsername(request, response);
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		// System.out.println("未读消息数为："+number);
 		try {
 			if (number == 0)
 				response.getWriter().print("");
@@ -204,7 +194,6 @@ public class NotificationController {
 		// 读取未读消息数，更新消息界面
 		String userid = CookieUtils.getCookieUsername(request, response);
 		int number = notificationServiceImpl.getNoreadMessageCount(userid);
-		// System.out.println("未读消息数为："+number);
 		try {
 			if (number == 0)
 				response.getWriter().print("");

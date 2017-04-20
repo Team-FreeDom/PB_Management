@@ -117,9 +117,7 @@ public class CookieUtils {
 					BigInteger loginTime = new BigInteger(co.getValue());
 					long currentTime = new Date().getTime();
 					long subTime = currentTime - loginTime.longValue();
-					// System.out.println(loginTime);
-					// System.out.println(currentTime);
-					// System.out.println(subTime / (1000*60));
+					
 					if (subTime / (1000 * 60 * 60 * 24) >= 1) { //未响应时间是否超过一天
 						flag = false;
 						// System.out.print("超过时间");

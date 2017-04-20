@@ -74,13 +74,11 @@ public class LoginController {
 			  src=ui.getImg();
 			  name=ui.getName();
 			  right=ui.getUserRight()!=1&&ui.getUserRight()!=3?0:1;
-			  System.out.println("right:"+right);
 			  if(right==0){				
 					college=ui.getCollege();
 				}	
 			}			
 			request.getSession().setAttribute("college", college);	
-			System.out.println("myCollege:"+request.getSession().getAttribute("college"));
 			CookieUtils.addCookie("image", src,response);
 			try {
 				CookieUtils.addCookie("name",java.net.URLEncoder.encode(name,"utf-8") ,response);
@@ -107,7 +105,6 @@ public class LoginController {
 	@RequestMapping("/getAuthCode.do")
     public void getAuthCode(HttpServletRequest request, HttpServletResponse response,HttpSession session)
             throws IOException {
-		//System.out.println("yanzhengma");
         int width = 63;
         int height = 37;
         Random random = new Random();

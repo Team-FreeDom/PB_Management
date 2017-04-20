@@ -267,7 +267,7 @@ public class BaseCheckController {
 	String recordstr = request.getParameter("recordstr");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
-	System.out.println("controller->infostr:" + infostr);
+	
 	// 获取基地打包id
 	String recorddigit = request.getParameter("recorddigit");
 	int flag = basecheckservice.refuseDateApply(recorddigit, recordstr,
@@ -290,13 +290,13 @@ public class BaseCheckController {
 	if (index == 0) {
 	    // 封装的记录id和申请年限
 	    String recordstr = request.getParameter("recordstr");
-	    System.out.println(recordstr + "songspng");
+	   
 	    // 获取前台json消息数据
 	    String infostr = request.getParameter("infostr");
-	    System.out.println(infostr + "panpan");
+	    
 	    // 获取单选id
 	    String recorddigit = request.getParameter("recorddigit");
-	    System.out.println(recorddigit + "lilili");
+	   
 	    int flag = basecheckservice.agreeApply(recorddigit, infostr,
 		    recordstr);
 	    response.setContentType("text/html;charset=UTF-8");
@@ -326,13 +326,13 @@ public class BaseCheckController {
     @RequestMapping("/addAgreeApply.do")
     public String addagreeApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("hahahahahha");
+	
 	// 封装的记录id
 	String recordstr = request.getParameter("recordstr");
 	// 获取前台json消息数据
 	String infostr = request.getParameter("infostr");
 	// 获取单选id
-	System.out.println("controller->infostr:" + infostr);
+
 	int flag = basecheckservice.addDateApply(infostr, recordstr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {

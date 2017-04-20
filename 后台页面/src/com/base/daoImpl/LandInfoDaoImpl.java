@@ -166,7 +166,6 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			while(rs.next())
 			{
 				String str=rs.getString("img");
-				System.out.println(str);
 				list.add(str);
 			}
 

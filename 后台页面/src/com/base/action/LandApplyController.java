@@ -385,7 +385,6 @@ public class LandApplyController {
 
 		String filename = fileName.substring(0, fileName.lastIndexOf('.'));
 		String filetype = fileName.substring(fileName.lastIndexOf("."));
-		// System.out.println(filename);
 
 		// 文件下载
 		response.setContentType(request.getServletContext().getMimeType(
@@ -463,7 +462,6 @@ public class LandApplyController {
 		int la_id = Integer.valueOf(request.getParameter("hide"));
 		String filename = "";
 
-		System.out.println(lid + "  " + dept + "  " + planting + "  " + la_id);
 
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 
@@ -475,7 +473,6 @@ public class LandApplyController {
 				.getRealPath("/infor/");
 		// 得到上传的文件的文件名
 		String fileName = mFile.getOriginalFilename();
-		System.out.println(fileName);
 
 		if (!fileName.isEmpty()) {
 			filename = new Date().getTime() + "$" + fileName;
@@ -546,7 +543,6 @@ public class LandApplyController {
 			HttpServletResponse response, ModelMap map) {
 
 		int bid = Integer.valueOf(request.getParameter("bid"));
-		System.out.println(bid);
 		List<Layout_InfoView> list = landApplyServiceImpl.getDifferLayout(bid);
 
 		JSONArray json = JSONArray.fromObject(list);
@@ -568,7 +564,6 @@ public class LandApplyController {
 	@ResponseBody
 	public String uploading(HttpServletRequest request,
 			HttpServletResponse response, ModelMap map) {
-		System.out.println("hello");
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		// 得到上传的文件
@@ -593,7 +588,6 @@ public class LandApplyController {
 				inputStream.close();
 				outputStream.close();
 				filename = "../landImage/" + filename;
-				System.out.println(filename);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -616,7 +610,6 @@ public class LandApplyController {
 		int tag = Integer.valueOf(request.getParameter("tag"));
 		String path1 = request.getSession().getServletContext().getRealPath("");
 
-		System.out.println(str);
 		List<Layout_InfoView> list = new ArrayList<Layout_InfoView>();
 		Layout_InfoView view = null;
 		String layoutStr = "";

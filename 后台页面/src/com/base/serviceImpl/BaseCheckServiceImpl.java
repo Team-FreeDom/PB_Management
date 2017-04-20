@@ -81,7 +81,6 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs(infostr, 8);
-	    System.out.println(insertStr + "到底是什么信息");
 	    // 向消息表中插入信息
 	    basecheckdao.insertMessage(insertStr);
 	}
