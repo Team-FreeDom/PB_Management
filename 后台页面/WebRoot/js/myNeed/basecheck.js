@@ -411,7 +411,11 @@ $(document).ready(function() {
 						var buildtime;
 						var endtime;
 						var name=[];
-						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {												
+						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {
+							/*for(var i=0;i<name.length;i++){
+								alert(name[i]);
+							}*/
+							
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
 							name.push(basename);
@@ -431,16 +435,19 @@ $(document).ready(function() {
 								i++;
 							});					                    
 	                    infostr=infostr+']';
-	                    recorddigit=recorddigit+')';  	                  
-						for(var j=0;j<name.length;j++){
-							for(var t=j+1;t<name.length;t++){
+	                    recorddigit=recorddigit+')'; 
+	                    outer:
+						for(var j=0;j<name.length;j++){							
+							for(var t=j+1;t<name.length;t++){								
 								if(name[j]==name[t]){									
-									indexCheck=0;									
+									indexCheck=0;
+									break outer;
 								}else{
 									indexCheck=1;									
-								}
+								}																	
 							}							
 						}
+						//alert(indexCheck);
 						if(indexCheck==0){
 							bootbox.alert({
 								message : "不允许选择相同的基地名字的条数,请检查",
