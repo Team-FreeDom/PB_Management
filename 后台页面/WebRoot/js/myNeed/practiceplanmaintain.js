@@ -26,11 +26,6 @@ $(document)
 							message : "您导入的Excel文件格式有错,请重新选择",
 							size : 'small'
 						});
-					}else if($("#ta3").text()=="true"){
-						bootbox.alert({
-							message : "导入成功",
-							size : 'small'
-						});
 					}
 					
 					// 获取学院，学期
@@ -1753,7 +1748,9 @@ $(document)
 						$("#major").val(majorname);
 					}
 				});
-				
+				$("#selectCollege option:gt(0)").remove();
+				$("#selectCollege2 option:gt(0)").remove();
+				$("#majorCollege option:gt(0)").remove();	
 				//获取选择的内容
 				$.ajax({
 					type : 'POST',
@@ -1783,10 +1780,10 @@ $(document)
 				});
 				var tbodylength=$("#table tbody").size();
 
-				if(screen.width<=1525&&tbodylength>2){
+				if(screen.width<=1536&&tbodylength>2){
 					$("#modalbody").addClass("modalbody");
 				}
-				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+				if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 					$("#modalbody").addClass("modalbody2");
 				}
 				if(screen.width>1708&&tbodylength>3){
@@ -2029,10 +2026,10 @@ $(document)
 								
 			$(document).on("click","#addTbody",function(){//添加一条空表的记录
 				var tbodylength=$("#table tbody").size();
-				if(screen.width<=1525&&tbodylength>2){
+				if(screen.width<=1536&&tbodylength>2){
 					$("#modalbody").addClass("modalbody");
 				}
-				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+				if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 					$("#modalbody").addClass("modalbody2");
 				}
 				if(screen.width>1708&&tbodylength>3){
