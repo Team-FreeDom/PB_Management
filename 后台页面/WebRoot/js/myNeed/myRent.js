@@ -109,7 +109,7 @@ $(document).ready(function() {
 																	+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ row.la_id+'$0'+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
+																	+ row.la_id+'$'+data+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
 																	+ ' id="frame1_cancel">撤回</button>';
 														} else if (data == 1) {
 															return data = '<button type="button"  id='

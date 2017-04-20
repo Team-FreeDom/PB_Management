@@ -247,6 +247,7 @@
 																		<td colspan="2">星级 <select name="status"
 																			id="starLink" style="width:150px;margin-top:0px;">
 																				<option value="-1" selected>显示全部</option>
+																				<option value="0">无</option>
 																				<option value="1">一星级</option>
 																				<option value="2">二星级</option>
 																				<option value="3">三星级</option>
@@ -459,7 +460,7 @@
 											<tr id="hidecol">
 												<td>星级：</td>
 												<td colspan="3">
-													<div id="starget"></div>
+													<div id="starget" ${college==null?"":"style='pointer-events: none;'"}></div>
 												</td>
 											</tr>
 											<tr id="hidecol">
@@ -467,7 +468,7 @@
 												<td>创建时间：</td>
 												<td><input type="text" id="setdated" disabled></td>
 												<td>截止日期 ：</td>
-												<td><input type="text" id="adddate"
+												<td><input type="text" id="adddate" ${college==null?"":"disabled='disabled'"}
 													class="laydate-icon"></td>
 
 											</tr>
