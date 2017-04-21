@@ -71,6 +71,27 @@ public class PlanMaintainController implements ServletContextAware {
     public void setServletContext(ServletContext arg0) {
 	this.application = arg0;
     }
+    
+    // 获取最新的学年学期
+    @RequestMapping("/getLatestYear.do")
+    public String getLatestYear(HttpServletRequest request,
+	    HttpServletResponse response) {
+    	
+    	// 获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+    	String college = (String) request.getSession().getAttribute("college");
+    	List<String> list = planMaintainService.getLatestSemester(college);
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("list", list);
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    	    response.getWriter().print(getObj.toString());
+    	} catch (Exception e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+    }
 
     // 显示实习计划数据
     @RequestMapping("/displayPlanInfo.do")

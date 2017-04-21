@@ -69,8 +69,29 @@ $(document)
 					//导入功能刷新页面，给学年学期赋值，获取数据
 					$("#termYear").val($("#ta1").text());
 					$("#semester").val($("#ta2").text());
-					if($("#termYear").val()!='-1'&&$("#semester").val()!='-1'){
+					if($("#termYear").val()!=''&&$("#semester").val()!=''){
 					   str=$("#termYear").val()+'-'+$("#semester").val();
+					}else{
+						//获取最新的学年学期
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : 'getLatestYear.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
+							},
+							success : function(data) {          
+								$("#termYear").val(data.list[0]);
+								$("#semester").val(data.list[1]);
+								str=$("#termYear").val()+'-'+$("#semester").val();						
+							}
+
+						});
 					}
 				
 					table = $("#practiceplanmaintain")

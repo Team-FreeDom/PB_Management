@@ -191,4 +191,12 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		semester, college);
 	return list;
     }
+
+	@Override
+	public List<String> getLatestSemester(String college) {
+		List<String> list=planMaintainDao.getLatestSemester(college);
+		return list;
+	}
+    
+    
 }
