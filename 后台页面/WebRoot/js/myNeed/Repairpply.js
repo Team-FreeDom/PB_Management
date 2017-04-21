@@ -101,14 +101,16 @@ $(function () {
 			        bootbox.alert({
 			            message: "上传资料仅限于rar,zip压缩包格式",
 			            size: 'small'
-			        });			    
+			        });	
+			        $("#applyfile").val('');
 			        return;
 			    }
 			    if (!flag2) {
 			        bootbox.alert({
 			            message: "上传资料大小不能大于10M",
 			            size: 'small'
-			        });			      
+			        });		
+			        $("#applyfile").val('');
 			        return;
 			    }   
 			/*************/
@@ -129,6 +131,7 @@ $(function () {
             message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag1=false;
         return;
     }
@@ -137,6 +140,7 @@ $(function () {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag2=false;
         return;
     }   
