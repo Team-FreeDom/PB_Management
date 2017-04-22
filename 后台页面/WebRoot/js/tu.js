@@ -353,10 +353,17 @@ $(function() {
                     });
                 },
                 success: function(data1) {
-                    bootbox.alert({
-                        message: "已同步至服务器，保存成功!",
-                        size: 'small'
-                    });
+                	if(data1[0].flag=="success"){
+                		  bootbox.alert({
+                              message: "已同步至服务器，保存成功!",
+                              size: 'small'
+                          });
+                	}else if(data1[0].flag=="fail"){
+                		bootbox.alert({
+                            message: "操作失败!",
+                            size: 'small'
+                        });
+                	}                 
                 }
             });
 

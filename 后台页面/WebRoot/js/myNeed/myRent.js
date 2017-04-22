@@ -109,7 +109,7 @@ $(document).ready(function() {
 																	+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ row.la_id+'$0'+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
+																	+ row.la_id+'$'+data+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
 																	+ ' id="frame1_cancel">撤回</button>';
 														} else if (data == 1) {
 															return data = '<button type="button"  id='
@@ -664,9 +664,9 @@ $(document).ready(function() {
 							cache : false,
 							success : function(data) {
 																
-								if (data[0].flag=="1"||data[0].flag==1) {
+								if (data[0].flag=="200"||data[0].flag==200) {
 									bootbox.alert({
-								        message: "撤销成功",
+								        message: "操作成功",
 								        size: 'small'
 								    });
 									table1.draw(false);
@@ -674,6 +674,11 @@ $(document).ready(function() {
 								} else if(data[0].flag=="0"||data[0].flag==0){
 									bootbox.alert({
 								        message: "撤销失败,请刷新页面",
+								        size: 'small'
+								    });
+								}else if(data[0].flag=="500"||data[0].flag==500){
+									bootbox.alert({
+								        message: "撤销失败",
 								        size: 'small'
 								    });
 								}

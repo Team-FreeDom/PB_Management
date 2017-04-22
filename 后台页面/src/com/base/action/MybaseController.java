@@ -52,7 +52,6 @@ public class MybaseController {
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
-		System.out.println("order:" + order);
 		// String orderDir = request.getParameter("order[0][dir]");//
 		// 排序的顺序asc or
 		String orderDir = "desc"; // // desc
@@ -154,13 +153,11 @@ public class MybaseController {
     // 实习基地申请撤回
     @RequestMapping("/recall.do")
     public String recall(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-	
+	    HttpServletResponse response, ModelMap map) {	
 	// 获取撤回哪条记录id
 	String id = request.getParameter("id");	
 	// 获取撤回信息
 	String infostr = request.getParameter("infostr");
-	System.out.println("tag: "+request.getParameter("tag"));
 	int tag = Integer.valueOf(request.getParameter("tag"));
 	int flag=mybaseinfoservice.recall(id, infostr,tag);
 	response.setContentType("text/html;charset=UTF-8");
@@ -180,12 +177,10 @@ public class MybaseController {
 	    HttpServletResponse response, ModelMap map) {
 	int id = Integer.valueOf(request.getParameter("id"));
 	String date = request.getParameter("adddate");
-	mybaseinfoservice.updateDate(id, date);
+	String message=mybaseinfoservice.updateDate(id, date);
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
-
+	getObj.put("flag", message);
 	response.setContentType("text/html;charset=UTF-8");
-
 	try {
 	    response.getWriter().print(getObj.toString());
 	} catch (IOException e) {
@@ -207,7 +202,6 @@ public class MybaseController {
 		String userid = co.getValue();
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		System.out.println(size + "当前几条记录lalalalala");
 		// 获取状态值 失败0；成功：1 失效：2 正常情况 失败：12 成功：6 失效：11
 		Integer status = Integer.parseInt(request
 			.getParameter("status"));
@@ -218,14 +212,12 @@ public class MybaseController {
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
-		System.out.println(order + "这是第几个列");
 		String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc
 									// or //
 									// //
 									// desc
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
-		System.out.println(pageindex + "当前第几页lalalla");
 		MyBaseList str = null;
 
 		str = mybaseinfoservice.MybaseInfo2(pageindex, size, order,

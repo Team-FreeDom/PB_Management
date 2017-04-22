@@ -23,7 +23,7 @@ public interface PlanMaintainDao {
 	 2.返回值： 无返回值
 	 3.函数功能：向课程安排表中插入一条实习计划数据
 	 */
-	public void addPlanInfo(String str);
+	public String addPlanInfo(String str);
 	
 	/*
 	 1.参数：semester,字符串型,代表某一学年的某一学期，例：2016-2017-1.
@@ -44,7 +44,7 @@ public interface PlanMaintainDao {
 	 2.返回值：无返回值
 	 3.函数功能：删除实习计划记录
 	 */
-	public void deletePlanInfo(String recordstr);
+	public String deletePlanInfo(String recordstr);
 	
 	/*
 	 1.参数：recordstr,字符串型，为课程安排表多个记录编号整合所构成的字符串
@@ -135,7 +135,7 @@ public interface PlanMaintainDao {
     2.返回值： 无返回值
     3.函数功能：修改课程安排表
    */
-    public void alterRecord(int id,String plandata);
+    public String alterRecord(int id,String plandata);
     
     /*
 	 1.参数：year,字符串型,为学年;semester,字符串型，为学期;college,字符串型，为学院
@@ -144,4 +144,11 @@ public interface PlanMaintainDao {
 	 */
     public List<PracticeCollection> getPlanTable_0(String year, int semester,
 			String college);
+    
+    /*
+	 1.参数：无参数
+	 2.返回值：List<String>，存放学年与学期
+	 3.函数功能： 获取最新的学年学期
+	 */
+    public List<String> getLatestSemester(String college);
 }

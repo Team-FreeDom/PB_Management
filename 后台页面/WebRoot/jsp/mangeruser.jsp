@@ -43,7 +43,7 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
@@ -211,6 +211,7 @@
 
 								<thead>
 									<tr bgcolor="#ECF1F5">
+									   <td hidden id="userTag">${flag }</td>
 										<td colspan="3" id="button-left">
 											<button type="button" class="btn btn-danger" id="deleteOne">
 												删除
@@ -226,7 +227,7 @@
 											href="../templet/PersonInfotemplet.rar"
 											class="btn btn-primary">点击下载导入模板</a>
 											<button type="button" class="btn btn-primary"
-												data-toggle="modal" data-target="#import">
+												data-toggle="modal" data-target="#import" id="dao">
 												导入
 												<tton>
 												<button type="button" class="btn btn-primary"

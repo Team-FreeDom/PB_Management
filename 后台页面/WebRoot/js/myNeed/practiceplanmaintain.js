@@ -26,6 +26,11 @@ $(document)
 							message : "您导入的Excel文件格式有错,请重新选择",
 							size : 'small'
 						});
+					}else if($("#ta3").text()=="true"){
+						bootbox.alert({
+							message : "导入成功",
+							size : 'small'
+						});
 					}
 					
 					// 获取学院，学期
@@ -64,8 +69,29 @@ $(document)
 					//导入功能刷新页面，给学年学期赋值，获取数据
 					$("#termYear").val($("#ta1").text());
 					$("#semester").val($("#ta2").text());
-					if($("#termYear").val()!='-1'&&$("#semester").val()!='-1'){
+					if($("#termYear").val()!=''&&$("#semester").val()!=''){
 					   str=$("#termYear").val()+'-'+$("#semester").val();
+					}else{
+						//获取最新的学年学期
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : 'getLatestYear.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								bootbox.alert({
+									message : "请求异常",
+									size : 'small'
+								});
+							},
+							success : function(data) {          
+								$("#termYear").val(data.list[0]);
+								$("#semester").val(data.list[1]);
+								str=$("#termYear").val()+'-'+$("#semester").val();						
+							}
+
+						});
 					}
 				
 					table = $("#practiceplanmaintain")
@@ -913,15 +939,20 @@ $(document)
 								});
 							},
 							success : function(data) {
-								if(data.flag){
+								if(data.flag=="操作成功"){
 								bootbox.alert({
-									message : "保存成功",
+									message : "操作成功",
 									size : 'small'
 								});
 								if($("#termYear").val()!=semester){
 								semeUp(insemester2,0);
 								}
 								table.draw(false);
+								}else if(data.flag=="操作失败"){
+									bootbox.alert({
+										message : "操作失败",
+										size : 'small'
+									});
 								}
 							}
 
@@ -1743,7 +1774,9 @@ $(document)
 						$("#major").val(majorname);
 					}
 				});
-				
+				$("#selectCollege option:gt(0)").remove();
+				$("#selectCollege2 option:gt(0)").remove();
+				$("#majorCollege option:gt(0)").remove();	
 				//获取选择的内容
 				$.ajax({
 					type : 'POST',
@@ -1773,10 +1806,10 @@ $(document)
 				});
 				var tbodylength=$("#table tbody").size();
 
-				if(screen.width<=1525&&tbodylength>2){
+				if(screen.width<=1536&&tbodylength>2){
 					$("#modalbody").addClass("modalbody");
 				}
-				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+				if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 					$("#modalbody").addClass("modalbody2");
 				}
 				if(screen.width>1708&&tbodylength>3){
@@ -2019,10 +2052,10 @@ $(document)
 								
 			$(document).on("click","#addTbody",function(){//添加一条空表的记录
 				var tbodylength=$("#table tbody").size();
-				if(screen.width<=1525&&tbodylength>2){
+				if(screen.width<=1536&&tbodylength>2){
 					$("#modalbody").addClass("modalbody");
 				}
-				if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+				if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 					$("#modalbody").addClass("modalbody2");
 				}
 				if(screen.width>1708&&tbodylength>3){

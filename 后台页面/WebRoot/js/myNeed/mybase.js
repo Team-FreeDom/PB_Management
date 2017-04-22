@@ -466,10 +466,22 @@ $(document).ready(function() {
 						dataType : "json",
 						cache : false,
 						success : function(data) {
-							$("#dateMyTable").modal('hide');
-							$("#adddate").val("");
-							page1.draw(false);
-							page2.draw(false);
+							if(data.flag=="success"){
+								bootbox.alert({
+							        message: "操作成功",
+							        size: 'small'
+							    });
+								$("#dateMyTable").modal('hide');
+								$("#adddate").val("");
+								page1.draw(false);
+								page2.draw(false);
+							}else if(data.flag=="fail"){
+								bootbox.alert({
+							        message: "操作失败",
+							        size: 'small'
+							    });
+							}
+							
 						},
 						error : function(data) {
 							bootbox.alert({
@@ -511,13 +523,18 @@ $(document).ready(function() {
 					  				message : "撤回失败,请刷新页面",
 					  				size : 'small'
 					  			});	
-				  			}else{				  			
+				  			}else if(msg==200){				  			
 				  			bootbox.alert({
-				  				message :"撤回成功",
+				  				message :"操作成功",
 				  				size : 'small'
 				  			});	
 				  			page1.draw(false);
 				  			page2.draw(false);
+				  			}else if(msg==500){
+				  				bootbox.alert({
+					  				message :"操作失败",
+					  				size : 'small'
+					  			});
 				  			}				  						  			
 				  			
 				  		}

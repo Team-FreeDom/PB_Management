@@ -65,7 +65,6 @@ public class PersonalManageController {
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	;
-	// System.out.println(size+"出现了");
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -191,7 +190,6 @@ public class PersonalManageController {
 	int flag = 0;
 	String id = request.getParameter("workerId");// 获取人员id
 	UserInfo Info = new UserInfo();
-	// System.out.println(id);
 	String name = request.getParameter("name");// 获取人员名字
 	if (name.equals("")) {
 	    name = null;
@@ -204,29 +202,23 @@ public class PersonalManageController {
 	if (birthdate.equals("")) {
 	    birthdate = null;
 	}
-	// System.out.println(birthdate);
 	String category = request.getParameter("Awkclass");// 获取员工类别
-	// System.out.println(category);
 	if (category.equals("")) {
 	    category = null;
 	}
-	// System.out.println(category);
 	String attritube = request.getParameter("Astatus");// 获取人员身份属性
 	if (attritube.equals("")) {
 	    attritube = null;
 	}
-	// System.out.println(attritube);
 	String dept = request.getParameter("Adivision");// 获取人员部门
 	if (dept.equals("")) {
 	    dept = null;
 	}
-	// System.out.println(dept);
 	String telephone = request.getParameter("phone");// 获取人员电话
 	if (telephone.equals("")) {
 	    telephone = null;
 	}
 	String idcard = request.getParameter("IDnumber1");// 身份证
-	// System.out.println(idcard);
 	if (idcard.equals("")) {
 	    idcard = null;
 	}
@@ -278,7 +270,6 @@ public class PersonalManageController {
     public String exportPersonInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String dept = request.getParameter("dept");
-	// System.out.println(dept);
 	if (dept.equals("1")) {// 1表示导出所有部门人员信息
 	    dept = null;
 	}
@@ -295,7 +286,6 @@ public class PersonalManageController {
 	    ExcelReport export = new ExcelReport();
 	    export.exportPersonInfo(list, fullFileName);
 	    String filename = "湖南农业大学人员信息表.xlsx";
-	    // System.out.println(fullFileName);
 
 	    // 显示中文文件名
 	    response.setContentType("application/octet-stream;charset=UTF-8");
@@ -357,6 +347,7 @@ public class PersonalManageController {
 	// 得到上传的文件的文件名
 	String fileName = mFile.getOriginalFilename();
 	String filename = "";
+	String flag="success";
 	if (!fileName.isEmpty()) {
 	    filename = new Date().getTime() + "$" + fileName;
 	    InputStream inputStream = mFile.getInputStream();
@@ -373,7 +364,6 @@ public class PersonalManageController {
 	    Workbook wb = (Workbook) InputExcelServiceImpl.getWb(path);
 	    List<List<String>> list = InputExcelServiceImpl.getExcelRows(
 		    InputExcelServiceImpl.getSheet(wb, 0), -1, -1);
-	    // System.out.println("获得数据啦！！！！！！！！！");
 	    // ！！！！！！注意此处是遍历list，可在下面写插入数据库的语句
 
 	    if (CollectionUtils.isNotEmpty(list)) {
@@ -416,8 +406,7 @@ public class PersonalManageController {
 			+ ",birthdate=values(birthdate),college=values(college),contactForm=values(contactForm),endContactTime=values(endContactTime)"
 			+ ",formerUnit=values(formerUnit),hukou=values(hukou),startContactTime=values(startContactTime),telephone=values(telephone)"
 			+ ",userType=values(userType),workTime=values(workTime),workingForm=values(workingForm),majorid=values(majorid),titles=values(titles)";
-		// System.out.println(sql);
-		adminManageServiceImpl.setAdminFunction(sql);
+		flag=adminManageServiceImpl.setAdminFunction(sql);
 	    }
 
 	    wb.close();
@@ -426,7 +415,8 @@ public class PersonalManageController {
 	    tempFile.delete(); // 删除临时文件
 
 	}
-	return "redirect:mangeruser.jsp";
+	map.addAttribute("flag", flag);
+	return "mangeruser";
     }
 
     // 筛选userInfo中的部门

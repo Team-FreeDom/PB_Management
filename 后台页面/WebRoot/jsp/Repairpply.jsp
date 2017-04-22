@@ -41,7 +41,7 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
@@ -225,8 +225,8 @@
 
 									<div class="form-group">
 										<input type="hidden"
-											value="<%=request.getAttribute("index")%>" id="repair" /> <label
-											for="inputEmail3" class="col-sm-2 control-label">项目名称<span
+											value="<%=request.getAttribute("index")%>" id="repair" /> 
+											<label for="inputEmail3" class="col-sm-2 control-label">项目名称<span
 											class="setTag">*</span></label>
 										<div class="col-sm-8">
 											<input class="form-control" id="projectname"
@@ -327,9 +327,14 @@
 	<script src="../js/kg.js"></script>
 	<script type="text/javascript">
 		var index = document.getElementById('repair').value;
-		if (index == 1) {
+		if (index == "success") {
 			bootbox.alert({
-				message : "提交成功",
+				message : "操作成功",
+				size : 'small'
+			});
+		}else if(index == "fail"){
+			bootbox.alert({
+				message : "操作失败",
 				size : 'small'
 			});
 		}

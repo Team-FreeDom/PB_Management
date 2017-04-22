@@ -411,7 +411,11 @@ $(document).ready(function() {
 						var buildtime;
 						var endtime;
 						var name=[];
-						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {												
+						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {
+							/*for(var i=0;i<name.length;i++){
+								alert(name[i]);
+							}*/
+							
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
 							name.push(basename);
@@ -431,16 +435,19 @@ $(document).ready(function() {
 								i++;
 							});					                    
 	                    infostr=infostr+']';
-	                    recorddigit=recorddigit+')';  	                  
-						for(var j=0;j<name.length;j++){
-							for(var t=j+1;t<name.length;t++){
+	                    recorddigit=recorddigit+')'; 
+	                    outer:
+						for(var j=0;j<name.length;j++){							
+							for(var t=j+1;t<name.length;t++){								
 								if(name[j]==name[t]){									
-									indexCheck=0;									
+									indexCheck=0;
+									break outer;
 								}else{
 									indexCheck=1;									
-								}
+								}																	
 							}							
 						}
+						//alert(indexCheck);
 						if(indexCheck==0){
 							bootbox.alert({
 								message : "不允许选择相同的基地名字的条数,请检查",
@@ -479,24 +486,25 @@ $(document).ready(function() {
 														message : "同意失败请刷新页面",
 														size : 'small'
 													});													
-												}else{
+												}else if(msg==200){
 													bootbox.alert({
-														message : "同意申请成功",
+														message :  "操作成功",
 														size : 'small'
 													});
 													getDept();
 													Spage.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message :  "操作失败",
+														size : 'small'
+													});
 												}
 												$("#valideDate").val("10");
 												$("#applyConfirm").modal('hide');								
 												}
 											
-										});	
-										getDept();
-										Spage.draw(false);
-									}
-									$("#valideDate").val("10");
-									$("#applyConfirm").modal('hide');								
+										});											
+									}																	
 									}							
 							});	  
 						}                    
@@ -550,13 +558,18 @@ $('#certain').click(function() {
 							size : 'small'
 						});
 						
-					}else{
+					}else if(msg==200){
 						bootbox.alert({
-							message : "拒绝申请成功",
+							message : "操作成功",
 							size : 'small'
 						});		
 						getDept();
 						Spage.draw(false);
+					}else if(msg==500){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});		
 					}											
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
@@ -700,15 +713,20 @@ $('#certainAdd').click(function() {
 					size : 'small'
 				});
 				$("#addDateConfirm").modal('hide');
-			}else{
+			}else if(msg==200){
 				bootbox.alert({
-					message : "拒绝续期成功",
+					message : "操作成功",
 					size : 'small'
 				});
 				$("#reasonAdd").val("");
 				$("#addDateConfirm").modal('hide');
 				getDept();
 				Spage2.draw(false);
+			}else if(msg==500){
+				bootbox.alert({
+					message : "操作失败",
+					size : 'small'
+				});
 			}
 			
 			}
@@ -797,15 +815,20 @@ $(document).on("click", "#confirm2", function() {
 						message : "同意续期失败请刷新页面",
 						size : 'small'
 					});
-				}else{
+				}else if(msg==200){
 					bootbox.alert({
-						message : "同意续期成功",
+						message : "操作成功",
 						size : 'small'
 					});
 					getDept();
 					Spage2.draw(false);
 					Spage1.draw(false);
-				}								
+				}else if(msg==500){
+					bootbox.alert({
+						message : "操作失败",
+						size : 'small'
+					});
+				}							
 			}	
 });
 });

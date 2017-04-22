@@ -36,7 +36,7 @@ public interface baseApplyService {
 	 返回值：    无返回值
 	 函数功能：增加实习基地申请
 	 */
-    public void getRequestBaseInfo(String str1,String str2,String infostr);
+    public String getRequestBaseInfo(String str1,String str2,String infostr);
     
     /*
 	  参数说明：name,为实习基地的名称   

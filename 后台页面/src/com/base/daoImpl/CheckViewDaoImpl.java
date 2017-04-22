@@ -281,7 +281,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     @Override
     public void insertMessage(String sql) {
-	System.out.println("insert---start");
 
 	Session session = sessionFactory.openSession();
 
@@ -293,7 +292,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    session.close();
 	}
 
-	System.out.println("insert---end");
 
     }
 
@@ -301,8 +299,6 @@ public class CheckViewDaoImpl implements CheckViewDao{
     @Override
     public void changeSolid(String landstr, int status1, int status2) {
 
-	System.out.println("改变啦");
-	System.out.println(landstr);
 	Session session = sessionFactory.openSession();
 	try {
 	    SQLQuery sqlQuery = session
@@ -315,13 +311,12 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    session.close();
 	}
 
-	System.out.println("改变完成");
 
     }
 
     // 确认交费，将记录的状态改为申请成功，并将记录插入土地租赁历史表中
     @Override
-    public int payForSuccess(String recordStr, int status) {
+    public int payForSuccess(String recordStr, int status,String landstr) {
     	
 	int tag = 0;
 	Connection conn = null;
@@ -333,13 +328,14 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.state_success(?,?,?)}");
+		    .prepareCall("{call baseweb.state_success(?,?,?,?)}");
 	    sp.setString(1, recordStr);
 	    sp.setInt(2, status);
-	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.setString(3, landstr);
+	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
 	    sp.execute();
 
-	    tag = sp.getInt(3);
+	    tag = sp.getInt(4);
 
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -371,18 +367,37 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 取消交费，将锁定状态的变为审核状态，发送通知
     @Override
-    public void releaseInfo(String landstr) {
+    public int releaseInfo(String recordStr, int status1,int status2,String landstr) {
 
+	int tag = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
 	Session session = sessionFactory.openSession();
+
 	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.trans_pay(?)}");
-	    sqlQuery.setString(0, landstr);
-	    sqlQuery.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.trans_pay(?,?,?,?,?)}");
+	    sp.setString(1, recordStr);
+	    sp.setString(2, landstr);	 
+	    sp.setInt(3, status1);
+	    sp.setInt(4, status2);	   
+	    sp.registerOutParameter(5, java.sql.Types.INTEGER);
+	    sp.execute();
+
+	    tag = sp.getInt(5);
+
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
+
+	return tag;
 
     }
 
@@ -405,7 +420,7 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 同意申请，将审核中的记录变为交费中，判断土地编号是否有相同的，返回flag值
     @Override
-    public int agreeInfo(String recordStr, int status) {
+    public int agreeInfo(String recordStr, int status,String landstr) {
 
 	int tag = 0;
 	Connection conn = null;
@@ -417,13 +432,14 @@ public class CheckViewDaoImpl implements CheckViewDao{
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.agree_apply(?,?,?)}");
+		    .prepareCall("{CALL baseweb.agree_apply(?,?,?,?)}");
 	    sp.setString(1, recordStr);
 	    sp.setInt(2, status);
-	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.setString(3, landstr);
+	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
 	    sp.execute();
 
-	    tag = sp.getInt(3);
+	    tag = sp.getInt(4);
 
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -677,16 +693,28 @@ public class CheckViewDaoImpl implements CheckViewDao{
 
     // 逾期恢复
     @Override
-    public void overduerecovery(String recordStr) {
-	Session session = sessionFactory.openSession();
+    public int overduerecovery(String recordStr) {
+	
+    Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	
+	int flag=0;
 	try {
-	    // hibernate调用存储过程(无返回参数)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.renewal_costsdate(?)}");
-	    sqlQuery.setString(0, recordStr);	   
-	    sqlQuery.executeUpdate();
-	} finally {
-	    session.close();
-	}
-    }
+		conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+		sp= (CallableStatement) conn.prepareCall("{CALL baseweb.renewal_costsdate(?,?)}");
+		sp.setString(1,recordStr);		
+		sp.registerOutParameter(2,java.sql.Types.INTEGER);
+		sp.execute();   //执行存储过程
+		flag=sp.getInt(2);
+		rs=sp.getResultSet();  //获得结果集
+	
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		SqlConnectionUtils.free(conn, sp, rs);			
+	}   
+	return flag;
+  }
 }

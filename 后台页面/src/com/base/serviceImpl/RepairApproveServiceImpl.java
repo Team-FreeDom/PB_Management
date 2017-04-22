@@ -31,14 +31,14 @@ public class RepairApproveServiceImpl implements RepairApproveService {
     // 同意申请
     @Override
     public int agreeRepairApply(String agreestr, String infostr) {
-	
+
 	// 将特定记录状态改为14,维修中
-	int flag=repairApproveDao.changeStatus(agreestr, 14);
-	if(flag==1){
-	 // 获得插入语句
-		String insertStr = MessageUtils.getinfoMs(infostr, 12);
-		// 插入语句
-		checkViewDaoImpl.insertMessage(insertStr);
+	int flag = repairApproveDao.changeStatus(agreestr, 14);
+	if (flag == 200) {
+	    // 获得插入语句
+	    String insertStr = MessageUtils.getinfoMs(infostr, 12);
+	    // 插入语句
+	    checkViewDaoImpl.insertMessage(insertStr);
 	}
 	return flag;
 
@@ -68,7 +68,7 @@ public class RepairApproveServiceImpl implements RepairApproveService {
     public int refuseRepairApply(String recorddigit, String refusestr,
 	    String infostr) {
 	int flag = repairApproveDao.refuseApply(recorddigit, refusestr);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入语句
 	    String insertStr = MessageUtils.getinfoMs(infostr, 13);
 	    // 插入语句
@@ -95,14 +95,17 @@ public class RepairApproveServiceImpl implements RepairApproveService {
 
     // 维修完成
     @Override
-    public void finishRepairApply(String storestr, String infostr) {
+    public String finishRepairApply(String storestr, String infostr) {
 	// 获得插入语句
-	String insertStr = MessageUtils.getinfoMs(infostr, 14);
-	//
-	repairApproveDao.finish(storestr);
-	// 插入语句
-	checkViewDaoImpl.insertMessage(insertStr);
+	String message = repairApproveDao.finish(storestr);
+	if (message.equals("success")) {
+	    String insertStr = MessageUtils.getinfoMs(infostr, 14);
 
+	    // 插入语句
+	    checkViewDaoImpl.insertMessage(insertStr);
+	}
+
+	return message;
     }
 
 }

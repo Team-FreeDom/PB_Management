@@ -24,7 +24,7 @@ public interface PlanMaintainService {
 	 2.返回值： 无返回值 
 	 3.函数功能：增加一条实习计划
 	 */
-	public void addOnePlanInfo(String str);
+	public String addOnePlanInfo(String str);
 
 	/*
 	 1.参数：semester,字符串型,代表某一学年的某一学期，例：2016-2017-1.
@@ -46,7 +46,7 @@ public interface PlanMaintainService {
 	 2.返回值：无返回值 
 	 3.函数功能：删除实习计划记录
 	 */
-	public void deletePlanInfo(String recordstr);
+	public String deletePlanInfo(String recordstr);
 
 	/*
 	  1.参数：recordstr,字符串型，为多个记录编号整合所构成的字符串
@@ -137,7 +137,7 @@ public interface PlanMaintainService {
 	 2.返回值：无返回值
 	 3.函数功能： 修改实习申请计划
 	 */
-    public void alterRecord(int id,String plandata);
+    public String alterRecord(int id,String plandata);
 
 	/*
 	 1.参数：year,字符串型,为学年;semester,字符串型，为学期;college,字符串型，为学院
@@ -146,4 +146,11 @@ public interface PlanMaintainService {
 	 */
     public List<PracticeCollection> getPlanTable_0(String year, int semester,
 			String college);
+    
+    /*
+	 1.参数：无参数
+	 2.返回值：List<String>，存放学年与学期
+	 3.函数功能： 获取最新的学年学期
+	 */
+   public List<String> getLatestSemester(String college);
 }

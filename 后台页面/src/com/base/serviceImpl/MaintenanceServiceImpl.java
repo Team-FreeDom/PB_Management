@@ -36,16 +36,15 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		}else if(order==9){
 			columnName="star";
 		}
-		System.out.println(order+" order:");
 	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue,college);
 	  return list;
     }
 
 
 	@Override
-	public void delInfo(String str) {
-		
-		maintenancedao.delInfo(str);
+	public String delInfo(String str) {		
+		String message=maintenancedao.delInfo(str);
+		return message;
 	}
 	
 	@Override
@@ -78,11 +77,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		return list;
 	}
 
-
+      //实习基地维护增加基地
 	@Override
-	public void increaseBaseInfo(String str1, String str2) {
-		
-		maintenancedao.increaseBaseInfo(str1, str2);
+	public String increaseBaseInfo(String str1, String str2) {		
+		String message=maintenancedao.increaseBaseInfo(str1, str2);
+		return message;
 	}
 
 
@@ -95,11 +94,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 
 	@Override
-	public void updateBaseInfo(String baseid, String basenamed,
+	public String updateBaseInfo(String baseid, String basenamed,
 		String basetyped, String landaread, String buildingaread,
 		int undertakeCountd, String userphoned, String usernamed,
 		String personDuty, String linkAddressd, String adddate, int star) {
-	    maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star);
+	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star);
+	   return message;
 	    
 	}
 

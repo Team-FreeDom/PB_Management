@@ -33,12 +33,12 @@ public interface LandInfoDao {
 	   返回值：   无参数值
 	   函数功能：根据基地编号删除该基地下的所有土地布局
 	 */
-    public void delLayout_info(int bid);
+    public int delLayout_info(int bid);
     
     /*
 	   参数说明：landinfoStr,土地信息封装信息;layoutStr,土地布局封装信息
 	   返回值：   无参数值
 	   函数功能：向数据库插入土地信息记录和土地布局记录
 	 */
-    public void doLayout_info(String landinfoStr,String layoutStr);
+    public int doLayout_info(String landinfoStr,String layoutStr,int bid);
 }

@@ -318,6 +318,7 @@ $(document).on("click", "#submitForm", function() {
 	            message: "上传资料仅限于rar,zip压缩包格式",
 	            size: 'small'
 	        });
+		 $("#applyfile").val('');
 		 return;
 	}
 	if(!flag2){
@@ -325,6 +326,7 @@ $(document).on("click", "#submitForm", function() {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+		 $("#applyfile").val('');
 		return;
 	}
 	$("#myForm").submit();
@@ -341,6 +343,7 @@ $('#applyfile').change(function() {
             message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag1=false;
         return false;
     }
@@ -349,6 +352,7 @@ $('#applyfile').change(function() {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag2=false;
         return false;
     }   

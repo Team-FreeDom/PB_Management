@@ -70,7 +70,6 @@ public class CheckController {
     public String checkApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	Integer flag = Integer.valueOf(request.getParameter("flag"));
-	System.out.println(flag + "-------------");
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 
@@ -118,7 +117,6 @@ public class CheckController {
     public String overdue(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	Integer flag = Integer.valueOf(request.getParameter("flag"));
-	System.out.println(flag + "==========");
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 
@@ -208,13 +206,11 @@ public class CheckController {
     public String overduerecovery(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String recordstr = request.getParameter("recordstr");
-	System.out.println(recordstr+"ppppppp");
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr+"qqqqqqqq");
-	checkservice.overduerecovery(recordstr, infostr);
+	String str=checkservice.overduerecovery(recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", " 逾期恢复成功");
+	getObj.put("str", str);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -324,7 +320,6 @@ public class CheckController {
     public String Rentdetail(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	Integer la_id = Integer.parseInt(request.getParameter("la_id"));
-	// System.out.println(la_id);
 	List<CheckView> list = null;
 	try {
 	    list = checkservice.Rentdetail(la_id);
@@ -377,7 +372,6 @@ public class CheckController {
     public String Select(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) throws IOException {
 	Integer flag = Integer.valueOf(request.getParameter("flag"));
-	System.out.println("刷选的flag:"+flag);
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
 	// 数据起始位置
@@ -387,8 +381,7 @@ public class CheckController {
 	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
 								// desc
 
-	// System.out.println(startIndex);
-	// System.out.println(size);
+	
 	// 通过计算求出当前页面为第几页
 	Integer pageindex = (startIndex / size + 1);
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -420,7 +413,6 @@ public class CheckController {
 	getObj.put("recordsFiltered", list.getRecordsTotal());
 	getObj.put("recordsTotal", list.getRecordsTotal());
 	getObj.put("data", list.getData());
-	System.out.println("数据条数:"+list.getRecordsTotal());
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());

@@ -78,10 +78,9 @@ public class BaseCheckServiceImpl implements BaseCheckService {
     public int refuseapply(String recorddigit, String recordstr, String infostr) {
 	// 申请失败（str:字符串id；12：失败状态值）
 	int flag = basecheckdao.refuseapply(recorddigit, recordstr);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs(infostr, 8);
-	    System.out.println(insertStr + "到底是什么信息");
 	    // 向消息表中插入信息
 	    basecheckdao.insertMessage(insertStr);
 	}
@@ -102,7 +101,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
     @Override
     public int agreeApply(String recorddigit, String infoStr, String recordstr) {
 	int flag = basecheckdao.agreeApply(recorddigit, recordstr);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs(infoStr, 9);
 	    // 向消息表中插入信息
@@ -137,7 +136,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 
 	// 将申请的状态变为申请成功，并插入prabaseinfo表
 	int flag = basecheckdao.addDateApply(recordstr);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs(infostr, 16);
 	    // 向消息表中插入信息
@@ -152,7 +151,7 @@ public class BaseCheckServiceImpl implements BaseCheckService {
 
 	// 将申请的状态变为过期失效
 	int flag = basecheckdao.refuseDateApply(recorddigit,recordstr);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs_baseRefuse(infostr, 17);
 	    // 向消息表中插入信息

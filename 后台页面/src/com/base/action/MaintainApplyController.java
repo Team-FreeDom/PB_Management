@@ -91,7 +91,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("applyfile");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 	    /*path = request.getSession().getServletContext()
@@ -149,8 +148,8 @@ public class MaintainApplyController {
 	map.addAttribute("userid", userid);
 	map.addAttribute("basename", "");
 	String infostr = JSONArray.fromObject(map).toString();
-	applyservice.insert_maintain(str, infostr);
-	request.setAttribute("index", 1);
+	String message=applyservice.insert_maintain(str, infostr);
+	request.setAttribute("index", message);
 	response.setContentType("text/html;charset=UTF-8");
 	return "Repairpply";
     }
@@ -169,7 +168,6 @@ public class MaintainApplyController {
 	String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc or
 								// desc
 	String searchValue = request.getParameter("search[value]");
-	System.out.println("search[value]:"+searchValue);
 	if (searchValue.equals("")) {
 	    searchValue = null;
 	}
@@ -198,9 +196,14 @@ public class MaintainApplyController {
     public String delmaintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("deletstr");
-	applyservice.delete_maintainapply(str);
+	String message=applyservice.delete_maintainapply(str);
+	if(message.equals("success")){
+	    message="操作成功";
+	}else if(message.equals("fail")){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "成功删除");
+	getObj.put("str", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());
@@ -222,7 +225,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("file");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 		path = ExcelReport.getWebRootUrl(request,"/maintainfile/");
@@ -274,9 +276,10 @@ public class MaintainApplyController {
 	String address = request.getParameter("Aaddress");
 	MaintainApply ma = new MaintainApply(pronames, bids, usernames,
 		address, reasons, filename, budget, time, 15, actualMoney);
-	applyservice.insert_maintainhistory(ma);
-
-	return "redirect:Repairmanage.jsp";
+	String message=applyservice.insert_maintainhistory(ma);
+        request.setAttribute("index", message);
+        response.setContentType("text/html;charset=UTF-8");
+	return "Repairmanage";
     }
 
     //获取年份

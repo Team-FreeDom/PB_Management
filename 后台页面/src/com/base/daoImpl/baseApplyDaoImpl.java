@@ -17,6 +17,7 @@ import com.base.dao.baseApplyDao;
 import com.base.po.ApplyDept;
 import com.base.po.Major;
 import com.base.po.basetype;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 
@@ -101,23 +102,28 @@ public class baseApplyDaoImpl implements baseApplyDao {
      * @param str2 基地名称id 申报部门id 基地类型id等的string字符串
      */
     @Override
-    public void getRequestBaseInfo(String str1, String str2) {
+    public String getRequestBaseInfo(String str1, String str2) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	try {
 		conn = (Connection) SessionFactoryUtils.getDataSource(
 				sessionFactory).getConnection();
 		sp = (CallableStatement) conn
-				.prepareCall("{call baseweb.base_apply(?,?)}");
+				.prepareCall("{call baseweb.base_apply(?,?,?)}");
 		sp.setString(1, str1);
-		sp.setString(2, str2);
+		sp.setString(2, str2);		
 		sp.execute();
+		flag = sp.getInt(3);
+		message=BaseUtils.getException(flag);		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} finally {
 		SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
 	
     }
     //检测用户输入的名称是否存在
@@ -149,7 +155,6 @@ public class baseApplyDaoImpl implements baseApplyDao {
      */
     @Override
     public void insertMessage(String sql) {
-   	System.out.println("insert---start");
 
    	Session session = sessionFactory.openSession();
 
@@ -159,7 +164,6 @@ public class baseApplyDaoImpl implements baseApplyDao {
    	} finally {
    	    session.close();
    	}
-   	System.out.println("insert---end");
 
        }
 

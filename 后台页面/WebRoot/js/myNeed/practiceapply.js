@@ -394,6 +394,9 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		}
 	});
 	
+	$("#selectCollege option:gt(0)").remove();
+	$("#selectCollege2 option:gt(0)").remove();
+	$("#majorCollege option:gt(0)").remove();	
 //获取选择的内容
 $.ajax({
 	type : 'POST',
@@ -422,11 +425,10 @@ $.ajax({
 	}
 });
 var tbodylength=$("#table tbody").size();
-
-if(screen.width<=1525&&tbodylength>2){
+if(screen.width<=1536&&tbodylength>2){
 	$("#modalbody").addClass("modalbody");
 }
-if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 	$("#modalbody").addClass("modalbody2");
 }
 if(screen.width>1708&&tbodylength>3){
@@ -683,10 +685,10 @@ $(document).on("click","#closemodal",function(){
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
 	var tbodylength=$("#table tbody").size();
-	if(screen.width<=1525&&tbodylength>2){
+	if(screen.width<=1536&&tbodylength>2){
 		$("#modalbody").addClass("modalbody");
 	}
-	if(screen.width<=1708&&screen.width>1525&&tbodylength>3){
+	if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
 		$("#modalbody").addClass("modalbody2");
 	}
 	if(screen.width>1708&&tbodylength>3){
@@ -793,22 +795,31 @@ $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 							"planid":judget
 						},
 						success : function(msg){
-							$(".mark").each(function(){
-							var htmlValue=$(this).html();
-							if(htmlValue>(rowNum+1)){
-								$(this).html(htmlValue-1);
-								}
-							});
-							teacherString.splice(rowNum,1);
-							showName=teacherString.join(",");
-							$("#adviser").val(showName);
-							value.splice(rowNum,1);
-							var value2=value.join(",");
-							$("#testername").val(value2);
-							bootbox.alert({
-								message : "删除成功",
-								size : 'small'
-							});											
+							if(msg.msg=="success"){
+								bootbox.alert({
+									message : "操作成功",
+									size : 'small'
+								});	
+								$(".mark").each(function(){
+									var htmlValue=$(this).html();
+									if(htmlValue>(rowNum+1)){
+										$(this).html(htmlValue-1);
+										}
+									});
+									teacherString.splice(rowNum,1);
+									showName=teacherString.join(",");
+									$("#adviser").val(showName);
+									value.splice(rowNum,1);
+									var value2=value.join(",");
+									$("#testername").val(value2);
+							}
+							else if(msg.msg=="fail"){
+								bootbox.alert({
+									message : "操作失败",
+									size : 'small'
+								});		
+							}
+																
 						}
 					});
 				}else{
@@ -1112,10 +1123,17 @@ $("#save").click(function(){//弹出框的保存
 							"str":str,
 						},
 						success : function(msg) {							
-							bootbox.alert({
-								message : "保存成功",
-								size : 'small'
-							});
+							if(msg.msg=="success"){
+								bootbox.alert({
+									message : "操作成功",
+									size : 'small'
+								});
+							}else if(msg.msg=="fail"){
+								bootbox.alert({
+									message : "操作失败",
+									size : 'small'
+								});
+							}		
 							//$("#Applychart").hide();
 							
 						}

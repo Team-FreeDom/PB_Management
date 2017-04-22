@@ -1,8 +1,21 @@
 $(document)
 		.ready(
 				function() {
-
-					$('#fieldrent_maintain')
+					
+					var deleId=$("#deleId").text();
+					if(deleId=="fail"){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});
+					}else if(deleId=="success"){
+						bootbox.alert({
+							message : "操作成功",
+							size : 'small'
+						});
+					}					
+				
+					var fieldrent_maintain=$('#fieldrent_maintain')
 							.DataTable(
 									{
 										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
@@ -251,7 +264,7 @@ $(document).delegate('#submitS', 'click', function() {
 	var deptSh = document.getElementById("deptSh").value;	
 	var contentSh = document.getElementById("contentSh").value;
 	
-	$('#fieldrent_maintain')
+	fieldrent_maintain=$('#fieldrent_maintain')
 	.DataTable(
 			{
 				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
@@ -419,6 +432,9 @@ $(document).delegate('#definite', 'click', function() {
 	var dept=$("#deptLaLa").val();
 	var planCareer=$("#planCareer").val();
 	var money=$("#expense").val();
+	var lr_id=$("#lr_id").val();
+	var startTime=$("#startTime").val();
+	var endTime=$("#endTime").val();
 	if(dept==""){
 		 bootbox.alert({
 				message : "请选择申报学院",
@@ -440,7 +456,44 @@ $(document).delegate('#definite', 'click', function() {
 		});
 	 return;
 	}	
-	$("#landManageUpdate").submit();
+	$.ajax({
+		type : 'POST',
+		data : {
+			"expense" : money,
+			"deptSelect":dept,
+			"planCareer":planCareer,
+			"startTime":startTime,
+			"endTime":endTime,
+			"lr_id":lr_id
+		},
+		dataType : 'json',
+		url : 'landManageUpdate.do',
+		async : false,
+		cache : false,
+		error : function(request) {
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
+		},
+		success : function(data) {
+               if(data.flag=="success"){
+            	   bootbox.alert({
+       				message : "操作成功",
+       				size : 'small'
+       			});
+            	   $("#myModalEdit").modal('hide');
+            	   fieldrent_maintain.draw(false);
+               }else if(data.flag=="fail"){
+            	   bootbox.alert({
+          				message : "操作失败",
+          				size : 'small'
+          			}); 
+               }
+			
+		}
+
+	});
 	
 });
 /*土地租赁记录修改---end*/
@@ -507,7 +560,7 @@ function check()
 	$('input[name="idname"]:checked').each(function(){
 	chk_value.push($(this).val());
 	});
-	alert("提交后检测");
+	//alert("提交后检测");
 	alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);  
 
 }

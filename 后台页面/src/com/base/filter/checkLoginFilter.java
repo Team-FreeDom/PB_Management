@@ -1,6 +1,7 @@
 package com.base.filter;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Properties;
@@ -64,7 +65,14 @@ public class checkLoginFilter implements Filter {
 		//访问权限控制
 		//获取admin.properties中的权限值，然后用户权限做
 	    Properties prop = new Properties();
-	    prop.load(request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties"));
+	    InputStream propInput=null;
+	    try{
+	    propInput = request.getSession().getServletContext().getResourceAsStream("/WEB-INF/admin.properties");
+	    prop.load(propInput);
+	    }finally{
+	    	if(propInput!=null)
+	    		propInput.close();
+	    }
 	    String requestPage = url.substring(url.lastIndexOf('/')+1); 
 	    String urlAdminValue= prop.getProperty(requestPage);	  
 	    if(urlAdminValue!=null){
@@ -76,7 +84,6 @@ public class checkLoginFilter implements Filter {
 				  BigInteger adminValueTemp = new BigInteger(co.getValue());
 				  long adminValue = adminValueTemp.longValue();
 				  long a = (long)Math.pow(2,Integer.valueOf(urlAdminValue));
-				  System.out.println("a:"+a);
 				  
 				  if((a & adminValue)==0){ //如果没有访问权限则返回
 					  response.setContentType("text/html;charset=UTF-8");

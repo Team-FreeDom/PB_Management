@@ -21,7 +21,7 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 	// 页面一
 	public MyBaseList MybaseInfo(int pageindex, int size, String columnName,
 			String orderDir, int year, int status, String userid) {
-		System.out.println(pageindex + "pageindex");
+		
 
 		MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 				orderDir, year, status, userid);
@@ -43,7 +43,6 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 			columnName = "descp";
 		}
 
-		System.out.println(userid + "userid");
 		MyBaseList list = mybaseinfodao.MybaseInfo(pageindex, size, columnName,
 				orderDir, year, status, userid);
 		return list;
@@ -63,7 +62,7 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 			number_0 = 18;
 		}
 		// 获得插入的消息语句
-		if (flag == 1) {
+		if (flag == 200) {
 			String insertStr = MessageUtils.getinfoMs(infostr, number_0);
 			// 向消息表中插入信息
 			mybaseinfodao.insertMessage(insertStr);
@@ -72,9 +71,10 @@ public class MyBaseInfoServiceImpl implements MyBaseInfoService {
 	}
 
 	@Override
-	public void updateDate(int id, String adddate) {
+	public String updateDate(int id, String adddate) {
 
-		mybaseinfodao.updateDate(id, adddate);
+		String message=mybaseinfodao.updateDate(id, adddate);
+		return message;
 	}
 
 }

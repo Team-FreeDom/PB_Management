@@ -45,7 +45,7 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
@@ -247,6 +247,7 @@
 																		<td colspan="2">星级 <select name="status"
 																			id="starLink" style="width:150px;margin-top:0px;">
 																				<option value="-1" selected>显示全部</option>
+																				<option value="0">无</option>
 																				<option value="1">一星级</option>
 																				<option value="2">二星级</option>
 																				<option value="3">三星级</option>
@@ -459,7 +460,7 @@
 											<tr id="hidecol">
 												<td>星级：</td>
 												<td colspan="3">
-													<div id="starget"></div>
+													<div id="starget" ${college==null?"":"style='pointer-events: none;'"}></div>
 												</td>
 											</tr>
 											<tr id="hidecol">
@@ -467,7 +468,7 @@
 												<td>创建时间：</td>
 												<td><input type="text" id="setdated" disabled></td>
 												<td>截止日期 ：</td>
-												<td><input type="text" id="adddate"
+												<td><input type="text" id="adddate" ${college==null?"":"disabled='disabled'"}
 													class="laydate-icon"></td>
 
 											</tr>
@@ -613,6 +614,7 @@
 						<form action="increaseBaseInfo.do" method="post" id="myForm"
 							enctype="multipart/form-data" class="form-horizontal" role="form">
 							<div class="form-group">
+							<input type="hidden" value="<%=request.getAttribute("index")%>" id="BaseMainAA" /> 
 								<label class="col-md-3 control-label fontDire">基地名称<span
 									class="setTag">*</span></label>
 								<div class="col-md-6">
@@ -738,14 +740,16 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label">创建日期</label>
+								<label class="col-md-3 control-label">创建日期<span
+									class="setTag">*</span></label>
 								<div class="col-md-6">
 									<input type="text" id="validdastart" name="start_time"
 										class="start_time laydate-icon" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-3 control-label">截止日期</label>
+								<label class="col-md-3 control-label">截止日期<span
+									class="setTag">*</span></label>
 								<div class="col-md-6">
 									<input type="text" id="validdaend" name="end_time"
 										class="end_time laydate-icon" placeholder="">
@@ -796,7 +800,19 @@
 	<script src="../js/myNeed/baseapply.js"></script>
 	<script src="../js/myNeed/base_maintain.js"></script>
 	<script src="../js/kg.js"></script>
-	<script>
+	<script type="text/javascript">
+		var index = document.getElementById('BaseMainAA').value;
+		if (index == "success") {
+			bootbox.alert({
+				message : "操作成功",
+				size : 'small'
+			});
+		}else if(index == "fail"){
+			bootbox.alert({
+				message : "操作失败",
+				size : 'small'
+			});
+		}
 		laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({
 			elem : '#validdastart'
@@ -807,13 +823,12 @@
 		laydate({
 			elem : '#adddate'
 		});
-	</script>
-	<script>
 		jQuery(document).ready(function() {
 
 			$(".rating-kv").rating();
 
 		});
 	</script>
+	
 </body>
 </html>

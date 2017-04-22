@@ -50,7 +50,6 @@ public class BaseApplyController {
     @RequestMapping("/getRequestBaseInfo.do")
     public String getRequestBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("===================");
 	Cookie[] cookies = request.getCookies();// 获得所有cookie对象
 	for (Cookie co : cookies) {
 	    if (co.getName().equals("username")) {
@@ -92,8 +91,7 @@ public class BaseApplyController {
 			    .getRealPath("/material/");*/
 		   path = ExcelReport.getWebRootUrl(request,"/material/");
 		    // 得到上传的文件的文件名
-		    String fileName = mFile.getOriginalFilename();
-		    System.out.println(fileName);
+		    String fileName = mFile.getOriginalFilename();		    
 		    String fileType = fileName.substring(fileName
 			    .lastIndexOf("."));
 		    filename = new Date().getTime() + fileType;
@@ -137,8 +135,7 @@ public class BaseApplyController {
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
 			+ userid +"','"+ time + "','"+lawPerson+"')";
-		System.out.println(str2+"拼装好的数据");
-
+		
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
 		String str1 = "";
@@ -155,7 +152,7 @@ public class BaseApplyController {
 		    str1 = sb.toString();
 		} else {
 		    for (String string : majorid) {
-			System.out.println(string);
+			
 			sb.append("(");
 			sb.append("'");
 			sb.append(Baseid);
@@ -174,9 +171,15 @@ public class BaseApplyController {
 		map.addAttribute("basename", name);
 		//String infostr="";
 		String infostr=JSONArray.fromObject(map).toString();		
-		baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
-		request.setAttribute("index", 1);
+		String message=baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
+		request.setAttribute("index", message);
 		response.setContentType("text/html;charset=UTF-8");
+		/*try {
+		    response.getWriter().print(message);
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}*/
 		
 	    }
 	}

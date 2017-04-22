@@ -47,10 +47,9 @@ public class MymaintainServiceImpl implements MymaintainService {
     public int recallmymaint(String id, String infostr) {
 	
 	int flag = mymaintaindao.recallmymaint(id);
-	if (flag == 1) {
+	if (flag == 200) {
 	    // 获得插入的消息语句
 	    String insertStr = MessageUtils.getinfoMs(infostr, 11);
-	    System.out.println(insertStr + "到底是什么信息");
 	    // 向消息表中插入信息
 	    mymaintaindao.insertMessage(insertStr);
 	}

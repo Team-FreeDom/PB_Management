@@ -57,7 +57,6 @@ public class MainController implements ServletContextAware{
 		if(CollectionUtils.isNotEmpty(notificationList)){
 	
 			map.addAttribute("notificationList", notificationList);
-			//System.out.println("messageList不为空");
 		}
 		
 		//获取注册用户
@@ -67,10 +66,8 @@ public class MainController implements ServletContextAware{
 		if(application.getAttribute("map_0")==null){
 			List<StartDate> list1=planMaintainService.getStartDate();
 			WeekTransformToTime.getLatestStartTime(application, list1);
-			System.out.println("为空呢");
 		}
 		String semester=WeekTransformToTime.getThisSemester(application);
-		System.out.println("不为空呢");
 		
 		//获取实习申请数目和报修申请数目
 		long[] value=mainServiceImpl.getRepairAndPracCount(semester);		

@@ -93,19 +93,14 @@ public class WeekTransformToTime {
 	int year = c.get(Calendar.YEAR);
 	String localsemester1 = (year + "-" + (year + 1) + "-" + "1")+"";
 	String localsemester2 = (year - 1)+ "-" + year + "-" + "2";
-	System.out.println(localsemester2);
 	String semester = null;// 此变量存放本时间所处于的学期
 	// 判断是否有application内是否有该key值，同时获取该key值的value值	
 	if(application.getAttribute("map_0")!=null){
 	String semester1 = (String) ((HashMap<String,String>)application.getAttribute("map_0")).get(localsemester1);//(第一学期) 每年的上半年所在的学期
-    System.out.println(semester1+"hahahha");
 	String semester2 =(String) ((HashMap<String,String>)application.getAttribute("map_0")).get(localsemester2);//(第二学期) 每年的下半年所在的学期
-	System.out.println(semester2+"aaaaa");
 	if (semester1 != null) {
 	    String startTime = semester1;
-	    System.out.println(startTime);
 	    String endtime = Time(semester1);
-	    System.out.println(startTime.compareTo(localtime));
 	    // 此处判断当前时间是否大于semester1，小于semester1+20周后的时间,若处于其中，则semester=semester1
 	    if (startTime.compareTo(localtime)< 0
 		    && endtime.compareTo(localtime) > 0) {
@@ -115,10 +110,7 @@ public class WeekTransformToTime {
 	if (semester2 != null) {
 	    String startTime = semester2;	 
 	    String endtime = Time(semester2);
-	    /*System.out.println(startTime);
-	    System.out.println(endtime);
-	    System.out.println(startTime.compareTo(localtime)+"www");
-	    System.out.println(endtime.compareTo(localtime)+"qqq");*/
+	    
 	    // 此处判断当前时间是否大于semester2，小于semester2+20周后的时间,若处于其中，则semester=semester2
 	    if (startTime.compareTo(localtime) < 0
 		    && endtime.compareTo(localtime) > 0) {

@@ -28,14 +28,14 @@ public interface PlanDao {
      2.返回值： 无返回值
      3.函数功能：保存实习计划
      */
-    public void updatePlan(int str1, String str3);
+    public String updatePlan(int str1, String str3);
 
     /*
      1.参数：id,整型,代表班级安排记录的主键值
      2.返回值： 无返回值 
      3.函数功能：删除单条班级安排记录
      */
-    public void deleteClassPlan(int id);
+    public String deleteClassPlan(int id);
 
     /*
      1.参数：majorid,字符串型，代表专业代码

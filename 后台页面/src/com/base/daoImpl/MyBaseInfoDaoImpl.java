@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.base.dao.MyBaseInfoDao;
 import com.base.po.MyBase;
 import com.base.po.MyBaseList;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("MyBaseInfoDao")
@@ -47,9 +48,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	    sp.setString(4, orderDir);
 	    sp.setInt(5, year);
 	    sp.setInt(6, status);
-	    // System.out.println(status);
 	    sp.setString(7, userid);
-	    // System.out.println(userid);
 	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
 	    recordsTotal = sp.getInt(8);
@@ -99,7 +98,6 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
      */
     @Override
     public void insertMessage(String sql) {
-	System.out.println("insert---start");
 
 	Session session = sessionFactory.openSession();
 
@@ -109,25 +107,33 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	} finally {
 	    session.close();
 	}
-	System.out.println("insert---end");
 
     }
-
+  //我的基地中基地续期
     @Override
-    public void updateDate(int id, String adddate) {
-	Session session = sessionFactory.openSession();
-
+    public String updateDate(int id, String adddate) {
+	int flag;
+	String message = null;
+	Connection conn = null;
+	CallableStatement sp = null;
 	try {
-	    SQLQuery query = session
-		    .createSQLQuery("{CALL baseweb.user_renewalbase(?,?)}");
-	    query.setInteger(0, id);
-	    query.setString(1, adddate);
-	    query.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.user_renewalbase(?,?,?)}");
+	    sp.setInt(1, id);
+	    sp.setString(2, adddate);
+	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
+	} catch (Exception e) {
+	    e.printStackTrace();
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
     }
-    
+    //我的基地中基地申请撤回
     @Override
     public int changeThisStatus(String id,int status1,int status2){
     	
@@ -145,8 +151,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
     	    sp.setInt(3, status2);
     	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
     	    sp.execute();
-    	    flag = sp.getInt(4);
-    	    
+    	    flag = sp.getInt(4);   	    
     	} catch (SQLException e) {
     	    // TODO Auto-generated catch block
     	    e.printStackTrace();

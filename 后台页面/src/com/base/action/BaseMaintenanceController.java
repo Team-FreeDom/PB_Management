@@ -108,9 +108,14 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("recordstr");
 
-	maintenanceservice.delInfo(str);
+	String message=maintenanceservice.delInfo(str);
+	if(message.equals("success")){
+	    message="操作成功";
+	}else if(message.equals("fail")){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 
 	response.setContentType("text/html;charset=UTF-8");
 
@@ -248,9 +253,14 @@ public class BaseMaintenanceController {
 	
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	if(message=="success"){
+	    message="操作成功";
+	}else if(message=="fail"){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("flag", true);
+	getObj.put("flag", message);
 
 	response.setContentType("text/html;charset=UTF-8");
 
@@ -268,7 +278,7 @@ public class BaseMaintenanceController {
     @RequestMapping("/exportThisInfo.do")
     public String exportThisInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	System.out.println("basetype: " + request.getParameter("basetype"));
+	
 	int basetype = Integer.valueOf(request.getParameter("basetype"));
 	String dept = request.getParameter("applydept");
 	if (dept == null) {
@@ -482,7 +492,6 @@ public class BaseMaintenanceController {
 		String phone = request.getParameter("phone");// 联系人电话
 		String starttime = request.getParameter("start_time");// 创建时间
 		String endtime = request.getParameter("end_time");// 截止时间
-		System.out.println(starttime + "   ,   " + endtime);
 		String lawPerson = request.getParameter("personDuty");
 		// 申请材料保存地址
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
@@ -496,7 +505,6 @@ public class BaseMaintenanceController {
 		    path = ExcelReport.getWebRootUrl(request, "/material/");
 		    // 得到上传的文件的文件名
 		    String fileName = mFile.getOriginalFilename();
-		    System.out.println(fileName);
 		    String fileType = fileName.substring(fileName
 			    .lastIndexOf("."));
 		    filename = new Date().getTime() + fileType;
@@ -563,9 +571,12 @@ public class BaseMaintenanceController {
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		}
-		maintenanceservice.increaseBaseInfo(str1, str2);
+		String message=maintenanceservice.increaseBaseInfo(str1, str2);
+		request.setAttribute("index", message);
+		String str=(String) request.getAttribute("index");
+		response.setContentType("text/html;charset=UTF-8");
 	    }
 	}
-	return "redirect:baseMaintain.jsp";
+	return "baseMaintain";
     }
 }

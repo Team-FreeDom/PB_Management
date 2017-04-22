@@ -188,9 +188,7 @@ public class RepairApproveController {
     public String refuseRepairApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
         String recorddigit=request.getParameter("recorddigit");
-        System.out.println(recorddigit+"浏阳河浏阳河浏阳河");
-	String refusestr = request.getParameter("recordstr");
-	System.out.println(refusestr+"李彩彩");
+	String refusestr = request.getParameter("recordstr");	
 	String infostr = request.getParameter("infostr");
 	int flag=repairApproveService.refuseRepairApply(recorddigit,refusestr, infostr);
 	response.setContentType("text/html;charset=UTF-8");
@@ -207,12 +205,9 @@ public class RepairApproveController {
     @RequestMapping("/agreeRepairApply.do")
     public String agreeRepairApply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	/*String recorddigit=request.getParameter("recorddigit");
-        System.out.println(recorddigit+"浏阳河浏阳河浏阳河");*/
+	
 	String agreestr = request.getParameter("agreestr");
-	System.out.println(agreestr+"哈哈哈哈");
 	String infostr = request.getParameter("infostr");
-	System.out.println(agreestr);
 	int flag=repairApproveService.agreeRepairApply(agreestr, infostr);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
@@ -230,10 +225,14 @@ public class RepairApproveController {
 	    HttpServletResponse response, ModelMap map) {
 	String storestr = request.getParameter("recordstr");
 	String infostr = request.getParameter("infostr");
-	repairApproveService.finishRepairApply(storestr, infostr);
-
+	String message=repairApproveService.finishRepairApply(storestr, infostr);
+	if(message.equals("success")){
+	    message="操作成功";
+	}else if(message.equals("fail")){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "成功确认维修完成");
+	getObj.put("str", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());

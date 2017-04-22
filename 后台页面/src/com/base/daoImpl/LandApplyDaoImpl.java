@@ -285,7 +285,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		CallableStatement sp = null;
 		ResultSet rs = null;
 		
-		System.out.println(date);	
 		Long applyCount=(long) 0;		
 		
 		Session session = sessionFactory.openSession();			
@@ -304,7 +303,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		} finally {
 			session.close();
 		}
-		//System.out.println(applyCount);
 		
 		return applyCount;
 	}
@@ -327,6 +325,33 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			sp.execute();   //执行存储过程
 			flag=sp.getInt(4);
 			rs=sp.getResultSet();  //获得结果集
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}			
+	    
+		return flag;
+	}
+	
+	@Override
+	public int cancelIt(int la_id,int tag)
+	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+		int flag=0;
+		try {
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.trans_pays(?,?,?)}");
+			sp.setInt(1,la_id);		
+			sp.setInt(2,tag);		
+			sp.registerOutParameter(3,java.sql.Types.INTEGER);
+			sp.execute();   //执行存储过程
+			flag=sp.getInt(3);
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

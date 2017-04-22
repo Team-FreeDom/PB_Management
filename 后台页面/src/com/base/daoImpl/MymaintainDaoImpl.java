@@ -37,24 +37,16 @@ public class MymaintainDaoImpl implements MymaintainDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_historymaintainapply(?,?,?,?,?,?,?,?)}");
-	    sp.setInt(1,pageindex);	
-	    //System.out.println(pageindex);
-	    sp.setInt(2, size);	 
-	   // System.out.println(size);
-	    sp.setString(3, columnName);
-	   // System.out.println(columnName);
-	    sp.setString(4, orderDir);	 
-	   // System.out.println(orderDir);
-	    sp.setInt(5, year);	 
-	    System.out.println(year);
-	    sp.setInt(6, status);
-	   // System.out.println(status);
-	    sp.setString(7, userid);
-	   // System.out.println(userid);
+	    sp.setInt(1,pageindex);		   
+	    sp.setInt(2, size);	   
+	    sp.setString(3, columnName);   
+	    sp.setString(4, orderDir);	 	  
+	    sp.setInt(5, year);	 	   
+	    sp.setInt(6, status);	  
+	    sp.setString(7, userid);	 
 	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
 	    recordsTotal = sp.getInt(8);
-	    System.out.println(recordsTotal+"几条记录");
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		Mymaintain ch = new Mymaintain();
@@ -118,7 +110,6 @@ public class MymaintainDaoImpl implements MymaintainDao {
      */
     @Override
     public void insertMessage(String sql) {
-   	System.out.println("insert---start");
    	Session session = sessionFactory.openSession();
 
    	try {
@@ -127,7 +118,6 @@ public class MymaintainDaoImpl implements MymaintainDao {
    	} finally {
    	    session.close();
    	}
-   	System.out.println("insert---end");
 
        }
 

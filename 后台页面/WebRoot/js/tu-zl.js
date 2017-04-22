@@ -248,19 +248,32 @@ $(function() {
                     success: function(data) {
                             var position = data.indexOf('$');
                             var flag = data.substring(0, position);
-
-
-                            if (flag != 1) {
-
+                             if(flag == 1){
+                            	 bootbox.alert({
+                                     message: "不在土地租赁申报时间段内，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if(flag == 2){
+                            	 bootbox.alert({
+                                     message: "该土地已被锁定，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if (flag == 404) {
                                 bootbox.alert({
                                     message: "请先撤回相同的土地申请",
                                     size: 'small',
                                     title: "申请失败",
                                 });
 
-                            } else {
-
-
+                            } else if(flag == 500){
+                            	 bootbox.alert({
+                                     message: "操作失败",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                            }else if(flag == 200){
                                 fill('', '', '', '', '', '', '', '');
                                 $('#field_rent tbody').html('');
                                 obj.dialog = bootbox.dialog({

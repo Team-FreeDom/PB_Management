@@ -161,7 +161,6 @@ public class MessageUtils {
 	String month1 = (month >= 10 ? "" + month : "0" + month);
 	String date1 = (date >= 10 ? "" + date : "0" + date);
 	String dateStr = "" + year + "-" + month1 + "-" + date1;
-	System.out.println(dateStr+"时间信息");
 
 	String msg = "";
 
@@ -181,7 +180,6 @@ public class MessageUtils {
 	}
 	insertStr = "insert into baseweb.message(title,content,time,isRead,userid) values"
 		+ insertStr;
-	System.out.println(insertStr);
 	return insertStr;
     }
     
@@ -204,12 +202,9 @@ public class MessageUtils {
 	    } else {
 		insertStr += "),";
 	    }	    
-	    System.out.println(MessageUtils.getTitle(tag));
-    	System.out.println(MessageUtils.getContent(tag,basename));    	
 	}
 	insertStr = "insert into baseweb.message(title,content,time,isRead,userid) values"
 		+ insertStr;
-	System.out.println(insertStr);
 	return insertStr;
 	
     }
@@ -233,12 +228,9 @@ public class MessageUtils {
     	    } else {
     		insertStr += "),";
     	    }	    
-    	    System.out.println(MessageUtils.getTitle(tag));
-        	System.out.println(MessageUtils.getContent(tag,basename));    	
     	}
     	insertStr = "insert into baseweb.message(title,content,time,isRead,userid) values"
     		+ insertStr;
-    	System.out.println(insertStr);
     	return insertStr;
     	
         }

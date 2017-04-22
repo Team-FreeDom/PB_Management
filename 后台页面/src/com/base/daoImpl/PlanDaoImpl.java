@@ -25,6 +25,7 @@ import com.base.po.Majoraim;
 import com.base.po.PlanList;
 import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("PlanDao")
@@ -77,7 +78,6 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setSemester(rs.getString("semester"));
 		ch.setWeek(rs.getString("week"));
 		ch.setCheckMethod(rs.getString("checkMethod"));
-		// System.out.println(ch.getCheckMethod()+"有没有");
 		ch.setMajor_oriented(rs.getString("major_oriented"));
 		list.add(ch);
 	    }
@@ -95,7 +95,9 @@ public class PlanDaoImpl implements PlanDao {
 
     // 提供保存按钮的功能
     @Override
-    public void updatePlan(int id, String plandata) {
+    public String updatePlan(int id, String plandata) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -103,21 +105,26 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_classarrangecourse(?,?)}");
+		    .prepareCall("{call baseweb.add_classarrangecourse(?,?,?)}");
 	    sp.setInt(1, id);
 	    sp.setString(2, plandata);
 	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
     }
 
     // 删除单条班级安排记录
     @Override
-    public void deleteClassPlan(int id) {
+    public String deleteClassPlan(int id) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -125,15 +132,18 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.delete_classArrangecourse(?)}");
+		    .prepareCall("{call baseweb.delete_classArrangecourse(?,?)}");
 	    sp.setInt(1, id);
 	    sp.execute();
+	    flag=sp.getInt(2);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
 
     }
 
@@ -185,7 +195,6 @@ public class PlanDaoImpl implements PlanDao {
 	    while (rs.next()) {
 		UserInfo ch = new UserInfo();
 		ch.setName(rs.getString("name"));
-		// System.out.println(ch.getName());
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -252,7 +261,6 @@ public class PlanDaoImpl implements PlanDao {
 		List<PracticeCollection> list = new ArrayList<PracticeCollection>();
 		PracticeCollection pc = null;
 		List<Classcourse> lra = plandataClass_export(userid,semester);
-         System.out.println("lra.length="+lra.size()+",userid="+userid+",semester="+semester);
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
@@ -363,9 +371,7 @@ public class PlanDaoImpl implements PlanDao {
     	    sp.setString(2, userid);
     	    sp.execute();
     	    rs = sp.getResultSet();
-    	    System.out.println("hello");
     	    while (rs.next()) {
-    	    	System.out.println("rs"+1);
     		Classcourse ch = new Classcourse();
     		ch.setId(rs.getInt("id"));
     		ch.setWeek(rs.getInt("week"));

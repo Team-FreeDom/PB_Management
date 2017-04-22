@@ -41,7 +41,7 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
@@ -427,9 +427,14 @@
 	<script src="../js/kg.js"></script>
 	<script type="text/javascript">
 		var index = document.getElementById('baseapply').value;
-		if (index == 1) {
+		if (index == "success") {
 			bootbox.alert({
-				message : "提交成功",
+				message : "操作成功",
+				size : 'small'
+			});
+		}else if(index == "fail"){
+			bootbox.alert({
+				message : "操作失败",
 				size : 'small'
 			});
 		}

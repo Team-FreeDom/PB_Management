@@ -23,7 +23,17 @@ $(document)
 								message : "您导入数据中存在相同的基地名称，请重新导入",
 								size : 'small'
 							});
-						}						
+						}else if(tag_1=="500"){
+							bootbox.alert({
+								message : "导入失败",
+								size : 'small'
+							});
+						}else if(tag_1=="200"){
+							bootbox.alert({
+								message : "导入成功",
+								size : 'small'
+							});
+						}										
 					}
 					$.ajax({
 						type : 'POST',
@@ -407,9 +417,14 @@ $(document)
 											type : "POST",
 											dataType : "json",
 											cache : false,
-											success : function(data) {
-												$("#deleteOneModal").modal('hide');											
-												page.draw(false);
+											success : function(data) {	
+												alert(data.flag);
+													bootbox.alert({
+														message : data.flag,
+														size : 'small'
+													});
+													$("#deleteOneModal").modal('hide');											
+													page.draw(false);																								
 											},
 											error : function(data) {
 												alert("请求异常");
@@ -500,7 +515,7 @@ $(document)
 												message : "该基地名称已存在,请重新输入",
 												size : 'small'
 											});*/
-											$("#basenamed")[0].focus();
+											$("#basenamed")[0].focus();											
 											alert("该基地名称已存在,请重新输入");
 											tag1=false;
 										}
@@ -619,6 +634,10 @@ $(document)
 							dataType : "json",
 							cache : false,
 							success : function(data) {
+								bootbox.alert({
+									message : data.flag,
+									size : 'small'
+								});
 								$("#edit").modal('hide');
 								$("#adddate").val("");
 								page.draw(false);
@@ -1096,7 +1115,10 @@ $(".icon-filter").on("click", function() {
 
 		},
 		error : function(data) {
-			alert("请求异常");
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});		
 		}
 	});
 	$('#hide_ul').toggle();

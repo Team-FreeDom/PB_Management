@@ -71,25 +71,8 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 	}
 
 	@Override
-	public void setAdminFunction(String sql) {
-		// TODO Auto-generated method stub
-		/*Session session = sessionFactory.openSession();
-
-		int i = 0;
-		Transaction t = null;
-		try {
-			t = session.beginTransaction();
-			Query q = session.createSQLQuery(insertSql);
-			q.executeUpdate();
-			t.commit();
-		} catch (Exception ex) {
-			if (t != null) {
-				t.rollback();
-			}
-		} finally {
-			session.close();
-		}*/
-
+	public String setAdminFunction(String sql) {	
+       String flag="success";
 		//实现批量插入
 		Connection conn=null;
 		PreparedStatement pst=null;
@@ -108,12 +91,11 @@ public class AdminManageDaoImpl implements AdminMangeDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			flag="fail";
 		}finally{
 			SqlConnectionUtils.free(conn, pst, null);
-		}
-		  
-        
-
+		}		  
+       return flag; 
 	}
 
 	@Override

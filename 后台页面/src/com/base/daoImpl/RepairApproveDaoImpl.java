@@ -22,6 +22,7 @@ import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.MaintenanceList;
 import com.base.po.Prabaseinfo;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("repairApproveDao")
@@ -68,13 +69,9 @@ public class RepairApproveDaoImpl implements RepairApproveDao {
 	    sp.setString(5, searchValue);
 	    sp.setInt(6, status);
 	    sp.setString(7, userid);
-	    sp.setString(8, baseid);
-	    System.out.println(pageIndex + " " + size + "  " + orderColumn
-		    + "  " + orderDir + "  " + searchValue + "  " + status
-		    + "  " + userid + "  " + baseid);
+	    sp.setString(8, baseid);	
 	    sp.registerOutParameter(9, java.sql.Types.INTEGER);
 	    sp.execute();
-	    // System.out.println("haha,weixiu2");
 	    recordsTotal = sp.getInt(9);
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
@@ -99,7 +96,6 @@ public class RepairApproveDaoImpl implements RepairApproveDao {
 	}
 	ma.setRecordsTotal(recordsTotal);
 	ma.setData(list);
-	System.out.println("ma:   " + ma);
 	return ma;
 
     }
@@ -228,20 +224,30 @@ public class RepairApproveDaoImpl implements RepairApproveDao {
 
     }
 
-    // ά�����
+    // 维修完成
     @Override
-    public void finish(String storestr) {
-
-	Session session = sessionFactory.openSession();
+    public String finish(String storestr) {
+	int flag;
+	String message = null;
+	Connection conn = null;
+	CallableStatement sp = null;
 	try {
-	    // hibernate���ô洢���(�޷��ز���)
-	    SQLQuery sqlQuery = session
-		    .createSQLQuery("{CALL baseweb.`maintainsuccess`(?)}");
-	    sqlQuery.setString(0, storestr);
-	    sqlQuery.executeUpdate();
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.`maintainsuccess`(?,?)}");
+	    sp.setString(1, storestr);	
+	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(2);
+	    message = BaseUtils.getException(flag);
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	} finally {
-	    session.close();
+	    SqlConnectionUtils.free(conn, sp, null);
 	}
+	return message;
 
     }
 

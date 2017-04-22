@@ -12,6 +12,7 @@ import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
 import com.base.service.LandRentService;
+import com.base.utils.BaseUtils;
 
 @Service("landRentService")
 public class LandRentServiceImpl implements LandRentService {
@@ -63,7 +64,7 @@ public class LandRentServiceImpl implements LandRentService {
 		
 	}
 	
-	public void deleteRentInfo(String[] check)
+	public String deleteRentInfo(String[] check)
 	{
 		String str="";
 		int i=0;
@@ -77,16 +78,14 @@ public class LandRentServiceImpl implements LandRentService {
 			}
 			i++;
 		}		
-		try {
-			landRentInfoDaoImpl.deleteRentInfo(str);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//try {
+		int flag=landRentInfoDaoImpl.deleteRentInfo(str);
+		String str_0=BaseUtils.getException(flag);
+		return str_0;
 	}
 	
 	//�������޼�¼�޸ĸ���
-	public void landManageUpdate(int dept,String planCareer,Double expense,String startTime,String endTime,int lr_id)
+	public String landManageUpdate(int dept,String planCareer,Double expense,String startTime,String endTime,int lr_id)
 	{
 		if(planCareer==null){
 			planCareer="";
@@ -104,10 +103,10 @@ public class LandRentServiceImpl implements LandRentService {
 		lr.setPlanting(planCareer);
 		lr.setRentMoney(expense);
 		lr.setStartTime(startTime);
-		lr.setApplyDept(dept);
-		System.out.println("rentMoney:"+lr.getRentMoney());
-		landRentInfoDaoImpl.updateOne(lr);
-		
+		lr.setApplyDept(dept);	
+		int flag=landRentInfoDaoImpl.updateOne(lr);
+		String str=BaseUtils.getException(flag);
+		return str;		
 	}
 	
  public void landManageAdd(LandRentInfo lr)

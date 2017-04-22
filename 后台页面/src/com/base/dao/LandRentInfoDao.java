@@ -36,7 +36,7 @@ public interface LandRentInfoDao {
 	   返回值：  无返回值
 	   函数功能：删除多条土地租赁信息记录
 	 */
-	public void deleteRentInfo(String str);
+	public int deleteRentInfo(String str);
 	
 	/*
 	   参数说明：lr_id,为

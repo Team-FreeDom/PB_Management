@@ -49,5 +49,5 @@ public interface RepairApproveDao {
 	 返回值：    无返回值
 	 函数功能： 维修完成
 	  */
-	public void finish(String storestr);
+	public String finish(String storestr);
 }

@@ -17,7 +17,7 @@ public interface MaintainApplyDao {
 	   返回值：   无返回值
 	   函数功能：插入报修申请信息记录
 	 */
-	public void insert_maintain(String str);
+	public String insert_maintain(String str);
 	
 	/*
 	   参数说明：page,为当前页数;offsets,为每页的条数; order,排序列;
@@ -32,14 +32,14 @@ public interface MaintainApplyDao {
 	   返回值：   无返回值
 	   函数功能：删除报修信息
 	 */
-	public void delete_maintainapply(String str);
+	public String delete_maintainapply(String str);
 	
 	/*
 	   参数说明：ma，为MaintainApply对象
 	   返回值：   无返回值
 	   函数功能：增加报修信息记录
 	 */
-	public void add_maintain(MaintainApply ma);
+	public String add_maintain(MaintainApply ma);
 	
 	/*
 	   参数说明：bname,字符串型，为基地名称;years,int型，为年份

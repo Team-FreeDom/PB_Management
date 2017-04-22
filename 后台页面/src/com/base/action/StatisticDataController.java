@@ -52,16 +52,14 @@ public class StatisticDataController implements ServletContextAware {
 	    HttpServletResponse response) {
 	// 获取用户登录的id
 	// String userid = CookieUtils.getUserid(request);
-	// System.out.println("哈哈哈哈哈======");
+	
 	// 获取学年学期
 	String semester = WeekTransformToTime.getThisSemester(application);
-	System.out.println("semester:"+semester);
 	if (semester==null||semester.equals("")) {
 	    semester = null;
 	}
 	// 获取当前页面的传输几条记录
 	Integer size = Integer.parseInt(request.getParameter("length"));
-	// System.out.println(size + "lialiaiaiaiaia");
 	// 数据起始位置
 	Integer startIndex = Integer.parseInt(request.getParameter("start"));
 	Integer draw = Integer.parseInt(request.getParameter("draw"));
@@ -341,11 +339,9 @@ public class StatisticDataController implements ServletContextAware {
 	List<StatisticData> list = new ArrayList<StatisticData>();
 
 	StatisticData st = new StatisticData();
-	// System.out.println(basetype+"  "+basename+"  "+grade+"  "+college+"  "+major+"  "+class1+"  "+teacherName+"  "+"彭心雨");
 	st = statisticDataservice.BaseUseRatioBrush(semester, basetype,
 		basename, grade, college, major, class1, teacherName);
 	list.add(st);
-	// System.out.println(st.getTypenum() + "李彩彩彩");
 	JSONObject getObj = new JSONObject();
 	getObj.put("data", list);
 	response.setContentType("text/html;charset=UTF-8");
@@ -452,7 +448,6 @@ public class StatisticDataController implements ServletContextAware {
 	if (college.equals("")) {
 	    college = null;
 	}
-	// System.out.println(college + "专业专业");
 	List<Map<String, String>> list = statisticDataservice.getMajor(
 		semester, college);
 	JSONArray json = JSONArray.fromObject(list);
@@ -481,7 +476,6 @@ public class StatisticDataController implements ServletContextAware {
 	if (college.equals("")) {
 	    college = null;
 	}
-	// System.out.println(college + "专业专业");
 	List<Map<String, String>> list = statisticDataservice.getMajor(
 		semester, college);
 	JSONArray json = JSONArray.fromObject(list);
