@@ -676,7 +676,7 @@ $("#finished").click(function (){
 
 //筛选功能1
 $(document).on("click","#finish",function() {
-	var obj=[];
+	obj=[];
 	var baseid = $("#searchbase option:selected").val();	
 	var userid = $("#searchname option:selected").val();
 	Approvetable=$('#Approveing').DataTable(
@@ -801,7 +801,7 @@ $(document).on("click","#finish",function() {
  });
 //筛选功能2
 $(document).on("click","#finish2",function() {
-	var obj2=[];
+	obj2=[];
 	var baseid = $("#searchbase2 option:selected").val();	
 	var userid = $("#searchname2 option:selected").val();
 	 repair=$('#Repairing').DataTable(
