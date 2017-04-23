@@ -24,6 +24,7 @@ import com.base.service.MyBaseInfoService;
  * @author 梦醒何处
  * 
  */
+// 我的实习申请控制层
 @Controller("MybaseController")
 @RequestMapping("/jsp")
 public class MybaseController {
@@ -31,7 +32,7 @@ public class MybaseController {
     @Autowired
     private MyBaseInfoService mybaseinfoservice;
 
-    // 页面一
+    // 获取用户的当前阶段的实习基地申请
     @RequestMapping("/MybaseInfo.do")
     public String MybaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -51,7 +52,6 @@ public class MybaseController {
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
-		System.out.println("order:"+order);
 		// String orderDir = request.getParameter("order[0][dir]");//
 		// 排序的顺序asc or
 		String orderDir = "desc"; // // desc
@@ -94,7 +94,7 @@ public class MybaseController {
 
     }
 
-    // 页面二
+    // 获取用户的所有实习基地申请
     @RequestMapping("/MybaseInfo2.do")
     public String MybaseInfo2(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -112,10 +112,10 @@ public class MybaseController {
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
 		String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc
-		
-									// or //
-									// //
-									// desc
+
+		// or //
+		// //
+		// desc
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
 		// 打包状态的id（status）2-待审核 6-申请成功 11-失效 12-申请失败
@@ -150,22 +150,19 @@ public class MybaseController {
 	return null;
     }
 
-    // 撤回
+    // 实习基地申请撤回
     @RequestMapping("/recall.do")
     public String recall(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map) {
-	System.out.println(" 进去撤回");
+	    HttpServletResponse response, ModelMap map) {	
 	// 获取撤回哪条记录id
-	String id = request.getParameter("id");
-	System.out.println(id);
+	String id = request.getParameter("id");	
 	// 获取撤回信息
 	String infostr = request.getParameter("infostr");
-	System.out.println(infostr);
-	mybaseinfoservice.recall(id, infostr);
-	JSONObject getObj = new JSONObject();
+	int tag = Integer.valueOf(request.getParameter("tag"));
+	int flag=mybaseinfoservice.recall(id, infostr,tag);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
-	    response.getWriter().print("成功撤回");
+	    response.getWriter().print(flag);
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
@@ -173,30 +170,28 @@ public class MybaseController {
 	return null;
 
     }
-    
-    //修改续期
+
+    // 实习基地续期
     @RequestMapping("/updateMyBaseDate.do")
     public String updateBaseInfo(HttpServletRequest request,
-	    HttpServletResponse response, ModelMap map){
-    	int id=Integer.valueOf(request.getParameter("id"));   	
-    	String date=request.getParameter("adddate");   	
-        mybaseinfoservice.updateDate(id,date);
-    	JSONObject getObj = new JSONObject();
-    	getObj.put("flag", true);
-    	
-    	response.setContentType("text/html;charset=UTF-8");
+	    HttpServletResponse response, ModelMap map) {
+	int id = Integer.valueOf(request.getParameter("id"));
+	String date = request.getParameter("adddate");
+	String message=mybaseinfoservice.updateDate(id, date);
+	JSONObject getObj = new JSONObject();
+	getObj.put("flag", message);
+	response.setContentType("text/html;charset=UTF-8");
+	try {
+	    response.getWriter().print(getObj.toString());
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 
-    	try {
-    		response.getWriter().print(getObj.toString());
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}   	
-    	
-    	return null;    	
+	return null;
     }
 
-    // 刷选(根据状态值刷选)
+    // 实习记录刷选(根据状态值刷选)
     @RequestMapping("/getStatus.do")
     public String getStatus(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -207,25 +202,22 @@ public class MybaseController {
 		String userid = co.getValue();
 		// 获取当前页面的传输几条记录
 		Integer size = Integer.parseInt(request.getParameter("length"));
-		System.out.println(size + "当前几条记录lalalalala");
-		// 获取状态值 失败0；成功：1 失效：2     正常情况 失败：12 成功：6 失效：11
+		// 获取状态值 失败0；成功：1 失效：2 正常情况 失败：12 成功：6 失效：11
 		Integer status = Integer.parseInt(request
-			.getParameter("status"));		
-		
+			.getParameter("status"));
+
 		// 数据起始位置
 		Integer startIndex = Integer.parseInt(request
 			.getParameter("start"));
 		Integer draw = Integer.parseInt(request.getParameter("draw"));
 		int order = Integer.valueOf(request
 			.getParameter("order[0][column]"));// 排序的列号
-		System.out.println(order + "这是第几个列");
 		String orderDir = request.getParameter("order[0][dir]");// 排序的顺序asc
 									// or //
 									// //
 									// desc
 		// 通过计算求出当前页面为第几页
 		Integer pageindex = (startIndex / size + 1);
-		System.out.println(pageindex + "当前第几页lalalla");
 		MyBaseList str = null;
 
 		str = mybaseinfoservice.MybaseInfo2(pageindex, size, order,

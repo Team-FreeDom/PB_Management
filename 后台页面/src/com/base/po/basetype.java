@@ -18,6 +18,12 @@ public class basetype {
 	this.id = id;
 	this.name = name;
     }
+    
+    public basetype(String name) {
+	super();
+	this.name = name;
+    }
+
     public int getId() {
         return id;
     }

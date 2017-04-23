@@ -36,9 +36,9 @@ $(".ck2").click(function () {//反选
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
-				  "aLengthMenu":[ 5, 10, 15, 20 ], //动态指定分页后每页显示的记录数。
+				  "aLengthMenu":[ 5, 10, 20, 30 ], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 5,  //默认每页显示多少条记录
+					"iDisplayLength" : 10,  //默认每页显示多少条记录
 					"bFilter": true,
 					"ordering":true,
 					"dom":'ftipr<"bottom"l>',
@@ -134,7 +134,7 @@ $(".ck2").click(function () {//反选
                         "zeroRecords": "没有找到记录",
                         "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
                         "infoEmpty": "无记录",
-						"sSearch": "查询：",
+						"sSearch": "模糊查询：",
                         "infoFiltered": "(从 _MAX_ 条记录过滤)",
 						"oPaginate": {
 						   "sFirst": "首页",
@@ -148,7 +148,7 @@ $(".ck2").click(function () {//反选
             //维修中表格	  
               var repair=$('#Repairing').DataTable(
              {
-             	"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+             	"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
              	"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
              	"bSort" : true,
              	"ordering":true,
@@ -156,7 +156,7 @@ $(".ck2").click(function () {//反选
              	"bFilter": true,
              	"ordering":true,	
              	"dom": 'frtip<"bottom"l>',
-             	"iDisplayLength": 5,	
+             	"iDisplayLength": 10,	
              	"ajax" : {
              			"url" : "getAgreeRepair.do",
              			"type" : "POST"
@@ -245,7 +245,7 @@ $(".ck2").click(function () {//反选
                             "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
                             "infoEmpty": "无记录",
                             "infoFiltered": "(从 _MAX_ 条记录过滤)",
-             			   "sSearch": "查询：",
+             			   "sSearch": "模糊查询：",
              			   "oPaginate": {
              					"sFirst": "首页",
              					"sPrevious": " 上一页 ",
@@ -358,6 +358,7 @@ $(document).on("click", "#scanDetail2", function() {
 								if(result){
 									var i=0;
 									var agreestr = '(';//同意记录的格式(1,2,3,4,5)
+									var recorddigit='(';
 									var keyid;
 									var infostr="[";
 									var userid;
@@ -369,31 +370,46 @@ $(document).on("click", "#scanDetail2", function() {
 															if (i != 0) {
 																agreestr = agreestr+ ','+ $(this).val();
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+','+this.className;
 															}
 															else{
 																agreestr = agreestr+ $(this).val();
 																infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+this.className;
 																}
 															i++;
 														});
 										agreestr = agreestr + ')';
-										infostr=infostr+']';										
+										infostr=infostr+']';
+										 recorddigit=recorddigit+')'; 
 										$.ajax({
 											url : 'agreeRepairApply.do',
 											type : 'post',
 											dataType : 'json',
 											data : {
 												"agreestr" : agreestr,
-												"infostr":infostr
+												"infostr":infostr,
 											},
-											success : function(msg) {
-												bootbox.alert({
-													message : msg.str,
-													size : 'small'
-												});
+											success : function(msg) {											
+												if(msg==0){
+													bootbox.alert({
+														message : "同意申请失败请刷新页面",
+														size : 'small'
+													});
+												}else if(msg==200){
+													bootbox.alert({
+														message : "操作成功",
+														size : 'small'
+													});
 												getInfoApply();
 												Approvetable.draw(false);
 												repair.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message : "操作失败",
+														size : 'small'
+													});
+												}																							
 											}
 										});//end
 
@@ -438,7 +454,8 @@ $(document).on("click", "#scanDetail2", function() {
 							callback: function (result) {
 								if(result){
 									var i=0;
-									var recordstr = '';//同意记录的格式(1,2,3,4,5)									
+									var recordstr = '';//同意记录的格式(1,2,3,4,5)
+									var recorddigit='(';
 									var infostr="[";
 									var userid;
 									var basename;
@@ -450,31 +467,50 @@ $(document).on("click", "#scanDetail2", function() {
 															if (i != 0) {
 																recordstr=recordstr+",("+this.className+",12,'"+refuseReason+"')";
 																infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+','+this.className;
 															}
 															else{
 																recordstr=recordstr+"("+this.className+",12,'"+refuseReason+"')";
 																infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+																recorddigit=recorddigit+this.className;
 																}
 															i++;
 														});									    
-										infostr=infostr+']';										
+										infostr=infostr+']';	
+										recorddigit=recorddigit+')';  
 										$.ajax({
 											url : 'refuseRepairApply.do',
 											type : 'post',
 											dataType : 'json',
 											data : {
+												"recorddigit":recorddigit,
 												"recordstr" :recordstr,
-												"infostr":infostr
+												"infostr":infostr,
 											},
-											success : function(msg) {
-												bootbox.alert({
-													message : msg.str,
+											success : function(msg) {											
+												if(msg==0){
+													bootbox.alert({
+														message : "拒绝失败请刷新页面",
+														size : 'small'
+													});
+													$("#refuseModal").modal('hide');
+												}else if(msg==200){
+													bootbox.alert({
+													message : "操作成功",
 													size : 'small'
 												});
-												$("#refuseModal").modal('hide');
-												getInfoApply();
-												Approvetable.draw(false);
-												repair.draw(false);
+													$("#refuseModal").modal('hide');
+													getInfoApply();
+													Approvetable.draw(false);
+													repair.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message : "操作失败",
+														size : 'small'
+													});
+													$("#refuseModal").modal('hide');
+												}
+																								
 											}
 										});//end
 
@@ -640,20 +676,21 @@ $("#finished").click(function (){
 
 //筛选功能1
 $(document).on("click","#finish",function() {
-	var obj=[];
+	obj=[];
 	var baseid = $("#searchbase option:selected").val();	
 	var userid = $("#searchname option:selected").val();
 	Approvetable=$('#Approveing').DataTable(
 		{
-		"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 		"bSort" : true,
 		"serverSide" : true,
-		"iDisplayLength": 5,// //默认每页显示多少条记录
+		"iDisplayLength": 10,// //默认每页显示多少条记录
 		"bDestroy" : true,
+		"bFilter": true,
 		"ordering":true,
 		"filter":true,
-		"dom" : 'tipr<"bottom"l>',
+		"dom" : 'ftipr<"bottom"l>',
 		"ajax" : {
 			"data" : {
 				"baseid" : baseid,
@@ -764,20 +801,21 @@ $(document).on("click","#finish",function() {
  });
 //筛选功能2
 $(document).on("click","#finish2",function() {
-	var obj2=[];
+	obj2=[];
 	var baseid = $("#searchbase2 option:selected").val();	
 	var userid = $("#searchname2 option:selected").val();
 	 repair=$('#Repairing').DataTable(
 		{
-		"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+		"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 		"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 		"bSort" : true,
 		"serverSide" : true,
-		"iDisplayLength": 5,// //默认每页显示多少条记录
+		"iDisplayLength": 10,// //默认每页显示多少条记录
 		"bDestroy" : true,
 		"ordering":true,
+		"bFilter": true,
 		"filter":true,
-		"dom" : 'tipr<"bottom"l>',
+		"dom" : 'ftipr<"bottom"l>',
 		"ajax" : {
 			"data" : {
 				"baseid" : baseid,

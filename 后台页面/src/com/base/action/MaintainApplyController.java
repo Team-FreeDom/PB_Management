@@ -36,6 +36,7 @@ import com.base.service.MaintainApplyService;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
+//报修申请控制层
 @Controller("MaintainApplyController")
 @RequestMapping("/jsp")
 public class MaintainApplyController {
@@ -46,7 +47,11 @@ public class MaintainApplyController {
     @RequestMapping("/basename.do")
     public String find_basename(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
-	List list = applyservice.find_basename();
+    String year = request.getParameter("year"); 
+    if(year.equals("-1")){
+    	year=null;
+    }
+	List list = applyservice.find_basename(year);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    JSONArray json = JSONArray.fromObject(list);
@@ -58,7 +63,7 @@ public class MaintainApplyController {
 	return null;
     }
     
- // 校内基地名查询
+   // 校内基地名查询(包括土地基地和校内基地)
     @RequestMapping("/baseNeiName.do")
     public String baseNeiName(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
@@ -86,7 +91,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("applyfile");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 	    /*path = request.getSession().getServletContext()
@@ -144,13 +148,13 @@ public class MaintainApplyController {
 	map.addAttribute("userid", userid);
 	map.addAttribute("basename", "");
 	String infostr = JSONArray.fromObject(map).toString();
-	applyservice.insert_maintain(str, infostr);
-	request.setAttribute("index", 1);
+	String message=applyservice.insert_maintain(str, infostr);
+	request.setAttribute("index", message);
 	response.setContentType("text/html;charset=UTF-8");
 	return "Repairpply";
     }
 
-    // 维修管理界面，把所有信息传到（前台当前页面记录数，当前页数，排序列，排序顺序，模糊查询的字符串,返回总记录数）
+    // 获取维修信息
     @RequestMapping("/query_maintainapply.do")
     public String query_maintainapply(HttpServletRequest request, ModelMap map,
 	    HttpServletResponse response) {
@@ -187,14 +191,19 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 删除维修基地申请记录，传的值为维修记录id的集合
+    // 删除维修信息记录
     @RequestMapping("/delmaintainapply.do")
     public String delmaintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("deletstr");
-	applyservice.delete_maintainapply(str);
+	String message=applyservice.delete_maintainapply(str);
+	if(message.equals("success")){
+	    message="操作成功";
+	}else if(message.equals("fail")){
+	    message="操作失败";
+	}
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", "成功删除");
+	getObj.put("str", message);
 	response.setContentType("text/html;charset=UTF-8");
 	try {
 	    response.getWriter().print(getObj.toString());
@@ -205,7 +214,7 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 增加维修基地记录（已完成的维修）
+    // 增加维修信息记录
     @RequestMapping("/addmaintainapply.do")
     public String add_maintainhistory(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -216,7 +225,6 @@ public class MaintainApplyController {
 	MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	// 得到上传的文件
 	MultipartFile mFile = multipartRequest.getFile("file");// 申请材料保存地址
-	System.out.println("11" + mFile);
 	if (!mFile.isEmpty()) {
 	    // 得到上传服务器的路径
 		path = ExcelReport.getWebRootUrl(request,"/maintainfile/");
@@ -268,15 +276,21 @@ public class MaintainApplyController {
 	String address = request.getParameter("Aaddress");
 	MaintainApply ma = new MaintainApply(pronames, bids, usernames,
 		address, reasons, filename, budget, time, 15, actualMoney);
-	applyservice.insert_maintainhistory(ma);
-
-	return "redirect:Repairmanage.jsp";
+	String message=applyservice.insert_maintainhistory(ma);
+        request.setAttribute("index", message);
+        response.setContentType("text/html;charset=UTF-8");
+	return "Repairmanage";
     }
 
+    //获取年份
     @RequestMapping("/getThoseYear.do")
     public String getThoseYear(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	List<String> list = applyservice.getThoseYear();
+    List list=new ArrayList();
+	List<String> list1 = applyservice.getThoseYear();
+	List list2 = applyservice.find_basename(null);
+	list.add(list1);
+	list.add(list2);
 	JSONObject getObj = new JSONObject();
 	getObj.put("list", list);
 	response.setContentType("text/html;charset=UTF-8");
@@ -289,7 +303,7 @@ public class MaintainApplyController {
 	return null;
     }
 
-    // 导出基地维修记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
+    // 导出维修信息记录，参数为筛选条件，第一个基地名字，第二个为年份(如没有，则为-1)
     @RequestMapping("/exportmaintainapply.do")
     public String export_maintainapply(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
@@ -302,11 +316,13 @@ public class MaintainApplyController {
 	if (bname.equals("-1")) {
 	    bname = null;
 	}
+	int exportMaintain=200;
 	List<MaintainApplys> list = new ArrayList<MaintainApplys>();
 	list = applyservice.export_maintainapply(bname, years);
-	if (CollectionUtils.isNotEmpty(list)) {
-	    /*String path = request.getSession().getServletContext()
-		    .getRealPath("/upload/");*/
+	if(list.size()==0){
+		exportMaintain=0;
+	}
+	if (CollectionUtils.isNotEmpty(list)) {	  
 	    String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 	    String fullFileName = path + "/BaseRepairInfo.xlsx";
 	    ExcelReport export = new ExcelReport();
@@ -329,6 +345,7 @@ public class MaintainApplyController {
 
 	    } catch (UnsupportedEncodingException e) {
 		// TODO Auto-generated catch block
+	    	exportMaintain=500;
 		e.printStackTrace();
 	    }
 	    // 读取文件
@@ -344,15 +361,14 @@ public class MaintainApplyController {
 		in.close();
 		out.close();
 
-	    } catch (FileNotFoundException e1) {
+	    }catch (Exception e) {
 		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
+	    	exportMaintain=500;
 		e.printStackTrace();
 	    }
 	    return null;
 	}
-	return "redirect:Repairmanage.jsp";
+	map.addAttribute("exportMaintain", exportMaintain);
+	return "forward:Repairmanage.jsp";
     }
 }

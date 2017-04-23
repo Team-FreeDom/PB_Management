@@ -37,19 +37,17 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs">
-					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
-                              <!--ms-if-->
-                      </a>
-						<!-- <ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
+						class="dropdown-toggle notification-icon"> <i
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a> <!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                           <a href="getMessage.do"><strong>未读消息列表</strong></a>
                           </li>
@@ -78,8 +76,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="#" target="_blank"><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -88,8 +85,8 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
-											id="imageMain" src=""></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -104,50 +101,74 @@
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+								<li class="menuItem nav-parent"
+									${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										
-										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a
+											href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 
-									</ul></li>
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a
+											href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a
+											href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+									</ul>
+								</li>
+
+								<li class="menuItem nav-parent"
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                            <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul></li>
-								<li class="menuItem nav-parent"><a> <i
+										<li ${visitRight[3]==0?"style='display:none;'":" "}><a
+											href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+										<li ${visitRight[4]==0?"style='display:none;'":" "}><a
+											href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+										<li ${visitRight[6]==0?"style='display:none;'":" "}><a
+											href="fieldRent_maintain.jsp"><span class="text">
+													土地租赁维护</span></a></li>
+										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
+											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
+											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
+											href="practicePlanMaintain.jsp"><span class="text">
+													实习计划维护</span></a></li>
+										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
+										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
+											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
+											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li><a href="#"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
-									</ul></li>
 
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+
+									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -181,31 +202,32 @@
                                 <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
+
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
 
 					<div class="col-lg-12">
-						<div class=" col-md-offset-1 col-md-10">
-							<table id="table1" class="cell-border" cellspacing="0"
-								width="100%">
-								<thead>
-									<tr bgcolor="#3B6290" style="color:#FFF">
-										<th>开始日期</th>
-										<th>租期</th>
-										<th>基地名</th>
-										<th>土地名称</th>
-										<th>土地编号</th>
-										<th>状态</th>
-										<th>操作</th>
 
-									</tr>
-								</thead>
-								<tbody>
+						<table id="table1" class="cell-border" cellspacing="0"
+							width="100%">
+							<thead>
+								<tr bgcolor="#3B6290" style="color:#FFF">
+									<th>开始日期</th>
+									<th>租期</th>
+									<th>基地名</th>
+									<th>土地名称</th>
+									<th>土地编号</th>
+									<th>状态</th>
+									<th>操作</th>
 
-								</tbody>
-							</table>
-						</div>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+
 					</div>
 
 					<!--弹出框-->
@@ -214,7 +236,8 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<div class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal"></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情及修改</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -291,18 +314,18 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<div class="glyphicon glyphicon-remove closeModal"
+											data-dismiss="modal"></div>
 										<h4 class="modal-title" id="myModalLabel"></h4>
 									</div>
 									<div class="modal-body" style="text-align: left;">
 										<h5>您确定要撤销吗？</h5>
 									</div>
 									<div class="modal-footer">
-										<!--
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">取消
-                    </button>
-                     -->
+
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">取消</button>
+
 										<button type="button" class="btn btn-primary"
 											id="cancelSubmit">确认</button>
 									</div>
@@ -322,7 +345,8 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<div class="glyphicon glyphicon-remove closeModal"
+											data-dismiss="modal"></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -330,9 +354,8 @@
 									</div>
 									<div class="modal-footer">
 
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">取消
-                    </button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">取消</button>
 
 										<button type="button" class="btn btn-primary" id="delSubmit">
 											确认</button>
@@ -353,7 +376,8 @@
 								<div class="modal-content" style="border:#4D719B 8px solid">
 									<div class="modal-header"
 										style="background:#4D719B; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<div class="glyphicon glyphicon-remove closeModal"
+											data-dismiss="modal"></div>
 										<h6 class="modal-title" id="myModalLabel"></h6>
 									</div>
 									<div class="modal-body" style="text-align: left;">
@@ -361,9 +385,8 @@
 									</div>
 									<div class="modal-footer">
 
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">取消
-                    </button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">取消</button>
 
 										<button type="button" class="btn btn-primary"
 											id="SubmitTemperate">确认</button>
@@ -380,7 +403,8 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<div class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal"></div>
 									<h4 class="modal-title text-center" id="myModalLabel">缴费中详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -433,18 +457,16 @@
 											<tr>
 												<td>1</td>
 												<td id="upload1">教学科研用地协议</td>
-												<td><a href="exportFile.do?flag=1"
-													style="color:#009">点击下载</a></td>
+												<td><a href="#" style="color:#009">点击下载</a></td>
 											</tr>
 											<tr>
 												<td>2</td>
 												<td id="upload1">土地有偿使用协议</td>
-												<td><a href="exportFile.do?flag=2"
-													style="color:#009">点击下载</a></td>
+												<td><a href="#" style="color:#009">点击下载</a></td>
 											</tr>
 										</table>
 										<span style="color:#F00">交费截止日期：</span><input type="text"
-											id="closingdate">
+											id="closingdate" readonly>
 									</center>
 
 								</div>
@@ -463,7 +485,8 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<div class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal"></div>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁修改</h4>
 								</div>
 								<form action="updateContent.do" method="post"
@@ -513,16 +536,14 @@
 												<td colspan="3">
 
 
-											<center>
-                                            <div class="form-group" style="position:relative">
-                                                <input type="file"  style=" position:absolute; left:25%" name="fileResource">
-                                                <label for="exampleInputFile" class="btn btn-primary" style=" position:absolute; top:-10px;left:23.5%">上传文件</label>
-                                            </div>
-                                            </center>
-
-
-
-													<!-- <div style="float:right;">
+													<center>
+														<div class="form-group" style="position:relative">
+															<input type="file" style=" position:absolute; left:25%"
+																name="fileResource"> <label
+																for="exampleInputFile" class="btn btn-primary"
+																style=" position:absolute; top:-10px;left:23.5%">上传文件</label>
+														</div>
+													</center> <!-- <div style="float:right;">
 
 														 <form enctype="multipart/form-data">
 														<input   class="file" name="fileResource"
@@ -551,28 +572,28 @@
 
 
 					<div class="col-lg-12 form-group">
-						<div class=" col-md-offset-1 col-md-10">
-							<table id="table2" class="cell-border" cellspacing="0"
-								width="100%">
-								<thead>
-									<tr bgcolor="#ECF1F5">
-										<td colspan="1">处理结果</td>
-										<td colspan="6">
-											<!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
-											<ul id="dropdown_show">
-												<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
-													<ul id="hide_ul" style="display:none;">
-														<li>
-															<form>
-																<table class="table">
-																	<tr>
-																		<td>基地名： <select name="bname" id="bnameUnion">
-																				<option value="" id="selectallbase">显示全部</option>
 
-																		</select>
-																		</td>
+						<table id="table2" class="cell-border" cellspacing="0"
+							width="100%">
+							<thead>
+								<tr bgcolor="#ECF1F5">
+									<td colspan="1">处理结果</td>
+									<td colspan="6">
+										<!--筛选<span class="glyphicon glyphicon-sort-by-attributes"> </td>-->
+										<ul id="dropdown_show">
+											<li><span class="icon-filter" onClick="showsubmenu()">筛选</span>
+												<ul id="hide_ul" style="display:none;">
+													<li>
+														<form>
+															<table class="table">
+																<tr>
+																	<td>基地名： <select name="bname" id="bnameUnion">
+																			<option value="" id="selectallbase">显示全部</option>
 
-																		<!-- <td>起止年份： <select name="startTime"
+																	</select>
+																	</td>
+
+																	<!-- <td>起止年份： <select name="startTime"
 																			id="startTimeUnion">
 																				<option value="">请选择</option>
 																				<option value="2015">2015</option>
@@ -584,44 +605,44 @@
 																		</select>年
 																		</td> -->
 
-																		<td colspan="2">最终状态 <select name="desc" id="descUnion"
-																			size="1">
-																				<option value="-1">显示全部</option>
-																				<option value="0">申请成功</option>
-																				<option value="1">申请失败</option>
-																		</select>
-																		</td>
-																	</tr>
+																	<td colspan="2">最终状态 <select name="desc"
+																		id="descUnion" size="1">
+																			<option value="-1">显示全部</option>
+																			<option value="0">申请成功</option>
+																			<option value="1">申请失败</option>
+																	</select>
+																	</td>
+																</tr>
 
-																	<tr>
-																		<td colspan="2">
-																			<button type="reset" class="btn btn-primary">重置</button>
-																			<button onClick="unionSelect()" type="button"
-																				class="btn btn-primary">完成</button>
-																		</td>
-																	</tr>
-																</table>
-															</form>
-														</li>
-													</ul></li>
-											</ul>
-									</tr>
-									<tr style="background:#eeeff4">
+																<tr>
+																	<td colspan="2">
+																		<button type="reset" class="btn btn-primary">重置</button>
+																		<button onClick="unionSelect()" type="button"
+																			class="btn btn-primary">完成</button>
+																	</td>
+																</tr>
+															</table>
+														</form>
+													</li>
+												</ul></li>
+										</ul>
+								</tr>
+								<tr style="background:#eeeff4">
 
-										<th>开始日期</th>
-										<th>结束日期</th>
-										<th>基地名</th>
-										<th>土地名称</th>
-										<th>土地编号</th>
-										<th>最终状态期</th>
-										<th>详情</th>
-									</tr>
-								</thead>
-								<tbody>
+									<th>开始日期</th>
+									<th>结束日期</th>
+									<th>基地名</th>
+									<th>土地名称</th>
+									<th>土地编号</th>
+									<th>最终状态期</th>
+									<th>详情</th>
+								</tr>
+							</thead>
+							<tbody>
 
-								</tbody>
-							</table>
-						</div>
+							</tbody>
+						</table>
+
 					</div>
 					<!--弹出框2-->
 					<div class="modal fade" id="scan" tabindex="-1" role="dialog"
@@ -629,11 +650,12 @@
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#4D719B 8px solid">
 								<div class="modal-header" style="background:#4D719B; color:#FFF">
-									
-										
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" onclick="closeScan2()"></div>
-										
-									
+
+
+									<div class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal" onclick="closeScan2()"></div>
+
+
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -642,7 +664,7 @@
 											<td>基地名 ：</td>
 											<td><input type="text" id="bname" readonly="readonly"></td>
 											<td>租赁人 ：</td>
-											<td><input type="text" id="name"></td>
+											<td><input type="text" id="name" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<td>土地名称 ：</td>
@@ -677,12 +699,11 @@
 										</tr>
 									</table>
 								</div>
-								<div class="modal-footer table-responsive"
-									>
-									<center  id="scanModal" style="display:none;">
-									<span>	失败原因：<input type="text" id="reason2" readonly></span>
+								<div class="modal-footer table-responsive">
+									<center id="scanModal" style="display:none;">
+										<span> 失败原因：<input type="text" id="reason2" readonly></span>
 
-									<%-- </center>申请材料：<a id="source" href="#">点击查看</a> --%>
+										<%-- </center>申请材料：<a id="source" href="#">点击查看</a> --%>
 								</div>
 
 							</div>
@@ -716,7 +737,7 @@
 <!--datatable javascript-->
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/bootbox.min.js"></script>
- <script src="../dist/jquery.cokie.min.js"></script>
- <script src="../js/myNeed/myRent.js"></script>
+<script src="../dist/jquery.cokie.min.js"></script>
+<script src="../js/myNeed/myRent.js"></script>
 <script src="../js/kg.js"></script>
 </html>

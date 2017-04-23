@@ -6,40 +6,49 @@ import com.base.po.ApplyDept;
 import com.base.po.Major;
 import com.base.po.basetype;
 
+//实习基地申请的数据交互层
 public interface baseApplyDao {
 
-    /**
-     * 得到对应部门
-     * @param type 基地类型
-     * @return
-     */
+	/*
+	  参数说明：type,字符串型，为部门类型	          
+	 返回值：    List<ApplyDept>，为ApplyDept对象的集合
+	 函数功能： 根据部门类型获取部门
+	  */
     public List<ApplyDept> getDept(int type);
-    /**
-     * 获取基地类型
-     * @return
-     */
+    
+    /*
+	  参数说明：无参数值          
+	 返回值：    List<basetype>，为basetype对象的集合
+	 函数功能：获取基地类型
+	  */
     public  List<basetype> getBasetype();
-    /**
-     * 获取学院对应的专业
-     * @param aid 学院id
-     * @return
-     */
+    
+    /*
+	  参数说明：aid，整型，为学院编号      
+	 返回值：    List<Major>，为Major对象的集合
+	 函数功能：根据学院编号获取专业
+	  */
     public List<Major> getMajor(int aid);
-    /**
-     * 插入用户基地申请信息
-     * @param str1 基地名称id 申报部门id 基地类型id等的string字符串
-     * @param str2 (基地id,专业id)
-     */
-    public void getRequestBaseInfo(String str1,String str2);
-    /**
-     * 
-     * @param name 用户输入的名称
-     * @return 0-false 1-true
-     */
+    
+    /*
+	  参数说明：str1, 字符串型，为('基地编号','专业编号')的封装;str2,字符串型，为实习基地申请的信息;
+	          info,字符串型，为要发送的消息 
+	 返回值：    无返回值
+	 函数功能：插入实习基地申请
+	 */
+    public String getRequestBaseInfo(String str1,String str2);
+    
+    /*
+	  参数说明：name,为实习基地的名称   
+	 返回值：   int型，标志是否存在该基地名字
+	 函数功能：判断是否存在该实习基地名称
+	 */
     public int CheckName(String name);
-    /**封装消息的方法
-     * 发送消息
-     * @param sql 插入封装好的sql语句
-     */
+    
+    /*
+	  参数说明：sql,为消息的封装  
+	 返回值：   无返回值
+	 函数功能：插入消息
+	 */
     public void insertMessage(String sql);
 }

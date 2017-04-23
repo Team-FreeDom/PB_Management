@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/fieldrent_maintain.css">
+<link rel="stylesheet" href="../css/calendar.css" media="screen">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -44,19 +45,17 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs">
-					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
-                              <!--ms-if-->
-                      </a>
-						<!-- <ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
+						class="dropdown-toggle notification-icon"> <i
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a> <!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;">
                                 <a href="getMessage.do"><strong>未读消息列表</strong></a>
                             </li>
@@ -85,8 +84,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="#" target="_blank"><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -95,8 +93,8 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
-											src="" id="imageMain"></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -107,54 +105,77 @@
 								<div class="divider2"></div>
 
 
-								<li class="menuItem">
-								<a href="index.do">
-								<i	class="icon-home" aria-hidden="true"></i><span>主界面</span>
+								<li class="menuItem"><a href="index.do"> <i
+										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
 								<li class="menuItem nav-parent"><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-										
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+								<li class="menuItem nav-parent"
+									${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-										
-										<li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-										<li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a
+											href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 
-									</ul></li>
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a
+											href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a
+											href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a>
-										<i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+									</ul>
+								</li>
+
+								<li class="menuItem nav-parent opened nav-expanded"
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                            <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul></li>
-								<li class="menuItem nav-parent"><a> <i
+										<li ${visitRight[3]==0?"style='display:none;'":" "}><a
+											href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+										<li ${visitRight[4]==0?"style='display:none;'":" "}><a
+											href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+										<li ${visitRight[6]==0?"style='display:none;'":" "}><a
+											href="fieldRent_maintain.jsp"><span class="text">
+													土地租赁维护</span></a></li>
+										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
+											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
+											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
+											href="practicePlanMaintain.jsp"><span class="text">
+													实习计划维护</span></a></li>
+										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
+										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
+											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
+											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a><span class="text">租赁统计</span></a></li>
-										<li><a><span class="text">实习分析</span></a></li>
-										<li><a><span class="text">实习基地统计</span></a></li>
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+
 									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 
 							</ul>
 						</nav>
@@ -182,13 +203,14 @@
 						</ol>
 					</div>
 					<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
-							</ol>
-						</div>
+						</ol>
+					</div>
+
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
@@ -199,7 +221,7 @@
 								cellspacing="0" width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
-
+                                        <td hidden id="deleId">${str}</td>                                     
 										<td colspan="5">
 											<ul class="dropdown_show">
 												<li><span style="color:#24354a" class="icon-filter"
@@ -243,22 +265,19 @@
 											</ul>
 										</td>
 										<td colspan="4">
-											<!-- <button type="button" class="btn btn-info button_style"
-												data-toggle="modal" data-target="#myModalAdd">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button> -->
+											
 										</td>
 										<td colspan="2">
 											<button type="button" class="btn btn-danger"
 												onClick="deleteInfo()">删除</button>
-											<button type="button" class="btn btn-primary"
+											<button type="button" class="btn btn-primary" id="daolead"
 												data-toggle="modal" data-target="#lead">导出</button>
 										</td>
 
 									</tr>
 									<tr style="background:#eeeff4" width="100%">
 										<th><label><input type="checkbox" name="0"
-												class="ck-all" /></label></th>
+												id="ck1" class="ck-all" /></label></th>
 										<th>开始日期</th>
 										<th>结束日期</th>
 										<th>基地名</th>
@@ -279,15 +298,16 @@
 							</table>
 						</form>
 					</div>
-					<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<form action="landManageUpdate.do" method="post"
+					<div class="modal fade" id="myModalEdit" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<form method="post"
 							id="landManageUpdate">
 							<div class="modal-dialog">
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<div class="glyphicon glyphicon-remove closeModal"
+											data-dismiss="modal"></div>
 										<h4 class="modal-title text-center" id="myModalLabel">详情及修改</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -347,9 +367,11 @@
 
 											<tr>
 												<td>使用年限 :</td>
-												<td><input type="text" name="startTime" id="startTime"></td>
+												<td><input type="text" name="startTime" id="startTime"
+													class="laydate-icon"></td>
 												<td>-----------</td>
-												<td><input type="text" name="endTime" id="endTime"></td>
+												<td><input type="text" name="endTime" id="endTime"
+													class="laydate-icon"></td>
 											</tr>
 										</table>
 									</div>
@@ -367,66 +389,69 @@
 
 					<div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
-						<form action="landManageAdd.do" method="post" id="landManageAdd" onSubmit="return checkA()">
-						<div class="modal-dialog">
-							<div class="modal-content" style="border:#3071a9 8px solid">
-								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
-									<h4 class="modal-title text-center" id="myModalLabel">租赁记录增加</h4>
-								</div>
-								<div class="modal-body table-responsive">
-									<table class="table">
-										<tr>
-											<td>土地编号 ：</td>
-											<td><input type="text" name="addLid" id="addLid"></td>
-											<td>租赁人编号：</td>
-											<td><input type="text" name="addUserid" id="addUserid"></td>
+						<form action="landManageAdd.do" method="post" id="landManageAdd"
+							onSubmit="return checkA()">
+							<div class="modal-dialog">
+								<div class="modal-content" style="border:#3071a9 8px solid">
+									<div class="modal-header"
+										style="background:#3071a9; color:#FFF">
+										<div class="glyphicon glyphicon-remove closeModal"
+											data-dismiss="modal"></div>
+										<h4 class="modal-title text-center" id="myModalLabel">租赁记录增加</h4>
+									</div>
+									<div class="modal-body table-responsive">
+										<table class="table">
+											<tr>
+												<td>土地编号 ：</td>
+												<td><input type="text" name="addLid" id="addLid"></td>
+												<td>租赁人编号：</td>
+												<td><input type="text" name="addUserid" id="addUserid"></td>
 
-										</tr>
-										<tr>
-											<td>申报部门：</td>
-											<td><select name="addDept" id="addDept">
-												  <option value="" id="addDepth"/>请选择</option>
-												</select>
-											</td>
-											<td>从事内容 ：</td>
-											<td><input type="text" name="addPlanting" id="addPlanting"/></td>
-										</tr>
-                                        <tr>
-											<td>使用年限 :</td>
-											<td><input type="text" name="addStartTime"
-												id="addStartTime"/>
-											</td>
-											<td>--------</td>
-											<td><input type="text" name="addEndTime"
-												id="addEndTime"/></td>
-										</tr>
-										<tr>
-											<td>交费日期 ：</td>
-											<td><input type="text" name="addChargeDate"
-												id="addChargeDate"/>
-											</td>
-											<td>租赁费用 ：</td>
-											<td><input type="text" name="addExpense" id="addExpense"/></td>
+											</tr>
+											<tr>
+												<td>申报部门：</td>
+												<td><select name="addDept" id="addDept">
+														<option value="" id="addDepth" />请选择
+														</option>
+												</select></td>
+												<td>从事内容 ：</td>
+												<td><input type="text" name="addPlanting"
+													id="addPlanting" /></td>
+											</tr>
+											<tr>
+												<td>使用年限 :</td>
+												<td><input type="text" name="addStartTime"
+													id="addStartTime" /></td>
+												<td>--------</td>
+												<td><input type="text" name="addEndTime"
+													id="addEndTime" /></td>
+											</tr>
+											<tr>
+												<td>交费日期 ：</td>
+												<td><input type="text" name="addChargeDate"
+													id="addChargeDate" /></td>
+												<td>租赁费用 ：</td>
+												<td><input type="text" name="addExpense"
+													id="addExpense" /></td>
 
 
-										</tr>
+											</tr>
 
 
-									</table>
-								</div>
-								<div class="modal-footer table-responsive">
-									<center>
-										<button type="button" class="btn btn-primary" id="add">确定</button>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">取消</button>
-									</center>
+										</table>
+									</div>
+									<div class="modal-footer table-responsive">
+										<center>
+											<button type="button" class="btn btn-primary" id="add">确定</button>
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">取消</button>
+										</center>
+									</div>
 								</div>
 							</div>
-						</div>
 						</form>
 
-				</div>
+					</div>
 
 				</div>
 			</div>
@@ -438,7 +463,8 @@
 				<div class="modal-dialog modal-sm">
 					<div class="modal-content" style="border:#3071a9 8px solid">
 						<div class="modal-header" style="background:#3071a9; color:#FFF">
-							<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+							<div class="glyphicon glyphicon-remove closeModal"
+								data-dismiss="modal"></div>
 							<h4 class="modal-title" id="myModalLabel">请选择导出的部门</h4>
 						</div>
 						<form action="exportLandRentInfo.do" method="post"
@@ -472,8 +498,18 @@
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.dataTables.min.js"></script>
 <script src="../js/bootbox.min.js"></script>
+<script type="text/javascript" src="../js/laydate.js"></script>
 <script src="../js/myNeed/rentMaintain.js"></script>
- <script src="../dist/jquery.cokie.min.js"></script>
+<script src="../dist/jquery.cokie.min.js"></script>
 <script src="../js/kg.js"></script>
+<script>
+	laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
+	laydate({
+		elem : '#startTime'
+	})
+	laydate({
+		elem : '#endTime'
+	});
+</script>
 
 </html>

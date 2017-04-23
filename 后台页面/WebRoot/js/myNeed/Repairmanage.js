@@ -1,16 +1,31 @@
 // JavaScript Document
-var obj=[];			
+var obj=[];
+var flag1=true;
+var flag2=true;
 $(document).ready(function() {
 				//分页表格 
+	var exportMaintain=$("#exportMaintain").text();
+	if(exportMaintain=="0"){
+		bootbox.alert({
+			message : "没有可导出的数据",
+			size : 'small'
+		});
+	}else if(exportMaintain=="500"){
+		bootbox.alert({
+			message : "导出失败",
+			size : 'small'
+		});
+	}
+	
               var applytable =$('#Repairmanage').DataTable(
 			  {
 				  "processing": true,
         		  "serverSide": true,
 				  "bSort": false,
 				  "ordering":true,
-				  "aLengthMenu":[ 5, 10, 15, 20 ], //动态指定分页后每页显示的记录数。
+				  "aLengthMenu":[ 5, 10, 20, 30 ], //动态指定分页后每页显示的记录数。
 					"lengthChange":true, //是否启用改变每页显示多少条数据的控件
-					"iDisplayLength" : 5,  //默认每页显示多少条记录
+					"iDisplayLength" : 10,  //默认每页显示多少条记录
 					"bfilter":true,
 					"dom":'ftipr<"bottom"l>',
 					"ajax" : {
@@ -114,38 +129,33 @@ $(document).ready(function() {
 					   }
                     }
 					  });
+              
+              //基地列表
+              $.ajax({
+  				type : 'POST',
+  				dataType : 'json',
+  				url : 'baseNeiName.do',
+  				async : false,
+  				cache : false,
+  				error : function(request) {
+  					bootbox.alert({
+  	     			  message: "请求异常",
+  	     			  size: 'small'
+  	     		  });
+  				},
+  				success : function(data) {
+  					 for (var i=0;i<data.length;i++) { 					
+  										$("#AbasenameID").after(
+  										"<option value="+data[i].id+">"
+  												+ data[i].name + "</option>");
+  								
+  				
+
+  	 }
+  				}
+  			}); 
 					  
-	  //获取基地列表
-        $.ajax({
- 			type : 'POST',
- 			dataType : 'json',
- 			url : 'basename.do',
- 			async : false,
- 			cache : false,
- 			error : function(request) {
- 				bootbox.alert({
-         			  message: "请求异常",
-         			  size: 'small'
-         		  });
- 			},
- 			success : function(data) {
- 				 for (var i=0;i<data[0].length;i++) { 					
- 									$("#AbasenameID").after(
- 				 							"<option class='rest' value="+data[0][i].id+">"
- 				 									+data[0][i].name+"</option>");
-												
-
- 				 }
- 				 for (var i=0;i<data[1].length;i++) { 					
-						
-										$("#SbasenameID").after(
-											"<option class='rest' value="+data[1][i].name+">"
-													+data[1][i].name+"</option>");
-
-	 }
- 			}
- 		}); 
-		
+	 
 					//删除操作	 
 					var flag=0;
 					$('#delete').click(function() {
@@ -221,7 +231,9 @@ $("#ZJ").click(function(){
 		$("#Abudget").val("");
 		$("#Aaddress").val("");
 		$("#Areason").val("");
-		$("#file").val("");
+		$("#file").val("");	
+		
+
 })					
 //增加操作
 $("#save").click(function(){
@@ -241,7 +253,7 @@ $("#save").click(function(){
 		}					
 		else if($("#Aname").val()==""){
 				bootbox.alert({
-				message : "请填写申报人姓名",
+				message : "请填写报修人",
 				size : 'small'
 				});	
 				return;
@@ -288,6 +300,20 @@ $("#save").click(function(){
 		if (!dataFormatWeek.exec(value2)) {
 			bootbox.alert({
 				message : "实际金额的格式不对，只能输入数字",
+				size : 'small'
+			});
+			return;
+		}
+		if(!flag1){
+			bootbox.alert({
+				message : "请上传正确的文件格式",
+				size : 'small'
+			});
+			return;
+		}
+		if(!flag2){
+			bootbox.alert({
+				message : "上传的文件文件太大",
 				size : 'small'
 			});
 			return;
@@ -346,9 +372,9 @@ $('.file').change(function() {
     var size = file_size / 1024;
     var extStart = filepath.lastIndexOf(".");
     var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-    if (ext != ".RAR" && ext != ".Z") {
+    if (ext != ".RAR" && ext != ".ZIP") {
         bootbox.alert({
-            message: "上传资料仅限于rar压缩包格式ʽ",
+            message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
         flag1=false;
@@ -387,50 +413,61 @@ $("#import").click(function (){//每次点击导出是清空数据
 		type : 'post',
 		dataType : 'json',		
 		success : function(data) {
-			$(".removeThis").remove();
-			 for (var i=0;i<data.list.length;i++) {
-			$("#yearId").after("<option class='removeThis' value='"+data.list[i]+"'>"+data.list[i]+"</option>");
+			$("#year option:gt(0)").remove();
+			$("#Sbasename option:gt(0)").remove();
+			for (var i=0;i<data.list[0].length;i++) {
+			   $("#yearId").after("<option value='"+data.list[0][i]+"'>"+data.list[0][i]+"</option>");
 			 }
+			 for (var i=0;i<data.list[1].length;i++) { 					
+					$("#SbasenameID").after(
+					"<option value="+data.list[1][i]+">"
+							+ data.list[1][i] + "</option>");
+			
+
+
+                }
 		}
 	});
+	
 	});	
-					 					 					
-});
 
 $("#export").click(function(){
 	$("#exportmodal").modal('hide');
 });
 
-function getInfo(){
-	$(".rest").remove();
-	 //获取基地列表
-    $.ajax({
-			type : 'POST',
-			dataType : 'json',
-			url : 'basename.do',
-			async : false,
-			cache : false,
-			error : function(request) {
-				bootbox.alert({
-     			  message: "请求异常",
-     			  size: 'small'
-     		  });
-			},
-			success : function(data) {
-				 for (var i=0;i<data[0].length;i++) { 					
-									$("#AbasenameID").after(
-				 							"<option class='rest' value="+data[0][i].id+">"
-				 									+data[0][i].name+"</option>");
-											
+$("#year").change(function(){
+	
+	var year=$("#year").val();
+	
+	$("#Sbasename").find("option:gt(0)").remove();
+		$.ajax({
+				type : 'POST',
+				dataType : 'json',
+				url : 'basename.do',
+				data:{"year":year},
+				async : false,
+				cache : false,
+				error : function(request) {
+					bootbox.alert({
+	     			  message: "请求异常",
+	     			  size: 'small'
+	     		  });
+				},
+				success : function(data) {
+					 for (var i=0;i<data.length;i++) { 					
+										$("#SbasenameID").after(
+										"<option value="+data[i]+">"
+												+ data[i] + "</option>");
+								
+				
 
-				 }
-				 for (var i=0;i<data[1].length;i++) { 					
-					
-									$("#SbasenameID").after(
-										"<option class='rest' value="+data[1][i].name+">"
-												+data[1][i].name+"</option>");
+	         }
+				}
+			}); 
+	
+});
+					 					 					
+});
 
- }
-			}
-		}); 
-}
+
+

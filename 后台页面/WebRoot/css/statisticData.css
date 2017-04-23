@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* CSS Document */
+table thead > tr> td{
+	font-size:16px;
+	background: -moz-linear-gradient(top, #e7eef3 0%, #cedee8 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e7eef3), color-stop(100%,#cedee8));
+    background: -webkit-linear-gradient(top, #000000 0%,#cedee8 100%);
+    background: -o-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: -ms-linear-gradient(top, #e7eef3 0%,#cedee8 100%);
+    background: linear-gradient(to bottom, #e7eef3 0%,#cedee8 100%);
+	}
+
+table thead tr th{
+	text-align:center;
+}
+table tbody tr td{
+	text-align:center;
+	cursor: pointer;
+}
+
+#Applychart{
+	position:fixed !important;
+	top:187px;
+	left:19%;
+	width: 80%;
+	display: none;
+}
+#modalcontent{
+	margin-top: 20%;
+}
+#modalcontent2{
+	margin-top: 20%;
+}
+.noborder{
+	border: none;
+	width: 120px;
+}
+
+#grade{
+	border: none;
+	width: 40px;
+}
+#number{
+	border: none;
+	width: 40px;
+}
+#weeks{
+	border: none;
+	width: 40px;
+}
+#practiceapplytable span{
+	cursor:pointer;
+	font-size:18px;
+	color:#24354a;}
+
+.inputWidth{
+	width: 80px;
+}
+#Leaderteacher{
+	width: 100%;
+}
+#adviser{
+	width: 100%;
+}
+#testername{
+	width: 80%;
+	float: left;
+}
+.buttonWidth{
+	margin-left: 5px;
+}
+.bottom{
+	margin-top:10px;
+	}
+.dataTables_length{
+	margin-left:5%;}
+
+.selectWidth{
+	width:12%;
+	float: left;
+	margin-right: 20px;
+}
+#delateTester{
+	color: #F5060A;
+	text-decoration: underline;
+	cursor: pointer;
+}
+#delatename{
+	color: #F5060A;
+	text-decoration: underline;
+	cursor: pointer;
+}
+/*input[type=date] {
+     line-height: 20px !important; 
+}*/
+#table{
+	width:100%;
+}
+#table tr{
+	line-height: 30px;
+}
+#table tbody td{
+	padding:0px 3px;
+}
+#table input{
+	line-height: 23px !important;
+}
+#table select{
+	line-height: 23px !important;
+	width: 100%;
+}
+.spanstyle{
+	font-size: 10px;
+	line-height: 15px;
+}
+.starColor{
+	color: #F70004;
+}
+.padding{
+	margin-left: 15px !important;
+}
+.deleteID{
+	color:#F90409;
+	text-decoration: underline;
+}
+.input-group-addon{
+	color: #fff;
+	background-color: #3071a9 !important;
+}
+#dropdown_show li{
+	position:relative;
+	list-style:none;
+	}
+#dropdown_show ul li{
+	list-style:none;
+	position:absolute;
+	top:35px;
+	left:0px;
+	width:100%;
+	}	
+#dropdown_show ul li table tr td{
+	color:#000;
+	font-size:14px;
+	background:#d6dfe9;
+	border:none !important;
+	text-align:left;
+	padding-left:13%;
+	}
+#dropdown_show li span{
+	cursor:pointer;
+	}
+#baseFrom{
+	width:86px;
+}
+#category{
+	width:95px;
+}
+#practiceClass{
+	width:93px;
+}
+

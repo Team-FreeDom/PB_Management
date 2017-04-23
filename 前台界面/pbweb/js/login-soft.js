@@ -1,7 +1,7 @@
 var Login = function () {
 
 
-    var handleUniform = function () {
+    /*var handleUniform = function () {
         if (!jQuery().uniform) {
             return;
         }
@@ -14,7 +14,7 @@ var Login = function () {
                 }
             });
         }
-    }
+    }*/
 
 	var handleLogin = function() {
 		$('.login-form').validate({
@@ -80,15 +80,12 @@ var Login = function () {
         init: function () {
         	
             handleLogin();
-			handleUniform();
+			//handleUniform();
 	       	$.backstretch([
-				"image/bg/1.jpg",
-				"image/bg/2.jpg",
+				//"image/bg/1.jpg",
+				//"image/bg/2.jpg",
 				"image/bg/3.jpg"
-		        ], {
-		          fade: 1000,
-		          duration: 4000
-		    });
+		        ]);
         }
 
     };

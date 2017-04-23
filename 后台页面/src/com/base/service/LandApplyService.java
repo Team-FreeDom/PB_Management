@@ -20,13 +20,6 @@ public interface LandApplyService {
 	public List<BaseInfo> getBaseInfos();
 
 	/*
-	   参数说明：bid,整型，表示基地编号
-	   返回值：   List<LandInfo>,为土地管理LandInfo对象的集合
-	   函数功能：查询土地布局信息
-	 */
-	public List<LandLayout> getLandLayout(int bid); 
-	
-	/*
 	   参数说明：lid,整型，表示土地编号
 	   返回值：   LandInfo,为土地管理LandInfo对象
 	   函数功能：查询土地信息

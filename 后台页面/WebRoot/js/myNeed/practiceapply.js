@@ -7,10 +7,23 @@ var str = null;
 var writeName="";
 var showName="";
 var teacherString=[];
-
+var majorString=[];
 
 
 $(document).ready(function() {	
+	
+	var exportPlanFlag=$("#exportPlanFlag").text();
+	if(exportPlanFlag=="0"){
+		bootbox.alert({
+			message : "没有可导出的数据",
+			size : 'small'
+		});
+	}else if(exportPlanFlag=="500"){
+		bootbox.alert({
+			message : "导出失败",
+			size : 'small'
+		});
+	}
 	
 	$('[data-toggle="tooltip"]').tooltip();
 	
@@ -41,6 +54,7 @@ $(document).ready(function() {
 	 $.ajax({
 			url : 'Checkinfo.do',
 			type : 'post',
+			async: false,
 			dataType : 'json',
 		success : function(msg){
 			if(msg.msg==0){				
@@ -148,16 +162,12 @@ $(document).ready(function() {
 					   				"mData" : "checkMethod",//考核
 					   				"orderable" : false,
 					   				"sDefaultContent" : "",
-					   			},
-								{
-									"mData" : "id",//考核
-									"orderable" : false,
-									"sDefaultContent" : "",
-									"render" : function(data,type,row){
+					   				"render" : function(data,type,row){
 										obj.push(row);
-										return '<span id='+(obj.length-1)+'></span>';
+										return '<span class="spanstly" id='+(obj.length-1)+'>'+data+'</span>';
 									}
-								}
+					   			},
+								
 						
 					],
 			        "language": {
@@ -175,7 +185,9 @@ $(document).ready(function() {
 							}
 			         }
 				});
+				$("#daoru_daochu").show();
 			}else{
+				$("#daoru_daochu").hide();
 				bootbox.alert({
 				message : msg.msg,
 				size : 'small'
@@ -184,60 +196,111 @@ $(document).ready(function() {
 		}
 		});
 	 
-	
+	 
+	$("#exportConfirm").click(function(){
+		$("#export").modal('hide');
+	});	
 	 
 	
 //显示实习申请表
-	 var tbodyStyle='<tbody class="tbodyID"><tr>'
-							+'<td>序号</td>'
-							+'<td>周次<span class="starColor">*</span></td>'
-							+'<td>开始时间<span class="starColor">*</span></td>'
-							+'<td>结束时间<span class="starColor">*</span></td>'
-							+'<td>实习内容<span class="starColor">*</span></td>'
-							+'<td>实习基地来源<span class="starColor">*</span></td>'
-							+'<td>实习地点<span class="starColor">*</span></td>'
-							+'<td>实习类别<span class="starColor">*</span></td>'
-							+'<td>备注</td>'
-							+'<td>操作</td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td rowspan="3"><sapn class="mark"></span></td>'
-						 +'<td><input id="weekend" type="text" class="text-center inputWidth flag"></td>'
-						 +'<td><input id="startweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
-						 +'<td><input id="endweek" name="control_date" type="text" size="10" maxlength="10" onClick="new Calendar().show(this);" readonly="readonly" class="flag"></td>'
-						 +'<td><input id="content" type="text" class="inputWidth flag"></td>'
-						 +'<td><select name="" id="baseFrom" class="flag"><option value="">请选择</option><option value="校内基地">校内基地</option><option value="校外基地">校外基地</option></select></td>'
-						 +'<td id="practicePlace"><select id="schoolBase" hidden style="width:150px;"><option id="schoolBaseID" value="">请选择</option></select><select id="outBase" hidden style="width:150px;"><option id="outBaseId" value="">请选择</option></select><a class="btn btn-primary" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
-						 +'<td><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
-						 +'<td><input id="remark" type="text" class="flag"></td>'
-						 +'<td rowspan="3"><span class="deleteID" id="">删除</span></td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td>实习形式<span class="starColor">*</span></td>'
-						 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
-						 +'<td>目的<span class="starColor">*</span></td>'
-						 +'<td>实习经费预算</td>'
-						 +'<td colspan="4">指导老师/实验员<span class="starColor">*</span></td>'
-						 +'</tr>'
-						 +'<tr>'
-						 +'<td><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
-						 +'<td><input id="phone" type="text" class="flag"></td>'
-						 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
-						 +'<td><input id="budget" type="text" class="inputWidth flag"></td>'
-						 +'<td colspan="4"><form class="form-inline"><div class="form-group"><div class="input-group"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div><div class="form-group padding"><div class="input-group"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'						 
-						 +'</tr></tbody>';
+	var tbodyStyle='<tbody class="tbodyID"><tr style="background:#3071a9; color:#FFF">'
+		+'<td>序号</td>'
+		+'<td>周次<span class="starColor">*</span></td>'
+		+'<td>班级<span class="starColor">*</span></td>'
+		+'<td>开始时间<span class="starColor">*</span></td>'
+		+'<td>结束时间<span class="starColor">*</span></td>'							
+		+'<td>实习基地来源<span class="starColor">*</span></td>'
+		+'<td>实习地点<span class="starColor">*</span></td>'
+		+'<td>实习类别<span class="starColor">*</span></td>'
+		+'<td>实习形式<span class="starColor">*</span></td>'
+		+'<td>备注</td>'
+		+'<td>操作</td>'
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td rowspan="5"><sapn class="mark"></span></td>'
+	 +'<td style="padding-top:5px"><select id="weekend" type="text" class="text-center  flag"><option value="" id="weekend_option">请选择</select></td>'
+	 +'<td style="padding-top:5px"><select id="class_one" type="text" class="text-center flag"><option value="" id="class_one_option">请选择</select></td>'
+	 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
+	 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
+	 
+	 +'<td style="padding-top:5px"><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
+	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
+	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
+	 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
+	 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
+	 +'<td rowspan="5"><span class="deleteID" id="">删除</span></td>'
+	 +'</tr>'
+	 +'<tr style="color:#3071a9;font-weight:bolder;">'
+	 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
+	 +'<td>目的<span class="starColor">*</span></td>'
+	 +'<td>实习经费预算</td>'
+	 +'<td colspan="6">实习内容<span class="starColor">*</span></td>'
+	 
+	 +'</tr>'
+	 +'<tr>'
+	 
+	 +'<td><input id="phone" type="text" class="flag"></td>'
+	 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
+	 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
+	 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
+	 +'</tr>'
+	 +'<tr style="color:#3071a9;font-weight:bolder;">'
+	 +'<td colspan="3">面向专业<span class="starColor">*</span></td>'
+	 +'<td colspan="3">实验员<span class="starColor">*</span></td>'
+	 +'<td colspan="3">指导老师<span class="starColor">*</span></td>'
+	 +'</tr>'
+	 +'<tr>'
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="facemajoy" placeholder="面向专业"><div class="input-group-addon choice3">选择</div></div></div></form></td>'
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="tes" placeholder="实验员"><div class="input-group-addon choice">选择</div></div></div></form></td>'
+	 +'<td style="padding-bottom:15px" colspan="3"><form class="form-inline"><div class="Iwidth"><div class="input-group Iwidth"><input readonly type="text" class="form-control" id="Tea" placeholder="指导老师"><div class="input-group-addon choice2">选择</div></div></div></form></td>'						 
+	 +'</tr></tbody>';
 	
 $("#practiceapplytable tbody").on("click","tr",function(){
-	
+	$("#modalbody").removeClass("modalbody");	
+	$("#modalbody").removeClass("modalbody2");
+	$("#modalbody").removeClass("modalbody3");
 	Oneindex= $(this).find("span").attr("id");
+	$("#weekend option:gt(0)").remove();//移除周次select的原来的option
 	$("#division").val(obj[Oneindex].college);
 	$("#classname").val(obj[Oneindex].coursename);
 	$("#major").val(obj[Oneindex].major_oriented);
+	$("#fromweek").val(obj[Oneindex].week);
 	$("#class").val(obj[Oneindex].composition);
 	$("#grade").val(obj[Oneindex].credit);
 	$("#number").val(obj[Oneindex].count);
 	$("#weeks").val(obj[Oneindex].weekClassify);
-	$("#leaderTeacher").val(obj[Oneindex].tname);
+	$("#leaderTeacher").val(obj[Oneindex].tname);	
+	
+	majorString=[];//将面向专业的全局变量清空
+	teacherString=[];//将指导老师的全局变量清空
+	value=[];//将实验员的全局变量清空
+	
+	//获得周次的数组
+	var fromweek=obj[Oneindex].week;
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
+	$.unique(data_week.sort(sortNumber));
+	
+	//获得班级的数组
+	var composition=obj[Oneindex].composition;
+	var data_composition=composition.split(',');
+	$.unique(data_composition.sort(sortNumber));
+	
 	
 	$.ajax({
 		url:'getplandata.do',
@@ -249,16 +312,28 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 		success:function(data){	
 			var teachername="";
 			var testername="";
+			var majorname="";
 			for(var i=0;i<data.length;i++){
 				$("#table tbody:last-child").after(tbodyStyle);
+				for(var week in data_week){
+					$("#table tbody:last-child").find("#weekend_option").after(
+							"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
+							);
+				}	
+				for(var composition_0 in data_composition){
+					$("#table tbody:last-child").find("#class_one_option").after(
+							"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
+							);
+				}	
 				$.ajax({
 					type : 'POST',
 					dataType : 'json',		
-					url : 'getPlanAim.do',  
+					url : 'getBasenameOfType.do',  
 					async : false,
 					cache : false,
 					data:{
-						"mid":obj[Oneindex].mid
+						"mid":obj[Oneindex].tid,
+						"typename":data[i].source
 					},
 					error : function(request) {
 						bootbox.alert({
@@ -266,28 +341,32 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 							size : 'small'
 						});
 					},
-					success : function(data){
+					success : function(date){
 						
-						for(var j=0;j<data[0].length;j++){//获取校内基地的实习地点下拉框
+						for(var i=0;i<date[0].length;i++){//获取基地类型
+							$("#table tbody:last-child").find("#baseForm").after(
+							"<option class='rest' value="+date[0][i].name+">"+ date[0][i].name+ "</option>"
+							);
+						}
+						for(var j=0;j<date[1].length;j++){//获取基地名字
 							$("#table tbody:last-child").find("#schoolBaseID").after(
-							"<option class='rest' value="+data[0][j]+">"+ data[0][j] + "</option>"
+							"<option class='rest' value="+date[1][j]+">"+ date[1][j] + "</option>"
 							);
 						}
-						for(var j=0;j<data[2].length;j++){//获取校外基地的实习地点下拉框
-							$("#table tbody:last-child").find("#outBaseId").after(
-							"<option class='rest' value="+data[2][j]+">"+ data[2][j]+ "</option>"
-							);
-						}
-						for(j=0;j<data[1].length;j++){//获取实习目的下拉框
+						
+						for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
-									"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
+									"<option class='rest' id="+date[2][t].id+" value="+date[2][t].aim+" data-placement='top' data-toggle='tooltip' title='"+date[2][t].aim+"'>"+ (date[2][t].aim.length>20?date[2][t].aim.substring(0,20)+"...":date[2][t].aim )+ "</option>"
 
 							);
 						}
+						
+						
 					}
 				});
 				$("#table tbody:last-child").find(".mark").html(i+1);
 				$("#table tbody:last-child").find("#weekend").val(data[i].week);
+				$("#table tbody:last-child").find("#class_one").val(data[i].grade);//班级
 				$("#table tbody:last-child").find("#startweek").val(data[i].starttime);
 				$("#table tbody:last-child").find("#endweek").val(data[i].endtime);
 				$("#table tbody:last-child").find("#content").val(data[i].content);
@@ -298,38 +377,39 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				
 				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 				$("#table tbody:last-child").find("#aim").val(data[i].aim);
-				$("#table tbody:last-child").find("#budget").val(data[i].expense);
-				//$("#table tbody:last-child").find("#guideTeacher").val(data[i].guideTeacher);
+				$("#table tbody:last-child").find("#budget").val(data[i].expense);				
 				$("#table tbody:last-child").find("#Tea").val("老师:"+data[i].guideTeacher);
 				$("#table tbody:last-child").find("#tes").val("实验员:"+data[i].assistant);
-				if($("#table tbody:last-child").find("#baseFrom").val()==="校内基地"){
-					$("#table tbody:last-child").find("#schoolBase").show();
-					$("#table tbody:last-child").find("#schoolBase").addClass("flag");
-					$("#table tbody:last-child").find("#schoolBase").val(data[i].site);
-					
-
-				}
-				if($("#table tbody:last-child").find("#baseFrom").val()==="校外基地"){
-					$("#table tbody:last-child").find("#outBase").show();
-					$("#table tbody:last-child").find("#outBase").addClass("flag");
-					$("#table tbody:last-child").find("#outBase").val(data[i].site);
-				}
+				$("#table tbody:last-child").find("#facemajoy").val("面向专业:"+data[i].major_oriented);
+				
+				$("#table tbody:last-child").find("#schoolBase").show();
+				$("#table tbody:last-child").find("#schoolBase").addClass("flag");
+				$("#table tbody:last-child").find("#schoolBase").val(data[i].site);	
+				
+				
 				$("#table tbody:last-child").find(".deleteID").attr("id",data[i].id);
 				if(i!==data.length-1){
 					teachername=teachername+data[i].guideTeacher+",";
 					testername=testername+data[i].assistant+",";
+					majorname=majorname+data[i].major_oriented+',';
 				}else{
 					teachername=teachername+data[i].guideTeacher;
 					testername=testername+data[i].assistant;
+					majorname=majorname+data[i].major_oriented;
 				}
 				value[i]=data[i].assistant;
 				teacherString[i]=data[i].guideTeacher;
+				majorString[i]=data[i].major_oriented;
 			}
 			$("#testername").val(testername);
 			$("#adviser").val(teachername);
+			$("#major").val(majorname);
 		}
 	});
 	
+	$("#selectCollege option:gt(0)").remove();
+	$("#selectCollege2 option:gt(0)").remove();
+	$("#majorCollege option:gt(0)").remove();	
 //获取选择的内容
 $.ajax({
 	type : 'POST',
@@ -351,51 +431,67 @@ $.ajax({
 			$("#collegeID2").after(
 					"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
 					);
+			$("#majorcollegeID").after(
+					"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+					);
 		}
 	}
 });
-	
+var tbodylength=$("#table tbody").size();
+if(screen.width<=1536&&tbodylength>2){
+	$("#modalbody").addClass("modalbody");
+}
+if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
+if(screen.width>1708&&tbodylength>3){
+	$("#modalbody").addClass("modalbody2");
+}
 	$("#Applychart").show();
 });
-	
+
 	
 /*实习申请表里面的操作*/
 	//实习基地来源改变，对应的实习基地改变
 $(document).on("change","#baseFrom",function(e){
-	if(e.target.value==='校内基地'){
-		$(this).parent().next().children(":first").show();
-		$(this).parent().next().children(":first").addClass("flag");
-		$(this).parent().next().children("select:last").hide();
-		$(this).parent().next().children("select:last").val("");
-		$(this).parent().next().children("select:last").removeClass("flag");
-		$(this).parent().next().find("a").hide();
-	}
-	if(e.target.value==='校外基地'){
-		var length=$(this).parent().next().find("#outBase option").length;
-		if(length>1){
-			$(this).parent().next().find("a").hide();
-			$(this).parent().next().children("select:last").show();
-			$(this).parent().next().children("select:last").addClass("flag");
-		}else{
-			$(this).parent().next().children("select:last").hide();
-			$(this).parent().next().children("select:last").val("");
-			$(this).parent().next().children("select:last").removeClass("flag");
-			$(this).parent().next().find("a").show();			
-		}		
-		$(this).parent().next().children(":first").hide();
-		$(this).parent().next().children(":first").val("");
-		$(this).parent().next().children(":first").removeClass("flag");
-	}
-	if(e.target.value===''){
-		/*$(this).parent().next().children(":last").hide();
-		$(this).parent().next().children(":first").hide();
-		$(this).parent().next().children(":last").val("");
-		$(this).parent().next().children(":first").val("");
-		$(this).parent().next().children(":first").removeClass("flag");
-		$(this).parent().next().children(":last").removeClass("flag");*/
-		$(this).parent().next().children("select").hide();
-		$(this).parent().next().children("select").val("");
-		$(this).parent().next().find("a").hide();
+	var type=e.target.value;
+	var selectObj=$(this).parent().next().children("select");
+	var aObj=$(this).parent().next().children("a");
+	selectObj.hide();
+	selectObj.val("");
+	selectObj.find("option:gt(0)").remove();
+	aObj.css("display","none");
+	
+	if(type!=''){	
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',	
+			data:{"typename":type},
+			url : 'getBasenameOneOfType.do',  
+			async : false,
+			cache : false,
+			error : function(request) {
+				bootbox.alert({
+					message : "请求异常",
+					size : 'small'
+				});
+			},
+			success : function(data){
+				if(data.length==0){
+					aObj.css("display","block");
+					return;
+				}else{
+					
+				for(var j=0;j<data.length;j++){//获取基地名字
+					selectObj.find("#schoolBaseID").after(
+					"<option class='rest' value="+data[j]+">"+ data[j] + "</option>"
+					);
+				}
+				selectObj.show();
+				
+				}
+			}
+		});
 	}
 });	
 
@@ -423,6 +519,27 @@ $(document).on("change","#selectCollege",function(){
 	}
 });
 });
+
+$(document).on("change","#majorCollege",function(){
+	var college=$("#majorCollege").val();
+	$("#majorName option:gt(0)").remove();
+	$.ajax({
+		url : 'getCollege_Major.do',
+		type : 'post',
+		dataType : 'json',
+		data : {
+			"college" : college,								
+		},
+	success : function(data){	
+		for(var i=0;i<data.length;i++){//获取老师名字下拉框
+			$("#majorNmaeID").after(
+			"<option class='rest' value="+data[i].major+">"+ data[i].major + "</option>"
+			);
+		}
+	}
+});
+});
+
 $(document).on("change","#selectCollege2",function(){
 	var college=$("#selectCollege2").val();
 	$("#selectTname2 option:gt(0)").remove();
@@ -522,7 +639,47 @@ $(document).on("click","#finished",function(){//点击确定之后讲实验员�
 	var str=value.join(',');
 	$("#testername").val(str);
 });
+
+var major_num;
+$(document).on("click",".choice3",function(){//点击选择弹出面向专业的弹出框
 	
+	major_num=$(this).closest("tbody").find(".mark").html()-1;
+	$("#Selectmajor").modal('show');
+	$("#showmajor").val(majorString[major_num]);
+	$("#majorName").val("");
+	$("#majorCollege").val("");
+});
+
+$(document).on("change","#majorName",function(e){//将专业显示在界面中
+	var teststring=$("#showmajor").val();
+	var testvalue=teststring.split(" ");
+	testvalue.push(e.target.value);
+	teststring=testvalue.join(" ");
+	$("#showmajor").val(teststring);
+	
+	
+});
+	
+$(document).on("click","#finished3",function(){//点击确定之后将专业在表格中显示出来
+	var showmajor=$("#showmajor").val();
+	if(showmajor===""){
+		bootbox.alert({
+			message : "面向专业不能为空",
+			size : 'small'
+		});
+		return;
+	}else{
+		majorString[major_num]=showmajor;
+	}
+	$(".tbodyID").each(function(){
+		var tea=$(this).find('.mark').html()-1;
+		if(tea===major_num){
+			$(this).find('#facemajoy').val("面向专业："+showmajor);
+		}
+	});
+	var str=majorString.join(',');
+	$("#major").val(str);
+});
 //实习表中添加一条记录
 
 	
@@ -540,7 +697,53 @@ $(document).on("click","#closemodal",function(){
 
 
 $(document).on("click","#addTbody",function(){//添加一条空表的记录
+	var tbodylength=$("#table tbody").size();
+	if(screen.width<=1536&&tbodylength>2){
+		$("#modalbody").addClass("modalbody");
+	}
+	if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
+		$("#modalbody").addClass("modalbody2");
+	}
+	if(screen.width>1708&&tbodylength>3){
+		$("#modalbody").addClass("modalbody3");
+	}
 	$("#table tbody:last-child").after(tbodyStyle);
+	
+	var fromweek=$("#fromweek").val();
+	var data_week_0=fromweek.split(',');
+	var data_week=[];
+	var data_week_1;				
+	var data_week_3;
+	for(var i in data_week_0){
+		data_week_1=data_week_0[i].split('-');					
+		var k=0;
+		data_week_3=data_week_1[0];
+		if(data_week_1[0]==data_week_1[data_week_1.length-1]){
+			data_week.push(data_week_1[0]);
+		}else{
+		   while(data_week_3<data_week_1[data_week_1.length-1]){						
+			data_week_3=Number(data_week_1[0])+(k++);
+			data_week.push(data_week_3);
+		}
+		}
+	}
+	$.unique(data_week.sort(sortNumber));
+	for(var week in data_week){
+		$("#table tbody:last-child").find("#weekend_option").after(
+				"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
+				);
+	}	
+	
+	//获得班级的数组
+	var composition=$("#class").val();
+	var data_composition=composition.split(',');
+	$.unique(data_composition.sort(sortNumber));
+	for(var composition_0 in data_composition){
+		$("#table tbody:last-child").find("#class_one_option").after(
+				"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
+				);
+	}	
+	
 	var tbNum=$("#table").children('tbody').length;
 	$("#table tbody:last-child").find(".mark").html(tbNum-2);
 	$.ajax({
@@ -550,23 +753,19 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 		async : false,
 		cache : false,
 		data:{
-			"mid":obj[Oneindex].mid
+			"mid":obj[Oneindex].tid
 		},
 	success : function(data){//
-		for(var i=0;i<data[0].length;i++){//获取校内基地的实习地点下拉框
-			$("#table tbody:last-child").find("#schoolBaseID").after(
-			"<option class='rest' value="+data[0][i]+">"+ data[0][i] + "</option>"
-			);
-		}
-		for(var i=0;i<data[2].length;i++){//获取校外基地的实习地点下拉框
-			$("#table tbody:last-child").find("#outBaseId").after(
-			"<option class='rest' value="+data[2][i]+">"+ data[2][i]+ "</option>"
-			);
-		}
-		for(i=0;i<data[1].length;i++){//获取实习目的下拉框
+		
+		for(i=0;i<data[0].length;i++){//获取实习目的下拉框
 			$("#table tbody:last-child").find("#aimID").after(
-			"<option class='rest' id="+data[1][i].id+" value="+data[1][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[1][i].aim+"'>"+ (data[1][i].aim.length>20?data[1][i].aim.substring(0,20)+"...":data[1][i].aim )+ "</option>"
+			"<option class='rest' id="+data[0][i].id+" value="+data[0][i].aim+" data-placement='top' data-toggle='tooltip' title='"+data[0][i].aim+"'>"+ (data[0][i].aim.length>20?data[0][i].aim.substring(0,20)+"...":data[0][i].aim )+ "</option>"
 
+			);
+		}
+		for(var i=0;i<data[1].length;i++){//获取基地类型
+			$("#table tbody:last-child").find("#baseForm").after(
+			"<option class='rest' value="+data[1][i].name+">"+ data[1][i].name+ "</option>"
 			);
 		}
 		
@@ -582,50 +781,85 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 $(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 	var judget=$(this).attr("id");
 	var rowNum=$(this).closest("tbody").find(".mark").html()-1;
-	$(this).closest("tbody").remove();
-	if(judget!==""){
-		$.ajax({
-			url:'deleteClassRecord.do',
-			type:"POST",
-			dataType:"json",
-			data:{
-				"planid":judget
+	var tbody=$(this).closest("tbody");
+	bootbox.confirm({
+		message: "是否删除？",
+		size: 'small',
+		buttons: {
+			confirm: {
+				label: '确定',
+				className: 'btn-success'
 			},
-			success : function(msg){
-				$(".mark").each(function(){
-				var htmlValue=$(this).html();
-				if(htmlValue>(rowNum+1)){
-					$(this).html(htmlValue-1);
-					}
-				});
-				teacherString.splice(rowNum,1);
-				showName=teacherString.join(",");
-				$("#adviser").val(showName);
-				value.splice(rowNum,1);
-				var value2=value.join(",");
-				$("#testername").val(value2);
-				bootbox.alert({
-					message : "删除成功",
-					size : 'small'
-				});											
+			cancel: {
+				label: '取消',
+				className: 'btn-danger'
+			},
+		},			
+		callback: function (result) { 		
+			
+			if(result){		
+				tbody.remove();
+				if(judget!==""){
+					$.ajax({
+						url:'deleteClassRecord.do',
+						type:"POST",
+						dataType:"json",
+						data:{
+							"planid":judget
+						},
+						success : function(msg){
+							if(msg.msg=="success"){
+								bootbox.alert({
+									message : "操作成功",
+									size : 'small'
+								});	
+								$(".mark").each(function(){
+									var htmlValue=$(this).html();
+									if(htmlValue>(rowNum+1)){
+										$(this).html(htmlValue-1);
+										}
+									});
+									teacherString.splice(rowNum,1);
+									showName=teacherString.join(",");
+									$("#adviser").val(showName);
+									value.splice(rowNum,1);
+									var value2=value.join(",");
+									$("#testername").val(value2);
+							}
+							else if(msg.msg=="fail"){
+								bootbox.alert({
+									message : "操作失败",
+									size : 'small'
+								});		
+							}
+																
+						}
+					});
+				}else{
+					$(".mark").each(function(){
+						var htmlValue=$(this).html();
+						if(htmlValue>(rowNum+1)){
+							$(this).html(htmlValue-1);
+						}
+					});
+					teacherString.splice(rowNum,1);
+					showName=teacherString.join(",");
+					$("#adviser").val(showName);
+					value.splice(rowNum,1);
+					var value2=value.join(",");
+					$("#tester").val(value2);
+				}
 			}
-		});
-	}else{
-		$(".mark").each(function(){
-			var htmlValue=$(this).html();
-			if(htmlValue>(rowNum+1)){
-				$(this).html(htmlValue-1);
-			}
-		});
-		teacherString.splice(rowNum,1);
-		showName=teacherString.join(",");
-		$("#adviser").val(showName);
-		value.splice(rowNum,1);
-		var value2=value.join(",");
-		$("#tester").val(value2);
-	}
+		}
+	});
+	
 
 });	
+
+//点击导出按钮复原原来的值
+$("#exportButton").click(function(){
+	$("#finishCondition").val('-1');
+});
 	
 	
 $("#save").click(function(){//弹出框的保存
@@ -637,12 +871,21 @@ $("#save").click(function(){//弹出框的保存
 	var practiceClass="";     var phone="";
 	var aim="";     var Tea="";
 	var tes="";
+	var major="";
+	var class_one="";
+	var reg=/^[1-9][0-9]*$/;
 	$(".tbodyID").each(function(){
 		y++;
 		week=$(this).find("#weekend").val();
 		if(week===""){
 			return false;
 		}
+		
+		class_one=$(this).find("#class_one").val();
+		if(class_one===""){
+			return false;
+		}
+		
 				
 		startweek=$(this).find("#startweek").val();
 		if(startweek===""){
@@ -659,9 +902,8 @@ $("#save").click(function(){//弹出框的保存
 			return false;
 		}
 		
-		var sSite=$(this).find("#schoolBase").val();
-		var oSite=$(this).find("#outBase").val().trim();
-		if(sSite===""&&oSite===""){
+		var sSite=$(this).find("#schoolBase").val();		
+		if(sSite===""){
 			x++;
 			return false;
 		}
@@ -686,6 +928,11 @@ $("#save").click(function(){//弹出框的保存
 			return false;
 		}
 		
+		major=$(this).find("#facemajoy").val();
+		if(major===""){
+			return false;
+		}
+		
 		Tea=$(this).find("#Tea").val();
 		if(Tea===""){
 			return false;
@@ -704,6 +951,15 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
+	
+	if(class_one===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的班级",
+			size : 'small'
+		});
+		return;
+		}
+	
 	if(startweek===""){
 		bootbox.alert({
 			message : "请填写第"+y+"条记录的开始时间",
@@ -786,6 +1042,13 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 		}
+	if(major===""){
+		bootbox.alert({
+			message : "请选择第"+y+"条记录的面向专业",
+			size : 'small'
+		});
+		return;
+		}
 	if(Tea===""){
 		bootbox.alert({
 			message : "请选择第"+y+"条记录的指导老师",
@@ -820,10 +1083,9 @@ $("#save").click(function(){//弹出框的保存
 					$(".tbodyID").each(function(){
 						if(y!==0){
 							str=str+",(";
-						}
-						//var b=$(this).find(".adviser2").val();
+						}						
 						var c=$(this).find(".mark").html()-1;
-						str=str+"'"+teacherString[c]+"'"+",'"+value[c]+"'";
+						str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
 						
 						var x=0;
 						$(this).find(".flag").each(function(){
@@ -845,7 +1107,7 @@ $("#save").click(function(){//弹出框的保存
 							if(x===11){
 								str=str+","+$(this).find("option:selected").attr("id");
 							}
-							if(x===12){
+							if(x===12||x===13){
 								if($(this).val()===""){
 								str=str+','+"null";
 								}else{
@@ -873,12 +1135,18 @@ $("#save").click(function(){//弹出框的保存
 							"courseID":obj[Oneindex].id,							
 							"str":str,
 						},
-						success : function(msg) {
-							//alert("hah");
-							bootbox.alert({
-								message : "保存成功",
-								size : 'small'
-							});
+						success : function(msg) {							
+							if(msg.msg=="success"){
+								bootbox.alert({
+									message : "操作成功",
+									size : 'small'
+								});
+							}else if(msg.msg=="fail"){
+								bootbox.alert({
+									message : "操作失败",
+									size : 'small'
+								});
+							}		
 							//$("#Applychart").hide();
 							
 						}
@@ -889,7 +1157,72 @@ $("#save").click(function(){//弹出框的保存
 	});
 });
 
+var timeArray=0;
+$(document).on("focus","#startweek",function(){
+	timeArray=$(this).closest("tbody").find(".mark").html()-1;
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$("#Stime").val($(this).val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$("#Etime").val($(this).val());
+			return false;
+		}
+		p++;
+	});
+	
+	$("#time").modal('show');
+});
+$(document).on("focus","#endweek",function(){
+	timeArray=$(this).closest("tbody").find(".mark").html()-1;
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$("#Stime").val($(this).val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$("#Etime").val($(this).val());
+			return false;
+		}
+		p++;
+	});
+	$("#time").modal('show');
+});
+	
+$(document).on("click","#finishTime",function(){
+	var o=0,p=0;
+	$(".startweek").each(function(){
+		if(o===timeArray){
+			$(this).val($("#Stime").val());
+			return false;
+		}
+		o++;
+	});
+	$(".endweek").each(function(){
+		if(p===timeArray){
+			$(this).val($("#Etime").val());
+			return false;
+		}
+		p++;
+	});
+	$("#time").modal('hide');
+});	
+
 } );
+
+function sortNumber(a,b)
+{
+	return a<b?a:b;
+}
 
 	
 	

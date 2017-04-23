@@ -21,7 +21,7 @@ $(document)
 								"bSort" : true,
 								"ordering":true,
 								"serverSide" : true,
-								"iDisplayLength": 5,
+								"iDisplayLength": 10,
 								//"TotalRecords" : [ 10 ],
 								"dom" : 'tipr<"bottom"l>',
 								"bDestroy" : true,
@@ -32,8 +32,7 @@ $(document)
 								},
 								"aoColumns" : [ // [{la_id:1},{startime:"2016-11-15"},{endtime:"2017-11-15"},{basename:"长安基地1号"},{li:"土地编号"},{username:"申请人"},{usercollage:"信息科学技术学院"},{time:"租用次数"},{plant:"种植内容"}]
 								{
-									"mData" : "la_id",
-									
+									"mData" : "la_id",									
 									"orderable" : false, // 禁用排序
 									"sDefaultContent" : "",
 									"sWidth" : "2%",
@@ -122,7 +121,261 @@ $(document)
 									}
 								}
 							});
+					var duepage = $('#tabledue').DataTable(
+							{
+								"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+								"bSort" : true,
+								"serverSide" : true,
+								"iDisplayLength": 10,
+								"dom" : 'tipr<"bottom"l>',
+								"bDestroy" : true,
+								"ajax" : {
+									"url" : "overdue.do?flag=2",
+									"type" : "POST"
+								},
+								"aoColumns" : [ {
+									"mData" : "la_id",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "2%",
+								},
 
+								{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
+									"mData" : "startime",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "2%"
+								}, {
+									"mData" : "endtime",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%",
+								}, {
+									"mData" : "basename",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
+								},
+								
+								{
+									"mData" : "li",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "10%"
+								},{
+									"mData" : "landname",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "6%"
+								}, {
+									"mData" : "username",
+									"orderable" :false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "8%"
+								}, {
+									"mData" : "usercollage",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "8%",
+								}, {
+									"mData" : "times",
+									"orderable" : true, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "8%",
+								}, {
+									"mData" : "plant",
+									"orderable" : false, // 禁用排序
+									"sDefaultContent" : "",
+									"sWidth" : "8%",
+								} ],
+								"columnDefs" : [ {
+									"orderable" : false, // 禁用排序
+									"targets" : [ 0 ], // 指定的列
+									"data" : "la_id",
+									"render" : function(data, type, row) {
+										data = row.la_id;
+										/*alert(data);
+										alert(row.userid);*/
+										return '<input type="checkbox" value="'
+												+ data
+												+ '" name="iname" data-id="'
+												+ row.userid
+												+ '"class="ck"  />';
+									}
+								} ],
+								"language" : {
+									"lengthMenu" : "每页 _MENU_ 条记录",
+									"zeroRecords" : "没有找到记录",
+									"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+									"infoEmpty" : "无记录",
+									"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+									"sSearch" : "模糊查询：",
+									"oPaginate" : {
+										"sFirst" : "首页",
+										"sPrevious" : " 上一页 ",
+										"sNext" : " 下一页 ",
+										"sLast" : " 尾页 "
+									}
+								}
+
+							});
+					//恢复逾期
+					$('#overdueOne').click(
+							function() {							
+								var chk_value =[];
+								$('input[name="iname"]:checked').each(function(){
+								chk_value.push($(this).val());
+								});	
+								
+								 if(chk_value.length==0)
+								 {
+									 bootbox.alert({
+											message : "请至少选择一项",
+											size : 'small'
+										});
+									 return;
+								  }
+								 
+								 bootbox.confirm({
+										message: "确定恢复？",
+										size: 'small',
+										buttons: {
+											confirm: {
+												label: '确定',
+												className: 'btn-success'
+											},
+											cancel: {
+												label: '取消',
+												className: 'btn-danger'
+											},
+										},			
+										callback: function (result) {
+											if(result){
+												
+												var record_str = '(';// //申请记录id格(1,2,3,4,5)
+									var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
+									var jsonback = '';/*
+														 * json对象格式{
+														 * recordstr:'(1,2,3,4,5)',
+														 * infostr:[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}] }
+														 */
+									var i = 0;
+									var userid;// //表中缺少此字段，需要补充
+
+									$(
+											"input[type='checkbox'][name='iname']:checked")
+											.each(
+													function() {
+														userid = $(this)
+																.data("id");
+														if (i != 0) {
+															record_str = record_str
+																	+ ','
+																	+ $(
+																			this)
+																			.val();
+															info_str = info_str
+																	+ ',{userid:"'
+																	+ userid
+																	+ '",msg:"'
+																	+ $(
+																			this)
+																			.closest(
+																					'tr')
+																			.find(
+																					'td:eq(3)')
+																			.text()
+																	+ '#'
+																	+ $(
+																			this)
+																			.closest(
+																					'tr')
+																			.find(
+																					'td:eq(4)')
+																			.text()
+																	+ '"}';
+														} else {
+															record_str = record_str
+																	+ $(
+																			this)
+																			.val();
+															info_str = info_str
+																	+ '{userid:"'
+																	+ userid
+																	+ '",msg:"'
+																	+ $(
+																			this)
+																			.closest(
+																					'tr')
+																			.find(
+																					'td:eq(3)')
+																			.text()
+																	+ '#'
+																	+ $(
+																			this)
+																			.closest(
+																					'tr')
+																			.find(
+																					'td:eq(4)')
+																			.text()
+																	+ '"}';
+														}
+														i++;
+													});
+								record_str = record_str + ')';
+								info_str = info_str + ']';
+
+								$.ajax({
+									url : 'overduerecovery.do',
+									type : 'post',
+									dataType : 'json',
+									data : {
+										"recordstr" : record_str,
+										"infostr" : info_str,
+									},
+									success : function(msg) {
+										if(msg.flag==0){
+											bootbox.alert({
+												message : "操作失败，请刷新页面",
+												size : 'small'
+											});
+										}else if(msg.flag==1){
+											bootbox.alert({
+												message : "其中存在已被租赁的土地，请重新选择",
+												size : 'small'
+											});
+										}else if(msg.flag==500){
+											bootbox.alert({
+												message : "操作失败",
+												size : 'small'
+											});
+										}else if(msg.flag==200){
+											bootbox.alert({
+												message : "操作成功",
+												size : 'small'
+											});
+										}
+										$("#basenameid option:gt(0)").remove();
+										$("#usernameid option:gt(0)").remove();
+										$("#dept option:gt(0)").remove();
+										$("#basenameid2 option:gt(0)").remove();
+										$("#usernameid2 option:gt(0)").remove();
+										$("#dept2 option:gt(0)").remove();
+										$("#basenameid3 option:gt(0)").remove();
+										$("#usernameid3 option:gt(0)").remove();
+										$("#dept3 option:gt(0)").remove();									
+										Brush();	
+										duepage.draw(false);
+									}
+								});
+												
+											}
+										}
+								});
+								 
+								 
+							});
 					// //全选反选
 					$("#ck1").on(
 							"click",
@@ -146,16 +399,32 @@ $(document)
 											"checked", false);
 								}
 							});
+					$("#ck3").on(
+							"click",
+							function() {
+								if ($(this).prop("checked") === true) {
+									$("#tabledue input[name='iname']").prop(
+											"checked", true);
+								} else {
+									$("#tabledue input[name='iname']").prop(
+											"checked", false);
+								}
+							});
 					$(".icon-filter").on("click", function() {
 						recovery();
 						recovery2();
-						$('.hide_ul').toggle(500);
+						$('.hide_ul').toggle();
+						recovery3();
+						
 					});
 					$('#PayM').click(function() {
 						repage.draw(true);
 					});
 					$('#NoCheck').click(function() {
 						Spage.draw(true);
+					});
+					$('#overdue1').click(function() {
+						duepage.draw(true);
 					});
 
 					// 拒绝申请
@@ -174,8 +443,22 @@ $(document)
 												});
 											 return;
 										  }
-										
-										var record_str = '(';// //申请记录id格(1,2,3,4,5)
+										 bootbox.confirm({
+												message: "确定拒绝申请？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var record_str = '(';// //申请记录id格(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var jsonback = '';/*
 															 * json对象格式{
@@ -257,19 +540,50 @@ $(document)
 											},
 											success : function(msg) {
 												// ////////将所有的alert替换成以下/////////////////////////////////////////////////////////////////////////////////////统一风格/////////////////////////////
+											if(msg.str==0){
 												bootbox.alert({
-													message : msg.str,
+													message : "拒绝失败，请刷新页面",
 													size : 'small'
 												});
+												return;
+											}else if(msg.str==200){
+												bootbox.alert({
+													message : "操作成功",
+													size : 'small'
+												});
+											}else if(msg.str==500){
+												bootbox.alert({
+													message : "操作失败",
+													size : 'small'
+												});
+											}
+												
+												
+												$("#basenameid option:gt(0)").remove();
+												$("#usernameid option:gt(0)").remove();
+												$("#dept option:gt(0)").remove();
+												$("#basenameid2 option:gt(0)").remove();
+												$("#usernameid2 option:gt(0)").remove();
+												$("#dept2 option:gt(0)").remove();
+												$("#basenameid3 option:gt(0)").remove();
+												$("#usernameid3 option:gt(0)").remove();
+												$("#dept3 option:gt(0)").remove();												
+												Brush();
 												Spage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+										
 
 									});
 
 					// 同意申请
 					// //////////状态值1： 2： 3： 4： 。。。。。。。
-					$('#agreeOne')							.click(
+					$('#agreeOne').click(
 									function() {
 										
 										var chk_value =[];
@@ -285,128 +599,171 @@ $(document)
 												});
 											 return;
 										  }
-										 
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
-										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
-										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
-										var jsonback = '';/*
-															 * json对象格式{
-															 * landstr:'("1","2","3","4","5")',
-															 * recordstr:'(1,2,3,4,5)',
-															 * infostr:[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}] }
-															 */
-										var i = 0;
-										var userid;// //表中缺少此字段，需要补充
-										$(
-												"input[type='checkbox'][name='idname']:checked")
-												.each(
-														function() {
-															userid = $(this)
-																	.data("id");
-															if (i != 0) {
-																record_str = record_str
-																		+ ','
-																		+ $(
-																				this)
-																				.val();
-																landid_str = landid_str
-																		+ ','
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text();
-																info_str = info_str
-																		+ ',{userid:"'
-																		+ userid
-																		+ '",msg:"'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(3)')
-																				.text()
-																		+ '#'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text()
-																		+ '"}'
-															} else {
-																record_str = record_str
-																		+ $(
-																				this)
-																				.val();
-																landid_str = landid_str
-																		+ ''
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text();
-																info_str = info_str
-																		+ '{userid:"'
-																		+ userid
-																		+ '",msg:"'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(3)')
-																				.text()
-																		+ '#'
-																		+ $(
-																				this)
-																				.closest(
-																						'tr')
-																				.find(
-																						'td:eq(4)')
-																				.text()
-																		+ '"}'
+										 bootbox.confirm({
+												message: "确定同意申请？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+														var record_str = '(';// //申请记录id格式(1,2,3,4,5)
+														var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
+														var jsonback = '';/*
+																			 * json对象格式{
+																			 * landstr:'("1","2","3","4","5")',
+																			 * recordstr:'(1,2,3,4,5)',
+																			 * infostr:[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}] }
+																			 */
+														var i = 0;
+														var userid;// //表中缺少此字段，需要补充
+														$(
+																"input[type='checkbox'][name='idname']:checked")
+																.each(
+																		function() {
+																			userid = $(this)
+																					.data("id");
+																			if (i != 0) {
+																				record_str = record_str
+																						+ ','
+																						+ $(
+																								this)
+																								.val();
+																				landid_str = landid_str
+																						+ ','
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text();
+																				info_str = info_str
+																						+ ',{userid:"'
+																						+ userid
+																						+ '",msg:"'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(3)')
+																								.text()
+																						+ '#'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text()
+																						+ '"}'
+																			} else {
+																				record_str = record_str
+																						+ $(
+																								this)
+																								.val();
+																				landid_str = landid_str
+																						+ ''
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text();
+																				info_str = info_str
+																						+ '{userid:"'
+																						+ userid
+																						+ '",msg:"'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(3)')
+																								.text()
+																						+ '#'
+																						+ $(
+																								this)
+																								.closest(
+																										'tr')
+																								.find(
+																										'td:eq(4)')
+																								.text()
+																						+ '"}'
+																			}
+																			i++;
+																		});
+														landid_str = landid_str + ')';
+														record_str = record_str + ')';
+														info_str = info_str + ']';
+
+														$.ajax({
+															url : 'agreeApply.do',
+															type : 'post',
+															dataType : 'json',
+															data : {
+																"recordstr" : record_str,
+																"infostr" : info_str,
+																"landstr" : landid_str
+															},
+															success : function(msg) {
+																
+				                                              var tag=msg.tag;
+																if(tag==200){												
+																bootbox.alert({
+																	message : "同意成功",
+																	size : 'small'
+																});																
+																}else if(tag==0){
+																	
+																	bootbox.alert({
+																		message : "不允许同一块土地多人申请成功，请检查",
+																		size : 'small'
+																	});
+																	return;
+																}else if(tag==2){
+																	bootbox.alert({
+																		message : "同意失败，请刷新页面",
+																		size : 'small'
+																	});
+																	return;
+																}else if(tag==500){
+																	bootbox.alert({
+																		message : "同意失败",
+																		size : 'small'
+																	});
+																	return;
+																}
+																$("#basenameid option:gt(0)").remove();
+																$("#usernameid option:gt(0)").remove();
+																$("#dept option:gt(0)").remove();
+																$("#basenameid2 option:gt(0)").remove();
+																$("#usernameid2 option:gt(0)").remove();
+																$("#dept2 option:gt(0)").remove();
+																$("#basenameid3 option:gt(0)").remove();
+																$("#usernameid3 option:gt(0)").remove();
+																$("#dept3 option:gt(0)").remove();													
+																Brush();
+																Spage.draw(false);
+
 															}
-															i++;
 														});
-										landid_str = landid_str + ')';
-										record_str = record_str + ')';
-										info_str = info_str + ']';
-
-										$.ajax({
-											url : 'agreeApply.do',
-											type : 'post',
-											dataType : 'json',
-											data : {
-												"recordstr" : record_str,
-												"infostr" : info_str,
-												"landstr" : landid_str
-											},
-											success : function(msg) {
-												
-                                              var tag=msg.tag;
-												if(tag==1){												
-												bootbox.alert({
-													message : msg.str,
-													size : 'small'
-												});
-												Spage.draw(false);
-												}else if(tag==0){
-													
-													bootbox.alert({
-														message : "不允许同一块土地多人申请成功，请检查",
-														size : 'small'
-													});
+														
+														
+													}
 												}
-
-											}
 										});
+										
 									});
 					// ///////////////////////////参照上面方法，修改‘取消交费’和'确认交费'/////////////////////////////////////////////
 					// 取消交费
@@ -427,8 +784,23 @@ $(document)
 												});
 											 return;
 										  }
-
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+										 
+										 bootbox.confirm({
+												message: "确定取消交费？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var i = 0;
@@ -525,14 +897,45 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
-											
+												
+											if(msg.str==0){
 												bootbox.alert({
-													message :  msg.str,
+													message :  "操作失败,请刷选页面",
 													size : 'small'
 												});
+												return;
+											}else if(msg.str==200){
+												bootbox.alert({
+													message :  "操作成功",
+													size : 'small'
+												});
+											}else if(msg.str==500){
+												bootbox.alert({
+													message :  "操作失败",
+													size : 'small'
+												});
+											}														
+												
+												$("#basenameid option:gt(0)").remove();
+												$("#usernameid option:gt(0)").remove();
+												$("#dept option:gt(0)").remove();
+												$("#basenameid2 option:gt(0)").remove();
+												$("#usernameid2 option:gt(0)").remove();
+												$("#dept2 option:gt(0)").remove();
+												$("#basenameid3 option:gt(0)").remove();
+												$("#usernameid3 option:gt(0)").remove();
+												$("#dept3 option:gt(0)").remove();	
+												Brush();
 												repage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+
+										
 									});
 
 					// 确认交费
@@ -553,8 +956,23 @@ $(document)
 												});
 											 return;
 										  }
-
-										var landid_str = '(';// //土地编号格式("1","2","3","4","5")
+										 
+										 bootbox.confirm({
+												message: "确定确认交费？",
+												size: 'small',
+												buttons: {
+													confirm: {
+														label: '确定',
+														className: 'btn-success'
+													},
+													cancel: {
+														label: '取消',
+														className: 'btn-danger'
+													},
+												},			
+												callback: function (result) {
+													if(result){
+														var landid_str = '(';// //土地编号格式("1","2","3","4","5")
 										var record_str = '(';// //申请记录id格式(1,2,3,4,5)
 										var info_str = '['; // ////消息格式[{userid:"180042",msg:"长安基地#821321"},{userid:"180043",msg:"长安基地#845621"}]
 										var i = 0;
@@ -651,14 +1069,44 @@ $(document)
 												"landstr" : landid_str
 											},
 											success : function(msg) {
+												if(msg.str==0){
+													bootbox.alert({
+														message :  "操作失败，请刷新页面",
+														size : 'small'
+													});
+													return;
+												}else if(msg.str==200){
+													bootbox.alert({
+														message :  "操作成功",
+														size : 'small'
+													});
+												}else if(msg.str==500){
+													bootbox.alert({
+														message :  "操作失败",
+														size : 'small'
+													});
+												}													
 												
-												bootbox.alert({
-													message :  msg.str,
-													size : 'small'
-												});
+												$("#basenameid option:gt(0)").remove();
+												$("#usernameid option:gt(0)").remove();
+												$("#dept option:gt(0)").remove();
+												$("#basenameid2 option:gt(0)").remove();
+												$("#usernameid2 option:gt(0)").remove();
+												$("#dept2 option:gt(0)").remove();
+												$("#basenameid3 option:gt(0)").remove();
+												$("#usernameid3 option:gt(0)").remove();
+												$("#dept3 option:gt(0)").remove();	
+												Brush();
 												repage.draw(false);
 											}
 										});
+														
+														
+													}
+												}
+										});
+
+										
 									});
 					// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					
@@ -672,7 +1120,89 @@ $(document)
 						document.getElementById("usernameid2").value = "";
 						document.getElementById("dept2").value = "";
 					}
+					function recovery3() {
+						document.getElementById("basenameid3").value = "";
+						document.getElementById("usernameid3").value = "";
+						document.getElementById("dept3").value = "";
+					}
+					//刷选方法
+					function Brush(){
+						$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : 'getAllInfos.do',
+							async : false,
+							cache : false,
+							error : function(request) {
+								alert("error");
+							},
+							success : function(data) {
 
+								//alert(data);
+								for ( var i = 0; i < data[0].length; i++) {
+
+									$("#selectallbase").after(
+											"<option value=" + data[0][i].bname
+													+ ">" + data[0][i].bname
+													+ "</option>");
+
+									$("#selectallbase2").after(
+											"<option value=" + data[0][i].bname
+													+ ">" + data[0][i].bname
+													+ "</option>");
+									$("#selectallbase3").after(
+											"<option value=" + data[0][i].bname
+													+ ">" + data[0][i].bname													+ "</option>");
+
+								}								
+								//alert(data[1][0].username);
+								for ( var i = 0; i < data[1].length; i++) {
+									
+									$("#applicantId").after(
+											"<option value=" + data[1][i].username
+													+ ">" + data[1][i].username
+													+ "</option>");
+
+								}
+
+								for ( var i = 0; i < data[2].length; i++) {
+									
+									$("#applicantId2").after(
+											"<option value=" + data[2][i].username
+													+ ">" + data[2][i].username
+													+ "</option>");								
+								}
+								
+								
+								for ( var i = 0; i < data[3].length; i++) {
+
+									$("#selectdept").after(
+											"<option value=" + data[3][i].dept
+													+ ">" + data[3][i].dept
+													+ "</option>");
+								
+								}							
+								for ( var i = 0; i < data[4].length; i++) {								
+									$("#selectdept2").after(
+											"<option value=" + data[4][i].dept
+													+ ">" + data[4][i].dept
+													+ "</option>");							
+								}
+	                             for ( var i = 0; i < data[5].length; i++) {								
+									$("#selectdept3").after(
+											"<option value=" + data[5][i].dept
+													+ ">" + data[5][i].dept
+													+ "</option>");							
+								}
+	                             for ( var i = 0; i < data[6].length; i++) { 								
+	 								$("#applicantId3").after(
+	 										"<option value=" + data[6][i].username
+	 												+ ">" + data[6][i].username
+	 												+ "</option>");							
+	 							}
+							}
+						});
+					}
 					// 获取用户名////////////////////////////修改后台，一次性取值//////////////////////////////////////////
 					$.ajax({
 						type : 'POST',
@@ -681,10 +1211,7 @@ $(document)
 						async : false,
 						cache : false,
 						error : function(request) {
-							bootbox.alert({
-								message : "请求异常",
-								size : 'small'
-							});
+							alert("error");
 						},
 						success : function(data) {
 
@@ -697,6 +1224,10 @@ $(document)
 												+ "</option>");
 
 								$("#selectallbase2").after(
+										"<option value=" + data[0][i].bname
+												+ ">" + data[0][i].bname
+												+ "</option>");
+								$("#selectallbase3").after(
 										"<option value=" + data[0][i].bname
 												+ ">" + data[0][i].bname
 												+ "</option>");
@@ -719,8 +1250,9 @@ $(document)
 								$("#applicantId2").after(
 										"<option value=" + data[2][i].username
 												+ ">" + data[2][i].username
-												+ "</option>");
+												+ "</option>");								
 							}
+							
 							
 							for ( var i = 0; i < data[3].length; i++) {
 
@@ -738,9 +1270,25 @@ $(document)
 								$("#selectdept2").after(
 										"<option value=" + data[4][i].dept
 												+ ">" + data[4][i].dept
-												+ "</option>");
-
+												+ "</option>");							
 							}
+                             for ( var i = 0; i < data[5].length; i++) {
+
+								
+								$("#selectdept3").after(
+										"<option value=" + data[5][i].dept
+												+ ">" + data[5][i].dept
+												+ "</option>");							
+							}
+                             for ( var i = 0; i < data[6].length; i++) {
+
+ 								
+ 								$("#applicantId3").after(
+ 										"<option value=" + data[6][i].username
+ 												+ ">" + data[6][i].username
+ 												+ "</option>");							
+ 							}
+
 
 						}
 					});
@@ -753,7 +1301,7 @@ $(document)
 								"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 								"bSort" : true,
 								"serverSide" : true,
-								"iDisplayLength": 5,
+								"iDisplayLength": 10,
 								"dom" : 'tipr<"bottom"l>',
 								"bDestroy" : true,
 								"ajax" : {
@@ -852,12 +1400,9 @@ $(document)
 									"#finish",
 									function() {
 
-										var basenameid = document
-												.getElementById("basenameid").value;
-										var deptid = document
-												.getElementById("dept").value;
-										var usernameid = document
-												.getElementById("usernameid").value;
+										var basenameid = $("#basenameid").val();
+										var deptid = $("#dept").val();
+										var usernameid = $("#usernameid").val();
 										$('#tableCheck')
 												.DataTable(
 														{
@@ -865,7 +1410,7 @@ $(document)
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"bSort" : true,
 															"serverSide" : true,
-															"iDisplayLength": 5,
+															"iDisplayLength": 10,
 															// //默认每页显示多少条记录
 															"bDestroy" : true,
 															"dom" : 'tipr<"bottom"l>',
@@ -978,8 +1523,8 @@ $(document)
 																}
 															}
 														});
-										$('.hide_ul').toggle(500);
-										//document.getElementById("hide_ul").style.display = "none";
+										$('.hide_ul').toggle();
+										
 										recovery();
 
 										
@@ -992,12 +1537,9 @@ $(document)
 									"#finishPay",
 									function() {
 
-										var basenameid = document
-												.getElementById("basenameid2").value;
-										var deptid = document
-												.getElementById("dept2").value;
-										var usernameid = document
-												.getElementById("usernameid2").value;
+										var basenameid = $("#basenameid2").val();
+										var deptid = $("#dept2").val();
+										var usernameid = $("#usernameid2").val();
 										$('#tablePay')
 												.DataTable(
 														{
@@ -1005,7 +1547,7 @@ $(document)
 															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 															"bSort" : true,
 															"serverSide" : true,
-															"iDisplayLength": 5,
+															"iDisplayLength": 10,
 															"bDestroy" : true,
 															"dom" : 'tipr<"bottom"l>',
 
@@ -1099,7 +1641,7 @@ $(document)
 																	data = row.la_id;
 																	return '<input type="checkbox" value="'
 																			+ data
-																			+ '" name="idname" class="ck"  />';
+																			+ '" name="iname" class="ck"  />';
 																}
 															} ],
 															"language" : {
@@ -1117,11 +1659,148 @@ $(document)
 																}
 															}
 														});
-										$('.hide_ul').toggle(500);
+										$('.hide_ul').toggle();
 										//document.getElementById("hide_ul2").style.display = "none";
 										recovery2();
 
 										//$('.hide_ul').toggle(500);
 									});
+					// 筛选功能3(刷选tabledue)
+					$(document)
+							.on(
+									"click",
+									"#finishdue",
+									function() {
+
+										var basenameid = $("#basenameid3").val();
+										var deptid = $("#dept3").val();
+										var usernameid = $("#usernameid3").value;
+										$('#tabledue')
+												.DataTable(
+														{
+															"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+															"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+															"bSort" : true,
+															"serverSide" : true,
+															"iDisplayLength": 10,
+															"bDestroy" : true,
+															"dom" : 'tipr<"bottom"l>',
+
+															"ajax" : {
+																"data" : {
+																	"basename" : basenameid,
+																	"username" : usernameid,
+																	"usercollage" : deptid,
+
+																},
+																"url" : "Select2.do?flag=2",
+																"type" : "POST"
+															},
+
+															"aoColumns" : [
+																	{
+																		"mData" : "la_id",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "2%",
+
+																	},
+
+																	{ // aoColumns设置列时，不可以任意指定列，必须列出所有列。
+																		"mData" : "startime",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "2%"
+																	},
+																	{
+																		"mData" : "endtime",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "6%",
+
+																	},
+																	{
+																		"mData" : "basename",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "6%"
+																	},
+																	{
+																		"mData" : "landname",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
+																	},
+																	{
+																		"mData" : "li",
+																		"orderable" : true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "10%"
+																	},
+																	{
+																		"mData" : "username",
+																		"orderable" :false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%"
+																	},
+																	{
+																		"mData" : "usercollage",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%",
+
+																	},
+
+																	{
+																		"mData" : "times",
+																		"orderable" :true, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%",
+
+																	},
+																	{
+																		"mData" : "plant",
+																		"orderable" : false, // 禁用排序
+																		"sDefaultContent" : "",
+																		"sWidth" : "8%",
+
+																	} ],
+															"columnDefs" : [ {
+																"orderable" : false, // 禁用排序
+																"targets" : [ 0 ], // 指定的列
+																"data" : "la_id",
+																"render" : function(
+																		data,
+																		type,
+																		row) {
+																	data = row.la_id;
+																	return '<input type="checkbox" value="'
+																			+ data
+																			+ '" name="iname" class="ck"  />';
+																}
+															} ],
+															"language" : {
+																"lengthMenu" : "每页 _MENU_ 条记录",
+																"zeroRecords" : "没有找到记录",
+																"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+																"infoEmpty" : "无记录",
+																"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+																"sSearch" : "模糊查询：",
+																"oPaginate" : {
+																	"sFirst" : "首页",
+																	"sPrevious" : " 上一页 ",
+																	"sNext" : " 下一页 ",
+																	"sLast" : " 尾页 "
+																}
+															}
+														});
+										$('.hide_ul').toggle();
+										//document.getElementById("hide_ul2").style.display = "none";
+										recovery3();
+										
+									});
+					
+					
+					
 
 				});

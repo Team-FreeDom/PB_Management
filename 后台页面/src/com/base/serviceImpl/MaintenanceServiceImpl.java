@@ -26,7 +26,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
      * 
      */
     @Override
-    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue)
+    public MaintenanceList maintenance(int pageindex, int size,int order,String orderDir,String searchValue,String college)
     {
     	String columnName="";
 		if(order==0||order==2){
@@ -36,16 +36,15 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		}else if(order==9){
 			columnName="star";
 		}
-		System.out.println(order+" order:");
-	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue);
+	  MaintenanceList list=maintenancedao.maintenance(pageindex, size,columnName,orderDir,searchValue,college);
 	  return list;
     }
 
 
 	@Override
-	public void delInfo(String str) {
-		
-		maintenancedao.delInfo(str);
+	public String delInfo(String str) {		
+		String message=maintenancedao.delInfo(str);
+		return message;
 	}
 	
 	@Override
@@ -56,7 +55,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 
 	@Override
-	public MaintenanceList getshaiBaseInfo(int basetype, int dept, int star,
+	public MaintenanceList getshaiBaseInfo(int basetype, String dept, int star,
 			int pageindex, int size,int order,String orderDir,String searchValue) {
 		String columnName="";
 		if(order==0||order==2){
@@ -70,25 +69,38 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 		return list;
 	}
 
-   //���»����Ϣ
-	@Override
-	public void updateBaseInfo(String baseid, int star, String adddate) {
-		maintenancedao.updateBaseInfo(baseid,star,adddate);
-		
-	}
-
+ 
 
 	@Override
-	public List<ExportBase> getExportBaseInfo(int basetype, int dept, int star) {
+	public List<ExportBase> getExportBaseInfo(int basetype, String dept, int star) {
 		List<ExportBase> list=maintenancedao.getInfo(basetype,dept,star);
 		return list;
 	}
 
+      //实习基地维护增加基地
+	@Override
+	public String increaseBaseInfo(String str1, String str2) {		
+		String message=maintenancedao.increaseBaseInfo(str1, str2);
+		return message;
+	}
+
 
 	@Override
-	public void increaseBaseInfo(String str1, String str2) {
-		
-		maintenancedao.increaseBaseInfo(str1, str2);
+	public int judge_insert_base(String userid, String recordStr1,
+			String recordStr2, String recordStr3,int count,String resultStr4) {
+		int flag=maintenancedao.judge_insert_base(userid, recordStr1, recordStr2, recordStr3,count,resultStr4);
+		return flag;
+	}
+
+
+	@Override
+	public String updateBaseInfo(String baseid, String basenamed,
+		String basetyped, String landaread, String buildingaread,
+		int undertakeCountd, String userphoned, String usernamed,
+		String personDuty, String linkAddressd, String adddate, int star) {
+	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star);
+	   return message;
+	    
 	}
 
 }

@@ -16,7 +16,6 @@ import com.base.daoImpl.CheckViewDaoImpl;
 import com.base.daoImpl.LandApplyDaoImpl;
 import com.base.daoImpl.LandApply_viewDaoImpl;
 import com.base.daoImpl.LandInfoDaoImpl;
-import com.base.daoImpl.LandLayoutDaoImpl;
 import com.base.daoImpl.LandLayout_infoDaoImpl;
 import com.base.daoImpl.Land_PlantingDaoImpl;
 import com.base.daoImpl.TemperateSaveDaoImpl;
@@ -35,17 +34,17 @@ import com.base.po.Startplan;
 import com.base.po.TemperateSave;
 import com.base.po.TemperateSave_View;
 import com.base.service.LandApplyService;
+import com.base.utils.BaseUtils;
 import com.base.utils.MessageUtils;
 
 @Service("landApplyService")
 public class LandApplyServiceImpl<E> implements LandApplyService {
-	
+
 	@Autowired
 	private LandApplyDaoImpl landApplyDaoImpl;
 	@Autowired
 	private BaseInfoDaoImpl baseInfoDaoImpl;
-	@Autowired
-	private LandLayoutDaoImpl landLayoutDaoImpl;
+
 	@Autowired
 	private LandInfoDaoImpl landInfoDaoImpl;
 	@Autowired
@@ -58,67 +57,56 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 	private ApplyDeptDaoImpl applyDeptDaoImpl;
 	@Autowired
 	private LandLayout_infoDaoImpl landLayout_infoDaoImpl;
-    @Autowired
-    private CheckViewDaoImpl checkViewDaoImpl;
-	
-	//1.´ú±íÍÁµØ  2.´ú±íĞ£ÄÚ  3.´ú±íĞ£Íâ    
+	@Autowired
+	private CheckViewDaoImpl checkViewDaoImpl;
+
+	// è·å¾—åŸºåœ°åœŸåœ°è¡¨é‡Œçš„åŸºåœ°ä¿¡æ¯
 	@Override
 	public List<BaseInfo> getBaseInfos() {
-		List<BaseInfo> list=baseInfoDaoImpl.getBaseInfos();
+		List<BaseInfo> list = baseInfoDaoImpl.getBaseInfos();
 		return list;
 	}
-	
-	public List<String> getLandLayout(int bid,String planting)
-	{
-		List<Land_Planting> list=land_PlantingDaoImpl.getPlanting(bid, planting);		
-		List<String> str=new ArrayList<String>();	
-		for(Land_Planting lp:list)
-		{
+
+	public List<String> getLandLayout(int bid, String planting) {
+		List<Land_Planting> list = land_PlantingDaoImpl.getPlanting(bid,
+				planting);
+		List<String> str = new ArrayList<String>();
+		for (Land_Planting lp : list) {
 			str.add(String.valueOf(lp.getLid()));
 		}
 		return str;
 	}
-	
-	public List<Land_Planting> getPlanting(int bid)
-	{
-		List<Land_Planting> list=land_PlantingDaoImpl.getPlanting(bid);
+
+	public List<Land_Planting> getPlanting(int bid) {
+		List<Land_Planting> list = land_PlantingDaoImpl.getPlanting(bid);
 		return list;
 	}
 
-	@Override
-	public List<LandLayout> getLandLayout(int bid) {
-		List<LandLayout> list=landLayoutDaoImpl.getLayout(bid);
-		return list;
-	}
-	
-	
+	public List<Land_base> getLand_baseView(String lid) {
 
-    public List<Land_base> getLand_baseView(String lid) {
-		
 		return landInfoDaoImpl.getView(lid);
 	}
-    
-    public List<Land_base> getLand_base(int bid)
-    {
-    	return landInfoDaoImpl.getlandbase(bid);
-    }
+
+	public List<Land_base> getLand_base(int bid) {
+		return landInfoDaoImpl.getlandbase(bid);
+	}
 
 	@Override
 	public List<LandInfo> getLandInfo(String lid) {
-		
+
 		return landInfoDaoImpl.getLandInfo(lid);
 	}
 
 	@Override
 	public void addLandApply(LandApply la) {
 		landApplyDaoImpl.doLandApply(la);
-         
+
 	}
 
-	//²éÑ¯ÓÃ»§¸öÈËËùÓĞµÄÉêÇë¼ÇÂ¼
+	// ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 	@Override
 	public List<LandApply> getUserApplys(String applicantId) {
-		List<LandApply> list=landApplyDaoImpl.getUserApplys(applicantId);
+		List<LandApply> list = landApplyDaoImpl.getUserApplys(applicantId);
 		return list;
 	}
 
@@ -130,254 +118,223 @@ public class LandApplyServiceImpl<E> implements LandApplyService {
 
 	@Override
 	public int getSpareValue(String lid) {
-		// ±£Áô
+		// ï¿½ï¿½ï¿½ï¿½
 		return 0;
 	}
 
-	//7.Ê§Ğ§(ÓÃ»§×ÔĞĞÈ¡Ïû)
+	// 7.Ê§Ğ§(ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½)
 	@Override
 	public void cancelApply(int la_id) {
-		LandApply la=landApplyDaoImpl.getapply(la_id);
+		LandApply la = landApplyDaoImpl.getapply(la_id);
 		la.setStatus(7);
 		landApplyDaoImpl.updateLandApply(la);
 
 	}
-	
-	//»ñµÃÓÃ»§µÄÉêÇëÀúÊ·
+
+	// ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
 	/*
-	 * bname,startTime,endTime,statusÎªÉ¸Ñ¡Ìõ¼ş£¬¹æ¶¨´«Èë´æ´¢¹ı³ÌµÄÕûĞÍ²ÎÊı£¬ÈôÃ»ÓĞ£¬Ôò´«-1
-	 * */
-	public ApplyList getselfApply(String applicantId,String bname,String status,int page,int length)
-	{
-		int start=0;
-		int end=0;
-		int statusZ=0;
-		
-		if(bname!=null&&bname.equals("")){
-			bname=null;			
+	 * bname,startTime,endTime,statusÎªÉ¸Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ£ï¿½ï¿½ï¿½-1
+	 */
+	public ApplyList getselfApply(String applicantId, String bname,
+			String status, int page, int length) {
+		int start = 0;
+		int end = 0;
+		int statusZ = 0;
+
+		if (bname != null && bname.equals("")) {
+			bname = null;
 		}
-		
-		System.out.println(status);
-		if(status==null){
-			statusZ=-1;
-		}else{
-			statusZ=Integer.valueOf(status);
+
+		if (status == null) {
+			statusZ = -1;
+		} else {
+			statusZ = Integer.valueOf(status);
 		}
-		
-		
-		ApplyList al=landApply_viewDaoImpl.getapplys(applicantId, bname,statusZ, page, length);
-		
+
+		ApplyList al = landApply_viewDaoImpl.getapplys(applicantId, bname,
+				statusZ, page, length);
+
 		return al;
 	}
-	
-	
-	//»ñÈ¡ÓÃ»§²»Í¬×´Ì¬µÄÉêÇë¼ÇÂ¼
-	public List<LandApply_view> getselfApply(String applicantId,int status)
-	{
-		List<LandApply_view> list=landApply_viewDaoImpl.getapplys(applicantId, status);
+
+	// ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Í¬×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
+	public List<LandApply_view> getselfApply(String applicantId, int status) {
+		List<LandApply_view> list = landApply_viewDaoImpl.getapplys(
+				applicantId, status);
 		return list;
 	}
-	
-	public List<LandApply_view> myRentdetail(int la_id)
-	{
-		List<LandApply_view> list=landApply_viewDaoImpl.getapplys(la_id);
+
+	public List<LandApply_view> myRentdetail(int la_id) {
+		List<LandApply_view> list = landApply_viewDaoImpl.getapplys(la_id);
 		return list;
-	}	
-  
-    
-    public ApplyList myRentFont1(String applicantId,int page,int length)
-    {   	
-    	
-    	ApplyList al=landApply_viewDaoImpl.getapply(applicantId, page, length);    	
-    	
-    	return al;
-    }   
-  
-    
-    public void myFameCancel1(int la_id,String info_str,int tag)
-    {
-    	 //»ñµÃ²åÈëµÄÏûÏ¢Óï¾ä
-  	    String insertStr=MessageUtils.getInsertStr(info_str,7);	
-  	  
-    	LandApply la=landApplyDaoImpl.getapply(la_id);   	
-    	//½«´Ë¼ÇÂ¼µÄ×´Ì¬¸ÄÎªÊ§Ğ§11
-        la.setStatus(11);        
-        //¸üĞÂ´Ë¼ÇÂ¼
-        landApplyDaoImpl.updateLandApply(la);
-        
-        //ÏòÏûÏ¢±íÖĞ²åÈëÊı¾İ
-        checkViewDaoImpl.insertMessage(insertStr);
-        String landstr=la.getLid();
-        landstr='('+landstr+')';
-        if(tag==1){
-        	
-        	//°ÑÏàÍ¬ÍÁµØµÄ×´Ì¬ÎªËø¶¨µÄÍÁµØ×´Ì¬±äÎªÉóºËÖĞ
-    		checkViewDaoImpl.releaseInfo(landstr);
-        }
-        
-    }
-    
-    public void myFrameSubmit(int la_id){
-    	
-    	TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
-    	
-    	LandApply la=new LandApply();
-    	la.setApplicantId(ts.getApplicantId());
-    	la.setEndTime(ts.getEndTime());
-    	la.setLid(ts.getLid());
-    	la.setPlanting(ts.getPlanting());
-    	la.setStartTime(ts.getStartTime());
-    	la.setStatus(2);
-    	la.setResource(ts.getResource());
-    	la.setApplyDept(ts.getApplyDept());
-    	landApplyDaoImpl.doLandApply(la);
-    	
-    	temperateSaveDaoImpl.delTemperate(la_id);
-    	
-    }
-    
-    public void myFrameDel1(int la_id)
-    {
-    	temperateSaveDaoImpl.delTemperate(la_id);
-    }
-    
-    public List<TemperateSave_View> getTs(int la_id)
-    {
-    	List<TemperateSave_View> tsv=temperateSaveDaoImpl.getTemperates(la_id);
-    	return tsv;
-    }
-    
-   public List<LandApply_view> getUnionInfo(String applicantId,String bname,String startTime,String endTime,String lid,String desc ){
-	   
-	   LandApply_view lav=new LandApply_view();
-	   lav.setApplicantId(applicantId);
-	   lav.setBname(bname);
-	   lav.setStartTime(startTime);
-	   lav.setEndTime(endTime);
-	   lav.setLid(lid);
-	   lav.setDescp(desc);
-	   
-	   List<LandApply_view> list=landApply_viewDaoImpl.getAllStudents(lav);
-	   return list;
-   }
-    
-   public List<ApplyDept> getDepts()
-   {
-	   List<ApplyDept> list=applyDeptDaoImpl.getDepts();
-	   return list;
-   }
-   
-   public void updateContent(int la_id,String lid,int dept,String planting,String filename,String path)
-   {
-	   TemperateSave ts=temperateSaveDaoImpl.getTemperate(la_id);
-	   ts.setLid(lid);
-	   ts.setPlanting(planting);
-	   ts.setApplyDept(dept);
-	   if(filename!=null)
-	   {
-		   String relativePath=ts.getResource();
-		   if(relativePath!=null)
-		   {		   
-		   relativePath=relativePath.substring(2);
-			File file=new File(path+relativePath);			
-			file.delete(); 
-		   }
-		   ts.setResource(filename);
-	   }
-	   temperateSaveDaoImpl.updateTemperate(ts);
-	   
-   }
-   
-   public List<Layout_InfoView>  getLayout()
-   {
-	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info();
-	   return list;
-   }
-   
-   public List<Layout_InfoView>  getDifferLayout(int bid)
-   {
-	   List<Layout_InfoView> list=landLayout_infoDaoImpl.getlayout_info(bid);
-	   return list;
-   }
-   
-   public void  delLayout_info(int bid,String path)
-   {
-	  /* List<String> list=new ArrayList<String>();
-	   list=landInfoDaoImpl.deletelandimg(bid);
-	   for(int i=0;i<list.size();i++)
-	   {
-		   String relativePath=list.get(i);
-		   System.out.println(path+relativePath.substring(2));
-		   if(relativePath!=null)
-		   {		   
-		   relativePath=relativePath.substring(2);
-			File file=new File(path+relativePath);			
-			file.delete(); 
-		   }
-	   }*/
-	   landInfoDaoImpl.delLayout_info(bid);
-   }
+	}
 
-   
-   public void updateLayInfo(String landinfoStr,String layoutStr)
-   {
-	   landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr);
-   }
-   
-  
-// ×âÁŞÉêÇëÊ±£¬»ñÈ¡ÍÁµØ²¼¾Ö+ÍÁµØ»ù±¾ĞÅÏ¢+ÍÁµØÏÖ×âÁŞÇé¿ö+ÍÁµØ×âÁŞÀúÊ·
-   public List<RentCollection> getRentCollection(int bid)
-   {
-	   List<RentCollection> list=landApplyDaoImpl.getRentCollection(bid);
-	   
-	   return list;
-   }
-  
-   //Ìá½»×âÁŞÉêÇë
-   public int submitLandApply(String userid,String lidList,String str,String info_str)
-   {
-	  	 		
-	  //Ìá½»ÉêÇë 
-	   int flag=landApplyDaoImpl.submitApply(userid,lidList,str);
-	   
-	   if(flag==1){
-		   
-	   //»ñµÃ²åÈëµÄÏûÏ¢Óï¾ä
-		  String insertStr=MessageUtils.getInsertStr(info_str,1);	
-		  
-	 //ÏòÏûÏ¢±íÖĞ²åÈëĞÅÏ¢ 
-		  checkViewDaoImpl.insertMessage(insertStr);
-	   }
-	   
+	public ApplyList myRentFont1(String applicantId, int page, int length) {
+
+		ApplyList al = landApply_viewDaoImpl
+				.getapply(applicantId, page, length);
+
+		return al;
+	}
+
+	public int myFameCancel1(int la_id, String info_str, int tag) {
+
+		String str = null;
+		String landstr = null;
+		LandApply la = null;
+		// è·å–æ¶ˆæ¯sqlè¯­å¥
+		String insertStr = MessageUtils.getInsertStr(info_str, 7);
+		int flag = landApplyDaoImpl.cancelIt(la_id, tag);
+		if(flag==200){
+			checkViewDaoImpl.insertMessage(insertStr);
+		}		
 		return flag;
-	   
-   }
+	}
 
-@Override
-public void updateLandApplyDate(Startplan sp) {
-	// TODO Auto-generated method stub
-	landApplyDaoImpl.updateLandApplyDate(sp);
-	return;
-}
+	public void myFrameSubmit(int la_id) {
 
-@Override
-public List<Startplan> getLandApplyDate() {
-	// TODO Auto-generated method stub
-	return landApplyDaoImpl.getLandApplyDate();
-}
+		TemperateSave ts = temperateSaveDaoImpl.getTemperate(la_id);
 
-@Override
-public Startplan getStartPlan(String id){
-	
-	Startplan sp=landApplyDaoImpl.getStartPlan(id);
-	
-	return sp;
-}
+		LandApply la = new LandApply();
+		la.setApplicantId(ts.getApplicantId());
+		la.setEndTime(ts.getEndTime());
+		la.setLid(ts.getLid());
+		la.setPlanting(ts.getPlanting());
+		la.setStartTime(ts.getStartTime());
+		la.setStatus(2);
+		la.setResource(ts.getResource());
+		la.setApplyDept(ts.getApplyDept());
+		landApplyDaoImpl.doLandApply(la);
 
-public void endStartPlan(){
-	
-	landApplyDaoImpl.endAllRent();	
-	
-}
-   
+		temperateSaveDaoImpl.delTemperate(la_id);
+
+	}
+
+	public void myFrameDel1(int la_id) {
+		temperateSaveDaoImpl.delTemperate(la_id);
+	}
+
+	public List<TemperateSave_View> getTs(int la_id) {
+		List<TemperateSave_View> tsv = temperateSaveDaoImpl
+				.getTemperates(la_id);
+		return tsv;
+	}
+
+	public List<LandApply_view> getUnionInfo(String applicantId, String bname,
+			String startTime, String endTime, String lid, String desc) {
+
+		LandApply_view lav = new LandApply_view();
+		lav.setApplicantId(applicantId);
+		lav.setBname(bname);
+		lav.setStartTime(startTime);
+		lav.setEndTime(endTime);
+		lav.setLid(lid);
+		lav.setDescp(desc);
+
+		List<LandApply_view> list = landApply_viewDaoImpl.getAllStudents(lav);
+		return list;
+	}
+
+	public List<ApplyDept> getDepts() {
+		List<ApplyDept> list = applyDeptDaoImpl.getDepts();
+		return list;
+	}
+
+	public void updateContent(int la_id, String lid, int dept, String planting,
+			String filename, String path) {
+		TemperateSave ts = temperateSaveDaoImpl.getTemperate(la_id);
+		ts.setLid(lid);
+		ts.setPlanting(planting);
+		ts.setApplyDept(dept);
+		if (filename != null) {
+			String relativePath = ts.getResource();
+			if (relativePath != null) {
+				relativePath = relativePath.substring(2);
+				File file = new File(path + relativePath);
+				file.delete();
+			}
+			ts.setResource(filename);
+		}
+		temperateSaveDaoImpl.updateTemperate(ts);
+
+	}
+
+	public List<Layout_InfoView> getLayout() {
+		List<Layout_InfoView> list = landLayout_infoDaoImpl.getlayout_info();
+		return list;
+	}
+
+	public List<Layout_InfoView> getDifferLayout(int bid) {
+		List<Layout_InfoView> list = landLayout_infoDaoImpl.getlayout_info(bid);
+		return list;
+	}
+
+	public String delLayout_info(int bid, String path) {
+		
+		int flag = landInfoDaoImpl.delLayout_info(bid);
+		String str = BaseUtils.getException(flag);
+		return str;
+	}
+
+	public String updateLayInfo(String landinfoStr, String layoutStr, int bid) {
+		int flag = landInfoDaoImpl.doLayout_info(landinfoStr, layoutStr, bid);
+		String str = BaseUtils.getException(flag);
+		return str;
+	}
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Ï¢+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
+	public List<RentCollection> getRentCollection(int bid) {
+		List<RentCollection> list = landApplyDaoImpl.getRentCollection(bid);
+
+		return list;
+	}
+
+	// ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public int submitLandApply(String userid, String lidList, String str,
+			String info_str) {
+
+		// ï¿½á½»ï¿½ï¿½ï¿½ï¿½
+		int flag = landApplyDaoImpl.submitApply(userid, lidList, str);
+
+		if (flag == 200) {
+
+			// ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
+
+			String insertStr = MessageUtils.getInsertStr(info_str, 1);
+
+			// ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ğ²ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+			checkViewDaoImpl.insertMessage(insertStr);
+		}
+
+		return flag;
+
+	}
+
+	@Override
+	public void updateLandApplyDate(Startplan sp) {
+		// TODO Auto-generated method stub
+		landApplyDaoImpl.updateLandApplyDate(sp);
+		return;
+	}
+
+	@Override
+	public List<Startplan> getLandApplyDate() {
+		// TODO Auto-generated method stub
+		return landApplyDaoImpl.getLandApplyDate();
+	}
+
+	@Override
+	public Startplan getStartPlan(String id) {
+
+		Startplan sp = landApplyDaoImpl.getStartPlan(id);
+
+		return sp;
+	}
+
+	public void endStartPlan() {
+
+		landApplyDaoImpl.endAllRent();
+
+	}
+
 }

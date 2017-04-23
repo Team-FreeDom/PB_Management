@@ -1,10 +1,12 @@
 var obj=[];
 var obj2=[];
+var index;
+var indexCheck;
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
@@ -155,7 +157,7 @@ $(document).ready(function() {
 	
 	var Spage2 = $('#basecheck2').DataTable(
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30  ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
@@ -345,6 +347,7 @@ $(document).ready(function() {
 	//同意申请
 	// //////////状态值1： 2： 3： 4： 。。。。。。。
 	$('#confirmDate').click(function() {
+		
 		var timeNum=0;var endNum=0;
 		var reg=/^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
 		              	$(".endtimeflag").each(function(){
@@ -363,6 +366,7 @@ $(document).ready(function() {
 		              		return;
 		              	}
 		              	var timeflag=0; var timeflag2=0; 
+		              	
 		              	$("#increase1 tr").each(function(){
 		              		timeflag2++;
 		              		var start=$(this).find(".starttimeflag").val().split("-");
@@ -406,10 +410,15 @@ $(document).ready(function() {
 						var basename;
 						var buildtime;
 						var endtime;
-						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {					
+						var name=[];
+						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {
+							/*for(var i=0;i<name.length;i++){
+								alert(name[i]);
+							}*/
 							
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
+							name.push(basename);
 							buildtime=$(this).closest('tr').find('td:eq(5) input').val();
 							endtime=$(this).closest('tr').find('td:eq(7) input').val();
 							if(i!=0){
@@ -424,29 +433,81 @@ $(document).ready(function() {
 							}					
 											
 								i++;
-							});					
-	                    
+							});					                    
 	                    infostr=infostr+']';
-	                    recorddigit=recorddigit+')';                    
-	                   
-	                  
-	                    $.ajax({
-							url : 'BasereAgreeApply.do',
-							type : 'post',
-							dataType : 'json',
-							data : {
-								"recordstr" : recordstr,								
-								"infostr" : infostr,
-								"recorddigit":recorddigit
-							},
-							success : function(msg) {						
-								$("#valideDate").val("10");
-								$("#applyConfirm").modal('hide');
-								getDept();
-								Spage.draw(false);
-								}
-							
-						});	                    
+	                    recorddigit=recorddigit+')'; 
+	                    outer:
+						for(var j=0;j<name.length;j++){							
+							for(var t=j+1;t<name.length;t++){								
+								if(name[j]==name[t]){									
+									indexCheck=0;
+									break outer;
+								}else{
+									indexCheck=1;									
+								}																	
+							}							
+						}
+						//alert(indexCheck);
+						if(indexCheck==0){
+							bootbox.alert({
+								message : "不允许选择相同的基地名字的条数,请检查",
+								size : 'small'
+							});
+							$("#valideDate").val("10");
+							$("#applyConfirm").modal('hide');
+						}else{						
+							$.ajax({
+								url : 'BasereAgreeApply.do?index=1',
+								type : 'post',
+								//dataType : 'json',
+								data : {								
+									"recorddigit":recorddigit
+								},
+								success : function(msg) {															
+									if(msg==1){
+										bootbox.alert({
+											message : "您选的信息里其中有一条基地名称已存在,请检查",
+											size : 'small'
+										});
+										
+									}else{
+										$.ajax({
+											url : 'BasereAgreeApply.do?index=0',
+											type : 'post',
+											//dataType : 'json',
+											data : {
+												"recordstr" : recordstr,								
+												"infostr" : infostr,
+												"recorddigit":recorddigit
+											},
+											success : function(msg) {															
+												if(msg==0){
+													bootbox.alert({
+														message : "同意失败请刷新页面",
+														size : 'small'
+													});													
+												}else if(msg==200){
+													bootbox.alert({
+														message :  "操作成功",
+														size : 'small'
+													});
+													getDept();
+													Spage.draw(false);
+												}else if(msg==500){
+													bootbox.alert({
+														message :  "操作失败",
+														size : 'small'
+													});
+												}
+												$("#valideDate").val("10");
+												$("#applyConfirm").modal('hide');								
+												}
+											
+										});											
+									}																	
+									}							
+							});	  
+						}                    
 					});
 	
 	//拒绝申请
@@ -455,7 +516,8 @@ $('#certain').click(function() {
 
 			var i=0;
 			var recordstr='';
-			var infostr="[";			
+			var infostr="[";
+			var recorddigit='(';
 			var userid;
 			var basename;
 			var reason;
@@ -466,16 +528,19 @@ $('#certain').click(function() {
 				if(i!=0){
 					recordstr=recordstr+",("+this.className+",'"+reason+"',12)";
 					infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+					recorddigit=recorddigit+','+this.className;
 					
 				}else{
 					recordstr=recordstr+"("+this.className+",'"+reason+"',12)";
 					infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+					recorddigit=recorddigit+this.className;
 				}					
 								
 					i++;
 				});		
         
-         infostr=infostr+']';         
+         infostr=infostr+']';  
+         recorddigit=recorddigit+')';  
          $.ajax({
 				url : 'BaserefuseApply.do',
 				type : 'post',
@@ -484,12 +549,30 @@ $('#certain').click(function() {
 					"recordstr" : recordstr,
 					"infostr" : infostr,
 					"reason":reason,
+					"recorddigit":recorddigit,
 				},
-				success : function(msg) {						
+				success : function(msg) {
+					if(msg==0){
+						bootbox.alert({
+							message : "拒绝申请失败请刷新页面",
+							size : 'small'
+						});
+						
+					}else if(msg==200){
+						bootbox.alert({
+							message : "操作成功",
+							size : 'small'
+						});		
+						getDept();
+						Spage.draw(false);
+					}else if(msg==500){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});		
+					}											
 					$("#reason").val("");
 					$("#reasonConfirm").modal('hide');
-					getDept();
-					Spage.draw(false);
 					}
 				
 			});
@@ -588,7 +671,8 @@ $('#certainAdd').click(function() {
 
 	var i=0;
 	var recordstr='';
-	var infostr="[";			
+	var infostr="[";
+	var recorddigit='(';
 	var userid;
 	var basename;
 	var reason;
@@ -598,31 +682,53 @@ $('#certainAdd').click(function() {
 		reason=$(this).closest('tr').find('td:eq(4) textarea').val();
 		if(i!=0){
 			recordstr=recordstr+",("+this.className+",'"+reason+"',17)";
-			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+',{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
+			recorddigit=recorddigit+','+this.className;
 			
 		}else{
 			recordstr=recordstr+"("+this.className+",'"+reason+"',17)";
-			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'"}';
+			infostr=infostr+'{userid:"'+userid+'",basename:"'+ basename+'",reason:"'+reason+'"}';
+			recorddigit=recorddigit+this.className;
 		}					
 						
 			i++;
 		});		
 
- infostr=infostr+']';         
+ infostr=infostr+']'; 
+ recorddigit=recorddigit+')';  
  $.ajax({
-		url : 'BaserefuseApply.do',
+		url : 'refuseAddApply.do',
 		type : 'post',
 		dataType : 'json',
 		data : {
+			"recorddigit":recorddigit,
 			"recordstr" : recordstr,
 			"infostr" : infostr,
 			"reason":reason,
 		},
-		success : function(msg) {						
-			$("#reasonAdd").val("");
-			$("#addDateConfirm").modal('hide');
-			getDept();
-			Spage2.draw(false);
+		success : function(msg) {	
+			if(msg==0){
+				bootbox.alert({
+					message : "拒绝续期失败请刷新页面",
+					size : 'small'
+				});
+				$("#addDateConfirm").modal('hide');
+			}else if(msg==200){
+				bootbox.alert({
+					message : "操作成功",
+					size : 'small'
+				});
+				$("#reasonAdd").val("");
+				$("#addDateConfirm").modal('hide');
+				getDept();
+				Spage2.draw(false);
+			}else if(msg==500){
+				bootbox.alert({
+					message : "操作失败",
+					size : 'small'
+				});
+			}
+			
 			}
 		
 	});
@@ -701,16 +807,28 @@ $(document).on("click", "#confirm2", function() {
 			dataType : 'json',
 			data : {
 				"recordstr" : agreestr,
-				"infostr":infostr
+				"infostr":infostr,
 			},
 			success : function(msg) {
-				bootbox.alert({
-					message : msg.str,
-					size : 'small'
-				});
-				getDept();
-				Spage2.draw(false);
-				Spage1.draw(false);
+				if(msg==0){
+					bootbox.alert({
+						message : "同意续期失败请刷新页面",
+						size : 'small'
+					});
+				}else if(msg==200){
+					bootbox.alert({
+						message : "操作成功",
+						size : 'small'
+					});
+					getDept();
+					Spage2.draw(false);
+					Spage1.draw(false);
+				}else if(msg==500){
+					bootbox.alert({
+						message : "操作失败",
+						size : 'small'
+					});
+				}							
 			}	
 });
 });
@@ -777,15 +895,16 @@ $("#submitS").click(function() {
 	obj=[];	
 	$('#basecheck').DataTable( //getXUBaseCheck.do
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
+				"bFilter": true,
 				"iDisplayLength": 10,	
 				"bDestroy":true,
 				"processing":true,
-				"dom" : 'tipr<"bottom"l>',
+				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
 					"url" : "getXUBaseCheck.do",
 					"type" : "POST",
@@ -929,23 +1048,29 @@ $("#submitS").click(function() {
 	$('.hide_ul').toggle(100);
 	
 	});
-
-$("#submitS2").click(function() {	
+$("#Baseapply").click(function() {
+	Spage.draw(true);
+});
+$("#Renewal").click(function() {
+	Spage2.draw(true);
+});
+$("#submitS2").click(function() {
 	var dept=$('#deptSh2').children('option:selected').val();	
 	obj2=[];	
 	$('#basecheck2').DataTable( //getXUBaseCheck.do
 			{
-				"aLengthMenu" : [ 5, 10, 15, 20 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : true,
 				"ordering":true,
 				"serverSide" : true,
 				"iDisplayLength": 10,	
 				"bDestroy":true,
+				"bFilter": true,
 				"processing":true,
-				"dom" : 'tipr<"bottom"l>',
+				"dom" : 'ftipr<"bottom"l>',
 				"ajax" : {
-					"url" : "getXUBaseCheck.do",
+					"url" : "getBushaddCheck.do",
 					"type" : "POST",
 					"data":{"dept":dept}
 				},
@@ -1106,6 +1231,7 @@ $("#submitS2").click(function() {
 	});
 
 });
+
 
 function getDept(){
 	

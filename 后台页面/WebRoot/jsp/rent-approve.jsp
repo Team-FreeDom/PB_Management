@@ -36,19 +36,17 @@
 						class="icon-align-justify"></i></a></li>
 			</ul>
 
-			<span class="teachCenterTitle">基地管理系统</span>
+			<span class="teachCenterTitle">基地实习综合管理系统</span>
 			<!-- Navbar Left -->
 
 			<!-- Navbar Right -->
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs">
-					 <a href="getMessage.do" class="dropdown-toggle notification-icon">
-                          <i class="icon-envelope"><span class="badge msg"></span></i>
-                              <!--ms-if-->
-                      </a>
-						<!-- <ul class="dropdown-menu">
+					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
+						class="dropdown-toggle notification-icon"> <i
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a> <!-- <ul class="dropdown-menu">
 							<li class="dropdown-header" style="text-align: center;"><strong>未读消息列表</strong>
 							</li>
 							<li class="dropdown-menu-footer text-center"><a
@@ -75,8 +73,7 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="#" target="_blank"><img
-							src="../image/manage-logo.png" alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
@@ -85,8 +82,8 @@
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="user.jsp"><img class="img-circle bk-img-60" alt=""
-											src="" id="imageMain"></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" src="" id="imageMain"></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -105,45 +102,69 @@
 										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
+										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
+										<li><a href="baseApply.jsp"><span class="text"></span>基地申报</a></li>
+										<li><a href="Repairpply.jsp"><span class="text"></span>报修申请</a></li>
+										<li><a href="practiapply.jsp"><span class="text"></span>实习申请</a></li>
 										<li><a href="myRent.jsp"><span class="text">我的租赁</span></a></li>
-									
-										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 										<li><a href="myBase.jsp"><span class="text">我的基地</span></a></li>
+										<li><a href="myrepair.jsp"><span class="text">我的报修</span></a></li>
 									</ul></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
+								<li class="menuItem nav-parent opened nav-expanded"
+									${(visitRight[0]==0&&visitRight[1]==0&&visitRight[2]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>审批工作</span>
 								</a>
 									<ul class="nav nav-children">
-                                            <li><a href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
-                                           
-                                            <li><a href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
-                                            <li><a href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+										<li ${visitRight[0]==0?"style='display:none;'":" "}><a
+											href="rent-approve.jsp"><span class="text">租赁审批</span></a></li>
 
-										</ul>
-								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
+										<li ${visitRight[2]==0?"style='display:none;'":" "}><a
+											href="baseCheck.jsp"><span class="text">基地审批</span></a></li>
+										<li ${visitRight[1]==0?"style='display:none;'":" "}><a
+											href="repairApprove.jsp"><span class="text">维修审批</span></a></li>
+
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
-                                        	<li><a href="notification.do"><span class="text"> 发布通知公告</span></a></li>
-                                        	<li><a href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
-                                            <li><a href="fieldRent_maintain.jsp"><span class="text"> 土地租赁维护</span></a></li>
-                                            <li><a href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
-                                             <li><a href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
-                                            <li><a href="practicePlanMaintain.jsp"><span class="text"> 实习计划维护</span></a></li>
-                                             <li><a href="start.jsp"><span class="text"> 工作计划制定</span></a></li>
-                                            <li><a href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
-                                            <li><a href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
-										</ul></li>
-								<li class="menuItem nav-parent"><a> <i
+										<li ${visitRight[3]==0?"style='display:none;'":" "}><a
+											href="notification.do"><span class="text"> 发布通知公告</span></a></li>
+										<li ${visitRight[4]==0?"style='display:none;'":" "}><a
+											href="land_modle.jsp"><span class="text"> 土地布局设置</span></a></li>
+										<li ${visitRight[6]==0?"style='display:none;'":" "}><a
+											href="fieldRent_maintain.jsp"><span class="text">
+													土地租赁维护</span></a></li>
+										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
+											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
+											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
+										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
+											href="practicePlanMaintain.jsp"><span class="text">
+													实习计划维护</span></a></li>
+										<li ${visitRight[10]==0?"style='display:none;'":" "}><a
+											href="start.jsp"><span class="text"> 租赁计划制定</span></a></li>
+										<li ${visitRight[8]==0?"style='display:none;'":" "}><a
+											href="mangeruser.jsp"><span class="text"> 系统用户维护</span></a></li>
+										<li ${visitRight[9]==0?"style='display:none;'":" "}><a
+											href="system_power.jsp"><span class="text"> 系统权限设置</span></a></li>
+									</ul>
+								</li>
+								<li class="menuItem nav-parent"
+									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										<li><a href="#"><span class="text">租赁统计</span></a></li>
-										<li><a href="#"><span class="text">实习分析</span></a></li>
-										<li><a href="#"><span class="text">实习基地统计</span></a></li>
-									</ul></li>
 
+										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
+
+									</ul></li>
+								<li><a href="#"> <i class="icon-copy"
+										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -170,13 +191,14 @@
 						</ol>
 					</div>
 					<div class="pull-right">
-							<ol class="breadcrumb visible-sm visible-md visible-lg wz">
-								<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
+						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
+							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
                                 <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
                                 <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
                                 <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
-							</ol>
-						</div>
+						</ol>
+					</div>
+
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
@@ -190,6 +212,8 @@
 										role="tab" data-toggle="tab" id="NoCheck">未审核</a></li>
 									<li role="presentation"><a href="#profile" role="tab"
 										data-toggle="tab" id="PayM">交费中</a></li>
+									<li role="presentation"><a href="#overdue" role="tab"
+										data-toggle="tab" id="overdue1">逾期</a></li>
 								</ul>
 							</div>
 						</div>
@@ -204,15 +228,8 @@
 									width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
+
+											<td colspan="8">
 												<ul class="dropdown_show">
 													<li><span class="icon-filter">筛选</span>
 														<ul class="hide_ul" style="display:none">
@@ -221,12 +238,13 @@
 																	<table class="table">
 																		<tr>
 																			<td>基地名： <select name="bname" id="basenameid">
-																					<option value="" id="selectallbase">显示全部</option>
+																					<option value="" id="selectallbase" class="aa">显示全部</option>
 																					<!--  <option value="">耘园科教综合基地</option>
                                                                       <option value="">西南角农学基地</option>	 -->
 																			</select>  
 																			</td>
-																			<td>申请人: <select name="username" id="usernameid">
+																			<td>申请人: <select name="username" id="usernameid"
+																				class="bb">
 																					<option value="" id="applicantId">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
@@ -235,14 +253,15 @@
 
 
 																		</tr>
-                                                                        <tr>
-                                                                          <td colspan="2">学院: <select name="dept" id="dept">
+																		<tr>
+																			<td colspan="2">学院: <select name="dept"
+																				id="dept" class="cc">
 																					<option value="" id="selectdept">显示全部</option>
 																					<!--  <option value="">信息科学技术学院</option>
                                                                           <option value="">动科院</option>	 -->
 																			</select>  
 																			</td>
-                                                                        </tr>
+																		</tr>
 																		<tr>
 																			<td colspan="3">
 																				<button type="reset" class="btn btn-primary">重置</button>
@@ -257,20 +276,22 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2">
+												<!-- <button type="button" class="btn btn-primary">导出</button> -->
+											</td>
 										</tr>
 										<tr style="background:#eeeff4">
 
 											<th>序号</th>
 											<th>开始日期</th>
-											<th>结束日期	</th>
+											<th>结束日期</th>
 											<th>基地名</th>
 											<th>土地编号</th>
 											<th>土地名称</th>
 											<th>申请人</th>
 											<th>申报部门</th>
 											<th>已租用次数</th>
-											<th>种植内容	</th>
+											<th>种植内容</th>
 
 										</tr>
 									</thead>
@@ -301,7 +322,9 @@
 								<div class="modal-content" style="border:#3071a9 8px solid">
 									<div class="modal-header"
 										style="background:#3071a9; color:#FFF">
-										<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+										<button type="button" class="close" data-dismiss="modal">
+											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+										</button>
 										<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 									</div>
 									<div class="modal-body table-responsive">
@@ -351,15 +374,8 @@
 								<table id="tablePay" class="hover" cellspacing="0" width="100%">
 									<thead>
 										<tr bgcolor="#ECF1F5">
-											<td colspan="3"><!-- 排序<span
-												class="glyphicon glyphicon-sort-by-attributes"></span> <select
-												name="" id="">
-													<option value="">默认</option>
-													<option value="">租用次数降次</option>
-													<option value="">租用次数</option>
-											</select>  -->
-											</td>
-											<td colspan="5">
+
+											<td colspan="8">
 												<ul class="dropdown_show">
 													<li><span class="icon-filter">筛选</span>
 														<ul class="hide_ul" style="display:none;">
@@ -368,20 +384,20 @@
 																	<table class="table">
 																		<tr>
 																			<td>基地名： <select name="bname2" id="basenameid2">
-																					<option value="" id="selectallbase2">显示全部</option>
+																					<option value="" id="selectallbase2" class="aa">显示全部</option>
 																					<!--  <option value="">耘园科教综合基地</option>
                                                                       <option value="">西南角农学基地</option>	 -->
 																			</select>  
 																			</td>
 																			<td>申请人: <select name="username2"
 																				id="usernameid2">
-																					<option value="" id="applicantId2">显示全部</option>
+																					<option value="" id="applicantId2" class="bb">显示全部</option>
 																					<!--  <option value="">李彩</option>
                                                                       <option value="">彭心雨</option>	 -->
 																			</select>
 																			</td>
 																			<td>学院: <select name="dept2" id="dept2">
-																					<option value="" id="selectdept2">显示全部</option>
+																					<option value="" id="selectdept2" class="cc">显示全部</option>
 																					<!--  <option value="">信息科学技术学院</option>
                                                                           <option value="">动科院</option>	 -->
 																			</select>  
@@ -402,7 +418,9 @@
 														</ul></li>
 												</ul>
 											</td>
-											<td colspan="2"><!-- <button type="button" class="btn btn-primary">导出</button> --></td>
+											<td colspan="2">
+												<!-- <button type="button" class="btn btn-primary">导出</button> -->
+											</td>
 										</tr>
 										<tr style="background:#eeeff4">
 											<th>序号</th>
@@ -435,13 +453,113 @@
 								</table>
 							</form>
 						</div>
+
+
+						<div role="tabpanel" class="tab-pane" id="overdue">
+							<form action="" method="post" enctype="multipart/form-data"
+								name="formCheck" id="formCheck">
+								<!-- onSubmit="return check1()" -->
+								<table id="tabledue" class="hover" cellspacing="0" width="100%">
+									<thead>
+										<tr bgcolor="#ECF1F5">
+
+											<td colspan="8">
+												<ul class="dropdown_show">
+													<li><span class="icon-filter">筛选</span>
+														<ul class="hide_ul" style="display:none">
+															<li>
+																<form>
+																	<table class="table">
+																		<tr>
+																			<td>基地名： <select name="bname" id="basenameid3"
+																				class="aa">
+																					<option value="" id="selectallbase3">显示全部</option>
+																					<!--  <option value="">耘园科教综合基地</option>
+                                                                      <option value="">西南角农学基地</option>	 -->
+																			</select>  
+																			</td>
+																			<td>申请人: <select name="username"
+																				id="usernameid3" class="bb">
+																					<option value="" id="applicantId3">显示全部</option>
+																					<!--  <option value="">李彩</option>
+                                                                      <option value="">彭心雨</option>	 -->
+																			</select>
+																			</td>
+
+
+																		</tr>
+																		<tr>
+																			<td colspan="2">学院: <select name="dept"
+																				id="dept3" class="cc">
+																					<option value="" id="selectdept3">显示全部</option>
+																					<!--  <option value="">信息科学技术学院</option>
+                                                                          <option value="">动科院</option>	 -->
+																			</select>  
+																			</td>
+																		</tr>
+																		<tr>
+																			<td colspan="3">
+																				<button type="reset" class="btn btn-primary">重置</button>
+																				<button id="finishdue" type="button"
+																					class="btn btn-primary">完成</button>
+																			</td>
+
+																		</tr>
+																	</table>
+																</form>
+															</li>
+														</ul></li>
+												</ul>
+											</td>
+											<td colspan="2">
+												<!-- <button type="button" class="btn btn-primary">导出</button> -->
+											</td>
+										</tr>
+										<tr style="background:#eeeff4">
+
+											<th>序号</th>
+											<th>开始日期</th>
+											<th>结束日期</th>
+											<th>基地名</th>
+											<th>土地编号</th>
+											<th>土地名称</th>
+											<th>申请人</th>
+											<th>申报部门</th>
+											<th>已租用次数</th>
+											<th>种植内容</th>
+
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+									</tbody>
+									<thead>
+										<tr>
+											<td colspan="2"><label><input type="checkbox"
+													name="0" id="ck3" />全选</label></td>
+											<td colspan="8">
+												<button type="button" class="btn btn-primary"
+													id="overdueOne" name="overdueOne">恢复期限</button>
+
+											</td>
+										</tr>
+									</thead>
+								</table>
+							</form>
+						</div>
+
+
 					</div>
 					<div class="modal fade" id="scan2" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
 								<div class="modal-header" style="background:#3071a9; color:#FFF">
-									<div class="glyphicon glyphicon-remove closeModal" data-dismiss="modal" ></div>
+									<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+									</button>
 									<h4 class="modal-title text-center" id="myModalLabel">土地租赁详情</h4>
 								</div>
 								<div class="modal-body table-responsive">
@@ -500,13 +618,12 @@
 		<script src="../js/respond.min.js"></script>
 	<![endif]-->
 	<script src="../js/jquery.min.js"></script>
-
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../js/bootbox.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/rent-approve.js"></script>
-    <script src="../js/kg.js"></script>
+	<script src="../js/kg.js"></script>
 	<script>
 		/* new YMDselect('year1','month1','day1');
 		new YMDselect('year2','month2','day2'); */

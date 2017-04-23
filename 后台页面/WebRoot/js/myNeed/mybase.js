@@ -34,20 +34,20 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "landarea",
+						"mData" : "resperson",
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					}, 
 					
 					{
-						"mData" : "constructionarea",					
+						"mData" : "username",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					},
 					{
-						"mData" : "undertake",					
+						"mData" : "phone",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
@@ -197,20 +197,20 @@ $(document).ready(function() {
 						"sWidth" : "8%",
 
 					}, {
-						"mData" : "landarea",
+						"mData" : "resperson",
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					}, 
 					
 					{
-						"mData" : "constructionarea",					
+						"mData" : "username",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
 					},
 					{
-						"mData" : "undertake",					
+						"mData" : "phone",					
 						"orderable" : false, // 禁用排序
 						"sDefaultContent" : "",
 						"sWidth" : "6%"
@@ -337,7 +337,8 @@ $(document).ready(function() {
 						object=obj2;
 					}
 						
-					var statusid=object[index].statusid;	
+					var statusid=object[index].statusid;		
+					
 					
 					$("#basename").val(object[index].name);
 					$("#basetype").val(object[index].type);
@@ -365,6 +366,8 @@ $(document).ready(function() {
 						$("#resource").prop("href",object[index].material_path);
 					}
 					
+					$("#reason").html('');
+					$("#hideReason").prop("hidden",true);
 					
 					if(statusid==6||statusid==18){
 						$("#setdate").val(object[index].buildtime);
@@ -455,7 +458,7 @@ $(document).ready(function() {
 					$.ajax({
 						data : {
 							"id" : id,							
-							"adddate" : adddate							
+							"adddate" : adddate,						
 						},
 						url : 'updateMyBaseDate.do',
 						async : true,
@@ -463,10 +466,22 @@ $(document).ready(function() {
 						dataType : "json",
 						cache : false,
 						success : function(data) {
-							$("#dateMyTable").modal('hide');
-							$("#adddate").val("");
-							page1.draw(false);
-							page2.draw(false);
+							if(data.flag=="success"){
+								bootbox.alert({
+							        message: "操作成功",
+							        size: 'small'
+							    });
+								$("#dateMyTable").modal('hide');
+								$("#adddate").val("");
+								page1.draw(false);
+								page2.draw(false);
+							}else if(data.flag=="fail"){
+								bootbox.alert({
+							        message: "操作失败",
+							        size: 'small'
+							    });
+							}
+							
 						},
 						error : function(data) {
 							bootbox.alert({
@@ -489,7 +504,8 @@ $(document).ready(function() {
 				  		//dataType : 'json',
 				  		data:{
 				  			"id":id,
-				  			"infostr":info_str
+				  			"infostr":info_str,
+				  			"tag":obj1[index].statusid
 				  		},
 				  		url : 'recall.do',   //
 				  		async : false,
@@ -501,13 +517,26 @@ $(document).ready(function() {
 				  		    });
 				  		},
 				  		success : function(msg) {
-				  			$("#cancelOneModal").modal('hide');	
+				  			$("#cancelOneModal").modal('hide');
+				  			if(msg==0){				  				
+				  				bootbox.alert({
+					  				message : "撤回失败,请刷新页面",
+					  				size : 'small'
+					  			});	
+				  			}else if(msg==200){				  			
 				  			bootbox.alert({
-				  				message : msg,
+				  				message :"操作成功",
 				  				size : 'small'
-				  			});				  			
+				  			});	
 				  			page1.draw(false);
 				  			page2.draw(false);
+				  			}else if(msg==500){
+				  				bootbox.alert({
+					  				message :"操作失败",
+					  				size : 'small'
+					  			});
+				  			}				  						  			
+				  			
 				  		}
 
 				  	});
@@ -551,20 +580,20 @@ $(document).ready(function() {
 										"sWidth" : "8%",
 
 									}, {
-										"mData" : "landarea",
+										"mData" : "resperson",
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
 									}, 
 									
 									{
-										"mData" : "constructionarea",					
+										"mData" : "username",					
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
 									},
 									{
-										"mData" : "undertake",					
+										"mData" : "phone",					
 										"orderable" : false, // 禁用排序
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
@@ -685,7 +714,7 @@ $(document).ready(function() {
             } );
 
 $(".icon-filter").on("click", function () {
-	$("#status").val("-1");
+	$("#status").val("-2");
 	$('#hide_ul').toggle();
 });
 

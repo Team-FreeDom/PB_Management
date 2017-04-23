@@ -29,8 +29,6 @@ import com.base.utils.SqlConnectionUtils;
 @Repository("landApplyDao")
 public class LandApplyDaoImpl implements LandApplyDao {
 
-	
-	
 	@Autowired
 	private SessionFactory sessionFactory;	
 	
@@ -55,25 +53,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 
 	}
 	
-	public void delLandApply(LandApply la) {
-		Session session=sessionFactory.openSession();		
-		Transaction tx=null;
-		
-		try {
-			 tx=session.beginTransaction();
-	    	 session.delete(la);
-	    	 tx.commit();
-	    	
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
-		}finally{
-			session.close();
-		}
-
-	}
 	
 	public LandApply getapply(int la_id)
 	{
@@ -84,6 +63,27 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	    try {
 	    	 Query query=session.createQuery(hql);
 	    	 query.setInteger(0, la_id);
+	    	 la=(LandApply) query.uniqueResult();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			session.close();
+		}
+		return la;
+	}
+	
+	public LandApply getapply(int la_id,int tag1,int tag2)
+	{
+		Session session=sessionFactory.openSession();		
+		String hql="from LandApply where la_id=? and status in (?,?)";
+		LandApply la=null;
+		
+	    try {
+	    	 Query query=session.createQuery(hql);
+	    	 query.setInteger(0, la_id);
+	    	 query.setInteger(1, tag1);	
+	    	 query.setInteger(2, tag2);
 	    	 la=(LandApply) query.uniqueResult();
 			
 		} catch (Exception e) {
@@ -135,18 +135,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 
 	@Override
-	public void updateStatus(int la_id, int status) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateStatus(int lid, int formerStatus, int status) {
-		
-
-	}
-
-	@Override
 	public List<LandApply> getUserApplys(String applicantId) {
 		Session session=sessionFactory.openSession();		
 		String hql="from LandApply where applicantId=?";
@@ -183,13 +171,9 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		}
 		return list;
 	}
-
-	@Override
-	public void updateOthers(int la_id, int lid) {
-		// TODO Auto-generated method stub
-
-	}
 	
+	//根据基地编号bid获取土地布局+土地信息+土地租赁历史
+	@Override
 	public List<RentCollection> getRentCollection(int bid)
 	{	
 		
@@ -254,7 +238,8 @@ public class LandApplyDaoImpl implements LandApplyDao {
 	}
 	
 	
-	
+	//获得土地租赁历史
+	@Override
 	public List<RentAdd> getRentAdd(int bid)
 	{
 		
@@ -300,7 +285,6 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		CallableStatement sp = null;
 		ResultSet rs = null;
 		
-		System.out.println(date);	
 		Long applyCount=(long) 0;		
 		
 		Session session = sessionFactory.openSession();			
@@ -319,11 +303,11 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		} finally {
 			session.close();
 		}
-		//System.out.println(applyCount);
 		
 		return applyCount;
 	}
 	
+	@Override
 	public int submitApply(String userid,String lidList,String str)
 	{
 		Connection conn = null;
@@ -341,6 +325,33 @@ public class LandApplyDaoImpl implements LandApplyDao {
 			sp.execute();   //执行存储过程
 			flag=sp.getInt(4);
 			rs=sp.getResultSet();  //获得结果集
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			SqlConnectionUtils.free(conn, sp, rs);			
+		}			
+	    
+		return flag;
+	}
+	
+	@Override
+	public int cancelIt(int la_id,int tag)
+	{
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		
+		int flag=0;
+		try {
+			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
+			sp= (CallableStatement) conn.prepareCall("{call baseweb.trans_pays(?,?,?)}");
+			sp.setInt(1,la_id);		
+			sp.setInt(2,tag);		
+			sp.registerOutParameter(3,java.sql.Types.INTEGER);
+			sp.execute();   //执行存储过程
+			flag=sp.getInt(3);
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -393,6 +404,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public Startplan getStartPlan(String id) {
 		
 		Session session = sessionFactory.openSession();
@@ -412,6 +424,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public void endAllRent(){
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -433,6 +446,7 @@ public class LandApplyDaoImpl implements LandApplyDao {
 		
 	}
 	
+	@Override
 	public long[] getRepairAndPracCount(String semester){
 		Connection conn = null;
 		CallableStatement sp = null;

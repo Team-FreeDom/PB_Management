@@ -1,6 +1,7 @@
 package com.base.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
 import com.base.service.PlanService;
 
@@ -21,42 +23,43 @@ public class PlanServiceImpl implements PlanService {
     // 获取该用户所在学院的实习计划
     @Override
     public PlanList getThisCollegePlan(String userid, int pageindex, int size,
-	    int order, String orderDir, String searchValue,String semester) {
+	    int order, String orderDir, String searchValue, String semester) {
 	String columnName = "";
 	if (order == 0) {
 	    columnName = "id";
-	} else if (order == 4) {
+	} else if (order == 3) {
 	    columnName = "count";
-	} else if (order == 5) {
+	} else if (order == 4) {
 	    columnName = "selectedCount";
-	} else if (order == 7) {
+	} else if (order == 6) {
 	    columnName = "college";
-	} else if (order == 8) {
+	} else if (order == 7) {
 	    columnName = "weekClassify";
-	} else if (order == 9) {
+	} else if (order == 8) {
 	    columnName = "credit";
-	} else if (order == 12) {
+	} else if (order == 11) {
 	    columnName = "tid";
-	} else if (order == 13) {
+	} else if (order == 12) {
 	    columnName = "tname";
 	}
 	PlanList list = plandao.getThisCollegePlan(userid, pageindex, size,
-		columnName, orderDir, searchValue,semester);
+		columnName, orderDir, searchValue, semester);
 	return list;
     }
 
     // 删除单条班级安排记录
     @Override
-    public void deleteClassRecord(int id) {
-	plandao.deleteClassPlan(id);
-
+    public String deleteClassRecord(int id) {
+	String message = plandao.deleteClassPlan(id);
+	return message;
     }
 
     // 提供保存按钮的功能
     @Override
-    public void savePlanModify(int id, String plandata) {
+    public String savePlanModify(int id, String plandata) {
 
-	plandao.updatePlan(id, plandata);
+	String message = plandao.updatePlan(id, plandata);
+	return message;
     }
 
     // 从专业培训表中获取特定专业的多个培训目的
@@ -80,29 +83,43 @@ public class PlanServiceImpl implements PlanService {
 	return list;
     }
 
-    @Override
-    public List<BaseInfo> getBaseInfo() {
-	List<BaseInfo> list = plandao.getBaseInfo();
-	return list;
-    }
-
     // 修改课程安排表(单条)李彩页面功能
     @Override
     public void alterRecord(String plandata) {
 	plandao.alterRecord(plandata);
 
     }
-    //检测学年学期和数据条数
+
+    // 检测学年学期和数据条数
     @Override
     public int checkinfo(String userid, String semester) {
-	int record=plandao.checkinfo(userid, semester);
+	int record = plandao.checkinfo(userid, semester);
 	return record;
     }
 
-	@Override
-	public List<String> getOutBase(int tag) {
-		List<String> list=plandao.getOutBase(tag);
-		return list;
+    @Override
+    public List<String> getProperBase(String typename) {
+	List<String> list = plandao.getProperBase(typename);
+	return list;
+    }
+
+    @Override
+    public List<PracticeCollection> plandata_export(String userid,
+	    String finishCondition, String semester) {
+	List<PracticeCollection> list = null;
+	if (finishCondition.equals("0")) {
+	    list = plandao.plandata_export_0(userid, semester);
+	} else {
+	    list = plandao.plandata_export_1(userid, finishCondition, semester);
 	}
+	return list;
+    }
+
+    // 通过学院获取专业
+    @Override
+    public List<Map<String, String>> getCollege_Major(String college) {
+	List<Map<String, String>> list = plandao.getCollege_Major(college);
+	return list;
+    }
 
 }

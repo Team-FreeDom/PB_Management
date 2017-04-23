@@ -37,24 +37,16 @@ public class MymaintainDaoImpl implements MymaintainDao {
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.query_historymaintainapply(?,?,?,?,?,?,?,?)}");
-	    sp.setInt(1,pageindex);	
-	    //System.out.println(pageindex);
-	    sp.setInt(2, size);	 
-	   // System.out.println(size);
-	    sp.setString(3, columnName);
-	   // System.out.println(columnName);
-	    sp.setString(4, orderDir);	 
-	   // System.out.println(orderDir);
-	    sp.setInt(5, year);	 
-	    System.out.println(year);
-	    sp.setInt(6, status);
-	   // System.out.println(status);
-	    sp.setString(7, userid);
-	   // System.out.println(userid);
+	    sp.setInt(1,pageindex);		   
+	    sp.setInt(2, size);	   
+	    sp.setString(3, columnName);   
+	    sp.setString(4, orderDir);	 	  
+	    sp.setInt(5, year);	 	   
+	    sp.setInt(6, status);	  
+	    sp.setString(7, userid);	 
 	    sp.registerOutParameter(8, java.sql.Types.INTEGER);
 	    sp.execute();
 	    recordsTotal = sp.getInt(8);
-	    System.out.println(recordsTotal+"几条记录");
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		Mymaintain ch = new Mymaintain();
@@ -72,6 +64,7 @@ public class MymaintainDaoImpl implements MymaintainDao {
 		ch.setStatus(rs.getInt("status"));
 		ch.setDescp(rs.getString("descp"));
 		ch.setActualmoney(rs.getDouble("actualmoney"));
+		ch.setRefuse(rs.getString("refuse"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -86,8 +79,10 @@ public class MymaintainDaoImpl implements MymaintainDao {
 	ck.setData(list);
 	return ck;
     }
+    //撤回功能
     @Override
-    public void recallmymaint(String id) {
+    public int recallmymaint(String id) {
+	int flag=0;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -95,15 +90,18 @@ public class MymaintainDaoImpl implements MymaintainDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.rollback_maintainapply(?)}");
-	    sp.setString(1, id);	   
-	    sp.execute();    
+		    .prepareCall("{call baseweb.rollback_maintainapply(?,?)}");
+	    sp.setString(1, id);
+	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(2);   
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return flag;
 	
     }
     /**
@@ -112,7 +110,6 @@ public class MymaintainDaoImpl implements MymaintainDao {
      */
     @Override
     public void insertMessage(String sql) {
-   	System.out.println("insert---start");
    	Session session = sessionFactory.openSession();
 
    	try {
@@ -121,7 +118,6 @@ public class MymaintainDaoImpl implements MymaintainDao {
    	} finally {
    	    session.close();
    	}
-   	System.out.println("insert---end");
 
        }
 

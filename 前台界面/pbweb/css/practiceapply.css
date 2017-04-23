@@ -22,7 +22,8 @@ table tbody tr td{
 	position:absolute !important;
 	top:187px;
 	left:19%;
-	width: 80%;
+	width: 82%;
+	margin-left:-1%;
 	display: none;
 }
 #modalcontent{
@@ -49,6 +50,7 @@ table tbody tr td{
 }
 #weeks{
 	border: none;
+	
 	width: 40px;
 }
 #practiceapplytable span{
@@ -128,6 +130,6 @@ table tbody tr td{
 }
 .input-group-addon{
 	color: #fff;
-	background-color: #3071a9 !important;
+	background-color: #38b1d5 !important;
 }
 

@@ -31,38 +31,40 @@ $(function () {
 		
 	/*########*/
 	 	$(document).on("click", "#Submit", function() {
-			
+	 		
 			var projectname=$("#projectname").val();
 			var name=$("#name").val();
 			var address=$("#address").val();
 			var budget=$("#budget").val();
+			budget=budget.trim();
 			var baselist=$("#baselist").val();
 			var reason=$("#reason").val();
 			var strmoney=/^[0-9]*$/.test(budget);
+			var money=budget.substring(1,0);
 			if(projectname==""){
 				bootbox.alert({
-					message : "请输入项目名称",
+					message : "请填写项目名称",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(name==""){
 				bootbox.alert({
-					message : "请输入您的姓名",
+					message : "请填写报修人",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(address==""){
 				bootbox.alert({
-					message : "请输入地址",
+					message : "请填写具体位置",
 					size : 'small'
 					});	
 				return 0;
 				}
 			else if(budget==""){
 				bootbox.alert({
-					message : "请输入预算金额",
+					message : "请填写预算金额",
 					size : 'small'
 					});	
 				return 0;
@@ -70,6 +72,13 @@ $(function () {
 			else if(strmoney==false){
 				bootbox.alert({
 					message : "预算金额只能为数字",
+					size : 'small'
+					});	
+				return 0;
+				}
+			else if(budget.length>1&&money==0){
+				bootbox.alert({
+					message : "请填写正确的预算金额格式，第一个数字不能为零",
 					size : 'small'
 					});	
 				return 0;
@@ -92,14 +101,16 @@ $(function () {
 			        bootbox.alert({
 			            message: "上传资料仅限于rar,zip压缩包格式",
 			            size: 'small'
-			        });			    
+			        });	
+			        $("#applyfile").val('');
 			        return;
 			    }
 			    if (!flag2) {
 			        bootbox.alert({
 			            message: "上传资料大小不能大于10M",
 			            size: 'small'
-			        });			      
+			        });		
+			        $("#applyfile").val('');
 			        return;
 			    }   
 			/*************/
@@ -120,6 +131,7 @@ $(function () {
             message: "上传资料仅限于rar,zip压缩包格式",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag1=false;
         return;
     }
@@ -128,6 +140,7 @@ $(function () {
             message: "上传资料大小不能大于10M",
             size: 'small'
         });
+        $("#applyfile").val('');
         flag2=false;
         return;
     }   

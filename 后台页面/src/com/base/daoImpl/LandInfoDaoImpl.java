@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.base.dao.LandInfoDao;
 import com.base.po.BaseInfo;
+import com.base.po.ExportBase;
 import com.base.po.LandInfo;
 import com.base.po.Land_base;
 import com.base.utils.SqlConnectionUtils;
@@ -42,7 +43,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ñ£¬³ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½
 			}
 			System.out.println(e);
 		}finally{
@@ -125,29 +126,8 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			System.out.println(e);
 		}finally{
 			session.close();
-		}
-		// System.out.println(bid+list.get(0).getAfford());
+		}		
 		return list;
-	}
-	
-	public void deleteInfo(LandInfo li) {
-		Session session=sessionFactory.openSession();		
-		Transaction tx=null;
-		
-		try {
-			 tx=session.beginTransaction();	    	
-	    	 session.delete(li);
-	    	 tx.commit();
-	    	
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
-			}
-			System.out.println(e);
-		}finally{
-			session.close();
-		}
-
 	}
 	
 	public void doInfo(LandInfo li) {
@@ -161,7 +141,7 @@ public class LandInfoDaoImpl implements LandInfoDao {
 	    	
 		} catch (Exception e) {
 			if (tx != null) {
-				tx.rollback();// »Ø¹öÊÂÎñ£¬³·Ïû²éÑ¯Óï¾ä
+				tx.rollback();// ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ñ£¬³ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½
 			}
 			System.out.println(e);
 		}finally{
@@ -181,12 +161,11 @@ public class LandInfoDaoImpl implements LandInfoDao {
 			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();
 			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.`findresource`(?)}");
 			sp.setInt(1, bid);
-			sp.execute();   //Ö´ÐÐ´æ´¢¹ý³Ì
-			rs=sp.getResultSet();  //»ñµÃ½á¹û¼¯
+			sp.execute();   //Ö´ï¿½Ð´æ´¢ï¿½ï¿½ï¿½
+			rs=sp.getResultSet();  //ï¿½ï¿½Ã½ï¿½ï¿½
 			while(rs.next())
 			{
 				String str=rs.getString("img");
-				System.out.println(str);
 				list.add(str);
 			}
 
@@ -204,26 +183,55 @@ public class LandInfoDaoImpl implements LandInfoDao {
 
 	}
 
-	
-	public void delLayout_info(int bid)
-	{
-		Session session=sessionFactory.openSession();		
-		//hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
-		SQLQuery sqlQuery =session.createSQLQuery("{call baseweb.`delete_land`(?)}");
-		sqlQuery.setInteger(0, bid);		
-		sqlQuery.executeUpdate();
-		session.close();		
+	@Override
+	public int delLayout_info(int bid)
+	{		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		int flag=0;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{call baseweb.`delete_land`(?,?)}");
+		    sp.setInt(1, bid);	   
+		    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+		    sp.execute();
+		    flag = sp.getInt(2);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
 	}
 	
-	public void doLayout_info(String landinfoStr,String layoutStr)
-	{
-		Session session=sessionFactory.openSession();		
-		//hibernateµ÷ÓÃ´æ´¢¹ý³Ì(ÎÞ·µ»Ø²ÎÊý)
-		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.insert_land(?,?)}");
-		sqlQuery.setString(0, landinfoStr);	
-		sqlQuery.setString(1, layoutStr);	
-		sqlQuery.executeUpdate();
-		session.close();		
+	public int doLayout_info(String landinfoStr,String layoutStr,int bid)
+	{		
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		int flag=0;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.insert_land(?,?,?,?)}");
+		    sp.setString(1, landinfoStr);
+		    sp.setString(2, layoutStr);
+		    sp.setInt(3,bid);
+		    sp.registerOutParameter(4, java.sql.Types.INTEGER);
+		    sp.execute();
+		    flag = sp.getInt(4);
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return flag;
 	}
 
 }

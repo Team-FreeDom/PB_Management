@@ -149,7 +149,11 @@ $(function () {
 						  message: '<p class="text-center">数据提交成功，正返回中......</p>',
 						  closeButton: false
 					  });
-					  window.setTimeout(closeboxEX, 1000);						
+					  window.setTimeout(closeboxEX, 1000);
+					  window.setTimeout(function(){
+						  location.reload(true);
+					  }, 1000);
+					  
 				}
 			});
 			return false;	

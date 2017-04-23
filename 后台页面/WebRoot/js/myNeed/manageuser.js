@@ -2,7 +2,26 @@
 $("#certainExport").click(function(){
         	 $("#lead").modal("hide");
 
-         })
+         });
+
+$("#dao").click(function(){
+	 $("#exampleInputFi").val("");
+
+});
+
+var userTag=$("#userTag").text();
+if(userTag=="success"){
+	 bootbox.alert({
+		  message: "导入成功",
+		  size: 'small'
+	  });
+}else if(userTag=="fail"){
+	 bootbox.alert({
+		  message: "导入失败",
+		  size: 'small'
+	  });
+}
+
 
         //导出功能刷选部门
         	 $.ajax({
@@ -61,6 +80,7 @@ $("#addOne").click(function(){
 				"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
 				"serverSide": true,
+				"iDisplayLength" : 10,
 				"bFilter": true,
 				"dom": 'frtip<"bottom"l>',
 	             "bDestroy":true,
@@ -200,6 +220,7 @@ $("#addOne").click(function(){
          		  });
  			},
  			success : function(data) {
+ 				
  				 for (var i=0;i<data[0].length;i++) {
  					$("#EstatusID").after(
  							"<option value="+data[0][i].name+">"
@@ -217,12 +238,16 @@ $("#addOne").click(function(){
  							"<option value="+data[1][i].dept+">"
  									+data[1][i].dept+"</option>");
  				}
+ 				for ( var i=0;i<data[2].length;i++) {
+ 					$("#EworkerclassId").after(
+ 							"<option value="+data[2][i].titles+">"
+ 									+data[2][i].titles+"</option>");
+ 					$("#AworkerclassId").after(
+ 							"<option value="+data[2][i].titles+">"
+ 									+data[2][i].titles+"</option>");
+ 				}
  			}
  		});
-
-
-
-
 
       //删除人员基本信息
       var flag=0;

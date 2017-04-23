@@ -1,6 +1,14 @@
 $("li.menuItem.nav-parent").click(function(){
-	  $(this).toggleClass("opened nav-expanded");
+	if($(this).hasClass("opened")){
+		
+		$(this).removeClass("opened nav-expanded");
+	}else{
+		$("li.menuItem.nav-parent").removeClass("opened nav-expanded");
+		$(this).addClass("opened nav-expanded");
+	}
 	});
+//左侧导航条高度动态设置
+$(".sidebar-menu").css("min-height",screen.height/1.5);
  $(function () {
 	 	$(document).on("click", "#msgtable tr", function() {
 			bootbox.dialog({
@@ -44,5 +52,6 @@ $("li.menuItem.nav-parent").click(function(){
        $('#imageMain').attr("src",$.cookie('image'));  
       
  });
+ 
 
  

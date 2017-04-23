@@ -27,8 +27,6 @@ import com.base.utils.SqlConnectionUtils;
 
 @Repository("landRentInfoDao")
 public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
-
-	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -74,63 +72,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		return list;
 	}
 
-	@Override
-	public List<LandRentInfo> getLandRentInfos()
-	{
-		return null;
-	}
-	
-	/*public List<RentMaintain> getRentMaintain(String bname,String deptName,String plantingContent,String lr_id) {	
-		List<RentMaintain> list=new ArrayList<RentMaintain>();
-		RentMaintain rm=null;
-		
-		try {
-			
-			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{call baseweb.rent_maintain(?,?,?,?)}");  //发送存储过程
-			sp.setString(1,bname);					
-			sp.setString(2,deptName);
-			sp.setString(3, plantingContent);
-			sp.setString(4, lr_id);
-			
-			sp.execute();   //执行存储过程
 
-			rs=sp.getResultSet();  //获得结果集
-			int i=0;
-			while(rs.next())    //遍历结果集，赋值给list
-			{
-				rm=new RentMaintain();
-				rm.setLr_id(rs.getInt("lrid"));
-				rm.setStartTime(rs.getString("starttime"));
-				rm.setEndTime(rs.getString("endtime"));
-				rm.setPlanting(rs.getString("plant"));	
-				rm.setDeptName(rs.getString("dept"));
-				rm.setBname(rs.getString("basename"));
-				rm.setLid(rs.getString("lids"));
-				rm.setLandname(rs.getString("landname"));
-				rm.setAptplanting(rs.getString("aptplanting"));
-				rm.setName(rs.getString("username"));
-				rm.setRentMoney(rs.getInt("rentmoney"));
-				rm.setChargeDate(rs.getString("chargedate"));
-				rm.setTimes(rs.getInt("times"));
-				rm.setApplydept(rs.getInt("deptid"));
-				
-				list.add(rm);    //加到list中
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{			
-			
-			SqlConnectionUtils.free(conn, sp, rs);
-			
-		}
-		
-		return list;
-	
-	}*/
-	
 	public RentList getRentMaintain(String bname,String dept,String planting,int page,int length)
 	{
 		
@@ -172,7 +114,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setLandname(rs.getString("landname"));
 				rm.setAptplanting(rs.getString("aptplanting"));
 				rm.setName(rs.getString("username"));
-				rm.setRentMoney(rs.getInt("rentmoney"));
+				rm.setRentMoney(rs.getDouble("rentmoney"));
 				rm.setChargeDate(rs.getString("chargedate"));
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
@@ -195,16 +137,35 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
      	return rl;	
 	}
 	
-	
-	
-	public void deleteRentInfo(String str) throws SQLException
-	{
-		Session session=sessionFactory.openSession();
-		//hibernate调用存储过程(无返回参数)
-		SQLQuery sqlQuery =session.createSQLQuery("{CALL baseweb.`delete_landrentinfo`(?)}");
-		sqlQuery.setString(0, str);		
-		sqlQuery.executeUpdate();
-		session.close();			
+    @Override
+	public int deleteRentInfo(String str)
+	{		
+		int tag = 0;
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;
+    	Session session = sessionFactory.openSession();
+
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.`delete_landrentinfo`(?,?)}");
+    	    sp.setString(1, str);    	  
+    	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+    	    sp.execute();
+
+    	    tag = sp.getInt(2);
+
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, null);
+    	}
+
+    	return tag;   
 		 
 	}
 	
@@ -213,9 +174,8 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		
 		Connection conn = null;
 		CallableStatement sp = null;
-		ResultSet rs = null;
-		
-		System.out.println("哈哈，我来到dao层");
+		ResultSet rs = null;		
+	
 		List<RentMaintain> list=new ArrayList<RentMaintain>();
 		RentMaintain rm=null;		
 		
@@ -243,7 +203,7 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 				rm.setLandname(rs.getString("landname"));
 				rm.setAptplanting(rs.getString("aptplanting"));
 				rm.setName(rs.getString("username"));
-				rm.setRentMoney(rs.getInt("rentmoney"));
+				rm.setRentMoney(rs.getDouble("rentmoney"));
 				rm.setChargeDate(rs.getString("chargedate"));
 				rm.setTimes(rs.getInt("times"));
 				rm.setApplydept(rs.getInt("deptid"));
@@ -260,7 +220,6 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
      			
      		}         
           
-         System.out.println("导出呀"+list);
      	return list;	
 	}
 	
@@ -282,11 +241,11 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		return lr;
 	}
 	
-	public void updateOne(LandRentInfo lr) {
+	public int updateOne(LandRentInfo lr) {
 		Session session=sessionFactory.openSession();	
 		
 		Transaction tx=null;
-		
+		int flag=200;
 		try {
 			 tx=session.beginTransaction();
 	    	 session.update(lr);
@@ -295,13 +254,15 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();// 回滚事务，撤消查询语句
-			}
-			System.out.println(e);
+			}	
+			flag=500;
 		}finally{
 			session.close();
 		}
+		return flag;
 	}
-	
+
+	@Override
 	public List<ApplyDept> getExistDept(){
 		
 		Connection conn = null;
@@ -338,7 +299,8 @@ public class LandRentInfoDaoImpl<E> implements LandRentInfoDao {
 	     		} 
 		 return list;
 	}
-	
+
+	@Override
 public List<String> getExistPlant(){
 		
 		Connection conn = null;

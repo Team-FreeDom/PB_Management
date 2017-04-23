@@ -1,14 +1,27 @@
 $(document)
 		.ready(
 				function() {
-
-					$('#fieldrent_maintain')
+					
+					var deleId=$("#deleId").text();
+					if(deleId=="fail"){
+						bootbox.alert({
+							message : "操作失败",
+							size : 'small'
+						});
+					}else if(deleId=="success"){
+						bootbox.alert({
+							message : "操作成功",
+							size : 'small'
+						});
+					}					
+				
+					var fieldrent_maintain=$('#fieldrent_maintain')
 							.DataTable(
 									{
-										"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 										"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 										"bSort" : false,
-										"iDisplayLength" : 4, // 默认每页显示多少条记录
+										"iDisplayLength" : 10, // 默认每页显示多少条记录
 										"bPaginate": true, //翻页功能
 										"searching":false,//禁用搜索
 										"bServerSide" : true,
@@ -128,10 +141,10 @@ $(document)
 
 									});
 
-					$.ajax({ // 获得申报部门
+					$.ajax({ // 获得所有部门，存在的部门，基地列表，种植内容
 						type : 'POST',
 						dataType : 'json',
-						url : 'getExistRentInfo.do',
+						url : 'getExistRentInfo.do',						
 						async : false,
 						cache : false,
 						error : function(request) {
@@ -140,79 +153,52 @@ $(document)
 								size : 'small'
 							});
 						},
-						success : function(data) {
-							
+						success : function(data) {						
 							
 							var i = 0;							
-							for ( var item in data[0]) {
+							for ( var item in data[0]) {								
+								$("#baseS").after(
+										"<option value=" + data[0][i].bname + ">"
+												+ data[0][i].bname + "</option>");												
 								
-								//所有的部门
-								$("#deptD").after(
-										"<option value=" + data[0][i].aid + ">"
-												+ data[0][i].dept + "</option>");
-								
-								/*$("#addDepth").after(
-										"<option value=" + data[i].aid + ">"
-												+ data[i].dept + "</option>");*/
 								i++;
-							}
+							}			
+
 							
 							//租赁历史表中存在的部门
 							i=0;
 							for ( var item in data[1]) {
-
 								$("#deptS").after(
 										"<option value=" + data[1][i].dept + ">"
 												+ data[1][i].dept + "</option>");
 								
 								$("#deptE").after(
 										"<option value=" + data[1][i].dept + ">"
-												+ data[1][i].dept + "</option>");
-								
+												+ data[1][i].dept + "</option>");								
 								i++;
 							}
 							
 							i=0;
-							for ( var item in data[2]) {
-								
+							for ( var item in data[2]) {								
 								$("#contentShh").after(
 										"<option value=" + data[2][i] + ">"
 												+ data[2][i]+ "</option>");
 								
-								i++;
-								
+								i++;								
+							}
+							i=0;
+							for ( var item in data[3]) {							
+
+								//所有的部门
+								$("#deptD").after(
+										"<option value=" + data[3][i].aid + ">"
+												+ data[3][i].dept + "</option>");	
+								i++;								
 							}
 
 						}
 
-					});
-
-					$.ajax({ // 获得基地列表
-						type : 'POST',
-						dataType : 'json',
-						url : 'baseInfo.do',
-						async : false,
-						cache : false,
-						error : function(request) {
-							bootbox.alert({
-								message : "请求异常",
-								size : 'small'
-							});
-						},
-						success : function(data) {
-							var i = 0;
-							for ( var item in data) {
-                           
-								$("#baseS").after(
-										"<option value=" + data[i].bname + ">"
-												+ data[i].bname + "</option>");
-
-								i++;
-							}
-
-						}
-
-					});
+					});				
 
 				});
 
@@ -278,13 +264,13 @@ $(document).delegate('#submitS', 'click', function() {
 	var deptSh = document.getElementById("deptSh").value;	
 	var contentSh = document.getElementById("contentSh").value;
 	
-	$('#fieldrent_maintain')
+	fieldrent_maintain=$('#fieldrent_maintain')
 	.DataTable(
 			{
-				"aLengthMenu" : [ 2, 4, 6, 8, 10 ], // 动态指定分页后每页显示的记录数。
+				"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
 				"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
 				"bSort" : false,
-				"iDisplayLength" : 8, // 默认每页显示多少条记录
+				"iDisplayLength" : 10, // 默认每页显示多少条记录
 				"bPaginate": true, //翻页功能
 				"bDestroy":true,
 				"processing": true,
@@ -413,8 +399,6 @@ $(document).delegate('#submitS', 'click', function() {
 				}
 
 			});
-	recovery();
-
 });
 
 /* 土地租赁记录筛选-------end */
@@ -444,9 +428,13 @@ $(document).delegate('#certainExport', 'click', function() {
 
 /*土地租赁记录修改---start*/
 $(document).delegate('#definite', 'click', function() {
-	
+	var reg=/^\d+(\.\d+)?$/;
 	var dept=$("#deptLaLa").val();
 	var planCareer=$("#planCareer").val();
+	var money=$("#expense").val();
+	var lr_id=$("#lr_id").val();
+	var startTime=$("#startTime").val();
+	var endTime=$("#endTime").val();
 	if(dept==""){
 		 bootbox.alert({
 				message : "请选择申报学院",
@@ -461,8 +449,51 @@ $(document).delegate('#definite', 'click', function() {
 			});
 		 return;
 	}
-		
-	$("#landManageUpdate").submit();
+	if(!money.match(reg)){
+		bootbox.alert({
+			message : "输入的金额只能为整数或小数",
+			size : 'small'
+		});
+	 return;
+	}	
+	$.ajax({
+		type : 'POST',
+		data : {
+			"expense" : money,
+			"deptSelect":dept,
+			"planCareer":planCareer,
+			"startTime":startTime,
+			"endTime":endTime,
+			"lr_id":lr_id
+		},
+		dataType : 'json',
+		url : 'landManageUpdate.do',
+		async : false,
+		cache : false,
+		error : function(request) {
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
+		},
+		success : function(data) {
+               if(data.flag=="success"){
+            	   bootbox.alert({
+       				message : "操作成功",
+       				size : 'small'
+       			});
+            	   $("#myModalEdit").modal('hide');
+            	   fieldrent_maintain.draw(false);
+               }else if(data.flag=="fail"){
+            	   bootbox.alert({
+          				message : "操作失败",
+          				size : 'small'
+          			}); 
+               }
+			
+		}
+
+	});
 	
 });
 /*土地租赁记录修改---end*/
@@ -477,6 +508,9 @@ $(document).delegate('#add', 'click', function() {
 });
 /*土地租赁记录增加---end*/
 
+$("#daolead").click(function(){
+	$("#exportDept").val('');
+});
 
 function deleteInfo()
 {
@@ -492,9 +526,29 @@ function deleteInfo()
 				size : 'small'
 			});
 	  }else{
+		  bootbox.confirm({
+				message: "是否确认删除？",
+				size: 'small',
+				buttons: {
+					confirm: {
+						label: '确定',
+						className: 'btn-success'
+					},
+					cancel: {
+						label: '取消',
+						className: 'btn-danger'
+					},
+				},			
+				callback: function (result) {
+					if(result){
+						
+						document.getElementById("lead").style.display = 'none';
+						$("#deleteInfo").submit();
+						
+					}
+				}
+		});
 		  
-		  document.getElementById("lead").style.display = 'none';
-		  $("#deleteInfo").submit();
 	  }	
 	
 
@@ -506,7 +560,7 @@ function check()
 	$('input[name="idname"]:checked').each(function(){
 	chk_value.push($(this).val());
 	});
-	alert("提交后检测");
+	//alert("提交后检测");
 	alert(chk_value.length==0 ?'你还没有选择任何内容！':chk_value);  
 
 }
@@ -559,6 +613,10 @@ function checkA()
 }
 
 function showsubmenu() {
+	
+	document.getElementById("baseSh").value = "";
+	document.getElementById("deptSh").value = "";	
+	document.getElementById("contentSh").value = "";
 	var submenu = document.getElementById("hide_ul");
 	if (submenu.style.display == 'none') {
 		submenu.style.display = 'block';
@@ -566,51 +624,27 @@ function showsubmenu() {
 		submenu.style.display = 'none';
 		recovery();
 	}
-
 }
+
 function hidesubmenu() {
 	var submenu = document.getElementById("hide_ul");
 	submenu.style.display = 'none';
 	
 }
 
-function recovery() {
-
-	document.getElementById("baseSh").value = "";
-	document.getElementById("deptSh").value = "";
-	document.getElementById("lidSh").value = "";
-	document.getElementById("contentSh").value = "";
-	
-}
-
-
-
 
 // 全选，反选按钮 
-
-allCkBox2(); 
-function allCkBox2(id){
-var tableBox = document.getElementById(id||"fieldrent_maintain"),
-     ck = tableBox.getElementsByClassName("ck"),
-     ckAll = tableBox.getElementsByClassName("ck-all")[0],
-     ckRe = tableBox.getElementsByClassName("ck-re")[0];
-     ckAll.onchange = function(){
-                            allCk(this.checked);
-                        };
-      ckRe.onchange = function(){
-                            reCk();
-                        };
-function allCk(bool){
-                    for(var i =0; i<ck.length;i++){
-                           ck[i].checked = bool;
-                            }
-                     }
-                
- function reCk(){
-                 for(var i =0; i<ck.length;i++){
-                        ck[i].checked ? ck[i].checked = false : ck[i].checked = true;
-                            }
-                        }
-                    }		
+$("#ck1").on(
+		"click",
+		function() {
+			if ($(this).prop("checked") === true) {
+				$("#fieldrent_maintain input[name='idname']").prop(
+						"checked", true);
+			} else {
+				$("#fieldrent_maintain input[name='idname']").prop(
+						"checked", false);
+			}
+		});
+ 
 
  

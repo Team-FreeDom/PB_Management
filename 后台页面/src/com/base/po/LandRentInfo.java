@@ -17,7 +17,7 @@ public class LandRentInfo {
 	private String endTime;	
 	private String planting;	
 	private String userId;
-	private int rentMoney;
+	private Double rentMoney;
 	private String chargeDate;
 	private int applyDept;
 	
@@ -66,10 +66,10 @@ public class LandRentInfo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getRentMoney() {
+	public Double getRentMoney() {
 		return rentMoney;
 	}
-	public void setRentMoney(int rentMoney) {
+	public void setRentMoney(Double rentMoney) {
 		this.rentMoney = rentMoney;
 	}
 	public String getChargeDate() {
@@ -82,7 +82,7 @@ public class LandRentInfo {
 		super();
 	}
 	public LandRentInfo(String lid, String startTime,
-			String endTime, String planting, String userId, int rentMoney,
+			String endTime, String planting, String userId, Double rentMoney,
 			String chargeDate, int applyDept) {
 		super();		
 		this.lid = lid;

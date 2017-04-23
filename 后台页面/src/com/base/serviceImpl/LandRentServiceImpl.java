@@ -12,6 +12,7 @@ import com.base.po.LandRentInfo;
 import com.base.po.RentList;
 import com.base.po.RentMaintain;
 import com.base.service.LandRentService;
+import com.base.utils.BaseUtils;
 
 @Service("landRentService")
 public class LandRentServiceImpl implements LandRentService {
@@ -33,7 +34,7 @@ public class LandRentServiceImpl implements LandRentService {
 	@Override
 	public RentList getLandRentInfos(String bname,String deptName ,String plantingContent,int page,int length) {
 		
-		System.out.println("service²ã");
+	
 		if(bname!=null&&bname.equals(""))
 		{
 			bname=null;
@@ -53,7 +54,7 @@ public class LandRentServiceImpl implements LandRentService {
 	
 	public List<RentMaintain> getSingleRentInfo(String lr_id,String dept)
 	{
-		System.out.println("¹ş¹ş¡£ÎÒÀ´µ½service²ãÁË");
+		
 		if(dept!=null&&dept.equals("")){
 			
 			dept=null;
@@ -63,7 +64,7 @@ public class LandRentServiceImpl implements LandRentService {
 		
 	}
 	
-	public void deleteRentInfo(String[] check)
+	public String deleteRentInfo(String[] check)
 	{
 		String str="";
 		int i=0;
@@ -76,18 +77,15 @@ public class LandRentServiceImpl implements LandRentService {
 				str+=st+",";
 			}
 			i++;
-		}
-		System.out.println(str);
-		try {
-			landRentInfoDaoImpl.deleteRentInfo(str);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		}		
+		//try {
+		int flag=landRentInfoDaoImpl.deleteRentInfo(str);
+		String str_0=BaseUtils.getException(flag);
+		return str_0;
 	}
 	
-	//ÍÁµØ×âÁŞ¼ÇÂ¼ĞŞ¸Ä¸üĞÂ
-	public void landManageUpdate(int dept,String planCareer,int expense,String startTime,String endTime,int lr_id)
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş¼ï¿½Â¼ï¿½Ş¸Ä¸ï¿½ï¿½ï¿½
+	public String landManageUpdate(int dept,String planCareer,Double expense,String startTime,String endTime,int lr_id)
 	{
 		if(planCareer==null){
 			planCareer="";
@@ -105,10 +103,10 @@ public class LandRentServiceImpl implements LandRentService {
 		lr.setPlanting(planCareer);
 		lr.setRentMoney(expense);
 		lr.setStartTime(startTime);
-		lr.setApplyDept(dept);
-		
-		landRentInfoDaoImpl.updateOne(lr);
-		
+		lr.setApplyDept(dept);	
+		int flag=landRentInfoDaoImpl.updateOne(lr);
+		String str=BaseUtils.getException(flag);
+		return str;		
 	}
 	
  public void landManageAdd(LandRentInfo lr)
@@ -116,6 +114,7 @@ public class LandRentServiceImpl implements LandRentService {
 	 landRentInfoDaoImpl.doLandRentInfo(lr);
  }
  
+ //è·å–åœŸåœ°ç§Ÿèµå†å²è¡¨é‡Œå­˜åœ¨çš„éƒ¨é—¨
  public List<ApplyDept> getExistRentInfo(){
 	 
 	 List<ApplyDept> list=landRentInfoDaoImpl.getExistDept();
@@ -123,7 +122,8 @@ public class LandRentServiceImpl implements LandRentService {
 	 return list;
 	 
  }
- 
+
+//è·å–åœŸåœ°ç§Ÿèµå†å²è¡¨é‡Œå­˜åœ¨çš„ç§æ¤å†…å®¹
  public List<String> getExistPlant(){
 	 
 	 List<String> list=landRentInfoDaoImpl.getExistPlant();

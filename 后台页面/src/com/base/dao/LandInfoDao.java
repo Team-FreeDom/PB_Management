@@ -27,4 +27,18 @@ public interface LandInfoDao {
 	   函数功能：根据基地编号获得该基地中的所有土地布局管理信息
 	 */
     public List<LandInfo> getLandInfos(int bid);
+    
+    /*
+	   参数说明：bid,整型，表示基地编号
+	   返回值：   无参数值
+	   函数功能：根据基地编号删除该基地下的所有土地布局
+	 */
+    public int delLayout_info(int bid);
+    
+    /*
+	   参数说明：landinfoStr,土地信息封装信息;layoutStr,土地布局封装信息
+	   返回值：   无参数值
+	   函数功能：向数据库插入土地信息记录和土地布局记录
+	 */
+    public int doLayout_info(String landinfoStr,String layoutStr,int bid);
 }

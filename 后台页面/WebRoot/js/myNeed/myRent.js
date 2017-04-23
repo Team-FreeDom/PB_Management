@@ -1,12 +1,14 @@
+var table1=null;
+var table2=null;
 $(document).ready(function() {
 	
 	
-					$('#table1').dataTable({
+					table1=$('#table1').DataTable({
 										"bSort" : false,
 										"bFilter" : false,
-										"aLengthMenu" : [ 2, 4, 5, 8, 10 ], //动态指定分页后每页显示的记录数。
+										"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
 										"lengthChange" : true, //是否启用改变每页显示多少条数据的控件										
-										"iDisplayLength" : 8,  //默认每页显示多少条记录
+										"iDisplayLength" : 5,  //默认每页显示多少条记录
 										"bDestroy":true,
 										"bPaginate": true, //翻页功能									
 										"bServerSide" : true,
@@ -30,7 +32,13 @@ $(document).ready(function() {
 													"mData" : "tenancy",
 													"orderable" : true,  // 禁用排序
 													"sDefaultContent" : "",
-													"sWidth" : "6%"
+													"sWidth" : "6%",
+													"render" : function(data,
+																type, row) {
+															var tenancy = row.tenancy;
+															tenancy=tenancy+"个月";
+															return data = tenancy;
+														}
 												},
 												{
 													"mData" : "bname",
@@ -101,7 +109,7 @@ $(document).ready(function() {
 																	+ ' onclick="scanOne(this)" class="btn btn-warning btn-xs" data-id='
 																	+ la_id
 																	+ ' id="frame1_scan">查看</button><button type="button" class="btn btn-danger btn-xs" data-id='
-																	+ row.la_id+'$0'+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
+																	+ row.la_id+'$'+data+"$"+"[{\"userid\":\""+row.applicantId+"\",\"msg\":\""+row.bname+"#"+row.lid+"\"}]"
 																	+ ' id="frame1_cancel">撤回</button>';
 														} else if (data == 1) {
 															return data = '<button type="button"  id='
@@ -145,13 +153,12 @@ $(document).ready(function() {
 
 									});
 					
-					$('#table2').DataTable({
-						"aLengthMenu" : [ 2, 4, 6, 8,
-											10 ], //动态指定分页后每页显示的记录数。
+					table2=$('#table2').DataTable({
+						"aLengthMenu" : [ 5, 10, 20, 30 ], //动态指定分页后每页显示的记录数。
 									"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 									"searching":false,//禁用搜索
 									"bSort" : false,									
-									"iDisplayLength" : 4, //默认每页显示多少条记录
+									"iDisplayLength" : 5, //默认每页显示多少条记录
 									"bPaginate": true, //翻页功能									
 									"bServerSide" : true,
 									"dom" : 'ftipr<"bottom"l>',
@@ -317,19 +324,16 @@ $(document).ready(function() {
 
 					function unionSelect() {
 
-						var bnameUnion = document.getElementById("bnameUnion").value;						
-						/*var startTimeUnion = document.getElementById("startTimeUnion").value;
-						var endTimeUnion = document.getElementById("endTimeUnion").value;*/
+						var bnameUnion = document.getElementById("bnameUnion").value;				
 						var descUnion = document.getElementById("descUnion").value;
 
-						$('#table2')
-								.DataTable(
+						table2=$('#table2').DataTable(
 										{
-											"aLengthMenu" : [ 2, 4, 6, 8, 10 ], //动态指定分页后每页显示的记录数。
+											"aLengthMenu" : [ 5, 10, 20, 30  ], //动态指定分页后每页显示的记录数。
 											"lengthChange" : true, //是否启用改变每页显示多少条数据的控件
 											"searching":false,//禁用搜索
 											"bSort" : false,
-											"iDisplayLength" : 4, //默认每页显示多少条记录
+											"iDisplayLength" : 5, //默认每页显示多少条记录
 											"bPaginate": true, //翻页功能									
 											"bServerSide" : true,
 											"bDestroy" : true,
@@ -465,7 +469,9 @@ $(document).ready(function() {
 											// alert(data[i].status);
 											if (data[i].status == 8) {
 												reason = "同类竞争";
-											} else {
+											} else if(data[i].status == 11) {
+												reason = "自己撤销";
+											}else{
 												reason = data[i].descp;
 											}
 											$("#bname").val(data[i].bname);
@@ -658,10 +664,23 @@ $(document).ready(function() {
 							cache : false,
 							success : function(data) {
 																
-								if (data[0].flag) {
-									window.location.reload();
-								} else {
-									alert("撤销失败");
+								if (data[0].flag=="200"||data[0].flag==200) {
+									bootbox.alert({
+								        message: "操作成功",
+								        size: 'small'
+								    });
+									table1.draw(false);
+									table2.draw(false);
+								} else if(data[0].flag=="0"||data[0].flag==0){
+									bootbox.alert({
+								        message: "撤销失败,请刷新页面",
+								        size: 'small'
+								    });
+								}else if(data[0].flag=="500"||data[0].flag==500){
+									bootbox.alert({
+								        message: "撤销失败",
+								        size: 'small'
+								    });
 								}
 
 							},
@@ -790,8 +809,6 @@ $(document).ready(function() {
 
 					function recovery() {
 						document.getElementById("bnameUnion").value = "";						
-						document.getElementById("startTimeUnion").value = "";
-						document.getElementById("endTimeUnion").value = "";
 						document.getElementById("descUnion").value = "-1";
 					}
 					

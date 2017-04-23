@@ -37,10 +37,10 @@ public class AdminManageServiceImpl implements AdminManageService {
 
 
 	@Override
-	public void setAdminFunction(String insertSql) {
+	public String setAdminFunction(String insertSql) {
 		// TODO Auto-generated method stub
-		adminManageDaoImpl.setAdminFunction(insertSql);
-		return;
+		String str=adminManageDaoImpl.setAdminFunction(insertSql);
+		return str;
 	}
 
 

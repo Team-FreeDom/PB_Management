@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,9 +20,12 @@ import com.base.dao.PlanDao;
 import com.base.po.AllPlan;
 import com.base.po.BaseInfo;
 import com.base.po.Classcourse;
+import com.base.po.ExportClassCourse;
 import com.base.po.Majoraim;
 import com.base.po.PlanList;
+import com.base.po.PracticeCollection;
 import com.base.po.UserInfo;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("PlanDao")
@@ -73,7 +78,6 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setSemester(rs.getString("semester"));
 		ch.setWeek(rs.getString("week"));
 		ch.setCheckMethod(rs.getString("checkMethod"));
-		// System.out.println(ch.getCheckMethod()+"有没有");
 		ch.setMajor_oriented(rs.getString("major_oriented"));
 		list.add(ch);
 	    }
@@ -91,7 +95,9 @@ public class PlanDaoImpl implements PlanDao {
 
     // 提供保存按钮的功能
     @Override
-    public void updatePlan(int id, String plandata) {
+    public String updatePlan(int id, String plandata) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -99,21 +105,26 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_classarrangecourse(?,?)}");
+		    .prepareCall("{call baseweb.add_classarrangecourse(?,?,?)}");
 	    sp.setInt(1, id);
 	    sp.setString(2, plandata);
 	    sp.execute();
+	    flag=sp.getInt(3);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
     }
 
     // 删除单条班级安排记录
     @Override
-    public void deleteClassPlan(int id) {
+    public String deleteClassPlan(int id) {
+	int flag;
+	String message=null;
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
@@ -121,15 +132,18 @@ public class PlanDaoImpl implements PlanDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.delete_classArrangecourse(?)}");
+		    .prepareCall("{call baseweb.delete_classArrangecourse(?,?)}");
 	    sp.setInt(1, id);
 	    sp.execute();
+	    flag=sp.getInt(2);
+	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	return message;
 
     }
 
@@ -181,7 +195,6 @@ public class PlanDaoImpl implements PlanDao {
 	    while (rs.next()) {
 		UserInfo ch = new UserInfo();
 		ch.setName(rs.getString("name"));
-		// System.out.println(ch.getName());
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -226,6 +239,8 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setGuideTeacher(rs.getString("guideTeacher"));
 		ch.setAssistant(rs.getString("assistant"));
 		ch.setRemark(rs.getString("remark"));
+		ch.setMajor_oriented(rs.getString("major_oriented"));
+		ch.setGrade(rs.getString("grade"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -236,25 +251,157 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	return list;
     }
-
-    // 获取基地集合
+        
     @Override
-    public List<BaseInfo> getBaseInfo() {
-	Session session = sessionFactory.openSession();
-	String hql = "from BaseInfo";
-	List<BaseInfo> list = null;
+    public List<PracticeCollection> plandata_export_1(String userid,String finishFunction,String semester) {
+    	Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
 
-	try {
-	    Query query = session.createQuery(hql);
-	    list = query.list();
+		List<PracticeCollection> list = new ArrayList<PracticeCollection>();
+		PracticeCollection pc = null;
+		List<Classcourse> lra = plandataClass_export(userid,semester);
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn.prepareCall("{CALL baseweb.export_classarrange(?,?,?)}");
+			sp.setString(1, semester);	
+			sp.setString(2, userid);			
+			sp.setString(3, finishFunction);		
+			sp.execute(); // 执行存储过程
+			rs = sp.getResultSet(); // 获得结果集
 
-	} catch (Exception e) {
-	    System.out.println(e);
-	} finally {
-	    session.close();
-	}
-	return list;
+			while (rs.next()) // 遍历结果集，赋值给list
+			{
+				pc = new PracticeCollection();
+
+				pc.setComposition(rs.getString("composition"));
+				pc.setCountPeople("学习人数:"+rs.getString("count"));
+				pc.setCourseId(rs.getString("cid"));
+				pc.setCourseName(rs.getString("coursename"));
+				pc.setCredit("学分:"+rs.getString("credit"));
+				pc.setDepartment(rs.getString("department"));
+				pc.setMajor_oriented(rs.getString("major_oriented"));
+				pc.setWeekCount("实习周数:"+rs.getString("week"));
+				pc.setTid(rs.getString("tid"));
+				pc.setTname(rs.getString("tname"));
+				
+				List<Classcourse> lis = new ArrayList<Classcourse>();
+				int i=0;
+				for (Classcourse ra : lra) {
+					if (String.valueOf(rs.getInt("id")).equals(ra.getCourse())) {
+						lis.add(ra);						
+					}
+					i++;
+				}				
+				pc.setData(lis);
+				list.add(pc);
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
+
+		}
+		return list;
     }
+    
+    @Override
+    public List<PracticeCollection> plandata_export_0(String userid,String semester) {
+    	Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+
+		List<PracticeCollection> list = new ArrayList<PracticeCollection>();
+		PracticeCollection pc = null;
+		
+		try {
+			conn = (Connection) SessionFactoryUtils.getDataSource(
+					sessionFactory).getConnection();
+			sp = (CallableStatement) conn.prepareCall("{CALL baseweb.export_classarrange(?,?,?)}");
+			sp.setString(1, semester);	
+			sp.setString(2, userid);			
+			sp.setString(3, "0");		
+			sp.execute(); // 执行存储过程
+			rs = sp.getResultSet(); // 获得结果集
+
+			while (rs.next()) // 遍历结果集，赋值给list
+			{
+				pc = new PracticeCollection();
+
+				pc.setComposition(rs.getString("composition"));
+				pc.setCountPeople("学习人数:"+rs.getString("count"));
+				pc.setCourseId(rs.getString("cid"));
+				pc.setCourseName(rs.getString("coursename"));
+				pc.setCredit("学分:"+rs.getString("credit"));
+				pc.setDepartment(rs.getString("department"));
+				pc.setMajor_oriented(rs.getString("major_oriented"));
+				pc.setWeekCount("实习周数:"+rs.getString("week"));	
+				pc.setTid(rs.getString("tid"));
+				pc.setTname(rs.getString("tname"));
+				pc.setData(new ArrayList<Classcourse>());
+				list.add(pc);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			SqlConnectionUtils.free(conn, sp, rs);
+
+		}
+		return list;
+    }
+    
+    @Override
+    public List<Classcourse> plandataClass_export(String userid,String semester){
+    	List<Classcourse> list = new ArrayList<Classcourse>();
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.export_classarranges(?,?)}");    	    
+    	    sp.setString(1, semester);
+    	    sp.setString(2, userid);
+    	    sp.execute();
+    	    rs = sp.getResultSet();
+    	    while (rs.next()) {
+    		Classcourse ch = new Classcourse();
+    		ch.setId(rs.getInt("id"));
+    		ch.setWeek(rs.getInt("week"));
+    		ch.setStarttime(rs.getString("starttime"));
+    		ch.setEndtime(rs.getString("endtime"));
+    		ch.setContent(rs.getString("content"));
+    		ch.setSource(rs.getString("source"));
+    		ch.setSite(rs.getString("site"));
+    		ch.setCategory(rs.getString("category"));
+    		ch.setForm(rs.getString("form"));
+    		ch.setTelephone(rs.getString("telephone"));
+    		ch.setAim(rs.getString("aim"));
+    		ch.setExpense(rs.getString("expense"));
+    		ch.setCourse(rs.getString("course"));
+    		ch.setGuideTeacher(rs.getString("guideTeacher"));
+    		ch.setAssistant(rs.getString("assistant"));
+    		ch.setRemark(rs.getString("remark"));
+    		ch.setGrade(rs.getString("grade"));
+    		ch.setMajor_oriented(rs.getString("major_oriented"));
+    		list.add(ch);
+    	    }
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, rs);
+    	}
+    	return list;
+    }
+ 
 
     // 修改课程安排表(单条)李彩页面功能
     @Override
@@ -301,9 +448,9 @@ public class PlanDaoImpl implements PlanDao {
 	}
 	return record;
     }
-
+    
 	@Override
-	public List<String> getOutBase(int tag) {
+	public List<String> getProperBase(String typename) {
 		List<String> list = new ArrayList<String>();
 		Connection conn = null;
 		CallableStatement sp = null;
@@ -312,12 +459,12 @@ public class PlanDaoImpl implements PlanDao {
 		    conn = (Connection) SessionFactoryUtils.getDataSource(
 			    sessionFactory).getConnection();
 		    sp = (CallableStatement) conn
-			    .prepareCall("{CALL baseweb.`query_basename`(?)}");	
-		    sp.setInt(1, tag);
+			    .prepareCall("{CALL baseweb.`find_basenames`(?)}");	
+		    sp.setString(1, typename);
 		    sp.execute();
 		    rs = sp.getResultSet();
 		    while (rs.next()) {				
-			list.add(rs.getString("basename"));
+			list.add(rs.getString("name"));
 		    }
 		} catch (SQLException e) {
 		    // TODO Auto-generated catch block
@@ -327,5 +474,34 @@ public class PlanDaoImpl implements PlanDao {
 		}
 		return list;
 	}
+       //通过学院获取专业
+	@Override
+	public List<Map<String, String>> getCollege_Major(String college) {
+	    List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Connection conn = null;
+		CallableStatement sp = null;
+		HashMap<String, String> map = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{CALL baseweb.find_major(?)}");
+		    sp.setString(1,college);
+		    sp.execute();
+		    rs = sp.getResultSet();
+		    while (rs.next()) {	
+			map = new HashMap<String, String>();
+			map.put("major", rs.getString("mname"));
+			list.add(map);
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		return list;
+	    }
 
-}
+	}

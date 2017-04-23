@@ -54,6 +54,9 @@ tbody tr td span{
 	text-align:left;}
 .modal-body tr td input{	
 	width:140px;}
+#basetyped{
+	width:140px;
+}
 .modal{
 	margin-top:5%;}
 #topPlugin{
@@ -93,9 +96,25 @@ tbody tr td span{
 	top:150px;
 	left:40%;
 	width:600px;
-	height:600px;
+	
 	display:none;
 	scroll:no;
 	
+}
+
+#exportButton{
+	float:right;
+	margin-left:5px;
+}
+#importButton{
+	float:right;
+	margin-left:5px;
+}
+#LinkButton{
+	float:right;
+	margin-left:5px;
+}
+.laydate_yms {
+	width:123px !important;
 }
 

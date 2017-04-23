@@ -22,214 +22,233 @@ import com.base.po.MaintainApplys;
 import com.base.po.MaintainList;
 import com.base.po.MaintenanceList;
 import com.base.po.Prabaseinfo;
+import com.base.utils.BaseUtils;
 import com.base.utils.SqlConnectionUtils;
 
 @Repository("repairApproveDao")
-public class RepairApproveDaoImpl implements RepairApproveDao{
-	
-	@Autowired
-	private SessionFactory sessionFactory;
+public class RepairApproveDaoImpl implements RepairApproveDao {
 
-	@Override
-	public MaintainList getRepairInfo(String baseid, String userid, int pageIndex,
-			int size, String orderColumn, String orderDir, String searchValue,
-			int status) {
-		MaintainList ma=new MaintainList();
-		List<MaintainApplys> list=new ArrayList<MaintainApplys>();
-		MaintainApplys mta=null;
-		int recordsTotal = 0;
-		Connection conn = null;
-		CallableStatement sp = null;
-		ResultSet rs = null;
-	if(baseid==null){
-		baseid="";
-	}
-	if(userid==null){
-		userid="";
-	}
-	if(orderColumn==null){
-		orderColumn="";
-	}
-	if(orderDir==null){
-		orderDir="";
-	}
-	if(searchValue==null){
-		searchValue="";
-	}
-		try
-		{
-			conn = (Connection) SessionFactoryUtils.getDataSource(
-					sessionFactory).getConnection();
-			sp = (CallableStatement) conn.prepareCall("{call baseweb.query_maintainrecord(?,?,?,?,?,?,?,?,?)}");		
-			sp.setInt(1, size);
-			sp.setInt(2, pageIndex);
-			sp.setString(3, orderColumn);
-			sp.setString(4, orderDir);
-			sp.setString(5, searchValue);
-			sp.setInt(6, status);
-			sp.setString(7, userid);
-			sp.setString(8, baseid);			
-			System.out.println(pageIndex+" "+size+"  "+orderColumn+"  "+orderDir+"  "+searchValue+"  "+status+"  "+userid+"  "+baseid);
-			sp.registerOutParameter(9, java.sql.Types.INTEGER);			
-			sp.execute();
-			System.out.println("haha,weixiu2");
-			recordsTotal = sp.getInt(9);
-			rs = sp.getResultSet();
-			while (rs.next())
-			{
-			    mta = new MaintainApplys();
-				mta.setId(rs.getInt("id"));
-				mta.setBasename(rs.getString("basename"));
-				mta.setPro_name(rs.getString("pro_name"));
-				mta.setUsername(rs.getString("username"));
-				mta.setAddress(rs.getString("address"));
-				mta.setApply_time(rs.getString("apply_time"));
-				mta.setFile(rs.getString("file"));
-				mta.setMoney(rs.getDouble("money"));
-				mta.setReason(rs.getString("reason"));
-				mta.setUserid(rs.getString("userid"));
-				list.add(mta);
-			}
-		} catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally
-		{
-			SqlConnectionUtils.free(conn, sp, rs);
-		}
-		ma.setRecordsTotal(recordsTotal);
-		ma.setData(list);	
-		System.out.println("ma:   "+ma);
-		return ma;
-		
-	}
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	public List<Map<String, String>> getUser(int status) {
-		Connection conn = null;
-		CallableStatement sp = null;
-		ResultSet rs = null;
-		
-		Session session=sessionFactory.openSession();			
-		List<Map<String, String>> list=new ArrayList<Map<String, String>>();
-		HashMap<String, String> map=null;
-		
-		try {
-			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainname(?)}");  //���ʹ洢���
-			sp.setInt(1, status);			
-			sp.execute();   //ִ�д洢���
-			rs=sp.getResultSet();  //��ý��
-			
-			while(rs.next())    //��������ֵ��list
-			{
-				map=new HashMap<String, String>();
-				map.put("username", rs.getString("username"));
-				list.add(map);				
-			}
-	    	 
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		}finally{
-			SqlConnectionUtils.free(conn, sp, rs);
-		}
-		return list;
+    @Override
+    public MaintainList getRepairInfo(String baseid, String userid,
+	    int pageIndex, int size, String orderColumn, String orderDir,
+	    String searchValue, int status) {
+	MaintainList ma = new MaintainList();
+	List<MaintainApplys> list = new ArrayList<MaintainApplys>();
+	MaintainApplys mta = null;
+	int recordsTotal = 0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+	if (baseid == null) {
+	    baseid = "";
 	}
-
-	@Override
-	public List<Map<String, String>> getBase(int status) {
-		Connection conn = null;
-		CallableStatement sp = null;
-		ResultSet rs = null;
-		
-		Session session=sessionFactory.openSession();			
-		List<Map<String, String>> list=new ArrayList<Map<String, String>>();
-		HashMap<String, String> map=null;
-		
-		try {
-			conn = (Connection)SessionFactoryUtils.getDataSource(sessionFactory).getConnection();			
-			sp= (CallableStatement) conn.prepareCall("{CALL baseweb.query_maintainbasename(?)}");  //���ʹ洢���
-			sp.setInt(1, status);			
-			sp.execute();   //ִ�д洢���
-			rs=sp.getResultSet();  //��ý��
-			
-			while(rs.next())    //��������ֵ��list
-			{
-				map=new HashMap<String, String>();
-				map.put("id", rs.getString("id"));
-				map.put("basename", rs.getString("basename"));
-				list.add(map);				
-			}
-	    	 
-			
-		} catch (Exception e) {
-			System.out.println(e);
-		}finally{
-			SqlConnectionUtils.free(conn, sp, rs);
-		}
-		return list;
+	if (userid == null) {
+	    userid = "";
 	}
-	
-	//�ı��¼��״̬
-	@Override
-	public void changeStatus(String recordstr,int status) {
-						
-		Connection conn = null;
-		CallableStatement sp = null;
-		ResultSet rs = null;
-		Session session = sessionFactory.openSession();
-		
-		try {
-			conn = (Connection) SessionFactoryUtils.getDataSource(
-					sessionFactory).getConnection();
-			sp = (CallableStatement) conn
-					.prepareCall("{call baseweb.trans_maintainstate(?,?)}");
-			sp.setString(1, recordstr);	
-			sp.setInt(2, status);								
-			sp.execute();
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-		}finally {
-			SqlConnectionUtils.free(conn, sp, null);
-		}		
-
+	if (orderColumn == null) {
+	    orderColumn = "";
 	}
-
-	//����¼״̬��Ϊ����ʧ�ܣ�������ܾ�ԭ��
-	@Override
-	public void refuseApply(String refusestr) {
-		
-		Session session = sessionFactory.openSession();
-		try {
-			// hibernate���ô洢���(�޷��ز���)
-			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`refuse_maintain`(?)}");
-			sqlQuery.setString(0,refusestr);				
-			sqlQuery.executeUpdate();
-		} finally {
-			session.close();
-		}		
-
+	if (orderDir == null) {
+	    orderDir = "";
 	}
-
-	//ά�����
-	@Override
-	public void finish(String storestr) {
-		
-		Session session = sessionFactory.openSession();
-		try {
-			// hibernate���ô洢���(�޷��ز���)
-			SQLQuery sqlQuery = session.createSQLQuery("{CALL baseweb.`maintainsuccess`(?)}");
-			sqlQuery.setString(0,storestr);				
-			sqlQuery.executeUpdate();
-		} finally {
-			session.close();
-		}		
-		
+	if (searchValue == null) {
+	    searchValue = "";
 	}
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.query_maintainrecord(?,?,?,?,?,?,?,?,?)}");
+	    sp.setInt(1, size);
+	    sp.setInt(2, pageIndex);
+	    sp.setString(3, orderColumn);
+	    sp.setString(4, orderDir);
+	    sp.setString(5, searchValue);
+	    sp.setInt(6, status);
+	    sp.setString(7, userid);
+	    sp.setString(8, baseid);	
+	    sp.registerOutParameter(9, java.sql.Types.INTEGER);
+	    sp.execute();
+	    recordsTotal = sp.getInt(9);
+	    rs = sp.getResultSet();
+	    while (rs.next()) {
+		mta = new MaintainApplys();
+		mta.setId(rs.getInt("id"));
+		mta.setBasename(rs.getString("basename"));
+		mta.setPro_name(rs.getString("pro_name"));
+		mta.setUsername(rs.getString("username"));
+		mta.setAddress(rs.getString("address"));
+		mta.setApply_time(rs.getString("apply_time"));
+		mta.setFile(rs.getString("file"));
+		mta.setMoney(rs.getDouble("money"));
+		mta.setReason(rs.getString("reason"));
+		mta.setUserid(rs.getString("userid"));
+		list.add(mta);
+	    }
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	ma.setRecordsTotal(recordsTotal);
+	ma.setData(list);
+	return ma;
+
+    }
+
+    @Override
+    public List<Map<String, String>> getUser(int status) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+
+	Session session = sessionFactory.openSession();
+	List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	HashMap<String, String> map = null;
+
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.query_maintainname(?)}"); // ���ʹ洢���
+	    sp.setInt(1, status);
+	    sp.execute(); // ִ�д洢���
+	    rs = sp.getResultSet(); // ��ý��
+
+	    while (rs.next()) // ��������ֵ��list
+	    {
+		map = new HashMap<String, String>();
+		map.put("username", rs.getString("username"));
+		list.add(map);
+	    }
+
+	} catch (Exception e) {
+	    System.out.println(e);
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return list;
+    }
+
+    @Override
+    public List<Map<String, String>> getBase(int status) {
+	Connection conn = null;
+	CallableStatement sp = null;
+	ResultSet rs = null;
+
+	Session session = sessionFactory.openSession();
+	List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+	HashMap<String, String> map = null;
+
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.query_maintainbasename(?)}"); // ���ʹ洢���
+	    sp.setInt(1, status);
+	    sp.execute(); // ִ�д洢���
+	    rs = sp.getResultSet(); // ��ý��
+
+	    while (rs.next()) // ��������ֵ��list
+	    {
+		map = new HashMap<String, String>();
+		map.put("id", rs.getString("id"));
+		map.put("basename", rs.getString("basename"));
+		list.add(map);
+	    }
+
+	} catch (Exception e) {
+	    System.out.println(e);
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, rs);
+	}
+	return list;
+    }
+
+    //改变状态（同意维修申请）̬
+    @Override
+    public int changeStatus(String recordstr, int status) {
+	int flag=0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{call baseweb.trans_maintainstate(?,?,?)}");
+	    sp.setString(1, recordstr);
+	    sp.setInt(2, status);	
+	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(3);
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, null);
+	}
+	return flag;
+
+    }
+
+    //拒绝维修申请
+    @Override
+    public int refuseApply(String recorddigit,String refusestr) {
+	int flag=0;
+	Connection conn = null;
+	CallableStatement sp = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.refuse_maintain(?,?,?)}");
+	    sp.setString(1, recorddigit);
+	    sp.setString(2, refusestr);
+	    sp.registerOutParameter(3, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(3);
+
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, null);
+	}
+	return flag;
+
+    }
+
+    // 维修完成
+    @Override
+    public String finish(String storestr) {
+	int flag;
+	String message = null;
+	Connection conn = null;
+	CallableStatement sp = null;
+	try {
+	    conn = (Connection) SessionFactoryUtils.getDataSource(
+		    sessionFactory).getConnection();
+	    sp = (CallableStatement) conn
+		    .prepareCall("{CALL baseweb.`maintainsuccess`(?,?)}");
+	    sp.setString(1, storestr);	
+	    sp.registerOutParameter(2, java.sql.Types.INTEGER);
+	    sp.execute();
+	    flag = sp.getInt(2);
+	    message = BaseUtils.getException(flag);
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} finally {
+	    SqlConnectionUtils.free(conn, sp, null);
+	}
+	return message;
+
+    }
 
 }

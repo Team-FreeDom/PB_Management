@@ -24,7 +24,13 @@ public interface checkService {
 	 * @param la_id
 	 * @throws SQLException
 	 */
-	public void refuseapply(String recordStr,String infoStr);
+	public int refuseapply(String recordStr,String infoStr);
+	/**
+	 * 逾期恢复
+	 * @param recordStr
+	 * @param infoStr
+	 */
+	public int overduerecovery(String recordStr,String infoStr);
 
     /*
      * 详情查看table1(tableCheck)
@@ -65,9 +71,9 @@ public interface checkService {
 	
 	public int agreeApply(String landstr,String recordstr,String infostr);
 	
-	public void cancelPayFor(String landstr, String recordstr, String infostr);
+	public int cancelPayFor(String landstr, String recordstr, String infostr);
 	
-	public void confirmPayFor(String landstr, String recordstr, String infostr);
+	public int confirmPayFor(String landstr, String recordstr, String infostr);
 	
 	public List<Map<String,String>> getCheckDept();
 	

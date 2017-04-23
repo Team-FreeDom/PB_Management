@@ -190,17 +190,7 @@ public class NotificationDaoImpl implements NotificationDao {
 
 	@Override
 	public List<Message> getMessageTop5Infos(String userid) {
-		// TODO Auto-generated method stub
-		/*
-		 * Session session = sessionFactory.openSession(); String hql =
-		 * "from Message where userid='"+userid+"' order by time desc limit 0,4"
-		 * ; System.out.println(hql); List<Message> list = null;
-		 * 
-		 * try { Query query = session.createQuery(hql); list = query.list();
-		 * 
-		 * } catch (Exception e) { System.out.println(e); } finally {
-		 * session.close(); }
-		 */
+	
 		CallableStatement sp = null;
 		Connection conn = null;
 		ResultSet rs = null;
@@ -225,7 +215,6 @@ public class NotificationDaoImpl implements NotificationDao {
 				message.setTime(rs.getString("time"));
 				message.setContent(rs.getString("content"));
 				message.setIsRead(rs.getInt("isRead"));
-				// System.out.println(message.getContent());
 
 				list.add(message);
 			}

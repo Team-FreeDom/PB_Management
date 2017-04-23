@@ -29,13 +29,23 @@ $(function() {
             var array2 = data.xy;
             var stime = data.stime;
             var etime = data.etime;
-            if (stime == '' || etime == '') {
+            var tag=data.tag;
+           // if (stime == '' || etime == '') {
+            if (tag==0) {
                 bootbox.alert({
                     message: "土地租赁尚未开放，请等候通知",
                     size: 'small'
                 });
                 return false;
             }
+            if(tag==1){
+            	bootbox.alert({
+                    message: "目前不属于租赁时间段",
+                    size: 'small'
+                });
+                return false;
+            }           
+            
             $('#stime').val(stime);
             $('#etime').val(etime);
             for (var item in array1) {
@@ -238,19 +248,32 @@ $(function() {
                     success: function(data) {
                             var position = data.indexOf('$');
                             var flag = data.substring(0, position);
-
-
-                            if (flag != 1) {
-
+                             if(flag == 1){
+                            	 bootbox.alert({
+                                     message: "不在土地租赁申报时间段内，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if(flag == 2){
+                            	 bootbox.alert({
+                                     message: "该土地已被锁定，请刷新页面",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                             }else if (flag == 404) {
                                 bootbox.alert({
                                     message: "请先撤回相同的土地申请",
                                     size: 'small',
                                     title: "申请失败",
                                 });
 
-                            } else {
-
-
+                            } else if(flag == 500){
+                            	 bootbox.alert({
+                                     message: "操作失败",
+                                     size: 'small',
+                                     title: "申请失败",
+                                 });
+                            }else if(flag == 200){
                                 fill('', '', '', '', '', '', '', '');
                                 $('#field_rent tbody').html('');
                                 obj.dialog = bootbox.dialog({
@@ -330,6 +353,7 @@ $(function() {
             }).bind(this);
 
             $(document).on("click", "#sum_app", function() {
+            	$("#modalHeight").removeClass("modalHeight");
                 var i = 1;
                 var str = '';
                 var id = -1;
@@ -362,6 +386,9 @@ $(function() {
                         i++;
                     } //end if
                 }); //end each
+                if(i>6){
+                	$("#modalHeight").addClass("modalHeight");
+                }
                 if (str == '') {
                     $('#sub_land_apply').attr('disabled', "true");
                     return false;
