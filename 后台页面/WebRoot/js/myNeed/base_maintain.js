@@ -432,8 +432,7 @@ $(document)
 											type : "POST",
 											dataType : "json",
 											cache : false,
-											success : function(data) {	
-												alert(data.flag);
+											success : function(data) {											
 													bootbox.alert({
 														message : data.flag,
 														size : 'small'
