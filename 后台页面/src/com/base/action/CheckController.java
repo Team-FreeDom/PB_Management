@@ -207,10 +207,10 @@ public class CheckController {
 	    HttpServletResponse response, ModelMap map) {
 	String recordstr = request.getParameter("recordstr");
 	String infostr = request.getParameter("infostr");
-	String str=checkservice.overduerecovery(recordstr, infostr);
+	int flag=checkservice.overduerecovery(recordstr, infostr);
 
 	JSONObject getObj = new JSONObject();
-	getObj.put("str", str);
+	getObj.put("flag", flag);
 
 	response.setContentType("text/html;charset=UTF-8");
 	try {

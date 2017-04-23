@@ -211,7 +211,8 @@
 						<table id="practiceapplytable" class="hover" cellspacing="0"
 							width="100%">
 							<thead>
-								<tr>								   
+								<tr>
+								    <td hidden id="exportPlanFlag">${exportPlanFlag}</td>								   
 									<td colspan="17" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>

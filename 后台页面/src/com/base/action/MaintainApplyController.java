@@ -316,11 +316,13 @@ public class MaintainApplyController {
 	if (bname.equals("-1")) {
 	    bname = null;
 	}
+	int exportMaintain=200;
 	List<MaintainApplys> list = new ArrayList<MaintainApplys>();
 	list = applyservice.export_maintainapply(bname, years);
-	if (CollectionUtils.isNotEmpty(list)) {
-	    /*String path = request.getSession().getServletContext()
-		    .getRealPath("/upload/");*/
+	if(list.size()==0){
+		exportMaintain=0;
+	}
+	if (CollectionUtils.isNotEmpty(list)) {	  
 	    String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 	    String fullFileName = path + "/BaseRepairInfo.xlsx";
 	    ExcelReport export = new ExcelReport();
@@ -343,6 +345,7 @@ public class MaintainApplyController {
 
 	    } catch (UnsupportedEncodingException e) {
 		// TODO Auto-generated catch block
+	    	exportMaintain=500;
 		e.printStackTrace();
 	    }
 	    // 读取文件
@@ -358,15 +361,14 @@ public class MaintainApplyController {
 		in.close();
 		out.close();
 
-	    } catch (FileNotFoundException e1) {
+	    }catch (Exception e) {
 		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
+	    	exportMaintain=500;
 		e.printStackTrace();
 	    }
 	    return null;
 	}
-	return "redirect:Repairmanage.jsp";
+	map.addAttribute("exportMaintain", exportMaintain);
+	return "forward:Repairmanage.jsp";
     }
 }

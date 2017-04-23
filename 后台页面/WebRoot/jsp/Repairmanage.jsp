@@ -218,6 +218,7 @@
 								width="100%">
 								<thead>
 									<tr bgcolor="#ECF1F5">
+									<td hidden id="exportMaintain">${exportMaintain}</td>
 										<td colspan="3" id="button-left">
 											<button type="button" class="btn btn-danger" id="delete">删除</button>
 											<button type="button" class="btn btn-info"

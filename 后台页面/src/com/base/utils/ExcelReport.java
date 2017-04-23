@@ -1036,7 +1036,7 @@ public class ExcelReport {
 		sheet.setColumnWidth(10, 5000);
 		sheet.setColumnWidth(11, 2500);
 		sheet.setColumnWidth(12, 3000);
-		sheet.setColumnWidth(13, 3000);
+		sheet.setColumnWidth(13, 8000);
 		sheet.setColumnWidth(14, 5000);
 
 		// * 设置样式
