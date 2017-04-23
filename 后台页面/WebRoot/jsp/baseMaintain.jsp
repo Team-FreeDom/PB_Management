@@ -232,6 +232,7 @@
 																		<td hidden id="tag_0">${flag}</td>
 																		<td hidden id="tag_1">${tag}</td>
 																		<td hidden id="tag_2">${college}</td>
+																		<td hidden id="tage_0">${tage_0}</td>
 																		<td>基地类型 <select name="status" id="shaiType"
 																			style="width:150px;margin-top:0px;">
 																				<option value="-1" id="shaiTypeh" selected>显示全部</option>

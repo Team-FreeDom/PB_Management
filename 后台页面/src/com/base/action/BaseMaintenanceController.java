@@ -284,10 +284,13 @@ public class BaseMaintenanceController {
 	if (dept == null) {
 	    dept = (String) request.getSession().getAttribute("college");
 	}
-	int star = Integer.valueOf(request.getParameter("star"));
+	int star = Integer.valueOf(request.getParameter("star"));	
+	int tage_0=200;
 	List<ExportBase> list = maintenanceservice.getExportBaseInfo(basetype,
 		dept, star);
-
+	if(list.size()==0){
+		tage_0=0;//没有数据
+	}
 	if (CollectionUtils.isNotEmpty(list)) {
 
 	    String path = ExcelReport.getWebRootUrl(request, "/upload/");
@@ -326,15 +329,14 @@ public class BaseMaintenanceController {
 		in.close();
 		out.close();
 
-	    } catch (FileNotFoundException e1) {
+	    }catch (Exception e) {
 		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	    } catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	    	tage_0=500;
+		e.printStackTrace();		
 	    }
 	    return null;
 	}
+	map.addAttribute("tage_0", tage_0);
 	return "baseMaintain";
     }
 

@@ -71,6 +71,27 @@ public class PlanMaintainController implements ServletContextAware {
     public void setServletContext(ServletContext arg0) {
 	this.application = arg0;
     }
+    
+    // 获取最新的学年学期
+    @RequestMapping("/getLatestYear.do")
+    public String getLatestYear(HttpServletRequest request,
+	    HttpServletResponse response) {
+    	
+    	// 获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+    	String college = (String) request.getSession().getAttribute("college");
+    	List<String> list = planMaintainService.getLatestSemester(college);
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("list", list);
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    	    response.getWriter().print(getObj.toString());
+    	} catch (Exception e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+    }
 
     // 显示实习计划数据
     @RequestMapping("/displayPlanInfo.do")
@@ -130,7 +151,7 @@ public class PlanMaintainController implements ServletContextAware {
     // 导出实习计划安排表
     @RequestMapping("/exportPlanInfo.do")
     public String exportPlanInfo(HttpServletRequest request,
-	    HttpServletResponse response) {
+	    HttpServletResponse response,ModelMap map) {
 	String daoYear = request.getParameter("daoYear");
 	int daoSemester = Integer.valueOf(request.getParameter("daosemster"));
 	String college = request.getParameter("college");
@@ -139,8 +160,13 @@ public class PlanMaintainController implements ServletContextAware {
 	} else if (college.equals("-1")) {
 	    college = null;
 	}
+	int exportTag=200;
 	List<PracticeCollection> list = planMaintainService.getPlanTable_0(
 		daoYear, daoSemester, college);
+	if(list.size()==0)
+	{
+		exportTag=0;
+	}
 
 	if (CollectionUtils.isNotEmpty(list)) {
 	    String path = ExcelReport.getWebRootUrl(request, "/upload/");
@@ -165,7 +191,8 @@ public class PlanMaintainController implements ServletContextAware {
 
 	    } catch (UnsupportedEncodingException e) {
 		// TODO Auto-generated catch block
-		e.printStackTrace();
+	    	exportTag=500;
+		e.printStackTrace();		
 	    }
 	    //
 	    InputStream in = null;
@@ -182,10 +209,12 @@ public class PlanMaintainController implements ServletContextAware {
 
 	    } catch (IOException e) {
 		// TODO Auto-generated catch block
+	    	exportTag=500;
 		e.printStackTrace();
 	    }
 	    return null;
 	}
+	map.addAttribute("exportTag", exportTag);
 	return "practicePlanMaintain";
     }
 

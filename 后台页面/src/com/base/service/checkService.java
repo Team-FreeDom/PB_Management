@@ -30,7 +30,7 @@ public interface checkService {
 	 * @param recordStr
 	 * @param infoStr
 	 */
-	public String overduerecovery(String recordStr,String infoStr);
+	public int overduerecovery(String recordStr,String infoStr);
 
     /*
      * 详情查看table1(tableCheck)

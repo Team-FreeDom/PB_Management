@@ -144,4 +144,11 @@ public interface PlanMaintainDao {
 	 */
     public List<PracticeCollection> getPlanTable_0(String year, int semester,
 			String college);
+    
+    /*
+	 1.参数：无参数
+	 2.返回值：List<String>，存放学年与学期
+	 3.函数功能： 获取最新的学年学期
+	 */
+    public List<String> getLatestSemester(String college);
 }

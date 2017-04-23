@@ -335,12 +335,27 @@ $(document)
 										"infostr" : info_str,
 									},
 									success : function(msg) {
-										
-										bootbox.alert({
-											message : msg.str,
-											size : 'small'
-										});
-										
+										if(msg.flag==0){
+											bootbox.alert({
+												message : "操作失败，请刷新页面",
+												size : 'small'
+											});
+										}else if(msg.flag==1){
+											bootbox.alert({
+												message : "其中存在已被租赁的土地，请重新选择",
+												size : 'small'
+											});
+										}else if(msg.flag==500){
+											bootbox.alert({
+												message : "操作失败",
+												size : 'small'
+											});
+										}else if(msg.flag==200){
+											bootbox.alert({
+												message : "操作成功",
+												size : 'small'
+											});
+										}
 										$("#basenameid option:gt(0)").remove();
 										$("#usernameid option:gt(0)").remove();
 										$("#dept option:gt(0)").remove();

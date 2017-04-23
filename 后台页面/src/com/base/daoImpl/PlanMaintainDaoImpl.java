@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -668,5 +669,32 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	}
 
     }
-
+    
+    // 获取最新的学年学期
+    @Override
+    public List<String> getLatestSemester(String college) {
+    	List<String> list = new ArrayList<String>();
+    	Connection conn = null;
+    	CallableStatement sp = null;
+    	ResultSet rs = null;
+    	try {
+    	    conn = (Connection) SessionFactoryUtils.getDataSource(
+    		    sessionFactory).getConnection();
+    	    sp = (CallableStatement) conn
+    		    .prepareCall("{CALL baseweb.`get_semester`(?,?,?)}"); 
+    	    sp.setString(1, college);
+    	    sp.registerOutParameter(2, java.sql.Types.VARCHAR);
+    	    sp.registerOutParameter(3, java.sql.Types.VARCHAR);
+    	    sp.execute();    	   
+    		list.add(sp.getString(2));
+    		list.add(sp.getString(3));    		
+    	} catch (SQLException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	} finally {
+    	    SqlConnectionUtils.free(conn, sp, rs);
+    	}
+    	return list;
+    }
+  
 }

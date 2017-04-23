@@ -157,12 +157,16 @@ public class PlanController implements ServletContextAware{
     // 获取导出的班级安排数据
     @RequestMapping("/getExportplandata.do")
     public String getExportplandata(HttpServletRequest request,
-	    HttpServletResponse response) {
+	    HttpServletResponse response,ModelMap map) {
     // 获取用户登录的id
     String userid = CookieUtils.getUserid(request);
 	String finishCondition=request.getParameter("finishCondition");
 	String semester=WeekTransformToTime.getThisSemester(application);
+	int exportPlanFlag=200;
 	List<PracticeCollection> list = planservice.plandata_export(userid, finishCondition, semester);	
+	if(list.size()==0){
+		exportPlanFlag=0;
+	}
 	if (CollectionUtils.isNotEmpty(list)) {			
 		String path = ExcelReport.getWebRootUrl(request,"/upload/"); 
 		String fullFileName = path + "/PracticeApplyInfo.xlsx";
@@ -186,6 +190,7 @@ public class PlanController implements ServletContextAware{
 
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
+			exportPlanFlag=500;
 			e.printStackTrace();
 		}
 		//
@@ -203,10 +208,12 @@ public class PlanController implements ServletContextAware{
 
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
+			exportPlanFlag=500;
 			e.printStackTrace();
 		}
 		return null;
 	}
+	map.addAttribute("exportPlanFlag", exportPlanFlag);
 	return "practiapply";
     }
     

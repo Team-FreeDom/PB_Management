@@ -228,7 +228,8 @@
 									</select></td>
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
-									<td hidden id="ta3">${tag}</td>									
+									<td hidden id="ta3">${tag}</td>	
+									<td hidden id="exportTag">${exportTag}</td>								
 									<td colspan="8">
 										<button class="btn btn-primary" id="chu">导出</button>									    
 										<button class="btn btn-primary" id="daoru" data-toggle="modal" data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>

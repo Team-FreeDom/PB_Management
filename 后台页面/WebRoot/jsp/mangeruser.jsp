@@ -404,7 +404,7 @@
 
 							<center>
 								<div class="modal-body" id="exportxsl" style="height:60px;">
-									<select name="dept" id="dept">
+									<select name="dept" id="dept" style="width:200px;">
 										<option id="EdeptID" value="1">全部</option>
 									</select>
 								</div>
