@@ -10,7 +10,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>实习申请</title>
+<title>湖南农业大学基地实习综合管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -49,10 +49,14 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
+						class="dropdown-toggle notification-icon"> <i
+							class="glyphicon glyphicon-question-sign"><span class="badge msg"></span></i> <!--ms-if-->
+					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a>
+					</a></li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-remove"></i>
@@ -211,7 +215,8 @@
 						<table id="practiceapplytable" class="hover" cellspacing="0"
 							width="100%">
 							<thead>
-								<tr>								   
+								<tr>
+								    <td hidden id="exportPlanFlag">${exportPlanFlag}</td>								   
 									<td colspan="17" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>
@@ -573,6 +578,21 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+     <form class="form-horizontal">
+  <div class="form-group" style="padding-left:0px;">
+    <label class="col-sm-8 control-label"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></label>  
+  </div>
+  <div class="form-group" style="padding-left:0px;">   
+    <label class="col-sm-8 control-label"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></label>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

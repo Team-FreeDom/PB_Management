@@ -4,6 +4,19 @@ var flag1=true;
 var flag2=true;
 $(document).ready(function() {
 				//分页表格 
+	var exportMaintain=$("#exportMaintain").text();
+	if(exportMaintain=="0"){
+		bootbox.alert({
+			message : "没有可导出的数据",
+			size : 'small'
+		});
+	}else if(exportMaintain=="500"){
+		bootbox.alert({
+			message : "导出失败",
+			size : 'small'
+		});
+	}
+	
               var applytable =$('#Repairmanage').DataTable(
 			  {
 				  "processing": true,

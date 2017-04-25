@@ -60,7 +60,7 @@ public class LoginController {
 			//0代表是学院负责人(教务秘书和教学基层组织负责人)，1代表是普通教师
 			int right=2;
 			CookieUtils.addCookie("username", userid, response);
-			CookieUtils.addCookie("password", pwd, response);
+			//CookieUtils.addCookie("password", pwd, response);
 			CookieUtils.addCookie("logintime",String.valueOf(new Date().getTime()),response);
 			CookieUtils.addCookie("adminValue", String.valueOf(adminValue),response);			
 			

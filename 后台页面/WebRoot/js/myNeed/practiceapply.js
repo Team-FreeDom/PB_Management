@@ -12,6 +12,19 @@ var majorString=[];
 
 $(document).ready(function() {	
 	
+	var exportPlanFlag=$("#exportPlanFlag").text();
+	if(exportPlanFlag=="0"){
+		bootbox.alert({
+			message : "没有可导出的数据",
+			size : 'small'
+		});
+	}else if(exportPlanFlag=="500"){
+		bootbox.alert({
+			message : "导出失败",
+			size : 'small'
+		});
+	}
+	
 	$('[data-toggle="tooltip"]').tooltip();
 	
 	 table=$("#practiceapplytable").DataTable({

@@ -217,16 +217,14 @@ public class CheckServiceImpl<E> implements checkService {
 
     // 逾期恢复
     @Override
-    public String overduerecovery(String recordStr, String infoStr) {
+    public int overduerecovery(String recordStr, String infoStr) {
 	// 获得插入的消息语句
 	String insertStr = MessageUtils.getInsertStr(infoStr, 20);	
-	int flag=checkViewDaoImpl.overduerecovery(recordStr);
-    String str="";
+	int flag=checkViewDaoImpl.overduerecovery(recordStr);   
     if(flag==200){
     	// 向消息表中插入信息
     	checkViewDaoImpl.insertMessage(insertStr);
-    }
-       str=BaseUtils.getException(flag);
-       return str;
+    }   
+       return flag;
     }
 }

@@ -14,7 +14,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>湖南农业大学土地管理系统</title>
+<title>湖南农业大学基地实习综合管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -57,6 +57,10 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
+						class="dropdown-toggle notification-icon"> <i
+							class="glyphicon glyphicon-question-sign"><span class="badge msg"></span></i> <!--ms-if-->
+					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
@@ -293,6 +297,22 @@
 
 			<!--row end-->
 		</div>
+		
+		<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+     <form class="form-horizontal">
+  <div class="form-group" style="padding-left:0px;">
+    <label class="col-sm-8 control-label"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></label>  
+  </div>
+  <div class="form-group" style="padding-left:0px;">   
+    <label class="col-sm-8 control-label"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></label>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+
 		<div class="clearfix"></div>
 		<!--[if lt IE 9]>
                 	<script src="../js/html5shiv.min.js"></script>

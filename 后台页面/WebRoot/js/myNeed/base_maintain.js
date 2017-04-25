@@ -35,6 +35,21 @@ $(document)
 							});
 						}										
 					}
+					
+					var tage_0=$("#tage_0").text();
+					if(tage_0=="0"){
+						bootbox.alert({
+							message : "目前没有任何数据用于导出",
+							size : 'small'
+						});
+					}else if(tage_0=="500"){
+						bootbox.alert({
+							message : "导出失败",
+							size : 'small'
+						});
+					}
+					
+					
 					$.ajax({
 						type : 'POST',
 						dataType : 'json',		
@@ -417,8 +432,7 @@ $(document)
 											type : "POST",
 											dataType : "json",
 											cache : false,
-											success : function(data) {	
-												alert(data.flag);
+											success : function(data) {											
 													bootbox.alert({
 														message : data.flag,
 														size : 'small'

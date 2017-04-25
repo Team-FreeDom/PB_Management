@@ -33,6 +33,19 @@ $(document)
 						});
 					}
 					
+					var exportTag=$("#exportTag").text();
+					if(exportTag=="0"){
+						bootbox.alert({
+							message : "没有可导出的数据",
+							size : 'small'
+						});
+					}else if(exportTag=="500"){
+						bootbox.alert({
+							message : "导出失败",
+							size : 'small'
+						});
+					}
+					
 					// 获取学院，学期
 					$.ajax({
 						type : 'POST',
