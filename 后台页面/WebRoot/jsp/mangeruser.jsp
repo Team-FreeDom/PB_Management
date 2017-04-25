@@ -375,12 +375,12 @@
 
 							<center>
 								<div class="modal-body" id="exportxsl" style="height:60px;">
-									<input type="file" id="exampleInputFile" name="fileResource">
+									<input type="file" id="fileResource" name="fileResource">
 								</div>
 							</center>
 							<div class="modal-footer">
 								<center>
-									<button type="submit" class="btn btn-primary"
+									<button type="button" class="btn btn-primary"
 										id="certainimport">确定</button>
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">取消</button>
