@@ -282,13 +282,20 @@ public class PlanMaintainController implements ServletContextAware {
 	    HttpServletResponse response) {
 	String str = request.getParameter("str");
 	String semester = request.getParameter("semester");
-	int weekCount = Integer.valueOf(request.getParameter("weekCount"));
-	String startTime = (String) Contants.map.get(semester);
-	String checkTime = WeekTransformToTime.weekTransformToTime(startTime,
-		weekCount);
+	String weekCount = request.getParameter("weekCount");	
+	
+	//给map_0赋值
+	HashMap<String, String> map_0 = null;
+	if (application.getAttribute("map_0") == null) {
+	    List<StartDate> list1 = planMaintainService.getStartDate();
+	    WeekTransformToTime.getLatestStartTime(application, list1);
+	}
+	String startTime=(String) ((HashMap<String,String>)application.getAttribute("map_0")).get(semester);	
+	int week= WeekTransformToTime.splitWeek(weekCount);	
+	String checkTime = WeekTransformToTime.weekTransformToTime(startTime,week);	
 	str = str + ",'" + checkTime + "')";
 	str = "insert into baseweb.coursearrange(semester,college,cid,count,selectedCount,composition,coursename,weekClassify,credit,courseNature,courseCategory,tid,tname,"
-		+ "Week,checkMethod,mid,major_oriented,checkTime) values" + str;
+		+ "Week,checkMethod,checkTime) values" + str;	
 	String message=planMaintainService.addOnePlanInfo(str);
 	if(message.equals("success")){
 	    message="操作成功";
