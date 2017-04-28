@@ -670,11 +670,7 @@
 								<td><input type="text" value="" name="tid" id="intid"
 									class="form-control"></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" name="mid" id="inmid"
-									class="form-control"></td>
-								</td>
+							<tr>								
 								<td>起始周次<span class="setTag">*</span></td>
 								<td id="td"><input type="text" name="week" id="inweek"
 									class="form-control" placeholder="请点击添加起始周" readonly>
@@ -702,42 +698,39 @@
 											</div>
 										</form>
 									</div></td>
+									<td>人数</td>
+								<td><input type="text" name="count" id="incount"
+									class="form-control" placeholder="例：90"></td>
 
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" name="count" id="incount"
-									class="form-control" placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" name="selectedCount"
 									id="inselectedCount" class="form-control" placeholder="例：90"></td>
-
+<td>周学时</td>
+								<td><input type="text" name="weekClassify"
+									id="inweekClassify" class="form-control" placeholder="例：2"></td>
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" name="weekClassify"
-									id="inweekClassify" class="form-control" placeholder="例：2"></td>
+								
 								<td>学分</td>
 								<td><input type="text" name="credit" id="incredit"
 									class="form-control" placeholder="例：2.0"></td>
-							</tr>
-
-							<tr>
-								<td>班级组成</td>
+									<td>班级组成</td>
 								<td><input type="text" name="composition"
 									id="incomposition" class="form-control"></td>
+							</tr>
+
+							<tr >
+								
 								<td>考核方式</td>
-								<td><input type="text" name="checkMethod"
+								<td><input type="text" name="checkMethod" 
 									id="incheckMethod" class="form-control"></td>
+									<td colspan="2"></td>
 							</tr>
-
-							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" name="major_oriented"
-									id="major" class="form-control"></td>
-
-							</tr>
+							
 						</table>
 					</form>
 				</div>
@@ -892,52 +885,46 @@
 								<td><input type="text" value="" id="tid_0" disabled
 									class="form-control"></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" id="mid_0" disabled
-									class="form-control"></td>
+							<tr>							
 								</td>
 								<td>起始周次<span class="setTag">*</span></td>
 								<td><input type="text" id="week_0" disabled
 									class="form-control"></td>
+									<td>人数</td>
+								<td><input type="text" id="count_0" class="form-control"
+									placeholder="例：90"></td>
 
 							</tr>
 							<tr>
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" id="count_0" class="form-control"
-									placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" id="selectedCount_0"
 									class="form-control" placeholder="例：90"></td>
+									<td>周学时</td>
+								<td><input type="text" id="weekClassify_0"
+									class="form-control" placeholder="例：2.0"></td>
 
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" id="weekClassify_0"
-									class="form-control" placeholder="例：2.0"></td>
+								
 								<td>学分</td>
 								<td><input type="text" id="credit_0" class="form-control"
 									placeholder="例：2.0"></td>
+									<td>班级组成</td>
+								<td><input type="text" id="composition_0"
+									class="form-control"></td>
 							</tr>
 
 							<tr>
-								<td>班级组成</td>
-								<td><input type="text" id="composition_0"
-									class="form-control"></td>
+								
 								<td>考核方式</td>
 								<td><input type="text" id="checkMethod_0"
 									class="form-control"></td>
-							</tr>
-
-							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" id="major_oriented_0"
-									class="form-control"></td>
-
-							</tr>
+									<td colspan="2"></td>
+							</tr>						
 						</table>
 					</form>
 				</div>
