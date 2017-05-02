@@ -625,40 +625,8 @@ $(document)
 							widFlag=true;	
 						}
 						}
-					});
+					});	
 					
-					$(document).on("blur", "#inmid", function() {
-						var aid = $("#inmid").val().trim();
-						if(aid==""){
-							return;
-						}
-						$.ajax({
-							type : 'POST',
-							dataType : 'json',
-							data:{"aid":aid},
-							url : 'checkIsThisMid.do',
-							async : false,
-							cache : false,
-							error : function(request) {
-								bootbox.alert({
-									message : "请求异常",
-									size : 'small'
-								});
-							},
-							success : function(data) {
-								if(!data.flag){
-								bootbox.alert({
-									message : "不存在该专业,请重新填写",
-									size : 'small'
-								});
-								midFlag=false;
-								}else{
-									midFlag=true;
-								}
-							}
-
-						});
-					});
 					
 					$(document).on("blur", "#inweekClassify,#weekClassify_0", function() {
 						var value=$(this).val();
@@ -777,11 +745,8 @@ $(document)
 						var tid = $("#intid").val().trim();
 						var tname = $("#intname").val().trim();
 						var week = $("#inweek").val().trim();// 起始周
-						var checkMethod = $("#incheckMethod").val().trim();
-						var mid = $("#inmid").val().trim();
-						var major_oriented =$("#major").val().trim();					
-						var insemester2=$("#insemester2").val().trim();
-						var weekCount=week.substring(0,week.indexOf('-'));
+						var checkMethod = $("#incheckMethod").val().trim();										
+						var insemester2=$("#insemester2").val().trim();					
 						if(count==""){
 							count="0";
 						}
@@ -871,21 +836,7 @@ $(document)
 								size : 'small'
 							});
 							return;
-						}
-						if(mid==""){
-							bootbox.alert({
-								message : "请填写专业编号",
-								size : 'small'
-							});
-							return;
-						}
-						if(!midFlag){
-							bootbox.alert({
-								message : "不存在该专业",
-								size : 'small'
-							});
-							return;
-						}
+						}					
 						if(!tag[2]){
                         	bootbox.alert({
 								message : "人数格式不对，只能输入整数",
@@ -919,8 +870,7 @@ $(document)
 						+ count + ',' + selectedCount + ",'" + composition + "','"
 						+ coursename + "'," + weekhours + ',' + credit + ",'"
 						+ courseNature + "','" + courseCategory + "','" + tid + "','"
-						+ tname + "','" + week + "','" + checkMethod + "','" + mid
-						+ "','" + major_oriented + "'";
+						+ tname + "','" + week + "','" + checkMethod + "'";
 						
 						bootbox.confirm({
 							message : "确定保存？",
@@ -941,7 +891,7 @@ $(document)
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
-							data:{"str":str1,"semester":insemester2,"weekCount":weekCount},
+							data:{"str":str1,"semester":insemester2,"weekCount":week},
 							url : 'addOnePlanInfo.do',
 							async : false,
 							cache : false,
@@ -994,9 +944,7 @@ $(document)
 						var tid = $("#tid_0").val().trim();
 						var tname = $("#tname_0").val().trim();
 						var week = $("#week_0").val().trim();// 起始周
-						var checkMethod = $("#checkMethod_0").val().trim();
-						var mid = $("#mid_0").val().trim();
-						var major_oriented =$("#major_oriented_0").val().trim();					
+						var checkMethod = $("#checkMethod_0").val().trim();									
 						var insemester2=$("#semsYear_0").val().trim();						
 						if(count==""){
 							count="0";
@@ -1051,8 +999,8 @@ $(document)
 						var str1 = "("+id+",'" + cid+ "'," + count+ "," + selectedCount + ",'"
 						+ composition + "','" + college + "','" + coursename + "',"
 						+ weekhours + "," +credit + ",'"+courseNature+"','" +courseCategory + "','"
-						+ checkMethod + "','" + mid + "','" + tid + "','"
-						+ tname + "','" + insemester2 + "','" + week+ "','" + major_oriented + "')";
+						+ checkMethod + "','" +tid + "','"
+						+ tname + "','" + insemester2 + "','" + week+ "')";
 						
 						bootbox.confirm({
 							message : "确定修改？",

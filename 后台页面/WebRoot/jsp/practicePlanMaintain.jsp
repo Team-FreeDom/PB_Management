@@ -54,7 +54,7 @@
 				<ul class="notifications" avalonctrl="subNotificationsController">
 					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
 						class="dropdown-toggle notification-icon"> <i
-							class="glyphicon glyphicon-question-sign"><span class="badge msg"></span></i> <!--ms-if-->
+							class="glyphicon glyphicon-question-sign"><span class="badge"></span></i> <!--ms-if-->
 					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
@@ -670,11 +670,7 @@
 								<td><input type="text" value="" name="tid" id="intid"
 									class="form-control"></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" name="mid" id="inmid"
-									class="form-control"></td>
-								</td>
+							<tr>								
 								<td>起始周次<span class="setTag">*</span></td>
 								<td id="td"><input type="text" name="week" id="inweek"
 									class="form-control" placeholder="请点击添加起始周" readonly>
@@ -702,42 +698,39 @@
 											</div>
 										</form>
 									</div></td>
+									<td>人数</td>
+								<td><input type="text" name="count" id="incount"
+									class="form-control" placeholder="例：90"></td>
 
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" name="count" id="incount"
-									class="form-control" placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" name="selectedCount"
 									id="inselectedCount" class="form-control" placeholder="例：90"></td>
-
+<td>周学时</td>
+								<td><input type="text" name="weekClassify"
+									id="inweekClassify" class="form-control" placeholder="例：2"></td>
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" name="weekClassify"
-									id="inweekClassify" class="form-control" placeholder="例：2"></td>
+								
 								<td>学分</td>
 								<td><input type="text" name="credit" id="incredit"
 									class="form-control" placeholder="例：2.0"></td>
-							</tr>
-
-							<tr>
-								<td>班级组成</td>
+									<td>班级组成</td>
 								<td><input type="text" name="composition"
 									id="incomposition" class="form-control"></td>
+							</tr>
+
+							<tr >
+								
 								<td>考核方式</td>
-								<td><input type="text" name="checkMethod"
+								<td><input type="text" name="checkMethod" 
 									id="incheckMethod" class="form-control"></td>
+									<td colspan="2"></td>
 							</tr>
-
-							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" name="major_oriented"
-									id="major" class="form-control"></td>
-
-							</tr>
+							
 						</table>
 					</form>
 				</div>
@@ -892,52 +885,46 @@
 								<td><input type="text" value="" id="tid_0" disabled
 									class="form-control"></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" id="mid_0" disabled
-									class="form-control"></td>
+							<tr>							
 								</td>
 								<td>起始周次<span class="setTag">*</span></td>
 								<td><input type="text" id="week_0" disabled
 									class="form-control"></td>
+									<td>人数</td>
+								<td><input type="text" id="count_0" class="form-control"
+									placeholder="例：90"></td>
 
 							</tr>
 							<tr>
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" id="count_0" class="form-control"
-									placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" id="selectedCount_0"
 									class="form-control" placeholder="例：90"></td>
+									<td>周学时</td>
+								<td><input type="text" id="weekClassify_0"
+									class="form-control" placeholder="例：2.0"></td>
 
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" id="weekClassify_0"
-									class="form-control" placeholder="例：2.0"></td>
+								
 								<td>学分</td>
 								<td><input type="text" id="credit_0" class="form-control"
 									placeholder="例：2.0"></td>
+									<td>班级组成</td>
+								<td><input type="text" id="composition_0"
+									class="form-control"></td>
 							</tr>
 
 							<tr>
-								<td>班级组成</td>
-								<td><input type="text" id="composition_0"
-									class="form-control"></td>
+								
 								<td>考核方式</td>
 								<td><input type="text" id="checkMethod_0"
 									class="form-control"></td>
-							</tr>
-
-							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" id="major_oriented_0"
-									class="form-control"></td>
-
-							</tr>
+									<td colspan="2"></td>
+							</tr>						
 						</table>
 					</form>
 				</div>
@@ -950,17 +937,21 @@
 		</div>
 	</div>
 	
-	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-     <form class="form-horizontal">
-  <div class="form-group" style="padding-left:0px;">
-    <label class="col-sm-8 control-label"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></label>  
-  </div>
-  <div class="form-group" style="padding-left:0px;">   
-    <label class="col-sm-8 control-label"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></label>
-  </div>
-</form>
+      <div class="modal-header" style="background:#3071a9; color:#FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel">演示视频</h4>
+      </div>
+      <div class="modal-body text-center">
+ 	    <div class="row">   
+    		<div class="col-md-12 helpcolor"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></div>
+  	   </div>
+  	   <div class="row" style="margin-top:20px;">
+  	 		 <div class="col-md-12 helpcolor"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></div>  
+  		</div>
+      </div>
     </div>
   </div>
 </div>
