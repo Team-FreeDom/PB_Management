@@ -566,6 +566,7 @@ $(document).on("click",".choice2",function(){//点击选择弹出
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectteacher").modal('show');
 	$("#selectCollege2").val("");
+	$("#selectTname2 option:gt(0)").remove();
 	$("#leadteachername").val(teacherString[selectNum]);
 	$("#selectTname2").val("");
 });
@@ -605,6 +606,7 @@ $(document).on("click",".choice",function(){//点击选择弹出
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectname").modal('show');
 	$("#selectTname").val("");
+	$("#selectTname option:gt(0)").remove();
 	$("#tester").val(value[selectNum]);
 	$("#selectCollege").val("");
 });
@@ -647,6 +649,7 @@ $(document).on("click",".choice3",function(){//点击选择弹出面向专业的
 	$("#Selectmajor").modal('show');
 	$("#showmajor").val(majorString[major_num]);
 	$("#majorName").val("");
+	$("#majorName option:gt(0)").remove();
 	$("#majorCollege").val("");
 });
 
