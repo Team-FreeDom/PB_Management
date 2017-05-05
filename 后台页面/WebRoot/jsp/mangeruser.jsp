@@ -278,7 +278,7 @@
 			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabe" aria-hidden="true">
 				<div class="modal-dialog">
-					<form action="upInfo.do" method="post" role="form" id="userform"
+					<form action="upInfo.do" method="post" role="form" id="userform" onSubmit="return checkSubmit();"
 						enctype="multipart/form-data">
 						<div class="modal-content" style="border:#3071a9 8px solid">
 							<div class="modal-header" style="background:#3071a9; color:#FFF">
@@ -341,7 +341,8 @@
 									</tr>
 
 									<tr>
-										<td>密码修改 :</td>
+										<td>密码修改 <span
+											class="setTag">*</span>:</td>
 										<td colspan="3"><input style="width:100%;" type="text"
 											class="form-control" id="Epassword" name="Epassword"></td>
 									</tr>

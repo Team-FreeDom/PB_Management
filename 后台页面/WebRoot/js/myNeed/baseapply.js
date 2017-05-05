@@ -329,6 +329,16 @@ $(document).on("click", "#submitForm", function() {
 		 $("#applyfile").val('');
 		return;
 	}
+	if($("#basetype0").val()==1){
+		if($("#applyfile").val()==""){
+			bootbox.alert({
+	            message: "请上传校外基地相关申报材料！",
+	            size: 'small'
+	        });
+			return false;
+		}
+		
+	}
 	$("#myForm").submit();
 });
 
@@ -360,4 +370,15 @@ $('#applyfile').change(function() {
     flag2=true;
     return false;
 });
+
+$(document).on("change", "#basetype0", function() {
+	$("#addspan span").remove();
+	$("#teachingBaseShow").show();
+	if($("#basetype0").val()==1){
+		$("#addspan").append("<span class='setTag'>*</span>");
+	}else{
+		document.getElementById("teachingBaseShow").style.display="none";
+	}
+});
+
 

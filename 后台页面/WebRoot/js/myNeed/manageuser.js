@@ -66,6 +66,8 @@ $("#addOne").click(function(){
 	        $("#password").val("");
 			 });
 
+
+
 //点击导入
 $("#certainimport").click(function(){
 	
@@ -410,6 +412,21 @@ $("#certainimport").click(function(){
 				}
         });
 });
+    
+   function checkSubmit(){	
+    	var pwd=$("#Epassword").val();
+    	if(pwd==''){
+    		bootbox.alert({
+    			message : "请填写密码",
+    			size : 'small'
+    		});
+    		return false;
+    	}else{
+    		return true;
+    	}    
+    	//$("#edit").modal('hide');    	
+    }
+    
     //查看详情及修改
     function editOne(obj) {
 
