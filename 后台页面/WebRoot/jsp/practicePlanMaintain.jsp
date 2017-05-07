@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practiceplanmaintain.css">
-
+<link rel="stylesheet" href="../css/select2.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -1146,6 +1146,7 @@
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
 	<script src="../js/kg.js"></script>
+	<script src="../js/select2.full.js" ></script>
 	<script>
 		laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({

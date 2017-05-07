@@ -1750,7 +1750,8 @@ $(document)
 								$("#table tbody:last-child").find("#class_one_option").after(
 										"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
 										);
-							}	
+							}
+							var site=data[i].site;
 							$.ajax({
 								type : 'POST',
 								dataType : 'json',		
@@ -1774,11 +1775,14 @@ $(document)
 										"<option class='rest' value="+date[0][i].name+">"+ date[0][i].name+ "</option>"
 										);
 									}
-									for(var j=0;j<date[1].length;j++){//获取基地名字
-										$("#table tbody:last-child").find("#schoolBaseID").after(
-										"<option class='rest' value="+date[1][j]+">"+ date[1][j] + "</option>"
-										);
-									}
+									$("#table tbody:last-child").find("#schoolBase").select2({
+										  data:date[1] ,
+										  placeholder:site,
+										  allowClear:false,
+										  width:100,
+										  dropdownAutoWidth:true
+										});
+									
 									
 									for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 										$("#table tbody:last-child").find("#aimID").after(
@@ -1887,7 +1891,7 @@ $(document)
 					selectObj.val("");
 					selectObj.find("option:gt(0)").remove();
 					aObj.css("display","none");
-					
+					var that=$(this);
 					if(type!=''){	
 						$.ajax({
 							type : 'POST',
@@ -1905,15 +1909,19 @@ $(document)
 							success : function(data){
 								if(data.length==0){
 									aObj.css("display","block");
+									$(".select2").css("display","none");
 									return;
 								}else{
+								that.parent().next().children("select").select2({
+										  data: data,
+										  placeholder:'请选择',
+										  allowClear:false,
+										  width:100,
+										  dropdownAutoWidth:true
+									});
 									
-								for(var j=0;j<data.length;j++){//获取基地名字
-									selectObj.find("#schoolBaseID").after(
-									"<option class='rest' value="+data[j]+">"+ data[j] + "</option>"
-									);
-								}
 								selectObj.show();
+								
 								
 								}
 							}
