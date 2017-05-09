@@ -37,3 +37,26 @@
   pointer-events:none;
 }
 
+#baseFileDownLoad a{
+	style-type:none;
+	color:blue;
+	font-size:15px;
+}
+#baseFileDownLoad li{
+	list-style:none;
+}
+#baseFileDownLoad{
+	padding-top:5px;
+}
+
+#societyBaseFileDownLoad a{
+	style-type:none;
+	color:blue;
+	font-size:15px;
+}
+#societyBaseFileDownLoad li{
+	list-style:none;
+}
+#societyBaseFileDownLoad{
+	padding-top:5px;
+}

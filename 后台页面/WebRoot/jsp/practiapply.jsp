@@ -10,7 +10,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>实习申请</title>
+<title>湖南农业大学基地实习综合管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practiceapply.css">
+<link rel="stylesheet" href="../css/select2.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,10 +50,14 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
+						class="dropdown-toggle notification-icon"> <i
+							class="glyphicon glyphicon-question-sign"><span class="badge"></span></i> <!--ms-if-->
+					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a>
+					</a></li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-remove"></i>
@@ -213,7 +218,7 @@
 							<thead>
 								<tr>
 								    <td hidden id="exportPlanFlag">${exportPlanFlag}</td>								   
-									<td colspan="17" hidden id="daoru_daochu">
+									<td colspan="16" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>
 									</td>
@@ -223,8 +228,7 @@
 									<th>学年学期</th>
 									<th>课程代码</th>
 									<th>课程名称</th>
-									<th>人数</th>
-									<th>已选人数</th>
+									<th>人数</th>									
 									<th>教学班组成</th>
 									<th>开课学院</th>
 									<th>周学时</th>
@@ -574,7 +578,25 @@
 			</div>
 		</div>
 	</div>
-
+	
+	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#3071a9; color:#FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel">演示视频</h4>
+      </div>
+      <div class="modal-body text-center">
+ 	    <div class="row">   
+    		<div class="col-md-12 helpcolor"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></div>
+  	   </div>
+  	   <div class="row" style="margin-top:20px;">
+  	 		 <div class="col-md-12 helpcolor"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></div>  
+  		</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
@@ -589,6 +611,7 @@
 	<script src="../js/laydate.js"></script>
 	<script src="../js/myNeed/practiceapply.js"></script>
 	<script src="../js/kg.js"></script>
+	<script src="../js/select2.full.js" ></script>
 	<script>
 		!function() {
 			laydate.skin('yalan');//切换皮肤，请查看skins下面皮肤库

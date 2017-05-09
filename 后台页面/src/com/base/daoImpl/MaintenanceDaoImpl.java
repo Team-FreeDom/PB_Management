@@ -287,7 +287,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 
     // 向基地信息表prabaseinfo中插入一条数据
     @Override
-    public String increaseBaseInfo(String str1, String str2) {
+    public String increaseBaseInfo(String baseid,String str1, String str2) {
 	int flag;
 	String message=null;
 	Connection conn = null;
@@ -296,11 +296,12 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{call baseweb.add_base(?,?,?)}");
+		    .prepareCall("{call baseweb.add_base(?,?,?,?)}");
 	    sp.setString(1, str1);
-	    sp.setString(2, str2);	     
+	    sp.setString(2, str2);
+	    sp.setString(3, baseid);
 	    sp.execute();
-	    flag=sp.getInt(3);
+	    flag=sp.getInt(4);	 
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block

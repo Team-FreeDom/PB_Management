@@ -152,12 +152,7 @@ $(document)
 											"orderable" : true,
 											"sDefaultContent" : "",
 											//"sWidth" : "3%"
-										}, {
-											"mData" : "selectedCount",// 已选人数
-											"orderable" : true,
-											"sDefaultContent" : "",
-											//"sWidth" : "3%"
-										}, {
+										},{
 											"mData" : "composition",// 教学班组成
 											"orderable" : false,
 											"sDefaultContent" : "",
@@ -339,11 +334,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -489,11 +480,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -625,40 +612,8 @@ $(document)
 							widFlag=true;	
 						}
 						}
-					});
+					});	
 					
-					$(document).on("blur", "#inmid", function() {
-						var aid = $("#inmid").val().trim();
-						if(aid==""){
-							return;
-						}
-						$.ajax({
-							type : 'POST',
-							dataType : 'json',
-							data:{"aid":aid},
-							url : 'checkIsThisMid.do',
-							async : false,
-							cache : false,
-							error : function(request) {
-								bootbox.alert({
-									message : "请求异常",
-									size : 'small'
-								});
-							},
-							success : function(data) {
-								if(!data.flag){
-								bootbox.alert({
-									message : "不存在该专业,请重新填写",
-									size : 'small'
-								});
-								midFlag=false;
-								}else{
-									midFlag=true;
-								}
-							}
-
-						});
-					});
 					
 					$(document).on("blur", "#inweekClassify,#weekClassify_0", function() {
 						var value=$(this).val();
@@ -777,11 +732,9 @@ $(document)
 						var tid = $("#intid").val().trim();
 						var tname = $("#intname").val().trim();
 						var week = $("#inweek").val().trim();// 起始周
-						var checkMethod = $("#incheckMethod").val().trim();
-						var mid = $("#inmid").val().trim();
-						var major_oriented =$("#major").val().trim();					
+						var checkMethod = $("#incheckMethod").val().trim();										
 						var insemester2=$("#insemester2").val().trim();
-						var weekCount=week.substring(0,week.indexOf('-'));
+						var format=/^([\u4e00-\u9fa5|\w|-]+[,]?)+$/;
 						if(count==""){
 							count="0";
 						}
@@ -871,21 +824,7 @@ $(document)
 								size : 'small'
 							});
 							return;
-						}
-						if(mid==""){
-							bootbox.alert({
-								message : "请填写专业编号",
-								size : 'small'
-							});
-							return;
-						}
-						if(!midFlag){
-							bootbox.alert({
-								message : "不存在该专业",
-								size : 'small'
-							});
-							return;
-						}
+						}					
 						if(!tag[2]){
                         	bootbox.alert({
 								message : "人数格式不对，只能输入整数",
@@ -913,14 +852,29 @@ $(document)
 								size : 'small'
 							});
                         	return;
-						}				
+						}	
+                        if(composition==""){
+                        	bootbox.alert({
+								message : "请填写班级组成",
+								size : 'small'
+							});
+                        	return;
+                        }
+                        if(!format.test(composition)){
+                        	bootbox.alert({
+								message : "班级之间用逗号','隔开",
+								size : 'small'
+							});
+                        	return;
+                        }
+                        
+                        
                         
 						var str1 = "('" + insemester2 + "','" + college + "','" + cid + "',"
 						+ count + ',' + selectedCount + ",'" + composition + "','"
 						+ coursename + "'," + weekhours + ',' + credit + ",'"
 						+ courseNature + "','" + courseCategory + "','" + tid + "','"
-						+ tname + "','" + week + "','" + checkMethod + "','" + mid
-						+ "','" + major_oriented + "'";
+						+ tname + "','" + week + "','" + checkMethod + "'";
 						
 						bootbox.confirm({
 							message : "确定保存？",
@@ -941,7 +895,7 @@ $(document)
 						$.ajax({
 							type : 'POST',
 							dataType : 'json',
-							data:{"str":str1,"semester":insemester2,"weekCount":weekCount},
+							data:{"str":str1,"semester":insemester2,"weekCount":week},
 							url : 'addOnePlanInfo.do',
 							async : false,
 							cache : false,
@@ -971,7 +925,7 @@ $(document)
 
 						});
 						
-						$("#addPraItem").modal('hide');
+						$("#addPraItem").hide();
 								}
 							}});
 					});
@@ -994,10 +948,9 @@ $(document)
 						var tid = $("#tid_0").val().trim();
 						var tname = $("#tname_0").val().trim();
 						var week = $("#week_0").val().trim();// 起始周
-						var checkMethod = $("#checkMethod_0").val().trim();
-						var mid = $("#mid_0").val().trim();
-						var major_oriented =$("#major_oriented_0").val().trim();					
-						var insemester2=$("#semsYear_0").val().trim();						
+						var checkMethod = $("#checkMethod_0").val().trim();									
+						var insemester2=$("#semsYear_0").val().trim();	
+						var format=/^([\u4e00-\u9fa5|\w|-]+[,]?)+$/;
 						if(count==""){
 							count="0";
 						}
@@ -1046,13 +999,33 @@ $(document)
 							});
 							return;
 						}
-									
+						if(tid==""){
+							bootbox.alert({
+								message : "请填写教师职工号",
+								size : 'small'
+							});
+							return;
+						}
+						 if(composition==""){
+	                        	bootbox.alert({
+									message : "请填写班级组成",
+									size : 'small'
+								});
+	                        	return;
+	                        }
+	                        if(!format.test(composition)){
+	                        	bootbox.alert({
+									message : "班级之间用','隔开",
+									size : 'small'
+								});
+	                        	return;
+	                        }
 						   
 						var str1 = "("+id+",'" + cid+ "'," + count+ "," + selectedCount + ",'"
 						+ composition + "','" + college + "','" + coursename + "',"
 						+ weekhours + "," +credit + ",'"+courseNature+"','" +courseCategory + "','"
-						+ checkMethod + "','" + mid + "','" + tid + "','"
-						+ tname + "','" + insemester2 + "','" + week+ "','" + major_oriented + "')";
+						+ checkMethod + "','" +tid + "','"
+						+ tname + "','" + insemester2 + "','" + week+ "')";
 						
 						bootbox.confirm({
 							message : "确定修改？",
@@ -1093,7 +1066,7 @@ $(document)
 							}
 						});
 						
-						$("#updatePlanItem").modal('hide');
+						$("#updatePlanItem").hide();
 						table.draw(false);
 						
 								}
@@ -1316,8 +1289,37 @@ $(document)
                     	 $("#checkMethod_0").val(obj[index].checkMethod);
                     	 $("#major_oriented_0").val(obj[index].major_oriented);
                     	 
+                    	var collegeName_1=$("#selectCollege_5").find("option:gt(0)");
+ 						var collegeName_2=$("#selectCollege_6").find("option:gt(0)");						
+ 						if(collegeName_1.length==0||collegeName_2.length==0){
+ 							collegeName_1.remove();
+ 							collegeName_2.remove();
+ 							$.ajax({
+ 								type : 'POST',
+ 								dataType : 'json',		
+ 								url : 'getCollege.do',  
+ 								async : false,
+ 								cache : false,
+ 								error : function(request) {
+ 									bootbox.alert({
+ 										message : "请求异常",
+ 										size : 'small'
+ 									});
+ 								},
+ 								success : function(data){
+ 									for(var i=0;i<data.length;i++){//获取学院下拉框
+ 										$("#collegeID_5").after(
+ 												"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+ 												);
+ 										$("#collegeID_6").after(
+ 												"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+ 												);										
+ 									}
+ 								}
+ 							});							
+ 						}	
                     	 
-                    	 $("#updatePlanItem").modal('show');
+                    	 $("#updatePlanItem").show();
                      });
                      
 					
@@ -1331,6 +1333,7 @@ $(document)
                         	   return;
                            }
                            userWarn=[];
+                           var checkSearchValue=table.search();//获取table的模糊查询框的输入值
 										table = $("#practiceplanmaintain").DataTable(
 														{
 															"processing" : true,
@@ -1348,7 +1351,7 @@ $(document)
 																"url" : "checkIsSave.do",
 																"type" : "POST",
 																"data" : {
-																	"semester" : str
+																	"semester" : str																	
 																}
 															},
 															"aoColumns" : [
@@ -1378,12 +1381,7 @@ $(document)
 																		"mData" : "count",// 人数
 																		"orderable" : true,
 																		"sDefaultContent" : ""
-																	},
-																	{
-																		"mData" : "selectedCount",// 已选人数
-																		"orderable" : true,
-																		"sDefaultContent" : "",
-																	},
+																	},																	
 																	{
 																		"mData" : "composition",// 教学班组成
 																		"orderable" : false,
@@ -1472,7 +1470,10 @@ $(document)
 																	"sLast" : " 尾页 "
 																}
 															}
-														});
+														});	
+										if(checkSearchValue!=""&&checkSearchValue!=null){
+											table.search(checkSearchValue).draw(false);
+										}
 										flag = 1;
 										$("#remind").prop("hidden", false);
 									});
@@ -1567,12 +1568,42 @@ $(document)
 									size : 'small'
 								});							
 								return;	
-						}						
-						
+						}	
+						//初始化数据
 						$("#addPraItem").find("input").val("");
 						$("#addPraItem").find("select").val("");
 						$("#insemester2").val(termYear+'-'+semester);
-						$("#addPraItem").modal('show');
+						
+						var collegeName_1=$("#selectCollege3").find("option:gt(0)");
+						var collegeName_2=$("#selectCollege4").find("option:gt(0)");						
+						if(collegeName_1.length==0||collegeName_2.length==0){
+							collegeName_1.remove();
+							collegeName_2.remove();
+							$.ajax({
+								type : 'POST',
+								dataType : 'json',		
+								url : 'getCollege.do',  
+								async : false,
+								cache : false,
+								error : function(request) {
+									bootbox.alert({
+										message : "请求异常",
+										size : 'small'
+									});
+								},
+								success : function(data){
+									for(var i=0;i<data.length;i++){//获取学院下拉框
+										$("#collegeID3").after(
+												"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+												);
+										$("#collegeID4").after(
+												"<option class='rest' value="+data[i].dept+">"+ data[i].dept + "</option>"
+												);										
+									}
+								}
+							});							
+						}						
+						$("#addPraItem").show();
 					});
 					
 					
@@ -1705,7 +1736,8 @@ $(document)
 								$("#table tbody:last-child").find("#class_one_option").after(
 										"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
 										);
-							}	
+							}
+							var site=data[i].site;
 							$.ajax({
 								type : 'POST',
 								dataType : 'json',		
@@ -1729,11 +1761,14 @@ $(document)
 										"<option class='rest' value="+date[0][i].name+">"+ date[0][i].name+ "</option>"
 										);
 									}
-									for(var j=0;j<date[1].length;j++){//获取基地名字
-										$("#table tbody:last-child").find("#schoolBaseID").after(
-										"<option class='rest' value="+date[1][j]+">"+ date[1][j] + "</option>"
-										);
-									}
+									$("#table tbody:last-child").find("#schoolBase").select2({
+										  data:date[1] ,
+										  placeholder:site,
+										  allowClear:false,
+										  width:100,
+										  dropdownAutoWidth:true
+										});
+									
 									
 									for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 										$("#table tbody:last-child").find("#aimID").after(
@@ -1842,7 +1877,7 @@ $(document)
 					selectObj.val("");
 					selectObj.find("option:gt(0)").remove();
 					aObj.css("display","none");
-					
+					var that=$(this);
 					if(type!=''){	
 						$.ajax({
 							type : 'POST',
@@ -1860,15 +1895,19 @@ $(document)
 							success : function(data){
 								if(data.length==0){
 									aObj.css("display","block");
+									$(".select2").css("display","none");
 									return;
 								}else{
+								that.parent().next().children("select").select2({
+										  data: data,
+										  placeholder:'请选择',
+										  allowClear:false,
+										  width:100,
+										  dropdownAutoWidth:true
+									});
 									
-								for(var j=0;j<data.length;j++){//获取基地名字
-									selectObj.find("#schoolBaseID").after(
-									"<option class='rest' value="+data[j]+">"+ data[j] + "</option>"
-									);
-								}
 								selectObj.show();
+								
 								
 								}
 							}
@@ -1876,7 +1915,256 @@ $(document)
 					}
 				});	
 	
-
+				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号，针对增加功能的带队老师				
+				$(document).on("change","#selectCollege3",function(){                   
+                    var college=$(this).val();                                    	
+    				$("#selectTname3 option:gt(0)").remove();    				
+					$.ajax({
+						url : 'getCollege_Teacher.do',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							"college" : college,								
+						},
+					success : function(data){						
+						for(var i=0;i<data.length;i++){//获取老师名字下拉框
+							$("#teacherNmaeID3").after(
+							"<option class='rest' value="+data[i].name+">"+ data[i].name + "</option>"
+							);
+						}
+					}
+				});
+				});
+				
+				/*增加按钮的带队老师js控制--start*/				
+				$(document).on("focus","#intname",function(){
+					$("#selectCollege3").val("");
+					$("#selectTname3 option:gt(0)").remove();
+					$("#selectTname3").val("");
+					$("#showTeaName").val($("#intname").val());
+					$("#TeaName").modal('show');
+					
+				});				
+					
+				$(document).on("change","#selectTname3",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
+					var teststring=$("#showTeaName").val().trim();
+					var testvalue=teststring.split("/");
+					var str_tname;
+					testvalue.push(e.target.value);
+					teststring=testvalue.join("/");
+					if(teststring.substring(0,1)=='/'){
+						str_tname=teststring.substring(1);
+					}else{
+						str_tname=teststring;
+					}
+					$("#showTeaName").val(str_tname);				
+				});
+					
+				$(document).on("click","#finished_increase1",function(){//点击确定之后讲实验员姓名在表格中显示出来
+					var tester=$("#showTeaName").val();
+					var format=/^([\u4e00-\u9fa5|\w]+[//]?)+$/;
+					if(tester===""){
+						bootbox.alert({
+							message : "带队教师不能为空",
+							size : 'small'
+						});
+						return;
+					}else if(!format.test(tester)){
+						bootbox.alert({
+							message : "名字之间用'/'隔开",
+							size : 'small'
+						});
+						return;
+					}					
+					$("#intname").val(tester);
+				});				
+				/*增加按钮的带队老师js控制--end*/
+				
+				
+				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号，针对增加功能的教师职工号				
+				$(document).on("change","#selectCollege4",function(){                 
+                    var college=$(this).val(); 
+    				$("#selectTname4 option:gt(0)").remove();
+    					
+					$.ajax({
+						url : 'getCollege_Teacher.do',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							"college" : college,								
+						},
+					success : function(data){						
+						for(var i=0;i<data.length;i++){//获取老师名字下拉框
+							$("#teacherNmaeID4").after(
+							"<option class='rest' value="+data[i].id+">"+ data[i].name + "</option>"
+							);
+						}
+					}
+				});
+				});
+				
+				/*增加按钮的教师职工号js控制--start*/		
+				var faculty_college="";
+				var faculty_name="";
+				$(document).on("focus","#intid",function(){
+					if($("#intid").val()==""){
+						$("#selectCollege4").val("");
+						$("#selectTname4 option:gt(0)").remove();
+						$("#selectTname4").val("");
+					}else{		
+						if($("#selectCollege4").val()==""){
+							$("#selectTname4 option:gt(0)").remove();    					
+							$.ajax({
+								url : 'getCollege_Teacher.do',
+								type : 'post',
+								dataType : 'json',
+								async: false,
+								data : {
+									"college" : faculty_college,								
+								},
+							success : function(data){						
+								for(var i=0;i<data.length;i++){//获取老师名字下拉框
+									$("#teacherNmaeID4").after(
+									"<option class='rest' value="+data[i].id+">"+ data[i].name + "</option>"
+									);
+								}
+							}
+						});
+						}						
+						$("#selectCollege4").val(faculty_college);
+						$("#selectTname4").val(faculty_name);
+					}	
+					
+					$("#TeaId").modal('show');					
+				});				
+					
+				$(document).on("click","#finished_increase2",function(){//点击确定之后讲教师职工号在表格中显示出来
+					var nameId=$("#selectTname4").val();
+					if(nameId===""){
+						bootbox.alert({
+							message : "教师职工号不能为空",
+							size : 'small'
+						});
+						return;
+					}else{
+						faculty_college=$("#selectCollege4").val();
+						faculty_name=$("#selectTname4").val();
+					}					
+					$("#intid").val(nameId);
+					
+				});				
+				/*增加按钮的教师职工号js控制--end*/
+				
+				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号，针对修改功能的带队老师				
+				$(document).on("change","#selectCollege_5",function(){                   
+                    var college=$(this).val();                                    	
+    				$("#selectTname_5 option:gt(0)").remove();    				
+					$.ajax({
+						url : 'getCollege_Teacher.do',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							"college" : college,								
+						},
+					success : function(data){						
+						for(var i=0;i<data.length;i++){//获取老师名字下拉框
+							$("#teacherNmaeID_5").after(
+							"<option class='rest' value="+data[i].name+">"+ data[i].name + "</option>"
+							);
+						}
+					}
+				});
+				});
+				
+				/*修改按钮的带队老师js控制--start*/				
+				$(document).on("focus","#tname_0",function(){
+					$("#selectCollege_5").val("");
+					$("#selectTname_5 option:gt(0)").remove();
+					$("#selectTname_5").val("");
+					$("#showTeaName_5").val($("#tname_0").val());
+					$("#TeaName_update").modal('show');
+					
+				});				
+					
+				$(document).on("change","#selectTname_5",function(e){//将实验员姓名显示在界面中
+					var teststring=$("#showTeaName_5").val().trim();
+					var testvalue=teststring.split("/");
+					var str_tname;
+					testvalue.push(e.target.value);
+					teststring=testvalue.join("/");
+					if(teststring.substring(0,1)=='/'){
+						str_tname=teststring.substring(1);
+					}else{
+						str_tname=teststring;
+					}
+					$("#showTeaName_5").val(str_tname);				
+				});
+					
+				$(document).on("click","#finished_update1",function(){//点击确定之后将带队教师在表格中显示出来
+					var tester=$("#showTeaName_5").val();					
+					var format=/^([\u4e00-\u9fa5|\w]+[//]?)+$/;
+					if(tester===""){
+						bootbox.alert({
+							message : "带队教师不能为空",
+							size : 'small'
+						});
+						return;
+					}else if(!format.test(tester)){
+						bootbox.alert({
+							message : "名字之间用'/'隔开",
+							size : 'small'
+						});
+						return;
+					}					
+					$("#tname_0").val(tester);
+				});				
+				/*修改按钮的带队老师js控制--end*/
+				
+				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号，针对修改功能的教师职工号				
+				$(document).on("change","#selectCollege_6",function(){                 
+                    var college=$(this).val(); 
+    				$("#selectTname_6 option:gt(0)").remove();
+    					
+					$.ajax({
+						url : 'getCollege_Teacher.do',
+						type : 'post',
+						dataType : 'json',
+						data : {
+							"college" : college,								
+						},
+					success : function(data){						
+						for(var i=0;i<data.length;i++){//获取老师名字下拉框
+							$("#teacherNmaeID_6").after(
+							"<option class='rest' value="+data[i].id+">"+ data[i].name + "</option>"
+							);
+						}
+					}
+				});
+				});
+				
+				/*修改按钮的教师职工号js控制--start*/					
+				$(document).on("focus","#tid_0",function(){
+					
+						$("#selectCollege_6").val("");
+						$("#selectTname_6 option:gt(0)").remove();
+						$("#selectTname_6").val("");					
+					$("#TeaId_update").modal('show');					
+				});				
+					
+				$(document).on("click","#finished_update2",function(){//点击确定之后讲教师职工号在表格中显示出来
+					var nameId=$("#selectTname_6").val();
+					if(nameId===""){
+						bootbox.alert({
+							message : "教师职工号不能为空",
+							size : 'small'
+						});
+						return;
+					}				
+					$("#tid_0").val(nameId);
+					
+				});				
+				/*修改按钮的教师职工号js控制--end*/
+				
 				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号）
 				var obj2;
 				$(document).on("change","#selectCollege",function(){
@@ -1947,6 +2235,7 @@ $(document)
 					$("#Selectteacher").modal('show');
 					$("#selectCollege2").val("");
 					$("#leadteachername").val(teacherString[selectNum]);
+					$("#selectTname2 option:gt(0)").remove();
 					$("#selectTname2").val("");
 				});
 
@@ -1988,6 +2277,7 @@ $(document)
 					$("#selectTname").val("");
 					$("#tester").val(value[selectNum]);
 					$("#selectCollege").val("");
+					$("#selectTname option:gt(0)").remove();
 				});
 					
 				$(document).on("change","#selectTname",function(e){//将实验员姓名显示在界面中，并且在选择的同时根据实验员的职工编号判断有没有选择同一人
@@ -2029,6 +2319,7 @@ $(document)
 					$("#showmajor").val(majorString[major_num]);
 					$("#majorName").val("");
 					$("#majorCollege").val("");
+					$("#majorName option:gt(0)").remove();
 				});
 
 				$(document).on("change","#majorName",function(e){//将专业显示在界面中
@@ -2747,7 +3038,20 @@ $(document)
 							p++;
 						});
 						$("#time").modal('hide');
-					});				
+					});	
+									
+					
+								
+
+
+
+$(document).on("click",".closeModal_increase",function(){		
+	$("#addPraItem").hide();
+});
+
+$(document).on("click",".closeModal_update",function(){		
+	$("#updatePlanItem").hide();
+});
 
 				});
 function sortNumber(a,b)

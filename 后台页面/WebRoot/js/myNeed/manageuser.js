@@ -65,6 +65,32 @@ $("#addOne").click(function(){
 	        $("#IDnumber1").val("");
 	        $("#password").val("");
 			 });
+
+
+
+//点击导入
+$("#certainimport").click(function(){
+	
+	var fireStr=$("#fileResource").val();
+	if(fireStr===""){
+		bootbox.alert({
+			message : "导入的文件不能为空",
+			size : 'small'
+		});
+		return;
+	}
+	var fireL=fireStr.lastIndexOf(".");
+	fireStr=fireStr.substring(fireL);
+	if(fireStr!=".xls"&&fireStr!=".xlsx"){
+		bootbox.alert({
+			message : "请导入Excel格式文档",
+			size : 'small'
+		});
+		$("#fileResource").val("");
+		return;
+	}
+	$("#daoruform").submit();
+});
    //限制修改用户id
     function stop(){
     	 bootbox.alert({
@@ -386,6 +412,21 @@ $("#addOne").click(function(){
 				}
         });
 });
+    
+   function checkSubmit(){	
+    	var pwd=$("#Epassword").val();
+    	if(pwd==''){
+    		bootbox.alert({
+    			message : "请填写密码",
+    			size : 'small'
+    		});
+    		return false;
+    	}else{
+    		return true;
+    	}    
+    	//$("#edit").modal('hide');    	
+    }
+    
     //查看详情及修改
     function editOne(obj) {
 

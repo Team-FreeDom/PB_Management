@@ -475,15 +475,9 @@ public class BaseMaintenanceController {
 		String str2 = "";
 		String name = request.getParameter("name");// 基地名称
 		String type = request.getParameter("typeid");// 基地类型id
-		String landarea = request.getParameter("landarea");// 基地面积
-		if (landarea.equals("")) {
-		    landarea = null;
-		}
+		String landarea = request.getParameter("landarea");// 基地面积		
 		String constructionarea = request
-			.getParameter("constructionarea");// 建筑面积
-		if (constructionarea.equals("")) {
-		    constructionarea = null;
-		}
+			.getParameter("constructionarea");// 建筑面积		
 		String undertake = request.getParameter("undertake");// 可承担人数
 		if (undertake.equals("")) {
 		    undertake = null;
@@ -543,8 +537,8 @@ public class BaseMaintenanceController {
 		}
 		Date d = new Date();
 		String Baseid = String.valueOf(d.getTime());
-		str2 += "('" + Baseid + "','" + name + "'," + type + ","
-			+ landarea + "," + constructionarea + "," + undertake
+		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
+			+ landarea + "','" + constructionarea + "'," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
 			+ userid + "','" + starttime + "','" + endtime + "','"
@@ -573,7 +567,7 @@ public class BaseMaintenanceController {
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		}
-		String message=maintenanceservice.increaseBaseInfo(str1, str2);
+		String message=maintenanceservice.increaseBaseInfo(Baseid,str1, str2);
 		request.setAttribute("index", message);
 		String str=(String) request.getAttribute("index");
 		response.setContentType("text/html;charset=UTF-8");

@@ -13,7 +13,7 @@
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>实习计划维护</title>
+<title>湖南农业大学基地实习综合管理系统</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
 <meta http-equiv="X-UA-Compatible" content="IE=9">
 <meta name="renderer" content="webkit">
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/practiceplanmaintain.css">
-
+<link rel="stylesheet" href="../css/select2.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -52,10 +52,14 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
+						class="dropdown-toggle notification-icon"> <i
+							class="glyphicon glyphicon-question-sign"><span class="badge"></span></i> <!--ms-if-->
+					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
-					</a>
+					</a></li>
 					<li><a href="../loginout.do"
 						class="dropdown-toggle notification-icon"> <i
 							class="icon-remove"></i>
@@ -230,7 +234,7 @@
 									<td hidden id="ta2">${sem}</td>
 									<td hidden id="ta3">${tag}</td>	
 									<td hidden id="exportTag">${exportTag}</td>								
-									<td colspan="8">
+									<td colspan="7">
 										<button class="btn btn-primary" id="chu">导出</button>									    
 										<button class="btn btn-primary" id="daoru" data-toggle="modal" data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
 										<a href="../templet/PracticeMaintainInfo.rar" id="LinkButton" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
@@ -238,7 +242,7 @@
 
 								</tr>
 								<tr bgcolor="#ECF1F5">
-									<td colspan="9"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
+									<td colspan="8"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
 									<td colspan="9">																														
 										<span id="remind" class="glyphicon glyphicon-send"></span>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>										
@@ -254,8 +258,7 @@
 									<th>学年学期</th>
 									<th>课程代码</th>
 									<th>课程名称</th>
-									<th>人数</th>
-									<th>已选人数</th>
+									<th>人数</th>								
 									<th>教学班组成</th>
 									<th>开课学院</th>
 									<th>周学时</th>
@@ -609,13 +612,104 @@
 			</div>
 		</div>
 	</div>
-	<!--增加按钮弹出框-->
-	<div class="modal fade" id="addPraItem" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="border:#3071a9 8px solid;">
+	
+	<div class="modal fade" id="TeaName" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" 	style="border:#3071a9 8px solid;width: 450px">
 				<div class="modal-header" style="background:#3071a9; color:#FFF">
 					<div class="glyphicon glyphicon-remove closeModal"
+						data-dismiss="modal"></div>
+					<h4 class="modal-title text-center">请选择带队老师</h4>
+				</div>
+
+				<center>
+					<div class="modal-body">
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-12 form-inline">
+								<lable>带队老师:</lable>
+								<input id="showTeaName" type="text"
+									class="form-control exeWidth" value="">
+							</div>
+
+						</div>
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-6">
+								<select name="" id="selectCollege3" class="form-control">
+									<option value="" id="collegeID3">请选择学院</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<select name="" id="selectTname3" class="form-control">
+									<option value="" id="teacherNmaeID3">请选择老师</option>
+								</select>
+							</div>
+						</div>
+
+
+
+					</div>
+				</center>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="finished_increase1">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="">取消</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="TeaId" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" 	style="border:#3071a9 8px solid;width: 450px">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<div class="glyphicon glyphicon-remove closeModal"
+						data-dismiss="modal"></div>
+					<h4 class="modal-title text-center">请选择教职工号</h4>
+				</div>
+
+				<center>
+					<div class="modal-body">						
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-6">
+								<select name="" id="selectCollege4" class="form-control">
+									<option value="" id="collegeID4">请选择学院</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<select name="" id="selectTname4" class="form-control">
+									<option value="" id="teacherNmaeID4">请选择工号</option>
+								</select>
+							</div>
+						</div>
+
+
+
+					</div>
+				</center>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="finished_increase2">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="">取消</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--增加按钮弹出框-->
+	<div id="addPraItem">
+		
+			<div class="modal-content" style="border:#3071a9 8px solid;">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<div class="glyphicon glyphicon-remove closeModal closeModal_increase"
 						data-dismiss="modal"></div>
 					<h4 class="modal-title text-center">增加实习计划</h4>
 				</div>
@@ -661,16 +755,12 @@
 							<tr>
 								<td>带队教师<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="tname" id="intname"
-									class="form-control"></td>
+									class="form-control"/></td>
 								<td>教师职工号<span class="setTag">*</span></td>
 								<td><input type="text" value="" name="tid" id="intid"
-									class="form-control"></td>
+									class="form-control"/></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" name="mid" id="inmid"
-									class="form-control"></td>
-								</td>
+							<tr>								
 								<td>起始周次<span class="setTag">*</span></td>
 								<td id="td"><input type="text" name="week" id="inweek"
 									class="form-control" placeholder="请点击添加起始周" readonly>
@@ -698,52 +788,48 @@
 											</div>
 										</form>
 									</div></td>
+									<td>人数</td>
+								<td><input type="text" name="count" id="incount"
+									class="form-control" placeholder="例：90"></td>
 
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" name="count" id="incount"
-									class="form-control" placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" name="selectedCount"
 									id="inselectedCount" class="form-control" placeholder="例：90"></td>
-
+<td>周学时</td>
+								<td><input type="text" name="weekClassify"
+									id="inweekClassify" class="form-control" placeholder="例：2"></td>
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" name="weekClassify"
-									id="inweekClassify" class="form-control" placeholder="例：2"></td>
+								
 								<td>学分</td>
 								<td><input type="text" name="credit" id="incredit"
 									class="form-control" placeholder="例：2.0"></td>
-							</tr>
-
-							<tr>
-								<td>班级组成</td>
-								<td><input type="text" name="composition"
-									id="incomposition" class="form-control"></td>
 								<td>考核方式</td>
-								<td><input type="text" name="checkMethod"
+								<td><input type="text" name="checkMethod" 
 									id="incheckMethod" class="form-control"></td>
+								
 							</tr>
 
 							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" name="major_oriented"
-									id="major" class="form-control"></td>
-
+								<td>班级组成<span class="setTag">*</span></td>
+								<td colspan="3"><input type="text" name="composition"
+									id="incomposition" class="form-control"></td>
 							</tr>
+							
 						</table>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="saveAdd">保存</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-default closeModal_increase" data-dismiss="modal">取消</button>
 				</div>
 
 			</div>
-		</div>
+		
 	</div>
 
 	<div class="modal fade" id="time" tabindex="-1" role="dialog"
@@ -833,13 +919,11 @@
 		</div>
 	</div>
 
-	<!-- 修改按钮弹出框-->
-	<div class="modal fade" id="updatePlanItem" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
+	<!-- 修改按钮弹出框-->	
+		<div id="updatePlanItem">
 			<div class="modal-content" style="border:#3071a9 8px solid;">
 				<div class="modal-header" style="background:#3071a9; color:#FFF">
-					<div class="glyphicon glyphicon-remove closeModal"
+					<div class="glyphicon glyphicon-remove closeModal closeModal_update"
 						data-dismiss="modal"></div>
 					<h4 class="modal-title text-center">修改实习计划</h4>
 				</div>
@@ -885,66 +969,169 @@
 								<td><input type="text" value="" id="tname_0"
 									class="form-control"></td>
 								<td>教师职工号<span class="setTag">*</span></td>
-								<td><input type="text" value="" id="tid_0" disabled
+								<td><input type="text" value="" id="tid_0"
 									class="form-control"></td>
 							</tr>
-							<tr>
-								<td>专业编号<span class="setTag">*</span></td>
-								<td><input type="text" id="mid_0" disabled
-									class="form-control"></td>
+							<tr>							
 								</td>
 								<td>起始周次<span class="setTag">*</span></td>
 								<td><input type="text" id="week_0" disabled
 									class="form-control"></td>
+									<td>人数</td>
+								<td><input type="text" id="count_0" class="form-control"
+									placeholder="例：90"></td>
 
 							</tr>
 							<tr>
 							</tr>
 							<tr>
-								<td>人数</td>
-								<td><input type="text" id="count_0" class="form-control"
-									placeholder="例：90"></td>
+								
 								<td>已选人数</td>
 								<td><input type="text" id="selectedCount_0"
 									class="form-control" placeholder="例：90"></td>
+									<td>周学时</td>
+								<td><input type="text" id="weekClassify_0"
+									class="form-control" placeholder="例：2.0"></td>
 
 							</tr>
 
 							<tr>
-								<td>周学时</td>
-								<td><input type="text" id="weekClassify_0"
-									class="form-control" placeholder="例：2.0"></td>
+								
 								<td>学分</td>
 								<td><input type="text" id="credit_0" class="form-control"
 									placeholder="例：2.0"></td>
-							</tr>
-
-							<tr>
-								<td>班级组成</td>
-								<td><input type="text" id="composition_0"
-									class="form-control"></td>
-								<td>考核方式</td>
+									<td>考核方式</td>
 								<td><input type="text" id="checkMethod_0"
 									class="form-control"></td>
+								
+								
 							</tr>
 
 							<tr>
-								<td>面向专业</td>
-								<td colspan="3"><input type="text" id="major_oriented_0"
+									<td>班级组成<span class="setTag">*</span></td>
+								<td colspan="3"><input type="text" id="composition_0"
 									class="form-control"></td>
-
-							</tr>
+								
+							</tr>						
 						</table>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" id="saveUpdate">确定修改</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-default closeModal_update" data-dismiss="modal">取消</button>
 				</div>
 
 			</div>
+		</div>	
+		
+		<div class="modal fade" id="TeaName_update" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" 	style="border:#3071a9 8px solid;width: 450px">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<div class="glyphicon glyphicon-remove closeModal"
+						data-dismiss="modal"></div>
+					<h4 class="modal-title text-center">请选择带队老师</h4>
+				</div>
+
+				<center>
+					<div class="modal-body">
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-12 form-inline">
+								<lable>带队老师:</lable>
+								<input id="showTeaName_5" type="text"
+									class="form-control exeWidth" value="">
+							</div>
+
+						</div>
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-6">
+								<select name="" id="selectCollege_5" class="form-control">
+									<option value="" id="collegeID_5">请选择学院</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<select name="" id="selectTname_5" class="form-control">
+									<option value="" id="teacherNmaeID_5">请选择老师</option>
+								</select>
+							</div>
+						</div>
+
+
+
+					</div>
+				</center>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="finished_update1">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="">取消</button>
+					</center>
+				</div>
+			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="TeaId_update" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" 	style="border:#3071a9 8px solid;width: 450px">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<div class="glyphicon glyphicon-remove closeModal"
+						data-dismiss="modal"></div>
+					<h4 class="modal-title text-center">请选择教职工号</h4>
+				</div>
+
+				<center>
+					<div class="modal-body">						
+						<div class="row" style="margin-bottom: 30px;">
+							<div class="col-sm-6">
+								<select name="" id="selectCollege_6" class="form-control">
+									<option value="" id="collegeID_6">请选择学院</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<select name="" id="selectTname_6" class="form-control">
+									<option value="" id="teacherNmaeID_6">请选择工号</option>
+								</select>
+							</div>
+						</div>
+
+
+
+					</div>
+				</center>
+				<div class="modal-footer">
+					<center>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							id="finished_update2">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="">取消</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#3071a9; color:#FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel">演示视频</h4>
+      </div>
+      <div class="modal-body text-center">
+ 	    <div class="row">   
+    		<div class="col-md-12 helpcolor"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></div>
+  	   </div>
+  	   <div class="row" style="margin-top:20px;">
+  	 		 <div class="col-md-12 helpcolor"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></div>  
+  		</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="../js/jquery.min.js"></script>
@@ -958,6 +1145,7 @@
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/myNeed/practiceplanmaintain.js"></script>
 	<script src="../js/kg.js"></script>
+	<script src="../js/select2.full.js" ></script>
 	<script>
 		laydate.skin('yalan'); //切换皮肤，请查看skins下面皮肤库
 		laydate({

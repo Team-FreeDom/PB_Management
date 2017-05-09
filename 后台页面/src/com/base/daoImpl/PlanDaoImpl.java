@@ -194,6 +194,7 @@ public class PlanDaoImpl implements PlanDao {
 	    rs = sp.getResultSet();
 	    while (rs.next()) {
 		UserInfo ch = new UserInfo();
+		ch.setId(rs.getString("id"));
 		ch.setName(rs.getString("name"));
 		list.add(ch);
 	    }

@@ -94,12 +94,7 @@ $(document).ready(function() {
 					   				"mData" : "count",//人数
 					   				"orderable" : true,
 					   				"sDefaultContent" : ""
-					   			},
-					   			{
-					   				"mData" : "selectedCount",//已选人数
-					   				"orderable" : true,
-					   				"sDefaultContent" : "",
-					   			},
+					   			},					   			
 					   			{
 					   				"mData" : "composition",//教学班组成
 					   				"orderable" : false,
@@ -222,7 +217,6 @@ $(document).ready(function() {
 	 +'<td style="padding-top:5px"><select id="class_one" type="text" class="text-center flag"><option value="" id="class_one_option">请选择</select></td>'
 	 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 	 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
-	 
 	 +'<td style="padding-top:5px"><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
 	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
 	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
@@ -325,6 +319,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 							"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
 							);
 				}	
+				var site=data[i].site;
 				$.ajax({
 					type : 'POST',
 					dataType : 'json',		
@@ -343,16 +338,27 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 					},
 					success : function(date){
 						
+					$("#table tbody:last-child").find("#schoolBase").select2({
+							  data:date[1] ,
+							  placeholder:site,
+							  allowClear:false,
+							  width:100,
+							  dropdownAutoWidth:true
+							});
+						
+						
 						for(var i=0;i<date[0].length;i++){//获取基地类型
 							$("#table tbody:last-child").find("#baseForm").after(
 							"<option class='rest' value="+date[0][i].name+">"+ date[0][i].name+ "</option>"
 							);
 						}
-						for(var j=0;j<date[1].length;j++){//获取基地名字
+					/*	for(var j=0;j<date[1].length;j++){//获取基地名字
 							$("#table tbody:last-child").find("#schoolBaseID").after(
 							"<option class='rest' value="+date[1][j]+">"+ date[1][j] + "</option>"
 							);
-						}
+						}*/
+						
+						
 						
 						for(var t=0;t<date[2].length;t++){//获取实习目的下拉框
 							$("#table tbody:last-child").find("#aimID").after(
@@ -461,7 +467,7 @@ $(document).on("change","#baseFrom",function(e){
 	selectObj.val("");
 	selectObj.find("option:gt(0)").remove();
 	aObj.css("display","none");
-	
+	var that=$(this);
 	if(type!=''){	
 		$.ajax({
 			type : 'POST',
@@ -479,18 +485,24 @@ $(document).on("change","#baseFrom",function(e){
 			success : function(data){
 				if(data.length==0){
 					aObj.css("display","block");
+					$(".select2").css("display","none");
 					return;
 				}else{
-					
-				for(var j=0;j<data.length;j++){//获取基地名字
-					selectObj.find("#schoolBaseID").after(
-					"<option class='rest' value="+data[j]+">"+ data[j] + "</option>"
-					);
-				}
+			
+			that.parent().next().children("select").select2({
+					  data: data,
+					  placeholder:'请选择',
+					  allowClear:false,
+					  width:100,
+					  dropdownAutoWidth:true
+					});
+				
+			
 				selectObj.show();
 				
 				}
 			}
+			
 		});
 	}
 });	
@@ -563,9 +575,10 @@ $(document).on("change","#selectCollege2",function(){
 
 var selectNum;
 $(document).on("click",".choice2",function(){//点击选择弹出 
-	selectNum=$(this).closest("tbody").find(".mark").html()-1;
+	selectNum=$(this).closest("tbody").find(".mark").html()-1;  
 	$("#Selectteacher").modal('show');
 	$("#selectCollege2").val("");
+	$("#selectTname2 option:gt(0)").remove();
 	$("#leadteachername").val(teacherString[selectNum]);
 	$("#selectTname2").val("");
 });
@@ -605,6 +618,7 @@ $(document).on("click",".choice",function(){//点击选择弹出
 	selectNum=$(this).closest("tbody").find(".mark").html()-1;
 	$("#Selectname").modal('show');
 	$("#selectTname").val("");
+	$("#selectTname option:gt(0)").remove();
 	$("#tester").val(value[selectNum]);
 	$("#selectCollege").val("");
 });
@@ -647,6 +661,7 @@ $(document).on("click",".choice3",function(){//点击选择弹出面向专业的
 	$("#Selectmajor").modal('show');
 	$("#showmajor").val(majorString[major_num]);
 	$("#majorName").val("");
+	$("#majorName option:gt(0)").remove();
 	$("#majorCollege").val("");
 });
 

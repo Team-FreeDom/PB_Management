@@ -532,7 +532,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	    sp.setString(7, dept);
 	    sp.setString(8, telephone);
 	    sp.setString(9, idcard);
-	    sp.setString(10, password);
+	    sp.setString(10, password);	    
 	    sp.execute();
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -551,10 +551,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public List<ApplyDept> getDepts() {
 	Session session = sessionFactory.openSession();
-	String hql = "from ApplyDept";
+	String hql = "from ApplyDept where dept!=?";
 	List<ApplyDept> list = null;
 	try {
 	    Query query = session.createQuery(hql);
+	    query.setString(0,"''");
 	    list = query.list();
 
 	} catch (Exception e) {
@@ -576,7 +577,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	String hql = "from Admin";
 	List<Admin> list = null;
 	try {
-	    Query query = session.createQuery(hql);
+	    Query query = session.createQuery(hql);	    
 	    list = query.list();
 
 	} catch (Exception e) {
