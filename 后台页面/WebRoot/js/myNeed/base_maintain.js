@@ -551,8 +551,17 @@ $(document)
 					
 						var buildingaread=$("#buildingaread").val();
 						var undertakeCountd=$("#undertakeCountd").val();
+						var reg=/^\d+$/;
 						if(undertakeCountd==""){
 							undertakeCountd=0;
+						}else{
+							if(!undertakeCountd.match(reg)){
+								bootbox.alert({
+									message : "可承担人数只能为整数",
+									size : 'small'
+								});
+							 return;
+							}
 						}
 						var usernamed=$("#usernamed").val();
 						var userphoned=$("#userphoned").val();
@@ -699,6 +708,8 @@ $(document)
 						var lawperson=$("#lawPerson").val();
 						var validdastart=$("#validdastart").val();
 						var validdaend=$("#validdaend").val();
+						var limit_population=$("#limit-population").val().trim();
+						var reg=/^\d+$/;
 						if(!tag){		
 							 bootbox.alert({
 									message : "该基地名称已存在，请重新输入",
@@ -727,6 +738,15 @@ $(document)
 								});
 							 return;
 						}
+						if(limit_population!=""){
+							if(!limit_population.match(reg)){
+								bootbox.alert({
+									message : "可承担人数只能为整数",
+									size : 'small'
+								});
+							 return;
+							}
+							}
 						if(baseaddress==""){
 							bootbox.alert({
 								message : "请填写通信地址",

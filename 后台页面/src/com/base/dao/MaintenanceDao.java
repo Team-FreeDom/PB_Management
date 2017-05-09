@@ -60,7 +60,7 @@ public interface MaintenanceDao {
 	 返回值：   无返回值
 	 函数功能：增加实习基地
 	 */
-	public String increaseBaseInfo(String str1, String str2);
+	public String increaseBaseInfo(String baseid,String str1, String str2);
 	
 	/*
 	  参数说明：userid,为用户编号; recordStr1,为基地名称集合;recordStr2,为基地记录集合;recordStr3,,为基地-专业集合   

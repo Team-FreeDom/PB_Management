@@ -290,7 +290,7 @@
 										<label class="col-md-3 control-label">土地面积</label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="filed-area"
-												name="landarea" placeholder="单位：亩">
+												name="landarea" placeholder="">
 										</div>
 									</div>
 
@@ -298,7 +298,7 @@
 										<label class="col-md-3 control-label">建筑面积</label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="base-area"
-												name="constructionarea" placeholder="单位：平方">
+												name="constructionarea" placeholder="">
 										</div>
 									</div>
 
@@ -335,6 +335,16 @@
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="personTel"
 												name="phone" placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group" id="societyBaseShow" style="display:none">
+
+										<label class="col-md-3 control-label">社会服务基地申请材料下载</label>
+										<div class="col-md-6">
+											<ul id="societyBaseFileDownLoad">
+												<li><a href="../material/societyBaseFile/societyBaseFile.zip">社会服务基地申报材料汇总</a></li>
+											</ul>
 										</div>
 									</div>
 

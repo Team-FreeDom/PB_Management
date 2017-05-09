@@ -685,7 +685,7 @@
 								<label class="col-md-3 control-label">土地面积</label>
 								<div class="col-md-6">
 									<input type="text" class="form-control" id="filed-area"
-										name="landarea" placeholder="单位：亩">
+										name="landarea" placeholder="">
 								</div>
 							</div>
 
@@ -693,7 +693,7 @@
 								<label class="col-md-3 control-label">建筑面积</label>
 								<div class="col-md-6">
 									<input type="text" class="form-control" id="building-area"
-										name="constructionarea" placeholder="单位：平方">
+										name="constructionarea" placeholder="">
 								</div>
 							</div>
 

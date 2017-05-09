@@ -225,7 +225,7 @@ $(document).on("click", "#submitForm", function() {
 	var limit_population=$("#limit-population").val().trim();
 	var base_area=$("#base-area").val().trim();
 	var filed_area=$("#filed-area").val().trim();
-	var reg=/^\d+(\.\d+)?$/;
+	var reg=/^\d+$/;
 	
 	if(!tag){		
 		 bootbox.alert({
@@ -258,31 +258,13 @@ $(document).on("click", "#submitForm", function() {
 	if(limit_population!=""){
 	if(!limit_population.match(reg)){
 		bootbox.alert({
-			message : "可承担人数只能为整数或小数",
+			message : "可承担人数只能为整数",
 			size : 'small'
 		});
 	 return;
 	}
 	}
-	if(filed_area!=""){
-	if(!filed_area.match(reg)){
-		bootbox.alert({
-			message : "土地面积只能为整数或小数",
-			size : 'small'
-		});
-	 return;
-	}	
-	}
-	if(base_area!=""){
-	if(!base_area.match(reg)){
-		bootbox.alert({
-			message : "基地面积只能为整数或小数",
-			size : 'small'
-		});
-	 return;
-	}
-	}
-	
+
 	if(baseaddress==""){
 		bootbox.alert({
 			message : "请填写通信地址",
@@ -339,6 +321,16 @@ $(document).on("click", "#submitForm", function() {
 		}
 		
 	}
+	if($("#basetype0").val()==5){
+		if($("#applyfile").val()==""){
+			bootbox.alert({
+	            message: "请上传社会服务基地相关申报材料！",
+	            size: 'small'
+	        });
+			return false;
+		}
+		
+	}
 	$("#myForm").submit();
 });
 
@@ -381,4 +373,12 @@ $(document).on("change", "#basetype0", function() {
 	}
 });
 
-
+$(document).on("change", "#basetype0", function() {
+//	$("#addspan span").remove();
+	$("#societyBaseShow").show();
+	if($("#basetype0").val()==5){
+		$("#addspan").append("<span class='setTag'>*</span>");
+	}else{
+		document.getElementById("societyBaseShow").style.display="none";
+	}
+});
