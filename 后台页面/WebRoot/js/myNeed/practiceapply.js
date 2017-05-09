@@ -94,12 +94,7 @@ $(document).ready(function() {
 					   				"mData" : "count",//人数
 					   				"orderable" : true,
 					   				"sDefaultContent" : ""
-					   			},
-					   			{
-					   				"mData" : "selectedCount",//已选人数
-					   				"orderable" : true,
-					   				"sDefaultContent" : "",
-					   			},
+					   			},					   			
 					   			{
 					   				"mData" : "composition",//教学班组成
 					   				"orderable" : false,

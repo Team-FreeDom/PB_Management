@@ -218,7 +218,7 @@
 							<thead>
 								<tr>
 								    <td hidden id="exportPlanFlag">${exportPlanFlag}</td>								   
-									<td colspan="17" hidden id="daoru_daochu">
+									<td colspan="16" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>
 									</td>
@@ -228,8 +228,7 @@
 									<th>学年学期</th>
 									<th>课程代码</th>
 									<th>课程名称</th>
-									<th>人数</th>
-									<th>已选人数</th>
+									<th>人数</th>									
 									<th>教学班组成</th>
 									<th>开课学院</th>
 									<th>周学时</th>

@@ -152,12 +152,7 @@ $(document)
 											"orderable" : true,
 											"sDefaultContent" : "",
 											//"sWidth" : "3%"
-										}, {
-											"mData" : "selectedCount",// 已选人数
-											"orderable" : true,
-											"sDefaultContent" : "",
-											//"sWidth" : "3%"
-										}, {
+										},{
 											"mData" : "composition",// 教学班组成
 											"orderable" : false,
 											"sDefaultContent" : "",
@@ -339,11 +334,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -489,11 +480,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -1346,6 +1333,7 @@ $(document)
                         	   return;
                            }
                            userWarn=[];
+                           var checkSearchValue=table.search();//获取table的模糊查询框的输入值
 										table = $("#practiceplanmaintain").DataTable(
 														{
 															"processing" : true,
@@ -1363,7 +1351,7 @@ $(document)
 																"url" : "checkIsSave.do",
 																"type" : "POST",
 																"data" : {
-																	"semester" : str
+																	"semester" : str																	
 																}
 															},
 															"aoColumns" : [
@@ -1393,12 +1381,7 @@ $(document)
 																		"mData" : "count",// 人数
 																		"orderable" : true,
 																		"sDefaultContent" : ""
-																	},
-																	{
-																		"mData" : "selectedCount",// 已选人数
-																		"orderable" : true,
-																		"sDefaultContent" : "",
-																	},
+																	},																	
 																	{
 																		"mData" : "composition",// 教学班组成
 																		"orderable" : false,
@@ -1487,7 +1470,10 @@ $(document)
 																	"sLast" : " 尾页 "
 																}
 															}
-														});
+														});	
+										if(checkSearchValue!=""&&checkSearchValue!=null){
+											table.search(checkSearchValue).draw(false);
+										}
 										flag = 1;
 										$("#remind").prop("hidden", false);
 									});
