@@ -312,7 +312,7 @@
 																			<tr>
 																				<td>
 																					<button type="reset" class="btn btn-primary">重置</button>
-																					<button type="button" id="submitS"
+																					<button type="button" id="submitS2"
 																						class="btn btn-primary">完成</button>
 																				</td>
 																			</tr>
