@@ -79,8 +79,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
       //实习基地维护增加基地
 	@Override
-	public String increaseBaseInfo(String baseid,String str1, String str2) {		
-		String message=maintenancedao.increaseBaseInfo(baseid,str1, str2);
+	public String increaseBaseInfo(String str1, String str2) {		
+		String message=maintenancedao.increaseBaseInfo(str1, str2);
 		return message;
 	}
 
@@ -97,8 +97,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 	public String updateBaseInfo(String baseid, String basenamed,
 		String basetyped, String landaread, String buildingaread,
 		int undertakeCountd, String userphoned, String usernamed,
-		String personDuty, String linkAddressd, String adddate, int star) {
-	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star);
+		String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String tag) {
+	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star,collegenamed,collegephoned,cooperativeUnit,tag);
 	   return message;
 	    
 	}

@@ -75,6 +75,9 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		ch.setEndtime(rs.getString("endtime"));
 		ch.setBuildtime(rs.getString("buildtime"));// 创建
 		ch.setResperson(rs.getString("resperson"));
+		ch.setCollegeName(rs.getString("collegeName"));
+		ch.setCollegePhone(rs.getString("collegePhone"));
+		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

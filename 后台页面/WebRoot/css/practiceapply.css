@@ -185,4 +185,6 @@ div.Iwidth{
 #practicePlace{
 	min-width:66px !important;
 }
-
+#table tbody tr td li{
+	font-size:0.7em;
+}

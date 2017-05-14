@@ -250,10 +250,23 @@ public class BaseMaintenanceController {
 	 if(personDuty.equals("")){
 	     personDuty=null;
 	 }
+	 String collegenamed=request.getParameter("collegenamed");
+	 if(collegenamed.equals("")){
+		 collegenamed=null;
+	 }
+	 String collegephoned=request.getParameter("collegephoned");
+	 if(collegephoned.equals("")){
+		 collegephoned=null;
+	 }
+	 String cooperativeUnit=request.getParameter("cooperativeUnit");
+	 if(cooperativeUnit.equals("")){
+		 cooperativeUnit=null;
+	 }
+	 String tag=request.getParameter("tag");
 	
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,tag);
 	if(message=="success"){
 	    message="操作成功";
 	}else if(message=="fail"){
@@ -489,6 +502,17 @@ public class BaseMaintenanceController {
 		String starttime = request.getParameter("start_time");// 创建时间
 		String endtime = request.getParameter("end_time");// 截止时间
 		String lawPerson = request.getParameter("personDuty");
+		String collegeName=request.getParameter("collegeName");
+		String collegeTel=request.getParameter("collegeTel");
+		String landarea_select=request.getParameter("landarea_select");
+		String constructionarea_select=request.getParameter("constructionarea_select");
+		if(!landarea.equals("")){
+			landarea=landarea+landarea_select;
+		}
+		if(!constructionarea.equals("")){
+			constructionarea=constructionarea+constructionarea_select;
+		}
+		String unit=request.getParameter("unit");
 		// 申请材料保存地址
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		String path = null;
@@ -542,7 +566,7 @@ public class BaseMaintenanceController {
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
 			+ userid + "','" + starttime + "','" + endtime + "','"
-			+ lawPerson + "')";
+			+ lawPerson+"','"+collegeName+"','"+collegeTel+"','"+unit+"')";
 
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
@@ -567,7 +591,7 @@ public class BaseMaintenanceController {
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		}
-		String message=maintenanceservice.increaseBaseInfo(Baseid,str1, str2);
+		String message=maintenanceservice.increaseBaseInfo(str1, str2);
 		request.setAttribute("index", message);
 		String str=(String) request.getAttribute("index");
 		response.setContentType("text/html;charset=UTF-8");
