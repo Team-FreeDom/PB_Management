@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -337,9 +338,19 @@
 										</div>
 									</div>
 
+									<div class="form-group" id="teachingBaseShow" style="display:none">
+
+										<label class="col-md-3 control-label">校外实习基地申请材料下载</label>
+										<div class="col-md-6">
+											<ul id="baseFileDownLoad">
+												<li><a href="../material/baseFile/outSchoolTeachingBase.zip">校外教学实习基地申报材料汇总</a></li>
+											</ul>
+										</div>
+									</div>
+
 									<div class="form-group">
 
-										<label class="col-md-3 control-label">申请材料</label>
+										<label id="addspan" class="col-md-3 control-label">实习基地申请材料上传</label>
 										<div class="col-md-6">
 											<input type="file" id="applyfile" placeholder=""
 												name="material_path">

@@ -36,4 +36,15 @@
 #textContent{
   pointer-events:none;
 }
+#baseFileDownLoad a{
+	style-type:none;
+	color:blue;
+	font-size:15px;
+}
+#baseFileDownLoad li{
+	list-style:none;
+}
+#baseFileDownLoad{
+	padding-top:5px;
+}
 

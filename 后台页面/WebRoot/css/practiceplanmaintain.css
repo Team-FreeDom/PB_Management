@@ -23,6 +23,20 @@ table tbody tr td{
 	border: none;
 	text-align:left;
 }
+#addPraItem{
+	position:absolute !important;
+	top:150px;
+	left:40%;
+	display:none;
+}
+
+#updatePlanItem{
+	position:absolute !important;
+	top:150px;
+	left:40%;
+	display:none;
+}
+
 #Applychart{
 	position:fixed !important;
 	top:112px;
@@ -30,6 +44,7 @@ table tbody tr td{
 	width: 80%;
 	display: none;	
 }
+
 #modalcontent{
 	margin-top: 20%;
 }

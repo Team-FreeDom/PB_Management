@@ -630,6 +630,8 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	Connection conn = null;
 	CallableStatement sp = null;
 	ResultSet rs = null;
+	System.out.println("id:"+id);
+	System.out.println("plandata:"+plandata);
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
@@ -638,13 +640,14 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	    sp.setInt(1, id);
 	    sp.setString(2, plandata);
 	    sp.execute();
-	    flag = sp.getInt(3);
-	    message = BaseUtils.getException(flag);
+	    flag = sp.getInt(3);	  
 	} catch (SQLException e) {
+		flag=500;
 	    e.printStackTrace();
 	} finally {
 	    SqlConnectionUtils.free(conn, sp, rs);
 	}
+	 message = BaseUtils.getException(flag);
 	return message;
 
     }
