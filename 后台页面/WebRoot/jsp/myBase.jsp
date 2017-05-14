@@ -219,8 +219,8 @@
 									<th>基地类型</th>
 									<th>申报部门</th>
 									<th>法定责任人</th>
-									<th>联系人</th>
-									<th>联系人电话</th>
+									<th>基地联系人</th>
+									<th>基地联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>
@@ -273,7 +273,7 @@
 					</div>
 
 					<!--弹出框-->
-					<div class="modal fade" id="fontTable" tabindex="-1" role="dialog"
+					<div class="modal fade" id="fontTable_0" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content" style="border:#3071a9 8px solid">
@@ -301,7 +301,125 @@
 													<td><input type="text" id="dept0" disabled></td>
 
 												</tr>
+												<tr>
+													<td>土地面积 ：</td>
+													<td><input type="text" id="landarea" disabled /></td>
+													<td>建筑面积 ：</td>
+													<td><input type="text" id="buildingarea" disabled></td>
 
+												</tr>
+												<tr>
+													<td>可承担人数 ：</td>
+													<td><input type="text" id="undertakeCount" disabled></td>
+													<td>法定责任人 ：</td>
+													<td colspan="3"><input type="text" id="dutyPerson"
+														disabled></td>
+												</tr>
+												<tr>
+												    <td>基地联系人 ：</td>
+													<td><input type="text" id="username" disabled></td>
+													<td>基地联系人电话 ：</td>
+													<td><input type="text" id="userphone" disabled></td>													
+												</tr>
+												<tr>
+												    <td>学院联系人 ：</td>
+													<td><input type="text" id="collegename" disabled></td>
+													<td>学院联系人电话 ：</td>
+													<td><input type="text" id="collegephone" disabled></td>													
+												</tr>
+
+												<tr hidden id="hidecol">
+													<td>创建日期：</td>
+													<td><input type="text" id="setdate" disabled></td>
+													<td>截止日期 ：</td>
+													<td><input type="text" id="validdate" disabled></td>
+												</tr>
+												<tr>
+													<td>面向专业 ：</td>
+													<td colspan="3" style="text-align:left;"><div
+															id="major_oriented"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+
+												<tr>
+													<td>通信地址 ：</td>
+													<td colspan="3" style="text-align:left;"><div
+															id="linkAddress"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+
+
+												<tr hidden id="hideReason">
+													<td>拒绝理由 ：</td>
+													<td colspan="3" style="text-align:left;"><div
+															id="reason" style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+
+												<tr id="resourcetr">
+													<td>申请材料 ：</td>
+													<td colspan="3" style="text-align:left;"><a
+														id="resource" href="#" style="color:#3071a9;">点击查看</a></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer table-responsive">
+									<button type="button" class="btn btn-primary" id="closeDe">关闭</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--弹出框-->
+					<div class="modal fade" id="fontTable_1" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="border:#3071a9 8px solid">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<div class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal"></div>
+									<h4 class="modal-title text-center" id="myModalLabel">基地申请详情</h4>
+								</div>
+
+								<div class="modal-body table-responsive">
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table">
+												<tr>
+													<td>基地编号 ：</td>
+													<td><input type="text" id="baseid" disabled></td>
+													<td>基地类型 ：</td>
+													<td><input type="text" id="basetype" disabled></td>													
+												</tr>
+												<tr>
+												 <td>合作单位名称 ：</td>
+												 <td><input type="text" id="unitName" disabled ></td>
+												 <td>基地名称 ：</td>
+												 <td><input type="text" id="basename" disabled></td>	
+												</tr>
+												<tr>
+												   <td>申请部门 ：</td>
+													<td><input type="text" id="dept0" disabled></td>
+													<td>法定责任人 ：</td>
+													<td colspan="3"><input type="text" id="dutyPerson"
+														disabled></td>
+												</tr>
+												<tr>
+												    <td>联系人姓名 ：</td>
+													<td><input type="text" id="username" disabled></td>
+													<td>联系人电话 ：</td>
+													<td><input type="text" id="userphone" disabled></td>
+												</tr>
+                                                <tr>
+											       <td>服务团队负责人 ：</td>
+											       <td><input type="text" id="collegename"  disabled></td>
+											       <td>服务团队负责人电话 ：</td>
+											       <td><input type="text" id="collegephone"  disabled></td>
+											   </tr>
 
 												<tr>
 													<td>土地面积 ：</td>
@@ -313,18 +431,9 @@
 												<tr>
 													<td>可承担人数 ：</td>
 													<td><input type="text" id="undertakeCount" disabled></td>
-													<td>联系人姓名 ：</td>
-													<td><input type="text" id="username" disabled></td>
-
+													<td colspan="2"></td>
 												</tr>
-												<tr>
-													<td>联系人电话 ：</td>
-													<td><input type="text" id="userphone" disabled></td>
-													<td>法定责任人 ：</td>
-													<td colspan="3"><input type="text" id="dutyPerson"
-														disabled></td>
-
-												</tr>
+												
 
 												<tr hidden id="hidecol">
 													<td>创建日期：</td>
@@ -395,7 +504,6 @@
 													<td><input type="text" id="baseidt" disabled></td>
 													<td>基地名称 ：</td>
 													<td><input type="text" id="basenamet" disabled></td>
-
 												</tr>
 												<tr>
 													<td>基地类型 ：</td>
@@ -404,30 +512,31 @@
 													<td><input type="text" id="dept0t" disabled></td>
 
 												</tr>
-
-
 												<tr>
 													<td>土地面积 ：</td>
 													<td><input type="text" id="landareat" disabled /></td>
 													<td>建筑面积 ：</td>
 													<td><input type="text" id="buildingareat" disabled></td>
-
 												</tr>
 												<tr>
 													<td>可承担人数 ：</td>
 													<td><input type="text" id="undertakeCountt" disabled></td>
-													<td>联系人姓名 ：</td>
-													<td><input type="text" id="usernamet" disabled></td>
-
-												</tr>
-												<tr>
-													<td>联系人电话 ：</td>
-													<td><input type="text" id="userphonet" disabled></td>
 													<td>法定责任人 ：</td>
 													<td colspan="3"><input type="text" id="dutyPersont"
-														disabled></td>
-
+														disabled></td>												
 												</tr>
+												<tr>
+												    <td>基地联系人 ：</td>
+													<td><input type="text" id="usernamet" disabled></td>
+													<td>基地联系人电话 ：</td>
+													<td><input type="text" id="userphonet" disabled></td>
+												</tr>
+												<tr>
+											      <td>学院联系人 ：</td>
+											      <td><input type="text" id="collegenamet" disabled ></td>
+											      <td>学院联系人电话 ：</td>
+											      <td><input type="text" id="collegephonet"  disabled></td>
+											    </tr>
 												<tr>
 													<td>面向专业 ：</td>
 													<td colspan="3" style="text-align:left;"><div
@@ -461,6 +570,109 @@
 								<div class="modal-footer table-responsive">
 									<center>
 										<button type="button" class="btn btn-primary" id="saveit">确认续期</button>
+										<button type="button" class="btn btn-default" id="cleark"
+											data-dismiss="modal">取消</button>
+									</center>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--弹出框-->
+					<div class="modal fade" id="dateMyTable_nong" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="border:#3071a9 8px solid">
+								<div class="modal-header" style="background:#3071a9; color:#FFF">
+									<div id="cleark" class="glyphicon glyphicon-remove closeModal"
+										data-dismiss="modal"></div>
+									<h4 class="modal-title text-center" id="myModalLabel">续期</h4>
+								</div>
+
+								<div class="modal-body table-responsive">
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table">
+												<tr>
+													<td><input type="text" id="tag" hidden="hidden" /></td>
+												</tr>
+												<tr>
+													<td>基地编号 ：</td>
+													<td><input type="text" id="baseidt" disabled></td>
+													<td>基地类型 ：</td>
+													<td><input type="text" id="basetypet" disabled></td>
+													
+												</tr>
+												<tr>
+												    <td>合作单位名称 ：</td>
+												    <td><input type="text" id="unitNamet" disabled></td>
+													<td>基地名称 ：</td>
+													<td><input type="text" id="basenamet" disabled></td>
+												</tr>
+                                                <tr>
+                                                   <td>申请部门 ：</td>
+												   <td><input type="text" id="dept0t" disabled></td>
+												   <td>法定责任人 ：</td>
+												   <td><input type="text" id="dutyPersont"
+														disabled></td>
+                                                </tr>
+                                                <tr>
+												    <td>基地联系人 ：</td>
+													<td><input type="text" id="usernamet" disabled></td>												    
+													<td>基地联系人电话 ：</td>
+													<td><input type="text" id="userphonet" disabled></td>
+												</tr>
+												<tr>
+											       <td>服务团队负责人 ：</td>
+											       <td><input type="text" id="collegenamet"  disabled></td>
+											       <td>服务团队负责人电话 ：</td>
+											       <td><input type="text" id="collegephonet"  disabled></td>
+											    </tr>
+												<tr>
+													<td>土地面积 ：</td>
+													<td><input type="text" id="landareat" disabled /></td>
+													<td>建筑面积 ：</td>
+													<td><input type="text" id="buildingareat" disabled></td>
+												</tr>
+												<tr>
+													<td>可承担人数 ：</td>
+													<td><input type="text" id="undertakeCountt" disabled></td>
+													<td colspan="2"></td>
+												</tr>
+												
+												<tr>
+													<td>面向专业 ：</td>
+													<td colspan="3" style="text-align:left;"><div
+															id="major_orientedt"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+
+												<tr>
+													<td>通信地址 ：</td>
+													<td colspan="3" style="text-align:left;"><div
+															id="linkAddresst"
+															style="border:#ccc 1px solid;height:80px;"></div></td>
+
+												</tr>
+												<tr id="resourcetrt">
+													<td>申请材料 ：</td>
+													<td colspan="3" style="text-align:left;"><a
+														id="resourcet" href="" style="color:#3071a9;">点击查看</a></td>
+												</tr>
+												<tr>
+													<td>创建日期 ：</td>
+													<td><input type="text" id="starttime" disabled></td>
+													<td>截止日期 ：</td>
+													<td><input type="text" id="adddate"></td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer table-responsive">
+									<center>
+										<button type="button" class="btn btn-primary" id="saveit_nong">确认续期</button>
 										<button type="button" class="btn btn-default" id="cleark"
 											data-dismiss="modal">取消</button>
 									</center>
@@ -515,8 +727,8 @@
 									<th>基地类型</th>
 									<th>申报部门</th>
 									<th>法定责任人</th>
-									<th>联系人</th>
-									<th>联系人电话</th>
+									<th>基地联系人</th>
+									<th>基地联系人电话</th>
 									<th hidden>通信地址</th>
 									<th hidden>法定责任人</th>
 									<th hidden>联系人姓名</th>

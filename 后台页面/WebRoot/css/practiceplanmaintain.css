@@ -216,3 +216,6 @@ div.Iwidth{
 	float:right;
 	margin-left:5px;
 }
+#table tbody tr td li{
+	font-size:0.7em;
+}

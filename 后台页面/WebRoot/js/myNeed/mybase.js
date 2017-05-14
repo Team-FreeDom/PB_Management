@@ -336,48 +336,58 @@ $(document).ready(function() {
 					}else{
 						object=obj2;
 					}
+					
+					var type=object[index].type;					
+					var result=(type=="新农院社会服务基地");
+					var domThis;
+					if(result){
+						domThis=$("#fontTable_1");
+						domThis.find("#unitName").val(object[index].cooperativeUnit);
+					}else{
+						domThis=$("#fontTable_0");
+					}				
 						
-					var statusid=object[index].statusid;		
-					
-					
-					$("#basename").val(object[index].name);
-					$("#basetype").val(object[index].type);
-					$("#dept0").val(object[index].applydp);
-					$("#landarea").val(object[index].landarea);
-					$("#buildingarea").val(object[index].constructionarea);
-					$("#undertakeCount").val(object[index].undertake);
-					$("#username").val(object[index].username);
-					$("#userphone").val(object[index].phone);
-					$("#major_oriented").html(object[index].mmajor);
-					$("#linkAddress").html(object[index].land_address);
+					var statusid=object[index].statusid;				
+					domThis.find("#basename").val(object[index].name);
+					domThis.find("#basetype").val(object[index].type);
+					domThis.find("#dept0").val(object[index].applydp);
+					domThis.find("#landarea").val(object[index].landarea);
+					domThis.find("#buildingarea").val(object[index].constructionarea);
+					domThis.find("#undertakeCount").val(object[index].undertake);
+					domThis.find("#username").val(object[index].username);
+					domThis.find("#userphone").val(object[index].phone);
+					domThis.find("#major_oriented").html(object[index].mmajor);
+					domThis.find("#linkAddress").html(object[index].land_address);
+					domThis.find("#collegename").val(object[index].collegeName);
+					domThis.find("#collegephone").val(object[index].collegePhone);
 					var resperson=object[index].resperson;
 					if(resperson=="null"){
-					$("#dutyPerson").val("");
+						domThis.find("#dutyPerson").val("");
 					}else{
-						$("#dutyPerson").val(resperson);	
+						domThis.find("#dutyPerson").val(resperson);	
 					}
-					$("#baseid").val('#'+object[index].bid);					
+					domThis.find("#baseid").val('#'+object[index].bid);					
 					
 					
 					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
-						$("#resourcetr").prop("hidden",true); 
+						domThis.find("#resourcetr").prop("hidden",true); 
 					}else{		
-						$("#resourcetr").prop("hidden",false); 
-						$("#resource").prop("href",object[index].material_path);
+						domThis.find("#resourcetr").prop("hidden",false); 
+						domThis.find("#resource").prop("href",object[index].material_path);
 					}
 					
-					$("#reason").html('');
-					$("#hideReason").prop("hidden",true);
+					domThis.find("#reason").html('');
+					domThis.find("#hideReason").prop("hidden",true);
 					
 					if(statusid==6||statusid==18){
-						$("#setdate").val(object[index].buildtime);
-						$("#validdate").val(object[index].endtime);
-						$("#hidecol").prop("hidden",false);
+						domThis.find("#setdate").val(object[index].buildtime);
+						domThis.find("#validdate").val(object[index].endtime);
+						domThis.find("#hidecol").prop("hidden",false);
 					}else if(statusid==12){
-						$("#reason").html(object[index].reason);
-						$("#hideReason").prop("hidden",false);
+						domThis.find("#reason").html(object[index].reason);
+						domThis.find("#hideReason").prop("hidden",false);
 					}
-					$("#fontTable").modal('show');
+					domThis.modal('show');
 					
 				});
 			  
@@ -393,39 +403,50 @@ $(document).ready(function() {
 					}else{
 						object=obj2;
 					}
+					
+					var type=object[index].type;
+					var object_this;
+					if(type=="新农院社会服务基地"){
+						object_this=$("#dateMyTable_nong");
+						object_this.find("#unitNamet").val(object[index].cooperativeUnit);
+					}else{
+						object_this=$("#dateMyTable");
+					}
 						
 					var statusid=object[index].statusid;	
 					
-					$("#baseidt").val('#'+object[index].bid);
-					$("#basenamet").val(object[index].name);
-					$("#basetypet").val(object[index].type);
-					$("#dept0t").val(object[index].applydp);
-					$("#landareat").val(object[index].landarea);
-					$("#buildingareat").val(object[index].constructionarea);
-					$("#undertakeCountt").val(object[index].undertake);
-					$("#usernamet").val(object[index].username);
-					$("#userphonet").val(object[index].phone);
-					$("#major_orientedt").html(object[index].mmajor);
-					$("#linkAddresst").html(object[index].land_address);				
-					$("#starttime").val(object[index].buildtime);
-					$("#adddate").val(object[index].endtime);
-					$("#tag").val(object[index].id);
+					object_this.find("#baseidt").val('#'+object[index].bid);
+					object_this.find("#basenamet").val(object[index].name);
+					object_this.find("#basetypet").val(object[index].type);
+					object_this.find("#dept0t").val(object[index].applydp);
+					object_this.find("#landareat").val(object[index].landarea);
+					object_this.find("#buildingareat").val(object[index].constructionarea);
+					object_this.find("#undertakeCountt").val(object[index].undertake);
+					object_this.find("#usernamet").val(object[index].username);
+					object_this.find("#userphonet").val(object[index].phone);
+					object_this.find("#collegenamet").val(object[index].collegeName);
+					object_this.find("#collegephonet").val(object[index].collegePhone);
+					object_this.find("#major_orientedt").html(object[index].mmajor);
+					object_this.find("#linkAddresst").html(object[index].land_address);				
+					object_this.find("#starttime").val(object[index].buildtime);
+					object_this.find("#adddate").val(object[index].endtime);
+					object_this.find("#tag").val(object[index].id);
 					var resperson=object[index].resperson;
 					if(resperson!=null&&resperson!=""){
-						$("#dutyPersont").val(resperson);
+						object_this.find("#dutyPersont").val(resperson);
 					}else{
-						$("#dutyPersont").val("");
+						object_this.find("#dutyPersont").val("");
 					}										
 					
 					
 					if(object[index].material_path=="null"||object[index].material_path==""||object[index].material_path==null){			
-						$("#resourcetrt").prop("hidden",true); 
+						object_this.find("#resourcetrt").prop("hidden",true); 
 					}else{		
-						$("#resourcetrt").prop("hidden",false); 
-						$("#resourcet").prop("href",object[index].material_path);						
+						object_this.find("#resourcetrt").prop("hidden",false); 
+						object_this.find("#resourcet").prop("href",object[index].material_path);						
 					}
 				
-					$("#dateMyTable").modal('show');
+					object_this.modal('show');
 					
 				});
 			  
@@ -445,9 +466,12 @@ $(document).ready(function() {
 					$("#adddate").val("");
 				});
 				
-				$(document).on("click", "#saveit", function() {
-					var id=$("#tag").val();					
-					var adddate=$("#adddate").val();				
+				$(document).on("click", "#saveit,#saveit_nong", function() {
+					
+					var thisId=$(this).prop("id");
+					var object_this=(thisId=="saveit"?$("#dateMyTable"):$("#dateMyTable_nong"));
+					var id=object_this.find("#tag").val();					
+					var adddate=object_this.find("#adddate").val();				
 					if(adddate==""){
 						bootbox.alert({
 							message : "请填写续期",
@@ -471,8 +495,8 @@ $(document).ready(function() {
 							        message: "操作成功",
 							        size: 'small'
 							    });
-								$("#dateMyTable").modal('hide');
-								$("#adddate").val("");
+								object_this.modal('hide');
+								object_this.find("#adddate").val("");
 								page1.draw(false);
 								page2.draw(false);
 							}else if(data.flag=="fail"){

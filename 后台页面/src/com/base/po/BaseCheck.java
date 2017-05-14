@@ -21,11 +21,31 @@ public class BaseCheck {
     private String buildtime;//创建时间
     private String endtime;//截止时间
     private String applytime;//申报时间
-    
+    private String cooperativeUnit;//合作单位名称
+    private String collegeName;//学院联系人
+    private String collegePhone;//学院联系人电话
     
     
   
-    public String getApplytime() {
+    public String getCooperativeUnit() {
+		return cooperativeUnit;
+	}
+	public void setCooperativeUnit(String cooperativeUnit) {
+		this.cooperativeUnit = cooperativeUnit;
+	}
+	public String getCollegeName() {
+		return collegeName;
+	}
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+	public String getCollegePhone() {
+		return collegePhone;
+	}
+	public void setCollegePhone(String collegePhone) {
+		this.collegePhone = collegePhone;
+	}
+	public String getApplytime() {
 		return applytime;
 	}
 	public void setApplytime(String applytime) {
