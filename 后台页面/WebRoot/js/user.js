@@ -53,24 +53,33 @@ function previewImage(file)
             return param;
         }
 		
-function password(){	
+/*function password(){	
 			var pw=document.getElementById("possword").value;
-			var pw2=document.getElementById("repossword").value;
-			if(pw!=pw2){
-				alert("两次输入不正确，请重新输入");
-				document.getElementById("possword").value="";
-				document.getElementById("repossword").value="";
-				}
-			}
+			var pw2=document.getElementById("repossword").value;					
 			
-$("#submit").click(function(){
-    $.ajax({
-        url:'demo.php',
-        type:"POST",
-        data:$('#myform').serialize(),
-        success: function(data) {
-            alert('修改成功！');
-        }
-    });
-});
+			}*/
+$("#submitUpdate").click(function(){
+	var pw=document.getElementById("possword").value;
+	var pw2=document.getElementById("repossword").value;
+	
+	if(pw==""){
+		bootbox.alert({
+			message : "密码不能为空",
+			size : 'small'
+		});
+		return false;
+	}
+	
+	else if(pw!=pw2){
+		bootbox.alert({
+			message : "两次输入不正确，请重新输入",
+			size : 'small'
+		});
+		document.getElementById("possword").value="";
+		document.getElementById("repossword").value="";
+		return false;
+		}
+		$("#userform").submit();
+	
+});			
 

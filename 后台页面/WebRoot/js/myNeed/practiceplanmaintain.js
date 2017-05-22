@@ -152,12 +152,7 @@ $(document)
 											"orderable" : true,
 											"sDefaultContent" : "",
 											//"sWidth" : "3%"
-										}, {
-											"mData" : "selectedCount",// 已选人数
-											"orderable" : true,
-											"sDefaultContent" : "",
-											//"sWidth" : "3%"
-										}, {
+										},{
 											"mData" : "composition",// 教学班组成
 											"orderable" : false,
 											"sDefaultContent" : "",
@@ -339,11 +334,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -489,11 +480,7 @@ $(document)
 										"orderable" : true,
 										"sDefaultContent" : "",
 										"sWidth" : "6%"
-									}, {
-										"mData" : "selectedCount",// 已选人数
-										"orderable" : true,
-										"sDefaultContent" : "",
-									}, {
+									},{
 										"mData" : "composition",// 教学班组成
 										"orderable" : false,
 										"sDefaultContent" : "",
@@ -1346,6 +1333,7 @@ $(document)
                         	   return;
                            }
                            userWarn=[];
+                           var checkSearchValue=table.search();//获取table的模糊查询框的输入值
 										table = $("#practiceplanmaintain").DataTable(
 														{
 															"processing" : true,
@@ -1363,7 +1351,7 @@ $(document)
 																"url" : "checkIsSave.do",
 																"type" : "POST",
 																"data" : {
-																	"semester" : str
+																	"semester" : str																	
 																}
 															},
 															"aoColumns" : [
@@ -1393,12 +1381,7 @@ $(document)
 																		"mData" : "count",// 人数
 																		"orderable" : true,
 																		"sDefaultContent" : ""
-																	},
-																	{
-																		"mData" : "selectedCount",// 已选人数
-																		"orderable" : true,
-																		"sDefaultContent" : "",
-																	},
+																	},																	
 																	{
 																		"mData" : "composition",// 教学班组成
 																		"orderable" : false,
@@ -1487,7 +1470,10 @@ $(document)
 																	"sLast" : " 尾页 "
 																}
 															}
-														});
+														});	
+										if(checkSearchValue!=""&&checkSearchValue!=null){
+											table.search(checkSearchValue).draw(false);
+										}
 										flag = 1;
 										$("#remind").prop("hidden", false);
 									});
@@ -1638,8 +1624,8 @@ $(document)
 					 +'</tr>'
 					 +'<tr>'
 					 +'<td rowspan="5"><sapn class="mark"></span></td>'
-					 +'<td style="padding-top:5px"><select id="weekend" type="text" class="text-center inputWidth flag"><option value="" id="weekend_option">请选择</select></td>'
-					 +'<td style="padding-top:5px"><select id="class_one" type="text" class="text-center inputWidth flag"><option value="" id="class_one_option">请选择</select></td>'
+					 +'<td style="padding-top:5px"><div id="divweek"><input id="weekend" type="text" class="text-center inputWidth flag Showweekend"><div class="showWeek"><ul id="ul1"></ul><button type="button" class="btn btn-info btn-xs Dweek">清空</button><button type="button" class="btn btn-info btn-xs Sweek">确定</button></div><div></td>'
+					 +'<td style="padding-top:5px"><div id="divgrade"><input id="class_one" type="text" class="text-center inputWidth flag Showgrade"><div class="showGrade"><ul id="ul2"></ul><button type="button" class="btn btn-info btn-xs Dgrade">清空</button><button type="button" class="btn btn-info btn-xs Sgrade">确定</button></div><div></td>'
 					 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 					 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 					 
@@ -1741,17 +1727,18 @@ $(document)
 						var majorname="";
 						for(var i=0;i<data.length;i++){
 							$("#table tbody:last-child").after(tbodyStyle);
-							for(var week in data_week){
-								$("#table tbody:last-child").find("#weekend_option").after(
-										"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
-										);
-							}	
-							for(var composition_0 in data_composition){
-								$("#table tbody:last-child").find("#class_one_option").after(
-										"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
-										);
+							for(var j=0;j<data_week.length;j++){
+								$("#table tbody:last-child").find("#ul1").append(
+								"<li value="+data_week[j]+">"+ data_week[j]+ "</li>"
+								);
+							}
+							for(var k=0;k<data_composition.length;k++){
+								$("#table tbody:last-child").find("#ul2").append(
+								"<li value="+data_composition[k]+">"+ data_composition[k]+ "</li>"
+								);
 							}
 							var site=data[i].site;
+							var source=data[i].source;
 							$.ajax({
 								type : 'POST',
 								dataType : 'json',		
@@ -1760,7 +1747,7 @@ $(document)
 								cache : false,
 								data:{
 									"mid":obj[Oneindex].tid,
-									"typename":data[i].source
+									"typename":source,
 								},
 								error : function(request) {
 									bootbox.alert({
@@ -2402,21 +2389,21 @@ $(document)
 					}
 				}
 				$.unique(data_week.sort(sortNumber));
-				for(var week in data_week){
-					$("#table tbody:last-child").find("#weekend_option").after(
-							"<option value="+data_week[week]+">"+ data_week[week] + "</option>"
-							);
-				}	
+				for(var i=0;i<data_week.length;i++){
+					$("#table tbody:last-child").find("#ul1").append(
+					"<li value="+data_week[i]+">"+ data_week[i]+ "</li>"
+					);
+				}
 				
 				//获得班级的数组
 				var composition=$("#class").val();
 				var data_composition=composition.split(',');
 				$.unique(data_composition.sort(sortNumber));
-				for(var composition_0 in data_composition){
-					$("#table tbody:last-child").find("#class_one_option").after(
-							"<option value="+data_composition[composition_0]+">"+ data_composition[composition_0] + "</option>"
-							);
-				}	
+				for(var i=0;i<data_composition.length;i++){
+					$("#table tbody:last-child").find("#ul2").append(
+					"<li value="+data_composition[i]+">"+ data_composition[i]+ "</li>"
+					);
+				}
 				
 				
 				
@@ -2446,7 +2433,107 @@ $(document)
 				}
 			});
 			});
+			var weekNum;
+			var weekstr="";
+
+			$(document).on("focus","#weekend",function(){
+				weekstr="";
+				$(".showWeek").hide();
+				$("li").removeClass("libg1");
+				weekNum=$(this).closest("tbody").find(".mark").html()-1;
 				
+				var w=0;
+				$(".showWeek").each(function(){
+					if(w===weekNum){
+						$(this).show();
+					return false;
+					}
+					w++;
+				});
+			});	
+
+			$(document).on("click","li",function(){
+				
+				if($(this).hasClass("libg1")){
+					$(this).removeClass("libg1");
+				}else{
+					$(this).addClass("libg1");
+				}
+			});
+
+			$(document).on("click",".Sweek",function(){
+				var s=0;
+				$(".libg1").each(function(){
+					weekstr=weekstr+" "+$(this).html();
+				});
+				$(".Showweekend").each(function(){
+					if(s===weekNum){
+						$(this).val(weekstr);
+					return false;
+					}
+					s++;
+				});
+				$(".showWeek").hide();
+			});
+			$(document).on("click",".Dweek",function(){	
+				var l=0;
+				$(".Showweekend").each(function(){
+					if(l===weekNum){
+						$(this).val("");
+					return false;
+					}
+					l++;
+				});
+			});
+			var gradeNum;
+			var gradestr="";
+
+			$(document).on("focus","#class_one",function(){
+				gradestr="";
+				$(".showGrade").hide();
+				$("li").removeClass("libg1 libg2");
+				gradeNum=$(this).closest("tbody").find(".mark").html()-1;
+				var m=0;
+				$(".showGrade").each(function(){
+					if(m===gradeNum){
+						$(this).show();
+					return false;
+					}
+					m++;
+				});
+			});		
+			$(document).on("click","li",function(){
+				
+				if($(this).hasClass("libg1 libg2")){
+					$(this).removeClass("libg1 libg2");
+				}else{
+					$(this).addClass("libg1 libg2");
+				}
+			});
+			$(document).on("click",".Sgrade",function(){
+				var n=0;
+				$(".libg2").each(function(){
+					gradestr=gradestr+" "+$(this).html();
+				});
+				$(".Showgrade").each(function(){
+					if(n===gradeNum){
+						$(this).val(gradestr);
+					return false;
+					}
+					n++;
+				});
+				$(".showGrade").hide();
+			});
+			$(document).on("click",".Dgrade",function(){	
+				var k=0;
+				$(".Showgrade").each(function(){
+					if(k===gradeNum){
+						$(this).val("");
+					return false;
+					}
+					k++;
+				});
+			});	
 			$(document).on("click",".deleteID",function(){//弹出框里面的记录删除
 				var judget=$(this).attr("id");
 				var rowNum=$(this).closest("tbody").find(".mark").html()-1;
@@ -2747,7 +2834,7 @@ $(document)
 											if($(this).val()===""){
 											str=str+','+"null";
 											}else{
-												str=str+","+$(this).val();
+												str=str+",'"+$(this).val()+"'";
 											}
 										}
 										if(x<=10&&x>1){
