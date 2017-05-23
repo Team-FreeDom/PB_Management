@@ -791,7 +791,9 @@ $(document).on("click","#addTbody",function(){//添加一条空表的记录
 var weekNum;
 var weekstr="";
 $(document).on("focus","#weekend",function(){
+	gradestr="";
 	weekstr="";
+	$(".showGrade").hide();
 	$(".showWeek").hide();
 	$("li").removeClass("libg1");
 	weekNum=$(this).closest("tbody").find(".mark").html()-1;
@@ -843,7 +845,9 @@ var gradeNum;
 var gradestr="";
 $(document).on("focus","#class_one",function(){
 	gradestr="";
+	weekstr="";
 	$(".showGrade").hide();
+	$(".showWeek").hide();
 	$("li").removeClass("libg1 libg2");
 	gradeNum=$(this).closest("tbody").find(".mark").html()-1;
 	var w=0;
