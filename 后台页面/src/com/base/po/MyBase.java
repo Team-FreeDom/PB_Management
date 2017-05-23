@@ -24,8 +24,35 @@ public class MyBase {
     private String resperson;//申请时间   
     private String buildtime;//申请时间   
     private String endtime;//申请时间   
+    private String cooperativeUnit;//合作单位名称
+    private String collegeName;//学院联系人
+    private String collegePhone;//学院联系人电话
     
-    public String getBuildtime() {
+    public String getCooperativeUnit() {
+		return cooperativeUnit;
+	}
+
+	public void setCooperativeUnit(String cooperativeUnit) {
+		this.cooperativeUnit = cooperativeUnit;
+	}
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	public void setCollegeName(String collegeName) {
+		this.collegeName = collegeName;
+	}
+
+	public String getCollegePhone() {
+		return collegePhone;
+	}
+
+	public void setCollegePhone(String collegePhone) {
+		this.collegePhone = collegePhone;
+	}
+
+	public String getBuildtime() {
 		return buildtime;
 	}
 

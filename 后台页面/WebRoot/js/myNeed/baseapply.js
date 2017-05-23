@@ -146,7 +146,7 @@ $(document).on("change", "#deptSelectOne", function() {
 				$(".majorhide").append(
 						"<span class='majorcheck'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
-			}			
+			}
 		}
 
 	});
@@ -189,10 +189,13 @@ $(document).on("click", "#hit", function() {
 	var content=$("#textContent").html();
 	if(content==null||content==""){	
 	  $("#majormain").css("display","none");
+	  $("#majorSuo").html(content);
 	  return;
-	}
+	}else{
+	$("#majormain").css("display","block");
 	$("#majorSuo").html(content);	
 	$("#majorSuo input").prop("hidden",false);
+	}
 });
 
 $(document).on("click", ".confirm", function() {
@@ -225,7 +228,12 @@ $(document).on("click", "#submitForm", function() {
 	var limit_population=$("#limit-population").val().trim();
 	var base_area=$("#base-area").val().trim();
 	var filed_area=$("#filed-area").val().trim();
-	var reg=/^\d+(\.\d+)?$/;
+	var collegeNameIt=$("#collegeNameIt").val().trim();
+	var collegeTelIt=$("#collegeTelIt").val().trim();
+	var unitIt=$("#unitIt").val().trim();
+	var reg=/^\d+$/;
+	var reg_area= /^\d+\.?\d*$/;
+	var msgCollege;
 	
 	if(!tag){		
 		 bootbox.alert({
@@ -258,31 +266,33 @@ $(document).on("click", "#submitForm", function() {
 	if(limit_population!=""){
 	if(!limit_population.match(reg)){
 		bootbox.alert({
-			message : "可承担人数只能为整数或小数",
-			size : 'small'
-		});
-	 return;
-	}
-	}
-	if(filed_area!=""){
-	if(!filed_area.match(reg)){
-		bootbox.alert({
-			message : "土地面积只能为整数或小数",
-			size : 'small'
-		});
-	 return;
-	}	
-	}
-	if(base_area!=""){
-	if(!base_area.match(reg)){
-		bootbox.alert({
-			message : "基地面积只能为整数或小数",
+			message : "可承担人数只能为整数",
 			size : 'small'
 		});
 	 return;
 	}
 	}
 	
+	if(filed_area!=""){
+		if(!filed_area.match(reg_area)){
+			bootbox.alert({
+				message : "土地面积只能为整数或小数",
+				size : 'small'
+			});
+		 return;
+		}
+		}
+	
+	if(base_area!=""){
+		if(!base_area.match(reg_area)){
+			bootbox.alert({
+				message : "建筑面积只能为整数或小数",
+				size : 'small'
+			});
+		 return;
+		}
+		}
+
 	if(baseaddress==""){
 		bootbox.alert({
 			message : "请填写通信地址",
@@ -300,17 +310,42 @@ $(document).on("click", "#submitForm", function() {
 	}
 	if(personName==""){
 		bootbox.alert({
-			message : "请填写联系人姓名",
+			message : "请填写基地联系人",
 			size : 'small'
 		});
 	 return;	
 	}
 	if(personTel==""){
 		bootbox.alert({
-			message : "请填写联系人电话",
+			message : "请填写基地联系人电话",
 			size : 'small'
 		});
 	 return;	
+	}
+	if(collegeNameIt==""){
+		msgCollege=(basetype==2?"请填写服务团队负责人":"请填写学院联系人");
+		bootbox.alert({
+			message : msgCollege,
+			size : 'small'
+		});
+	 return;	
+	}
+	if(collegeTelIt==""){
+		msgCollege=(basetype==2?"请填写服务团队负责人电话":"请填写学院联系人电话");
+		bootbox.alert({
+			message : msgCollege,
+			size : 'small'
+		});
+	 return;	
+	}
+	if(unitIt==""){
+		if(basetype==2){
+			bootbox.alert({
+				message : "请填写合作单位名称",
+				size : 'small'
+			});
+		 return;
+		}
 	}
 	
 	if(!flag1){
@@ -332,7 +367,16 @@ $(document).on("click", "#submitForm", function() {
 	if($("#basetype0").val()==1){
 		if($("#applyfile").val()==""){
 			bootbox.alert({
-	            message: "请上传校外基地相关申报材料！",
+	            message: "请上传校外教学实习基地相关申报材料！",
+	            size: 'small'
+	        });
+			return false;
+		}		
+	}
+	if($("#basetype0").val()==2){
+		if($("#applyfile").val()==""){
+			bootbox.alert({
+	            message: "请上传新农院社会服务基地相关申报材料！",
 	            size: 'small'
 	        });
 			return false;
@@ -371,14 +415,32 @@ $('#applyfile').change(function() {
     return false;
 });
 
-$(document).on("change", "#basetype0", function() {
+var formerValue="";
+$(document).on("change", "#basetype0", function() {	
 	$("#addspan span").remove();
-	$("#teachingBaseShow").show();
-	if($("#basetype0").val()==1){
+	$("#teachingBaseShow").hide();
+	$("#societyBaseShow").hide();
+	$("#unitShow").hide();
+	$("#unitIt").val('');
+	var basetype0=$("#basetype0").val();	
+	if(basetype0==1){
 		$("#addspan").append("<span class='setTag'>*</span>");
-	}else{
-		document.getElementById("teachingBaseShow").style.display="none";
+		$("#teachingBaseShow").show();
+	}else if(basetype0==2){
+		$("#addspan").append("<span class='setTag'>*</span>");
+		$("#societyBaseShow").show();
+		$(".collegeNameIt").html("服务团队负责人"+'<span class="setTag">*</span>');
+		$(".collegeTelIt").html("服务团队负责人电话"+'<span class="setTag">*</span>');
+		$("#collegeNameIt").val('');
+		$("#collegeTelIt").val('');
+		$("#unitShow").show();			
 	}
+	if(basetype0!=2&&formerValue==2){
+		$(".collegeNameIt").html("学院联系人"+'<span class="setTag">*</span>');
+		$(".collegeTelIt").html("学院联系人电话"+'<span class="setTag">*</span>');	
+		$("#collegeNameIt").val('');
+		$("#collegeTelIt").val('');
+	}	
+	formerValue=basetype0;	
 });
-
 

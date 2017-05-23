@@ -95,8 +95,7 @@ tbody tr td span{
 	position:absolute !important;
 	top:150px;
 	left:40%;
-	width:600px;
-	
+	width:600px;	
 	display:none;
 	scroll:no;
 	
@@ -116,5 +115,25 @@ tbody tr td span{
 }
 .laydate_yms {
 	width:123px !important;
+}
+
+#edit{
+	position:absolute !important;
+	top:150px;
+	left:30%;
+	width:650px;	
+	display:none;
+	scroll:no;
+	
+}
+
+#edit_nong{
+	position:absolute !important;
+	top:150px;
+	left:30%;
+	width:650px;	
+	display:none;
+	scroll:no;
+	
 }
 

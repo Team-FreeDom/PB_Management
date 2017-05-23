@@ -59,13 +59,15 @@ public class BaseApplyController {
 		String str2 = "";
 		String name = request.getParameter("name");// 基地名称		
 		String type = request.getParameter("typeid");//基地类型id		
-		String landarea = request.getParameter("landarea");//基地面积		
-		if (landarea.equals("")) {
-		    landarea = null;
+		String landarea = request.getParameter("landarea");//基地面积	
+		String constructionarea = request.getParameter("constructionarea");//建筑面积
+		String landarea_select=request.getParameter("landarea_select");
+		String constructionarea_select=request.getParameter("constructionarea_select");
+		if(!landarea.equals("")){
+			landarea=landarea+landarea_select;
 		}
-		String constructionarea = request.getParameter("constructionarea");//建筑面积		
-		if (constructionarea.equals("")) {
-		    constructionarea = null;
+		if(!constructionarea.equals("")){
+			constructionarea=constructionarea+constructionarea_select;
 		}
 		String undertake = request.getParameter("undertake");//可承担人数		
 		if (undertake.equals("")) {
@@ -76,6 +78,9 @@ public class BaseApplyController {
 		String username = request.getParameter("username");// 联系人姓名		
 		String phone = request.getParameter("phone");// 联系人电话		
 		String lawPerson = request.getParameter("lawPerson");// 联系人电话
+		String collegeName=request.getParameter("collegeName");
+		String collegeTel=request.getParameter("collegeTel");
+		String unit=request.getParameter("unit");
 		// String material_path =
 		// request.getParameter("material_path");//
 		// 申请材料保存地址
@@ -130,11 +135,11 @@ public class BaseApplyController {
 		  DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 		  String time=format.format(d);
 		String Baseid = String.valueOf(d.getTime());		
-		str2 += "('" + Baseid + "','" + name + "'," + type + ","
-			+ landarea + "," + constructionarea + "," + undertake
+		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
+			+ landarea + "','" + constructionarea + "'," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
-			+ userid +"','"+ time + "','"+lawPerson+"')";
+			+ userid +"','"+ time + "','"+lawPerson+"','"+collegeName+"','"+collegeTel+"','"+unit+"')";
 		
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
@@ -171,6 +176,7 @@ public class BaseApplyController {
 		map.addAttribute("basename", name);
 		//String infostr="";
 		String infostr=JSONArray.fromObject(map).toString();		
+
 		String message=baseapplyservice.getRequestBaseInfo(str1, str2,infostr);
 		request.setAttribute("index", message);
 		response.setContentType("text/html;charset=UTF-8");

@@ -250,10 +250,27 @@ public class BaseMaintenanceController {
 	 if(personDuty.equals("")){
 	     personDuty=null;
 	 }
+	 String collegenamed=request.getParameter("collegenamed");
+	 if(collegenamed.equals("")){
+		 collegenamed=null;
+	 }
+	 String collegephoned=request.getParameter("collegephoned");
+	 if(collegephoned.equals("")){
+		 collegephoned=null;
+	 }
+	 String cooperativeUnit=request.getParameter("cooperativeUnit");
+	 if(cooperativeUnit.equals("")){
+		 cooperativeUnit=null;
+	 }
+	 String majorString = request.getParameter("majorString");
+	 if(majorString.equals("")){
+		 majorString=null;
+	 }
+	 String tag=request.getParameter("tag");
 	
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,majorString,tag);
 	if(message=="success"){
 	    message="操作成功";
 	}else if(message=="fail"){
@@ -475,15 +492,9 @@ public class BaseMaintenanceController {
 		String str2 = "";
 		String name = request.getParameter("name");// 基地名称
 		String type = request.getParameter("typeid");// 基地类型id
-		String landarea = request.getParameter("landarea");// 基地面积
-		if (landarea.equals("")) {
-		    landarea = null;
-		}
+		String landarea = request.getParameter("landarea");// 基地面积		
 		String constructionarea = request
-			.getParameter("constructionarea");// 建筑面积
-		if (constructionarea.equals("")) {
-		    constructionarea = null;
-		}
+			.getParameter("constructionarea");// 建筑面积		
 		String undertake = request.getParameter("undertake");// 可承担人数
 		if (undertake.equals("")) {
 		    undertake = null;
@@ -495,6 +506,17 @@ public class BaseMaintenanceController {
 		String starttime = request.getParameter("start_time");// 创建时间
 		String endtime = request.getParameter("end_time");// 截止时间
 		String lawPerson = request.getParameter("personDuty");
+		String collegeName=request.getParameter("collegeName");
+		String collegeTel=request.getParameter("collegeTel");
+		String landarea_select=request.getParameter("landarea_select");
+		String constructionarea_select=request.getParameter("constructionarea_select");
+		if(!landarea.equals("")){
+			landarea=landarea+landarea_select;
+		}
+		if(!constructionarea.equals("")){
+			constructionarea=constructionarea+constructionarea_select;
+		}
+		String unit=request.getParameter("unit");
 		// 申请材料保存地址
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		String path = null;
@@ -543,12 +565,12 @@ public class BaseMaintenanceController {
 		}
 		Date d = new Date();
 		String Baseid = String.valueOf(d.getTime());
-		str2 += "('" + Baseid + "','" + name + "'," + type + ","
-			+ landarea + "," + constructionarea + "," + undertake
+		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
+			+ landarea + "','" + constructionarea + "'," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
 			+ userid + "','" + starttime + "','" + endtime + "','"
-			+ lawPerson + "')";
+			+ lawPerson+"','"+collegeName+"','"+collegeTel+"','"+unit+"')";
 
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id

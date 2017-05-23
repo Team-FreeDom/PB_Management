@@ -69,10 +69,14 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setPhone(rs.getString("phone"));
 		ch.setMaterial_path(rs.getString("material_path"));
 		ch.setFacemajor(rs.getString("mname"));// 闂傚牄鍨归幃婊勭▔閹捐尙鐟�
+		ch.setMajorid(rs.getString("majorid"));//获得专业的id
 		ch.setStar(rs.getInt("star"));// 闁哄嫮鍠撴锟�
 		ch.setResperson(rs.getString("resperson"));
 		ch.setBuildtime(rs.getString("buildtime"));
 		ch.setEndtime(rs.getString("endtime"));
+		ch.setCollegeName(rs.getString("collegeName"));
+		ch.setCollegePhone(rs.getString("collegePhone"));
+		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -191,6 +195,9 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setResperson(rs.getString("resperson"));
 		ch.setBuildtime(rs.getString("buildtime"));
 		ch.setEndtime(rs.getString("endtime"));
+		ch.setCollegeName(rs.getString("collegeName"));
+		ch.setCollegePhone(rs.getString("collegePhone"));
+		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -208,7 +215,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
     public String updateBaseInfo(String baseid, String basenamed,
 	    String basetyped, String landaread, String buildingaread,
 	    int undertakeCountd, String userphoned, String usernamed,
-	    String personDuty, String linkAddressd, String adddate, int star) {
+	    String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag) {
 	int flag;
 	String message=null;
 	Connection conn = null;
@@ -217,7 +224,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, baseid);
 	    sp.setString(2, basenamed);
 	    sp.setString(3, basetyped);
@@ -230,8 +237,13 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp.setString(10, linkAddressd);
 	    sp.setString(11, adddate);
 	    sp.setInt(12, star);
+	    sp.setString(13, collegenamed);
+	    sp.setString(14, collegephoned);
+	    sp.setString(15, cooperativeUnit);
+	    sp.setString(16, tag);
+	    sp.setString(17, majorString);
 	    sp.execute();
-	    flag=sp.getInt(13);
+	    flag=sp.getInt(18);
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -298,9 +310,9 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.add_base(?,?,?)}");
 	    sp.setString(1, str1);
-	    sp.setString(2, str2);	     
+	    sp.setString(2, str2);	  
 	    sp.execute();
-	    flag=sp.getInt(3);
+	    flag=sp.getInt(3);	 
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block

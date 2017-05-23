@@ -49,9 +49,10 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
-						class="dropdown-toggle notification-icon"> <i
-							class="glyphicon glyphicon-question-sign"><span class="badge"></span></i> <!--ms-if-->
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal"
+						data-target="#help" class="dropdown-toggle notification-icon">
+							<i class="glyphicon glyphicon-question-sign"><span
+								class="badge"></span></i> <!--ms-if-->
 					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
@@ -101,8 +102,8 @@
 										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
-								<li class="menuItem nav-parent opened nav-expanded"><a> <i
-										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
+								<li class="menuItem nav-parent opened nav-expanded"><a>
+										<i class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
@@ -162,10 +163,10 @@
 										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
-										
+
 										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
 											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
-									
+
 									</ul></li>
 								<li><a href="#"> <i class="icon-copy"
 										aria-hidden="true"></i><span>集中实习在线课堂</span></a></li>
@@ -197,9 +198,9 @@
 					<div class="pull-right">
 						<ol class="breadcrumb visible-sm visible-md visible-lg wz">
 							<li><a href="baseApply.jsp"><i class=" icon-building"></i>基地申报</a></li>
-                                <li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
-                                <li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
-                                <li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
+							<li><a href="field-rent.jsp"><i class="icon-legal"></i>土地租赁</a></li>
+							<li><a href="practiapply.jsp"><i class="icon-user"></i>实习申请</a></li>
+							<li><a href="Repairpply.jsp"><i class="icon-home"></i>报修申请</a></li>
 						</ol>
 					</div>
 				</div>
@@ -289,16 +290,31 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label">土地面积</label>
 										<div class="col-md-6">
-											<input type="text" class="form-control" id="filed-area"
-												name="landarea" placeholder="单位：亩">
+											<div class="input-group">
+												<input type="text" class="form-control" id="filed-area"
+													name="landarea" placeholder=""/>
+												<span class="input-group-btn"> 
+												  <select class="btn btn-default" name="landarea_select">
+														<option value="平方米">平方米</option>
+														<option value="亩">亩</option>														
+												  </select>
+												</span> 
+											</div>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-md-3 control-label">建筑面积</label>
 										<div class="col-md-6">
+										    <div class="input-group">
 											<input type="text" class="form-control" id="base-area"
-												name="constructionarea" placeholder="单位：平方">
+												name="constructionarea" placeholder="">
+											<span class="input-group-btn"> 
+												  <select class="btn btn-default" name="constructionarea_select">
+														<option value="平方米">平方米</option>																										
+												  </select>
+												</span> 	
+										</div>
 										</div>
 									</div>
 
@@ -321,7 +337,7 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">联系人姓名<span
+										<label class="col-md-3 control-label">基地联系人<span
 											class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="personName"
@@ -330,20 +346,62 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">联系人电话<span
+										<label class="col-md-3 control-label">基地联系人电话<span
 											class="setTag">*</span></label>
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="personTel"
 												name="phone" placeholder="">
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label collegeNameIt">学院联系人<span
+											class="setTag">*</span></label>
+										<div class="col-md-6">
+											<input type="text" class="form-control" id="collegeNameIt"
+												name="collegeName" placeholder="">
+										</div>
+									</div>
 
-									<div class="form-group" id="teachingBaseShow" style="display:none">
+									<div class="form-group">
+										<label class="col-md-3 control-label collegeTelIt">学院联系人电话<span
+											class="setTag">*</span></label>
+										<div class="col-md-6">
+											<input type="text" class="form-control" id="collegeTelIt"
+												name="collegeTel" placeholder="">
+										</div>
+									</div>
 
-										<label class="col-md-3 control-label">校外实习基地申请材料下载</label>
+									<div class="form-group" id="unitShow" style="display:none">
+										<label class="col-md-3 control-label unitIt">合作单位名称<span
+											class="setTag">*</span></label>
+										<div class="col-md-6">
+											<input type="text" class="form-control" id="unitIt"
+												name="unit" placeholder="">
+										</div>
+									</div>
+
+									<div class="form-group" id="societyBaseShow"
+										style="display:none">
+
+										<label class="col-md-3 control-label">社会服务基地申请材料下载<span
+											class="setTag">*</span></label>
+										<div class="col-md-6">
+											<ul id="societyBaseFileDownLoad">
+												<li><a
+													href="../material/societyBaseFile/societyBaseFile.zip">社会服务基地申报材料汇总</a></li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="form-group" id="teachingBaseShow"
+										style="display:none">
+
+										<label class="col-md-3 control-label">校外实习基地申请材料下载<span
+											class="setTag">*</span></label>
 										<div class="col-md-6">
 											<ul id="baseFileDownLoad">
-												<li><a href="../material/baseFile/outSchoolTeachingBase.zip">校外教学实习基地申报材料汇总</a></li>
+												<li><a
+													href="../material/baseFile/outSchoolTeachingBase.zip">校外教学实习基地申报材料汇总</a></li>
 											</ul>
 										</div>
 									</div>
@@ -429,25 +487,33 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background:#3071a9; color:#FFF">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center" id="myModalLabel">演示视频</h4>
-      </div>
-      <div class="modal-body text-center">
- 	    <div class="row">   
-    		<div class="col-md-12 helpcolor"><a href="../audio/userMedia.rar">普通用户功能演示视频</a></div>
-  	   </div>
-  	   <div class="row" style="margin-top:20px;">
-  	 		 <div class="col-md-12 helpcolor"><a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a></div>  
-  		</div>
-      </div>
-    </div>
-  </div>
-</div>
+
+	<div class="modal fade bs-example-modal-sm" id="help" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background:#3071a9; color:#FFF">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title text-center" id="myModalLabel">演示视频</h4>
+				</div>
+				<div class="modal-body text-center">
+					<div class="row">
+						<div class="col-md-12 helpcolor">
+							<a href="../audio/userMedia.rar">普通用户功能演示视频</a>
+						</div>
+					</div>
+					<div class="row" style="margin-top:20px;">
+						<div class="col-md-12 helpcolor">
+							<a href="../audio/collegeMedia.rar">学院负责人功能演示视频</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="clearfix"></div>
 
@@ -467,7 +533,7 @@
 				message : "操作成功",
 				size : 'small'
 			});
-		}else if(index == "fail"){
+		} else if (index == "fail") {
 			bootbox.alert({
 				message : "操作失败",
 				size : 'small'
