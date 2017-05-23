@@ -216,6 +216,31 @@ div.Iwidth{
 	float:right;
 	margin-left:5px;
 }
-#table tbody tr td li{
-	font-size:0.7em;
+#divweek,#divgrade{
+	position: relative;
+}
+#weekend,#class_one{
+	width:80%;
+}
+.showWeek,.showGrade{
+	display: none;
+	width: 80%;
+	position: absolute;
+	top: 25px;
+	left: 16px;
+	background:#FFF;
+	z-index:9999;
+}
+#ul1,#ul2{
+	text-align: center;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+li{
+	list-style:none;
+}
+.libg1,libg2{
+	background: #3071a9;
+	color: #fff;
 }

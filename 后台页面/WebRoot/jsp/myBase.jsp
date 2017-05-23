@@ -368,7 +368,7 @@
 									</div>
 								</div>
 								<div class="modal-footer table-responsive">
-									<button type="button" class="btn btn-primary" id="closeDe">关闭</button>
+									<button type="button" class="btn btn-primary" id="closeDe" data-dismiss="modal">关闭</button>
 								</div>
 							</div>
 						</div>
@@ -475,7 +475,7 @@
 									</div>
 								</div>
 								<div class="modal-footer table-responsive">
-									<button type="button" class="btn btn-primary" id="closeDe">关闭</button>
+									<button type="button" class="btn btn-primary" id="closeDe" data-dismiss="modal">关闭</button>
 								</div>
 							</div>
 						</div>

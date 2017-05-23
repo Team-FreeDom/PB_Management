@@ -146,7 +146,7 @@ $(document).on("change", "#deptSelectOne", function() {
 				$(".majorhide").append(
 						"<span class='majorcheck'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
-			}			
+			}
 		}
 
 	});
@@ -189,10 +189,13 @@ $(document).on("click", "#hit", function() {
 	var content=$("#textContent").html();
 	if(content==null||content==""){	
 	  $("#majormain").css("display","none");
+	  $("#majorSuo").html(content);
 	  return;
-	}
+	}else{
+	$("#majormain").css("display","block");
 	$("#majorSuo").html(content);	
 	$("#majorSuo input").prop("hidden",false);
+	}
 });
 
 $(document).on("click", ".confirm", function() {

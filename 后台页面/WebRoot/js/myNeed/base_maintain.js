@@ -1,9 +1,7 @@
 // JavaScript Document
 var obj = [];
 var tag1=true;
-$(document)
-		.ready(
-				function() {
+$(document).ready(function() {
 					
 					var tag_0=$("#tag_0").text();
 					if(tag_0=="false"){
@@ -70,8 +68,12 @@ $(document)
 								$("#edit_nong").find("#basetype1").after(
 										"<option value="+data[1][i].name+">"
 												+ data[1][i].name + "</option>");	
-								
 							}	
+							for ( var i=0;i<data[0].length;i++){
+								$("#deptSelect1").after(
+										"<option value="+data[0][i].aid+">"
+												+ data[0][i].dept + "</option>");
+							}
 							
 						}
 
@@ -408,7 +410,20 @@ $(document)
 						object_this.find("#undertakeCountd").val(obj[index].undertake);
 						object_this.find("#usernamed").val(obj[index].username);
 						object_this.find("#userphoned").val(obj[index].phone);
-						object_this.find("#major_orientedd").html(obj[index].facemajor);						
+
+						//将传来的专业名进行分开
+						var str1 = obj[index].facemajor;
+						var str2 = obj[index].majorid;
+						var facemajors = new Array();
+						var facemajorid = new Array();
+						facemajors=str1.split(",");
+						facemajorid=str2.split(",");
+						var majorString3 = "";
+						for (i=0;i<facemajors.length ;i++ )
+						{
+							majorString3 = majorString3+"<span class='majorchoose1'><input name='majorid1' hidden='' value='"+facemajorid[i]+"'><label>"+facemajors[i]+"</label></span>";
+						} 
+						object_this.find("#major_orientedd").html(majorString3);
 						object_this.find("#linkAddressd").html(obj[index].land_address);
 						object_this.find("#collegenamed").val(obj[index].collegeName);
 						object_this.find("#collegephoned").val(obj[index].collegePhone);
@@ -631,6 +646,7 @@ $(document)
 						var tag=(thisId=="saverun_0"?0:1);
 						
 						//$("#major_orientedd").html(obj[index].facemajor);
+						
 						var linkAddressd=object_this.find("#linkAddressd").val();
 						var personDuty=object_this.find("#personDuty").val();//法定责任人						
 						var setdated=object_this.find("#setdated").val();						
@@ -687,6 +703,13 @@ $(document)
 						
 						var baseid=object_this.find("#baseid").val();
 						baseid=baseid.substring(1);
+						var majorString = "";
+
+						$("#major_orientedd input[name = 'majorid1'").each(function(){
+							var id = $(this).val();
+							majorString =majorString + "('"+baseid+"','"+id+"'),";
+						});
+						majorString = majorString.substring(0,majorString.length-1);
 						var i=0;
 						$("#starget .icon-star").each(function() {
 							i++;
@@ -716,7 +739,8 @@ $(document)
 								"collegenamed":collegenamed,
 								"collegephoned":collegephoned,
 								"cooperativeUnit":cooperativeUnit,
-								"tag":tag
+								"tag":tag,
+								"majorString":majorString//面向专业
 							},
 							url : 'updateBaseInfo.do',
 							async : true,
@@ -1158,8 +1182,7 @@ $(document)
 																				data,
 																				type,
 																				row) {
-																			obj
-																					.push(row);
+																			obj.push(row);
 																			return data = '<span id="updateDetail" class="icon-edit edit-color" value="'
 																					+ (obj.length - 1)
 																					+ '"></span>';
@@ -1283,4 +1306,102 @@ $(".icon-filter").on("click", function() {
 	});
 	$('#hide_ul').toggle();
 });
+
+
+
+$(document).on("change", "#deptSelectOne1", function() {	
+	var id= this.value;	
+	$(".majorhide1").html("");
+	if(id==""){
+		return;
+	}
+		$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		data:{
+			"aid":id
+		},
+		url : 'getMajor.do',  //��ȡרҵ
+		async : false,
+		cache : false,
+		error : function(request) {
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
+		},
+		success : function(data) {
+			var tag;
+			for ( var i=0;i<data.length;i++) {
+				tag=false;
+				$("#majorSuo1 input").each(function(index){					
+					var id=$(this).val();				
+					if(data[i].mid==id){
+						tag=true;
+						return;
+					}					
+				});
+				if(!tag){
+				$(".majorhide1").append(
+						"<span class='majorcheck1'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
+				}
+			}			
+		}
+
+	});
+	
+});
+
+$(document).on("click", ".majorcheck1", function() {
+	var obj=$(this).children('input');		
+	var str="<span class='majorchoose1'><input name='majorid1' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
+	this.remove();
+	$("#majorSuo1").append(str);	
+	var tag=$("#majormain1").css("display");
+	if(tag=="none"){
+		$("#majormain1").css("display","block");
+	}	
+});
+
+$(document).on("click", ".majorchoose1", function() {	
+	var obj=$(this).children('input');
+	var id=$("#deptSelectOne1").val();	
+	if(id!=obj.prop("placeholder")){
+		bootbox.alert({
+			message : "请选择相应的学院，再进行更改",
+			size : 'small'
+		});
+		obj.prop("checked",true);
+	 return;
+
+	}
+	var str="<span class='majorcheck1'><input type='checkbox' name='majorcheck1' value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
+	this.remove();
+	$(".majorhide1").append(str);	
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}	
+});
+
+$(document).on("click", "#chooseMajor", function() {
+	$("#deptSelectOne1").val("");
+	$(".majorhide1 span[class = majorcheck1]").html("");
+	$("#majorSuo1").html("");
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}
+});
+
+$(document).on("click", ".confirm1", function() {
+	var content=$("#majorSuo1").html();	
+	$("#major_orientedd").html(content);
+	$("#major_orientedd input").prop("hidden",true);
+	$(".majorhide1").html("");
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}
+	$("#deptSelectOne1").val("");
+});
+
+
 

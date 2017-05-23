@@ -219,7 +219,7 @@
 				<div class="row form">
 
 					<form action="Userupdata.do" method="post" role="form"
-						id="userform" enctype="multipart/form-data">
+						id="userform" enctype="multipart/form-data" >
 
 						<div
 							class="col-md-6  col-md-offset-2 form-group xgarea form-horizontal">
@@ -243,7 +243,7 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">密码修改</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control" id="possword"
-										name="possword">
+										name="possword"  >
 								</div>
 							</div>
 
@@ -251,12 +251,12 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
 								<div class="col-sm-8">
 									<input type="password" class="form-control" id="repossword"
-										onBlur="password()">
+										>
 								</div>
 							</div>
 							<div class="form-group jianju">
 								<div class="col-sm-offset-5 col-sm-5" id="lastxg">
-									<button type="submit" class="btn btn-success" id="submit">确认修改</button>
+									<button type="button" class="btn btn-success" id="submitUpdate">确认修改</button>
 									<button type="reset" class="btn btn-danger">重置</button>
 								</div>
 							</div>
@@ -317,6 +317,7 @@
     <![endif]-->
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootbox.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
 	<script src="../js/kg.js"></script>
 	<script src="../js/user.js"></script>

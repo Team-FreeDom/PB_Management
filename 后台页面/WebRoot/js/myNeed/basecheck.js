@@ -1,7 +1,7 @@
 var obj=[];
 var obj2=[];
 var index;
-var indexCheck;
+//var indexCheck=1;
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
@@ -411,11 +411,13 @@ $(document).ready(function() {
 						var buildtime;
 						var endtime;
 						var name=[];
+						var indexCheck=1;
 						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {
-							/*for(var i=0;i<name.length;i++){
-								alert(name[i]);
-							}*/
 							
+							/*for(var i=0;i<name.length;){
+								alert(name[i]+i);
+								i++;
+							}*/					
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
 							name.push(basename);
@@ -440,14 +442,13 @@ $(document).ready(function() {
 						for(var j=0;j<name.length;j++){							
 							for(var t=j+1;t<name.length;t++){								
 								if(name[j]==name[t]){									
-									indexCheck=0;
+									indexCheck=0;									
 									break outer;
 								}else{
 									indexCheck=1;									
-								}																	
+								}							
 							}							
-						}
-						//alert(indexCheck);
+						}						
 						if(indexCheck==0){
 							bootbox.alert({
 								message : "不允许选择相同的基地名字的条数,请检查",
