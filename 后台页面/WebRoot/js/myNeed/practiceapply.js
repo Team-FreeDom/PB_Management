@@ -307,6 +307,15 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 			var teachername="";
 			var testername="";
 			var majorname="";
+			if(screen.width<=1536&&data.length>1){
+				$("#modalbody").addClass("modalbody");
+			}
+			if(screen.width<=1708&&screen.width>1536&&data.length>3){
+				$("#modalbody").addClass("modalbody2");
+			}
+			if(screen.width>1708&&data.length>3){
+				$("#modalbody").addClass("modalbody3");
+			}
 			for(var i=0;i<data.length;i++){
 				$("#table tbody:last-child").after(tbodyStyle);
 				for(var j=0;j<data_week.length;j++){
@@ -515,7 +524,7 @@ $(document).on("change","#selectCollege",function(){
 			"college" : college,								
 		},
 	success : function(data){
-		obj2=data;//用于下面函数里面的判断
+		obj2=data;//用于下面函数里面的判断	
 		for(var i=0;i<data.length;i++){//获取老师名字下拉框
 			$("#teacherNmaeID").after(
 			"<option class='rest' value="+data[i].name+">"+ data[i].name + "</option>"
@@ -556,7 +565,6 @@ $(document).on("change","#selectCollege2",function(){
 			"college" : college,								
 		},
 	success : function(data){
-		
 		for(var i=0;i<data.length;i++){//获取老师名字下拉框
 			$("#teacherNmaeID2").after(
 			"<option class='rest' value="+data[i].name+">"+ data[i].name + "</option>"

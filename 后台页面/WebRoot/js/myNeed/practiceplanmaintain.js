@@ -1725,6 +1725,15 @@ $(document)
 						var teachername="";
 						var testername="";
 						var majorname="";
+						if(screen.width<=1536&&data.length>1){
+							$("#modalbody").addClass("modalbody");
+						}
+						if(screen.width<=1708&&screen.width>1536&&data.length>3){
+							$("#modalbody").addClass("modalbody2");
+						}
+						if(screen.width>1708&&data.length>3){
+							$("#modalbody").addClass("modalbody3");
+						}
 						for(var i=0;i<data.length;i++){
 							$("#table tbody:last-child").after(tbodyStyle);
 							for(var j=0;j<data_week.length;j++){
