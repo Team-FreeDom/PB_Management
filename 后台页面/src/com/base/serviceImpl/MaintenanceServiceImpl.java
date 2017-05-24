@@ -97,8 +97,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 	public String updateBaseInfo(String baseid, String basenamed,
 		String basetyped, String landaread, String buildingaread,
 		int undertakeCountd, String userphoned, String usernamed,
-		String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String tag) {
-	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star,collegenamed,collegephoned,cooperativeUnit,tag);
+		String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag) {
+	   String message= maintenancedao.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,adddate,star,collegenamed,collegephoned,cooperativeUnit,majorString,tag);
 	   return message;
 	    
 	}

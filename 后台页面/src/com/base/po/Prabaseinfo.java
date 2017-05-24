@@ -25,7 +25,14 @@ public class Prabaseinfo implements Serializable {
     private String buildtime;
     private String userid;
     private String facemajor;//闈㈠悜涓撲笟
-    private int star;//鏄熺骇
+    private String majorid;
+    public String getMajorid() {
+		return majorid;
+	}
+	public void setMajorid(String majorid) {
+		this.majorid = majorid;
+	}
+	private int star;//鏄熺骇
     private String resperson;
     private String cooperativeUnit;//合作单位名称
     private String collegeName;//学院联系人
@@ -62,7 +69,7 @@ public class Prabaseinfo implements Serializable {
     public Prabaseinfo(String id, String name, String type, String landarea,
 	    String constructionarea, int undertake, String applydp,
 	    String land_address, String username, String phone,
-	    String material_path, String facemajor, int star) {
+	    String material_path, String facemajor,String majorid, int star) {
 	super();
 	this.id = id;
 	this.name = name;
@@ -76,6 +83,7 @@ public class Prabaseinfo implements Serializable {
 	this.phone = phone;
 	this.material_path = material_path;
 	this.facemajor = facemajor;
+	this.majorid = majorid;
 	this.star = star;
     }
     
@@ -182,6 +190,5 @@ public class Prabaseinfo implements Serializable {
 	public void setUndertake(Integer undertake) {
 		this.undertake = undertake;
 	}
-	
     
 }

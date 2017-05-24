@@ -262,11 +262,15 @@ public class BaseMaintenanceController {
 	 if(cooperativeUnit.equals("")){
 		 cooperativeUnit=null;
 	 }
+	 String majorString = request.getParameter("majorString");
+	 if(majorString.equals("")){
+		 majorString=null;
+	 }
 	 String tag=request.getParameter("tag");
 	
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,tag);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,majorString,tag);
 	if(message=="success"){
 	    message="操作成功";
 	}else if(message=="fail"){
