@@ -1,4 +1,4 @@
-package com.base.action;
+﻿package com.base.action;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -134,7 +134,21 @@ public class BaseApplyController {
 		//获取当前		
 		  DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 		  String time=format.format(d);
-		String Baseid = String.valueOf(d.getTime());		
+
+		//将获得的baseid自动生成首字母+时间 by jimao
+		  String applyTime = null;
+		  if(Integer.parseInt(type)== 1){
+			  	String applyName = request.getParameter("applyName");
+				String firstspell = ApplyUtils.getFirstSpell(applyName);
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+				applyTime = firstspell+df.format(new Date());
+			  
+		  }else{
+			  applyTime = String.valueOf(d.getTime());
+		  }
+
+		String Baseid = applyTime;   //获得学院首字母+时间	
+		
 		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
 			+ landarea + "','" + constructionarea + "'," + undertake
 			+ "," + applyid + ",'" + land_address + "','"

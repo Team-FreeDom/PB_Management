@@ -57,6 +57,18 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 		MyBase ch = new MyBase();
 		ch.setId(rs.getInt("id"));
 		ch.setBid(rs.getString("bids"));
+
+//		截断字符串by jimao
+		String ab = ch.getBid();
+		if (ApplyUtils.judgeEng(ab)) {
+			StringBuffer s = new StringBuffer(ab);
+			// s.substring(0, ab.length() -6);
+			String s1 = s.substring(0, ab.length() - 6).toString();
+			// System.out.println(s1+"aaaaa");
+			ch.setBid(s1);
+		}
+
+
 		ch.setName(rs.getString("basename"));
 		ch.setLandarea(rs.getString("landarea"));
 		ch.setConstructionarea(rs.getString("constructionarea"));
@@ -95,7 +107,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 
     /**
      * 发送消息
-     * 
+     *
      * @param sql
      *            插入封装好的sql语句
      */
@@ -139,11 +151,11 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
     //我的基地中基地申请撤回
     @Override
     public int changeThisStatus(String id,int status1,int status2){
-    	
+
     	int flag = 0;
     	Connection conn = null;
     	CallableStatement sp = null;
-    	ResultSet rs = null;    	
+    	ResultSet rs = null;
     	try {
     	    conn = (Connection) SessionFactoryUtils.getDataSource(
     		    sessionFactory).getConnection();
@@ -154,7 +166,7 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
     	    sp.setInt(3, status2);
     	    sp.registerOutParameter(4, java.sql.Types.INTEGER);
     	    sp.execute();
-    	    flag = sp.getInt(4);   	    
+    	    flag = sp.getInt(4);
     	} catch (SQLException e) {
     	    // TODO Auto-generated catch block
     	    e.printStackTrace();

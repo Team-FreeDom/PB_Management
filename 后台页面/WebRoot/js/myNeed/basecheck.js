@@ -847,7 +847,8 @@ $(document).on("click", "#scanDetail", function() {
 	}else{
 		domThis=$("#scan");
 	}				
-	domThis.find("#baseid").val('#'+obj[index].id);
+	//domThis.find("#baseid").val('#'+obj[index].id);
+	domThis.find("#baseid").val('#'+obj[index].bid);//获取不是基地的id是bid by jimao
 	domThis.find("#basename").val(obj[index].name);
 	domThis.find("#basetype").val(obj[index].type);
 	domThis.find("#dept0").val(obj[index].applydp);
@@ -887,7 +888,8 @@ $(document).on("click", "#scanDetail2", function() {
 	}else{
 		domThis=$("#scan2");
 	}				
-	domThis.find("#baseid2").val('#'+obj2[index].id);	
+	//domThis.find("#baseid2").val('#'+obj2[index].id);	
+	domThis.find("#baseid2").val('#'+obj2[index].bid);//获取不是基地的id是bid by jimao
 	domThis.find("#basename2").val(obj2[index].name);
 	domThis.find("#basetype2").val(obj2[index].type);
 	domThis.find("#dept02").val(obj2[index].applydp);

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -406,6 +406,7 @@
 											<td>基地编号：</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
+											<input type="hidden" id="hiddenbaseid"class="form-control" /><!-- 隐藏框by jimao -->
 											<td>基地名称 ：</td>
 											<td><input type="text" id="basenamed"
 												class="form-control"><span id="display"
@@ -612,6 +613,7 @@
 											<td>基地编号：</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
+											<input type="hidden" id="hiddenbaseid"class="form-control" /><!-- 隐藏框 jimao -->
 											<td>基地类型 ：</td>
 											<td><select class="form-control" id="basetyped"
 												name="TYPE	">
@@ -941,6 +943,7 @@
 						</div>
 
 						<div class="form-group">
+							<input type="hidden" name="applyName"  id="applyNameId" /><!--隐藏的input框  -->
 							<label class="col-md-3 control-label">申报部门<span
 								class="setTag">*</span></label>
 							<div class="col-md-6">
