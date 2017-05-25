@@ -31,6 +31,7 @@ import com.base.po.ApplyDept;
 import com.base.po.Major;
 import com.base.po.basetype;
 import com.base.service.baseApplyService;
+import com.base.utils.ApplyUtils;
 import com.base.utils.ExcelReport;
 
 /**

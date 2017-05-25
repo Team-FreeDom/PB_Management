@@ -390,7 +390,18 @@ $(document).ready(function() {
 						}
 						object_this.find("select").val('平方米');
 						
-						object_this.find("#baseid").val('#'+obj[index].id);
+						//截断字符串
+					    var src=obj[index].id;
+					 	var rexp=/^[a-zA-Z]/;
+						if(rexp.test(src)){
+							 object_this.find("#baseid").val('#'+src.substring(0,src.length-6));
+							 
+						 }else{
+							 object_this.find("#baseid").val('#'+obj[index].id);
+						 }
+						 						
+						 object_this.find("#hiddenbaseid").val('#'+obj[index].id);
+						
 						object_this.find("#basenamed").val(obj[index].name);
 						object_this.find("#basetyped").val(obj[index].type);
 						object_this.find("#dept0d").val(obj[index].applydp);
@@ -464,13 +475,13 @@ $(document).ready(function() {
 
 															if (i != 0) {
 																recordstr = recordstr
-																		+ ","
+																		+ ",'"
 																		+ $(
 																				this)
 																				.val()+"'";
 															} else {
 																recordstr = recordstr
-																		+ $(
+																		+ "'"+$(
 																				this)
 																				.val()+"'";
 															}

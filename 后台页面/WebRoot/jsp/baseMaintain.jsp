@@ -613,7 +613,7 @@
 											<td>基地编号：</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
-											<input type="hidden" id="hiddenbaseid"class="form-control" /><!-- 隐藏框 jimao -->
+											<input type="hidden" id="hiddenbaseid" class="form-control" /><!-- 隐藏框 jimao -->
 											<td>基地类型 ：</td>
 											<td><select class="form-control" id="basetyped"
 												name="TYPE	">
