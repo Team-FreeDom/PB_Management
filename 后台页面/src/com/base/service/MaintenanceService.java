@@ -69,5 +69,12 @@ public interface MaintenanceService {
 	 */
 	public int judge_insert_base(String userid, String recordStr1,String recordStr2,String recordStr3,int count,String resultStr4);
 	
+	 /*
+	  参数说明：aid,为基地编号，是数字
+	 返回值：    string型，代表基地名称
+	 函数功能： 通过基地编号，得到基地名称
+	 */
+	public String getDeptsId(int aid);
+	
    
 }

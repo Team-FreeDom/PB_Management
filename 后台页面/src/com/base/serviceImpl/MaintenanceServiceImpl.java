@@ -102,5 +102,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 	   return message;
 	    
 	}
+	
+	public  String getDeptsId(int aid){
+		String bid = maintenancedao.getDeptsId(aid);
+		return bid;
+	}
 
 }
