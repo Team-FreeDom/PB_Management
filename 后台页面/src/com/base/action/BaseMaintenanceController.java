@@ -423,7 +423,7 @@ public class BaseMaintenanceController {
 				    		 	String applyName =	maintenanceservice.getDeptsId(Integer.parseInt(row.get(2)));
 								String firstspell = ApplyUtils.getFirstSpell(applyName);
 								SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-								applyTime = firstspell+df.format(new Date());
+								applyTime = firstspell+df.format(new Date())+i;
 
 						  }else{
 							  applyTime = String.valueOf(new Date().getTime() + i);
