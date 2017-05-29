@@ -36,30 +36,17 @@ public class ApplyUtils {
 	       return pybf.toString().replaceAll("\\W", "").trim().toUpperCase();   
 	   }
 	
-	public static boolean judgeEng(String str){
-		boolean flag;
-		//System.out.println(str+"gggg");
-		//System.out.println("wosho");
-		 String regex = ".*[a-zA-z].*";
-		if(str.matches(regex)){
-			flag=true;
-			
+	public static String judgeEng(String str){
+		String finalResult;
+		String regex_1 = "[a-zA-Z]+[0-9]+";
+		String regex_2 = "[a-zA-Z]+[0-9]+A[0-9]+";
+		if(str.matches(regex_1)){			
+			finalResult=str.substring(0,str.length()-6);
+		}else if(str.matches(regex_2)){
+			finalResult=str.substring(0,str.lastIndexOf('A')-6);
 		}else{
-			flag=false;
-			
+			finalResult=str;
 		}
-		return flag;
+		return finalResult;
 	}
-	
-	/*public static void main(String args[]) {	
-		String str = "1494209156703";
-		  String regex = ".*[a-zA-z].*";
-		  if(str.matches(regex)){
-			  System.out.println("11111");
-		  }else{
-			  System.out.println("13333331111");
-			  
-		  }
-		
-	}*/
 }

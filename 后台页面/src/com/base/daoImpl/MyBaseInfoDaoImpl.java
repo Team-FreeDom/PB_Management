@@ -57,19 +57,10 @@ public class MyBaseInfoDaoImpl implements MyBaseInfoDao {
 	    while (rs.next()) {
 		MyBase ch = new MyBase();
 		ch.setId(rs.getInt("id"));
-		ch.setBid(rs.getString("bids"));
-
 //		截断字符串by jimao
-		String ab = ch.getBid();
-		if (ApplyUtils.judgeEng(ab)) {
-			StringBuffer s = new StringBuffer(ab);
-			// s.substring(0, ab.length() -6);
-			String s1 = s.substring(0, ab.length() - 6).toString();
-			// System.out.println(s1+"aaaaa");
-			ch.setBid(s1);
-		}
-
-
+		String ab = rs.getString("bids");
+		ab=ApplyUtils.judgeEng(ab);
+		ch.setBid(ab);
 		ch.setName(rs.getString("basename"));
 		ch.setLandarea(rs.getString("landarea"));
 		ch.setConstructionarea(rs.getString("constructionarea"));

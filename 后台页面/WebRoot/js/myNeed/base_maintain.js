@@ -118,9 +118,12 @@ $(document).ready(function() {
 													"sWidth" : "6%",
 													"render":function(data,
 															type, row) {
-														var rexp=/^[a-zA-Z]/;
-														 if(rexp.test(data)){
+														var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+														var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+														 if(rexp_1.test(data)){
 															 return  data='#'+data.substring(0,data.length-6);
+														 }else if(rexp_2.test(data)){
+															 return  data='#'+data.substring(0,data.lastIndexOf('A')-6);
 														 }else{
 															 return data='#'+data;
 														 }		
@@ -392,10 +395,13 @@ $(document).ready(function() {
 						
 						//截断字符串
 					    var src=obj[index].id;
-					 	var rexp=/^[a-zA-Z]/;
-						if(rexp.test(src)){
-							 object_this.find("#baseid").val('#'+src.substring(0,src.length-6));
-							 
+					    var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+						var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+						if(rexp_1.test(src)){
+							 object_this.find("#baseid").val('#'+src.substring(0,src.length-6));							 
+						 }else if(rexp_2.test(src)){
+							 object_this.find("#baseid").val('#'+src.substring(0,src.lastIndexOf('A')-6));
+							 var a=src.substring(0,src.lastIndexOf('A')-6);
 						 }else{
 							 object_this.find("#baseid").val('#'+obj[index].id);
 						 }
@@ -1061,7 +1067,15 @@ $(document).ready(function() {
 																		"sWidth" : "8%",
 																		"render":function(data,
 																				type, row) {
-																			return data='#'+data;
+																			var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+																			var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+																			 if(rexp_1.test(data)){
+																				 return  data='#'+data.substring(0,data.length-6);
+																			 }else if(rexp_2.test(data)){
+																				 return  data='#'+data.substring(0,data.lastIndexOf('A')-6);
+																			 }else{
+																				 return data='#'+data;
+																			 }	
 																			}
 
 																	},

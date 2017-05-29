@@ -265,7 +265,7 @@ public class BaseMaintenanceController {
 	 }
 	 String majorString = request.getParameter("majorString");
 	 if(majorString.equals("")){
-		 majorString=null;
+		 majorString="-1";
 	 }
 	 String tag=request.getParameter("tag");
 
@@ -414,7 +414,7 @@ public class BaseMaintenanceController {
 
 				//将导入的数据中,如果基地编号是1,则转为首字母+时间   jimao
 			   String applyTime = null;
-			    for (int k = 0; k < row.size(); k++) {
+			   // for (int k = 0; k < row.size(); k++) {
 			    	if(row.get(1).equals("")){
 			    		continue;
 			    	}else{
@@ -423,16 +423,15 @@ public class BaseMaintenanceController {
 				    		 	String applyName =	maintenanceservice.getDeptsId(Integer.parseInt(row.get(2)));
 								String firstspell = ApplyUtils.getFirstSpell(applyName);
 								SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-								applyTime = firstspell+df.format(new Date())+i;
+								applyTime = firstspell+df.format(new Date())+'A'+i;
 
 						  }else{
 							  applyTime = String.valueOf(new Date().getTime() + i);
 						  }
 			    	}
-			    }
+			  //  }
 			     String bid = applyTime;
 			     //String bid = String.valueOf(new Date().getTime() + i);
-
 
 			    resultStr1 = "('" + bid + "',";
 			    for (int j = 0; j < row.size(); j++) {
