@@ -118,7 +118,14 @@ $(document).ready(function() {
 													"sWidth" : "6%",
 													"render":function(data,
 															type, row) {
-														return data='#'+data;
+														var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+														var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+														 if(rexp_1.test(data)||rexp_2.test(data)){
+															 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+															 return  data='#'+data.substring(0,digitIndex+8);
+														 }else{
+															 return data='#'+data;
+														 }		
 													}
 
 												},
@@ -385,7 +392,20 @@ $(document).ready(function() {
 						}
 						object_this.find("select").val('平方米');
 						
-						object_this.find("#baseid").val('#'+obj[index].id);
+						//截断字符串
+					    var src=obj[index].id;
+					    var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+						var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+						var digitIndex;
+						if(rexp_1.test(src)||rexp_2.test(src)){							
+							 digitIndex=src.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');							
+							 object_this.find("#baseid").val('#'+src.substring(0,digitIndex+8));								
+						 }else{
+							 object_this.find("#baseid").val('#'+obj[index].id);
+						 }
+						 						
+						 object_this.find("#hiddenbaseid").val('#'+obj[index].id);
+						
 						object_this.find("#basenamed").val(obj[index].name);
 						object_this.find("#basetyped").val(obj[index].type);
 						object_this.find("#dept0d").val(obj[index].applydp);
@@ -459,15 +479,15 @@ $(document).ready(function() {
 
 															if (i != 0) {
 																recordstr = recordstr
-																		+ ","
+																		+ ",'"
 																		+ $(
 																				this)
-																				.val();
+																				.val()+"'";
 															} else {
 																recordstr = recordstr
-																		+ $(
+																		+ "'"+$(
 																				this)
-																				.val();
+																				.val()+"'";
 															}
 
 															i++;
@@ -700,8 +720,8 @@ $(document).ready(function() {
 							}
 						}
 						
-						
-						var baseid=object_this.find("#baseid").val();
+						// 获得隐藏框
+						var baseid=object_this.find("#hiddenbaseid").val();
 						baseid=baseid.substring(1);
 						var majorString = "";
 
@@ -799,6 +819,8 @@ $(document).ready(function() {
 					//增加框的js控制
 					$(document).on("click", "#submitForm_0", function() {
 						var basename=$("#basename").val();
+						var applyName = $("#deptty").find("option:selected").text();//获取下拉列表的文本-- by jimao
+						$("#applyNameId").val(applyName);							//获取隐藏input的文本值
 						var deptty=$("#deptty").val();
 						var basetype=$("#basetype0").val();
 						var baseaddress=$("#baseaddress").val();
@@ -1043,7 +1065,14 @@ $(document).ready(function() {
 																		"sWidth" : "8%",
 																		"render":function(data,
 																				type, row) {
-																			return data='#'+data;
+																			var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+																			var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+																			 if(rexp_1.test(data)||rexp_2.test(data)){
+																				 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+																				 return  data='#'+data.substring(0,digitIndex+8);
+																			 }else{
+																				 return data='#'+data;
+																			 }	
 																			}
 
 																	},
