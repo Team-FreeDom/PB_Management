@@ -199,6 +199,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setCollegeName(rs.getString("collegeName"));
 		ch.setCollegePhone(rs.getString("collegePhone"));
 		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
+		ch.setMajorid(rs.getString("majorid"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

@@ -40,10 +40,10 @@ public class ApplyUtils {
 		String finalResult;
 		String regex_1 = "[a-zA-Z]+[0-9]+";
 		String regex_2 = "[a-zA-Z]+[0-9]+A[0-9]+";
-		if(str.matches(regex_1)){			
-			finalResult=str.substring(0,str.length()-6);
-		}else if(str.matches(regex_2)){
-			finalResult=str.substring(0,str.lastIndexOf('A')-6);
+		int digitIndex;
+		if(str.matches(regex_1)||str.matches(regex_2)){	
+			digitIndex=str.replaceAll("\\d","@").indexOf('@');
+			finalResult=str.substring(0,digitIndex+8);
 		}else{
 			finalResult=str;
 		}

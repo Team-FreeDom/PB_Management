@@ -120,10 +120,9 @@ $(document).ready(function() {
 															type, row) {
 														var rexp_1=/^[a-zA-Z]+[0-9]+$/;
 														var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
-														 if(rexp_1.test(data)){
-															 return  data='#'+data.substring(0,data.length-6);
-														 }else if(rexp_2.test(data)){
-															 return  data='#'+data.substring(0,data.lastIndexOf('A')-6);
+														 if(rexp_1.test(data)||rexp_2.test(data)){
+															 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+															 return  data='#'+data.substring(0,digitIndex+8);
 														 }else{
 															 return data='#'+data;
 														 }		
@@ -397,11 +396,10 @@ $(document).ready(function() {
 					    var src=obj[index].id;
 					    var rexp_1=/^[a-zA-Z]+[0-9]+$/;
 						var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
-						if(rexp_1.test(src)){
-							 object_this.find("#baseid").val('#'+src.substring(0,src.length-6));							 
-						 }else if(rexp_2.test(src)){
-							 object_this.find("#baseid").val('#'+src.substring(0,src.lastIndexOf('A')-6));
-							 var a=src.substring(0,src.lastIndexOf('A')-6);
+						var digitIndex;
+						if(rexp_1.test(src)||rexp_2.test(src)){							
+							 digitIndex=src.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');							
+							 object_this.find("#baseid").val('#'+src.substring(0,digitIndex+8));								
 						 }else{
 							 object_this.find("#baseid").val('#'+obj[index].id);
 						 }
@@ -1069,10 +1067,9 @@ $(document).ready(function() {
 																				type, row) {
 																			var rexp_1=/^[a-zA-Z]+[0-9]+$/;
 																			var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
-																			 if(rexp_1.test(data)){
-																				 return  data='#'+data.substring(0,data.length-6);
-																			 }else if(rexp_2.test(data)){
-																				 return  data='#'+data.substring(0,data.lastIndexOf('A')-6);
+																			 if(rexp_1.test(data)||rexp_2.test(data)){
+																				 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+																				 return  data='#'+data.substring(0,digitIndex+8);
 																			 }else{
 																				 return data='#'+data;
 																			 }	
