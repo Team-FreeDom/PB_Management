@@ -186,7 +186,7 @@ public class PlanMaintainDaoImpl implements PlanMaintainDao {
 	    while (rs.next()) {
 		Classcourse ch = new Classcourse();
 		ch.setId(rs.getInt("id"));
-		ch.setWeek(rs.getInt("week"));
+		ch.setWeek(rs.getString("week"));
 		ch.setStarttime(rs.getString("starttime"));
 		ch.setEndtime(rs.getString("endtime"));
 		ch.setContent(rs.getString("content"));

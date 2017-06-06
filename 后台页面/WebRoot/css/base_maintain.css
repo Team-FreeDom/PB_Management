@@ -95,8 +95,7 @@ tbody tr td span{
 	position:absolute !important;
 	top:150px;
 	left:40%;
-	width:600px;
-	
+	width:600px;	
 	display:none;
 	scroll:no;
 	
@@ -118,3 +117,39 @@ tbody tr td span{
 	width:123px !important;
 }
 
+#edit{
+	position:absolute !important;
+	top:150px;
+	left:30%;
+	width:650px;	
+	display:none;
+	scroll:no;
+	
+}
+#edit table tr td{
+	text-align:right !important;
+}
+#edit_nong{
+	position:absolute !important;
+	top:150px;
+	left:30%;
+	width:650px;	
+	display:none;
+	scroll:no;
+	
+}
+#edit_nong table tr td{
+	text-align:right !important;
+}
+#linkAddressd{
+	text-align:left !important;
+}
+#major_orientedd{
+	text-align:left !important;
+}
+#starget{
+	text-align:left !important;
+}
+#adddate{
+	text-align:left !important;
+}

@@ -41,13 +41,14 @@ import com.base.service.MaintenanceService;
 import com.base.service.baseApplyService;
 import com.base.serviceImpl.AdminManageServiceImpl;
 import com.base.serviceImpl.InputExcelServiceImpl;
+import com.base.utils.ApplyUtils;
 import com.base.utils.CookieUtils;
 import com.base.utils.ExcelReport;
 
 /**
  * 鍩哄湴缁存姢
- * 
- * 
+ *
+ *
  */
 // 实习基地管理控制层
 @Controller("baseMaintenance")
@@ -250,10 +251,27 @@ public class BaseMaintenanceController {
 	 if(personDuty.equals("")){
 	     personDuty=null;
 	 }
-	
+	 String collegenamed=request.getParameter("collegenamed");
+	 if(collegenamed.equals("")){
+		 collegenamed=null;
+	 }
+	 String collegephoned=request.getParameter("collegephoned");
+	 if(collegephoned.equals("")){
+		 collegephoned=null;
+	 }
+	 String cooperativeUnit=request.getParameter("cooperativeUnit");
+	 if(cooperativeUnit.equals("")){
+		 cooperativeUnit=null;
+	 }
+	 String majorString = request.getParameter("majorString");
+	 if(majorString.equals("")){
+		 majorString="-1";
+	 }
+	 String tag=request.getParameter("tag");
+
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star);
+	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,majorString,tag);
 	if(message=="success"){
 	    message="操作成功";
 	}else if(message=="fail"){
@@ -278,13 +296,13 @@ public class BaseMaintenanceController {
     @RequestMapping("/exportThisInfo.do")
     public String exportThisInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
-	
+
 	int basetype = Integer.valueOf(request.getParameter("basetype"));
 	String dept = request.getParameter("applydept");
 	if (dept == null) {
 	    dept = (String) request.getSession().getAttribute("college");
 	}
-	int star = Integer.valueOf(request.getParameter("star"));	
+	int star = Integer.valueOf(request.getParameter("star"));
 	int tage_0=200;
 	List<ExportBase> list = maintenanceservice.getExportBaseInfo(basetype,
 		dept, star);
@@ -332,7 +350,7 @@ public class BaseMaintenanceController {
 	    }catch (Exception e) {
 		// TODO Auto-generated catch block
 	    	tage_0=500;
-		e.printStackTrace();		
+		e.printStackTrace();
 	    }
 	    return null;
 	}
@@ -392,8 +410,29 @@ public class BaseMaintenanceController {
 			String resultStr1 = "";
 			List<String> row = list.get(i);
 			if (row != null && row.size() > 0) {
-			    String bid = String.valueOf(new Date().getTime()
-				    + i);
+
+
+				//将导入的数据中,如果基地编号是1,则转为首字母+时间   jimao
+			   String applyTime = null;
+			   // for (int k = 0; k < row.size(); k++) {
+			    	if(row.get(1).equals("")){
+			    		continue;
+			    	}else{
+			    		 if(Integer.parseInt(row.get(1))== 1){
+
+				    		 	String applyName =	maintenanceservice.getDeptsId(Integer.parseInt(row.get(2)));
+								String firstspell = ApplyUtils.getFirstSpell(applyName);
+								SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+								applyTime = firstspell+df.format(new Date())+'A'+i;
+
+						  }else{
+							  applyTime = String.valueOf(new Date().getTime() + i);
+						  }
+			    	}
+			  //  }
+			     String bid = applyTime;
+			     //String bid = String.valueOf(new Date().getTime() + i);
+
 			    resultStr1 = "('" + bid + "',";
 			    for (int j = 0; j < row.size(); j++) {
 				// 判断必填字段是否是空数据
@@ -476,14 +515,8 @@ public class BaseMaintenanceController {
 		String name = request.getParameter("name");// 基地名称
 		String type = request.getParameter("typeid");// 基地类型id
 		String landarea = request.getParameter("landarea");// 基地面积
-		if (landarea.equals("")) {
-		    landarea = null;
-		}
 		String constructionarea = request
 			.getParameter("constructionarea");// 建筑面积
-		if (constructionarea.equals("")) {
-		    constructionarea = null;
-		}
 		String undertake = request.getParameter("undertake");// 可承担人数
 		if (undertake.equals("")) {
 		    undertake = null;
@@ -495,6 +528,17 @@ public class BaseMaintenanceController {
 		String starttime = request.getParameter("start_time");// 创建时间
 		String endtime = request.getParameter("end_time");// 截止时间
 		String lawPerson = request.getParameter("personDuty");
+		String collegeName=request.getParameter("collegeName");
+		String collegeTel=request.getParameter("collegeTel");
+		String landarea_select=request.getParameter("landarea_select");
+		String constructionarea_select=request.getParameter("constructionarea_select");
+		if(!landarea.equals("")){
+			landarea=landarea+landarea_select;
+		}
+		if(!constructionarea.equals("")){
+			constructionarea=constructionarea+constructionarea_select;
+		}
+		String unit=request.getParameter("unit");
 		// 申请材料保存地址
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		String path = null;
@@ -542,33 +586,52 @@ public class BaseMaintenanceController {
 		    filename = null;
 		}
 		Date d = new Date();
-		String Baseid = String.valueOf(d.getTime());
-		str2 += "('" + Baseid + "','" + name + "'," + type + ","
-			+ landarea + "," + constructionarea + "," + undertake
+			//将获得的baseid自动生成首字母+时间 by jimao
+		  String applyTime = null;
+		  if(Integer.parseInt(type)== 1){
+			  	String applyName = request.getParameter("applyName");
+				String firstspell = ApplyUtils.getFirstSpell(applyName);
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+				applyTime = firstspell+df.format(new Date());
+
+		  }else{
+			  applyTime = String.valueOf(d.getTime());
+		  }
+
+		String Baseid = applyTime;   //获得学院首字母+时间
+
+		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
+			+ landarea + "','" + constructionarea + "'," + undertake
 			+ "," + applyid + ",'" + land_address + "','"
 			+ username + "','" + phone + "','" + filename + "','"
 			+ userid + "','" + starttime + "','" + endtime + "','"
-			+ lawPerson + "')";
+			+ lawPerson+"','"+collegeName+"','"+collegeTel+"','"+unit+"')";
 
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
 		String str1 = "";
 		StringBuffer sb = new StringBuffer();
 		if (majorid == null) {
-		    sb.append("(");
-		    sb.append(Baseid);
-		    sb.append(",");
-		    sb.append("-1");
-		    sb.append("),");
+            sb.append("(");
+			    sb.append("'");
+			    sb.append(Baseid);
+			    sb.append("'");
+			    sb.append(",");
+			    sb.append("-1");
+			    sb.append("),");
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
 		} else {
 		    for (String string : majorid) {
-			sb.append("('");
-			sb.append(Baseid);
-			sb.append("','");
-			sb.append(string);
-			sb.append("'),");
+			sb.append("(");
+				sb.append("'");
+				sb.append(Baseid);
+				sb.append("'");
+				sb.append(",");
+				sb.append("'");
+				sb.append(string);
+				sb.append("'");
+				sb.append("),");
 		    }
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();

@@ -1,7 +1,7 @@
 var obj=[];
 var obj2=[];
 var index;
-var indexCheck;
+//var indexCheck=1;
 $(document).ready(function() {
 	
 	var Spage = $('#basecheck').DataTable(
@@ -411,11 +411,13 @@ $(document).ready(function() {
 						var buildtime;
 						var endtime;
 						var name=[];
+						var indexCheck=1;
 						$("input[type='checkbox'][name='checkedIncrease1']:checked").each(function() {
-							/*for(var i=0;i<name.length;i++){
-								alert(name[i]);
-							}*/
 							
+							/*for(var i=0;i<name.length;){
+								alert(name[i]+i);
+								i++;
+							}*/					
 							userid=$(this).val();
 							basename=$(this).closest('tr').find('td:eq(3) input').val();
 							name.push(basename);
@@ -440,14 +442,13 @@ $(document).ready(function() {
 						for(var j=0;j<name.length;j++){							
 							for(var t=j+1;t<name.length;t++){								
 								if(name[j]==name[t]){									
-									indexCheck=0;
+									indexCheck=0;									
 									break outer;
 								}else{
 									indexCheck=1;									
-								}																	
+								}							
 							}							
-						}
-						//alert(indexCheck);
+						}						
 						if(indexCheck==0){
 							bootbox.alert({
 								message : "不允许选择相同的基地名字的条数,请检查",
@@ -837,27 +838,40 @@ $(document).on("click", "#scanDetail", function() {
 	
 	var index=$(this).val();
 	
-	$("#basename").val(obj[index].name);
-	$("#basetype").val(obj[index].type);
-	$("#dept0").val(obj[index].applydp);
-	$("#landarea").val(obj[index].landarea);
-	$("#buildingarea").val(obj[index].constructionarea);
-	$("#undertakeCount").val(obj[index].undertake);	
-	$("#dutyPerson").val(obj[index].resperson);
-	$("#username").val(obj[index].username);
-	$("#userphone").val(obj[index].phone);
-	$("#Createdate").val(obj[index].createdate);
-	$("#validdate").val(obj[index].validdate);
-	$("#major_oriented").html(obj[index].mmajor);
-	$("#linkAddress").html(obj[index].land_address);	
+	var type=obj[index].type;	
+	var result=(type=="新农院社会服务基地");
+	var domThis;
+	if(result){
+		domThis=$("#scan_nong");
+		domThis.find("#unitName").val(obj[index].cooperativeUnit);
+	}else{
+		domThis=$("#scan");
+	}				
+	//domThis.find("#baseid").val('#'+obj[index].id);
+	domThis.find("#baseid").val('#'+obj[index].bid);//获取不是基地的id是bid by jimao
+	domThis.find("#basename").val(obj[index].name);
+	domThis.find("#basetype").val(obj[index].type);
+	domThis.find("#dept0").val(obj[index].applydp);
+	domThis.find("#landarea").val(obj[index].landarea);
+	domThis.find("#buildingarea").val(obj[index].constructionarea);
+	domThis.find("#undertakeCount").val(obj[index].undertake);	
+	domThis.find("#dutyPerson").val(obj[index].resperson);
+	domThis.find("#username").val(obj[index].username);
+	domThis.find("#userphone").val(obj[index].phone);
+	domThis.find("#Createdate").val(obj[index].createdate);
+	domThis.find("#validdate").val(obj[index].validdate);
+	domThis.find("#major_oriented").html(obj[index].mmajor);
+	domThis.find("#linkAddress").html(obj[index].land_address);	
+	domThis.find("#collegename").val(obj[index].collegeName);
+	domThis.find("#collegephone").val(obj[index].collegePhone);
 	if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
-		$("#resourcetr").prop("hidden",true); 
+		domThis.find("#resourcetr").prop("hidden",true); 
 	}else{		
-		$("#resourcetr").prop("hidden",false); 
-		$("#resource").prop("href",obj[index].material_path);
+		domThis.find("#resourcetr").prop("hidden",false); 
+		domThis.find("#resource").prop("href",obj[index].material_path);
 	}
 	
-	$("#scan").modal('show');
+	domThis.modal('show');
 	
 });
 //续期详情查看
@@ -865,27 +879,38 @@ $(document).on("click", "#scanDetail2", function() {
 	
 	var index=$(this).val();
 	
-	$("#basename2").val(obj2[index].name);
-	$("#basetype2").val(obj2[index].type);
-	$("#dept02").val(obj2[index].applydp);
-	$("#landarea2").val(obj2[index].landarea);
-	$("#buildingarea2").val(obj2[index].constructionarea);
-	$("#undertakeCount2").val(obj2[index].undertake);	
-	$("#dutyPerson2").val(obj2[index].resperson);
-	$("#username2").val(obj2[index].username);
-	$("#userphone2").val(obj2[index].phone);
-	$("#major_oriented2").html(obj2[index].mmajor);
-	$("#linkAddress2").html(obj2[index].land_address);
-	$("#Createdate2").val(obj2[index].buildtime);
-	$("#validdate2").val(obj2[index].endtime);
+	var type=obj2[index].type;	
+	var result=(type=="新农院社会服务基地");
+	var domThis;
+	if(result){
+		domThis=$("#scan2_nong");
+		domThis.find("#unitName2").val(obj2[index].cooperativeUnit);
+	}else{
+		domThis=$("#scan2");
+	}				
+	//domThis.find("#baseid2").val('#'+obj2[index].id);	
+	domThis.find("#baseid2").val('#'+obj2[index].bid);//获取不是基地的id是bid by jimao
+	domThis.find("#basename2").val(obj2[index].name);
+	domThis.find("#basetype2").val(obj2[index].type);
+	domThis.find("#dept02").val(obj2[index].applydp);
+	domThis.find("#landarea2").val(obj2[index].landarea);
+	domThis.find("#buildingarea2").val(obj2[index].constructionarea);
+	domThis.find("#undertakeCount2").val(obj2[index].undertake);	
+	domThis.find("#dutyPerson2").val(obj2[index].resperson);
+	domThis.find("#username2").val(obj2[index].username);
+	domThis.find("#userphone2").val(obj2[index].phone);
+	domThis.find("#major_oriented2").html(obj2[index].mmajor);
+	domThis.find("#linkAddress2").html(obj2[index].land_address);
+	domThis.find("#Createdate2").val(obj2[index].buildtime);
+	domThis.find("#validdate2").val(obj2[index].endtime);
 	if(obj2[index].material_path=="null"||obj2[index].material_path==""||obj2[index].material_path==null){			
-		$("#resourcetr2").prop("hidden",true); 
+		domThis.find("#resourcetr2").prop("hidden",true); 
 	}else{		
-		$("#resourcetr2").prop("hidden",false); 
-		$("#resource2").prop("href",obj2[index].material_path);
+		domThis.find("#resourcetr2").prop("hidden",false); 
+		domThis.find("#resource2").prop("href",obj2[index].material_path);
 	}
 	
-	$("#scan2").modal('show');
+	domThis.modal('show');
 	
 });
 

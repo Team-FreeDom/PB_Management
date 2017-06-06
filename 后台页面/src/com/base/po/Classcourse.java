@@ -2,7 +2,7 @@ package com.base.po;
 
 public class Classcourse {
     private int id;// 编号
-    private int week;// 周次
+    private String week;// 周次
     private String starttime;// 开始时间
     private String endtime;// 结束时间
     private String content;// 实验内容
@@ -32,7 +32,7 @@ public class Classcourse {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public Classcourse(int id, int week, String starttime, String endtime,
+	public Classcourse(int id, String week, String starttime, String endtime,
 	    String content, String source, String site, String category,
 	    String form, String telephone, String aim, String expense,
 	    String course, String guideTeacher, String assistant, String remark) {
@@ -63,10 +63,10 @@ public class Classcourse {
     public void setId(int id) {
         this.id = id;
     }
-    public int getWeek() {
+    public String getWeek() {
         return week;
     }
-    public void setWeek(int week) {
+    public void setWeek(String week) {
         this.week = week;
     }
     public String getStarttime() {

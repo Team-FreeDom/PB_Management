@@ -46,7 +46,7 @@ public interface MaintenanceDao {
 	 返回值：   无返回值
 	 函数功能：修改实习基地截止日期
 	 */
-    public String updateBaseInfo(String baseid,String basenamed,String basetyped,String landaread,String buildingaread,int undertakeCountd,String userphoned,String usernamed,String personDuty,String linkAddressd ,String adddate,int star);
+    public String updateBaseInfo(String baseid,String basenamed,String basetyped,String landaread,String buildingaread,int undertakeCountd,String userphoned,String usernamed,String personDuty,String linkAddressd ,String adddate,int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag);
 
     /*
 	  参数说明：basetype，为实习基地类型;dept,为部门;star,为星级;        
@@ -68,5 +68,12 @@ public interface MaintenanceDao {
 	 函数功能：判断是否存在基地名称，若不存在，则插入基地信息你，否则不插入
 	 */
 	public int judge_insert_base(String userid, String recordStr1,String recordStr2,String recordStr3,int count,String resultStr4);
+
+	 /*
+	  参数说明：aid,为基地编号，是数字
+	 返回值：    string型，代表基地名称
+	 函数功能： 通过基地编号，得到基地名称
+	 */
+	public String getDeptsId(int aid);
 	
 }

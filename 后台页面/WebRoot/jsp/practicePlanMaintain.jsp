@@ -234,7 +234,7 @@
 									<td hidden id="ta2">${sem}</td>
 									<td hidden id="ta3">${tag}</td>	
 									<td hidden id="exportTag">${exportTag}</td>								
-									<td colspan="8">
+									<td colspan="7">
 										<button class="btn btn-primary" id="chu">导出</button>									    
 										<button class="btn btn-primary" id="daoru" data-toggle="modal" data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
 										<a href="../templet/PracticeMaintainInfo.rar" id="LinkButton" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
@@ -242,7 +242,7 @@
 
 								</tr>
 								<tr bgcolor="#ECF1F5">
-									<td colspan="9"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
+									<td colspan="8"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
 									<td colspan="9">																														
 										<span id="remind" class="glyphicon glyphicon-send"></span>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>										
@@ -258,8 +258,7 @@
 									<th>学年学期</th>
 									<th>课程代码</th>
 									<th>课程名称</th>
-									<th>人数</th>
-									<th>已选人数</th>
+									<th>人数</th>								
 									<th>教学班组成</th>
 									<th>开课学院</th>
 									<th>周学时</th>

@@ -1,9 +1,7 @@
 // JavaScript Document
 var obj = [];
 var tag1=true;
-$(document)
-		.ready(
-				function() {
+$(document).ready(function() {
 					
 					var tag_0=$("#tag_0").text();
 					if(tag_0=="false"){
@@ -64,11 +62,18 @@ $(document)
 						},
 						success : function(data) {																				
 							for ( var i=0;i<data[1].length;i++) {				
-								$("#basetype1").after(
+								$("#edit").find("#basetype1").after(
 										"<option value="+data[1][i].name+">"
-												+ data[1][i].name + "</option>");				
-								
+												+ data[1][i].name + "</option>");	
+								$("#edit_nong").find("#basetype1").after(
+										"<option value="+data[1][i].name+">"
+												+ data[1][i].name + "</option>");	
 							}	
+							for ( var i=0;i<data[0].length;i++){
+								$("#deptSelect1").after(
+										"<option value="+data[0][i].aid+">"
+												+ data[0][i].dept + "</option>");
+							}
 							
 						}
 
@@ -113,7 +118,14 @@ $(document)
 													"sWidth" : "6%",
 													"render":function(data,
 															type, row) {
-														return data='#'+data;
+														var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+														var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+														 if(rexp_1.test(data)||rexp_2.test(data)){
+															 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+															 return  data='#'+data.substring(0,digitIndex+8);
+														 }else{
+															 return data='#'+data;
+														 }		
 													}
 
 												},
@@ -367,35 +379,95 @@ $(document)
 					// 点击修改图标，填充修改模态框中的内容
 					$(document).on("click", "#updateDetail", function() {						
 						index = $(this).attr("value");
+						var type=obj[index].type;
+						var reg_area= /^\d+\.?\d*$/;
+						var object_this;
+						if(type=="新农院社会服务基地"){
+							object_this=$("#edit_nong");
+							object_this.find("input").val('');
+							object_this.find("#unitName").val(obj[index].cooperativeUnit);
+						}else{
+							object_this=$("#edit");
+							object_this.find("input").val('');
+						}
+						object_this.find("select").val('平方米');
 						
-						$("#baseid").val('#'+obj[index].id);
-						$("#basenamed").val(obj[index].name);
-						$("#basetyped").val(obj[index].type);
-						$("#dept0d").val(obj[index].applydp);
-						$("#landaread").val(obj[index].landarea);
-						$("#buildingaread").val(obj[index].constructionarea);
-						$("#undertakeCountd").val(obj[index].undertake);
-						$("#usernamed").val(obj[index].username);
-						$("#userphoned").val(obj[index].phone);
-						$("#major_orientedd").html(obj[index].facemajor);
-						$("#major_orientedd").val(obj[index].facemajor);
-						$("#linkAddressd").html(obj[index].land_address);					
-						$("#resourced").prop("href", obj[index].material_path);
+						//截断字符串
+					    var src=obj[index].id;
+					    var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+						var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+						var digitIndex;
+						if(rexp_1.test(src)||rexp_2.test(src)){							
+							 digitIndex=src.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');							
+							 object_this.find("#baseid").val('#'+src.substring(0,digitIndex+8));								
+						 }else{
+							 object_this.find("#baseid").val('#'+obj[index].id);
+						 }
+						 						
+						 object_this.find("#hiddenbaseid").val('#'+obj[index].id);
+						
+						object_this.find("#basenamed").val(obj[index].name);
+						object_this.find("#basetyped").val(obj[index].type);
+						object_this.find("#dept0d").val(obj[index].applydp);
+						
+						var landarea=obj[index].landarea;						
+						if(landarea.match(reg_area)){
+							object_this.find("#landaread").val(landarea);
+						}else if(landarea.substring(landarea.length-1)=="亩"){
+							object_this.find("#landaread").val(landarea.substring(0,landarea.length-1));
+							object_this.find("#landarea_select").val("亩");
+						}else if(landarea.substring(landarea.length-3)=="平方米"){
+							object_this.find("#landaread").val(landarea.substring(0,landarea.length-3));
+							object_this.find("#landarea_select").val("平方米");
+						}
+                        var buildingarea=obj[index].constructionarea;
+                        if(buildingarea.match(reg_area)){
+                        	object_this.find("#buildingaread").val(buildingarea);
+                        }else if(buildingarea.substring(buildingarea.length-3)=="平方米"){
+                        	object_this.find("#buildingaread").val(buildingarea.substring(0,buildingarea.length-3));
+                        }						
+						
+						object_this.find("#undertakeCountd").val(obj[index].undertake);
+						object_this.find("#usernamed").val(obj[index].username);
+						object_this.find("#userphoned").val(obj[index].phone);
+
+						//将传来的专业名进行分开
+						var str1 = obj[index].facemajor;
+						var str2 = obj[index].majorid;
+						var facemajors = new Array();
+						var facemajorid = new Array();
+						facemajors=str1.split(",");
+						facemajorid=str2.split(",");
+						var majorString3 = "";
+						for (i=0;i<facemajors.length ;i++ )
+						{
+							majorString3 = majorString3+"<span class='majorchoose1'><input name='majorid1' hidden='' value='"+facemajorid[i]+"'><label>"+facemajors[i]+"</label></span>";
+						} 
+						object_this.find("#major_orientedd").html(majorString3);
+						object_this.find("#linkAddressd").val(obj[index].land_address);
+				
+						object_this.find("#collegenamed").val(obj[index].collegeName);
+						object_this.find("#collegephoned").val(obj[index].collegePhone);
+						object_this.find("#resourced").prop("href", obj[index].material_path);
 						
 						if(obj[index].material_path=="null"||obj[index].material_path==""||obj[index].material_path==null){			
-							$("#resourcetr").prop("hidden",true); 
+							object_this.find("#resourcetr").prop("hidden",true); 
 						}else{		
-							$("#resourcetr").prop("hidden",false); 
-							$("#resourced").prop("href", obj[index].material_path);
+							object_this.find("#resourcetr").prop("hidden",false); 
+							object_this.find("#resourced").prop("href", obj[index].material_path);
 						}
-						$("#setdated").val(obj[index].buildtime);
-						$("#adddate").val(obj[index].endtime);						
-						$("#starget").html("<span id='delateStar' class='icon-remove-sign'></span>"+$(this).closest('tr').find('td:eq(9)').html());
-						$("#personDuty").val(obj[index].resperson);
-						
-						$("#edit").modal('show');
+						object_this.find("#setdated").val(obj[index].buildtime);
+						object_this.find("#adddate").val(obj[index].endtime);						
+						object_this.find("#starget").html("<span id='delateStar' class='icon-remove-sign'></span>"+$(this).closest('tr').find('td:eq(9)').html());
+						object_this.find("#personDuty").val(obj[index].resperson);
+											
+						object_this.show();
 
 					});
+					
+					/*$("#chooseMajor").click(function(){
+						$("#Selectmajor").modal('show');
+					});*/
 
 					// 确认删除
 					$("#delSubmit").click(function() {										
@@ -408,15 +480,15 @@ $(document)
 
 															if (i != 0) {
 																recordstr = recordstr
-																		+ ","
+																		+ ",'"
 																		+ $(
 																				this)
-																				.val();
+																				.val()+"'";
 															} else {
 																recordstr = recordstr
-																		+ $(
+																		+ "'"+$(
 																				this)
-																				.val();
+																				.val()+"'";
 															}
 
 															i++;
@@ -542,32 +614,69 @@ $(document)
 						
 					});
 					//确认修改
-					$("#saverun").click(function() {
-						var basenamed=$("#basenamed").val();
-						
-						var basetyped=$("#basetyped").val();
-						
-						var landaread=$("#landaread").val();										
-					
-						var buildingaread=$("#buildingaread").val();
-						var undertakeCountd=$("#undertakeCountd").val();
+					$(document).on("click", "#saverun_0,#saverun_1", function(){						
+						var thisId=$(this).prop("id");
+						var object_this=(thisId=="saverun_0"?$("#edit"):$("#edit_nong"));						
+						var basenamed=object_this.find("#basenamed").val();						
+						var basetyped=object_this.find("#basetyped").val();						
+						var landaread=object_this.find("#landaread").val();					
+						var buildingaread=object_this.find("#buildingaread").val().trim();
+						var undertakeCountd=object_this.find("#undertakeCountd").val();
+						var reg=/^\d+$/;
+						var reg_area= /^\d+\.?\d*$/;
 						if(undertakeCountd==""){
 							undertakeCountd=0;
+						}else{
+							if(!undertakeCountd.match(reg)){
+								bootbox.alert({
+									message : "可承担人数只能为整数",
+									size : 'small'
+								});
+							 return;
+							}
 						}
-						var usernamed=$("#usernamed").val();
-						var userphoned=$("#userphoned").val();
-						//$("#major_orientedd").html(obj[index].facemajor);
-						var linkAddressd=$("#linkAddressd").val();
-						var personDuty=$("#personDuty").val();//法定责任人						
-						var setdated=$("#setdated").val();
+						if(landaread!=""){
+							if(!landaread.match(reg_area)){
+								bootbox.alert({
+									message : "土地面积只能为整数或小数",
+									size : 'small'
+								});
+							 return;
+							}else{
+								landaread=landaread+object_this.find("#landarea_select").val();	
+							}
+							}
 						
-						var adddate=$("#adddate").val();
+						if(buildingaread!=""){
+							if(!buildingaread.match(reg_area)){
+								bootbox.alert({
+									message : "建筑面积只能为整数或小数",
+									size : 'small'
+								});
+							 return;
+							}else{
+								buildingaread=buildingaread+object_this.find("#buildingaread_select").val();	
+							}
+							}
+						var usernamed=object_this.find("#usernamed").val();
+						var userphoned=object_this.find("#userphoned").val();
+						var collegenamed=object_this.find("#collegenamed").val();
+						var collegephoned=object_this.find("#collegephoned").val();
+						
+						var cooperativeUnit=(thisId=="saverun_0"?"":object_this.find("#unitName").val());
+						var tag=(thisId=="saverun_0"?0:1);
+						
+						//$("#major_orientedd").html(obj[index].facemajor);
+						
+						var linkAddressd=object_this.find("#linkAddressd").val();
+						var personDuty=object_this.find("#personDuty").val();//法定责任人						
+						var setdated=object_this.find("#setdated").val();						
+						var adddate=object_this.find("#adddate").val();						
 						if(!tag1){		
-							/* bootbox.alert({
+							 bootbox.alert({
 									message : "该基地名称已存在，请重新输入",
 									size : 'small'
-								});*/
-							alert("该基地名称已存在，请重新输入");
+								});							
 							 return;
 						}
 						if(basenamed==""){
@@ -612,9 +721,16 @@ $(document)
 							}
 						}
 						
-						
-						var baseid=$("#baseid").val();
+						// 获得隐藏框
+						var baseid=object_this.find("#hiddenbaseid").val();
 						baseid=baseid.substring(1);
+						var majorString = "";
+
+						$("#major_orientedd input[name = 'majorid1'").each(function(){
+							var id = $(this).val();
+							majorString =majorString + "('"+baseid+"','"+id+"'),";
+						});
+						majorString = majorString.substring(0,majorString.length-1);
 						var i=0;
 						$("#starget .icon-star").each(function() {
 							i++;
@@ -641,6 +757,11 @@ $(document)
 								"userphoned":userphoned,								
 								"linkAddressd":linkAddressd,
 								"personDuty":personDuty,//法定责任人
+								"collegenamed":collegenamed,
+								"collegephoned":collegephoned,
+								"cooperativeUnit":cooperativeUnit,
+								"tag":tag,
+								"majorString":majorString//面向专业
 							},
 							url : 'updateBaseInfo.do',
 							async : true,
@@ -652,7 +773,7 @@ $(document)
 									message : data.flag,
 									size : 'small'
 								});
-								$("#edit").modal('hide');
+								object_this.hide();
 								$("#adddate").val("");
 								page.draw(false);
 							},
@@ -665,6 +786,14 @@ $(document)
 						});
 						
 						
+					});
+					
+					$(".closeModal_edit_nong").click(function() {
+						$("#edit_nong").hide();
+					});
+					
+					$(".closeModal_edit").click(function() {
+						$("#edit").hide();
 					});
 
 					$("#closebase").click(function() {
@@ -691,6 +820,8 @@ $(document)
 					//增加框的js控制
 					$(document).on("click", "#submitForm_0", function() {
 						var basename=$("#basename").val();
+						var applyName = $("#deptty").find("option:selected").text();//获取下拉列表的文本-- by jimao
+						$("#applyNameId").val(applyName);							//获取隐藏input的文本值
 						var deptty=$("#deptty").val();
 						var basetype=$("#basetype0").val();
 						var baseaddress=$("#baseaddress").val();
@@ -699,6 +830,15 @@ $(document)
 						var lawperson=$("#lawPerson").val();
 						var validdastart=$("#validdastart").val();
 						var validdaend=$("#validdaend").val();
+						var limit_population=$("#limit-population").val().trim();
+						var collegeNameIt=$("#collegeNameIt").val().trim();
+						var collegeTelIt=$("#collegeTelIt").val().trim();
+						var unitIt=$("#unitIt").val().trim();	
+						var base_area=$("#base-area").val().trim();
+						var filed_area=$("#filed-area").val().trim();
+						var reg=/^\d+$/;
+						var reg_area= /^\d+\.?\d*$/;
+						var msgCollege;
 						if(!tag){		
 							 bootbox.alert({
 									message : "该基地名称已存在，请重新输入",
@@ -727,6 +867,34 @@ $(document)
 								});
 							 return;
 						}
+						if(limit_population!=""){
+							if(!limit_population.match(reg)){
+								bootbox.alert({
+									message : "可承担人数只能为整数",
+									size : 'small'
+								});
+							 return;
+							}
+							}
+						if(filed_area!=""){
+							if(!filed_area.match(reg_area)){
+								bootbox.alert({
+									message : "土地面积只能为整数或小数",
+									size : 'small'
+								});
+							 return;
+							}
+							}
+						
+						if(base_area!=""){
+							if(!base_area.match(reg_area)){
+								bootbox.alert({
+									message : "建筑面积只能为整数或小数",
+									size : 'small'
+								});
+							 return;
+							}
+							}
 						if(baseaddress==""){
 							bootbox.alert({
 								message : "请填写通信地址",
@@ -743,17 +911,42 @@ $(document)
 						}
 						if(personName==""){
 							bootbox.alert({
-								message : "请填写联系人姓名",
+								message : "请填写基地联系人",
 								size : 'small'
 							});
 						 return;	
 						}
 						if(personTel==""){
 							bootbox.alert({
-								message : "请填写联系人电话",
+								message : "请填写基地联系人电话",
 								size : 'small'
 							});
 						 return;	
+						}
+						if(collegeNameIt==""){
+							msgCollege=(basetype==2?"请填写服务团队负责人":"请填写学院联系人");
+							bootbox.alert({
+								message : msgCollege,
+								size : 'small'
+							});
+						 return;	
+						}
+						if(collegeTelIt==""){
+							msgCollege=(basetype==2?"请填写服务团队负责人电话":"请填写学院联系人电话");
+							bootbox.alert({
+								message : msgCollege,
+								size : 'small'
+							});
+						 return;	
+						}
+						if(unitIt==""){
+							if(basetype==2){
+								bootbox.alert({
+									message : "请填写合作单位名称",
+									size : 'small'
+								});
+							 return;
+							}
 						}
 						
 						if(!flag1){
@@ -873,7 +1066,14 @@ $(document)
 																		"sWidth" : "8%",
 																		"render":function(data,
 																				type, row) {
-																			return data='#'+data;
+																			var rexp_1=/^[a-zA-Z]+[0-9]+$/;
+																			var rexp_2=/^[a-zA-Z]+[0-9]+A[0-9]+$/;
+																			 if(rexp_1.test(data)||rexp_2.test(data)){
+																				 var digitIndex=data.replace(/[^a-zA-Z]+/ig,"@").indexOf('@');
+																				 return  data='#'+data.substring(0,digitIndex+8);
+																			 }else{
+																				 return data='#'+data;
+																			 }	
 																			}
 
 																	},
@@ -1012,8 +1212,7 @@ $(document)
 																				data,
 																				type,
 																				row) {
-																			obj
-																					.push(row);
+																			obj.push(row);
 																			return data = '<span id="updateDetail" class="icon-edit edit-color" value="'
 																					+ (obj.length - 1)
 																					+ '"></span>';
@@ -1137,4 +1336,102 @@ $(".icon-filter").on("click", function() {
 	});
 	$('#hide_ul').toggle();
 });
+
+
+
+$(document).on("change", "#deptSelectOne1", function() {	
+	var id= this.value;	
+	$(".majorhide1").html("");
+	if(id==""){
+		return;
+	}
+		$.ajax({
+		type : 'POST',
+		dataType : 'json',
+		data:{
+			"aid":id
+		},
+		url : 'getMajor.do',  //��ȡרҵ
+		async : false,
+		cache : false,
+		error : function(request) {
+			bootbox.alert({
+				message : "请求异常",
+				size : 'small'
+			});
+		},
+		success : function(data) {
+			var tag;
+			for ( var i=0;i<data.length;i++) {
+				tag=false;
+				$("#majorSuo1 input").each(function(index){					
+					var id=$(this).val();				
+					if(data[i].mid==id){
+						tag=true;
+						return;
+					}					
+				});
+				if(!tag){
+				$(".majorhide1").append(
+						"<span class='majorcheck1'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
+				}
+			}			
+		}
+
+	});
+	
+});
+
+$(document).on("click", ".majorcheck1", function() {
+	var obj=$(this).children('input');		
+	var str="<span class='majorchoose1'><input name='majorid1' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
+	this.remove();
+	$("#majorSuo1").append(str);	
+	var tag=$("#majormain1").css("display");
+	if(tag=="none"){
+		$("#majormain1").css("display","block");
+	}	
+});
+
+$(document).on("click", ".majorchoose1", function() {	
+	var obj=$(this).children('input');
+	var id=$("#deptSelectOne1").val();	
+	if(id!=obj.prop("placeholder")){
+		bootbox.alert({
+			message : "请选择相应的学院，再进行更改",
+			size : 'small'
+		});
+		obj.prop("checked",true);
+	 return;
+
+	}
+	var str="<span class='majorcheck1'><input type='checkbox' name='majorcheck1' value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
+	this.remove();
+	$(".majorhide1").append(str);	
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}	
+});
+
+$(document).on("click", "#chooseMajor", function() {
+	$("#deptSelectOne1").val("");
+	$(".majorhide1 span[class = majorcheck1]").html("");
+	$("#majorSuo1").html("");
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}
+});
+
+$(document).on("click", ".confirm1", function() {
+	var content=$("#majorSuo1").html();	
+	$("#major_orientedd").html(content);
+	$("#major_orientedd input").prop("hidden",true);
+	$(".majorhide1").html("");
+	if($("#majorSuo1 .majorchoose1")[0]==null){			
+		$("#majormain1").css("display","none");
+	}
+	$("#deptSelectOne1").val("");
+});
+
+
 

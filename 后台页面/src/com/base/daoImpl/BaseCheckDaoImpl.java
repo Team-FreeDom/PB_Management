@@ -56,7 +56,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    while (rs.next()) {
 		BaseCheck ch = new BaseCheck();
 		ch.setId(rs.getInt("id"));
-		ch.setBid(rs.getString("bids"));
+		ch.setBid(rs.getString("bids"));		
 		ch.setName(rs.getString("basename"));
 		ch.setLandarea(rs.getString("landarea"));
 		ch.setConstructionarea(rs.getString("constructionarea"));
@@ -70,6 +70,9 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 		ch.setApplydp(rs.getString("dept"));
 		ch.setMmajor(rs.getString("mname"));
 		ch.setResperson(rs.getString("resperson"));
+		ch.setCollegeName(rs.getString("collegeName"));
+		ch.setCollegePhone(rs.getString("collegePhone"));
+		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -127,6 +130,9 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 		ch.setResperson(rs.getString("resperson"));
 		ch.setBuildtime(rs.getString("buildtime"));
 		ch.setEndtime(rs.getString("endtime"));
+		ch.setCollegeName(rs.getString("collegeName"));
+		ch.setCollegePhone(rs.getString("collegePhone"));
+		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
