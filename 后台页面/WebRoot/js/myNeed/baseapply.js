@@ -146,7 +146,7 @@ $(document).on("change", "#deptSelectOne", function() {
 				$(".majorhide").append(
 						"<span class='majorcheck'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
-			}			
+			}
 		}
 
 	});
@@ -189,10 +189,13 @@ $(document).on("click", "#hit", function() {
 	var content=$("#textContent").html();
 	if(content==null||content==""){	
 	  $("#majormain").css("display","none");
+	  $("#majorSuo").html(content);
 	  return;
-	}
+	}else{
+	$("#majormain").css("display","block");
 	$("#majorSuo").html(content);	
 	$("#majorSuo input").prop("hidden",false);
+	}
 });
 
 $(document).on("click", ".confirm", function() {
@@ -216,6 +219,8 @@ $(document).on("click", ".closeit", function() {
 
 $(document).on("click", "#submitForm", function() {
 	var basename=$("#basename").val();
+	var applyName = $("#deptty").find("option:selected").text();//获取下拉列表的文本-- by jimao
+	$("#applyNameId").val(applyName);							//获取隐藏input的文本值
 	var deptty=$("#deptty").val();
 	var basetype=$("#basetype0").val();
 	var baseaddress=$("#baseaddress").val();

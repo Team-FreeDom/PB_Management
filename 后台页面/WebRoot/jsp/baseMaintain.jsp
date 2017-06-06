@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -406,6 +406,7 @@
 											<td>基地编号：</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
+											<input type="hidden" id="hiddenbaseid"class="form-control" /><!-- 隐藏框by jimao -->
 											<td>基地名称 ：</td>
 											<td><input type="text" id="basenamed"
 												class="form-control"><span id="display"
@@ -484,14 +485,22 @@
 										</tr>
 										<tr>
 											<td>面向专业 ：</td>
-											<td colspan="3">
-											 <!--  <span class="btn btn-primary" id="chooseMajor">请选择</span> -->
-											  <div id="major_orientedd"
-													style="border:#ccc 1px solid;height:80px;"
-													class="form-control">													
-											 </div>											 
+											<td>
+												<div class="col-md-6" data-toggle="modal"
+													data-target="#myModal1" id="chooseMajor">
+													<span class="btn btn-primary">请选择</span>
+												</div>
 											</td>
+										</tr>
 
+										<tr>
+											<td></td>
+											<td colspan="3">
+												<div id="major_orientedd"
+													style="border:#ccc 1px solid;height:100px;"
+													class="form-control">													
+											 	</div>
+											</td>
 										</tr>
 
 										<tr>
@@ -604,6 +613,7 @@
 											<td>基地编号：</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
+											<input type="hidden" id="hiddenbaseid" class="form-control" /><!-- 隐藏框 jimao -->
 											<td>基地类型 ：</td>
 											<td><select class="form-control" id="basetyped"
 												name="TYPE	">
@@ -782,6 +792,54 @@
 				</div>
 			</div>
 
+			<!-- Modal1 -->
+			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="border:#416793 8px solid">
+						<div class="modal-header">
+
+							<div class="glyphicon glyphicon-remove closeModal  closeit"
+								data-dismiss="modal"></div>
+
+
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-md-3 control-label fontDire">学院:</label>
+
+									<div class="col-md-5">
+										<select class="form-control" id="deptSelectOne1">
+											<option id="deptSelect1" value="">请选择</option>
+										</select>
+									</div>
+
+								</div>
+								<div class="form-group ">
+									<label class="col-md-3 control-label fontDire">可选专业:</label>
+									<div class="col-md-6 majorhide1">
+										<!-- <span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='计算机'/><label>计算机</label>	</span>
+									<span class="majorcheck"><input type='checkbox' id='majorcheck' value='1' class='电商'/><label>电商</label>	</span> -->
+									</div>
+
+								</div>
+								<div class="form-group" id="majormain1">
+									<label class="col-md-3 control-label fontDire">已选专业:</label>
+									<div class="col-md-6 " id="majorSuo1"></div>
+								</div>
+							</form>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary confirm1"
+									data-dismiss="modal">确定</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 			<div class="modal fade" id="export" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:400px;height:600px;">
@@ -885,6 +943,7 @@
 						</div>
 
 						<div class="form-group">
+							<input type="hidden" name="applyName"  id="applyNameId" /><!--隐藏的input框  -->
 							<label class="col-md-3 control-label">申报部门<span
 								class="setTag">*</span></label>
 							<div class="col-md-6">

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -69,6 +70,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setPhone(rs.getString("phone"));
 		ch.setMaterial_path(rs.getString("material_path"));
 		ch.setFacemajor(rs.getString("mname"));// 闂傚牄鍨归幃婊勭▔閹捐尙鐟�
+		ch.setMajorid(rs.getString("majorid"));//获得专业的id
 		ch.setStar(rs.getInt("star"));// 闁哄嫮鍠撴锟�
 		ch.setResperson(rs.getString("resperson"));
 		ch.setBuildtime(rs.getString("buildtime"));
@@ -98,7 +100,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	ResultSet rs = null;
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
-		    sessionFactory).getConnection();
+		    sessionFactory).getConnection();System.out.println(str+"aaaaaaaaa");
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.`delete_prabaseinfo`(?,?)}");
 	    sp.setString(1, str);
@@ -197,6 +199,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setCollegeName(rs.getString("collegeName"));
 		ch.setCollegePhone(rs.getString("collegePhone"));
 		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
+		ch.setMajorid(rs.getString("majorid"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -214,7 +217,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
     public String updateBaseInfo(String baseid, String basenamed,
 	    String basetyped, String landaread, String buildingaread,
 	    int undertakeCountd, String userphoned, String usernamed,
-	    String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String tag) {
+	    String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag) {
 	int flag;
 	String message=null;
 	Connection conn = null;
@@ -223,7 +226,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, baseid);
 	    sp.setString(2, basenamed);
 	    sp.setString(3, basetyped);
@@ -240,8 +243,9 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp.setString(14, collegephoned);
 	    sp.setString(15, cooperativeUnit);
 	    sp.setString(16, tag);
+	    sp.setString(17, majorString);
 	    sp.execute();
-	    flag=sp.getInt(17);
+	    flag=sp.getInt(18);
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -352,4 +356,22 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	return flag;
     }
 
+    public String getDeptsId(int aid) {
+		Session session = sessionFactory.openSession();
+		String hql = "from ApplyDept where aid=?";
+		String applyDept = "";
+
+		try {
+			Query query = session.createQuery(hql);
+			query.setInteger(0, aid);
+			ApplyDept ap = (ApplyDept) query.uniqueResult();
+			applyDept = ap.getDept();
+
+		} catch (Exception e) {
+			// System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return applyDept;
+	}
 }
