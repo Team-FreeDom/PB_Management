@@ -2446,7 +2446,9 @@ $(document)
 			var weekstr="";
 
 			$(document).on("focus","#weekend",function(){
+				gradestr="";
 				weekstr="";
+				$(".showGrade").hide();
 				$(".showWeek").hide();
 				$("li").removeClass("libg1");
 				weekNum=$(this).closest("tbody").find(".mark").html()-1;
@@ -2499,7 +2501,9 @@ $(document)
 
 			$(document).on("focus","#class_one",function(){
 				gradestr="";
+				weekstr="";
 				$(".showGrade").hide();
+				$(".showWeek").hide();
 				$("li").removeClass("libg1 libg2");
 				gradeNum=$(this).closest("tbody").find(".mark").html()-1;
 				var m=0;

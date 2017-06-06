@@ -56,7 +56,7 @@ public class BaseCheckDaoImpl implements BaseCheckDao {
 	    while (rs.next()) {
 		BaseCheck ch = new BaseCheck();
 		ch.setId(rs.getInt("id"));
-		ch.setBid(rs.getString("bids"));
+		ch.setBid(rs.getString("bids"));		
 		ch.setName(rs.getString("basename"));
 		ch.setLandarea(rs.getString("landarea"));
 		ch.setConstructionarea(rs.getString("constructionarea"));

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -99,7 +100,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	ResultSet rs = null;
 	try {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
-		    sessionFactory).getConnection();
+		    sessionFactory).getConnection();System.out.println(str+"aaaaaaaaa");
 	    sp = (CallableStatement) conn
 		    .prepareCall("{call baseweb.`delete_prabaseinfo`(?,?)}");
 	    sp.setString(1, str);
@@ -198,6 +199,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 		ch.setCollegeName(rs.getString("collegeName"));
 		ch.setCollegePhone(rs.getString("collegePhone"));
 		ch.setCooperativeUnit(rs.getString("cooperativeUnit"));
+		ch.setMajorid(rs.getString("majorid"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -354,4 +356,22 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	return flag;
     }
 
+    public String getDeptsId(int aid) {
+		Session session = sessionFactory.openSession();
+		String hql = "from ApplyDept where aid=?";
+		String applyDept = "";
+
+		try {
+			Query query = session.createQuery(hql);
+			query.setInteger(0, aid);
+			ApplyDept ap = (ApplyDept) query.uniqueResult();
+			applyDept = ap.getDept();
+
+		} catch (Exception e) {
+			// System.out.println(e);
+		} finally {
+			session.close();
+		}
+		return applyDept;
+	}
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -244,6 +244,7 @@
 									</div>
 
 									<div class="form-group">
+									<input type="hidden" name="applyName"  id="applyNameId" /><!--隐藏的input框  -->
 										<label class="col-md-3 control-label">申报部门<span
 											class="setTag">*</span></label>
 										<div class="col-md-6">
