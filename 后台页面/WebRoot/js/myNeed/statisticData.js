@@ -278,6 +278,9 @@ $(document)
 							"click",
 							"tr",
 							function() {
+								$("#modalbody").removeClass("modalbody");	
+								$("#modalbody").removeClass("modalbody2");
+								$("#modalbody").removeClass("modalbody3");
 								Oneindex = $(this).find("span").attr("id");
 								$("#division").val(obj[Oneindex].college);
 								$("#classname").val(obj[Oneindex].coursename);
@@ -297,7 +300,16 @@ $(document)
 									},
 									success : function(data) {
 										var teachername = "";
-										var testername = "";
+										var testername = "";																		
+										if(screen.width<=1536&&data.length>1){
+											$("#modalbody").addClass("modalbody");
+										}
+										if(screen.width<=1708&&screen.width>1536&&data.length>3){
+											$("#modalbody").addClass("modalbody2");
+										}
+										if(screen.width>1708&&data.length>3){
+											$("#modalbody").addClass("modalbody3");
+										}
 										for (var i = 0; i < data.length; i++) {
 											$("#table tbody:last-child").after(
 													tbodyStyle);
@@ -363,8 +375,7 @@ $(document)
 										$("#testername").val(testername);
 										$("#adviser").val(teachername);
 									}
-								});
-
+								});								
 								$("#Applychart").show();
 							});
 
