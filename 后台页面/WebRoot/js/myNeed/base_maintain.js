@@ -444,7 +444,8 @@ $(document).ready(function() {
 							majorString3 = majorString3+"<span class='majorchoose1'><input name='majorid1' hidden='' value='"+facemajorid[i]+"'><label>"+facemajors[i]+"</label></span>";
 						} 
 						object_this.find("#major_orientedd").html(majorString3);
-						object_this.find("#linkAddressd").html(obj[index].land_address);
+						object_this.find("#linkAddressd").val(obj[index].land_address);
+				
 						object_this.find("#collegenamed").val(obj[index].collegeName);
 						object_this.find("#collegephoned").val(obj[index].collegePhone);
 						object_this.find("#resourced").prop("href", obj[index].material_path);
