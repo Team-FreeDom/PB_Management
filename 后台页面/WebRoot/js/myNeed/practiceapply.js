@@ -218,7 +218,7 @@ $(document).ready(function() {
 	 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 	 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 	 +'<td style="padding-top:5px"><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
-	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a></td>'
+	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a><input class="text-center" type="text" value="分散实习基地" style="display:none;"></td>'
 	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 	 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 	 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
@@ -465,11 +465,21 @@ $(document).on("change","#baseFrom",function(e){
 	var type=e.target.value;
 	var selectObj=$(this).parent().next().children("select");
 	var aObj=$(this).parent().next().children("a");
+	var aObj2=$(this).parent().next().children("input");
 	selectObj.hide();
 	selectObj.val("");
 	selectObj.find("option:gt(0)").remove();
 	aObj.css("display","none");
+	aObj2.css("display","none");
 	var that=$(this);
+	
+	if(type == "分散实习基地"){
+		aObj2.css("display","block");
+		$(".select2").css("display","none");
+		return;
+	}
+
+	
 	if(type!=''){	
 		$.ajax({
 			type : 'POST',
@@ -485,7 +495,7 @@ $(document).on("change","#baseFrom",function(e){
 				});
 			},
 			success : function(data){
-				if(data.length==0){
+				if(data.length==0 && type !== "分散实习基地"){
 					aObj.css("display","block");
 					$(".select2").css("display","none");
 					return;
