@@ -485,7 +485,7 @@
 			<h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
 		</div>
 
-		<div class="modal-body table-responsive">
+		<div class="modal-body table-responsive" id="modalbody">
 			<form class="form-horizontal" role="form" id="PraForm">
 
 				<table>
