@@ -133,7 +133,7 @@
 								</li>
 
 								<li class="menuItem nav-parent"
-									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0&&visitRight[13]==0)?"style='display:none;'":" "}>
 									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
@@ -146,6 +146,8 @@
 													土地租赁维护</span></a></li>
 										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
 											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[13]==0?"style='display:none;'":" "}><a
+											href="Professionalmanage.jsp"><span class="text"> 实习专业维护</span></a></li>
 										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
 											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
 										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
@@ -485,7 +487,7 @@
 			<h4 class="modal-title text-center" id="myModalLabel">实习申请表</h4>
 		</div>
 
-		<div class="modal-body table-responsive">
+		<div class="modal-body table-responsive" id="modalbody">
 			<form class="form-horizontal" role="form" id="PraForm">
 
 				<table>

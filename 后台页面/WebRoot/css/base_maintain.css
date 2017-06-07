@@ -126,7 +126,9 @@ tbody tr td span{
 	scroll:no;
 	
 }
-
+#edit table tr td{
+	text-align:right !important;
+}
 #edit_nong{
 	position:absolute !important;
 	top:150px;
@@ -136,4 +138,21 @@ tbody tr td span{
 	scroll:no;
 	
 }
-
+#edit_nong table tr td{
+	text-align:right !important;
+}
+#linkAddressd{
+	text-align:left !important;
+}
+#major_orientedd{
+	text-align:left !important;
+}
+#major_orientedd1{
+	text-align:left !important;
+}
+#starget{
+	text-align:left !important;
+}
+#adddate{
+	text-align:left !important;
+}

@@ -418,7 +418,7 @@ public class BaseMaintenanceController {
 			    	if(row.get(1).equals("")){
 			    		continue;
 			    	}else{
-			    		 if(Integer.parseInt(row.get(1))== 1){
+			    		 if(Integer.parseInt(row.get(1))== 1 || Integer.parseInt(row.get(1))== 2 ){
 
 				    		 	String applyName =	maintenanceservice.getDeptsId(Integer.parseInt(row.get(2)));
 								String firstspell = ApplyUtils.getFirstSpell(applyName);
@@ -588,7 +588,7 @@ public class BaseMaintenanceController {
 		Date d = new Date();
 			//将获得的baseid自动生成首字母+时间 by jimao
 		  String applyTime = null;
-		  if(Integer.parseInt(type)== 1){
+		  if(Integer.parseInt(type)== 1 || Integer.parseInt(type)== 2){
 			  	String applyName = request.getParameter("applyName");
 				String firstspell = ApplyUtils.getFirstSpell(applyName);
 				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
