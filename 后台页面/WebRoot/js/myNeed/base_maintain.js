@@ -1,8 +1,9 @@
 // JavaScript Document
 var obj = [];
 var tag1=true;
+var XN=0;
 $(document).ready(function() {
-					
+
 					var tag_0=$("#tag_0").text();
 					if(tag_0=="false"){
 						bootbox.alert({
@@ -61,15 +62,18 @@ $(document).ready(function() {
 							});
 						},
 						success : function(data) {																				
-							for ( var i=0;i<data[1].length;i++) {				
+							for ( var i=0;i<data[1].length;i++) {	
+								if(i !== 5){
 								$("#edit").find("#basetype1").after(
 										"<option value="+data[1][i].name+">"
 												+ data[1][i].name + "</option>");	
 								$("#edit_nong").find("#basetype1").after(
 										"<option value="+data[1][i].name+">"
 												+ data[1][i].name + "</option>");	
+								}
 							}	
 							for ( var i=0;i<data[0].length;i++){
+						
 								$("#deptSelect1").after(
 										"<option value="+data[0][i].aid+">"
 												+ data[0][i].dept + "</option>");
@@ -305,29 +309,51 @@ $(document).ready(function() {
 					
 					
 					// star星级点击的实时改变
-					$(document).on("click", "#color", function() {
+$(document).on("click", "#color", function() {
 						
 						var starNum=$(this).attr('value');
-						$("#starget .star-flag").each(function(){
-							if($(this).attr('value')>starNum){
-								$(this).removeClass("icon-star");
-								$(this).addClass("icon-star-empty");
-								$(this).prop("id", "nocolor");
-							}
-						});
+						if(XN==0){
+							$("#starget .star-flag").each(function(){
+									if($(this).attr('value')>starNum){
+									$(this).removeClass("icon-star");
+									$(this).addClass("icon-star-empty");
+									$(this).prop("id", "nocolor");
+								}
+							});
+						}else{
+							$(".Xstar .star-flag").each(function(){
+									if($(this).attr('value')>starNum){
+									$(this).removeClass("icon-star");
+									$(this).addClass("icon-star-empty");
+									$(this).prop("id", "nocolor");
+								}
+							});
+						}
+						
 					});
 
 					$(document).on("click", "#nocolor", function() {
 						
 						var starNum=$(this).attr('value');
-						$("#starget .star-flag").each(function(){
-							$(this).removeClass("icon-star-empty");
-							$(this).addClass("icon-star");
-							$(this).prop("id", "color");
-							if(--starNum==0){
-								return false;
-							}
-						});
+						if(XN==0){
+							$("#starget .star-flag").each(function(){
+								$(this).removeClass("icon-star-empty");
+								$(this).addClass("icon-star");
+								$(this).prop("id", "color");
+								if(--starNum==0){
+									return false;
+								}
+							});
+						}else{
+							$(".Xstar .star-flag").each(function(){
+								$(this).removeClass("icon-star-empty");
+								$(this).addClass("icon-star");
+								$(this).prop("id", "color");
+								if(--starNum==0){
+									return false;
+								}
+							});
+						}
 												
 					});
 					
@@ -382,11 +408,20 @@ $(document).ready(function() {
 						var type=obj[index].type;
 						var reg_area= /^\d+\.?\d*$/;
 						var object_this;
+						
+						/*if(type=="新农院社会服务基地"||type=="校外教学实习基地"){
+							$("#CJ1").html("基地创建时间");
+						}*/
+						if(type=="校外教学实习基地"){
+							$("#CJ1").html("基地创建时间");
+						}
 						if(type=="新农院社会服务基地"){
+							XN=1;
 							object_this=$("#edit_nong");
 							object_this.find("input").val('');
 							object_this.find("#unitName").val(obj[index].cooperativeUnit);
 						}else{
+							XN=0;
 							object_this=$("#edit");
 							object_this.find("input").val('');
 						}
@@ -439,11 +474,12 @@ $(document).ready(function() {
 						facemajors=str1.split(",");
 						facemajorid=str2.split(",");
 						var majorString3 = "";
-						for (i=0;i<facemajors.length ;i++ )
+						for (var i=0;i<facemajors.length ;i++ )
 						{
 							majorString3 = majorString3+"<span class='majorchoose1'><input name='majorid1' hidden='' value='"+facemajorid[i]+"'><label>"+facemajors[i]+"</label></span>";
 						} 
 						object_this.find("#major_orientedd").html(majorString3);
+						object_this.find("#major_orientedd1").html(majorString3);
 						object_this.find("#linkAddressd").val(obj[index].land_address);
 				
 						object_this.find("#collegenamed").val(obj[index].collegeName);
@@ -671,7 +707,8 @@ $(document).ready(function() {
 						var linkAddressd=object_this.find("#linkAddressd").val();
 						var personDuty=object_this.find("#personDuty").val();//法定责任人						
 						var setdated=object_this.find("#setdated").val();						
-						var adddate=object_this.find("#adddate").val();						
+						var adddate=object_this.find("#adddate").val();
+						
 						if(!tag1){		
 							 bootbox.alert({
 									message : "该基地名称已存在，请重新输入",
@@ -726,15 +763,41 @@ $(document).ready(function() {
 						baseid=baseid.substring(1);
 						var majorString = "";
 
-						$("#major_orientedd input[name = 'majorid1'").each(function(){
-							var id = $(this).val();
-							majorString =majorString + "('"+baseid+"','"+id+"'),";
-						});
-						majorString = majorString.substring(0,majorString.length-1);
 						var i=0;
-						$("#starget .icon-star").each(function() {
-							i++;
-						});						
+						var ZY=0;
+						if(XN==0){
+							$(".elseText input[name = 'majorid1'").each(function(){
+								ZY++;
+								var id = $(this).val();
+								majorString =majorString + "('"+baseid+"','"+id+"'),";
+//								if(id==-1){
+//									majorString =majorString + "('"+baseid+"','"+id+"'),";
+//								}
+							
+							});
+							$(".Estar .icon-star").each(function() {
+								i++;							
+							});
+						}else{							
+							$(".XNtext input[name = 'majorid1'").each(function(){
+								ZY++;
+								var id = $(this).val();
+								majorString =majorString + "('"+baseid+"','"+id+"'),";
+//								alert(majorString);
+							});
+							$(".Xstar .icon-star").each(function() {
+								i++;							
+							});
+						}
+						if(ZY==0){
+							majorString =majorString + "('"+baseid+"','-1'),";
+							
+						}
+						majorString = majorString.substring(0,majorString.length-1);
+						
+//						if(majorString==""){
+//							majorString = majorString+""
+//						}
 						var star=i;											
 						if(time!==0){
 							bootbox.alert({
@@ -1375,12 +1438,28 @@ $(document).on("change", "#deptSelectOne1", function() {
 				$(".majorhide1").append(
 						"<span class='majorcheck1'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
 				}
-			}			
+			}
+			for ( var i=0;i<data.length;i++) {
+				tag=false;
+				$("#majorSuo2 input").each(function(index){					
+					var id=$(this).val();				
+					if(data[i].mid==id){
+						tag=true;
+						return;
+					}					
+				});
+				if(!tag){
+				$(".majorhide2").append(
+						"<span class='majorcheck2'><input type='checkbox' placeholder='"+id+"' value='"+data[i].mid+"' class='"+data[i].mname+"'/><label>"+data[i].mname+"</label></span>");				
+				}
+			}
 		}
 
 	});
 	
 });
+
+
 
 $(document).on("click", ".majorcheck1", function() {
 	var obj=$(this).children('input');		
@@ -1423,15 +1502,19 @@ $(document).on("click", "#chooseMajor", function() {
 });
 
 $(document).on("click", ".confirm1", function() {
-	var content=$("#majorSuo1").html();	
-	$("#major_orientedd").html(content);
-	$("#major_orientedd input").prop("hidden",true);
+	var content=$("#majorSuo1").html();
+	if(XN==1){
+		$(".XNtext").html(content);
+		$(".XNtext input").prop("hidden",true);		
+	}else{
+		$(".elseText").html(content);
+		$(".elseText input").prop("hidden",true);
+	}
 	$(".majorhide1").html("");
 	if($("#majorSuo1 .majorchoose1")[0]==null){			
 		$("#majormain1").css("display","none");
 	}
 	$("#deptSelectOne1").val("");
 });
-
 
 

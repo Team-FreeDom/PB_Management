@@ -90,7 +90,7 @@ public class MainController implements ServletContextAware{
 			e.printStackTrace();
 		}
 		
-		String pagename[]={"rent-approve.jsp","repairApprove.jsp","baseCheck.jsp","notification.do","land_modle.jsp","baseMaintain.jsp","fieldRent_maintain.jsp","practicePlanMaintain.jsp","mangeruser.jsp","system_power.jsp","start.jsp","Repairmanage.jsp","statisticData.jsp"};
+		String pagename[]={"rent-approve.jsp","repairApprove.jsp","baseCheck.jsp","notification.do","land_modle.jsp","baseMaintain.jsp","fieldRent_maintain.jsp","practicePlanMaintain.jsp","mangeruser.jsp","system_power.jsp","start.jsp","Repairmanage.jsp","statisticData.jsp","Professionalmanage.jsp"};
 		int pageValue[]=new int[pagename.length];
 		HttpSession session=request.getSession();
 		int adminValue=0;
