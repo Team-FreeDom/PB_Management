@@ -20,7 +20,7 @@ table tbody tr td{
 
 #Applychart{
 	position:fixed !important;
-	top:187px;
+	top:112px;
 	left:19%;
 	width: 80%;
 	display: none;
@@ -158,4 +158,16 @@ table tbody tr td{
 #practiceClass{
 	width:93px;
 }
+.modalbody{
+	height:432px;
+	overflow-y:auto;
+	}
+.modalbody2{
+	height:592px;
+	overflow-y:auto;
+	}
+.modalbody3{
+	height:652px;
+	overflow-y:auto;
+	}
 
