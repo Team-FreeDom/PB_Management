@@ -136,7 +136,7 @@
 									</ul>
 								</li>
 								<li class="menuItem nav-parent opened nav-expanded"
-									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0)?"style='display:none;'":" "}>
+									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0&&visitRight[13]==0)?"style='display:none;'":" "}>
 									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
 									<ul class="nav nav-children">
@@ -149,6 +149,8 @@
 													土地租赁维护</span></a></li>
 										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
 											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+										<li ${visitRight[13]==0?"style='display:none;'":" "}><a
+											href="Professionalmanage.jsp"><span class="text"> 实习专业维护</span></a></li>
 										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
 											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
 										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
@@ -496,9 +498,9 @@
 										<tr>
 											<td></td>
 											<td colspan="3">
-												<div id="major_orientedd"
+												<div id="major_orientedd1"
 													style="border:#ccc 1px solid;height:100px;"
-													class="form-control">													
+													class="form-control elseText">													
 											 	</div>
 											</td>
 										</tr>
@@ -512,13 +514,13 @@
 										<tr id="hidecol">
 											<td>星级</td>
 											<td colspan="3">
-												<div id="starget"
+												<div class="Estar" id="starget"
 													${college==null?"":"style='pointer-events: none;'"}></div>
 											</td>
 										</tr>
 										<tr id="hidecol">
 
-											<td>创建<br>时间</td>
+											<td id="CJ1">创建<br>时间</td>
 											<td><input type="text" id="setdated" disabled
 												class="form-control"></td>
 											<td>截止日期 </td>
@@ -693,13 +695,35 @@
 											<td colspan="3" style="text-align:left;"><a
 												id="resourced" href="#" style="color:#3071a9;">点击查看</a></td>
 										</tr>
-										<tr>
+										<!-- <tr>
 											<td>面向<br>专业 </td>
 											<td colspan="3"><div id="major_orientedd"
 													style="border:#ccc 1px solid;height:80px;"
 													class="form-control"></div></td>
 
+										</tr> -->
+										<tr>
+											<td>面向<br>专业 </td>
+											<td>
+												<div class="col-md-6" data-toggle="modal"
+													data-target="#myModal1" id="chooseMajor">
+													<span class="btn btn-primary">请选择</span>
+												</div>
+											</td>
 										</tr>
+
+										<tr>
+											<td></td>
+											<td colspan="3">
+												<div id="major_orientedd"
+													style="border:#ccc 1px solid;height:100px;"
+													class="form-control XNtext">													
+											 	</div>
+											</td>
+										</tr>
+										
+										
+										
 
 										<tr>
 											<td>通信<br>地址 </td>
@@ -716,7 +740,7 @@
 										</tr>
 										<tr id="hidecol">
 
-											<td>创建<br>时间</td>
+											<td id="CJ1">基地创建<br>时间</td>
 											<td><input type="text" id="setdated" disabled
 												class="form-control"></td>
 											<td>截止日期 </td>
@@ -1088,7 +1112,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-3 control-label">创建日期<span
+							<label class="col-md-3 control-label" id="CJ">创建日期<span
 								class="setTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" id="validdastart" name="start_time"

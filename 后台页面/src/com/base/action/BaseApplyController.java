@@ -138,7 +138,7 @@ public class BaseApplyController {
 
 		//将获得的baseid自动生成首字母+时间 by jimao
 		  String applyTime = null;
-		  if(Integer.parseInt(type)== 1){
+		  if(Integer.parseInt(type)== 1 ||Integer.parseInt(type)== 2){
 			  	String applyName = request.getParameter("applyName");
 				String firstspell = ApplyUtils.getFirstSpell(applyName);
 				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");

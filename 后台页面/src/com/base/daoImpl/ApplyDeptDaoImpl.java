@@ -20,7 +20,7 @@ public class ApplyDeptDaoImpl {
 	public List<ApplyDept> getDepts()
 	{
 		Session session=sessionFactory.openSession();		
-		String hql="from ApplyDept where dept!=?";
+		String hql="from ApplyDept where dept!=? and aid !=-1";
 		List<ApplyDept> list=null;
 		
 	    try {

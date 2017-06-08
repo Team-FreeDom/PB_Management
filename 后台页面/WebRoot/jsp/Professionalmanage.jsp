@@ -1,7 +1,4 @@
-<%@ page language="java"
-	import="java.util.*,com.base.po.*,com.base.dao.*,com.base.daoImpl.*"
-	pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -23,35 +20,26 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
+<!--datatable-->
+<link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/index_main.css">
-<link rel="stylesheet" href="../css/calendar.css" media="screen">
-
-<style>
-.table {
-	background: #FFF;
-}
-
-.table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th
-	{
-	border-top: 0 solid #ddd;
-}
-</style>
+<link rel="stylesheet" href="../css/Professionalmanage.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 	<div class="navbar" role="navigation">
 		<div class="container-fluid container-nav">
 			<!-- 点击收缩左边的菜单栏  + 缩小后左边菜单栏的显示 -->
 			<ul class="nav navbar-nav navbar-actions navbar-left">
-				<li class="visible-md visible-lg"><a> <i
-						class="icon-th-large"></i>
-				</a></li>
-				<li class="visible-xs visible-sm"><a> <i
-						class="icon-align-justify"></i>
-				</a></li>
+				<li class="visible-md visible-lg"><a><i
+						class="icon-th-large"></i></a></li>
+				<li class="visible-xs visible-sm"><a><i
+						class="icon-align-justify"></i></a></li>
 			</ul>
 
 			<span class="teachCenterTitle">基地实习综合管理系统</span>
@@ -61,19 +49,17 @@
 			<div class="navbar-right">
 				<!-- Notifications -->
 				<ul class="notifications" avalonctrl="subNotificationsController">
-				   <li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
+					<li class="hidden-sm hidden-xs"><a data-toggle="modal" data-target="#help"
 						class="dropdown-toggle notification-icon"> <i
 							class="glyphicon glyphicon-question-sign"><span class="badge"></span></i> <!--ms-if-->
 					</a></li>
 					<li class="hidden-sm hidden-xs"><a href="getMessage.do"
 						class="dropdown-toggle notification-icon"> <i
-							class="icon-envelope"> <span class="badge msg"></span>
-						</i> <!--ms-if-->
-					</a>
-					</li>
+							class="icon-envelope"><span class="badge msg"></span></i> <!--ms-if-->
+					</a></li>
 					<li><a href="../loginout.do"
-						class="dropdown-toggle notification-icon"> <i
-							class="icon-remove"></i>
+						class="dropdown-toggle notification-icon" data-toggle="modal">
+							<i class="icon-remove"></i>
 					</a></li>
 				</ul>
 
@@ -83,6 +69,8 @@
 		</div>
 	</div>
 
+
+
 	<div class="container-fluid content">
 		<div class="row">
 
@@ -90,18 +78,17 @@
 				<div class="sidebar-collapse">
 					<!-- Sidebar Header Logo-->
 					<div class="sidebar-header ">
-						<a href="index.do"> <img src="../image/manage-logo.png"
-							alt=""></a>
+						<a href="index.do"><img src="../image/manage-logo.png" alt=""></a>
 					</div>
 
 					<!-- Sidebar Menu-->
-					<div class="sidebar-menu">
+					<div class="sidebar-menu" style="height: 384px;">
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-sidebar">
 								<div class="panel-body text-center">
 									<div class="bk-avatar">
-										<a href="user.jsp"> <img class="img-circle bk-img-60"
-											alt="" src="" id="imageMain"></a>
+										<a href="user.jsp"><img class="img-circle bk-img-60"
+											alt="" id="imageMain" src=""></a>
 										<!--ms-if-->
 									</div>
 									<div class="bk-padding-top-10">
@@ -110,12 +97,14 @@
 									</div>
 								</div>
 								<div class="divider2"></div>
+
+
 								<li class="menuItem"><a href="index.do"> <i
-										class="icon-home" aria-hidden="true"></i> <span>主界面</span>
+										class="icon-home" aria-hidden="true"></i><span>主界面</span>
 								</a></li>
 
 								<li class="menuItem nav-parent"><a> <i
-										class="icon-copy" aria-hidden="true"></i> <span>我的工作</span>
+										class="icon-copy" aria-hidden="true"></i><span>我的工作</span>
 								</a>
 									<ul class="nav nav-children">
 										<li><a href="field-rent.jsp"><span class="text"></span>土地租赁</a></li>
@@ -143,7 +132,7 @@
 									</ul>
 								</li>
 
-								<li class="menuItem nav-parent"
+								<li class="menuItem nav-parent opened nav-expanded"
 									${(visitRight[3]==0&&visitRight[4]==0&&visitRight[5]==0&&visitRight[6]==0&&visitRight[7]==0&&visitRight[8]==0&&visitRight[9]==0&&visitRight[10]==0&&visitRight[11]==0&&visitRight[13]==0)?"style='display:none;'":" "}>
 									<a> <i class="icon-copy" aria-hidden="true"></i><span>数据管理</span>
 								</a>
@@ -157,8 +146,10 @@
 													土地租赁维护</span></a></li>
 										<li ${visitRight[5]==0?"style='display:none;'":" "}><a
 											href="baseMaintain.jsp"><span class="text"> 实习基地维护</span></a></li>
+											
 										<li ${visitRight[13]==0?"style='display:none;'":" "}><a
 											href="Professionalmanage.jsp"><span class="text"> 实习专业维护</span></a></li>
+											
 										<li ${visitRight[11]==0?"style='display:none;'":" "}><a
 											href="Repairmanage.jsp"><span class="text"> 报修信息维护</span></a></li>
 										<li ${visitRight[7]==0?"style='display:none;'":" "}><a
@@ -174,13 +165,12 @@
 								</li>
 								<li class="menuItem nav-parent"
 									${visitRight[12]==0?"style='display:none;'":" "}><a> <i
-										class="icon-copy" aria-hidden="true"></i> <span>统计分析</span>
+										class="icon-copy" aria-hidden="true"></i><span>统计分析</span>
 								</a>
 									<ul class="nav nav-children">
 
 										<li ${visitRight[12]==0?"style='display:none;'":" "}><a
-											href="statisticData.jsp"> <span class="text">实习分析</span>
-										</a></li>
+											href="statisticData.jsp"><span class="text">实习分析</span></a></li>
 
 									</ul></li>
 								<li><a href="#"> <i class="icon-copy"
@@ -200,14 +190,14 @@
 			</div>
 			<!-- End Sidebar-->
 
+
 			<div class="main " style="min-height: 584px;">
 				<!-- 当前地址导航 -->
-				<div class="page-header row">
+				<div class="page-header">
 					<div class="pull-left">
 						<ol class="breadcrumb visible-sm visible-md visible-lg">
-							<li><a>位置 :</a></li>
-							<li><a href="#"> <i class=" icon-home"></i>新闻详情
-							</a></li>
+							<li><a>位置</a></li>
+							<li><a href="RepairManage.jsp">实习专业管理</a></li>
 						</ol>
 					</div>
 					<div class="pull-right">
@@ -222,19 +212,163 @@
 				</div>
 				<!-- 主面板内容 -->
 				<div class="row form">
-					<div class="article">
-						<div class="title">
-							<h1 class="text-center">${notification.title }</h1>
-						</div>
-						<div class="content" id="newdetail">
-							<!-- 在此插入新闻详情。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。-->
-							${notification.message }
-						</div>
+					<div class="col-lg-12">
+						<form action="" method="post" enctype="multipart/form-data"
+							name="formApplyInfo" id="formApplyInfo">
+							<table id="major" class="cell-border" cellspacing="0"
+								width="100%">
+								<thead>
+									<tr bgcolor="#ECF1F5">
+									<td hidden id="exportMaintain">${exportMaintain}</td>
+										<td colspan="3" id="button-left">
+											<button type="button" class="btn btn-danger" id="delete">删除</button>
+											<button type="button" class="btn btn-info"
+												data-toggle="modal" data-target="#add" id="ZJ">增加</button>
+										</td>										
+										<td colspan="3" id="button-right">
+<!-- 											<button type="button" id="import" class="btn btn-primary" -->
+<!-- 												data-toggle="modal" data-target="#exportmodal">导出</button> -->
+										</td>
+
+									</tr>
+									<tr>
+										<th>序号</th>
+										<th>学院名称</th>
+										<th>专业编号</th>
+										<th>专业名称</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="text-center">
+
+								</tbody>
+								<thead>
+									<tr>
+										<td colspan="11"><label><input type="checkbox"
+												name="0" class="ck-all" id="ck1" />全选</label></td>
+									</tr>
+
+								</thead>
+							</table>
+						</form>
 					</div>
 				</div>
 
+
 			</div>
 			<!-- End Sidebar-->
+			<!-- 弹出框-->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabe" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<div class="glyphicon glyphicon-remove closeModal"
+								data-dismiss="modal"></div>
+							<h4 class="modal-title text-center" id="myModalLabel">专业详情</h4>
+						</div>
+						<div class="modal-body table-responsive">
+							<div class="row">
+								<div class="col-md-12">
+									<form action="updatemajor.do" method="post" class="form-horizontal"
+										role="form" id="majoreditform">
+										<table class="table" style="border:none !important;">
+											<tr>
+												<td>所属学院 ：</td>
+												<td><input type="text" class="form-control"
+													id="Mdept" name="Mdept" disabled/></td>
+											</tr>
+											<tr>
+												<td>专业编号 ：</td>
+												<td><input type="text" class="form-control"
+													id="Mid" name="Mid" readonly/>
+													</td>
+											</tr>
+											<tr>
+												<td>专业名称 ：</td>
+												<td><input type="text" class="form-control" id="Mname" name="Mname"
+													/><span id="display1" style="color:#f00;"></span></td>
+											</tr>
+											
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer table-responsive">
+							<center>
+								<button type="button" class="btn btn-primary" id="saverun">保存</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">取消</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="add" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabe" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="border:#3071a9 8px solid">
+						<div class="modal-header" style="background:#3071a9; color:#FFF">
+							<div class="glyphicon glyphicon-remove closeModal"
+								data-dismiss="modal"></div>
+							<h4 class="modal-title text-center" id="myModalLabel">新增专业信息</h4>
+						</div>
+						<div class="modal-body table-responsive">
+							<div class="row">
+								<div class="col-md-12">
+									<form action="addmajor.do" method="post"
+										class="form-horizontal" enctype="multipart/form-data"
+										role="form" id="applyaddform">
+										<table class="table" style="border:none !important;">
+<!-- 											<tr> -->
+<!-- 												<td>项目名称 ： <span class="setTag">*</span><input type="hidden" -->
+<!-- 											value="<%=request.getAttribute("index")%>" id="AddrepairInfo" /></td> -->
+<!-- 												<td><input type="text" class="form-control" -->
+<!-- 													id="Aprojectname" name="Aprojectname" value=""></td> -->
+<!-- 											</tr> -->
+											<tr>
+												<td>学院名称 ： <span class="setTag">*</span></td>
+												<td><select class="form-control" id="deptSelectOne1"
+													name="deptSelectOne1" value="">
+														<option id="deptSelect1" value="" selected>请选择</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td>新增专业编号： <span class="setTag">*</span>
+												</td>
+												<td><input type="text" class="form-control" id="mid"
+													name="mid" value=""><span id="display"
+												style="color:#f00;"></span></td>
+												<input type="hidden" value="<%=request.getAttribute("flag")%>" id="baseapply" />
+											</tr>
+											<tr>
+												<td>新增专业名称：<span class="setTag"> *</td>
+												<td><input type="text" class="form-control" id="mname"
+													name="mname" value=""><span id="display2"
+												style="color:#f00;"></span></td>
+											</tr>
+
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer table-responsive">
+							<center>
+								<button type="button" class="btn btn-primary" id="save">保存</button>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">取消</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
 
 		</div>
 		<!--row end-->
@@ -258,17 +392,34 @@
     </div>
   </div>
 </div>
+
 	<div class="clearfix"></div>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<!--[if lt IE 9]>
-                                                        	<script src="../js/html5shiv.min.js"></script>
-                                                        	<script src="../js/respond.min.js"></script>
-                                                        <![endif]-->
 	<script src="../js/jquery.min.js"></script>
+	<!--datatable javascript-->
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/bootbox.min.js"></script>
+	<script src="../js/jquery.dataTables.min.js"></script>
 	<script src="../dist/jquery.cokie.min.js"></script>
+	<script src="../js/bootbox.min.js"></script>
+	<script type="text/javascript" src="../js/laydate.js"></script>
+	<script src="../js/myNeed/Professionalmanage.js"></script>
 	<script src="../js/kg.js"></script>
+	<script type="text/javascript">
+		var flag = document.getElementById('baseapply').value;
+		if (flag == 1) {
+			bootbox.alert({
+				message : "操作成功",
+				size : 'small'
+			});
+		} else if (flag == 0) {
+			bootbox.alert({
+				message : "操作失败",
+				size : 'small'
+			});
+		}
+	</script>
 
 </body>
 </html>
