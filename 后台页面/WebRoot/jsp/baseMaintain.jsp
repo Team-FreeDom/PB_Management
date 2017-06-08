@@ -734,7 +734,7 @@
 										<tr id="hidecol">
 											<td>星级</td>
 											<td colspan="3">
-												<div id="starget"
+												<div class="Xstar" id="starget" 
 													${college==null?"":"style='pointer-events: none;'"}></div>
 											</td>
 										</tr>

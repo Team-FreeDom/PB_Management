@@ -270,12 +270,18 @@ public class PlanController implements ServletContextAware{
     @RequestMapping("/getBasenameOfType.do")
     public String getBasenameOfType(HttpServletRequest request,
     	    HttpServletResponse response) {
-    	
-    	String typename=request.getParameter("typename");    	
+    	List<String> list2=new ArrayList<String>();
+   	    	String typename=request.getParameter("typename"); 
+    	if(typename.equals("分散实习基地")&&typename!=null){
+    		list2.add(typename);
+    	}else{
+    		 //根据基地类型获取基地名字
+        	 list2 = planservice.getProperBase(typename);
+        	
+    	}
     	 // 获取基地类型
         List<basetype> list1 = baseapplyservice.getBasetype();
-       //根据基地类型获取基地名字
-    	List<String> list2 = planservice.getProperBase(typename);
+      
     	// 获取教师编号
     	String cid = request.getParameter("mid");
     	
