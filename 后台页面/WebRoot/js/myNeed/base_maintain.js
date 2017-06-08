@@ -414,6 +414,9 @@ $(document).on("click", "#color", function() {
 						}*/
 						if(type=="校外教学实习基地"){
 							$("#CJ1").html("基地创建时间");
+							alert("ff");
+						}else{
+							$("#CJ1").html("创建时间");
 						}
 						if(type=="新农院社会服务基地"){
 							XN=1;

@@ -4,6 +4,7 @@ var flag1=true;
 var flag2=true;
 var tag = true;
 var tag1 = true;
+var tag2=true;
 $(document).ready(function() {
 				//分页表格 
               var applytable =$('#major').DataTable(
@@ -200,7 +201,7 @@ $("#save").click(function(){
 				});
 			 return;
 		}
-		if(!tag1){		
+		if(!tag2){		
 			 bootbox.alert({
 					message : "该专业名称已存在，请重新输入",
 					size : 'small'
@@ -298,11 +299,11 @@ $(document).on("blur", "#mname", function() {
 				success : function(data) {	
 					if(data=="false"){						
 						$("#display2").html("");
-						tag=true;
+						tag2=true;
 					}else{						
 						$("#display2").html("该专业名称已存在，请重新输入!");
 						$("#mname")[0].focus();
-						tag=false;
+						tag2=false;
 					}
 				}
 
@@ -310,10 +311,10 @@ $(document).on("blur", "#mname", function() {
 	}
 	
 });
+//详情
 $(document).on("blur", "#Mname", function() {
 	var value=$(this).val();
-	if(value!=""){
-		
+	if(value!=""){		
 		 $.ajax({
 				type : 'POST',
 				data:{
@@ -381,6 +382,12 @@ $("#saverun").click(function(){
 								size : 'small'
 							});
 							return;
+						} else if(!tag1){
+							bootbox.alert({
+								message : "该专业名称已存在，请重新输入",
+								size : 'small'
+							});
+						 return;
 						}
 				bootbox.confirm({
 				message: "是否确认修改",

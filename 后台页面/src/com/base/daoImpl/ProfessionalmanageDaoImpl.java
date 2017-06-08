@@ -125,9 +125,7 @@ public class ProfessionalmanageDaoImpl implements ProfessionalmanageDao{
 	public void updatemajor(String mid,String mname) {
 		Connection conn = null;
 		PreparedStatement ps=null;
-		ResultSet rs = null;
-		System.out.println(mid);
-		System.out.println(mname);
+		ResultSet rs = null;		
 		try {
 		    conn = (Connection) SessionFactoryUtils.getDataSource(
 			    sessionFactory).getConnection();
@@ -149,7 +147,6 @@ public class ProfessionalmanageDaoImpl implements ProfessionalmanageDao{
 		Connection conn = null;
 		CallableStatement sp = null;
 		int flag = 0;
-		System.out.println(name+"3333333333333");
 		try {
 			conn = (Connection) SessionFactoryUtils.getDataSource(
 					sessionFactory).getConnection();
@@ -158,8 +155,7 @@ public class ProfessionalmanageDaoImpl implements ProfessionalmanageDao{
 			sp.setString(1, name);
 			sp.registerOutParameter(2, java.sql.Types.INTEGER);
 		    sp.execute();
-		    flag=sp.getInt(2);
-		    System.out.println(flag);
+		    flag=sp.getInt(2);		    
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,8 +177,7 @@ public class ProfessionalmanageDaoImpl implements ProfessionalmanageDao{
 			sp.setString(1, name);
 			sp.registerOutParameter(2, java.sql.Types.INTEGER);
 		    sp.execute();
-		    flag=sp.getInt(2);
-		    System.out.println(flag);
+		    flag=sp.getInt(2);		  
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
