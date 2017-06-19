@@ -158,7 +158,7 @@ $(document).on("change", "#deptSelectOne", function() {
 $(document).on("click", ".majorcheck", function() {
 	var obj=$(this).children('input');		
 	var str="<span class='majorchoose'><input name='majorid' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
-	this.remove();
+	$(this).remove();
 	$("#majorSuo").append(str);	
 	var tag=$("#majormain").css("display");
 	if(tag=="none"){
@@ -179,7 +179,7 @@ $(document).on("click", ".majorchoose", function() {
 
 	}
 	var str="<span class='majorcheck'><input type='checkbox' name='majorcheck' value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
-	this.remove();
+	$(this).remove();
 	$(".majorhide").append(str);	
 	if($("#majorSuo .majorchoose")[0]==null){			
 		$("#majormain").css("display","none");
