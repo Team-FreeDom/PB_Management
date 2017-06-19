@@ -229,6 +229,7 @@ $("#ZJ").click(function(){
 		$("#Aname").val("");
 		$("#Atime").val("");
 		$("#Abudget").val("");
+		$("#ActualMoney").val("");
 		$("#Aaddress").val("");
 		$("#Areason").val("");
 		$("#file").val("");	
