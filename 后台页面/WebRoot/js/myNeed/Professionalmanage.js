@@ -5,6 +5,8 @@ var flag2=true;
 var tag = true;
 var tag1 = true;
 var tag2=true;
+/*var copy_mname="";
+var num=1;*/
 $(document).ready(function() {
 				//分页表格 
               var applytable =$('#major').DataTable(
@@ -181,17 +183,15 @@ $(document).ready(function() {
 					});
 //点击增加清空数据函数
 $("#ZJ").click(function(){
-		$("#Aprojectname").val("");
-		$("#Abasename").val("-1");
-		$("#Aname").val("");
-		$("#Atime").val("");
-		$("#Abudget").val("");
-		$("#Aaddress").val("");
-		$("#Areason").val("");
-		$("#file").val("");	
+		$("#applyaddform select").val('');
+		$("#applyaddform input").val('');
+		$("#display").html("");
+		$("#display2").html("");
+		tag=true;
+		tag2=true;
 		
+});
 
-})					
 //增加操作
 $("#save").click(function(){
 		if(!tag){		
@@ -276,11 +276,11 @@ $(document).on("blur", "#mid", function() {
 	}
 	
 });
+
 //检查专业名字
 $(document).on("blur", "#mname", function() {
 	var value=$(this).val();
-	if(value!=""){
-		
+	if(value!=""){		
 		 $.ajax({
 				type : 'POST',
 				data:{
@@ -314,7 +314,7 @@ $(document).on("blur", "#mname", function() {
 //详情
 $(document).on("blur", "#Mname", function() {
 	var value=$(this).val();
-	if(value!=""){		
+	if(value!=""&&value!=$("#copyMname").val()){		
 		 $.ajax({
 				type : 'POST',
 				data:{
@@ -348,11 +348,13 @@ $(document).on("blur", "#Mname", function() {
 //修改操作
 $(document).on("click", "#checkdetale1", function() {	
 	
-	var index=$(this).val();
-	
+	var index=$(this).val();	
+	$("#display1").html("");
+	tag1=true;
 	$("#Mdept").val(obj[index].dept);
 	$("#Mid").val(obj[index].mid);
 	$("#Mname").val(obj[index].mname);
+	$("#copyMname").val(obj[index].mname);	
 	var file=obj[index].file;
 	if(file=="null"||file==""||file==null){
 		$("#resourcetr").prop("hidden",true);

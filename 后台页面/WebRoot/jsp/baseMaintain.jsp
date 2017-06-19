@@ -408,11 +408,10 @@
 											<td>基地<br>编号</td>
 											<td><input type="text" id="baseid" disabled
 												class="form-control" /></td>
-											<input type="hidden" id="hiddenbaseid"class="form-control" /><!-- 隐藏框by jimao -->
+											<input type="hidden" id="hiddenbaseid" class="form-control" /><!-- 隐藏框by jimao -->
 											<td>基地<br>名称 </td>
 											<td><input type="text" id="basenamed"
-												class="form-control"><span id="display"
-												style="color:#f00;"> </span></td>
+												class="form-control"></td>
 										</tr>
 										<tr>
 											<td>基地<br>类型 </td>
