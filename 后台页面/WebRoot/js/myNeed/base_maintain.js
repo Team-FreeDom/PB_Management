@@ -393,6 +393,7 @@ $(document).on("click", "#color", function() {
 					
 					$(document).on("click", "#ZJ", function() {							
 						$("#add").css("display","block");
+						$("#textContent").html("");//这行代码清空弹出框
 					});
 					
 					$(document).on("click", "#closebas", function() {					
@@ -413,8 +414,7 @@ $(document).on("click", "#color", function() {
 							$("#CJ1").html("基地创建时间");
 						}*/
 						if(type=="校外教学实习基地"){
-							$("#CJ1").html("基地创建时间");
-							alert("ff");
+							$("#CJ1").html("基地创建时间");							
 						}else{
 							$("#CJ1").html("创建时间");
 						}
@@ -895,6 +895,7 @@ $(document).on("click", "#color", function() {
 						var personTel=$("#personTel").val();
 						var lawperson=$("#lawPerson").val();
 						var validdastart=$("#validdastart").val();
+						
 						var validdaend=$("#validdaend").val();
 						var limit_population=$("#limit-population").val().trim();
 						var collegeNameIt=$("#collegeNameIt").val().trim();
@@ -997,14 +998,14 @@ $(document).on("click", "#color", function() {
 							});
 						 return;	
 						}
-						if(collegeTelIt==""){
+						/*if(collegeTelIt==""){
 							msgCollege=(basetype==2?"请填写服务团队负责人电话":"请填写学院联系人电话");
 							bootbox.alert({
 								message : msgCollege,
 								size : 'small'
 							});
 						 return;	
-						}
+						}*/
 						if(unitIt==""){
 							if(basetype==2){
 								bootbox.alert({
@@ -1029,12 +1030,18 @@ $(document).on("click", "#color", function() {
 					        });
 							return;
 						}
-						if(validdastart==""){
+						if((basetype==2||basetype==1)&&validdastart==""){
 							 bootbox.alert({
-									message : "请填写创建日期",
+									message : "请填写基地创建日期",
 									size : 'small'
 								});
 							 return;
+						}else if(validdastart==""){
+							bootbox.alert({
+								message : "请填写创建日期",
+								size : 'small'
+							});
+						 return;
 						}
 						if(validdaend==""){
 							 bootbox.alert({
@@ -1467,7 +1474,7 @@ $(document).on("change", "#deptSelectOne1", function() {
 $(document).on("click", ".majorcheck1", function() {
 	var obj=$(this).children('input');		
 	var str="<span class='majorchoose1'><input name='majorid1' type='checkbox' checked  value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
-	this.remove();
+	$(this).remove();
 	$("#majorSuo1").append(str);	
 	var tag=$("#majormain1").css("display");
 	if(tag=="none"){
@@ -1488,7 +1495,7 @@ $(document).on("click", ".majorchoose1", function() {
 
 	}
 	var str="<span class='majorcheck1'><input type='checkbox' name='majorcheck1' value='"+obj.val()+"' class='"+obj.attr('class')+"' placeholder='"+obj.prop("placeholder")+"'/><label>"+obj.attr('class')+"</label></span>";
-	this.remove();
+	$(this).remove();
 	$(".majorhide1").append(str);	
 	if($("#majorSuo1 .majorchoose1")[0]==null){			
 		$("#majormain1").css("display","none");
@@ -1519,5 +1526,14 @@ $(document).on("click", ".confirm1", function() {
 	}
 	$("#deptSelectOne1").val("");
 });
+
+$(document).on("change", "#basetype0", function(){
+	var basetype =$("#basetype0").val();
+	$("#CJ").html("创建时间"+'<span class="setTag">*</span>');
+	if(basetype==1||basetype==2){
+		$("#CJ").html("基地创建时间"+'<span class="setTag">*</span>');
+	}
+});
+
 
 

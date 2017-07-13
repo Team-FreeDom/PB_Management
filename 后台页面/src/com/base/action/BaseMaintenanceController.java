@@ -47,8 +47,8 @@ import com.base.utils.ExcelReport;
 
 /**
  * 鍩哄湴缁存姢
- *
- *
+ * 
+ * 
  */
 // 实习基地管理控制层
 @Controller("baseMaintenance")
@@ -109,11 +109,11 @@ public class BaseMaintenanceController {
 	    HttpServletResponse response, ModelMap map) {
 	String str = request.getParameter("recordstr");
 
-	String message=maintenanceservice.delInfo(str);
-	if(message.equals("success")){
-	    message="操作成功";
-	}else if(message.equals("fail")){
-	    message="操作失败";
+	String message = maintenanceservice.delInfo(str);
+	if (message.equals("success")) {
+	    message = "操作成功";
+	} else if (message.equals("fail")) {
+	    message = "操作失败";
 	}
 	JSONObject getObj = new JSONObject();
 	getObj.put("flag", message);
@@ -218,64 +218,68 @@ public class BaseMaintenanceController {
     public String updateBaseInfo(HttpServletRequest request,
 	    HttpServletResponse response, ModelMap map) {
 	String baseid = request.getParameter("baseid");
-	String basenamed=request.getParameter("basenamed");
-	if(basenamed.equals("")){
-	    basenamed=null;
+	String basenamed = request.getParameter("basenamed");
+	if (basenamed.equals("")) {
+	    basenamed = null;
 	}
-	String basetyped=request.getParameter("basetyped");
-	if(basetyped.equals("")){
-	    basetyped=null;
+	String basetyped = request.getParameter("basetyped");
+	if (basetyped.equals("")) {
+	    basetyped = null;
 	}
-	String landaread=request.getParameter("landaread");
-	if(landaread.equals("")){
-	    landaread=null;
+	String landaread = request.getParameter("landaread");
+	if (landaread.equals("")) {
+	    landaread = null;
 	}
-	String buildingaread=request.getParameter("buildingaread");
-	if(buildingaread.equals("")){
-	    buildingaread=null;
+	String buildingaread = request.getParameter("buildingaread");
+	if (buildingaread.equals("")) {
+	    buildingaread = null;
 	}
-	int undertakeCountd=Integer.valueOf(request.getParameter("undertakeCountd"));
-	String usernamed=request.getParameter("usernamed");
-	if(usernamed.equals("")){
-	    usernamed=null;
+	int undertakeCountd = Integer.valueOf(request
+		.getParameter("undertakeCountd"));
+	String usernamed = request.getParameter("usernamed");
+	if (usernamed.equals("")) {
+	    usernamed = null;
 	}
-	String userphoned=request.getParameter("userphoned");
-	 if(userphoned.equals("")){
-	     userphoned=null;
-	 }
-	 String linkAddressd=request.getParameter("linkAddressd");
-	 if(linkAddressd.equals("")){
-	     linkAddressd=null;
-	 }
-	 String personDuty=request.getParameter("personDuty");
-	 if(personDuty.equals("")){
-	     personDuty=null;
-	 }
-	 String collegenamed=request.getParameter("collegenamed");
-	 if(collegenamed.equals("")){
-		 collegenamed=null;
-	 }
-	 String collegephoned=request.getParameter("collegephoned");
-	 if(collegephoned.equals("")){
-		 collegephoned=null;
-	 }
-	 String cooperativeUnit=request.getParameter("cooperativeUnit");
-	 if(cooperativeUnit.equals("")){
-		 cooperativeUnit=null;
-	 }
-	 String majorString = request.getParameter("majorString");
-	 if(majorString.equals("")){
-		 majorString="-1";
-	 }
-	 String tag=request.getParameter("tag");
+	String userphoned = request.getParameter("userphoned");
+	if (userphoned.equals("")) {
+	    userphoned = null;
+	}
+	String linkAddressd = request.getParameter("linkAddressd");
+	if (linkAddressd.equals("")) {
+	    linkAddressd = null;
+	}
+	String personDuty = request.getParameter("personDuty");
+	if (personDuty.equals("")) {
+	    personDuty = null;
+	}
+	String collegenamed = request.getParameter("collegenamed");
+	if (collegenamed.equals("")) {
+	    collegenamed = null;
+	}
+	String collegephoned = request.getParameter("collegephoned");
+	if (collegephoned.equals("")) {
+	    collegephoned = null;
+	}
+	String cooperativeUnit = request.getParameter("cooperativeUnit");
+	if (cooperativeUnit.equals("")) {
+	    cooperativeUnit = null;
+	}
+	String majorString = request.getParameter("majorString");
+	if (majorString.equals("")) {
+	    majorString = "-1";
+	}
+	String tag = request.getParameter("tag");
 
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
-	String message=maintenanceservice.updateBaseInfo(baseid,basenamed,basetyped,landaread,buildingaread,undertakeCountd,userphoned,usernamed,personDuty, linkAddressd,date,star,collegenamed,collegephoned,cooperativeUnit,majorString,tag);
-	if(message=="success"){
-	    message="操作成功";
-	}else if(message=="fail"){
-	    message="操作失败";
+	String message = maintenanceservice.updateBaseInfo(baseid, basenamed,
+		basetyped, landaread, buildingaread, undertakeCountd,
+		userphoned, usernamed, personDuty, linkAddressd, date, star,
+		collegenamed, collegephoned, cooperativeUnit, majorString, tag);
+	if (message == "success") {
+	    message = "操作成功";
+	} else if (message == "fail") {
+	    message = "操作失败";
 	}
 	JSONObject getObj = new JSONObject();
 	getObj.put("flag", message);
@@ -303,11 +307,11 @@ public class BaseMaintenanceController {
 	    dept = (String) request.getSession().getAttribute("college");
 	}
 	int star = Integer.valueOf(request.getParameter("star"));
-	int tage_0=200;
+	int tage_0 = 200;
 	List<ExportBase> list = maintenanceservice.getExportBaseInfo(basetype,
 		dept, star);
-	if(list.size()==0){
-		tage_0=0;//没有数据
+	if (list.size() == 0) {
+	    tage_0 = 0;// 没有数据
 	}
 	if (CollectionUtils.isNotEmpty(list)) {
 
@@ -347,9 +351,9 @@ public class BaseMaintenanceController {
 		in.close();
 		out.close();
 
-	    }catch (Exception e) {
+	    } catch (Exception e) {
 		// TODO Auto-generated catch block
-	    	tage_0=500;
+		tage_0 = 500;
 		e.printStackTrace();
 	    }
 	    return null;
@@ -411,27 +415,34 @@ public class BaseMaintenanceController {
 			List<String> row = list.get(i);
 			if (row != null && row.size() > 0) {
 
+			    // 将导入的数据中,如果基地编号是1,则转为首字母+时间 jimao
+			    String applyTime = null;
+			    // for (int k = 0; k < row.size(); k++) {
+			    if (row.get(1).equals("")) {
+				continue;
+			    } else {
+				if (Integer.parseInt(row.get(1)) == 1
+					|| Integer.parseInt(row.get(1)) == 2) {
 
-				//将导入的数据中,如果基地编号是1,则转为首字母+时间   jimao
-			   String applyTime = null;
-			   // for (int k = 0; k < row.size(); k++) {
-			    	if(row.get(1).equals("")){
-			    		continue;
-			    	}else{
-			    		 if(Integer.parseInt(row.get(1))== 1 || Integer.parseInt(row.get(1))== 2 ){
+				    String applyName = maintenanceservice
+					    .getDeptsId(Integer.parseInt(row
+						    .get(2)));
+				    String firstspell = ApplyUtils
+					    .getFirstSpell(applyName);
+				    SimpleDateFormat df = new SimpleDateFormat(
+					    "yyyyMMddhhmmss");
+				    applyTime = firstspell
+					    + df.format(new Date()) + 'A' + i;
 
-				    		 	String applyName =	maintenanceservice.getDeptsId(Integer.parseInt(row.get(2)));
-								String firstspell = ApplyUtils.getFirstSpell(applyName);
-								SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-								applyTime = firstspell+df.format(new Date())+'A'+i;
-
-						  }else{
-							  applyTime = String.valueOf(new Date().getTime() + i);
-						  }
-			    	}
-			  //  }
-			     String bid = applyTime;
-			     //String bid = String.valueOf(new Date().getTime() + i);
+				} else {
+				    applyTime = String.valueOf(new Date()
+					    .getTime() + i);
+				}
+			    }
+			    // }
+			    String bid = applyTime;
+			    // String bid = String.valueOf(new Date().getTime()
+			    // + i);
 
 			    resultStr1 = "('" + bid + "',";
 			    for (int j = 0; j < row.size(); j++) {
@@ -528,17 +539,20 @@ public class BaseMaintenanceController {
 		String starttime = request.getParameter("start_time");// 创建时间
 		String endtime = request.getParameter("end_time");// 截止时间
 		String lawPerson = request.getParameter("personDuty");
-		String collegeName=request.getParameter("collegeName");
-		String collegeTel=request.getParameter("collegeTel");
-		String landarea_select=request.getParameter("landarea_select");
-		String constructionarea_select=request.getParameter("constructionarea_select");
-		if(!landarea.equals("")){
-			landarea=landarea+landarea_select;
+		String collegeName = request.getParameter("collegeName");
+		String collegeTel = request.getParameter("collegeTel");
+		String landarea_select = request
+			.getParameter("landarea_select");
+		String constructionarea_select = request
+			.getParameter("constructionarea_select");
+		if (!landarea.equals("")) {
+		    landarea = landarea + landarea_select;
 		}
-		if(!constructionarea.equals("")){
-			constructionarea=constructionarea+constructionarea_select;
+		if (!constructionarea.equals("")) {
+		    constructionarea = constructionarea
+			    + constructionarea_select;
 		}
-		String unit=request.getParameter("unit");
+		String unit = request.getParameter("unit");
 		// 申请材料保存地址
 		// 上传文件（图片），将文件存入服务器指定路径下，并获得文件的相对路径
 		String path = null;
@@ -586,59 +600,63 @@ public class BaseMaintenanceController {
 		    filename = null;
 		}
 		Date d = new Date();
-			//将获得的baseid自动生成首字母+时间 by jimao
-		  String applyTime = null;
-		  if(Integer.parseInt(type)== 1 || Integer.parseInt(type)== 2){
-			  	String applyName = request.getParameter("applyName");
-				String firstspell = ApplyUtils.getFirstSpell(applyName);
-				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-				applyTime = firstspell+df.format(new Date());
+		// 将获得的baseid自动生成首字母+时间 by jimao
+		String applyTime = null;
+		if (Integer.parseInt(type) == 1 || Integer.parseInt(type) == 2) {
+		    String applyName = request.getParameter("applyName");
+		    String firstspell = ApplyUtils.getFirstSpell(applyName);
+		    SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+		    applyTime = firstspell + df.format(new Date());
 
-		  }else{
-			  applyTime = String.valueOf(d.getTime());
-		  }
+		} else {
+		    applyTime = String.valueOf(d.getTime());
+		}
 
-		String Baseid = applyTime;   //获得学院首字母+时间
+		String Baseid = applyTime; // 获得学院首字母+时间
 
 		str2 += "('" + Baseid + "','" + name + "'," + type + ",'"
-			+ landarea + "','" + constructionarea + "'," + undertake
-			+ "," + applyid + ",'" + land_address + "','"
-			+ username + "','" + phone + "','" + filename + "','"
-			+ userid + "','" + starttime + "','" + endtime + "','"
-			+ lawPerson+"','"+collegeName+"','"+collegeTel+"','"+unit+"')";
+			+ landarea + "','" + constructionarea + "',"
+			+ undertake + "," + applyid + ",'" + land_address
+			+ "','" + username + "','" + phone + "','" + filename
+			+ "','" + userid + "','" + starttime + "','" + endtime
+			+ "','" + lawPerson + "','" + collegeName + "','"
+			+ collegeTel + "','" + unit + "')";
 
 		/*------参数1-----------*/
 		String majorid[] = request.getParameterValues("majorid");// 专业id
 		String str1 = "";
 		StringBuffer sb = new StringBuffer();
-		if (majorid == null) {
-            sb.append("(");
-			    sb.append("'");
-			    sb.append(Baseid);
-			    sb.append("'");
-			    sb.append(",");
-			    sb.append("-1");
-			    sb.append("),");
+		if (majorid == null) {		   
+		    sb.append("(");
+		    sb.append("'");
+		    sb.append(Baseid);
+		    sb.append("'");
+		    sb.append(",");
+		    sb.append("-1");
+		    sb.append("),");
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
+		   
 		} else {
 		    for (String string : majorid) {
 			sb.append("(");
-				sb.append("'");
-				sb.append(Baseid);
-				sb.append("'");
-				sb.append(",");
-				sb.append("'");
-				sb.append(string);
-				sb.append("'");
-				sb.append("),");
+			sb.append("'");
+			sb.append(Baseid);
+			sb.append("'");
+			sb.append(",");
+			sb.append("'");
+			sb.append(string);
+			sb.append("'");
+			sb.append("),");
 		    }
 		    sb.deleteCharAt(sb.length() - 1);
 		    str1 = sb.toString();
-		}
-		String message=maintenanceservice.increaseBaseInfo(str1, str2);
+		    
+		}		
+		String message = maintenanceservice
+			.increaseBaseInfo(str1, str2);
 		request.setAttribute("index", message);
-		String str=(String) request.getAttribute("index");
+		String str = (String) request.getAttribute("index");
 		response.setContentType("text/html;charset=UTF-8");
 	    }
 	}

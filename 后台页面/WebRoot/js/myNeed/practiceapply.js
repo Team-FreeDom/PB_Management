@@ -218,7 +218,7 @@ $(document).ready(function() {
 	 +'<td style="padding-top:5px"><input id="startweek" type="text"  readonly="readonly" class="flag startweek"></td>'
 	 +'<td style="padding-top:5px"><input id="endweek" type="text" readonly="readonly" class="flag endweek"></td>'
 	 +'<td style="padding-top:5px"><select name="" id="baseFrom" class="flag"><option id="baseForm" value="">请选择</option></select></td>'
-	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a><input class="text-center" type="text" value="分散实习基地" style="display:none;"></td>'
+	 +'<td style="padding-top:5px" id="practicePlace"><select id="schoolBase" class="flag" style="display:none;"><option id="schoolBaseID" value="">请选择</option></select><a class="btn btn-primary btn-sm" href="baseApply.jsp" style="display:none;">添加基地</a><option value="分散实习基地" id="fensan" style="display:none;">分散实习基地</option></td>'
 	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 	 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 	 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
@@ -465,17 +465,26 @@ $(document).on("change","#baseFrom",function(e){
 	var type=e.target.value;
 	var selectObj=$(this).parent().next().children("select");
 	var aObj=$(this).parent().next().children("a");
-	var aObj2=$(this).parent().next().children("input");
+	//var aObj2=$(this).parent().next().children("input");
 	selectObj.hide();
 	selectObj.val("");
 	selectObj.find("option:gt(0)").remove();
 	aObj.css("display","none");
-	aObj2.css("display","none");
+	//aObj2.css("display","none");
 	var that=$(this);
 	
 	if(type == "分散实习基地"){
-		aObj2.css("display","block");
-		$(".select2").css("display","none");
+		//aObj2.css("display","block");
+		//$(".select2").css("display","none");
+		//'<option value="分散实习基地" id="fensan" style="display:none;">分散实习基地</option>'
+		selectObj.select2({
+			  data: ['分散实习基地'],
+			  placeholder:'请选择',
+			  allowClear:false,
+			  width:100,
+			  dropdownAutoWidth:true
+			});
+		selectObj.show();
 		return;
 	}
 
@@ -495,11 +504,11 @@ $(document).on("change","#baseFrom",function(e){
 				});
 			},
 			success : function(data){
-				if(data.length==0 && type !== "分散实习基地"){
+				/*if(data.length==0 && type !== "分散实习基地"){
 					aObj.css("display","block");
 					$(".select2").css("display","none");
 					return;
-				}else{
+				}else{*/
 			
 			that.parent().next().children("select").select2({
 					  data: data,
@@ -513,7 +522,7 @@ $(document).on("change","#baseFrom",function(e){
 				selectObj.show();
 				
 				}
-			}
+			//}
 			
 		});
 	}
@@ -1030,8 +1039,12 @@ $("#save").click(function(){//弹出框的保存
 			return false;
 		}
 		
-		var sSite=$(this).find("#schoolBase").val();		
-		if(sSite===""){
+		var sSite=$(this).find("#schoolBase").val();
+		var ssite=$(this).find("#fensan").val();
+	
+		if(sSite===""&&ssite!="分散实习基地"){
+			
+			
 			x++;
 			return false;
 		}
@@ -1208,30 +1221,60 @@ $("#save").click(function(){//弹出框的保存
 				if(result){
 					var str="(";
 					var y=0;
+					
 					$(".tbodyID").each(function(){
 						if(y!==0){
 							str=str+",(";
+							
 						}						
 						var c=$(this).find(".mark").html()-1;
 						str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
-						
 						var x=0;
 						$(this).find(".flag").each(function(){
 							x++;
 							if(x===1){
 								if($(this).val()===""){
+									
 								str=str+','+"null";
+								
 								}else{
+									
 									str=str+",'"+$(this).val()+"'";
 								}
 							}
+							//var a=$(this).attr('id');
 							if(x<=10&&x>1){
-								if($(this).val()===""){
+								/*if($("#baseFrom").val() == "分散实习基地" && x==6){
+									str=str+","+"'"+'分散实习基地'+"'";
+								}*/
+								//else{
+								if($(this).val()==="" ){
+									str=str+','+"null";
+								}else{
+									
+											str=str+","+"'"+$(this).val()+"'";
+												
+									 }
+								//}
+
+								}
+							
+							
+						/*	if(x<=10&&x>1){
+								if($(this).val()===""&& ssite!="分散实习基地"){
 								str=str+','+"null";
 								}else{
-									str=str+","+"'"+$(this).val()+"'";
+										if(ssite=="分散实习基地" && x==6){
+											str=str+","+"'"+ssite+"'";
+										}else{
+											str=str+","+"'"+$(this).val()+"'";
+										}
+										
+								
+									
 								}
-							}
+							}*/
+							
 							if(x===11){
 								str=str+","+$(this).find("option:selected").attr("id");
 							}
