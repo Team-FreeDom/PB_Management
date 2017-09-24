@@ -1634,7 +1634,7 @@ $(document)
 					 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 					 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 					 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
-					 +'<td rowspan="5"><span class="deleteID" id="">删除</span></td>'
+					 +'<td rowspan="5"><span class="deleteID" id="">删除</span><span class="icon-paste copyFinal" data-placement="top" data-toggle="tooltip" title="复制并粘贴至最后一行"></span></td>'
 					 +'</tr>'
 					 +'<tr style="color:#3071a9;font-weight:bolder;">'
 					 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
@@ -1882,12 +1882,24 @@ $(document)
 				$(document).on("change","#baseFrom",function(e){
 					var type=e.target.value;
 					var selectObj=$(this).parent().next().children("select");
+					var hintSpan=$(this).parent().next().children(".select2");
 					var aObj=$(this).parent().next().children("a");
 					selectObj.hide();
 					selectObj.val("");
 					selectObj.find("option:gt(0)").remove();
 					aObj.css("display","none");
 					var that=$(this);
+					if(type == "分散实习基地"){						
+						selectObj.select2({
+							  data: ['分散实习基地'],
+							  placeholder:'请选择',
+							  allowClear:false,
+							  width:100,
+							  dropdownAutoWidth:true
+							});
+						selectObj.show();
+						return;
+					}
 					if(type!=''){	
 						$.ajax({
 							type : 'POST',
@@ -1905,7 +1917,7 @@ $(document)
 							success : function(data){
 								if(data.length==0){
 									aObj.css("display","block");
-									$(".select2").css("display","none");
+									hintSpan.css("display","none");							
 									return;
 								}else{
 								that.parent().next().children("select").select2({
@@ -1919,11 +1931,39 @@ $(document)
 								selectObj.show();
 								
 								
-								}
+							}
 							}
 						});
+					}else{
+						hintSpan.css("display","none");	
 					}
 				});	
+				
+				$(document).on("click",".copyFinal",function(){//复制并粘贴至最后一行
+					
+					var rowNum=parseInt($('#table').children("tbody:last-child").find(".mark").html())+1;
+					var tbody=$(this).closest("tbody").clone();	
+					var thisDom=$(this).closest("tbody");
+					var index=$(this).closest("tbody").find(".mark").html()-1;
+					tbody.find(".mark").html(rowNum);
+					tbody.find('.deleteID').attr("id","");
+					//获取当前点击记录的下拉列表选择值并复制至新的目录
+					tbody.find("#baseFrom").val(thisDom.find("#baseFrom").val());
+					tbody.find("#category").val(thisDom.find("#category").val());
+					tbody.find("#practiceClass").val(thisDom.find("#practiceClass").val());
+					tbody.find("#aim").val(thisDom.find("#aim").val());
+					//将复制后记录的面向专业，实验员，老师分别存入相应的数组
+					majorString[rowNum-1]=majorString[index];
+					teacherString[rowNum-1]=teacherString[index];
+					value[rowNum-1]=value[index];	
+					$('#table').append(tbody);
+					//practicePlace
+					$('#table').children("tbody:last-child").find("#practicePlace>span").remove();	
+					//实习地点	
+					copyBasePlace($('#table').children("tbody:last-child").find("#baseFrom"),thisDom.find("#schoolBase").val());
+					$('#table').children("tbody:last-child").find("#schoolBase").val(thisDom.find("#schoolBase").val());
+					
+				});
 	
 				//选择学院并且上传学院的名称，放回改学院老师的数据（包含老师名称和老师员工编号，针对增加功能的带队老师				
 				$(document).on("change","#selectCollege3",function(){                   
@@ -2620,6 +2660,8 @@ $(document)
 				var y=0;
 				var week="";        var startweek="";
 				var endweek="";     var content="";
+				var baseSource="";//实习基地来源
+				var basePlace="";//实习地点
 			    var category="";
 				var practiceClass="";     var phone="";
 				var aim="";     var Tea="";
@@ -2647,6 +2689,15 @@ $(document)
 					
 					endweek=$(this).find("#endweek").val();
 					if(endweek===""){
+						return false;
+					}
+					
+					baseSource=$(this).find("#baseFrom").val();
+					if(baseSource==""){
+						return false;
+					}
+					basePlace=$(this).find("#schoolBase").val();
+					if(basePlace==""){
 						return false;
 					}
 					
@@ -2759,13 +2810,27 @@ $(document)
 					});
 					return;
 					}
-				if(x!==0){
+				if(baseSource==""){  //baseSource
+					bootbox.alert({
+						message : "请填写第"+y+"条记录的实习基地来源",
+						size : 'small'
+					});
+					return;
+				}      
+				if(basePlace==""){  //basePlace
 					bootbox.alert({
 						message : "请填写第"+y+"条记录的实习地点",
 						size : 'small'
 					});
 					return;
-				}
+				}   
+//				if(x!==0){
+//					bootbox.alert({
+//						message : "请填写第"+y+"条记录的实习地点",
+//						size : 'small'
+//					});
+//					return;
+//				}
 				
 				if(category===""){
 					bootbox.alert({
@@ -3261,5 +3326,70 @@ $.ajax({
 
 	});  
 }
+
+function copyBasePlace(obj,str){	
+	var type=obj.val();
+	var selectObj=obj.parent().next().children("#schoolBase");
+	var hintSpan=obj.parent().next().children(".select2");
+	var aObj=obj.parent().next().children("a");		
+	selectObj.hide();
+	selectObj.val("");
+	selectObj.find("option:gt(0)").remove();
+	aObj.css("display","none");		
+	var that=obj;
+	if(str==""){
+		str="请选择";
+	}
+	if(type == "分散实习基地"){			
+		selectObj.select2({
+			  data: ['分散实习基地'],
+			  placeholder:str,
+			  allowClear:false,
+			  width:100,
+			  dropdownAutoWidth:true
+			});
+		selectObj.show();
+		return;
+	}
+
+	
+	if(type!=''){	
+		$.ajax({
+			type : 'POST',
+			dataType : 'json',	
+			data:{"typename":type},
+			url : 'getBasenameOneOfType.do',  
+			async : false,
+			cache : false,
+			error : function(request) {
+				bootbox.alert({
+					message : "请求异常",
+					size : 'small'
+				});
+			},
+			success : function(data){	
+				
+				if(data.length==0){
+					aObj.css("display","block");
+					hintSpan.css("display","none");			
+					return;
+				}else{
+			that.parent().next().children("#schoolBase").select2({
+					  data: data,
+					  placeholder:str,
+					  allowClear:false,
+					  width:100,
+					  dropdownAutoWidth:true
+					});		
+				selectObj.show();
+				}
+				
+				}				
+		});
+	}else{
+		hintSpan.css("display","none");	
+	}
+}
+
 	
 

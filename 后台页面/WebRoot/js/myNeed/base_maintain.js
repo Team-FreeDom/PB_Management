@@ -393,6 +393,7 @@ $(document).on("click", "#color", function() {
 					
 					$(document).on("click", "#ZJ", function() {							
 						$("#add").css("display","block");
+						$("#textContent").html("");//这行代码清空弹出框
 					});
 					
 					$(document).on("click", "#closebas", function() {					

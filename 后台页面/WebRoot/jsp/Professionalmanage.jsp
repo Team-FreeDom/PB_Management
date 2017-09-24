@@ -287,7 +287,9 @@
 											<tr>
 												<td>专业名称 ：</td>
 												<td><input type="text" class="form-control" id="Mname" name="Mname"
-													/><span id="display1" style="color:#f00;"></span></td>
+													/><span id="display1" style="color:#f00;"></span>
+													<input type="text" id="copyMname" hidden/>
+													</td>
 											</tr>
 											
 										</table>
@@ -323,12 +325,6 @@
 										class="form-horizontal" enctype="multipart/form-data"
 										role="form" id="applyaddform">
 										<table class="table" style="border:none !important;">
-<!-- 											<tr> -->
-<!-- 												<td>项目名称 ： <span class="setTag">*</span><input type="hidden" -->
-<!-- 											value="<%=request.getAttribute("index")%>" id="AddrepairInfo" /></td> -->
-<!-- 												<td><input type="text" class="form-control" -->
-<!-- 													id="Aprojectname" name="Aprojectname" value=""></td> -->
-<!-- 											</tr> -->
 											<tr>
 												<td>学院名称 ： <span class="setTag">*</span></td>
 												<td><select class="form-control" id="deptSelectOne1"
