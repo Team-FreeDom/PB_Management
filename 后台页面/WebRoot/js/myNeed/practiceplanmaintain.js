@@ -1940,7 +1940,17 @@ $(document)
 				});	
 				
 				$(document).on("click",".copyFinal",function(){//复制并粘贴至最后一行
-					
+					var tbodylength=$("#table tbody").size();
+
+					if(screen.width<=1536&&tbodylength>2){
+						$("#modalbody").addClass("modalbody");
+					}
+					if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
+						$("#modalbody").addClass("modalbody2");
+					}
+					if(screen.width>1708&&tbodylength>3){
+						$("#modalbody").addClass("modalbody2");
+					}
 					var rowNum=parseInt($('#table').children("tbody:last-child").find(".mark").html())+1;
 					var tbody=$(this).closest("tbody").clone();	
 					var thisDom=$(this).closest("tbody");
@@ -2701,10 +2711,7 @@ $(document)
 						return false;
 					}
 					
-					content=$(this).find("#content").val();
-					if(content===""){
-						return false;
-					}
+					
 					
 					var sSite=$(this).find("#schoolBase").val();		
 					if(sSite===""){
@@ -2731,7 +2738,10 @@ $(document)
 					if(aim===""){
 						return false;
 					}
-					
+					content=$(this).find("#content").val();
+					if(content===""){
+						return false;
+					}
 					major=$(this).find("#facemajoy").val();
 					if(major===""){
 						return false;
@@ -2803,13 +2813,7 @@ $(document)
 					});
 					return;
 				}
-				if(content===""){
-					bootbox.alert({
-						message : "请填写第"+y+"条记录的实习内容",
-						size : 'small'
-					});
-					return;
-					}
+				
 				if(baseSource==""){  //baseSource
 					bootbox.alert({
 						message : "请填写第"+y+"条记录的实习基地来源",
@@ -2856,6 +2860,13 @@ $(document)
 				if(aim===""){
 					bootbox.alert({
 						message : "请选择第"+y+"条记录的实习目的",
+						size : 'small'
+					});
+					return;
+					}
+				if(content===""){
+					bootbox.alert({
+						message : "请填写第"+y+"条记录的实习内容",
 						size : 'small'
 					});
 					return;

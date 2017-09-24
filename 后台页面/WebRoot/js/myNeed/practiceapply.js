@@ -915,6 +915,17 @@ $(document).on("click",".Dgrade",function(){
 
 $(document).on("click",".copyFinal",function(){//复制并粘贴至最后一行
 	
+	var tbodylength=$("#table tbody").size();
+	if(screen.width<=1536&&tbodylength>2){
+		$("#modalbody").addClass("modalbody");
+	}
+	if(screen.width<=1708&&screen.width>1536&&tbodylength>3){
+		$("#modalbody").addClass("modalbody2");
+	}
+	if(screen.width>1708&&tbodylength>3){
+		$("#modalbody").addClass("modalbody3");
+	}
+	
 	var rowNum=parseInt($('#table').children("tbody:last-child").find(".mark").html())+1;
 	var tbody=$(this).closest("tbody").clone();	
 	var thisDom=$(this).closest("tbody");
@@ -1069,10 +1080,7 @@ $("#save").click(function(){//弹出框的保存
 			return false;
 		}
 		
-		content=$(this).find("#content").val();
-		if(content===""){
-			return false;
-		}
+		
 		
 		var sSite=$(this).find("#schoolBase").val();
 		var ssite=$(this).find("#fensan").val();
@@ -1083,7 +1091,6 @@ $("#save").click(function(){//弹出框的保存
 			x++;
 			return false;
 		}
-		
 		category=$(this).find("#category").val();
 		if(category===""){
 			return false;
@@ -1101,6 +1108,11 @@ $("#save").click(function(){//弹出框的保存
 		
 		aim=$(this).find("#aim").val();
 		if(aim===""){
+			return false;
+		}
+		
+		content=$(this).find("#content").val();
+		if(content===""){
 			return false;
 		}
 		
@@ -1175,13 +1187,8 @@ $("#save").click(function(){//弹出框的保存
 		});
 		return;
 	}
-	if(content===""){
-		bootbox.alert({
-			message : "请填写第"+y+"条记录的实习内容",
-			size : 'small'
-		});
-		return;
-		}
+	
+	
 	if(baseSource==""){  //baseSource
 		bootbox.alert({
 			message : "请填写第"+y+"条记录的实习基地来源",
@@ -1228,6 +1235,13 @@ $("#save").click(function(){//弹出框的保存
 	if(aim===""){
 		bootbox.alert({
 			message : "请选择第"+y+"条记录的实习目的",
+			size : 'small'
+		});
+		return;
+		}
+	if(content===""){
+		bootbox.alert({
+			message : "请填写第"+y+"条记录的实习内容",
 			size : 'small'
 		});
 		return;
