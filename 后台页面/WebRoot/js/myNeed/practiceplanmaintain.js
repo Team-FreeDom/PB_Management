@@ -1638,7 +1638,7 @@ $(document)
 					 +'</tr>'
 					 +'<tr style="color:#3071a9;font-weight:bolder;">'
 					 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
-					 +'<td>目的<span class="starColor">*</span></td>'
+					 +'<td>目的</td>'
 					 +'<td>实习经费预算</td>'
 					 +'<td colspan="6">实习内容<span class="starColor">*</span></td>'
 					 
@@ -2674,7 +2674,7 @@ $(document)
 				var basePlace="";//实习地点
 			    var category="";
 				var practiceClass="";     var phone="";
-				var aim="";     var Tea="";
+				/*var aim="";*/     var Tea="";
 				var tes="";
 				var major="";
 				var class_one="";
@@ -2734,10 +2734,10 @@ $(document)
 						return false;
 					}
 					
-					aim=$(this).find("#aim").val();
+					/*aim=$(this).find("#aim").val();
 					if(aim===""){
 						return false;
-					}
+					}*/
 					content=$(this).find("#content").val();
 					if(content===""){
 						return false;
@@ -2857,13 +2857,13 @@ $(document)
 					});
 					return;
 					}
-				if(aim===""){
+				/*if(aim===""){
 					bootbox.alert({
 						message : "请选择第"+y+"条记录的实习目的",
 						size : 'small'
 					});
 					return;
-					}
+					}*/
 				if(content===""){
 					bootbox.alert({
 						message : "请填写第"+y+"条记录的实习内容",
@@ -2933,8 +2933,11 @@ $(document)
 												str=str+","+"'"+$(this).val()+"'";
 											}
 										}
-										if(x===11){
+										if(x===11&&$(this).val()!=""){
 											str=str+","+$(this).find("option:selected").attr("id");
+										}
+										if(x===11&&$(this).val()===""){
+											str=str+","+"2727";
 										}
 										if(x===12||x===13){
 											if($(this).val()===""){
