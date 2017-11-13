@@ -520,8 +520,8 @@
 										<tr id="hidecol">
 
 											<td id="CJ1">创建<br>时间</td>
-											<td><input type="text" id="setdated" disabled
-												class="form-control"></td>
+											<td><input type="text" id="setdated"
+												class="laydate-icon"></td>
 											<td>截止日期 </td>
 											<td><input type="text" id="adddate"
 												${college==null?"":"disabled='disabled'"}
@@ -1220,6 +1220,9 @@
 		});
 		laydate({
 			elem : '#adddate'
+		});
+		laydate({
+			elem : '#setdated'
 		});
 		jQuery(document).ready(function() {
 

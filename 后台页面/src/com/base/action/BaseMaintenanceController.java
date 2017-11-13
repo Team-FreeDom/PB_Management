@@ -272,10 +272,11 @@ public class BaseMaintenanceController {
 
 	int star = Integer.valueOf(request.getParameter("star"));
 	String date = request.getParameter("adddate");
+	String setdated = request.getParameter("setdated");
 	String message = maintenanceservice.updateBaseInfo(baseid, basenamed,
 		basetyped, landaread, buildingaread, undertakeCountd,
 		userphoned, usernamed, personDuty, linkAddressd, date, star,
-		collegenamed, collegephoned, cooperativeUnit, majorString, tag);
+		collegenamed, collegephoned, cooperativeUnit, majorString, tag, setdated);
 	if (message == "success") {
 	    message = "操作成功";
 	} else if (message == "fail") {

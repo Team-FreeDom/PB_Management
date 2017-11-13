@@ -733,9 +733,41 @@ $(document).on("click", "#color", function() {
 							});
 							return;
 						}
+						if(setdated==""){
+							bootbox.alert({
+								message : "请填写创建日期",
+								size : 'small'
+							});
+							return;
+						}
 						if(adddate==""){
 							bootbox.alert({
 								message : "请填写截止日期",
+								size : 'small'
+							});
+							return;
+						}
+						var start1=setdated.split("-");
+						var end1=adddate.split("-");
+						var time=0;
+						if((end1[0]-start1[0])<0){
+							time++;
+						}else{
+							if(end1[0]===start1[0]){
+								if((end1[1]-start1[1])<0){
+									time++;
+								}else{
+									if(end1[1]===start1[1]){
+									   if((end1[2]-start1[2]<0)){
+										   time++;
+									   }
+									   }
+								}
+							}
+						}
+						if(time!==0){
+							bootbox.alert({
+								message : "创建时间不能大于截止日期！",
 								size : 'small'
 							});
 							return;
@@ -813,6 +845,7 @@ $(document).on("click", "#color", function() {
 							data : {
 								"baseid" : baseid,
 								"star" : star,
+								"setdated":setdated,
 								"adddate" : adddate,
 							    "basenamed":basenamed,								
 								"basetyped":basetyped,
