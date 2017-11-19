@@ -560,7 +560,7 @@ public class PlanMaintainController implements ServletContextAware {
 			    // 构建完整sql
 			    String sql = prefix
 				    + suffix.substring(0, suffix.length() - 1)
-				    + " on duplicate key update count=values(count),selectedCount=values(selectedCount),composition=values(composition),college=values(college)"
+				    + " on duplicate key update `count`=VALUES(`count`)+`count`,selectedCount=VALUES(selectedCount)+selectedCount,composition=CONCAT(composition,',',VALUES(composition),college=values(college)"
 				    + ",cid=values(cid),coursename=values(coursename),weekClassify=values(weekClassify),credit=values(credit)"
 				    + ",courseNature=values(courseNature),courseCategory=values(courseCategory),siteRepuire=values(siteRepuire),tid=values(tid)"
 				    + ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),checkTime=values(checkTime)";
