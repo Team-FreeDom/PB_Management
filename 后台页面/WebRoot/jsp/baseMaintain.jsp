@@ -1043,7 +1043,7 @@
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">通信地址<span
-								class="setTag">*</span></label>
+								class="setTag hideTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" id="baseaddress"
 									name="land_addres" placeholder="">
@@ -1051,7 +1051,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">法定负责人<span
-								class="setTag">*</span></label>
+								class="setTag hideTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" id="lawPerson"
 									name="personDuty" placeholder="">
@@ -1059,7 +1059,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">基地联系人<span
-								class="setTag">*</span></label>
+								class="setTag hideTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" id="personName"
 									name="username" placeholder="">
@@ -1068,7 +1068,7 @@
 
 						<div class="form-group">
 							<label class="col-md-3 control-label">基地联系人电话<span
-								class="setTag">*</span></label>
+								class="setTag hideTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" id="personTel"
 									name="phone" placeholder="">
@@ -1120,7 +1120,7 @@
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label">截止日期<span
-								class="setTag">*</span></label>
+								class="setTag hideTag">*</span></label>
 							<div class="col-md-6">
 								<input type="text" id="validdaend" name="end_time"
 									class="end_time laydate-icon" placeholder="">
