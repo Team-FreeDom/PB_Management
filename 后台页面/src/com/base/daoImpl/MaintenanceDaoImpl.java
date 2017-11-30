@@ -217,7 +217,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
     public String updateBaseInfo(String baseid, String basenamed,
 	    String basetyped, String landaread, String buildingaread,
 	    int undertakeCountd, String userphoned, String usernamed,
-	    String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag) {
+	    String personDuty, String linkAddressd, String adddate, int star,String collegenamed,String collegephoned,String cooperativeUnit,String majorString,String tag,String setdated) {
 	int flag;
 	
 	String message=null;
@@ -227,7 +227,7 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    conn = (Connection) SessionFactoryUtils.getDataSource(
 		    sessionFactory).getConnection();
 	    sp = (CallableStatement) conn
-		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+		    .prepareCall("{CALL baseweb.base_management(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 	    sp.setString(1, baseid);
 	    sp.setString(2, basenamed);
 	    sp.setString(3, basetyped);
@@ -245,8 +245,9 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
 	    sp.setString(15, cooperativeUnit);
 	    sp.setString(16, tag);
 	    sp.setString(17, majorString);
+	    sp.setString(18, setdated);
 	    sp.execute();
-	    flag=sp.getInt(18);
+	    flag=sp.getInt(19);
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
