@@ -529,17 +529,34 @@ public class BaseMaintenanceController {
 		String landarea = request.getParameter("landarea");// 基地面积
 		String constructionarea = request
 			.getParameter("constructionarea");// 建筑面积
-		String undertake = request.getParameter("undertake");// 可承担人数
+		String undertake = request.getParameter("undertake");// 可承担人数(新农基地可为空)
 		if (undertake.equals("")) {
 		    undertake = null;
 		}
 		String applyid = request.getParameter("applyid");// 申报部门id
-		String land_address = request.getParameter("land_addres");// 通讯地址
-		String username = request.getParameter("username");// 联系人姓名
-		String phone = request.getParameter("phone");// 联系人电话
+		String land_address = request.getParameter("land_addres");// 通讯地址(新农基地可为空)
+		if (land_address.equals("")) {
+			land_address = null;
+		}
+		System.out.println(land_address+"||通讯地址");
+		String username = request.getParameter("username");// 联系人姓名(新农基地可为空)
+		if (username.equals("")) {
+			username = null;
+		}
+		System.out.println(username+"||联系人姓名");
+		String phone = request.getParameter("phone");// 联系人电话(新农基地可为空)
+		if (phone.equals("")) {
+			phone = null;
+		}
 		String starttime = request.getParameter("start_time");// 创建时间
-		String endtime = request.getParameter("end_time");// 截止时间
-		String lawPerson = request.getParameter("personDuty");
+		String endtime = request.getParameter("end_time");// 截止时间(新农基地可为空)
+		if (endtime.equals("")) {
+			endtime = null;
+		}
+		String lawPerson = request.getParameter("personDuty");//法定人(新农基地可为空)
+		if (lawPerson.equals("")) {
+			lawPerson = null;
+		}
 		String collegeName = request.getParameter("collegeName");
 		String collegeTel = request.getParameter("collegeTel");
 		String landarea_select = request

@@ -480,6 +480,7 @@
 				</table>
 				<button type="button" class="btn btn-primary" id="addTbody">添加</button>
 				<button type="button" class="btn btn-success" id="save">保存</button>
+				<a type="button" href="../templet/budgetChat.zip" class="btn btn-info">预算表</a>
 
 				<table id="table">
 
