@@ -539,7 +539,7 @@ public class PlanMaintainController implements ServletContextAware {
 
 				    value = semesterfile;
 				    termYear = value;
-				} else if (j > 16 && j <= 25 || j == 0
+				} else if (j > 17 && j <= 25 || j == 0
 					|| j > 26 && j <= 44) {
 				    continue;
 				}
@@ -548,6 +548,7 @@ public class PlanMaintainController implements ServletContextAware {
 
 			    }
 			    if (tag_this) {
+			    	resultStr = resultStr.substring(0,resultStr.length() - 3);
 				resultStr = resultStr
 					+ WeekTransformToTime
 						.weekTransformToTime(timeDi,
@@ -560,7 +561,7 @@ public class PlanMaintainController implements ServletContextAware {
 			    // 构建完整sql
 			    String sql = prefix
 				    + suffix.substring(0, suffix.length() - 1)
-				    + " on duplicate key update `count`=VALUES(`count`)+`count`,selectedCount=VALUES(selectedCount)+selectedCount,composition=CONCAT(composition,',',VALUES(composition),college=values(college)"
+				    + " on duplicate key update `count`=VALUES(`count`)+`count`,selectedCount=VALUES(selectedCount)+selectedCount,composition=CONCAT(composition,',',VALUES(composition)),college=values(college)"
 				    + ",cid=values(cid),coursename=values(coursename),weekClassify=values(weekClassify),credit=values(credit)"
 				    + ",courseNature=values(courseNature),courseCategory=values(courseCategory),siteRepuire=values(siteRepuire),tid=values(tid)"
 				    + ",tname=values(tname),technicalTitle=values(technicalTitle),semester=values(semester),week=values(week),checkMethod=values(checkMethod),checkTime=values(checkTime)";
