@@ -236,7 +236,7 @@ $(document).ready(function() {
 	 +'<td><input id="phone" type="text" class="flag"></td>'
 	 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
 	 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
-	 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
+	 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%" maxlength="200" placeholder="两百字以内"></td>'						 
 	 +'</tr>'
 	 +'<tr style="color:#3071a9;font-weight:bolder;">'
 	 +'<td colspan="3">面向专业<span class="starColor">*</span></td>'
