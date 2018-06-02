@@ -222,7 +222,7 @@ $(document).ready(function() {
 	 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 	 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 	 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
-	 +'<td rowspan="5"><span class="deleteID" id="">删除</span><span class="icon-paste copyFinal" data-placement="top" data-toggle="tooltip" title="复制并粘贴至最后一行"></span></td>'
+	 +'<td rowspan="5"><span class="deleteID" id="">删除</span><br><span class="icon-paste copyFinal" data-placement="top" data-toggle="tooltip" title="复制并粘贴至最后一行"></span><br><span class="starColor check_state" id="">待审核</span></td>'
 	 +'</tr>'
 	 +'<tr style="color:#3071a9;font-weight:bolder;">'
 	 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
@@ -236,6 +236,7 @@ $(document).ready(function() {
 	 +'<td><input id="phone" type="text" class="flag"></td>'
 	 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
 	 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
+	 +'<td hidden><input id="check_budget" type="text" class="inputWidth flag">万</td>'
 	 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%" maxlength="200" placeholder="两百字以内"></td>'						 
 	 +'</tr>'
 	 +'<tr style="color:#3071a9;font-weight:bolder;">'
@@ -386,7 +387,8 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				
 				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 				$("#table tbody:last-child").find("#aim").val(data[i].aim);
-				$("#table tbody:last-child").find("#budget").val(data[i].expense);				
+				$("#table tbody:last-child").find("#budget").val(data[i].expense);
+				$("#table tbody:last-child").find("#check_budget").val(data[i].actualAmount);
 				$("#table tbody:last-child").find("#Tea").val("老师:"+data[i].guideTeacher);
 				$("#table tbody:last-child").find("#tes").val("实验员:"+data[i].assistant);
 				$("#table tbody:last-child").find("#facemajoy").val("面向专业:"+data[i].major_oriented);
@@ -394,8 +396,10 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#schoolBase").show();
 				$("#table tbody:last-child").find("#schoolBase").addClass("flag");
 				$("#table tbody:last-child").find("#schoolBase").val(data[i].site);	
-				
-				
+				$("#table tbody:last-child").find(".check_state").attr("id",data[i].state);
+				if(data[i].state=="6"){
+					$("#table tbody:last-child").find(".check_state").html("申请成功");
+				}
 				$("#table tbody:last-child").find(".deleteID").attr("id",data[i].id);
 				if(i!==data.length-1){
 					teachername=teachername+data[i].guideTeacher+",";
@@ -413,6 +417,7 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 			$("#testername").val(testername);
 			$("#adviser").val(teachername);
 			$("#major").val(majorname);
+			
 		}
 	});
 	
@@ -1293,6 +1298,7 @@ $("#save").click(function(){//弹出框的保存
 						}						
 						var c=$(this).find(".mark").html()-1;
 						str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
+						var state_id=$(this).find(".check_state").attr("id");
 						var x=0;
 						$(this).find(".flag").each(function(){
 							x++;
@@ -1346,7 +1352,7 @@ $("#save").click(function(){//弹出框的保存
 								
 								str=str+","+"2727";
 							}
-							if(x===12||x===13){
+							if(x===12||x===13||x===14){
 								if($(this).val()===""){
 								str=str+','+"null";
 								}else{
@@ -1355,7 +1361,7 @@ $("#save").click(function(){//弹出框的保存
 							}
 							
 						});
-						str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
+						str=str+","+"'"+state_id+"',"+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
 						y++;
 					});
 					$.ajax({
