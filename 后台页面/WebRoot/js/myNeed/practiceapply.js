@@ -384,7 +384,6 @@ $("#practiceapplytable tbody").on("click","tr",function(){
 				$("#table tbody:last-child").find("#category").val(data[i].category);
 				$("#table tbody:last-child").find("#remark").val(data[i].remark);
 				$("#table tbody:last-child").find("#practiceClass").val(data[i].form);
-				
 				$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 				$("#table tbody:last-child").find("#aim").val(data[i].aim);
 				$("#table tbody:last-child").find("#budget").val(data[i].expense);
@@ -1299,6 +1298,9 @@ $("#save").click(function(){//弹出框的保存
 						var c=$(this).find(".mark").html()-1;
 						str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
 						var state_id=$(this).find(".check_state").attr("id");
+						if(state_id===""){
+							state_id=2;
+						}
 						var x=0;
 						$(this).find(".flag").each(function(){
 							x++;
