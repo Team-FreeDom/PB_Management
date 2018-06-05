@@ -81,4 +81,8 @@ public interface PlanService {
      */
     public List<Map<String, String>> getCollege_Major(String college);
 
+	public PlanList getshaiplaninfo(String userid, Integer pageindex,
+			Integer size, int order, String orderDir, String searchValue,
+			String semester, int state); 
+
 }

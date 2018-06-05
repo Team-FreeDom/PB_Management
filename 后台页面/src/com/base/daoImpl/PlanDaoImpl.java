@@ -79,6 +79,7 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setWeek(rs.getString("week"));
 		ch.setCheckMethod(rs.getString("checkMethod"));
 		ch.setMajor_oriented(rs.getString("major_oriented"));
+		ch.setState(rs.getString("state"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {
@@ -507,6 +508,68 @@ public class PlanDaoImpl implements PlanDao {
 		    SqlConnectionUtils.free(conn, sp, rs);
 		}
 		return list;
+	    }
+
+	@Override
+	public PlanList getshaiplaninfo(String userid, Integer pageindex,
+			Integer size, String columnName, String orderDir,
+			String searchValue, String semester, int state) {
+		List<AllPlan> list = new ArrayList<AllPlan>();
+		int recordsTotal = 0;
+		Connection conn = null;
+		CallableStatement sp = null;
+		ResultSet rs = null;
+		try {
+		    conn = (Connection) SessionFactoryUtils.getDataSource(
+			    sessionFactory).getConnection();
+		    sp = (CallableStatement) conn
+			    .prepareCall("{call baseweb.query_choosecourse(?,?,?,?,?,?,?,?,?)}");
+		    sp.setString(1, userid);
+		    sp.setInt(2, pageindex);
+		    sp.setInt(3, size);
+		    sp.setString(4, columnName);
+		    sp.setString(5, orderDir);
+		    sp.setString(6, searchValue);
+		    sp.setString(7, semester);
+		    sp.setInt(8, state);
+		    sp.registerOutParameter(9,java.sql.Types.INTEGER);
+		    
+		    sp.execute();
+		    recordsTotal = sp.getInt(9);
+		    rs = sp.getResultSet();
+		    while (rs.next()) {
+			AllPlan ch = new AllPlan();
+			ch.setId(rs.getInt("id"));
+			ch.setCid(rs.getString("cid"));
+			ch.setCount(rs.getInt("count"));
+			ch.setSelectedCount(rs.getInt("selectedCount"));
+			ch.setComposition(rs.getString("composition"));
+			ch.setCollege(rs.getString("college"));
+			ch.setCoursename(rs.getString("coursename"));
+			ch.setWeekClassify(rs.getDouble("weekClassify"));
+			ch.setCredit(rs.getDouble("credit"));
+			ch.setCourseNature(rs.getString("courseNature"));
+			ch.setCourseCategory(rs.getString("courseCategory"));
+			ch.setMid(rs.getString("mid"));
+			ch.setTid(rs.getString("tid"));
+			ch.setTname(rs.getString("tname"));
+			ch.setSemester(rs.getString("semester"));
+			ch.setWeek(rs.getString("week"));
+			ch.setCheckMethod(rs.getString("checkMethod"));
+			ch.setMajor_oriented(rs.getString("major_oriented"));
+			ch.setState(rs.getString("state"));
+			list.add(ch);
+		    }
+		} catch (SQLException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} finally {
+		    SqlConnectionUtils.free(conn, sp, rs);
+		}
+		PlanList ck = new PlanList();
+		ck.setRecordsTotal(recordsTotal);
+		ck.setData(list);
+		return ck;
 	    }
 
 	}

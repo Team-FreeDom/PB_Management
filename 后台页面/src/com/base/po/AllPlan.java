@@ -21,7 +21,14 @@ public class AllPlan {
 	private String week;//起止周
 	private String checkMethod;//考核方式
 	private String major_oriented;//面向专业
+	private String state;//状态
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public int getId() {
 		return id;
 	}

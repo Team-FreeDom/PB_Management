@@ -107,4 +107,8 @@ public interface PlanDao {
      * @return
      */
     public List<Map<String, String>> getCollege_Major(String college);
+
+	public PlanList getshaiplaninfo(String userid, Integer pageindex,
+			Integer size, String columnName, String orderDir,
+			String searchValue, String semester, int state);
 }

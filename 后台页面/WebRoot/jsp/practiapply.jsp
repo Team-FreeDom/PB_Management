@@ -220,10 +220,19 @@
 							<thead>
 								<tr>
 								    <td hidden id="exportPlanFlag">${exportPlanFlag}</td>								   
-									<td colspan="16" hidden id="daoru_daochu">
+									<td colspan="2" hidden id="daoru_daochu">
 										<button class="btn btn-primary" data-toggle="modal"
 											data-target="#export" id="exportButton">导出</button>
 									</td>
+									<td class="text-right"><label>筛选:</label></td>
+									<td colspan="2" id="zhuangtai">
+										<select name="state" id="shaiState" class="form-control">
+											<option value="-1">显示全部</option>
+											<option value="0">未审核</option>
+											<option value="1">审核通过</option>
+										</select>
+									</td>
+									<td colspan="12"></td>
 
 								</tr>
 								<tr>
@@ -243,6 +252,7 @@
 									<th hidden>专业编号</th>
 									<th hidden>面向专业</th>
 									<th>考核</th>
+									<th>状态</th>
 
 								</tr>
 							</thead>
