@@ -122,4 +122,37 @@ public class PlanServiceImpl implements PlanService {
 	return list;
     }
 
+	@Override
+	public PlanList getshaiplaninfo(String userid, Integer pageindex,
+			Integer size, int order, String orderDir, String searchValue,
+			String semester, int state) {
+		PlanList list = null;
+		String columnName = "";
+		if (order == 0) {
+		    columnName = "id";
+		} else if (order == 3) {
+		    columnName = "count";
+		} else if (order == 4) {
+		    columnName = "selectedCount";
+		} else if (order == 6) {
+		    columnName = "college";
+		} else if (order == 7) {
+		    columnName = "weekClassify";
+		} else if (order == 8) {
+		    columnName = "credit";
+		} else if (order == 11) {
+		    columnName = "tid";
+		} else if (order == 12) {
+		    columnName = "tname";
+		}
+		if(state != -1){
+		 list = plandao.getshaiplaninfo(userid, pageindex, size,
+			columnName, orderDir, searchValue, semester,state);
+		}else{
+		list = 	plandao.getThisCollegePlan(userid, pageindex, size,
+				columnName, orderDir, searchValue, semester);
+		}
+		return list;
+	    }
+
 }

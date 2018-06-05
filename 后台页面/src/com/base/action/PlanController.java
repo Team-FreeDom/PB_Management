@@ -418,5 +418,54 @@ public class PlanController implements ServletContextAware{
 	}
 	return null;
     }
+    
+    //获得状态筛选所有数据
+    @RequestMapping("/getshaiplaninfo.do")
+    public String getshaiplaninfo(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+    	// 获取用户登录的id
+    	String userid = CookieUtils.getUserid(request);
+    	String searchValue = request.getParameter("search[value]");
+    	if (searchValue.equals("")) {
+    	    searchValue = null;
+    	}
+    	//获取状态
+    	int state = Integer.parseInt(request.getParameter("state"));
+    	System.out.println(state+"aaa3333333");
+    	//获取学年学期
+    	String semester=WeekTransformToTime.getThisSemester(application);
+    	// 获取当前页面的传输几条记录
+    	Integer size = Integer.parseInt(request.getParameter("length"));
+    	// 数据起始位置
+    	Integer startIndex = Integer.parseInt(request.getParameter("start"));
+    	Integer draw = Integer.parseInt(request.getParameter("draw"));
+    	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
+    	// String orderDir = request.getParameter("order[0][dir]");//
+    	// 排序的顺序asc or
+    	String orderDir = "desc"; // // desc
+    	// 通过计算求出当前页面为第几页
+    	Integer pageindex = (startIndex / size + 1);
+    	int recordsTotal = 0;
+    	List<AllPlan> list = new ArrayList<AllPlan>();
+    	PlanList pl = null;
+    	pl = planservice.getshaiplaninfo(userid, pageindex, size, order,
+    		orderDir, searchValue,semester,state);
+    	list = pl.getData();
+    	recordsTotal = pl.getRecordsTotal();
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("draw", draw);
+    	getObj.put("recordsFiltered", recordsTotal);
+    	getObj.put("recordsTotal", recordsTotal);
+    	getObj.put("data", list);
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    	    response.getWriter().print(getObj.toString());
+    	} catch (IOException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+        }
 
 }

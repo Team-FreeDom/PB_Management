@@ -30,9 +30,13 @@ http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		<property name="username" value="root"></property>
 		<property name="password" value="mysql@123Rear"></property>
 		
-		<!-- <property name="url" value="jdbc:mysql://localhost:3306/baseweb"></property>		
-		<property name="username" value="test"></property>
-		<property name="password" value="test@123"></property> -->
+		 <!-- <property name="url" value="jdbc:mysql://localhost:3306/baseweb"></property>		
+		<property name="username" value="root"></property>
+		<property name="password" value="wing926"></property>   -->
+		<!-- 
+		<property name="url" value="jdbc:mysql://111.230.13.103:3306/baseweb"></property>		
+		<property name="username" value="root"></property>
+		<property name="password" value="spoc123"></property> -->
 		
 		
 	
