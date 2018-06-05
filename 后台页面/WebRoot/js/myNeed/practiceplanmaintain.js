@@ -1634,13 +1634,14 @@ $(document)
 					 +'<td style="padding-top:5px"><select id="category" class="flag"><option value="">请选择</option><option value="生产实习">生产实习</option><option value="教学实习">教学实习</option><option value="毕业实习">毕业实习</option><option value="综合实习">综合实习</option></select></td>'
 					 +'<td style="padding-top:5px"><select name="" id="practiceClass" class="flag"><option value="">请选择</option><option value="集中">集中</option><option value="分散">分散</option></select></td>'
 					 +'<td style="padding-top:5px"><input id="remark" type="text" class="flag"></td>'
-					 +'<td rowspan="5"><span class="deleteID" id="">删除</span><span class="icon-paste copyFinal" data-placement="top" data-toggle="tooltip" title="复制并粘贴至最后一行"></span></td>'
+					 +'<td rowspan="5"><span class="deleteID" id="">删除</span><br><span class="icon-paste copyFinal" data-placement="top" data-toggle="tooltip" title="复制并粘贴至最后一行"></span><br><a class="btn btn-primary btn-xs mark_check2" id="">确认</a></td>'
 					 +'</tr>'
 					 +'<tr style="color:#3071a9;font-weight:bolder;">'
 					 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
 					 +'<td>目的</td>'
-					 +'<td>实习经费预算</td>'
-					 +'<td colspan="6">实习内容<span class="starColor">*</span></td>'
+					 +'<td>预算经费</td>'
+					 +'<td>实际经费</td>'
+					 +'<td colspan="5">实习内容<span class="starColor">*</span></td>'
 					 
 					 +'</tr>'
 					 +'<tr>'
@@ -1648,7 +1649,8 @@ $(document)
 					 +'<td><input id="phone" type="text" class="flag"></td>'
 					 +'<td><select id="aim" class="flag" style="width:150px;"><option id="aimID" value="">请选择</option></select></td>'
 					 +'<td><input id="budget" type="text" class="inputWidth flag">万</td>'
-					 +'<td colspan="6"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
+					 +'<td><input id="check_budget" type="text" class="inputWidth flag">万</td>'
+					 +'<td colspan="5"><input id="content" type="text" class="flag" style="width:100%"></td>'						 
 					 +'</tr>'
 					 +'<tr style="color:#3071a9;font-weight:bolder;">'
 					 +'<td colspan="3">面向专业<span class="starColor">*</span></td>'
@@ -1803,7 +1805,8 @@ $(document)
 							
 							$("#table tbody:last-child").find("#phone").val(data[i].telephone);
 							$("#table tbody:last-child").find("#aim").val(data[i].aim);
-							$("#table tbody:last-child").find("#budget").val(data[i].expense);				
+							$("#table tbody:last-child").find("#budget").val(data[i].expense);
+							$("#table tbody:last-child").find("#check_budget").val(data[i].actualAmount);
 							$("#table tbody:last-child").find("#Tea").val("老师:"+data[i].guideTeacher);
 							$("#table tbody:last-child").find("#tes").val("实验员:"+data[i].assistant);
 							$("#table tbody:last-child").find("#facemajoy").val("面向专业:"+data[i].major_oriented);
@@ -1814,6 +1817,12 @@ $(document)
 							
 							
 							$("#table tbody:last-child").find(".deleteID").attr("id",data[i].id);
+							$("#table tbody:last-child").find(".mark_check2").attr("id",data[i].state);
+							if(data[i].state=="6"){//zhaoyong
+								$("#table tbody:last-child").find(".mark_check2").hide();
+								$("#table tbody:last-child").find(".mark").html(i+1+'<span class="starColor">已审核</span>');
+							}
+							
 							if(i!==data.length-1){
 								teachername=teachername+data[i].guideTeacher+",";
 								testername=testername+data[i].assistant+",";
@@ -2291,7 +2300,7 @@ $(document)
 
 				var selectNum;
 				$(document).on("click",".choice2",function(){//点击选择弹出 
-					selectNum=$(this).closest("tbody").find(".mark").html()-1;
+					selectNum=parseInt($(this).closest("tbody").find(".mark").html())-1;
 					$("#Selectteacher").modal('show');
 					$("#selectCollege2").val("");
 					$("#leadteachername").val(teacherString[selectNum]);
@@ -2320,7 +2329,7 @@ $(document)
 						teacherString[selectNum]=tester;
 					}
 					$(".tbodyID").each(function(){
-						var tea=$(this).find('.mark').html()-1;
+						var tea=parseInt($(this).find('.mark').html())-1;
 						if(tea===selectNum){
 							$(this).find('#Tea').val("老师："+tester);
 						}
@@ -2332,7 +2341,7 @@ $(document)
 				var value3=[];
 				$(document).on("click",".choice",function(){//点击选择弹出 
 					
-					selectNum=$(this).closest("tbody").find(".mark").html()-1;
+					selectNum=parseInt($(this).closest("tbody").find(".mark").html())-1;
 					$("#Selectname").modal('show');
 					$("#selectTname").val("");
 					$("#tester").val(value[selectNum]);
@@ -2362,7 +2371,7 @@ $(document)
 						value[selectNum]=tester;
 					}
 					$(".tbodyID").each(function(){
-						var tea=$(this).find('.mark').html()-1;
+						var tea=parseInt($(this).find('.mark').html())-1;
 						if(tea===selectNum){
 							$(this).find('#tes').val("实验员："+tester);
 						}
@@ -2374,7 +2383,7 @@ $(document)
 				var major_num;
 				$(document).on("click",".choice3",function(){//点击选择弹出面向专业的弹出框
 					
-					major_num=$(this).closest("tbody").find(".mark").html()-1;
+					major_num=parseInt($(this).closest("tbody").find(".mark").html())-1;
 					$("#Selectmajor").modal('show');
 					$("#showmajor").val(majorString[major_num]);
 					$("#majorName").val("");
@@ -2404,7 +2413,7 @@ $(document)
 						majorString[major_num]=showmajor;
 					}
 					$(".tbodyID").each(function(){
-						var tea=$(this).find('.mark').html()-1;
+						var tea=parseInt($(this).find('.mark').html())-1;
 						if(tea===major_num){
 							$(this).find('#facemajoy').val("面向专业："+showmajor);
 						}
@@ -2596,9 +2605,53 @@ $(document)
 					}
 					k++;
 				});
-			});	
+			});
+			
+			$(document).on("click",".mark_check2",function(){//zhaoyong
+				//var check_id=$(this).attr("id");
+				var check_budget=$(this).closest("tbody").find("#check_budget").val();
+				
+				var rowNum=$(this).closest("tbody").find(".mark").html();
+				var f_this=$(this);
+				bootbox.confirm({
+					message: "是否确认审核？",
+					size: 'small',
+					buttons: {
+						confirm: {
+							label: '确定',
+							className: 'btn-success'
+						},
+						cancel: {
+							label: '取消',
+							className: 'btn-danger'
+						},
+					},			
+					callback: function (result) { 		
+						if(result){
+							if(check_budget!==""){
+								f_this.closest("tbody").find(".mark").html(rowNum+'<span class="starColor">已审核</span>');
+								f_this.closest("tbody").find(".mark_check2").hide();//
+										f_this.attr("id","6");
+										bootbox.alert({
+											message : "本地审核成功，请及时保存",
+											size : 'small'
+										});
+							}else{
+								bootbox.alert({
+									message : "请填写实际金额",
+									size : 'small'
+								});
+							}
+																											
+						}
+					}
+				});	
+				
+			});
+			
+			
 			$(document).on("click",".deleteID",function(){//弹出框里面的记录删除
-				var judget=$(this).attr("id");
+				var judget=$(this).attr("id");//zhaoyong
 				var rowNum=$(this).closest("tbody").find(".mark").html()-1;
 				var tbody=$(this).closest("tbody");
 				bootbox.confirm({
@@ -2913,13 +2966,13 @@ $(document)
 									if(y!==0){
 										str=str+",(";
 									}						
-									var c=$(this).find(".mark").html()-1;
+									var c=parseInt($(this).find(".mark").html())-1;
 									str=str+"'"+majorString[c]+"','"+teacherString[c]+"'"+",'"+value[c]+"'";
-									
+									var state_id=$(this).find(".mark_check2").attr("id");
 									var x=0;
 									$(this).find(".flag").each(function(){
 										x++;
-										if(x===1){
+										if(x===1){//zhaoyong
 											if($(this).val()===""){
 											str=str+','+"null";
 											}else{
@@ -2939,7 +2992,7 @@ $(document)
 										if(x===11&&$(this).val()===""){
 											str=str+","+"2727";
 										}
-										if(x===12||x===13){
+										if(x===12||x===13||x===14){
 											if($(this).val()===""){
 											str=str+','+"null";
 											}else{
@@ -2948,6 +3001,11 @@ $(document)
 										}
 										
 									});
+									if(state_id!=="6"){
+										str=str+","+'2';
+									}else{
+										str=str+","+'6';
+									}
 									str=str+","+obj[Oneindex].id+",'"+obj[Oneindex].semester+"'"+")";
 									y++;
 								});

@@ -227,6 +227,8 @@ public class PlanController implements ServletContextAware{
 	int id = Integer.valueOf(request.getParameter("courseID"));
 	String plandata = request.getParameter("str");
 	String message=planservice.savePlanModify(id, plandata);
+	System.out.println(plandata);
+	System.out.println(message);
 	JSONObject getObj = new JSONObject();
 	getObj.put("msg", message);
 	response.setContentType("text/html;charset=UTF-8");

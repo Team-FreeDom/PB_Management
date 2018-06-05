@@ -19,8 +19,22 @@ public class Classcourse {
     private String remark;// 备注
     private String major_oriented;
     private String grade;
+    private String actualAmount;
+    private int state;
     
-    public String getMajor_oriented() {
+    public String getActualAmount() {
+		return actualAmount;
+	}
+	public void setActualAmount(String actualAmount) {
+		this.actualAmount = actualAmount;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public String getMajor_oriented() {
 		return major_oriented;
 	}
 	public void setMajor_oriented(String major_oriented) {
@@ -35,7 +49,7 @@ public class Classcourse {
 	public Classcourse(int id, String week, String starttime, String endtime,
 	    String content, String source, String site, String category,
 	    String form, String telephone, String aim, String expense,
-	    String course, String guideTeacher, String assistant, String remark) {
+	    String course, String guideTeacher, String assistant, String remark, String major_oriented, String grade, String actualAmount,int state) {
 	super();
 	this.id = id;
 	this.week = week;
@@ -52,7 +66,11 @@ public class Classcourse {
 	this.course = course;
 	this.guideTeacher = guideTeacher;
 	this.assistant = assistant;
+	this.major_oriented = major_oriented;
+	this.grade = grade;
 	this.remark = remark;
+	this.actualAmount = actualAmount;
+	this.state = state;
     }
     public Classcourse() {
 	super();

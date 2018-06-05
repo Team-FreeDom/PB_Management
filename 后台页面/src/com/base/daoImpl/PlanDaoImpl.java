@@ -110,6 +110,7 @@ public class PlanDaoImpl implements PlanDao {
 	    sp.setString(2, plandata);
 	    sp.execute();
 	    flag=sp.getInt(3);
+	    System.out.println(flag);
 	    message=BaseUtils.getException(flag);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
@@ -242,6 +243,9 @@ public class PlanDaoImpl implements PlanDao {
 		ch.setRemark(rs.getString("remark"));
 		ch.setMajor_oriented(rs.getString("major_oriented"));
 		ch.setGrade(rs.getString("grade"));
+		ch.setActualAmount(rs.getString("actualAmount"));
+		ch.setState(rs.getInt("state"));
+		System.out.println(rs.getInt("state"));
 		list.add(ch);
 	    }
 	} catch (SQLException e) {

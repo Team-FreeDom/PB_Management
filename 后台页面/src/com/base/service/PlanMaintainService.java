@@ -153,4 +153,5 @@ public interface PlanMaintainService {
 	 3.函数功能： 获取最新的学年学期
 	 */
    public List<String> getLatestSemester(String college);
+   
 }
