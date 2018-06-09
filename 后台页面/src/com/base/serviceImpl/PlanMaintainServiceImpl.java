@@ -197,6 +197,40 @@ public class PlanMaintainServiceImpl implements PlanMaintainService {
 		List<String> list=planMaintainDao.getLatestSemester(college);
 		return list;
 	}
+
+	@Override
+	public PlanList getshaiplan(Integer pageindex, Integer size, int order,
+			String orderDir, String searchValue, String semester, int state,String college) {
+		// TODO Auto-generated method stub
+			PlanList list = null;
+			String columnName = "";
+			if (order == 0) {
+			    columnName = "id";
+			} else if (order == 3) {
+			    columnName = "count";
+			} else if (order == 4) {
+			    columnName = "selectedCount";
+			} else if (order == 6) {
+			    columnName = "college";
+			} else if (order == 7) {
+			    columnName = "weekClassify";
+			} else if (order == 8) {
+			    columnName = "credit";
+			} else if (order == 11) {
+			    columnName = "tid";
+			} else if (order == 12) {
+			    columnName = "tname";
+			}
+			if(state != -1){
+			 list = planMaintainDao.getshaiplan(pageindex, size,
+				columnName, orderDir, searchValue, semester,state);
+			}else{
+			list = 	planMaintainDao.getPlanInfo(semester,pageindex, size,
+					columnName, orderDir, searchValue, college);
+			}
+			return list;
+	}
+
     
     
 }

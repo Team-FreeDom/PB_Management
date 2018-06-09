@@ -226,26 +226,34 @@
 											<option value="" id="termYearID" selected>请选择学年</option>
 									</select></td>
 
-									<td colspan="8"><select name="semester" id="semester"
+									<td colspan="2"><select name="semester" id="semester"
 										class="form-control" style="width:150px;">
 											<option value="" selected>请选择学期</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 									</select></td>
+									<td colspan="2" class="text-right"><label>筛选:</label></td>
+									<td colspan="3" id="zhuangtai">
+										<select name="state" id="shaiState" class="form-control">
+											<option value="-1">显示全部</option>
+											<option value="2">未填写</option>
+											<option value="0">未审核</option>
+											<option value="1">审核通过</option>
+										</select>
+									</td>
 									<td hidden id="ta1">${teamYear}</td>
 									<td hidden id="ta2">${sem}</td>
 									<td hidden id="ta3">${tag}</td>	
 									<td hidden id="exportTag">${exportTag}</td>								
-									<td colspan="7">
+									<td colspan="9">
 										<button class="btn btn-primary" id="chu">导出</button>									    
 										<button class="btn btn-primary" id="daoru" data-toggle="modal" data-target="#writeWeekTime" ${college==null?"":"style='display:none;'"}>导入</button>
 										<a href="../templet/PracticeMaintainInfo.rar" id="LinkButton" class="btn btn-primary" ${college==null?"":"style='display:none;'"}>点击下载导入模板</a>
 									</td>
-
 								</tr>
 								<tr bgcolor="#ECF1F5">
 									<td colspan="8"><button class="btn btn-success" id="showAllInfo">显示全部数据</button></td>
-									<td colspan="9">																														
+									<td colspan="10">																														
 										<span id="remind" class="glyphicon glyphicon-send"></span>
 										<button class="btn btn-warning" id="checkIsSave">检测数据完整性</button>										
 										<button class="btn btn-danger" id="delete" ${college==null?"":"style='display:none;'"}>删除</button>
@@ -273,6 +281,7 @@
 									<th hidden>面向专业</th>
 									<th hidden>专业编号</th>
 									<th>考核方式</th>
+									<th>状态</th>
 
 								</tr>
 							</thead>
