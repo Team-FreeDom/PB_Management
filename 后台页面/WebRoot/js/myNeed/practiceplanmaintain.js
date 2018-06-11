@@ -214,7 +214,22 @@ $(document)
 											"orderable" : false,
 											"sDefaultContent" : "",
 											//"sWidth" : "4%"
-										} ],
+										}, {
+							   				"mData" : "state",//状态
+							   				"orderable" : false,
+							   				"sDefaultContent" : "",
+							   				"render":function(data){
+							   					if(data=="0"){
+							   						return '未审核';
+							   					}
+							   					if(data=="1"){
+							   						return '审核通过';
+							   					}else{
+							   						return '未填写';
+							   					}
+							   				}
+							   			}, 
+							   			],
 										"columnDefs" : [ {
 											"orderable" : false,
 											"targets" : [ 0 ],
@@ -386,7 +401,21 @@ $(document)
 										"mData" : "checkMethod",// 考核
 										"orderable" : false,
 										"sDefaultContent" : ""
-									} ],
+									}, {
+						   				"mData" : "state",//状态
+						   				"orderable" : false,
+						   				"sDefaultContent" : "",
+						   				"render":function(data){
+						   					if(data=="0"){
+						   						return '未审核';
+						   					}
+						   					if(data=="1"){
+						   						return '审核通过';
+						   					}else{
+						   						return '未填写';
+						   					}
+						   				}
+						   			}, ],
 									"columnDefs" : [ {
 										"orderable" : false,
 										"targets" : [ 0 ],
@@ -532,7 +561,21 @@ $(document)
 										"mData" : "checkMethod",// 考核
 										"orderable" : false,
 										"sDefaultContent" : ""
-									} ],
+									},{
+						   				"mData" : "state",//状态
+						   				"orderable" : false,
+						   				"sDefaultContent" : "",
+						   				"render":function(data){
+						   					if(data=="0"){
+						   						return '未审核';
+						   					}
+						   					if(data=="1"){
+						   						return '审核通过';
+						   					}else{
+						   						return '未填写';
+						   					}
+						   				}
+						   			}, ],
 									"columnDefs" : [ {
 										"orderable" : false,
 										"targets" : [ 0 ],
@@ -1444,7 +1487,21 @@ $(document)
 																		"mData" : "checkMethod",// 考核
 																		"orderable" : false,
 																		"sDefaultContent" : ""
-																	} ],
+																	},{
+														   				"mData" : "state",//状态
+														   				"orderable" : false,
+														   				"sDefaultContent" : "",
+														   				"render":function(data){
+														   					if(data=="0"){
+														   						return '未审核';
+														   					}
+														   					if(data=="1"){
+														   						return '审核通过';
+														   					}else{
+														   						return '未填写';
+														   					}
+														   				}
+														   			} ],
 															"columnDefs" : [ {
 																"orderable" : false,
 																"targets" : [ 0 ],
@@ -1477,6 +1534,157 @@ $(document)
 										flag = 1;
 										$("#remind").prop("hidden", false);
 									});
+					
+					
+	//状态筛选
+	$("#shaiState").on('change',function(){
+		var state = $(this).val();
+		var semester = $("#semester").val();
+		var syear=$("#termYear").val();
+		var str = syear+ '-'+semester;
+		table = $("#practiceplanmaintain")
+		.DataTable(
+				{
+					"processing" : true,
+					"serverSide" : true,
+					"bSort" : false,
+					"bFilter" : false,
+					"aLengthMenu" : [ 5, 10, 20, 30 ], // 动态指定分页后每页显示的记录数。
+					"lengthChange" : true, // 是否启用改变每页显示多少条数据的控件
+					"iDisplayLength" : 10, // 默认每页显示多少条记录
+					"dom" : 'ftipr<"bottom"l>',
+					"ordering" : true,
+					"bDestroy":true,
+					"searching" : true,
+					"ajax" : {
+						"url" : "getshaiplan.do",
+						"type" : "POST",
+						"data" : {
+							"state" : state,
+							"semester" : str
+						}
+					},
+					"aoColumns" : [ {
+						"mData" : "id",
+						"orderable" : false,
+						"sDefaultContent" : "",
+						"sWidth" : "6%"
+					}, {
+						"mData" : "semester",// 学期学年
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "cid",// 课程代码
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "coursename",// 课程名称
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "count",// 人数
+						"orderable" : true,
+						"sDefaultContent" : "",
+						"sWidth" : "6%"
+					},{
+						"mData" : "composition",// 教学班组成
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "college",// 开课学院
+						"orderable" : true,
+						"sDefaultContent" : "",
+					},
+
+					{
+						"mData" : "weekClassify",// 周学时
+						"orderable" : true,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "credit",// 学分
+						"orderable" : true,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "courseNature",// 课程性质
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "courseCategory",// 课程类别
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "tid",// 教职工号
+						"orderable" : true,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "tname",// 教师姓名
+						"orderable" : true,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "week",// 起始周
+						"orderable" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "major_oriented",// 面向专业
+						"orderable" : false,
+						"visible" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "mid",// 专业编号
+						"orderable" : false,
+						"visible" : false,
+						"sDefaultContent" : "",
+					}, {
+						"mData" : "checkMethod",// 考核
+						"orderable" : false,
+						"sDefaultContent" : ""
+					},{
+		   				"mData" : "state",//状态
+		   				"orderable" : false,
+		   				"sDefaultContent" : "",
+		   				"render":function(data){
+		   					if(data=="0"){
+		   						return '未审核';
+		   					}
+		   					if(data=="1"){
+		   						return '审核通过';
+		   					}else{
+		   						return '未填写';
+		   					}
+		   				}
+		   			}],
+					"columnDefs" : [ {
+						"orderable" : false,
+						"targets" : [ 0 ],
+						"data" : "id",
+						"render" : function(data, type, row) {
+							obj.push(row);
+							return '<input type="checkbox" name="allcheckbox" value="'
+							+ data + '" id="'+(obj.length-1)+'"/>';
+						}
+					} ],
+					"language" : {
+						"lengthMenu" : "每页 _MENU_ 条记录",
+						"zeroRecords" : "没有找到记录",
+						"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+						"infoEmpty" : "无记录",
+						"infoFiltered" : "(从 _MAX_ 条记录过滤)",
+						"sSearch" : "模糊查询：",
+						"oPaginate" : {
+							"sFirst" : "首页",
+							"sPrevious" : " 上一页 ",
+							"sNext" : " 下一页 ",
+							"sLast" : " 尾页 "
+						}
+					}
+				});
+		
+});
+					
+					
+					
+					
+					
 					
                        //发送消息提醒用户
 					$("#remind").click(function(){
@@ -1640,7 +1848,7 @@ $(document)
 					 +'<td>实习基地联系人/电话<span class="starColor">*</span></td>'
 					 +'<td>目的</td>'
 					 +'<td>预算经费</td>'
-					 +'<td>实际经费</td>'
+					 +'<td>审批经费</td>'
 					 +'<td colspan="5">实习内容<span class="starColor">*</span></td>'
 					 
 					 +'</tr>'

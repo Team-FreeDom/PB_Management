@@ -153,5 +153,8 @@ public interface PlanMaintainService {
 	 3.函数功能： 获取最新的学年学期
 	 */
    public List<String> getLatestSemester(String college);
+
+   public PlanList getshaiplan(Integer pageindex, Integer size, int order,
+		String orderDir, String searchValue, String semester, int state, String college);
    
 }

@@ -716,4 +716,56 @@ public class PlanMaintainController implements ServletContextAware {
 	return null;
     }
 
+  //获得状态筛选所有数据
+    @RequestMapping("/getshaiplan.do")
+    public String getshaiplan(HttpServletRequest request,
+	    HttpServletResponse response, ModelMap map) {
+//    	//获取用户登录的id
+//    	String userid = CookieUtils.getUserid(request);
+    	String searchValue = request.getParameter("search[value]");
+    	if (searchValue.equals("")) {
+    	    searchValue = null;
+    	}
+    	// 获取该用户的学院，学院为空，则获取所有学院的记录，否则，获取该用户所在学院的记录
+    	String college = (String) request.getSession().getAttribute("college");
+    	//获取状态
+    	int state = Integer.parseInt(request.getParameter("state"));
+    	// 获取学年学期
+    	String semester = request.getParameter("semester");
+    	if (semester==null||semester.equals("")) {
+    	    semester = null;
+    	}
+    	// 获取当前页面的传输几条记录
+    	Integer size = Integer.parseInt(request.getParameter("length"));
+    	// 数据起始位置
+    	Integer startIndex = Integer.parseInt(request.getParameter("start"));
+    	Integer draw = Integer.parseInt(request.getParameter("draw"));
+    	int order = Integer.valueOf(request.getParameter("order[0][column]"));// 排序的列号
+    	// String orderDir = request.getParameter("order[0][dir]");//
+    	// 排序的顺序asc or
+    	String orderDir = "desc"; // // desc
+    	// 通过计算求出当前页面为第几页
+    	Integer pageindex = (startIndex / size + 1);
+    	int recordsTotal = 0;
+    	List<AllPlan> list = new ArrayList<AllPlan>();
+    	PlanList pl = null;
+    	pl = planMaintainService.getshaiplan(pageindex, size, order,
+    		orderDir, searchValue,semester,state,college);
+    	list = pl.getData();
+    	recordsTotal = pl.getRecordsTotal();
+    	JSONObject getObj = new JSONObject();
+    	getObj.put("draw", draw);
+    	getObj.put("recordsFiltered", recordsTotal);
+    	getObj.put("recordsTotal", recordsTotal);
+    	getObj.put("data", list);
+    	response.setContentType("text/html;charset=UTF-8");
+
+    	try {
+    	    response.getWriter().print(getObj.toString());
+    	} catch (IOException e) {
+    	    // TODO Auto-generated catch block
+    	    e.printStackTrace();
+    	}
+    	return null;
+    }
 }

@@ -169,11 +169,14 @@ $(document).ready(function() {
 					   				"render":function(data){
 					   					if(data=="0"){
 					   						return '未审核';
-					   					}else{
+					   					}
+					   					if(data=="1"){
 					   						return '审核通过';
+					   					}else{
+					   						return '未填写';
 					   					}
 					   				}
-					   			},
+					   			}, 
 								
 						
 					],
@@ -330,6 +333,8 @@ $(document).ready(function() {
 						   				"render":function(data){
 						   					if(data=="0"){
 						   						return '未审核';
+						   					}if(data=="2"){
+						   						return '未填写';
 						   					}else{
 						   						return '审核通过';
 						   					}

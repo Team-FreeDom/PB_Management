@@ -228,6 +228,7 @@
 									<td colspan="2" id="zhuangtai">
 										<select name="state" id="shaiState" class="form-control">
 											<option value="-1">显示全部</option>
+											<option value="2">未填写</option>
 											<option value="0">未审核</option>
 											<option value="1">审核通过</option>
 										</select>

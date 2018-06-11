@@ -152,4 +152,8 @@ public interface PlanMaintainDao {
 	 */
     public List<String> getLatestSemester(String college);
 
+	public PlanList getshaiplan(Integer pageindex, Integer size,
+			String columnName, String orderDir, String searchValue,
+			String semester, int state);
+
 }
